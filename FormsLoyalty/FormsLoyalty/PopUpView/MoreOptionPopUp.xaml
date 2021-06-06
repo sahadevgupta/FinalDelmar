@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                  x:Class="FormsLoyalty.PopUpView.MoreOptionPopUp"  
+                  xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+                  FlowDirection="LeftToRight"
+                   Opacity="1" CloseWhenBackgroundIsClicked="True"
+                  BackgroundColor="Transparent">
+
+    <pages:PopupPage.Triggers>
+        <DataTrigger TargetType="pages:PopupPage" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                     Value="true">
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+        </DataTrigger>
+
+    </pages:PopupPage.Triggers>
+
+    <Grid  x:Name="popUpView"
+            HorizontalOptions="End"
+           MinimumHeightRequest="50" 
+           RowSpacing="0" 
+           BackgroundColor="Transparent"
+           RowDefinitions="Auto">
+
+
+        <Frame CornerRadius="5" HorizontalOptions="End" Visual="Material" Padding="0">
+            <StackLayout
+                x:Name="moreStack"
+        IsClippedToBounds="True"
+        BackgroundColor="#F8F8F8"
+        HorizontalOptions="End"
+        VerticalOptions="Start"
+            MinimumHeightRequest="100"
+        Spacing="0" Padding="10,0,10,0" BindableLayout.ItemsSource="{Binding MoreOptionsList}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5" Margin="5">
+                            <Label
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center"
+            HorizontalOptions="Center" FontSize="15"
+            Text="{Binding OptionName}" TextColor="#333333" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="MoreOptions_Selected" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </StackLayout>
+        </Frame>
+        
+        <!--<Label Text="Share" FontSize="30" TextColor="Black"/>-->
+        <!--<pancakeview:PancakeView  CornerRadius="5,5,5,5" Grid.Row="0" 
+                                  HasShadow="True" Padding="0" 
+                                  Margin="0" HorizontalOptions="End" 
+                                  Visual="Material">
+            <StackLayout
+                x:Name="moreStack"
+        IsClippedToBounds="True"
+        BackgroundColor="Green"
+        HorizontalOptions="End"
+        VerticalOptions="Start"
+            MinimumHeightRequest="100"
+        Spacing="0" Padding="10,0,10,0" >
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="5" Margin="5">
+                            <Label
+            VerticalTextAlignment="Center"
+            HorizontalTextAlignment="Center"
+            HorizontalOptions="Center" FontSize="15"
+            Text="{Binding OptionName}" TextColor="#333333" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="MoreOptions_Selected" CommandParameter="{Binding .}"></TapGestureRecognizer>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+            </StackLayout>
+        </pancakeview:PancakeView>-->
+    </Grid>
+
+
+</pages:PopupPage>

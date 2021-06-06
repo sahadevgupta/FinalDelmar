@@ -1,0 +1,230 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.StoreLocatorPage"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:enums="clr-namespace:LSRetail.Omni.Domain.DataModel.Loyalty.Setup;assembly=LSRetail.Omni.Domain.DataModel.Loyalty" 
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+            xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             BackgroundColor="WhiteSmoke"
+             xmlns:effects="clr-namespace:FormsLoyalty.Effects"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             x:Name="storePage"
+             Title="Stores"
+             >
+
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+            <Setter Property="BackgroundColor" Value="White"/>
+        </DataTrigger>
+    </ContentPage.Triggers>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+            <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+
+            <DataTemplate x:Key="ListView">
+                <Grid RowDefinitions="*">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" NumberOfTapsRequired="1"
+                                              CommandParameter="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+                    <Frame Visual="Material" Padding="10">
+
+                       
+
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                                  BorderThickness="0.4"
+                                                      BorderColor="Silver"
+                                              VerticalOptions="CenterAndExpand"
+                                                 
+                                              Grid.Row="0" Grid.Column="0"
+                                              Grid.RowSpan="2"
+                                                 Aspect="AspectFill" HeightRequest="40" WidthRequest="40"/>
+                            <Label Text="{Binding Description}" FontSize="Body" TextColor="Black" 
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               VerticalTextAlignment="Center"/>
+
+                            <Label Grid.Row="1"  Text="{Binding FormatAddress}" 
+                               Grid.Column="1"
+                               LineBreakMode="TailTruncation"
+                                       TextColor="Silver"
+                                       FontSize="Caption"
+                                       />
+
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="CardView">
+                <Grid RowDefinitions="*">
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+
+
+                    <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
+
+                       
+                        <StackLayout  Margin="-5,-5,-5,0">
+
+                            <Grid>
+                                <controls1:LoadingImageView/>
+                                <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                         DownsampleToViewSize="True"
+                                   HeightRequest="150"
+                                   Aspect="AspectFill"
+                                   />
+                            </Grid>
+                            
+                            <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           Padding="5"
+                           TextColor="Black"
+                           
+                           HorizontalTextAlignment="Center"
+                                   VerticalTextAlignment="Center"/>
+
+
+                            <Label Text="{Binding FormatAddress}" 
+                               MaxLines="1" Padding="2,0,2,0"
+                              HorizontalTextAlignment="Center"
+                                   Margin="0,-5,0,0"
+                               LineBreakMode="TailTruncation"
+                                       TextColor="Silver"
+                                       FontSize="Caption"
+                                       />
+
+                        </StackLayout>
+                    </Frame>
+                </Grid>
+                
+               
+              
+            </DataTemplate>
+
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+            <ToolbarItem.CommandParameter>
+                <prism:NavigationParameters>
+                    <prism:NavigationParameter Key="page" Value="Store" />
+                    <prism:NavigationParameter Key="searchType" Value="{x:Static enums:SearchType.Store}" />
+                </prism:NavigationParameters>
+
+            </ToolbarItem.CommandParameter>
+        </ToolbarItem>
+        <ToolbarItem 
+                     x:Name="viewtoolbar"
+                     Order="Primary" Clicked="ToolbarItem_Clicked"/>
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+              >
+
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Grid.Triggers>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+
+            <Label Text="{Binding viewStockDesc}"
+            TextColor="Black"
+           Padding="10"
+               BackgroundColor="#dedede"
+            >
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding viewStockDesc,Converter={StaticResource  StringToBoolConverter}}"
+                                 Value="false">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+
+            <CollectionView ItemsSource="{Binding stores}"
+                            x:Name="stores"
+                            Grid.Row="1"
+                            VerticalScrollBarVisibility="Never"
+                            
+                            Scrolled="stores_Scrolled">
+
+        <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical" 
+                             VerticalItemSpacing="10"
+                              Span="{Binding count}"  />
+        </CollectionView.ItemsLayout>
+
+        
+    </CollectionView>
+
+        
+
+            <Grid Margin="10,0,20,22" Grid.Row="1" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand">
+                <BoxView HeightRequest="60" WidthRequest="60" CornerRadius="30"
+                         BackgroundColor="{StaticResource My_Header_Color}"/>
+                <Image Source="ic_action_map" VerticalOptions="Center" HorizontalOptions="Center"
+                       effects:TintImageEffect.TintColor="White"
+                       HeightRequest="30"/>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="Button_Clicked"/>
+                </Grid.GestureRecognizers>
+                
+            </Grid>
+            
+            
+            
+
+    </Grid>
+        <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls1:LoadingView.Triggers>
+                <DataTrigger TargetType="controls1:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls1:LoadingView.Triggers>
+
+        </controls1:LoadingView>
+
+
+    </AbsoluteLayout>
+
+</ContentPage>

@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+             mc:Ignorable="d"
+             x:Class="FormsLoyalty.Controls.SidebarControl"
+             x:Name="sideBar">
+
+   
+        <ScrollView VerticalScrollBarVisibility="Never">
+       <StackLayout BindableLayout.ItemsSource="{Binding Categories, Source={x:Reference sideBar}}"
+                           
+                           x:Name="categoriesContainer"
+                          
+                          
+                           Grid.ColumnSpan="2">
+                    <BindableLayout.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout Orientation="Horizontal"
+                                        HorizontalOptions="FillAndExpand">
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="Category_Clicked"/>
+                        </StackLayout.GestureRecognizers>
+                                
+                                
+                        <Label Text="{Binding Description}" 
+                                  WidthRequest="100"
+                               HeightRequest="50"
+                                MaxLines="2" HorizontalTextAlignment="Center"
+                               VerticalTextAlignment="Center"
+                               LineBreakMode="WordWrap"
+                                Visual="Material" FontSize="Caption"
+                                       x:Name="categoryTitle" 
+                               
+                                
+                               >
+
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                                 Value="true">
+                                    <Setter Property="Text" Value="{Binding ArabicDescription}"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    
+                                    <VisualState x:Name="Normal">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="White"/>
+                                            <Setter Property="TextColor" Value="Black"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+
+                                    <VisualState x:Name="Selected">
+                                        <VisualState.Setters>
+                                            <Setter Property="BackgroundColor" Value="Black"/>
+                                            <Setter Property="TextColor" Value="White"/>
+                                        </VisualState.Setters>
+                                    </VisualState>
+                                    
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            
+                        </Label>
+
+                        <Grid ColumnSpacing="0" 
+              HeightRequest="60"
+              Grid.Column="1"
+              VerticalOptions="Start"
+             Margin="-20,0,0,0"
+              x:Name="sectionIndicator">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+
+                                <yummy:PancakeView Sides="3"
+                               
+                               WidthRequest="40"
+                               BackgroundColor="Black"
+                               CornerRadius="8, 0, 0"
+                               HeightRequest="40">
+
+                                </yummy:PancakeView>
+                                
+                            </Grid>
+
+
+                            
+                            </StackLayout>
+                        </DataTemplate>
+                    </BindableLayout.ItemTemplate>
+                </StackLayout>
+
+        </ScrollView>
+
+
+        
+    
+</ContentView>

@@ -1,0 +1,208 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.TransactionDetailPage"
+             BackgroundColor="WhiteSmoke"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls">
+  
+    <AbsoluteLayout>
+    <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                 AbsoluteLayout.LayoutFlags="All">
+
+            <StackLayout.Triggers>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </StackLayout.Triggers>
+
+            <Label Padding="10" Margin="0,0,0,-10"
+                       TextColor="#B3d3d3d3"
+                       
+                       BackgroundColor="{StaticResource My_Header_Color}"
+                           Text="{Binding transaction.DocumentRegTime,StringFormat='{0:D}'}"
+                           FontSize="Large"
+                           FontAttributes="Bold" />
+
+        <CollectionView ItemsSource="{Binding transaction.Lines}" VerticalScrollBarVisibility="Never"
+                  
+                        SelectionMode="Single">
+
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                </CollectionView.ItemsLayout>
+            
+                <CollectionView.Header>
+                <Grid HeightRequest="40" BackgroundColor="{StaticResource My_Header_Color}" RowDefinitions="40" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                       
+
+                   
+                        <Label Text="{x:Static resources:AppResources.ActionbarItems}"  Grid.Row="0" Grid.Column="0"
+                               VerticalTextAlignment="Center" 
+                               TextColor="White"
+                               FontSize="Body"
+                               Margin="10,0,10,0"/>
+                        <Label Text="{x:Static resources:AppResources.ApplicationQty}" Grid.Column="1" Grid.Row="0" TextColor="White"
+                                VerticalTextAlignment="Center" 
+                               FontSize="Body"
+                               />
+                        <Label Text="{x:Static resources:AppResources.TransactionDetailViewItemAmountHeaderText}" Grid.Column="2" Grid.Row="0"
+                               VerticalTextAlignment="Center" 
+                               FontSize="Body"
+                               TextColor="White"/>
+                   
+                </Grid>
+            </CollectionView.Header>
+                <CollectionView.ItemTemplate>
+            <DataTemplate>
+                     
+                    <Frame Visual="Material" Padding="0" >
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                        
+                        
+                <Grid Padding="10" RowDefinitions="*,0.7">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="6*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="2*"/>
+
+                    </Grid.ColumnDefinitions>
+
+
+                                
+
+                    <StackLayout Grid.Column="0">
+                        <Label Text="{Binding ItemDescription}" TextColor="Black" 
+                               FontSize="16"
+                              MaxLines="2"                              
+                               LineBreakMode="TailTruncation"/>
+                        <Label Text="{Binding VariantDescription}" FontSize="Caption"/>
+                    </StackLayout>
+
+                        <Label Text="{Binding Quantity}" Margin="5,0" Grid.Column="1"
+                               TextColor="Black" 
+                               FontSize="14"/>
+                        <Label Text="{Binding Amount}" HorizontalTextAlignment="End" Grid.Column="2"
+                               TextColor="Black" 
+                               FontSize="14"/>
+
+                                
+                            </Grid>
+                    </Frame>
+                      
+                    </DataTemplate>
+        </CollectionView.ItemTemplate>
+
+                <CollectionView.Footer>
+                <Grid  Padding="10" >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="7*"/>
+                       
+                        <ColumnDefinition Width="3*"/>
+
+                    </Grid.ColumnDefinitions>
+
+                    <!--<Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="1"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>-->
+                    
+
+
+                    <Label Text="{x:Static resources:AppResources.CheckoutViewTotalWithoutVAT}"
+                           TextColor="Black" Grid.Row="0" Grid.Column="0" 
+                           HorizontalOptions="End"
+                           LineHeight="2"
+                               VerticalTextAlignment="Center" 
+                               FontSize="16"
+                               />
+
+                    <Label Text="{Binding transaction.TotalNetAmount,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="0"
+                               VerticalTextAlignment="Center" 
+                               FontSize="16"
+                            LineHeight="2"
+                           HorizontalOptions="End"
+                               TextColor="Black"/>
+
+                    <Label Text="{x:Static resources:AppResources.CheckoutViewTotal}"
+                           TextColor="Black" Grid.Row="1" Grid.Column="0" 
+                           HorizontalOptions="End"
+                            LineHeight="2"
+                               VerticalTextAlignment="Center" 
+                               FontSize="16"
+                               />
+
+                    <Label Text="{Binding transaction.TotalAmount,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="1"
+                               VerticalTextAlignment="Center" 
+                               FontSize="16"
+                            LineHeight="2"
+                           HorizontalOptions="End"
+                               TextColor="Black"/>
+
+                    <Label Text="{x:Static resources:AppResources.TransactionDetailViewDiscountTotal}"
+                           TextColor="Black" Grid.Row="2" Grid.Column="0" 
+                           HorizontalOptions="End"
+                               VerticalTextAlignment="Center" 
+                               FontSize="16"
+                               />
+
+                    <Label Text="{Binding transaction.TotalDiscount,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="2"
+                               VerticalTextAlignment="Center" 
+                           HorizontalOptions="End"
+                               FontSize="16"
+                               TextColor="Black"/>
+
+
+                    <Button Grid.Row="3"
+                            Grid.ColumnSpan="2"
+                            HeightRequest="40"
+                            FontSize="Body"
+                            Visual="Material"
+                            TextColor="White"
+                            Command="{Binding ReOrderCommand}"
+                            Margin="0,0,0,10"
+                            BackgroundColor="{StaticResource My_Button_Color}"
+                            Text="{x:Static resources:AppResources.HistoryViewReorderButton}"
+                            IsVisible="{Binding IsReOrderBtnVisible}"/>
+
+                </Grid>
+            </CollectionView.Footer>
+            
+    </CollectionView>
+
+       
+    </StackLayout>
+
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

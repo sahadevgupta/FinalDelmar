@@ -1,0 +1,116 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.LoginOtpView"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:local="clr-namespace:FormsLoyalty.Controls"
+             Visual="Material"
+             iOS:Page.UseSafeArea="True"
+             NavigationPage.HasNavigationBar="False">
+
+    <AbsoluteLayout>
+
+        <ScrollView  AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+
+            <ScrollView.Triggers>
+                <DataTrigger TargetType="ScrollView" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </ScrollView.Triggers>
+            <Grid Margin="20" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+
+                <Label Text="CLOSE" HorizontalOptions="End" FontSize="Body" FontAttributes="Bold" TextColor="Black">
+                    <Label.GestureRecognizers>
+                        <TapGestureRecognizer Command="{prism:GoBack}"/>
+                    </Label.GestureRecognizers>
+                </Label>
+                <ImageButton Source="iconClose" HorizontalOptions="Start" VerticalOptions="Start" BackgroundColor="Transparent" 
+                     Command="{prism:GoBack}"/>
+
+                <StackLayout VerticalOptions="Center" Grid.Row="1" 
+                     Margin="0,20,0,0"
+                     Spacing="10">
+                    <Image Source="imgPINPopUp"/>
+                    <Label Text="OTP VERIFICATION" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0"
+                   TextColor="Black"/>
+                    <Label HorizontalTextAlignment="Center" TextColor="Black">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Enter the OTP Sent to "/>
+                                <Span Text="{Binding MobileNumber,StringFormat='{0}'}"  FontSize="Body" FontAttributes="Bold">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{prism:GoBack}"/>
+
+
+                                    </Span.GestureRecognizers>
+                                </Span>
+                                <Span Text="  "/>
+                                <Span Text="&#9997;" TextColor="Black" FontSize="Large"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                </StackLayout>
+
+                <Grid  x:Name="mainGrid"
+                   Grid.Row="2"
+               Margin="0,20,0,0"
+                   BackgroundColor="Transparent"
+                   HorizontalOptions="Center"
+                   RowSpacing="30"
+                   VerticalOptions="CenterAndExpand">
+
+                </Grid>
+
+                <Label HorizontalTextAlignment="Center" Grid.Row="4"  TextColor="Black" IsEnabled="False">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="Didn't receive OTP? "/>
+                            <Span Text="RESEND" TextColor="IndianRed" FontSize="Body" FontAttributes="Bold">
+
+                                <Span.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ResendOtpCommand}"/>
+
+
+                                </Span.GestureRecognizers>
+                            </Span>
+                        </FormattedString>
+                    </Label.FormattedText>
+
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding TimerCount}" Value="0">
+                            <Setter Property="IsEnabled" Value="True"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+
+                </Label>
+
+                <Button Text="Verify &amp; Continue" Grid.Row="5" BackgroundColor="{StaticResource My_Button_Color}" VerticalOptions="Start" Margin="0,30"
+                HeightRequest="40" Command="{Binding OnVerifyCommand}"/>
+
+
+
+
+            </Grid>
+
+        </ScrollView>
+
+        <local:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <local:LoadingView.Triggers>
+                <DataTrigger TargetType="local:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </local:LoadingView.Triggers>
+
+        </local:LoadingView>
+
+    </AbsoluteLayout>
+</ContentPage>

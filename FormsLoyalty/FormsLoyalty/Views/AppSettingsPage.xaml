@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.AppSettingsPage"
+             xmlns:resources="clr-namespace:FormsLoyalty" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             Visual="Material"
+            Title="{x:Static resources:AppResources.AppConfigurationappbar}">
+
+    <AbsoluteLayout>
+        <StackLayout Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                 AbsoluteLayout.LayoutFlags="All">
+
+        <StackLayout.Triggers>
+            <DataTrigger TargetType="StackLayout" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                <Setter Property="Opacity" Value="0.5"/>
+            </DataTrigger>
+        </StackLayout.Triggers>
+
+        <Label Text="{x:Static resources:AppResources.SettingsViewLanguage}"
+               />
+
+
+            <StackLayout Orientation="Horizontal">
+               
+
+                <RadioButton TextColor="{StaticResource My_Button_Color}"
+                     Visual="Material"
+                     IsChecked="{Binding IsEnLan}"
+                     GroupName="language"/>
+
+                <Label Text="{x:Static resources:AppResources.RadioButtonEnglishLanguage}"  FontSize="Default" LineBreakMode="TailTruncation" 
+                       VerticalOptions="Center"/>
+                
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+
+
+                <RadioButton TextColor="{StaticResource My_Button_Color}"
+                     Visual="Material"
+                     IsChecked="{Binding IsArLan}"
+                     GroupName="language"/>
+
+                <Label Text="{x:Static resources:AppResources.RadioButtonArabicLanguage}"  FontSize="Default" LineBreakMode="TailTruncation" 
+                       VerticalOptions="Center"/>
+
+            </StackLayout>
+
+
+           
+
+        <Button Text="{x:Static resources:AppResources.ApplyBtn}"
+                Margin="0,20,0,0"
+                HeightRequest="40"
+                TextColor="White"
+                Command="{Binding changeLangCommand}"
+                BackgroundColor="{StaticResource My_Button_Color}"/>
+
+    </StackLayout>
+
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

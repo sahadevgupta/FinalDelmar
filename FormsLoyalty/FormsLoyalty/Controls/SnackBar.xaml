@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView  xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FormsLoyalty.Controls.SnackBar">
+
+ 
+            <Grid>
+                <Label Text="{Binding Message}"
+                       VerticalOptions="Center" HorizontalOptions="FillAndExpand"
+                       Margin="20, 5, 5, 5" LineBreakMode="WordWrap"
+                       FontSize="{Binding FontSize}"
+                       TextColor="{Binding TextColor}"
+                       FontFamily="{Binding FontFamily}"/>
+
+                <Button Grid.Column="1" HorizontalOptions="End"
+                        Clicked="CloseButton_Clicked" Margin="2"
+                        FontFamily="{Binding FontFamily}"
+                        FontSize="{Binding FontSisze}"
+                        TextColor="{Binding ButtonTextColor}"
+                        BackgroundColor="{Binding CloseButtonBackGroundColor}"
+                        VerticalOptions="Center" Text="{Binding CloseButtonText}"/>
+            </Grid>
+        
+    
+    
+</ContentView>

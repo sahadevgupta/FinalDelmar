@@ -1,0 +1,170 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+                  xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                  xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
+                  xmlns:rg="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+                  x:Class="FormsLoyalty.PopUpView.CouponsViewPopUp"
+                  xmlns:vm="clr-namespace:FormsLoyalty.ViewModels"
+                  xmlns:resources="clr-namespace:FormsLoyalty">
+
+    
+
+    <pages:PopupPage.Resources>
+        <ResourceDictionary>
+            <converters:DateTimeConverter x:Key="DateTimeConverter"/>
+        </ResourceDictionary>
+
+    </pages:PopupPage.Resources>
+
+    <pages:PopupPage.Animation>
+        <rg:MoveAnimation
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="False"
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </pages:PopupPage.Animation>
+
+   
+        <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="Center"  
+              BackgroundColor="Silver"
+              Margin="10" RowDefinitions="Auto,400">
+
+        <Label Text="{x:Static resources:AppResources.txtSelectCategory}" FontSize="Medium" Padding="5" FontAttributes="Bold"/>
+
+        <CollectionView   VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
+                          Grid.Row="1" 
+                          HeightRequest="400"
+                    x:Name="couponlist"
+                            HorizontalScrollBarVisibility="Never"
+                            VerticalScrollBarVisibility="Never"
+                           ItemsSource="{Binding Coupons}"
+                       >
+
+            <CollectionView.ItemsLayout>
+                <GridItemsLayout Orientation="Vertical" HorizontalItemSpacing="5"
+                             VerticalItemSpacing="10"
+                                  />
+            </CollectionView.ItemsLayout>
+
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Visual="Material">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCouponSelected" CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+
+
+                        <Grid RowDefinitions="Auto,Auto">
+                            <Label >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Code : "/>
+                                        <Span Text="{Binding CouponID}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label Grid.Row="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Value : "/>
+                                        <Span Text="{Binding CouponValue,StringFormat='{0:0.00}'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="2">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{x:Static resources:AppResources.txtExpiryDate}"/>
+                                        <Span Text=" : "/>
+                                        <Span Text="{Binding ExpirationDate,StringFormat='{0:dd/MM/yyyy}'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+
+                            <Frame Visual="Material" Grid.RowSpan="3" VerticalOptions="Center" HorizontalOptions="End"
+                                    IsVisible="false" BackgroundColor="Red" CornerRadius="15" Padding="5">
+                                <Label Text="{x:Static resources:AppResources.txtExpired}" 
+                                       Padding="5,0,5,0"
+                                       TextColor="White" FontSize="Medium" />
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding ExpirationDate,Converter={StaticResource DateTimeConverter}}" 
+                                                 Value="true">
+                                        <Setter Property="IsVisible" Value="true"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        </Grid>
+
+        <!--<StackLayout x:Name="couponsStack" BindableLayout.ItemsSource="{Binding Coupons}" HeightRequest="300">
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Frame Visual="Material">
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="OnCouponSelected" CommandParameter="{Binding .}"/>
+                        </Frame.GestureRecognizers>
+
+
+                        <Grid RowDefinitions="Auto,Auto">
+                            <Label >
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Code : "/>
+                                        <Span Text="{Binding CouponID}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label Grid.Row="1">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Value : "/>
+                                        <Span Text="{Binding CouponValue,StringFormat='{0:0.00}'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+                            <Label Grid.Row="2">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Expiry Date : "/>
+                                        <Span Text="{Binding ExpirationDate,StringFormat='{0:dd/MM/yyyy}'}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+
+
+                            <Frame Visual="Material" Grid.RowSpan="3" VerticalOptions="Center" HorizontalOptions="End"
+                                    IsVisible="false" BackgroundColor="Red" CornerRadius="15" Padding="5">
+                                <Label Text="Expired" 
+                                       Padding="5,0,5,0"
+                                       TextColor="White" FontSize="Medium" />
+                                <Frame.Triggers>
+                                    <DataTrigger TargetType="Frame" Binding="{Binding ExpirationDate,Converter={StaticResource DateTimeConverter}}" 
+                                                 Value="true">
+                                        <Setter Property="IsVisible" Value="true"/>
+                                    </DataTrigger>
+                                </Frame.Triggers>
+
+                            </Frame>
+                        </Grid>
+                    </Frame>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+        </StackLayout>-->
+        
+   
+</pages:PopupPage>

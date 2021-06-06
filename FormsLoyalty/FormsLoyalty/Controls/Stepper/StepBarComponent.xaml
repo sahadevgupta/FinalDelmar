@@ -1,0 +1,36 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:converter="clr-namespace:FormsLoyalty.Converters"
+             x:Class="FormsLoyalty.Controls.Stepper.StepBarComponent"
+             BackgroundColor="WhiteSmoke">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converter:ProgressValueConverter x:Key="ProgressValueConverter" />
+
+            <converter:StepColorConverter x:Key="StepColorConverter" />
+
+            <converter:StepImageConverter x:Key="StepImageConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <ContentView.Content>
+
+        <ContentView
+            Margin="20,10,20,10"
+            HorizontalOptions="Center"
+            VerticalOptions="CenterAndExpand">
+            <CollectionView
+                x:Name="collectionView"
+               HeightRequest="80"
+                HorizontalOptions="CenterAndExpand"
+                HorizontalScrollBarVisibility="Never"
+                ItemSizingStrategy="MeasureAllItems"
+                ItemsSource="{Binding Steps, Mode=TwoWay}"
+                VerticalOptions="CenterAndExpand">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+            </CollectionView>
+        </ContentView>
+    </ContentView.Content>
+</ContentView>

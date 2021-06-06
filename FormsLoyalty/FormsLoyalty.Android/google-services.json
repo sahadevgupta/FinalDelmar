@@ -1,0 +1,63 @@
+{
+  "project_info": {
+    "project_number": "609884243902",
+    "firebase_url": "https://delmarandattalah.firebaseio.com",
+    "project_id": "delmarandattalah",
+    "storage_bucket": "delmarandattalah.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:609884243902:android:8499463bfe2a827dae1bef",
+        "android_client_info": {
+          "package_name": "com.LinkedGates.DelmarAttalla"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "609884243902-28q5i2i4umu7rrcnbqc745o882c7lsgd.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.LinkedGates.DelmarAttalla",
+            "certificate_hash": "51d2a7798ac7675d8c7470d7c3660bdc6f3ba5a0"
+          }
+        },
+        {
+          "client_id": "609884243902-ippm9n24akhs9rb81s12b66rfttd9t6b.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.LinkedGates.DelmarAttalla",
+            "certificate_hash": "0f103e422e1068a1417c9b39c68bca6e1e55b622"
+          }
+        },
+        {
+          "client_id": "609884243902-au35m5oiavifou8eng1paa0dpbam8s2t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCy7dkfSK1mhgX5B-_E2bueA0wWPak1zu8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "609884243902-au35m5oiavifou8eng1paa0dpbam8s2t.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "609884243902-od6cagbknof736bgfn993ebr3j8kqdch.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.LinkedGates.DelmarAttalla"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

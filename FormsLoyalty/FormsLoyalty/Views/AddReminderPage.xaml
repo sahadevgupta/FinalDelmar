@@ -1,0 +1,315 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.AddReminderPage"
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
+             xmlns:effects="clr-namespace:FormsLoyalty.Effects"
+             xmlns:mat="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             BackgroundColor="#33b6b6b6"
+             x:Name="thisPage">
+    <ContentPage.Triggers>
+
+        <DataTrigger TargetType="ContentPage"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+            <Setter Property="BackgroundColor" Value="White"/>
+
+
+        </DataTrigger>
+    </ContentPage.Triggers>
+
+    <ContentPage.Resources>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <ScrollView VerticalScrollBarVisibility="Never"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+
+            <ScrollView.Triggers>
+                <DataTrigger TargetType="ScrollView" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </ScrollView.Triggers>
+
+            <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,Auto">
+                <Frame Margin="0,5">
+                    <StackLayout>
+                        <Label Text="Medication Name" FontSize="Medium" TextColor="{StaticResource My_Header_Color}"/>
+                        <Entry x:Name="namelbl" Text="{Binding medicineReminder.EventName}" Placeholder="Type active ingrident or brand name" Visual="Default"/>
+                        <Picker Title="Unit" 
+                                         Visual="Default"      
+                                               ItemsSource="{Binding Units}" SelectedItem="{Binding SelectedUnit}">
+                            <Picker.Triggers>
+                                <DataTrigger TargetType="Picker" Binding="{Binding Source={x:Reference namelbl},Path=Text,Converter={StaticResource StringToBoolConverter}}"
+                                     Value="false">
+                                    <Setter Property="IsVisible" Value="false"/>
+                                </DataTrigger>
+                            </Picker.Triggers>
+                        </Picker>
+
+                    </StackLayout>
+                </Frame>
+
+                <Frame Margin="0,5" Grid.Row="1">
+
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference namelbl},Path=Text,Converter={StaticResource StringToBoolConverter}}"
+                                     Value="false">
+                            <Setter Property="IsVisible" Value="false"/>
+                        </DataTrigger>
+                    </Frame.Triggers>
+
+                    <Expander x:Name="expander" HorizontalOptions="FillAndExpand" IsExpanded="True">
+                        <Expander.Triggers>
+                            <DataTrigger TargetType="Expander" Binding="{Binding Source={x:Reference reminderSwitch },Path=IsToggled}"
+                                 Value="true">
+                                <Setter Property="IsExpanded" Value="True"/>
+                            </DataTrigger>
+
+
+
+                        </Expander.Triggers>
+
+                        <Expander.Header>
+                            <StackLayout Orientation="Horizontal">
+                                <Label Text="Reminder Times" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
+
+
+                                <Switch x:Name="reminderSwitch"  HorizontalOptions="End" IsToggled="{Binding medicineReminder.IsReminder}" OnColor="#f6ced0" 
+                             ThumbColor="{StaticResource My_Header_Color}"/>
+
+                                <Image Source="left_arrow" BackgroundColor="Transparent" 
+                                                 HeightRequest="16" Aspect="AspectFit"
+                                           effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
+                                                 WidthRequest="16"
+                                                 Margin="5,0,5,0"
+                                                 Rotation="270"
+                                                 HorizontalOptions="End" VerticalOptions="Center">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander},Path= IsExpanded }"
+                                                         Value="true">
+                                            <Setter Property="Rotation" Value="90"/>
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+
+                            </StackLayout>
+                        </Expander.Header>
+                        <Grid  RowDefinitions="Auto,Auto">
+
+
+                            <Picker x:Name="reminderPicker"  HorizontalOptions="FillAndExpand" Visual="Default" 
+                            SelectedIndex="{Binding SelectedFreqIndex}" 
+                                                   
+                                                   BackgroundColor="White" TitleColor="DimGray">
+                                <Picker.Items>
+                                    <x:String>Once daily</x:String>
+                                    <x:String>Twice daily</x:String>
+                                    <x:String>3 times a day</x:String>
+                                </Picker.Items>
+                            </Picker>
+
+                            <CollectionView ItemsSource="{Binding frequencies}" Grid.Row="1" MinimumHeightRequest="40" HeightRequest="150">
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout Orientation="Horizontal" >
+                                            <StackLayout.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="ScheduleTime_Tapped"/>
+                                            </StackLayout.GestureRecognizers>
+                                            <TimePicker Grid.Row="1" Grid.Column="0" Visual="Default"  Format="hh:mm tt" 
+                                Time="{Binding Time}"
+                                HorizontalOptions="StartAndExpand"
+                                FontSize="20" />
+
+                                            <Label   VerticalOptions="Center" FontSize="Body" HorizontalOptions="End" TextColor="{StaticResource My_Header_Color}"
+                                                 >
+                                                <Label.Text>
+
+                                                    <MultiBinding StringFormat="{}{0} {1}">
+                                                        <Binding Path="Qty" StringFormat="Take {0}" />
+                                                        <Binding Path="BindingContext.SelectedUnit" Source="{x:Reference thisPage}" />
+
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+
+
+
+                        </Grid>
+                    </Expander>
+                </Frame>
+
+                <Frame Margin="0,5" Grid.Row="2">
+                    <Frame.Triggers>
+                        <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference namelbl},Path=Text,Converter={StaticResource StringToBoolConverter}}"
+                                     Value="false">
+                            <Setter Property="IsVisible" Value="false"/>
+                        </DataTrigger>
+
+                        <DataTrigger TargetType="Frame" Binding="{Binding medicineReminder.IsReminder}" Value="false">
+                            <Setter Property="IsVisible" Value="false"/>
+                        </DataTrigger>
+
+                    </Frame.Triggers>
+                    <Expander x:Name="schexpander" HorizontalOptions="FillAndExpand">
+                        <Expander.Header>
+                            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+                                <Label Text="Schedule" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
+                                <Image Source="left_arrow" BackgroundColor="Transparent" 
+                                                 HeightRequest="16" Aspect="AspectFit"
+                                           effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
+                                                 WidthRequest="16"
+                                                 Margin="5,0,5,0"
+                                                 Rotation="270"
+                                                 HorizontalOptions="End" VerticalOptions="Center">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference schexpander},Path= IsExpanded }"
+                                                         Value="true">
+                                            <Setter Property="Rotation" Value="90"/>
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                            </StackLayout>
+
+                        </Expander.Header>
+                        <Grid Padding="10" ColumnDefinitions="Auto,*" RowDefinitions="Auto,0.5,Auto,Auto">
+                            <Label Text="Start Date:" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"/>
+                            <DatePicker Grid.Column="1" Date="{Binding medicineReminder.From}" Format="dd MMMM" Visual="Default" HorizontalOptions="Start"/>
+                            <BoxView HeightRequest="0.5" Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Silver" HorizontalOptions="FillAndExpand"/>
+
+                            <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
+                                <Label Text="Duration" FontAttributes="Bold" TextColor="Black" FontSize="Body" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout.Spacing>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="iOS" Value="-8" />
+                                        </OnPlatform>
+                                    </StackLayout.Spacing>
+                                    <RadioButton Text="Ongoing Treatment" x:Name="ongoingSwitch" GroupName="duration" IsChecked="True" CheckedChanged="duration_CheckedChanged" />
+                                    <Label Text="Ongoing Treatment"  FontSize="Default" LineBreakMode="TailTruncation" 
+                       VerticalOptions="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout.Spacing>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="iOS" Value="-8" />
+                                        </OnPlatform>
+                                    </StackLayout.Spacing>
+                                    <RadioButton Text="Numbers of days" GroupName="duration" CheckedChanged="duration_CheckedChanged"/>
+                                    <Label Text="Numbers of days"  FontSize="Default" LineBreakMode="TailTruncation" 
+                       VerticalOptions="Center"/>
+                                </StackLayout>
+                                <Label Text="{Binding medicineReminder.NoOfDays}" Margin="10,0" TextColor="{StaticResource My_Header_Color}">
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding medicineReminder.NoOfDays}"
+                                                 Value="0">
+                                            <Setter Property="IsVisible" Value="false"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="noOfDays_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                    
+                                </Label>
+                                <BoxView HeightRequest="0.5"  BackgroundColor="Silver" HorizontalOptions="FillAndExpand"/>
+
+                            </StackLayout>
+
+
+                            <StackLayout Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="150">
+                                <Label Text="Days" FontAttributes="Bold" TextColor="Black" FontSize="Body" VerticalOptions="Center" HorizontalOptions="Start"/>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout.Spacing>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="iOS" Value="-8" />
+                                        </OnPlatform>
+                                    </StackLayout.Spacing>
+
+                                    <RadioButton x:Name="everydaybtn" Text="Every day"
+                                         GroupName="days" IsChecked="{Binding medicineReminder.AllDay}" CheckedChanged="days_CheckedChanged" />
+                                    <Label Text="Every day"  FontSize="Default" LineBreakMode="TailTruncation" 
+                       VerticalOptions="Center"/>
+                                </StackLayout>
+
+                                <StackLayout Orientation="Horizontal">
+                                    <StackLayout.Spacing>
+                                        <OnPlatform x:TypeArguments="x:Double">
+                                            <On Platform="iOS" Value="-8" />
+                                        </OnPlatform>
+                                    </StackLayout.Spacing>
+
+                                    <RadioButton Text="Specific days of the week" GroupName="days" CheckedChanged="days_CheckedChanged"/>
+                                    <Label Text="Specific days of the week"  FontSize="Default" LineBreakMode="TailTruncation" 
+                       VerticalOptions="Center"/>
+                                </StackLayout>
+                                <Label x:Name="dayslbl" Margin="10,0" Text="{Binding medicineReminder.SpecificDays}" TextColor="{StaticResource My_Header_Color}"
+                                       >
+
+                                    <Label.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="specificdays_Tapped"/>
+                                    </Label.GestureRecognizers>
+                                    
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding medicineReminder.SpecificDays, Converter={StaticResource StringToBoolConverter}}"
+                                                 Value="false">
+                                            <Setter Property="IsVisible" Value="false"/>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+
+                            </StackLayout>
+
+                        </Grid>
+                    </Expander>
+                </Frame>
+
+
+                <Button Text="Next" HorizontalOptions="End" BackgroundColor="#4f4f4f"  Visual="Material"
+                        Clicked="Next_Clicked"
+                 Grid.Row="3">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding Source={x:Reference namelbl},Path= Text,Converter={StaticResource StringToBoolConverter}}" Value="false">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+
+                    </Button.Triggers>
+
+                </Button>
+
+
+
+
+
+            </Grid>
+        </ScrollView>
+
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+    </AbsoluteLayout>
+</ContentPage>

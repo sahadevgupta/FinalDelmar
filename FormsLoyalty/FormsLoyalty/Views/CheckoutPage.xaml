@@ -1,0 +1,278 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.CheckoutPage"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:effects="clr-namespace:FormsLoyalty.Effects"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+           
+             
+             Title="{x:Static resources:AppResources.ActionbarCheckout}">
+   
+    
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+    </ContentPage.Resources>
+
+   
+
+       
+           
+
+            <!--<Grid RowDefinitions="Auto,Auto,Auto,*,Auto,Auto" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All" IsVisible="false">
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                        <Setter Property="Opacity" Value="0.5"/>
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+
+                <Picker ItemsSource="{Binding shippingMethodNames}" 
+                SelectedItem="{Binding currentMethod}"
+                    Visual="Material"
+                        x:Name="methodPicker"
+                        
+                Title="{x:Static resources:AppResources.CheckoutViewShippingMethod}"
+                HorizontalOptions="FillAndExpand"/>
+
+                <StackLayout Orientation="Horizontal" Margin="0,10,0,0" Grid.Row="1">
+
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding currentShippingMedhod}"
+                                     Value="HomeDelivery">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                
+                <Picker ItemsSource="{Binding clickCollectStores}" 
+                         
+                     ItemDisplayBinding="{Binding Description}"
+                        SelectedItem="{Binding SelectedStore}"
+                Title="{x:Static resources:AppResources.CheckoutViewStoreToPickup}"
+                HorizontalOptions="FillAndExpand"/>
+
+                    <Image Source="ic_action_map"
+                       HorizontalOptions="Center"
+                           WidthRequest="30"
+                           HeightRequest="30"
+                       VerticalOptions="CenterAndExpand"
+                       
+                   effects:TintImageEffect.TintColor="{StaticResource My_Header_Color}">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Command="{prism:NavigateTo Name='MapPage'}"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+
+
+
+                </StackLayout>
+
+                <Label Text="{Binding unavailableItems}" 
+                   TextColor="Red" Grid.Row="2"
+                       x:Name="unavailableText"
+                      IsVisible="false"
+                   FontSize="Medium"
+                   Margin="0,10,0,0">
+
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label"
+                                     Binding="{Binding Source={x:Reference methodPicker},Path=SelectedIndex}"
+                                     Value="1">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+
+                        <MultiTrigger TargetType="Label">
+                            <MultiTrigger.Conditions>
+                                <BindingCondition Binding="{Binding Source={x:Reference methodPicker},Path=SelectedIndex}" Value="0"/>
+                                <BindingCondition Binding="{Binding unavailableItems,Converter={StaticResource StringToBoolConverter}}" Value="true"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="IsVisible" Value="true"/>
+                        </MultiTrigger>
+                        
+                      
+                    </Label.Triggers>
+                    
+                </Label>
+
+                <StackLayout Grid.Row="3">
+                    <StackLayout.Triggers>
+                        <DataTrigger TargetType="StackLayout" Binding="{Binding basketItems.Count}"
+                                     Value="0">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </StackLayout.Triggers>
+                <Label Margin="0,20,0,0"
+                       TextColor="Black"
+                       CharacterSpacing="2"
+                           Text="{x:Static resources:AppResources.ActionbarItems}"
+                           FontSize="Body"
+                   FontAttributes="Bold"
+                            />
+
+                <ScrollView VerticalScrollBarVisibility="Never" Orientation="Vertical">
+                    <StackLayout Margin="0,10,0,0" BackgroundColor="WhiteSmoke" BindableLayout.ItemsSource="{Binding basketItems}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame Padding="10" Visual="Material" CornerRadius="0">
+                                    <Grid >
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto"/>
+                                            <RowDefinition Height="Auto"/>
+                                        </Grid.RowDefinitions>
+
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto"/>
+                                            <ColumnDefinition Width="*"/>
+                                            <ColumnDefinition Width="Auto"/>
+                                        </Grid.ColumnDefinitions>
+
+
+                                        <controls:CircleImage Source="{Binding Image.Image,Converter={StaticResource BytesToImageSource}}"
+                                                      Aspect="AspectFill"
+                                                      BorderThickness="0.4"
+                                                      BorderColor="Silver"
+                                                      WidthRequest="60"
+                                                      HeightRequest="60"
+                                                      Grid.RowSpan="2"
+                                                      Grid.Column="0"/>
+
+                                        <Label Text="{Binding ItemDescription}"
+                                       VerticalTextAlignment="Center"
+                                       MaxLines="2" LineBreakMode="TailTruncation"
+                                       TextColor="Black" FontSize="Body"
+                                       Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+
+
+                                        <Label Text="{Binding Quantity,StringFormat={x:Static resources:AppResources.ApplicationQtyN,'{0:N0}'}}"
+                                       
+                                       VerticalTextAlignment="Center"
+                                       FontSize="Small" Grid.Row="1" Grid.Column="1"/>
+
+                                        <Label Text="{Binding Amount,StringFormat='{0:F2}'}" HorizontalOptions="End"
+                                       TextColor="Black"
+                                       VerticalTextAlignment="Center"
+                                       FontSize="Small" Grid.Row="1" Grid.Column="2"/>
+
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+
+                    --><!--<ListView  HasUnevenRows="True"
+                                VerticalScrollBarVisibility="Never"
+                            ItemsSource="{Binding basketItems}"
+                            BackgroundColor="WhiteSmoke">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <ViewCell>
+                       
+                            </ViewCell>
+                        </DataTemplate>
+                </ListView.ItemTemplate>
+                
+            </ListView>--><!--
+                </ScrollView>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" Grid.Row="4" VerticalOptions="CenterAndExpand" Margin="10,5,10,5" >
+                <Label VerticalTextAlignment="Center" Text="{Binding TotalAmount}"
+                       FontAttributes="Bold" FontSize="Body" TextColor="Black"/>
+
+
+                <Button  Text="{x:Static resources:AppResources.ApplicationNext}"
+                    Visual="Material"
+                         IsVisible="True"
+                   Command="{Binding NextCommand}"
+                         VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand"
+                    BackgroundColor="{StaticResource My_Button_Color}"
+                    TextColor="White"/>
+
+                <StackLayout.Triggers>
+                    <MultiTrigger TargetType="StackLayout">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding Source={x:Reference unavailableText},Path=IsVisible}" Value="true"/>
+                            <BindingCondition Binding="{Binding basketItems.Count}" Value="0"/>
+                        </MultiTrigger.Conditions>
+                        <Setter Property="IsVisible" Value="false"/>
+                    </MultiTrigger>
+
+
+                </StackLayout.Triggers>
+
+
+
+            </StackLayout>
+
+            </Grid>-->
+
+
+
+    <AbsoluteLayout>
+        <Grid 
+            x:Name="mainGrid"
+            HorizontalOptions="FillAndExpand"
+          RowDefinitions="80,*"
+            VerticalOptions="FillAndExpand" 
+            AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+
+            
+
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Grid.Triggers>
+
+
+            <ScrollView Grid.Row="1"
+               
+                HorizontalOptions="FillAndExpand"
+                VerticalOptions="FillAndExpand">
+
+
+
+                <Grid
+                    x:Name="subGrid"
+                    HorizontalOptions="FillAndExpand"
+                    VerticalOptions="FillAndExpand">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+                </Grid>
+            </ScrollView>
+        </Grid>
+
+        <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls1:LoadingView.Triggers>
+                <DataTrigger TargetType="controls1:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls1:LoadingView.Triggers>
+
+        </controls1:LoadingView>
+
+    </AbsoluteLayout>
+
+
+
+
+</ContentPage>

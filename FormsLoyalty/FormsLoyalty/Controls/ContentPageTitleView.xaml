@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FormsLoyalty.Controls.ContentPageTitleView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <Style x:Key="SubTitle3T3" TargetType="Label">
+                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="TextColor" Value="#333333" />
+            </Style>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+    <Grid ColumnDefinitions="Auto,*" >
+        <Label
+            x:Name="StepperPageTitle"
+            Grid.Column="0"
+            HorizontalOptions="Start"
+            Style="{StaticResource SubTitle3T3}" />
+        <BoxView
+            Grid.Column="1"
+            BackgroundColor="#FF8000"
+            HeightRequest="1"
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="CenterAndExpand" />
+    </Grid>
+</ContentView>

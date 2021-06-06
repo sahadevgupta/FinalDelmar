@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.RemainderPage"
+             xmlns:effects="clr-namespace:FormsLoyalty.Effects"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+           BackgroundColor="#D9f2f2ef"
+             Title="{x:Static resources:AppResources.ActionbarReminders}">
+
+
+
+    <Grid RowDefinitions="Auto,*,Auto">
+
+        <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
+        <Grid Padding="10" ColumnDefinitions="*" RowDefinitions="Auto,60,*" BackgroundColor="White">
+
+            <Label Grid.Row="0" Grid.Column="0" Margin="0,20,0,0" Text="July 2020" FontAttributes="Bold"
+                       HorizontalTextAlignment="Start" 
+                       FontSize="20" TextColor="Black"/>
+
+            <StackLayout Orientation="Horizontal" Grid.Row="1" >
+                    <Image Source="left_arrow" HeightRequest="16" WidthRequest="16" HorizontalOptions="Center" effects:TintImageEffect.TintColor="Black">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="leftarrow_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+
+                    <CollectionView  ItemsSource="{Binding dates}"  x:Name="collectionView" HorizontalScrollBarVisibility="Never">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Horizontal"
+                                           
+                                    ItemSpacing="5"/>
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame CornerRadius="10"  WidthRequest="50" HeightRequest="50" Padding="5"
+                                       Visual="Material"
+                                       BackgroundColor="White" BorderColor="White">
+
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="SelectDate" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
+
+                                    <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                                        <Label Text="{Binding DayofWeek}" x:Name="dayofWeek" >
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="true">
+                                                    <Setter Property="TextColor" Value="White"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                        <Label Text="{Binding day}" x:Name="day" HorizontalTextAlignment="Center" >
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding IsSelected}" Value="true">
+                                                    <Setter Property="TextColor" Value="White"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+                                    </StackLayout>
+
+                                    <Frame.Triggers>
+                                        <DataTrigger TargetType="Frame" Binding="{Binding IsSelected}" Value="true">
+                                            <Setter Property="BackgroundColor" Value="{StaticResource My_Header_Color}"/>
+                                        </DataTrigger>
+                                    </Frame.Triggers>
+
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                </CollectionView>
+                    <Image Source="right_arrow" HeightRequest="16" HorizontalOptions="Center" WidthRequest="16" effects:TintImageEffect.TintColor="Black">
+                        <Image.GestureRecognizers>
+                            <TapGestureRecognizer Tapped="rightarrow_Tapped"/>
+                        </Image.GestureRecognizers>
+                    </Image>
+
+                </StackLayout>
+
+
+                <Button Grid.Row="2" Text="&lt;&lt; Today" HorizontalOptions="End" Clicked="Today_Clicked"/>
+
+
+
+            </Grid>
+        </Frame>
+
+        <CollectionView ItemsSource="{Binding MedicineReminderDict}" Grid.Row="1"
+                        Margin="10"
+                        x:Name="reminderlist"
+                        VerticalScrollBarVisibility="Never">
+
+           
+            <CollectionView.ItemsLayout>
+                <LinearItemsLayout Orientation="Vertical"
+                           ItemSpacing="10"
+                                  />
+            </CollectionView.ItemsLayout>
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+
+                    <Frame CornerRadius="10" Padding="5" >
+                        <Expander x:Name="expander" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" Margin="-5,-5,-5,0" IsExpanded="True">
+                            <Expander.Header>
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#4f4f4f" Padding="5">
+                                    <Label Text="{Binding Key}" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20"/>
+                                    <ImageButton Source="left_arrow" BackgroundColor="Transparent" 
+                                                 HeightRequest="16" Aspect="AspectFit"
+                                                 WidthRequest="16"
+                                                 Margin="10,0,10,0"
+                                                 Rotation="270"
+                                                 HorizontalOptions="End" VerticalOptions="Center">
+                                        <ImageButton.Triggers>
+                                            <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference expander},Path= IsExpanded }"
+                                                         Value="true">
+                                                <Setter Property="Rotation" Value="90"/>
+                                            </DataTrigger>
+                                        </ImageButton.Triggers>
+                                    </ImageButton>
+                                </StackLayout>
+                            </Expander.Header>
+
+                            <StackLayout BindableLayout.ItemsSource="{Binding Value}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate>
+
+                                        <SwipeView IsClippedToBounds="True" Visual="Material">
+                                            <SwipeView.RightItems>
+
+                                                <SwipeItems>
+                                                    <SwipeItem Text="Edit"
+                                                               Command="{Binding BindingContext.EditCommand,Source={x:Reference reminderlist}}"
+                                                               CommandParameter="{Binding .}"
+                                                               IconImageSource="edit.png"
+                                                                BackgroundColor="LightGray"/>
+
+                                                    <SwipeItem Text="Delete"
+                                                               Command="{Binding BindingContext.DeleteCommand,Source={x:Reference reminderlist}}"
+                                                               CommandParameter="{Binding .}"
+                                                               IconImageSource="ic_action_discard.png"
+                                                               BackgroundColor="LightPink"
+                                                                />
+                                                </SwipeItems>
+
+                                              
+
+                                            </SwipeView.RightItems>
+                                       
+                                        <Grid RowDefinitions="Auto,Auto,0.7"  Padding="10">
+
+                                            <Label Grid.Row="0"  Text="{Binding EventName}" FontSize="Medium" TextColor="Black"/>
+                                            <Label Grid.Row="1" >
+                                                <Label.Text>
+                                                    <MultiBinding StringFormat="{}{0} {1}">
+
+                                                        <Binding Path="DoseQty" StringFormat="Take {0}"/>
+                                                        <Binding Path="unit"/>
+                                                    </MultiBinding>
+                                                </Label.Text>
+                                            </Label>
+
+                                            
+
+                                            <BoxView Grid.Row="2"  BackgroundColor="Silver" HeightRequest="0.7" />
+                                        </Grid>
+
+                                        </SwipeView>
+
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </StackLayout>
+
+
+                        </Expander>
+                    </Frame>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        
+
+        <Grid Margin="10,0,20,22" Grid.RowSpan="2"  HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Tapped="AddBtn_Tapped"/>
+            </Grid.GestureRecognizers>
+            
+            <BoxView HeightRequest="60" WidthRequest="60" CornerRadius="30"
+                         BackgroundColor="#CCb72227"/>
+            <Image Source="ic_action_new" VerticalOptions="Center" HorizontalOptions="Center" effects:TintImageEffect.TintColor="White"
+                       HeightRequest="40"/>
+        </Grid>
+
+
+   
+
+    </Grid>   
+   
+</ContentPage>

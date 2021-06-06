@@ -1,0 +1,306 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.TransactionPage"
+             BackgroundColor="#40d3d3d3"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:enums="clr-namespace:LSRetail.Omni.Domain.DataModel.Loyalty.Setup;assembly=LSRetail.Omni.Domain.DataModel.Loyalty"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             x:Name="thisPage"
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls" 
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             ios:Page.UseSafeArea="True"
+              Title="{x:Static resources:AppResources.txtOrderHistory}">
+    <ContentPage.Resources>
+        <converters:SalesEntryStatusToColorConverter x:Key="SalesEntryStatusToColorConverter"/>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+            <ToolbarItem.CommandParameter>
+                <prism:NavigationParameters>
+                    <prism:NavigationParameter Key="page" Value="Wishlist" />
+                    <prism:NavigationParameter Key="searchType" Value="{x:Static enums:SearchType.SalesEntry}" />
+                </prism:NavigationParameters>
+
+            </ToolbarItem.CommandParameter>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+
+    <AbsoluteLayout>    
+        <CollectionView ItemsSource="{Binding transactions}"
+                    SelectionMode="Single" Margin="10"
+                        VerticalScrollBarVisibility="Never"
+                    AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+
+            <CollectionView.EmptyView>
+                <Label Text="There is no orders to show" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"/>
+            </CollectionView.EmptyView>
+
+            <CollectionView.Triggers>
+                <DataTrigger TargetType="CollectionView" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </CollectionView.Triggers>
+
+            <CollectionView.ItemsLayout>
+            <GridItemsLayout VerticalItemSpacing="5"
+                             
+                             Orientation="Vertical"/>
+        </CollectionView.ItemsLayout>
+        <CollectionView.ItemTemplate>
+            <DataTemplate>
+                <Frame  Visual="Material"
+                        HorizontalOptions="StartAndExpand"
+                                VerticalOptions="StartAndExpand"                                
+                                Padding="10,20,0,0" 
+                                HasShadow="False"
+                                IsClippedToBounds="True" BackgroundColor="#ffffff" CornerRadius="15" >
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.onSelectedCommand,Source={x:Reference thisPage}}" 
+                                              CommandParameter="{Binding .}"/>
+                    </Frame.GestureRecognizers>
+                    
+                    <!--<Grid RowSpacing="5" IsClippedToBounds="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Label Text="{Binding DocumentRegTime,StringFormat='{0:f}'}"
+                               FontSize="Body"
+
+                               TextColor="Black"/>
+
+                            <yummy:PancakeView
+                    Grid.Row="0" BackgroundColor="White"
+                                VerticalOptions="StartAndExpand"
+                    Grid.Column="1"
+                    CornerRadius="45,0,45,0"
+                    HeightRequest="40">
+                                
+                                <Button WidthRequest="100" HeightRequest="30" TextColor="White"
+                        x:Name="ButtonStyle" FontAttributes="Bold" Visual="Default"
+                        BackgroundColor="{Binding Status, Converter={StaticResource SalesEntryStatusToColorConverter}}"
+                        Text="{Binding Status}"
+                        />
+                            </yummy:PancakeView>
+
+
+                            <Label Text="{Binding StoreName}"
+                               Grid.Row="1" Grid.Column="0"
+                               />
+                        <Label Text="{Binding TotalAmount,StringFormat=' {0:N02}'}"
+                                    Grid.Row="1" Grid.Column="1"
+                               HorizontalOptions="End" Margin="10,0,10,0"
+                               TextColor="Black"/>
+                    </Grid>-->
+
+
+
+                        <Grid Padding="0" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="3.5*,1.5*">
+
+
+
+
+                            <StackLayout Orientation="Horizontal"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    HorizontalOptions="FillAndExpand"
+                    HeightRequest="40">
+
+                              
+                                <Label
+                        x:Name="CardlblTitle"
+                                   
+                        VerticalOptions="Start"
+                        Text="{Binding Id}"
+                       FontAttributes="Bold"
+                                            FontSize="20"
+                                            TextColor="#465A54"/>
+
+                                <Label Text="" TextColor="#849A93" FontAttributes="Bold" FontSize="11"/>
+                            </StackLayout>
+
+
+                            <yummy:PancakeView 
+                    Grid.Row="0" BackgroundColor="White"
+                                VerticalOptions="StartAndExpand"
+                    Grid.Column="1"
+                    CornerRadius="45,0,45,0"
+                    HeightRequest="40">
+
+                                <Button WidthRequest="100" HeightRequest="30" TextColor="White"
+                        x:Name="ButtonStyle" FontAttributes="Bold" Visual="Default"
+                        BackgroundColor="{Binding Status, Converter={StaticResource SalesEntryStatusToColorConverter}}"
+                        Text="{Binding Status}"
+                        />
+
+                                <yummy:PancakeView.Triggers>
+                                    <DataTrigger TargetType="yummy:PancakeView" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                 Value="true">
+                                        <Setter Property="CornerRadius" Value="0,45,0,45"/>
+                                    </DataTrigger>
+                                </yummy:PancakeView.Triggers>
+                                
+                            </yummy:PancakeView>
+
+
+
+
+
+
+
+
+                            <StackLayout
+                    Grid.Row="2"
+                    Grid.Column="0"
+                    HorizontalOptions="FillAndExpand">
+
+                                <Grid
+                        Padding="0, 10, 0, 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition
+                                Width="16" />
+                                        <ColumnDefinition
+                                Width="*" />
+                                    </Grid.ColumnDefinitions>
+
+                                    <Path Data="M489.4,171.05c0-2.1-0.5-4.1-1.6-5.9l-72.8-128c-2.1-3.7-6.1-6.1-10.4-6.1H84.7c-4.3,0-8.3,2.3-10.4,6.1l-72.7,128
+			c-1,1.8-1.6,3.8-1.6,5.9c0,28.7,17.3,53.3,42,64.2v211.1c0,6.6,5.4,12,12,12h66.3c0.1,0,0.2,0,0.3,0h93c0.1,0,0.2,0,0.3,0h221.4
+			c6.6,0,12-5.4,12-12v-209.6c0-0.5,0-0.9-0.1-1.3C472,224.55,489.4,199.85,489.4,171.05z M91.7,55.15h305.9l56.9,100.1H34.9
+			L91.7,55.15z M348.3,179.15c-3.8,21.6-22.7,38-45.4,38c-22.7,0-41.6-16.4-45.4-38H348.3z M232,179.15c-3.8,21.6-22.7,38-45.4,38
+			s-41.6-16.4-45.5-38H232z M24.8,179.15h90.9c-3.8,21.6-22.8,38-45.5,38C47.5,217.25,28.6,200.75,24.8,179.15z M201.6,434.35h-69
+			v-129.5c0-9.4,7.6-17.1,17.1-17.1h34.9c9.4,0,17.1,7.6,17.1,17.1v129.5H201.6z M423.3,434.35H225.6v-129.5
+			c0-22.6-18.4-41.1-41.1-41.1h-34.9c-22.6,0-41.1,18.4-41.1,41.1v129.6H66v-193.3c1.4,0.1,2.8,0.1,4.2,0.1
+			c24.2,0,45.6-12.3,58.2-31c12.6,18.7,34,31,58.2,31s45.5-12.3,58.2-31c12.6,18.7,34,31,58.1,31c24.2,0,45.5-12.3,58.1-31
+			c12.6,18.7,34,31,58.2,31c1.4,0,2.7-0.1,4.1-0.1L423.3,434.35L423.3,434.35z M419.2,217.25c-22.7,0-41.6-16.4-45.4-38h90.9
+			C460.8,200.75,441.9,217.25,419.2,217.25z" Stroke="#849A93" Fill="#849A93" Grid.Row="0" Aspect="Uniform"
+                            Grid.Column="0" HeightRequest="16"/>
+
+                                  
+                                    <Label
+                            x:Name="Icon1Lbl"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding StoreName}"
+                           
+                        
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start" />
+                                </Grid>
+                            </StackLayout>
+
+
+
+                            <StackLayout
+                    Grid.Row="3"
+                    Grid.Column="0"
+                    HorizontalOptions="FillAndExpand">
+
+                                <Grid
+                        Padding="0, 10, 0, 0">
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition
+                                Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition
+                                Width="18" />
+                                        <ColumnDefinition
+                                Width="*" />
+                                    </Grid.ColumnDefinitions>
+                                    <Path Data="M426.667,51.2h-51.2V17.067C375.467,7.641,367.826,0,358.4,0s-17.067,7.641-17.067,17.067V51.2h-204.8V17.067
+			C136.533,7.641,128.892,0,119.467,0S102.4,7.641,102.4,17.067V51.2H51.2C22.923,51.2,0,74.123,0,102.4v324.267
+			c0,28.277,22.923,51.2,51.2,51.2h375.467c28.277,0,51.2-22.923,51.2-51.2V102.4C477.867,74.123,454.944,51.2,426.667,51.2z
+			 M443.733,426.667c0,9.426-7.641,17.067-17.067,17.067H51.2c-9.426,0-17.067-7.641-17.067-17.067V204.8h409.6V426.667z
+			 M443.733,170.667h-409.6V102.4c0-9.426,7.641-17.067,17.067-17.067h51.2v34.133c0,9.426,7.641,17.067,17.067,17.067
+			s17.067-7.641,17.067-17.067V85.333h204.8v34.133c0,9.426,7.641,17.067,17.067,17.067s17.067-7.641,17.067-17.067V85.333h51.2
+			c9.426,0,17.067,7.641,17.067,17.067V170.667z"      
+                                      Aspect="Uniform" Stroke="#849A93" Fill="#849A93" Grid.Row="0" Grid.Column="0" HeightRequest="16"/>
+                                    <Label
+                            x:Name="Icon3Lbl"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding DocumentRegTime,StringFormat='{0:f}'}"
+                           
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start" />
+                                </Grid>
+                            </StackLayout>
+
+
+                            <StackLayout
+                    Grid.Row="3"
+                    Grid.Column="1"
+                    HorizontalOptions="FillAndExpand">
+
+                                <Grid Padding="0, 10, 0, 0" RowDefinitions="Auto" ColumnDefinitions="16,*">
+                                    
+                                    <Path Data="M458.667,0H323.349c-25.643,0-49.749,9.984-67.883,28.117L18.197,265.387C6.464,277.12,0,292.715,0,309.376
+			c0,16.576,6.464,32.171,18.197,43.904L158.72,493.803C170.453,505.536,186.048,512,202.709,512
+			c16.576,0,32.171-6.464,43.904-18.197l237.269-237.269C502.016,238.4,512,214.293,512,188.651V53.333
+			C512,23.936,488.064,0,458.667,0z M490.667,188.651c0,19.947-7.765,38.699-21.845,52.779L231.531,478.72
+			c-15.339,15.339-42.24,15.445-57.707,0L33.28,338.176c-7.701-7.68-11.947-17.92-11.947-28.885c0-10.88,4.245-21.12,11.947-28.821
+			L270.549,43.2c14.123-14.101,32.853-21.867,52.8-21.867h135.317c17.643,0,32,14.357,32,32V188.651z"      
+                                      Aspect="Uniform" Stroke="#849A93" Fill="#849A93" Grid.Row="0" Grid.Column="0" HeightRequest="16"/>
+
+
+                                    <Label
+                           
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            Text="{Binding TotalAmount,StringFormat=' {0:N02}'}"
+                           FontSize="Body"
+                            HorizontalTextAlignment="Start" />
+
+
+                                   
+
+                                   
+                                </Grid>
+                            </StackLayout>
+
+
+                        </Grid>
+
+
+
+
+                    </Frame>
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

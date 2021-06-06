@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup" 
+                  xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+                  xmlns:resources="clr-namespace:FormsLoyalty"
+             x:Class="FormsLoyalty.PopUpView.DosePopUp">
+
+    <Grid  Padding="10"   VerticalOptions="CenterAndExpand" BackgroundColor="WhiteSmoke" Margin="20" RowDefinitions="Auto,Auto, Auto">
+
+        <Label x:Name="titlelbl" TextColor="{StaticResource My_Header_Color}" FontSize="Body"/>
+            <StackLayout x:Name="doseStack" Orientation="Horizontal" HorizontalOptions="Center" Margin="10" Grid.Row="1" IsVisible="false">
+
+               
+
+                <Stepper x:Name="_stepperDose"   Margin="10" Maximum="100"  Visual="Material"
+                             HorizontalOptions="End" />
+
+            <Entry x:Name="doseQtyEntry" Text="{Binding Source={x:Reference _stepperDose}, Path=Value,StringFormat='{0:F2}'}"
+                           
+                           Visual="Default"
+                           WidthRequest="100"
+                           HorizontalTextAlignment="Center"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+            </StackLayout>
+
+        <StackLayout x:Name="QtyStack" Orientation="Horizontal" HorizontalOptions="Center" Margin="10" Grid.Row="1" IsVisible="false">
+
+            <Stepper x:Name="_stepper" Minimum="1"  Margin="10" Maximum="100"  Visual="Material"
+                             HorizontalOptions="End" />
+
+            <Entry x:Name="qtyEntry" Text="{Binding Source={x:Reference _stepper}, Path=Value,StringFormat='{0:F0}'}"
+                           
+                           Visual="Default"
+                           WidthRequest="100"
+                           HorizontalTextAlignment="Center"
+               HorizontalOptions="Center"
+               VerticalOptions="CenterAndExpand" />
+        </StackLayout>
+
+        <StackLayout HorizontalOptions="End" Orientation="Horizontal" Grid.Row="2" Spacing="20">
+            <Button Text="{x:Static resources:AppResources.ApplicationCancel}"
+                    x:Name="CancelBtn"
+                    BackgroundColor="White"
+                    TextColor="Black"
+                    Clicked="CancelBtn_Clicked"
+                    FontSize="Medium"/>
+            <Button Text="Set"
+                    x:Name="okBtn"
+                    BackgroundColor="#4f4f4f"
+                   
+                   
+                    Clicked="okBtn_Clicked"
+                    FontSize="Medium"/>
+        </StackLayout>
+
+    </Grid>
+
+</pages:PopupPage>

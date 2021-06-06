@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             BackgroundColor="WhiteSmoke"
+             xmlns:effects="clr-namespace:FormsLoyalty.Effects" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.CouponDetailsPage"
+             >
+
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <ScrollView VerticalScrollBarVisibility="Never" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+            <ScrollView.Triggers>
+                <DataTrigger TargetType="ScrollView" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </ScrollView.Triggers>
+
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="250"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <StackLayout Grid.Row="0" Grid.ColumnSpan="2" HorizontalOptions="FillAndExpand">
+                    <CarouselView ItemsSource="{Binding SelectedCoupon.Images}"
+                          x:Name="carousel"
+                  IndicatorView="indicatorView"
+                       CurrentItemChanged="CarouselView_CurrentItemChanged"
+                          >
+                        <CarouselView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout>
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding BindingContext.ShowPreviewCommand,Source={x:Reference carousel}}"
+                                                              CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+                                    <Frame Visual="Material" Padding="1">
+                                        <ffimage:CachedImage Source="{Binding Image,Converter={StaticResource BytesToImageSource}}"
+                                               HeightRequest="250" DownsampleToViewSize="True"
+                               Aspect="AspectFill"/>
+
+                                    </Frame>
+
+                                </StackLayout>
+                            </DataTemplate>
+                        </CarouselView.ItemTemplate>
+                    </CarouselView>
+                    <IndicatorView x:Name="indicatorView"
+                   IndicatorColor="DarkGray"
+                   SelectedIndicatorColor="#303F9F"
+                   HorizontalOptions="Center" >
+                        <IndicatorView.Triggers>
+                            <DataTrigger TargetType="IndicatorView" Binding="{Binding SelectedCoupon.Images.Count}" Value="1">
+                                <Setter Property="IsVisible" Value="False"/>
+                            </DataTrigger>
+                        </IndicatorView.Triggers>
+                    </IndicatorView>
+                </StackLayout>
+
+                <Grid Margin="10,0,10,0" Grid.Row="0" Grid.Column="1" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"
+                  TranslationY="30" >
+                    <BoxView HeightRequest="60" WidthRequest="60" CornerRadius="30"
+                         BackgroundColor="#303F9F"/>
+                    <Image  VerticalOptions="Center" HorizontalOptions="Center" Source="ic_action_new" effects:TintImageEffect.TintColor="White"
+                       HeightRequest="40">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image" Binding="{Binding SelectedCoupon.Selected}" Value="true">
+                                <Setter Property="Source" Value="ic_action_remove"/>
+                            </DataTrigger>
+
+                        </Image.Triggers>
+                    </Image>
+
+                   
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Button_Clicked"/>
+                    </Grid.GestureRecognizers>
+
+                </Grid>
+
+
+
+
+                <StackLayout Grid.Row="1" Grid.ColumnSpan="2" Margin="0,10,0,0">
+
+
+
+                    <Label Margin="10"
+                   FontSize="Title"
+                   TextColor="{StaticResource My_Header_Color}"
+                   Text="{Binding SelectedCoupon.Description}"/>
+
+                    <Label Margin="10"
+                   TextColor="Black"
+                   FontSize="Body"
+                   >
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <Span Text="Expires: "/>
+                                <Span Text="{Binding SelectedCoupon.ExpirationDate,Mode=OneWay}"/>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+
+                    <Label Margin="10"
+                   FontSize="Body"
+                   TextColor="Black"
+                   Text="{Binding SelectedCoupon.Details}"/>
+
+                    <Label Margin="10,20,0,0"
+                       TextColor="Black"
+                       CharacterSpacing="2"
+                           Text="{x:Static resources:AppResources.OfferRelatedItems}"
+                           FontSize="Medium"
+                   FontAttributes="Bold"
+                            >
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding relatedItems.Count}" Value="0">
+                                <Setter Property="IsVisible" Value="false"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
+                    <CollectionView ItemsSource="{Binding relatedItems}"
+                                SelectionMode="Single"
+                                HeightRequest="250"
+                            Margin="10,0">
+
+                        <CollectionView.Triggers>
+                            <DataTrigger TargetType="CollectionView" Binding="{Binding relatedItems.Count}" Value="0">
+                                <Setter Property="IsVisible" Value="false"/>
+                            </DataTrigger>
+                        </CollectionView.Triggers>
+
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Horizontal" 
+                                           ItemSpacing="5"/>
+                        </CollectionView.ItemsLayout>
+
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <StackLayout WidthRequest="150" Padding="5" >
+
+                                    <StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                                    </StackLayout.GestureRecognizers>
+
+                                    <Image Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                   HeightRequest="200"
+                                   Aspect="AspectFill"
+                                   />
+                                    <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                                   VerticalTextAlignment="Center"/>
+                                </StackLayout>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </StackLayout>
+
+
+
+            </Grid>
+        </ScrollView>
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+
+    </AbsoluteLayout>
+
+
+</ContentPage>

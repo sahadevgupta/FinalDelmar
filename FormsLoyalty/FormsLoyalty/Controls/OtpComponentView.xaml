@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:converter="clr-namespace:FormsLoyalty.Converters"
+             x:Class="FormsLoyalty.Controls.OtpComponentView">
+    
+    <ContentView.Resources>
+        <ResourceDictionary>
+
+            <Style x:Key="SmallLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="#444444" />
+                <Setter Property="FontSize" Value="Body" />
+            </Style>
+
+            <Style x:Key="BodyText2B2" TargetType="Label">
+                <Setter Property="FontSize" Value="Caption" />
+                <Setter Property="TextColor" Value="#333333" />
+            </Style>
+
+            <Style x:Key="SmallLabelStyleLight" TargetType="Label">
+                <Setter Property="TextColor" Value="#666666" />
+                <Setter Property="FontSize" Value="12" />
+            </Style>
+
+            <converter:OtpErrorConverter x:Key="OtpErrorConverter" />
+            <converter:OtpTimerInverseConverter x:Key="OTPTimerInverseConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid HorizontalOptions="FillAndExpand" RowSpacing="2"
+          VerticalOptions="FillAndExpand" RowDefinitions="Auto,Auto,Auto">
+
+        
+
+
+        <FlexLayout Grid.Row="0" Direction="Row" JustifyContent="Start"
+                    HorizontalOptions="CenterAndExpand"
+                    AlignContent="Start" AlignItems="Start"
+                    HeightRequest="35" Padding="0,0,20,0" 
+                    Margin="0,5,0,5"
+                    x:Name="otpFlex"
+                    BindableLayout.ItemsSource="{Binding OtpModelList}" >
+            <BindableLayout.ItemTemplate>
+                <DataTemplate>
+                    <Frame WidthRequest="100" 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Margin="0,0,10,0"
+                    Padding="0"
+                    BackgroundColor="#ededed"
+                    BorderColor="{Binding Source={x:Reference otpFlex}, Path=BindingContext.IsError, Converter={StaticResource OtpErrorConverter}}" Content="{Binding entry}">
+                    </Frame>
+                </DataTemplate>
+            </BindableLayout.ItemTemplate>
+
+            <FlexLayout.GestureRecognizers>
+                <TapGestureRecognizer Tapped="FrameGestureRecognizer_Tapped"/>
+            </FlexLayout.GestureRecognizers>
+
+        </FlexLayout>
+
+
+        <Label
+                Margin="0,10,0,0"
+                x:Name="footerLabel"
+                Grid.Row="1"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Start"
+                 
+                 />
+        <Label
+                x:Name="errorLabel"
+                Grid.Row="2"
+                Margin="0,10,0,0"
+                HorizontalOptions="FillAndExpand"
+                HorizontalTextAlignment="Start"
+                Style="{StaticResource BodyText2B2}"
+                Text="Please enter a valid OTP"
+                TextColor="{StaticResource My_Button_Color}" />
+
+    </Grid>
+    
+</ContentView>

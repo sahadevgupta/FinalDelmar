@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.WishListPage"
+             BackgroundColor="WhiteSmoke"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:enums="clr-namespace:LSRetail.Omni.Domain.DataModel.Loyalty.Setup;assembly=LSRetail.Omni.Domain.DataModel.Loyalty"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             Title="{x:Static resources:AppResources.ShoppingListDetailViewWishlist}">
+   
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+            <ToolbarItem.CommandParameter>
+                <prism:NavigationParameters>
+                    <prism:NavigationParameter Key="page" Value="Wishlist" />
+                    <prism:NavigationParameter Key="searchType" Value="{x:Static enums:SearchType.OneList}" />
+                </prism:NavigationParameters>
+
+            </ToolbarItem.CommandParameter>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    
+    
+    <AbsoluteLayout>
+        <CollectionView ItemsSource="{Binding WishList}"
+              VerticalScrollBarVisibility="Never"
+              SelectionMode="Single"
+             AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+               x:Name="list"
+             >
+
+            <CollectionView.Triggers>
+                <DataTrigger TargetType="CollectionView" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </CollectionView.Triggers>
+
+            <CollectionView.ItemTemplate>
+            <DataTemplate>
+                    <Frame Padding="10" Visual="Material" VerticalOptions="CenterAndExpand">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                        
+                        <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto">
+                            <controls:CircleImage Source="{Binding Image.Image,Converter={StaticResource BytesToImageSource}}"
+                                                  BorderThickness="0.4"
+                                                  VerticalOptions="CenterAndExpand"
+                                                      BorderColor="Silver"
+                                                  Grid.RowSpan="2" Grid.Column="0"
+                                                  HeightRequest="50"
+                                                  WidthRequest="50"/>
+                            <Label Text="{Binding ItemDescription}" MaxLines="2"
+                                   LineBreakMode="TailTruncation"
+                                   FontSize="Body" Grid.Row="0" Grid.Column="1"
+                                   VerticalTextAlignment="Center"
+                                   TextColor="Black"/>
+
+
+                            <Label VerticalOptions="Center" Grid.Row="1" Grid.Column="1">
+
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding NewPrice}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                        <Span Text="  " FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                        <Span Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding DiscountPercent}" Value="0">
+                                        <Setter Property="IsVisible" Value="false"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+
+                            </Label>
+
+
+                            <Label Text="{Binding Price}" IsVisible="false" 
+                                                   Grid.Row="1" Grid.Column="1"
+                                                   FontSize="16" FontAttributes="Bold">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding DiscountPercent}" Value="0">
+                                        <Setter Property="IsVisible" Value="true"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
+
+
+                            <ImageButton HeightRequest="25" Grid.RowSpan="2" Grid.Column="2"
+                                         Source="more.png"
+                                         IsVisible="false"
+                                         VerticalOptions="CenterAndExpand"
+                                         HorizontalOptions="EndAndExpand"
+                                         Clicked="moreButton_Clicked"
+                                         CommandParameter="{Binding .}" BackgroundColor="Transparent"/>
+
+
+                            <material:MaterialMenuButton ButtonType="Text" CornerRadius="24" 
+                                                         Grid.RowSpan="2" Grid.Column="2"
+                                                         HeightRequest="25"
+                                                         
+                                                         HorizontalOptions="EndAndExpand"
+                                                         Image="more.png" TintColor="Gray"
+                                                         Choices="{Binding BindingContext.Actions,Source={x:Reference list}}"
+                                                         Command="{Binding BindingContext.MenuCommand,Source={x:Reference list}}"
+                                                         CommandParameter="{Binding .}"/>
+
+
+
+
+                        </Grid>
+                    </Frame>
+                    
+                    
+            </DataTemplate>
+        </CollectionView.ItemTemplate>
+    </CollectionView>
+
+        <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls1:LoadingView.Triggers>
+                <DataTrigger TargetType="controls1:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls1:LoadingView.Triggers>
+
+        </controls1:LoadingView>
+
+    </AbsoluteLayout>
+
+
+</ContentPage>

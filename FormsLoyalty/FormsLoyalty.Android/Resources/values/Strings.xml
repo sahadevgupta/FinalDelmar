@@ -1,0 +1,10 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="hello">Hello World, Click Me!</string>
+	<string name="app_name">Delmar &amp; Attalah</string>
+
+  <string name="facebook_app_name">MyFacebookAppName</string>
+  <string name="facebook_app_id">1009767512769310</string>
+	<string name="fb_login_protocol_scheme">fb1009767512769310</string>
+  
+</resources>

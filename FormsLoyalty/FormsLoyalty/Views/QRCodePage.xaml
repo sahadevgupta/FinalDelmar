@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.QRCodePage"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             BackgroundColor="WhiteSmoke">
+
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+    </ContentPage.Resources>
+    
+   
+        <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="250"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Image 
+                   HeightRequest="250"
+                   WidthRequest="250"
+                   Source="{Binding qrCode}"
+                   VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="Center"
+                   />
+
+
+            <CollectionView Margin="0,20,0,0" ItemsSource="{Binding offers}"
+                    IsGrouped="True"
+                   Grid.Row="1"
+                    x:Name="offerlist">
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                             VerticalItemSpacing="10"
+                                 />
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+
+                        <Label 
+                       TextColor="Black"
+                       CharacterSpacing="2"
+                       
+                           Text="{Binding Name}"
+                           FontSize="Small"
+                           FontAttributes="Bold" />
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+
+
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+
+                        <Frame>
+                        <Grid RowDefinitions="Auto,Auto">
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            
+                            
+
+
+                            <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                                  Grid.RowSpan="2"
+                                                  VerticalOptions="CenterAndExpand"
+                                                  Aspect="AspectFill"
+                                                  Grid.Column="0"
+                                                  HeightRequest="40"
+                                                  WidthRequest="40"/>
+
+                            <Label Grid.Row="0" Grid.Column="1"
+                              LineBreakMode="TailTruncation"
+                                   TextColor="Black"
+                                   FontSize="Body"
+                               Text="{Binding Description}" />
+
+                            <Label Grid.Row="1" Grid.Column="1" Text="{Binding Details}" 
+                                   MaxLines="2"  LineBreakMode="TailTruncation"
+                                       FontSize="Caption"/>
+
+                        </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+            </CollectionView>
+
+
+        </Grid>
+   
+    
+    
+</ContentPage>

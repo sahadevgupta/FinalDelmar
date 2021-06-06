@@ -1,0 +1,367 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin" 
+             xmlns:behaviors="clr-namespace:FormsLoyalty.Behaviors" 
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls" 
+             xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.ItemGroupPage"
+             BackgroundColor="WhiteSmoke"
+             xmlns:effects="clr-namespace:FormsLoyalty.Effects"
+             xmlns:resources="clr-namespace:FormsLoyalty">
+
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal" FlowDirection="LeftToRight">
+            <Image 
+              
+                    VerticalOptions="Center"          
+                   Aspect="AspectFill"
+                HeightRequest="40" WidthRequest="40"
+                   HorizontalOptions="Start"
+                   Source="{Binding product.Images[0].Image,Converter={StaticResource BytesToImageSource}}">
+                <Image.Clip>
+                    <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
+                </Image.Clip>
+            </Image>
+
+            <Label Text="{Binding product.Description}"
+                VerticalOptions="CenterAndExpand"
+               CharacterSpacing="2"
+               FontAttributes="Bold"
+               TextColor="White"
+               />
+
+        </StackLayout>
+    </NavigationPage.TitleView>
+    
+    
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+   
+
+    <AbsoluteLayout>
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+              RowDefinitions="Auto,Auto,*">
+
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Grid.Triggers>
+
+
+
+            <Frame x:Name="searchView" Grid.Row="0" CornerRadius="{OnPlatform Android=30, iOS=25}" Padding="0" Margin="10"
+                   BackgroundColor="White" BorderColor="#33BDC3C7"
+                   Visual="Material">
+                <SearchBar HeightRequest="40" Placeholder="Type the item name to search" FontSize="Body" Text="{Binding SearchText}"/>
+            </Frame>
+
+
+
+
+            <Grid Grid.Row="1" ColumnDefinitions="Auto,*" RowDefinitions="Auto" VerticalOptions="CenterAndExpand">
+                <Label Margin="10,0,10,0" Text="Sort By" FontSize="16" VerticalTextAlignment="Center"
+                       FontAttributes="Bold"
+                       TextColor="Silver"
+                       Grid.Column="0"/>
+                <ScrollView HorizontalScrollBarVisibility="Never" Orientation="Horizontal" Grid.Column="1">
+
+                    <StackLayout Orientation="Horizontal"
+                                 x:Name="filterBox"
+                                 BindableLayout.ItemsSource="{Binding SortingOptions}"
+                                 Spacing="2">
+
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+
+
+                                <pancake:PancakeView
+                                        Margin="5,0,5,0"
+                                        BackgroundColor="#E3E4EB"
+                                        CornerRadius="20"
+                                        HasShadow="False">
+                                    <pancake:PancakeView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="SelectSortingOption" />
+                                    </pancake:PancakeView.GestureRecognizers>
+                                    <Label
+                                            x:Name="sortingOption"
+                                            Padding="20,10"
+                                            FontSize="16"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding .}"
+                                            TextColor="#707070" />
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundGradientStops" >
+                                                        <Setter.Value>
+                                                            <GradientStop Offset="1" Color="White"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                            <VisualState x:Name="Selected">
+                                                <VisualState.Setters>
+                                                    <Setter Property="BackgroundGradientStops">
+                                                        <Setter.Value>
+                                                            <pancake:GradientStopCollection>
+                                                                <pancake:GradientStop Offset="0" Color="Black" />
+                                                                <pancake:GradientStop Offset="0.5" Color="Black" />
+                                                                <pancake:GradientStop Offset="1" Color="#323144" />
+                                                            </pancake:GradientStopCollection>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                    <Setter Property="BackgroundGradientAngle" Value="270" />
+                                                </VisualState.Setters>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                </pancake:PancakeView>
+
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+
+                    </StackLayout>
+                </ScrollView>
+
+            </Grid>
+
+
+            <Label  
+                       FontAttributes="Bold"
+                       FontSize="Medium" 
+                       x:Name="noitemlbl"
+                 Grid.Row="2" 
+                       TextColor="Black" x:Uid="nit" 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       IsVisible="{Binding IsNoItemFound}"
+                       Text="No Item Found " >
+                <!--<Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding Items.Count}" Value="0">
+                        <Setter Property="IsVisible" Value="true"/>
+                    </DataTrigger>
+                </Label.Triggers>-->
+            </Label>
+
+            <CollectionView ItemsSource="{Binding Items}" 
+                        Margin="10,0,10,0"
+                        SelectionMode="Single"
+                       x:Name="itemlist"
+                        Grid.Row="2" 
+                            
+                        
+                            Scrolled="collectionView_Scrolled">
+
+                
+                
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical" 
+                             HorizontalItemSpacing="1"
+                             Span="2" VerticalItemSpacing="10"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid RowDefinitions="*">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Item_Tapped" NumberOfTapsRequired="1" CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+
+
+
+
+                            <Frame WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material"  Margin="0,0,8,0" >
+
+
+
+
+
+                                <Grid IsClippedToBounds="True" RowDefinitions="100,Auto,Auto,*">
+
+                                    <Grid Grid.Row="0" HeightRequest="100">
+                                        <controls1:LoadingImageView/>
+                                        <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                   HeightRequest="100"
+                           DownsampleToViewSize="True"
+                                   Aspect="AspectFit"
+                                   />
+                                    </Grid>
+
+
+                                    <Frame Grid.Row="0" HorizontalOptions="End" VerticalOptions="StartAndExpand" Padding="4" Margin="5"  
+                                   CornerRadius="20" BackgroundColor="Red" >
+                                        <Label Text="{Binding Discount,StringFormat='{0:N0}% Off'}" VerticalOptions="Center" HorizontalTextAlignment="Center" 
+                                                       TextColor = "White" FontSize ="14" />
+
+                                        <Frame.Triggers>
+                                            <DataTrigger TargetType="Frame" Binding="{Binding Discount}" Value="0">
+                                                <Setter Property="IsVisible" Value="false"/>
+                                            </DataTrigger>
+                                        </Frame.Triggers>
+
+                                    </Frame>
+
+                                   
+
+                                    <Label Text="{Binding Description}" 
+                                   LineBreakMode="TailTruncation"
+                                                   MaxLines="2" TextColor="Silver" 
+                                   Margin="10,0,10,0"
+                           FontSize="Small"
+                           FontAttributes="Bold"
+                           Grid.Row="1"
+                           />
+
+                                    <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0">
+                                      
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding NewPrice}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                                <Span Text="  " FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                                <Span Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Discount}" Value="0">
+                                                <Setter Property="IsVisible" Value="false"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+
+                                    </Label>
+
+
+                                    <Label Text="{Binding Price}" IsVisible="false" 
+                                                   Margin="10,0,10,0"
+                                                   Grid.Row="2"
+                                                   FontSize="16" FontAttributes="Bold">
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Discount}" Value="0">
+                                                <Setter Property="IsVisible" Value="true"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
+
+                                    <Grid Grid.Row="3" ColumnDefinitions="*,Auto" RowDefinitions="Auto" Margin="5,0,5,0" HeightRequest="30"
+                                          VerticalOptions="End">
+                                        <Button BackgroundColor="Black" TextColor="White" 
+                                                             HorizontalOptions="FillAndExpand"
+                                                            CornerRadius="20" 
+                                                Padding="0"
+                                                HeightRequest="30"
+                                                FontSize="11"
+                                                            IsVisible="false"
+                                                            Clicked="AddToCart_Clicked" 
+                                                            Visual="Default" Text="{x:Static resources:AppResources.AddToCartTxt}" VerticalOptions="EndAndExpand" >
+                                            <Button.Triggers>
+                                                <DataTrigger TargetType="Button" Binding="{Binding Quantity}" Value="0">
+                                                    <Setter Property="IsVisible" Value="true"/>
+                                                </DataTrigger>
+                                            </Button.Triggers>
+                                        </Button>
+
+
+                                        <Frame Padding ="1"  BorderColor="{StaticResource My_Button_Color}"
+                                                           HorizontalOptions="Start" Visual="Material"  
+                                                           Grid.Column="0" >
+
+                                            <Frame.Triggers>
+                                                <DataTrigger TargetType="Frame" Binding="{Binding Quantity}" Value="0">
+                                                    <Setter Property="IsVisible" Value="false"/>
+                                                </DataTrigger>
+                                            </Frame.Triggers>
+
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" Padding="0" Spacing="1" 
+                                                  BackgroundColor="{StaticResource My_Button_Color}" >
+
+                                                <Label HeightRequest="25" Text=" - " BackgroundColor="White"
+                                               VerticalOptions="Center" Padding="10,2,10,2">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="minus_Tapped"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+
+                                                <Label HeightRequest="25" Text="{Binding Quantity,StringFormat='{0:N0}'}" BackgroundColor="White"
+                                               TextColor="Gray"
+                                               VerticalOptions="Center" Padding="12,2,12,2"/>
+
+                                                <Label HeightRequest="25" Text=" + " BackgroundColor="White"
+                                               VerticalOptions="Center" Padding="10,2,10,2">
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="plus_Tapped"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+
+                                            </StackLayout>
+
+                                        </Frame>
+
+
+                                        <Image Source="ic_favorite_outline_24dp.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30"
+                                                           Aspect="AspectFit" Grid.Column="1"
+                                                                 BackgroundColor="Transparent" effects:TintImageEffect.TintColor="{StaticResource My_Header_Color}">
+                                            <Image.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="WishList_Tapped"/>
+                                            </Image.GestureRecognizers>
+
+                                            <Image.Triggers>
+                                                <DataTrigger TargetType="Image" Binding="{Binding IsWishlisted}" Value="true">
+                                                    <Setter Property="Source" Value="ic_favorite_24dp"/>
+                                                </DataTrigger>
+                                            </Image.Triggers>
+
+                                        </Image>
+
+                                    </Grid>
+
+                                </Grid>
+                            </Frame>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+                <CollectionView.Footer>
+                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource My_Header_Color}" Visual="Material"/>
+
+
+                </CollectionView.Footer>
+
+
+            </CollectionView>
+
+
+
+        </Grid>
+
+        <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls1:LoadingView.Triggers>
+                <DataTrigger TargetType="controls1:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls1:LoadingView.Triggers>
+
+        </controls1:LoadingView>
+    </AbsoluteLayout>
+
+   
+
+</ContentPage>

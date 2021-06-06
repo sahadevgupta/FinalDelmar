@@ -1,0 +1,1426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountInformationAccountInformation" xml:space="preserve">
+    <value>Account information</value>
+  </data>
+  <data name="AccountInformationPersonalInformation" xml:space="preserve">
+    <value>Personal information</value>
+  </data>
+  <data name="AccountInformationViewAddressOne" xml:space="preserve">
+    <value>Address 1</value>
+  </data>
+  <data name="AccountInformationViewAddressTwo" xml:space="preserve">
+    <value>Address 2</value>
+  </data>
+  <data name="AccountInformationViewChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="AccountInformationViewCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="AccountInformationViewCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="AccountInformationViewEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="AccountInformationViewFirstName" xml:space="preserve">
+    <value>First name</value>
+  </data>
+  <data name="AccountInformationViewLastName" xml:space="preserve">
+    <value>Last name</value>
+  </data>
+  <data name="AccountInformationViewMiddleName" xml:space="preserve">
+    <value>Middle name</value>
+  </data>
+  <data name="AccountInformationViewMobile" xml:space="preserve">
+    <value>Mobile Number</value>
+  </data>
+  <data name="AccountInformationViewName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="AccountInformationViewPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="AccountInformationViewPasswordConfirmation" xml:space="preserve">
+    <value>Password confirmation</value>
+  </data>
+  <data name="AccountInformationViewPhone" xml:space="preserve">
+    <value>Phone</value>
+  </data>
+  <data name="AccountInformationViewPostCode" xml:space="preserve">
+    <value>Post code</value>
+  </data>
+  <data name="AccountInformationViewState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="AccountInformationViewUserName" xml:space="preserve">
+    <value>User name</value>
+  </data>
+  <data name="AccountManagementViewChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="AccountManagementViewEditInformation" xml:space="preserve">
+    <value>Edit account</value>
+  </data>
+  <data name="AccountManagementViewInstructions" xml:space="preserve">
+    <value>To change basic account information or change profiles connected to the account, choose \"{0}\".\n\n\nTo change account password, choose \"{1}\"</value>
+  </data>
+  <data name="AccountProfilesViewCreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="AccountProfilesViewFailed" xml:space="preserve">
+    <value>Error retrieving profiles</value>
+  </data>
+  <data name="AccountProfilesViewProfiles" xml:space="preserve">
+    <value>Profiles</value>
+  </data>
+  <data name="AccountProfilesViewRetry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="AccountTierViewCurrentLevel" xml:space="preserve">
+    <value>Current level</value>
+  </data>
+  <data name="AccountTierViewCurrentTier" xml:space="preserve">
+    <value>You are a {0} member.</value>
+  </data>
+  <data name="AccountTierViewIdentify" xml:space="preserve">
+    <value>Scan this code at the register to identify yourself.</value>
+  </data>
+  <data name="AccountTierViewNextLevel" xml:space="preserve">
+    <value>Next level</value>
+  </data>
+  <data name="AccountTierViewNextTier" xml:space="preserve">
+    <value>Next level at {0}. You need another {1} points to become a {2} member.</value>
+  </data>
+  <data name="AccountTierViewPointsBalance" xml:space="preserve">
+    <value>You have {0} points.</value>
+  </data>
+  <data name="AccountViewAddressOneEmpty" xml:space="preserve">
+    <value>Address one cannot be empty</value>
+  </data>
+  <data name="AccountViewBack" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="AccountViewCityEmpty" xml:space="preserve">
+    <value>City cannot be empty</value>
+  </data>
+  <data name="AccountViewCountryEmpty" xml:space="preserve">
+    <value>Country cannot be empty</value>
+  </data>
+  <data name="AccountViewCreate" xml:space="preserve">
+    <value>Create</value>
+  </data>
+  <data name="AccountViewCreateAccount" xml:space="preserve">
+    <value>Create account</value>
+  </data>
+  <data name="AccountViewCreatingNewAccount" xml:space="preserve">
+    <value>Creating new account</value>
+  </data>
+  <data name="AccountViewEmailEmpty" xml:space="preserve">
+    <value>Email cannot be empty</value>
+  </data>
+  <data name="AccountViewEmailExists" xml:space="preserve">
+    <value>The provided email address is already registered.</value>
+  </data>
+  <data name="AccountViewEmailInvalid" xml:space="preserve">
+    <value>Please provide a valid email address.</value>
+  </data>
+  <data name="AccountViewExistMobileNo" xml:space="preserve">
+    <value>Mobile No is Exist</value>
+  </data>
+  <data name="AccountViewExistPhoneNo" xml:space="preserve">
+    <value>Phone No is Exist</value>
+  </data>
+  <data name="AccountViewFacebookInvalid" xml:space="preserve">
+    <value>Facebook Account is invalid.</value>
+  </data>
+  <data name="AccountViewFacebookIsExist" xml:space="preserve">
+    <value>Facebook Account is Exist before.</value>
+  </data>
+  <data name="AccountViewFirstNameEmpty" xml:space="preserve">
+    <value>First name cannot be empty</value>
+  </data>
+  <data name="AccountViewGoogleInvalid" xml:space="preserve">
+    <value>Google Account is invalid.</value>
+  </data>
+  <data name="AccountViewGoogleIsExist" xml:space="preserve">
+    <value>Google Account is Exist before.</value>
+  </data>
+  <data name="AccountViewLastNameEmpty" xml:space="preserve">
+    <value>Last name cannot be empty</value>
+  </data>
+  <data name="AccountViewMobileInvalid" xml:space="preserve">
+    <value>Mobile No is Invalid</value>
+  </data>
+  <data name="AccountViewNameMustContainLastName" xml:space="preserve">
+    <value>Name must contain last name</value>
+  </data>
+  <data name="AccountViewPasswordAndPasswordConfirmDifferent" xml:space="preserve">
+    <value>Password must match password confirmation</value>
+  </data>
+  <data name="AccountViewPasswordConfirmEmpty" xml:space="preserve">
+    <value>Password conformation cannot be empty</value>
+  </data>
+  <data name="AccountViewPasswordEmpty" xml:space="preserve">
+    <value>Password cannot be empty</value>
+  </data>
+  <data name="AccountViewPasswordInvalid" xml:space="preserve">
+    <value>Please enter a valid password.</value>
+  </data>
+  <data name="AccountViewPhoneInvalid" xml:space="preserve">
+    <value>Phone No is Invalid</value>
+  </data>
+  <data name="AccountViewPostCodeEmpty" xml:space="preserve">
+    <value>Post code cannot be empty</value>
+  </data>
+  <data name="AccountViewStateEmpty" xml:space="preserve">
+    <value>State cannot be empty</value>
+  </data>
+  <data name="AccountViewUpdate" xml:space="preserve">
+    <value>Update</value>
+  </data>
+  <data name="AccountViewUpdateAccount" xml:space="preserve">
+    <value>Update account</value>
+  </data>
+  <data name="AccountViewUpdateSuccess" xml:space="preserve">
+    <value>Successfully updated account</value>
+  </data>
+  <data name="AccountViewUpdatingExistingAccount" xml:space="preserve">
+    <value>Updating your account</value>
+  </data>
+  <data name="AccountViewUserNameEmpty" xml:space="preserve">
+    <value>User name cannot be empty</value>
+  </data>
+  <data name="AccountViewUserNameExists" xml:space="preserve">
+    <value>This user name is already in use.\nPlease select another user name.</value>
+  </data>
+  <data name="AccountViewUserNameInvalid" xml:space="preserve">
+    <value>Please enter a valid user name.</value>
+  </data>
+  <data name="ActionbarCheckout" xml:space="preserve">
+    <value>Checkout</value>
+  </data>
+  <data name="ActionbarContactUs" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
+  <data name="ActionbarCoupon" xml:space="preserve">
+    <value>Coupon</value>
+  </data>
+  <data name="ActionbarCoupons" xml:space="preserve">
+    <value>Coupons</value>
+  </data>
+  <data name="ActionBarForgotPassword" xml:space="preserve">
+    <value>Forgot password</value>
+  </data>
+  <data name="ActionbarHome" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="ActionbarItem" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="ActionbarItems" xml:space="preserve">
+    <value>Items</value>
+  </data>
+  <data name="ActionbarLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="ActionbarLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="ActionbarMagazines" xml:space="preserve">
+    <value>Magazines</value>
+  </data>
+  <data name="ActionbarMap" xml:space="preserve">
+    <value>Map</value>
+  </data>
+  <data name="ActionbarNotification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="ActionbarNotifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="ActionbarOffer" xml:space="preserve">
+    <value>Offer</value>
+  </data>
+  <data name="ActionbarOffers" xml:space="preserve">
+    <value>Offers</value>
+  </data>
+  <data name="ActionbarQrCode" xml:space="preserve">
+    <value>Qr code</value>
+  </data>
+  <data name="ActionbarReminders" xml:space="preserve">
+    <value>Reminders</value>
+  </data>
+  <data name="ActionBarResetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="ActionbarScanSend" xml:space="preserve">
+    <value>Scan &amp; Send</value>
+  </data>
+  <data name="ActionbarSearch" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ActionbarSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ActionbarShoppingList" xml:space="preserve">
+    <value>Shopping list</value>
+  </data>
+  <data name="ActionbarShoppingLists" xml:space="preserve">
+    <value>Shopping lists</value>
+  </data>
+  <data name="ActionbarStore" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="ActionbarStores" xml:space="preserve">
+    <value>Stores</value>
+  </data>
+  <data name="ActionbarTerm" xml:space="preserve">
+    <value>TermsAndConditions</value>
+  </data>
+  <data name="ActionbarTransactions" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="AddToCartTxt" xml:space="preserve">
+    <value>Add To Cart</value>
+  </data>
+  <data name="AppConfigurationappbar" xml:space="preserve">
+    <value>App Settings</value>
+  </data>
+  <data name="ApplicatioItemDeleted" xml:space="preserve">
+    <value>Item deleted</value>
+  </data>
+  <data name="ApplicationAddedToBasket" xml:space="preserve">
+    <value>Added to basket</value>
+  </data>
+  <data name="ApplicationAddToBasket" xml:space="preserve">
+    <value>Add to basket</value>
+  </data>
+  <data name="ApplicationAddToWishList" xml:space="preserve">
+    <value>Add to wish list</value>
+  </data>
+  <data name="ApplicationBasket" xml:space="preserve">
+    <value>Basket</value>
+  </data>
+  <data name="ApplicationCancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ApplicationDelete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="ApplicationDone" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="ApplicationEmail" xml:space="preserve">
+    <value>Email</value>
+  </data>
+  <data name="ApplicationMustBeLoggedIn" xml:space="preserve">
+    <value>You must login or register to access this feature..</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Delmar-Attalla</value>
+  </data>
+  <data name="ApplicationNext" xml:space="preserve">
+    <value>Next</value>
+  </data>
+  <data name="ApplicationNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="ApplicationOk" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="ApplicationOpenSettings" xml:space="preserve">
+    <value>Open settings</value>
+  </data>
+  <data name="ApplicationOr" xml:space="preserve">
+    <value>Or</value>
+  </data>
+  <data name="ApplicationQty" xml:space="preserve">
+    <value>Qty</value>
+  </data>
+  <data name="ApplicationQtyN" xml:space="preserve">
+    <value>Qty: {0}</value>
+  </data>
+  <data name="ApplicationRequired" xml:space="preserve">
+    <value>Required</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>Delmar&amp;Attalla</value>
+  </data>
+  <data name="ApplicationTotal" xml:space="preserve">
+    <value>Total</value>
+  </data>
+  <data name="ApplicationUndo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="ApplicationYes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="ApplyBtn" xml:space="preserve">
+    <value>Apply</value>
+  </data>
+  <data name="ApplySettings" xml:space="preserve">
+    <value>Saved Successfully</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>Delmar &amp; Attalla</value>
+  </data>
+  <data name="await" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="BasketViewBasketIsEmpty" xml:space="preserve">
+    <value>Basket is empty.</value>
+  </data>
+  <data name="BasketViewClearBasketPrompt" xml:space="preserve">
+    <value>Clear basket?</value>
+  </data>
+  <data name="BasketViewGoToCheckout" xml:space="preserve">
+    <value>Go to checkout</value>
+  </data>
+  <data name="CartTab" xml:space="preserve">
+    <value>Cart</value>
+  </data>
+  <data name="ChangePasswordChangePassword" xml:space="preserve">
+    <value>Change password</value>
+  </data>
+  <data name="ChangePasswordChangePasswordSuccess" xml:space="preserve">
+    <value>Changing password successful</value>
+  </data>
+  <data name="ChangePasswordChangingPassword" xml:space="preserve">
+    <value>Changing password</value>
+  </data>
+  <data name="ChangePasswordErrorChangingPassword" xml:space="preserve">
+    <value>Unable to change the password</value>
+  </data>
+  <data name="ChangePasswordInvalidPasswordException" xml:space="preserve">
+    <value>Please provide a valid password</value>
+  </data>
+  <data name="ChangePasswordNewPasswordEmpty" xml:space="preserve">
+    <value>New password cannot be empty</value>
+  </data>
+  <data name="ChangePasswordOldPasswordEmpty" xml:space="preserve">
+    <value>Old password cannot be empty</value>
+  </data>
+  <data name="ChangePasswordPasswordsDontMatch" xml:space="preserve">
+    <value>Password does not match password confirmation</value>
+  </data>
+  <data name="ChangePasswordViewOldPassword" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="ChangePasswordViewPassword" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="ChangePasswordViewPasswordConfirmation" xml:space="preserve">
+    <value>New password confirmation</value>
+  </data>
+  <data name="CheckoutViewAddressOne" xml:space="preserve">
+    <value>Address 1</value>
+  </data>
+  <data name="CheckoutViewAddressTwo" xml:space="preserve">
+    <value>Address 2</value>
+  </data>
+  <data name="CheckoutViewAllRequiredFieldsMustBeFilled" xml:space="preserve">
+    <value>All required fields must be filled</value>
+  </data>
+  <data name="CheckoutViewBillingAddress" xml:space="preserve">
+    <value>Billing address</value>
+  </data>
+  <data name="CheckoutViewCalculateTotal" xml:space="preserve">
+    <value>Calculate total</value>
+  </data>
+  <data name="CheckoutViewCantHaveZeroQty" xml:space="preserve">
+    <value>{0} cannot have 0 quantity</value>
+  </data>
+  <data name="CheckoutViewCardNumber" xml:space="preserve">
+    <value>Card number</value>
+  </data>
+  <data name="CheckoutViewCity" xml:space="preserve">
+    <value>City</value>
+  </data>
+  <data name="CheckoutViewClickCollect" xml:space="preserve">
+    <value>Click &amp; Collect</value>
+  </data>
+  <data name="CheckoutViewCountry" xml:space="preserve">
+    <value>Country</value>
+  </data>
+  <data name="CheckoutViewCVV" xml:space="preserve">
+    <value>CVV</value>
+  </data>
+  <data name="CheckoutViewDiscount" xml:space="preserve">
+    <value>Discount:</value>
+  </data>
+  <data name="CheckoutViewEmailToSendReceipt" xml:space="preserve">
+    <value>A receipt will be sent to the following email</value>
+  </data>
+  <data name="CheckoutViewExpires" xml:space="preserve">
+    <value>Expires {0}/{1}</value>
+  </data>
+  <data name="CheckoutViewHomeDelivery" xml:space="preserve">
+    <value>Home Delivery</value>
+  </data>
+  <data name="CheckoutViewInStorePickup" xml:space="preserve">
+    <value>In store pickup</value>
+  </data>
+  <data name="CheckoutViewItemNotAvailable" xml:space="preserve">
+    <value>{0} is not available at {1}</value>
+  </data>
+  <data name="CheckoutViewItemsNotAvailable" xml:space="preserve">
+    <value>The following items are not available at {0}</value>
+  </data>
+  <data name="CheckoutViewMM" xml:space="preserve">
+    <value>MM</value>
+  </data>
+  <data name="CheckoutViewMustEnterCreditCardInfo" xml:space="preserve">
+    <value>All credit card information must be filled</value>
+  </data>
+  <data name="CheckoutViewName" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="CheckoutViewNoItemsAvailable" xml:space="preserve">
+    <value>None of the items are available in {0}</value>
+  </data>
+  <data name="CheckoutViewOrder" xml:space="preserve">
+    <value>Place order</value>
+  </data>
+  <data name="CheckoutViewOrderSuccess" xml:space="preserve">
+    <value>Order successfully completed</value>
+  </data>
+  <data name="CheckoutViewPayCreditCard" xml:space="preserve">
+    <value>Credit Card</value>
+  </data>
+  <data name="CheckoutViewPayCreditOnDelivery" xml:space="preserve">
+    <value>Visa on Delivery</value>
+  </data>
+  <data name="CheckoutViewPayment" xml:space="preserve">
+    <value>Payment</value>
+  </data>
+  <data name="CheckoutViewPaymentOptions" xml:space="preserve">
+    <value>Payment options</value>
+  </data>
+  <data name="CheckoutViewPayOnDelivery" xml:space="preserve">
+    <value>Cash on delivery</value>
+  </data>
+  <data name="CheckoutViewPostCode" xml:space="preserve">
+    <value>Post code</value>
+  </data>
+  <data name="CheckoutViewSameAsShippingAddress" xml:space="preserve">
+    <value>Same as shipping address</value>
+  </data>
+  <data name="CheckoutViewShipping" xml:space="preserve">
+    <value>Shipping:</value>
+  </data>
+  <data name="CheckoutViewShippingAddress" xml:space="preserve">
+    <value>Shipping address</value>
+  </data>
+  <data name="CheckoutViewShippingMethod" xml:space="preserve">
+    <value>Shipping Method</value>
+  </data>
+  <data name="CheckoutViewState" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="CheckoutViewStoreToPickup" xml:space="preserve">
+    <value>Store to pick up in</value>
+  </data>
+  <data name="CheckoutViewSubtotal" xml:space="preserve">
+    <value>SubTotal:</value>
+  </data>
+  <data name="CheckoutViewTotal" xml:space="preserve">
+    <value>Total:</value>
+  </data>
+  <data name="CheckoutViewTotalHeader" xml:space="preserve">
+    <value>TOTAL</value>
+  </data>
+  <data name="CheckoutViewTotalWithoutVAT" xml:space="preserve">
+    <value>Total without VAT:</value>
+  </data>
+  <data name="CheckoutViewVAT" xml:space="preserve">
+    <value>VAT:</value>
+  </data>
+  <data name="CheckoutViewYYYY" xml:space="preserve">
+    <value>YYYY</value>
+  </data>
+  <data name="ClubOffers" xml:space="preserve">
+    <value>Club offers</value>
+  </data>
+  <data name="ContactUsViewOpenAppError" xml:space="preserve">
+    <value>There is no app that can open this extension</value>
+  </data>
+  <data name="ContactUsVview " xml:space="preserve">
+    <value>الخط الساخن19552</value>
+  </data>
+  <data name="CouponUse" xml:space="preserve">
+    <value>Use coupon</value>
+  </data>
+  <data name="CouponViewAddedToQRCode" xml:space="preserve">
+    <value>CouponViewAddedToQRCode</value>
+  </data>
+  <data name="CouponViewAddToQRCode" xml:space="preserve">
+    <value>Add coupon to QR code</value>
+  </data>
+  <data name="CouponViewRemoveFromQRCode" xml:space="preserve">
+    <value>Remove coupon from QR code</value>
+  </data>
+  <data name="desc_google_icon" xml:space="preserve">
+    <value>Google Logo</value>
+  </data>
+  <data name="DetailViewDetails" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="DetailViewExpires" xml:space="preserve">
+    <value>Expires: {0} - {1}</value>
+  </data>
+  <data name="DetailViewNeverExpires" xml:space="preserve">
+    <value>Never expires</value>
+  </data>
+  <data name="disconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="FacebookLoginBtn" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="ForgotPasswordAlreadyHaveCode" xml:space="preserve">
+    <value>Already have a reset code?</value>
+  </data>
+  <data name="ForgotPasswordInstructions" xml:space="preserve">
+    <value>Enter username to receive a code to reset your password.</value>
+  </data>
+  <data name="ForgotPasswordSendCode" xml:space="preserve">
+    <value>Send code</value>
+  </data>
+  <data name="GeneralOffers" xml:space="preserve">
+    <value>General offers</value>
+  </data>
+  <data name="GeneralSearchViewChooseCategories" xml:space="preserve">
+    <value>Please choose categories you want to search in.</value>
+  </data>
+  <data name="GeneralSearchViewCoupon" xml:space="preserve">
+    <value>Coupon</value>
+  </data>
+  <data name="GeneralSearchViewCouponsGroupHeader" xml:space="preserve">
+    <value>Coupons ({0})</value>
+  </data>
+  <data name="GeneralSearchViewItem" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="GeneralSearchViewItemsGroupHeader" xml:space="preserve">
+    <value>Items ({0})</value>
+  </data>
+  <data name="GeneralSearchViewNotification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="GeneralSearchViewNotificationsGroupHeader" xml:space="preserve">
+    <value>Notifications ({0})</value>
+  </data>
+  <data name="GeneralSearchViewOffer" xml:space="preserve">
+    <value>Offer</value>
+  </data>
+  <data name="GeneralSearchViewOffersGroupHeader" xml:space="preserve">
+    <value>Offers ({0})</value>
+  </data>
+  <data name="GeneralSearchViewSearchStringToShort" xml:space="preserve">
+    <value>Search must contain at least 3 letters.</value>
+  </data>
+  <data name="GeneralSearchViewShoppingList" xml:space="preserve">
+    <value>Shopping list</value>
+  </data>
+  <data name="GeneralSearchViewStore" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="GeneralSearchViewStoresGroupHeader" xml:space="preserve">
+    <value>Stores ({0})</value>
+  </data>
+  <data name="GeneralSearchViewTransaction" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="GeneralSearchViewTransactionsGroupHeader" xml:space="preserve">
+    <value>History ({0})</value>
+  </data>
+  <data name="GeneralSearchViewWishListGroupHeader" xml:space="preserve">
+    <value>Wish list ({0})</value>
+  </data>
+  <data name="GoogleLoginBtn" xml:space="preserve">
+    <value>Google</value>
+  </data>
+  <data name="HistoryViewReorderButton" xml:space="preserve">
+    <value>Reorder Items</value>
+  </data>
+  <data name="HockeyAppId" xml:space="preserve">
+    <value>[Please enter the HockeyApp Id here]</value>
+  </data>
+  <data name="ItemCategoryViewFailed" xml:space="preserve">
+    <value>Error retrieving item categories</value>
+  </data>
+  <data name="ItemCategoryViewRetry" xml:space="preserve">
+    <value>Retry</value>
+  </data>
+  <data name="ItemModelItemNotFound" xml:space="preserve">
+    <value>Item not found</value>
+  </data>
+  <data name="ItemSearchViewNoItemsFound" xml:space="preserve">
+    <value>No items found</value>
+  </data>
+  <data name="ItemSearchViewSearchToShortError" xml:space="preserve">
+    <value>There have to be at least 3 letters in a search</value>
+  </data>
+  <data name="ItemViewAddToNewList" xml:space="preserve">
+    <value>Create a new shopping list</value>
+  </data>
+  <data name="ItemViewAddToShoppingList" xml:space="preserve">
+    <value>Add to</value>
+  </data>
+  <data name="ItemViewCannotAccessExternalStorage" xml:space="preserve">
+    <value>App cannot access your external storage, open settings to change permissions.</value>
+  </data>
+  <data name="ItemViewNewListName" xml:space="preserve">
+    <value>Shopping list name</value>
+  </data>
+  <data name="ItemViewPickShoppingList" xml:space="preserve">
+    <value>Please pick a shopping list</value>
+  </data>
+  <data name="ItemViewPickVariant" xml:space="preserve">
+    <value>Please select a variantId</value>
+  </data>
+  <data name="ItemViewRelatedOffers" xml:space="preserve">
+    <value>Related offers</value>
+  </data>
+  <data name="ItemViewSelectValidCombination" xml:space="preserve">
+    <value>Please select a valid combination</value>
+  </data>
+  <data name="ItemViewSelectVariation" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="ItemViewUnitOfMeasure" xml:space="preserve">
+    <value>Unit</value>
+  </data>
+  <data name="ItemViewVariant" xml:space="preserve">
+    <value>Variation</value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>Loading…</value>
+  </data>
+  <data name="LoginToCheckPtTxt" xml:space="preserve">
+    <value>Login to check your points</value>
+  </data>
+  <data name="LoginViewCreateAccountButton" xml:space="preserve">
+    <value>Dont Have An Account? Sign Up</value>
+  </data>
+  <data name="LoginViewForgotPassword" xml:space="preserve">
+    <value>Forgot password?</value>
+  </data>
+  <data name="LoginViewInvalidSecurityToken" xml:space="preserve">
+    <value>Login has expired, please login again</value>
+  </data>
+  <data name="LoginViewLoginButton" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="LoginViewPassword" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="LoginViewPasswordEmpty" xml:space="preserve">
+    <value>Password cannot be empty </value>
+  </data>
+  <data name="LoginViewUsername" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="LoginViewUserNameEmpty" xml:space="preserve">
+    <value>User name cannot be empty</value>
+  </data>
+  <data name="Login_OR" xml:space="preserve">
+    <value>OR</value>
+  </data>
+  <data name="logoutText" xml:space="preserve">
+    <value>Are you sure, you want to logout?</value>
+  </data>
+  <data name="MemberContactModelLoggingInUser" xml:space="preserve">
+    <value>Logging in user: {0}</value>
+  </data>
+  <data name="MemberContactModelLoggingOutUser" xml:space="preserve">
+    <value>Logging out user: {0}</value>
+  </data>
+  <data name="MemberContactModelLogin" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MemberContactModelLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="MemberContactModelRegisterDevice" xml:space="preserve">
+    <value>Register device</value>
+  </data>
+  <data name="MemberContactModelRegisteringDevice" xml:space="preserve">
+    <value>Registering device</value>
+  </data>
+  <data name="MemberContactModelResetPassword" xml:space="preserve">
+    <value>Reset password</value>
+  </data>
+  <data name="MemberContactModelResettingPassword" xml:space="preserve">
+    <value>Resetting password</value>
+  </data>
+  <data name="MemberOffers" xml:space="preserve">
+    <value>Member offers</value>
+  </data>
+  <data name="MenuViewAccountManagementTitle" xml:space="preserve">
+    <value>Account management</value>
+  </data>
+  <data name="MenuViewAddToCurrentTitle" xml:space="preserve">
+    <value>Add all items to current list</value>
+  </data>
+  <data name="MenuViewClearTitle" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="MenuViewContactUs" xml:space="preserve">
+    <value>Contact us</value>
+  </data>
+  <data name="MenuViewDeleteTitle" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="MenuViewFacebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="MenuViewGooglePlus" xml:space="preserve">
+    <value>Google+</value>
+  </data>
+  <data name="MenuViewHelp" xml:space="preserve">
+    <value>Help</value>
+  </data>
+  <data name="MenuViewLogout" xml:space="preserve">
+    <value>Logout</value>
+  </data>
+  <data name="MenuViewMarkAsReadTitle" xml:space="preserve">
+    <value>Mark as read</value>
+  </data>
+  <data name="MenuViewMarkAsUnreadTitle" xml:space="preserve">
+    <value>Mark as unread</value>
+  </data>
+  <data name="MenuViewNewShoppingList" xml:space="preserve">
+    <value>Create new shopping list</value>
+  </data>
+  <data name="MenuViewQRTitle" xml:space="preserve">
+    <value>Generate QR code</value>
+  </data>
+  <data name="MenuViewRefreshTitle" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="MenuViewSaveAsNewListTitle" xml:space="preserve">
+    <value>Save as new list</value>
+  </data>
+  <data name="MenuViewScanBarcodeTitle" xml:space="preserve">
+    <value>Scan barcode</value>
+  </data>
+  <data name="MenuViewSearchTitle" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="MenuViewSendFeedback" xml:space="preserve">
+    <value>Send feedback</value>
+  </data>
+  <data name="MenuViewSettingsTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="MenuViewShare" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="MenuViewShowAsGrid" xml:space="preserve">
+    <value>Show as grid</value>
+  </data>
+  <data name="MenuViewShowAsList" xml:space="preserve">
+    <value>Show as list</value>
+  </data>
+  <data name="MenuViewShowDirections" xml:space="preserve">
+    <value>Show directions</value>
+  </data>
+  <data name="MenuViewShowStoreOnMap" xml:space="preserve">
+    <value>Show store on map</value>
+  </data>
+  <data name="MenuViewShowStoresOnMap" xml:space="preserve">
+    <value>Show all stores on map</value>
+  </data>
+  <data name="MenuViewViewStock" xml:space="preserve">
+    <value>Check where item is in stock</value>
+  </data>
+  <data name="ModelAccessNotAllowed" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="ModelAuthenticationFailed" xml:space="preserve">
+    <value>Incorrect user name or password. Please try again.</value>
+  </data>
+  <data name="ModelDeviceBlocked" xml:space="preserve">
+    <value>This device has been blocked</value>
+  </data>
+  <data name="ModelEmailExists" xml:space="preserve">
+    <value>Email already exists</value>
+  </data>
+  <data name="ModelErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="ModelGenericException" xml:space="preserve">
+    <value>Error, please try again</value>
+  </data>
+  <data name="ModelNetworkException" xml:space="preserve">
+    <value>No network connection</value>
+  </data>
+  <data name="ModelSecurityToken" xml:space="preserve">
+    <value>Access denied</value>
+  </data>
+  <data name="MoreTab" xml:space="preserve">
+    <value>More</value>
+  </data>
+  <data name="MyCartTxt" xml:space="preserve">
+    <value>My Cart</value>
+  </data>
+  <data name="MyPoints" xml:space="preserve">
+    <value>My Points : </value>
+  </data>
+  <data name="NotificationBarContentText" xml:space="preserve">
+    <value>You have {0} new {1}</value>
+  </data>
+  <data name="NotificationBarNotification" xml:space="preserve">
+    <value>Notification</value>
+  </data>
+  <data name="NotificationBarNotifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="NotificationModelDelete" xml:space="preserve">
+    <value>Deleting {0}</value>
+  </data>
+  <data name="NotificationModelDeletingChecked" xml:space="preserve">
+    <value>Deleting checked notifications</value>
+  </data>
+  <data name="NotificationModelMarkingAsRead" xml:space="preserve">
+    <value>Marking {0} as read</value>
+  </data>
+  <data name="NotificationModelMarkingAsUnread" xml:space="preserve">
+    <value>Marking {0} as unread</value>
+  </data>
+  <data name="NotificationModelMarkingCheckedAsRead" xml:space="preserve">
+    <value>Marking checked notifications as read</value>
+  </data>
+  <data name="NotificationModelMarkingCheckedAsUnread" xml:space="preserve">
+    <value>Marking checked notifications as unread</value>
+  </data>
+  <data name="NotificationModelNotifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="NotificationViewDeleteNotification" xml:space="preserve">
+    <value>Delete notifications?</value>
+  </data>
+  <data name="NotificationViewDeleteNotifications" xml:space="preserve">
+    <value>Delete notification?</value>
+  </data>
+  <data name="NotificationViewExpires" xml:space="preserve">
+    <value>Expires:</value>
+  </data>
+  <data name="NotificationViewNotificationationsWillBeDeleted" xml:space="preserve">
+    <value>Notifications will be gone permanently</value>
+  </data>
+  <data name="NotificationViewNotificationationWillBeDeleted" xml:space="preserve">
+    <value>Notification will be gone permanently</value>
+  </data>
+  <data name="NotificationViewRead" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="NotificationViewUnread" xml:space="preserve">
+    <value>Unread</value>
+  </data>
+  <data name="OfferRelatedItems" xml:space="preserve">
+    <value>Related items</value>
+  </data>
+  <data name="OfferUse" xml:space="preserve">
+    <value>Use offer</value>
+  </data>
+  <data name="OfferViewAddedToQRCode" xml:space="preserve">
+    <value>Offer added to QR code</value>
+  </data>
+  <data name="OfferViewAddToQRCode" xml:space="preserve">
+    <value>Add offer to QR code</value>
+  </data>
+  <data name="OfferViewRemoveFromQRCode" xml:space="preserve">
+    <value>Remove Offer from QR code</value>
+  </data>
+  <data name="OrdersTab" xml:space="preserve">
+    <value>Orders</value>
+  </data>
+  <data name="PlayServiceUtilInstall" xml:space="preserve">
+    <value>Install</value>
+  </data>
+  <data name="PlayServiceUtilPlayServices" xml:space="preserve">
+    <value>Google Play Services</value>
+  </data>
+  <data name="PlayServiceUtilRequiresPlayService" xml:space="preserve">
+    <value>The map requires Google Play Services to be installed.</value>
+  </data>
+  <data name="play_services_error_fmt" xml:space="preserve">
+    <value>Google Play Services Error: {0}</value>
+  </data>
+  <data name="PointOffers" xml:space="preserve">
+    <value>Point offers</value>
+  </data>
+  <data name="PricedetailTxt" xml:space="preserve">
+    <value>Price Details</value>
+  </data>
+  <data name="ProceedTxt" xml:space="preserve">
+    <value>Proceed</value>
+  </data>
+  <data name="QRCodeViewNoSelected" xml:space="preserve">
+    <value>No offers or coupons have been selected.</value>
+  </data>
+  <data name="RadioButtonArabicLanguage" xml:space="preserve">
+    <value>Arabic</value>
+  </data>
+  <data name="RadioButtonEnglishLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="RemoveTxt" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="ResetPasswordInstructions" xml:space="preserve">
+    <value>Enter email, reset code and new password to reset your password.</value>
+  </data>
+  <data name="ResetPasswordResetCode" xml:space="preserve">
+    <value>Reset code 
+        </value>
+  </data>
+  <data name="ResetPasswordResetCodeEmpty" xml:space="preserve">
+    <value>Reset code cannot be empty.</value>
+  </data>
+  <data name="ResetPasswordResetPassword" xml:space="preserve">
+    <value> Reset password</value>
+  </data>
+  <data name="ScannerViewScannerBottomText" xml:space="preserve">
+    <value>Wait for the barcode to automatically scan!</value>
+  </data>
+  <data name="ScannerViewScannerTopText" xml:space="preserve">
+    <value>Hold the camera up to the barcode\nAbout 15 centimeters away</value>
+  </data>
+  <data name="server_client_id" xml:space="preserve">
+    <value>641451297819-nqqn78s0og5okkoqcak63490k1tfae13.apps.googleusercontent.com</value>
+  </data>
+  <data name="SettingsViewLanguage" xml:space="preserve">
+    <value>Language Settings</value>
+  </data>
+  <data name="SettingsViewNewPinMessage" xml:space="preserve">
+    <value>Resetting pin number</value>
+  </data>
+  <data name="SettingsViewNewPinTitle" xml:space="preserve">
+    <value>Reset pin</value>
+  </data>
+  <data name="SettingsViewNewPinToShort" xml:space="preserve">
+    <value>New pin must be 4 digits</value>
+  </data>
+  <data name="SettingsViewNotifications" xml:space="preserve">
+    <value>Notification settings</value>
+  </data>
+  <data name="SettingsViewReceiveNotificationsSummary" xml:space="preserve">
+    <value>Allow app to notify you when there are new notifications</value>
+  </data>
+  <data name="SettingsViewResetPinError" xml:space="preserve">
+    <value>Could not change pin</value>
+  </data>
+  <data name="SettingsViewResetPinSuccess" xml:space="preserve">
+    <value>Pin changed successfully</value>
+  </data>
+  <data name="ShoppingListDetailViewAddToAnotherList" xml:space="preserve">
+    <value>Add to another shopping list</value>
+  </data>
+  <data name="ShoppingListDetailViewChangeQty" xml:space="preserve">
+    <value>Change quantity</value>
+  </data>
+  <data name="ShoppingListDetailViewDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete item?</value>
+  </data>
+  <data name="ShoppingListDetailViewDeleteItemFromList" xml:space="preserve">
+    <value>Delete item from list</value>
+  </data>
+  <data name="ShoppingListDetailViewEnterNewQuantity" xml:space="preserve">
+    <value>Please enter new quantity</value>
+  </data>
+  <data name="ShoppingListDetailViewEnterShoppingListName" xml:space="preserve">
+    <value>Please enter shopping list name</value>
+  </data>
+  <data name="ShoppingListDetailViewGoToItemInfo" xml:space="preserve">
+    <value>Item information</value>
+  </data>
+  <data name="ShoppingListDetailViewItemExistsAndWillBeOverwritten" xml:space="preserve">
+    <value>{0} already exists in {1} and will be overwritten</value>
+  </data>
+  <data name="ShoppingListDetailViewItemName" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="ShoppingListDetailViewItemsExistAndWillBeOverwritten" xml:space="preserve">
+    <value>The following item already exists in {0} and will be overwritten</value>
+  </data>
+  <data name="ShoppingListDetailViewNameCannotBeEmpty" xml:space="preserve">
+    <value>Name cannot be empty</value>
+  </data>
+  <data name="ShoppingListDetailViewNoItemsInShoppingList" xml:space="preserve">
+    <value>No items in shopping list</value>
+  </data>
+  <data name="ShoppingListDetailViewSaveShoppingList" xml:space="preserve">
+    <value>Save shopping list</value>
+  </data>
+  <data name="ShoppingListDetailViewWishlist" xml:space="preserve">
+    <value>Wish list</value>
+  </data>
+  <data name="ShoppingListModelItemAddedToShoppingList" xml:space="preserve">
+    <value>تم حفظ المنتج</value>
+  </data>
+  <data name="ShoppingListModelItemsAddedToShoppingList" xml:space="preserve">
+    <value>تم حفظ المنتج</value>
+  </data>
+  <data name="ShoppingListViewClearConfirmation" xml:space="preserve">
+    <value>Are you sure you want to clear list?</value>
+  </data>
+  <data name="ShoppingListViewClearList" xml:space="preserve">
+    <value>Clear list</value>
+  </data>
+  <data name="ShoppingListViewDeleteConfirmation" xml:space="preserve">
+    <value>Are you sure you want to delete list?</value>
+  </data>
+  <data name="ShoppingListViewDeleteList" xml:space="preserve">
+    <value>Delete list</value>
+  </data>
+  <data name="ShowPasswordTxt" xml:space="preserve">
+    <value>Show Password</value>
+  </data>
+  <data name="signed_in_fmt" xml:space="preserve">
+    <value>Signed in as: {0}</value>
+  </data>
+  <data name="signed_out" xml:space="preserve">
+    <value>Signed out</value>
+  </data>
+  <data name="signing_in" xml:space="preserve">
+    <value>Signing in…</value>
+  </data>
+  <data name="SignUpTxt" xml:space="preserve">
+    <value>Sign Up</value>
+  </data>
+  <data name="sign_out" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="StorelocatorDetailViewFriday" xml:space="preserve">
+    <value>Fridays</value>
+  </data>
+  <data name="StorelocatorDetailViewKilometersAway" xml:space="preserve">
+    <value>{0} kilometers away</value>
+  </data>
+  <data name="StorelocatorDetailViewMonday" xml:space="preserve">
+    <value>Mondays</value>
+  </data>
+  <data name="StorelocatorDetailViewOpeningHourDay" xml:space="preserve">
+    <value>{0} - {1} on {2}</value>
+  </data>
+  <data name="StorelocatorDetailViewPhone" xml:space="preserve">
+    <value>Tel. {0}</value>
+  </data>
+  <data name="StorelocatorDetailViewSaturday" xml:space="preserve">
+    <value>Saturdays</value>
+  </data>
+  <data name="StorelocatorDetailViewSundays" xml:space="preserve">
+    <value>Sundays</value>
+  </data>
+  <data name="StorelocatorDetailViewThursday" xml:space="preserve">
+    <value>Thursdays</value>
+  </data>
+  <data name="StorelocatorDetailViewTuesday" xml:space="preserve">
+    <value>Tuesdays</value>
+  </data>
+  <data name="StorelocatorDetailViewWednesday" xml:space="preserve">
+    <value>Wednesdays</value>
+  </data>
+  <data name="StorelocatorViewInStockStores" xml:space="preserve">
+    <value>{0} is in stock in these stores.</value>
+  </data>
+  <data name="StorelocatorViewNotInStock" xml:space="preserve">
+    <value>Item is not in stock in anywhere.</value>
+  </data>
+  <data name="StoreMapCannotAccessLocation" xml:space="preserve">
+    <value>App cannot access your location, open settings to change permissions.</value>
+  </data>
+  <data name="StoreModelGettingStores" xml:space="preserve">
+    <value>Getting stores</value>
+  </data>
+  <data name="StoreModelStoreLocator" xml:space="preserve">
+    <value>Store locator</value>
+  </data>
+  <data name="TimeUtilsDaysAgo" xml:space="preserve">
+    <value>days ago</value>
+  </data>
+  <data name="TimeUtilsHourAgo" xml:space="preserve">
+    <value>an hour ago</value>
+  </data>
+  <data name="TimeUtilsHoursAgo" xml:space="preserve">
+    <value>hours ago</value>
+  </data>
+  <data name="TimeUtilsMinuteAgo" xml:space="preserve">
+    <value>a minute ago</value>
+  </data>
+  <data name="TimeUtilsMinutesAgo" xml:space="preserve">
+    <value>minutes ago</value>
+  </data>
+  <data name="TimeUtilsMonthAgo" xml:space="preserve">
+    <value>one month ago</value>
+  </data>
+  <data name="TimeUtilsMonthsAgo" xml:space="preserve">
+    <value>months ago</value>
+  </data>
+  <data name="TimeUtilsSecondAgo" xml:space="preserve">
+    <value>one second ago</value>
+  </data>
+  <data name="TimeUtilsSecondsAgo" xml:space="preserve">
+    <value>seconds ago</value>
+  </data>
+  <data name="TimeUtilsYearAgo" xml:space="preserve">
+    <value>one year ago</value>
+  </data>
+  <data name="TimeUtilsYearsAgo" xml:space="preserve">
+    <value>years ago</value>
+  </data>
+  <data name="TimeUtilsYesterday" xml:space="preserve">
+    <value>yesterday</value>
+  </data>
+  <data name="TotalMRPTxt" xml:space="preserve">
+    <value>Total MRP</value>
+  </data>
+  <data name="TransactionDetailViewDiscountTotal" xml:space="preserve">
+    <value>Discount total:</value>
+  </data>
+  <data name="TransactionDetailViewItemAmountHeaderText" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="TransactionDetailViewItemDiscount" xml:space="preserve">
+    <value>Discount: {0}</value>
+  </data>
+  <data name="TransactionDetailViewItemNameHeaderText" xml:space="preserve">
+    <value>Item</value>
+  </data>
+  <data name="TransactionDetailViewTotal" xml:space="preserve">
+    <value>Total:</value>
+  </data>
+  <data name="TransactionDetailViewTotalWithoutVAT" xml:space="preserve">
+    <value>Total without VAT:</value>
+  </data>
+  <data name="TransactionViewNoTransactions" xml:space="preserve">
+    <value>You have no transactions</value>
+  </data>
+  <data name="TransactionViewTransactionCannotBeOpened" xml:space="preserve">
+    <value>Transaction cannot be opened</value>
+  </data>
+  <data name="txt6Digit" xml:space="preserve">
+    <value>6 digit</value>
+  </data>
+  <data name="txtAddress" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="txtApplied" xml:space="preserve">
+    <value>applied!</value>
+  </data>
+  <data name="txtAprtNo" xml:space="preserve">
+    <value>Apartment No.</value>
+  </data>
+  <data name="txtArea" xml:space="preserve">
+    <value>Area</value>
+  </data>
+  <data name="txtbestsellers" xml:space="preserve">
+    <value>Best Sellers</value>
+  </data>
+  <data name="txtCardNumber" xml:space="preserve">
+    <value>Card Number</value>
+  </data>
+  <data name="txtCategory" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="txtCVV" xml:space="preserve">
+    <value>CVV</value>
+  </data>
+  <data name="txtEnterPhoneNumber" xml:space="preserve">
+    <value>Enter your Phone Number</value>
+  </data>
+  <data name="txtExpired" xml:space="preserve">
+    <value>Expired</value>
+  </data>
+  <data name="txtExpiryDate" xml:space="preserve">
+    <value>Expiry Date</value>
+  </data>
+  <data name="txtFloorNo" xml:space="preserve">
+    <value>Floor No.</value>
+  </data>
+  <data name="txtGenerateOtp" xml:space="preserve">
+    <value>Generate OTP</value>
+  </data>
+  <data name="txtImageSizeError" xml:space="preserve">
+    <value>Size Exceeds!!</value>
+  </data>
+  <data name="txtImageSizeExceed" xml:space="preserve">
+    <value>File size too large!  Should be less than 2MB</value>
+  </data>
+  <data name="txtImgListSizeExceed" xml:space="preserve">
+    <value>Some of the images are not added as file size too large! Should be less than 2MB</value>
+  </data>
+  <data name="txtImgSizeNote" xml:space="preserve">
+    <value>All Documents should be in Png , jpeg, jpg formats only within the file size limit of 2 MB</value>
+  </data>
+  <data name="txtInvalidOtp" xml:space="preserve">
+    <value>Invalid OTP</value>
+  </data>
+  <data name="txtLandmark" xml:space="preserve">
+    <value>Landmark</value>
+  </data>
+  <data name="txtmostviewed" xml:space="preserve">
+    <value>Frequently Ordered</value>
+  </data>
+  <data name="txtNumber" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="txtOrderHistory" xml:space="preserve">
+    <value>Order History</value>
+  </data>
+  <data name="txtpoints" xml:space="preserve">
+    <value>Points</value>
+  </data>
+  <data name="txtRemark" xml:space="preserve">
+    <value>Remarks :</value>
+  </data>
+  <data name="txtSelectCategory" xml:space="preserve">
+    <value>Select A Coupon</value>
+  </data>
+  <data name="txtSelectCode" xml:space="preserve">
+    <value>Select a promo code</value>
+  </data>
+  <data name="txtStreet" xml:space="preserve">
+    <value>Street</value>
+  </data>
+  <data name="txtVerificationCode" xml:space="preserve">
+    <value>verification code</value>
+  </data>
+  <data name="txtWeWillShare" xml:space="preserve">
+    <value>We will share you the</value>
+  </data>
+  <data name="WelcomeViewLoginButtonText" xml:space="preserve">
+    <value>Logon</value>
+  </data>
+  <data name="WelcomeViewPageTitle" xml:space="preserve">
+    <value>Welcome</value>
+  </data>
+  <data name="WelcomeViewWelcomeText" xml:space="preserve">
+    <value>&amp;#10;To get started, tap the button below to log on or to add a new account and configure your personal profile.&amp;#10;&amp;#10;&amp;#10; Being a member allows you to benefit from personal offers and coupons as well as collecting points, which can be used for tendering during your shopping experience.</value>
+  </data>
+  <data name="WishListViewNoItemsInWishList" xml:space="preserve">
+    <value>No items in wish list</value>
+  </data>
+</root>

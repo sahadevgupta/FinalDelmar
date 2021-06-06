@@ -1,0 +1,1422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AccountInformationAccountInformation" xml:space="preserve">
+    <value>معلومات الحساب</value>
+  </data>
+  <data name="AccountInformationPersonalInformation" xml:space="preserve">
+    <value>معلومات شخصية</value>
+  </data>
+  <data name="AccountInformationViewAddressOne" xml:space="preserve">
+    <value>عنوان ١</value>
+  </data>
+  <data name="AccountInformationViewAddressTwo" xml:space="preserve">
+    <value>عنوان ٢</value>
+  </data>
+  <data name="AccountInformationViewChangePassword" xml:space="preserve">
+    <value>تغيير كلمة السر</value>
+  </data>
+  <data name="AccountInformationViewCity" xml:space="preserve">
+    <value>مدينة</value>
+  </data>
+  <data name="AccountInformationViewCountry" xml:space="preserve">
+    <value>البلد</value>
+  </data>
+  <data name="AccountInformationViewEmail" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="AccountInformationViewFirstName" xml:space="preserve">
+    <value>الاسم الاول</value>
+  </data>
+  <data name="AccountInformationViewLastName" xml:space="preserve">
+    <value>إسم العائلة</value>
+  </data>
+  <data name="AccountInformationViewMiddleName" xml:space="preserve">
+    <value>إسم الأب </value>
+  </data>
+  <data name="AccountInformationViewMobile" xml:space="preserve">
+    <value>رقم الموبايل</value>
+  </data>
+  <data name="AccountInformationViewName" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="AccountInformationViewPassword" xml:space="preserve">
+    <value>كلمة السر</value>
+  </data>
+  <data name="AccountInformationViewPasswordConfirmation" xml:space="preserve">
+    <value>تاكيد كلمة السر</value>
+  </data>
+  <data name="AccountInformationViewPhone" xml:space="preserve">
+    <value>تليفون</value>
+  </data>
+  <data name="AccountInformationViewPostCode" xml:space="preserve">
+    <value>الرمز البريدي</value>
+  </data>
+  <data name="AccountInformationViewState" xml:space="preserve">
+    <value>دولة</value>
+  </data>
+  <data name="AccountInformationViewUserName" xml:space="preserve">
+    <value>إسم المستخدم</value>
+  </data>
+  <data name="AccountManagementViewChangePassword" xml:space="preserve">
+    <value>تغيير كلمة السر</value>
+  </data>
+  <data name="AccountManagementViewEditInformation" xml:space="preserve">
+    <value>تعديل الحساب</value>
+  </data>
+  <data name="AccountManagementViewInstructions" xml:space="preserve">
+    <value>لتغيير معلومات الحساب الأساسية أو تغيير الملفات الشخصية المتصلة بالحساب ، اختر \ "{0} \". \n \n \n لتغيير كلمة سر الحساب ، اختر \ "{1} \"</value>
+  </data>
+  <data name="AccountProfilesViewCreateAccount" xml:space="preserve">
+    <value>إنشاء حساب</value>
+  </data>
+  <data name="AccountProfilesViewFailed" xml:space="preserve">
+    <value>خطا في استرداد ملف التعريف</value>
+  </data>
+  <data name="AccountProfilesViewProfiles" xml:space="preserve">
+    <value>الملف الشخصي</value>
+  </data>
+  <data name="AccountProfilesViewRetry" xml:space="preserve">
+    <value>اعد المحاولة</value>
+  </data>
+  <data name="AccountTierViewCurrentLevel" xml:space="preserve">
+    <value>المستوي الحالي</value>
+  </data>
+  <data name="AccountTierViewCurrentTier" xml:space="preserve">
+    <value>أنتم {0} عضو.</value>
+  </data>
+  <data name="AccountTierViewIdentify" xml:space="preserve">
+    <value>امسح هذا الرمز في السجل لتعريف نفسك.</value>
+  </data>
+  <data name="AccountTierViewNextLevel" xml:space="preserve">
+    <value>المستوي التالي</value>
+  </data>
+  <data name="AccountTierViewNextTier" xml:space="preserve">
+    <value>الخط الساخنالمستوي القادم في{0} . تحتاج الي{1} نقطة لتصبح {2} عضو.</value>
+  </data>
+  <data name="AccountTierViewPointsBalance" xml:space="preserve">
+    <value>لديك {0} نقاط</value>
+  </data>
+  <data name="AccountViewAddressOneEmpty" xml:space="preserve">
+    <value>العنوان ١ لا يجب ان يكون فارغا</value>
+  </data>
+  <data name="AccountViewBack" xml:space="preserve">
+    <value>ارجع</value>
+  </data>
+  <data name="AccountViewCityEmpty" xml:space="preserve">
+    <value>المدينة لا يجب ان تكون فارغة</value>
+  </data>
+  <data name="AccountViewCountryEmpty" xml:space="preserve">
+    <value>البلد لا يجب ان يكون فارغة</value>
+  </data>
+  <data name="AccountViewCreate" xml:space="preserve">
+    <value>انشئ</value>
+  </data>
+  <data name="AccountViewCreateAccount" xml:space="preserve">
+    <value>انشئ حساب</value>
+  </data>
+  <data name="AccountViewCreatingNewAccount" xml:space="preserve">
+    <value>إنشاء حساب جديد</value>
+  </data>
+  <data name="AccountViewEmailEmpty" xml:space="preserve">
+    <value>البريد الالكتروني لا يجب ان يكون فارغا</value>
+  </data>
+  <data name="AccountViewEmailExists" xml:space="preserve">
+    <value>عنوان البريد الالكتروني المقدم مسجل بالفعل.</value>
+  </data>
+  <data name="AccountViewEmailInvalid" xml:space="preserve">
+    <value>يرجي تقديم عنوان بريد الكتروني صالح.</value>
+  </data>
+  <data name="AccountViewExistMobileNo" xml:space="preserve">
+    <value>موبايل موجود مسبقا</value>
+  </data>
+  <data name="AccountViewExistPhoneNo" xml:space="preserve">
+    <value>رقم هاتف موجود مسبقا</value>
+  </data>
+  <data name="AccountViewFacebookInvalid" xml:space="preserve">
+    <value>حساب فيسبوك غير مسجل</value>
+  </data>
+  <data name="AccountViewFacebookIsExist" xml:space="preserve">
+    <value>تم التسجيل بحساب فيسبوك هذا مسبقا</value>
+  </data>
+  <data name="AccountViewFirstNameEmpty" xml:space="preserve">
+    <value>الاسم الاول لا يجب ان يكون فارغا</value>
+  </data>
+  <data name="AccountViewGoogleInvalid" xml:space="preserve">
+    <value>حساب جوجل غير مسجل</value>
+  </data>
+  <data name="AccountViewGoogleIsExist" xml:space="preserve">
+    <value>تم التسجيل بحساب جوجل هذا مسبقا</value>
+  </data>
+  <data name="AccountViewLastNameEmpty" xml:space="preserve">
+    <value>اسم العائلة لا يجب ان يترك فارغا</value>
+  </data>
+  <data name="AccountViewMobileInvalid" xml:space="preserve">
+    <value>موبايل غير صحيح</value>
+  </data>
+  <data name="AccountViewNameMustContainLastName" xml:space="preserve">
+    <value>يجب ان يحتوي الاسم علي اسم العائلة</value>
+  </data>
+  <data name="AccountViewPasswordAndPasswordConfirmDifferent" xml:space="preserve">
+    <value>كلمة السر يجب ان تماثل تأكيد كلمة السر</value>
+  </data>
+  <data name="AccountViewPasswordConfirmEmpty" xml:space="preserve">
+    <value>تأكيد كلمة السر لا يجب ان تكون فارغة</value>
+  </data>
+  <data name="AccountViewPasswordEmpty" xml:space="preserve">
+    <value>كلمة السر لا يجب ان تكون فارغة</value>
+  </data>
+  <data name="AccountViewPasswordInvalid" xml:space="preserve">
+    <value>يرجي تقديم كلمة سر صالحة.</value>
+  </data>
+  <data name="AccountViewPhoneInvalid" xml:space="preserve">
+    <value>رقم هاتف غير صحيح</value>
+  </data>
+  <data name="AccountViewPostCodeEmpty" xml:space="preserve">
+    <value>الرمز البريدي لا يجب ان تكون فارغا</value>
+  </data>
+  <data name="AccountViewStateEmpty" xml:space="preserve">
+    <value>المحافظة لا يجب ان تكون فارغة</value>
+  </data>
+  <data name="AccountViewUpdate" xml:space="preserve">
+    <value>تحديث</value>
+  </data>
+  <data name="AccountViewUpdateAccount" xml:space="preserve">
+    <value>تحديث الحساب</value>
+  </data>
+  <data name="AccountViewUpdateSuccess" xml:space="preserve">
+    <value>تم تحديث الحساب بنجاح</value>
+  </data>
+  <data name="AccountViewUpdatingExistingAccount" xml:space="preserve">
+    <value>تحديث حسابك</value>
+  </data>
+  <data name="AccountViewUserNameEmpty" xml:space="preserve">
+    <value>اسم المستخدم لا يجب ان يكون فارغا</value>
+  </data>
+  <data name="AccountViewUserNameExists" xml:space="preserve">
+    <value>اسم المستخدم هذا قد استخدم بالفعل. \n الرجاء تحديد اسم مستخدم آخر.</value>
+  </data>
+  <data name="AccountViewUserNameInvalid" xml:space="preserve">
+    <value>يرجي تقديم اسم مستخدم صالحا.</value>
+  </data>
+  <data name="ActionbarCheckout" xml:space="preserve">
+    <value>إتمام الشراء</value>
+  </data>
+  <data name="ActionbarContactUs" xml:space="preserve">
+    <value>إتصل بنا</value>
+  </data>
+  <data name="ActionbarCoupon" xml:space="preserve">
+    <value>كوبون</value>
+  </data>
+  <data name="ActionbarCoupons" xml:space="preserve">
+    <value>الكوبونات</value>
+  </data>
+  <data name="ActionBarForgotPassword" xml:space="preserve">
+    <value>نسيت كلمة السر</value>
+  </data>
+  <data name="ActionbarHome" xml:space="preserve">
+    <value>الصفحة الرئيسية</value>
+  </data>
+  <data name="ActionbarItem" xml:space="preserve">
+    <value>منتج</value>
+  </data>
+  <data name="ActionbarItems" xml:space="preserve">
+    <value>المنتجات</value>
+  </data>
+  <data name="ActionbarLogin" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="ActionbarLogout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="ActionbarMagazines" xml:space="preserve">
+    <value>المجلات</value>
+  </data>
+  <data name="ActionbarMap" xml:space="preserve">
+    <value>الخريطة</value>
+  </data>
+  <data name="ActionbarNotification" xml:space="preserve">
+    <value>إشعار</value>
+  </data>
+  <data name="ActionbarNotifications" xml:space="preserve">
+    <value>الاشعارات</value>
+  </data>
+  <data name="ActionbarOffer" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="ActionbarOffers" xml:space="preserve">
+    <value>العروض</value>
+  </data>
+  <data name="ActionbarQrCode" xml:space="preserve">
+    <value>رمز الاستجابة السريعة</value>
+  </data>
+  <data name="ActionbarReminders" xml:space="preserve">
+    <value>تذكير</value>
+  </data>
+  <data name="ActionBarResetPassword" xml:space="preserve">
+    <value>إعادة تعيين كلمة السر</value>
+  </data>
+  <data name="ActionbarScanSend" xml:space="preserve">
+    <value>صور و ارسل</value>
+  </data>
+  <data name="ActionbarSearch" xml:space="preserve">
+    <value>البحث</value>
+  </data>
+  <data name="ActionbarSettings" xml:space="preserve">
+    <value>إعدادات</value>
+  </data>
+  <data name="ActionbarShoppingList" xml:space="preserve">
+    <value>قائمة التسوق</value>
+  </data>
+  <data name="ActionbarShoppingLists" xml:space="preserve">
+    <value>قوائم التسوق</value>
+  </data>
+  <data name="ActionbarStore" xml:space="preserve">
+    <value>متجر</value>
+  </data>
+  <data name="ActionbarStores" xml:space="preserve">
+    <value>المتاجر</value>
+  </data>
+  <data name="ActionbarTerm" xml:space="preserve">
+    <value>الأحكام والشروط</value>
+  </data>
+  <data name="ActionbarTransactions" xml:space="preserve">
+    <value>السجل</value>
+  </data>
+  <data name="AddToCartTxt" xml:space="preserve">
+    <value>إضافة الي السلة</value>
+  </data>
+  <data name="AppConfigurationappbar" xml:space="preserve">
+    <value>اعدادات التطبيق</value>
+  </data>
+  <data name="ApplicatioItemDeleted" xml:space="preserve">
+    <value>تم حذف المنتج</value>
+  </data>
+  <data name="ApplicationAddedToBasket" xml:space="preserve">
+    <value>اضيفت إلي السلة</value>
+  </data>
+  <data name="ApplicationAddToBasket" xml:space="preserve">
+    <value>اضف إلي السلة</value>
+  </data>
+  <data name="ApplicationAddToWishList" xml:space="preserve">
+    <value>اضف إلي قائمة الرغبات</value>
+  </data>
+  <data name="ApplicationBasket" xml:space="preserve">
+    <value>سلة</value>
+  </data>
+  <data name="ApplicationCancel" xml:space="preserve">
+    <value>إلغاء</value>
+  </data>
+  <data name="ApplicationDelete" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="ApplicationDone" xml:space="preserve">
+    <value>تم</value>
+  </data>
+  <data name="ApplicationEmail" xml:space="preserve">
+    <value>البريد الالكتروني</value>
+  </data>
+  <data name="ApplicationMustBeLoggedIn" xml:space="preserve">
+    <value>يجب تسجيل الدخول للوصول لهذه الخاصية.</value>
+  </data>
+  <data name="ApplicationName" xml:space="preserve">
+    <value>Delmar-Attalla</value>
+  </data>
+  <data name="ApplicationNext" xml:space="preserve">
+    <value>التالي</value>
+  </data>
+  <data name="ApplicationNo" xml:space="preserve">
+    <value>لا</value>
+  </data>
+  <data name="ApplicationOk" xml:space="preserve">
+    <value>موافق</value>
+  </data>
+  <data name="ApplicationOpenSettings" xml:space="preserve">
+    <value>افتح الاعدادات</value>
+  </data>
+  <data name="ApplicationOr" xml:space="preserve">
+    <value>او</value>
+  </data>
+  <data name="ApplicationQty" xml:space="preserve">
+    <value>الكمية</value>
+  </data>
+  <data name="ApplicationQtyN" xml:space="preserve">
+    <value>Qty: {0}</value>
+  </data>
+  <data name="ApplicationRequired" xml:space="preserve">
+    <value>مطلوبة</value>
+  </data>
+  <data name="ApplicationTitle" xml:space="preserve">
+    <value>دلمار &amp; عطالله</value>
+  </data>
+  <data name="ApplicationTotal" xml:space="preserve">
+    <value>الإجمالي</value>
+  </data>
+  <data name="ApplicationUndo" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="ApplicationYes" xml:space="preserve">
+    <value>نعم</value>
+  </data>
+  <data name="ApplyBtn" xml:space="preserve">
+    <value>حفظ</value>
+  </data>
+  <data name="ApplySettings" xml:space="preserve">
+    <value>تم الحفظ</value>
+  </data>
+  <data name="app_name" xml:space="preserve">
+    <value>دلمار &amp; عطالله</value>
+  </data>
+  <data name="await" xml:space="preserve">
+    <value>السجل</value>
+  </data>
+  <data name="BasketViewBasketIsEmpty" xml:space="preserve">
+    <value>السلة فارغة</value>
+  </data>
+  <data name="BasketViewClearBasketPrompt" xml:space="preserve">
+    <value>حذف السلة?</value>
+  </data>
+  <data name="BasketViewGoToCheckout" xml:space="preserve">
+    <value>انتقل للخروج</value>
+  </data>
+  <data name="CartTab" xml:space="preserve">
+    <value>عربة التسوق</value>
+  </data>
+  <data name="ChangePasswordChangePassword" xml:space="preserve">
+    <value>تغيير كلمة السر</value>
+  </data>
+  <data name="ChangePasswordChangePasswordSuccess" xml:space="preserve">
+    <value>تم تغيير كلمة السر بنجاح</value>
+  </data>
+  <data name="ChangePasswordChangingPassword" xml:space="preserve">
+    <value>تغيير كلمة السر</value>
+  </data>
+  <data name="ChangePasswordErrorChangingPassword" xml:space="preserve">
+    <value>لا يمكن تغيير كلمة المرور</value>
+  </data>
+  <data name="ChangePasswordInvalidPasswordException" xml:space="preserve">
+    <value>يرجي تقديم كلمة سر صالحة</value>
+  </data>
+  <data name="ChangePasswordNewPasswordEmpty" xml:space="preserve">
+    <value>كلمة السر الجديدة لا يجب ان تكون فارغة</value>
+  </data>
+  <data name="ChangePasswordOldPasswordEmpty" xml:space="preserve">
+    <value>كلمة المرور القديمة لا بجب ان تكون فارفة</value>
+  </data>
+  <data name="ChangePasswordPasswordsDontMatch" xml:space="preserve">
+    <value>كلمة السر لا تماثل تأكيد كلمة السر</value>
+  </data>
+  <data name="ChangePasswordViewOldPassword" xml:space="preserve">
+    <value>كلمة السر الحالية</value>
+  </data>
+  <data name="ChangePasswordViewPassword" xml:space="preserve">
+    <value>كلمة السر الجديدة</value>
+  </data>
+  <data name="ChangePasswordViewPasswordConfirmation" xml:space="preserve">
+    <value>تأكيد كلمة السر الجديدة</value>
+  </data>
+  <data name="CheckoutViewAddressOne" xml:space="preserve">
+    <value>عنوان ١</value>
+  </data>
+  <data name="CheckoutViewAddressTwo" xml:space="preserve">
+    <value>عنوان ٢</value>
+  </data>
+  <data name="CheckoutViewAllRequiredFieldsMustBeFilled" xml:space="preserve">
+    <value>يجب ادخال كل البيانات المطلوبة</value>
+  </data>
+  <data name="CheckoutViewBillingAddress" xml:space="preserve">
+    <value>عنوان وصول الفواتير</value>
+  </data>
+  <data name="CheckoutViewCalculateTotal" xml:space="preserve">
+    <value>إحسب الاجمالي</value>
+  </data>
+  <data name="CheckoutViewCantHaveZeroQty" xml:space="preserve">
+    <value>{0} cannot have 0 quantity</value>
+  </data>
+  <data name="CheckoutViewCardNumber" xml:space="preserve">
+    <value>رقم الكارت</value>
+  </data>
+  <data name="CheckoutViewCity" xml:space="preserve">
+    <value>المدينة</value>
+  </data>
+  <data name="CheckoutViewClickCollect" xml:space="preserve">
+    <value>Click &amp; Collect</value>
+  </data>
+  <data name="CheckoutViewCountry" xml:space="preserve">
+    <value>البلد</value>
+  </data>
+  <data name="CheckoutViewCVV" xml:space="preserve">
+    <value>CVV</value>
+  </data>
+  <data name="CheckoutViewDiscount" xml:space="preserve">
+    <value>خصم:</value>
+  </data>
+  <data name="CheckoutViewEmailToSendReceipt" xml:space="preserve">
+    <value>الايصال سوف يرسل علي البريد الالكتروني الاتي</value>
+  </data>
+  <data name="CheckoutViewExpires" xml:space="preserve">
+    <value>تنتهي صلاحيته{0}/{1}</value>
+  </data>
+  <data name="CheckoutViewHomeDelivery" xml:space="preserve">
+    <value>التوصيل للمنزل</value>
+  </data>
+  <data name="CheckoutViewInStorePickup" xml:space="preserve">
+    <value>الحصور للفرع</value>
+  </data>
+  <data name="CheckoutViewItemNotAvailable" xml:space="preserve">
+    <value>{0} غير متاح في {1}</value>
+  </data>
+  <data name="CheckoutViewItemsNotAvailable" xml:space="preserve">
+    <value>المنتجات التالية غير متاحة في {0}</value>
+  </data>
+  <data name="CheckoutViewMM" xml:space="preserve">
+    <value>الشهر</value>
+  </data>
+  <data name="CheckoutViewMustEnterCreditCardInfo" xml:space="preserve">
+    <value>يجب ادخال جميع بيانات بطاقة الائتمان</value>
+  </data>
+  <data name="CheckoutViewName" xml:space="preserve">
+    <value>الاسم</value>
+  </data>
+  <data name="CheckoutViewNoItemsAvailable" xml:space="preserve">
+    <value>لا يتوفر أي من المنتجات في {0}</value>
+  </data>
+  <data name="CheckoutViewOrder" xml:space="preserve">
+    <value>ضع الطلب</value>
+  </data>
+  <data name="CheckoutViewOrderSuccess" xml:space="preserve">
+    <value>تم اتمام الطلب بنجاح</value>
+  </data>
+  <data name="CheckoutViewPayCreditCard" xml:space="preserve">
+    <value>بطاقة الائتمان</value>
+  </data>
+  <data name="CheckoutViewPayCreditOnDelivery" xml:space="preserve">
+    <value>فيزا عند التوصيل</value>
+  </data>
+  <data name="CheckoutViewPayment" xml:space="preserve">
+    <value>الدفع</value>
+  </data>
+  <data name="CheckoutViewPaymentOptions" xml:space="preserve">
+    <value>خيارات الدفع</value>
+  </data>
+  <data name="CheckoutViewPayOnDelivery" xml:space="preserve">
+    <value>نقدا عند التوصيل</value>
+  </data>
+  <data name="CheckoutViewPostCode" xml:space="preserve">
+    <value>الرمز البريدي</value>
+  </data>
+  <data name="CheckoutViewSameAsShippingAddress" xml:space="preserve">
+    <value>نفس عنوان الشحن</value>
+  </data>
+  <data name="CheckoutViewShipping" xml:space="preserve">
+    <value>شحن:</value>
+  </data>
+  <data name="CheckoutViewShippingAddress" xml:space="preserve">
+    <value>عنوان الشحن</value>
+  </data>
+  <data name="CheckoutViewShippingMethod" xml:space="preserve">
+    <value>طريقة الشحن</value>
+  </data>
+  <data name="CheckoutViewState" xml:space="preserve">
+    <value>المحافظة</value>
+  </data>
+  <data name="CheckoutViewStoreToPickup" xml:space="preserve">
+    <value>Store to pick up in</value>
+  </data>
+  <data name="CheckoutViewSubtotal" xml:space="preserve">
+    <value>المجموع الفرعي:</value>
+  </data>
+  <data name="CheckoutViewTotal" xml:space="preserve">
+    <value>الاجمالي:</value>
+  </data>
+  <data name="CheckoutViewTotalHeader" xml:space="preserve">
+    <value>الاجمالي</value>
+  </data>
+  <data name="CheckoutViewTotalWithoutVAT" xml:space="preserve">
+    <value>الاجمالي بدون ضريبة القيمة المضافة:</value>
+  </data>
+  <data name="CheckoutViewVAT" xml:space="preserve">
+    <value>ضريبة القيمة المضافة:</value>
+  </data>
+  <data name="CheckoutViewYYYY" xml:space="preserve">
+    <value>السنة</value>
+  </data>
+  <data name="ClubOffers" xml:space="preserve">
+    <value>Club offers</value>
+  </data>
+  <data name="ContactUsViewOpenAppError" xml:space="preserve">
+    <value>لا يوجد تطبيق يمكنه فتح هذا القسم</value>
+  </data>
+  <data name="ContactUsVview " xml:space="preserve">
+    <value>الخط الساخن19552</value>
+  </data>
+  <data name="CouponUse" xml:space="preserve">
+    <value>Use coupon</value>
+  </data>
+  <data name="CouponViewAddedToQRCode" xml:space="preserve">
+    <value>اضيفت القسيمة لرمز الاستجابة السريعة</value>
+  </data>
+  <data name="CouponViewAddToQRCode" xml:space="preserve">
+    <value>اضف القسيمة الي رمز الاستجابة السريعة</value>
+  </data>
+  <data name="CouponViewRemoveFromQRCode" xml:space="preserve">
+    <value>ازالة القسيمة من رمز الاستجابة السريعة</value>
+  </data>
+  <data name="desc_google_icon" xml:space="preserve">
+    <value>Google Logo</value>
+  </data>
+  <data name="DetailViewDetails" xml:space="preserve">
+    <value>تفاصيل</value>
+  </data>
+  <data name="DetailViewExpires" xml:space="preserve">
+    <value>تنتهي الصلاحية{0} - {1}</value>
+  </data>
+  <data name="DetailViewNeverExpires" xml:space="preserve">
+    <value>لا تنتهي صلاحيته قط</value>
+  </data>
+  <data name="disconnect" xml:space="preserve">
+    <value>Disconnect</value>
+  </data>
+  <data name="FacebookLoginBtn" xml:space="preserve">
+    <value>فيسبوك</value>
+  </data>
+  <data name="ForgotPasswordAlreadyHaveCode" xml:space="preserve">
+    <value>لديك بالفعل رمز إعادة تعيين?</value>
+  </data>
+  <data name="ForgotPasswordInstructions" xml:space="preserve">
+    <value>أدخل اسم المستخدم لتلقي رمز لإعادة تعيين كلمة السر الخاصة بك.</value>
+  </data>
+  <data name="ForgotPasswordSendCode" xml:space="preserve">
+    <value>ارسال الرمز</value>
+  </data>
+  <data name="GeneralOffers" xml:space="preserve">
+    <value>عروض عامة</value>
+  </data>
+  <data name="GeneralSearchViewChooseCategories" xml:space="preserve">
+    <value>يرجى اختيار الفئات التي تريد البحث فيها..</value>
+  </data>
+  <data name="GeneralSearchViewCoupon" xml:space="preserve">
+    <value>كوبون</value>
+  </data>
+  <data name="GeneralSearchViewCouponsGroupHeader" xml:space="preserve">
+    <value>الكوبونات ({0})</value>
+  </data>
+  <data name="GeneralSearchViewItem" xml:space="preserve">
+    <value>عنصر</value>
+  </data>
+  <data name="GeneralSearchViewItemsGroupHeader" xml:space="preserve">
+    <value>العناصر ({0})</value>
+  </data>
+  <data name="GeneralSearchViewNotification" xml:space="preserve">
+    <value>إشعار</value>
+  </data>
+  <data name="GeneralSearchViewNotificationsGroupHeader" xml:space="preserve">
+    <value>الاشعارات ({0})</value>
+  </data>
+  <data name="GeneralSearchViewOffer" xml:space="preserve">
+    <value>عرض</value>
+  </data>
+  <data name="GeneralSearchViewOffersGroupHeader" xml:space="preserve">
+    <value>العروض ({0})</value>
+  </data>
+  <data name="GeneralSearchViewSearchStringToShort" xml:space="preserve">
+    <value>البحث يجب ان يحتوي علي ٣ احرف علي الاقل.</value>
+  </data>
+  <data name="GeneralSearchViewShoppingList" xml:space="preserve">
+    <value>قائمة التسوق</value>
+  </data>
+  <data name="GeneralSearchViewStore" xml:space="preserve">
+    <value>المتجر</value>
+  </data>
+  <data name="GeneralSearchViewStoresGroupHeader" xml:space="preserve">
+    <value>المتاجر ({0})</value>
+  </data>
+  <data name="GeneralSearchViewTransaction" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="GeneralSearchViewTransactionsGroupHeader" xml:space="preserve">
+    <value>History ({0})</value>
+  </data>
+  <data name="GeneralSearchViewWishListGroupHeader" xml:space="preserve">
+    <value>قائمة الرغبات ({0})</value>
+  </data>
+  <data name="GoogleLoginBtn" xml:space="preserve">
+    <value>جوجل</value>
+  </data>
+  <data name="HistoryViewReorderButton" xml:space="preserve">
+    <value>اعاده طلب العناصر</value>
+  </data>
+  <data name="HockeyAppId" xml:space="preserve">
+    <value>[Please enter the HockeyApp Id here]</value>
+  </data>
+  <data name="ItemCategoryViewFailed" xml:space="preserve">
+    <value>خطأ في استرداد فئات العناصر</value>
+  </data>
+  <data name="ItemCategoryViewRetry" xml:space="preserve">
+    <value>اعد المحاولة</value>
+  </data>
+  <data name="ItemModelItemNotFound" xml:space="preserve">
+    <value>المنتج غير موجود</value>
+  </data>
+  <data name="ItemSearchViewNoItemsFound" xml:space="preserve">
+    <value>لم يتم العثور على العناصر</value>
+  </data>
+  <data name="ItemSearchViewSearchToShortError" xml:space="preserve">
+    <value>يجب أن يكون هناك 3 أحرف على الأقل في البحث</value>
+  </data>
+  <data name="ItemViewAddToNewList" xml:space="preserve">
+    <value>إنشاء قائمة تسوق جديدة</value>
+  </data>
+  <data name="ItemViewAddToShoppingList" xml:space="preserve">
+    <value>اضف إلي</value>
+  </data>
+  <data name="ItemViewCannotAccessExternalStorage" xml:space="preserve">
+    <value>التطبيق لا يمكنه الوصول إلى وحدة التخزين الخارجية ، افتح الإعدادات لتغيير الأذونات.</value>
+  </data>
+  <data name="ItemViewNewListName" xml:space="preserve">
+    <value>اسم قائمة التسوق</value>
+  </data>
+  <data name="ItemViewPickShoppingList" xml:space="preserve">
+    <value>يرجي اختيار قائمة التسوق</value>
+  </data>
+  <data name="ItemViewPickVariant" xml:space="preserve">
+    <value>الرجاء تحديد variantId</value>
+  </data>
+  <data name="ItemViewRelatedOffers" xml:space="preserve">
+    <value>عروض ذات صلة</value>
+  </data>
+  <data name="ItemViewSelectValidCombination" xml:space="preserve">
+    <value>الرجاء تحديد مجموعة صالحة</value>
+  </data>
+  <data name="ItemViewSelectVariation" xml:space="preserve">
+    <value>تعديل</value>
+  </data>
+  <data name="ItemViewUnitOfMeasure" xml:space="preserve">
+    <value>وحدة</value>
+  </data>
+  <data name="ItemViewVariant" xml:space="preserve">
+    <value>تفاوت</value>
+  </data>
+  <data name="loading" xml:space="preserve">
+    <value>جار التحميل…</value>
+  </data>
+  <data name="LoginToCheckPtTxt" xml:space="preserve">
+    <value>تسجيل الدخول للتحقق من نقاطك</value>
+  </data>
+  <data name="LoginViewCreateAccountButton" xml:space="preserve">
+    <value>هل لديك حساب ؟ تسجيل</value>
+  </data>
+  <data name="LoginViewForgotPassword" xml:space="preserve">
+    <value>نسيت كلمة المرور ؟</value>
+  </data>
+  <data name="LoginViewInvalidSecurityToken" xml:space="preserve">
+    <value>انتهت صلاحية تسجيل الدخول يرجي تسجيل الدخول من جديد</value>
+  </data>
+  <data name="LoginViewLoginButton" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="LoginViewPassword" xml:space="preserve">
+    <value>كلمة السر</value>
+  </data>
+  <data name="LoginViewPasswordEmpty" xml:space="preserve">
+    <value>كلمة السر لا يجب ان تكون فارغة</value>
+  </data>
+  <data name="LoginViewUsername" xml:space="preserve">
+    <value>تغيير كلمة السر</value>
+  </data>
+  <data name="LoginViewUserNameEmpty" xml:space="preserve">
+    <value>اسم المستخدم لا يجب ان يكون فارغا</value>
+  </data>
+  <data name="Login_OR" xml:space="preserve">
+    <value>أو</value>
+  </data>
+  <data name="logoutText" xml:space="preserve">
+    <value>هل انت متأكد انك تريد تسجيل الخروج ؟</value>
+  </data>
+  <data name="MemberContactModelLoggingInUser" xml:space="preserve">
+    <value>تسجيل خروج المستخدم: {0}</value>
+  </data>
+  <data name="MemberContactModelLoggingOutUser" xml:space="preserve">
+    <value>تسجيل خروج المستخدم: {0}</value>
+  </data>
+  <data name="MemberContactModelLogin" xml:space="preserve">
+    <value>تسجيل خول</value>
+  </data>
+  <data name="MemberContactModelLogout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="MemberContactModelRegisterDevice" xml:space="preserve">
+    <value>سجل الجهاز</value>
+  </data>
+  <data name="MemberContactModelRegisteringDevice" xml:space="preserve">
+    <value>تسجيل</value>
+  </data>
+  <data name="MemberContactModelResetPassword" xml:space="preserve">
+    <value>إعادة تعيين كلمة السر</value>
+  </data>
+  <data name="MemberContactModelResettingPassword" xml:space="preserve">
+    <value>إعادة تعيين كلمة السر</value>
+  </data>
+  <data name="MemberOffers" xml:space="preserve">
+    <value>عروض الاعضاء</value>
+  </data>
+  <data name="MenuViewAccountManagementTitle" xml:space="preserve">
+    <value>إدارة الحساب </value>
+  </data>
+  <data name="MenuViewAddToCurrentTitle" xml:space="preserve">
+    <value>اضف كل العناصر إلي قائمة التسوق الحالية</value>
+  </data>
+  <data name="MenuViewClearTitle" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+  <data name="MenuViewContactUs" xml:space="preserve">
+    <value>اتصل بنا </value>
+  </data>
+  <data name="MenuViewDeleteTitle" xml:space="preserve">
+    <value>حذف</value>
+  </data>
+  <data name="MenuViewFacebook" xml:space="preserve">
+    <value>Facebook</value>
+  </data>
+  <data name="MenuViewGooglePlus" xml:space="preserve">
+    <value>Google+</value>
+  </data>
+  <data name="MenuViewHelp" xml:space="preserve">
+    <value>المساعدة</value>
+  </data>
+  <data name="MenuViewLogout" xml:space="preserve">
+    <value>تسجيل الخروج</value>
+  </data>
+  <data name="MenuViewMarkAsReadTitle" xml:space="preserve">
+    <value>اعتبارها مقرؤة</value>
+  </data>
+  <data name="MenuViewMarkAsUnreadTitle" xml:space="preserve">
+    <value>اعتبارها غير مقرؤة</value>
+  </data>
+  <data name="MenuViewNewShoppingList" xml:space="preserve">
+    <value>إنشاء قائمة تسوق جديدة</value>
+  </data>
+  <data name="MenuViewQRTitle" xml:space="preserve">
+    <value>إنشاء QR code</value>
+  </data>
+  <data name="MenuViewRefreshTitle" xml:space="preserve">
+    <value>إعادة تحميل</value>
+  </data>
+  <data name="MenuViewSaveAsNewListTitle" xml:space="preserve">
+    <value>حفظ كقائمة تسوق جديدة</value>
+  </data>
+  <data name="MenuViewScanBarcodeTitle" xml:space="preserve">
+    <value>ب</value>
+  </data>
+  <data name="MenuViewSearchTitle" xml:space="preserve">
+    <value>البحث</value>
+  </data>
+  <data name="MenuViewSendFeedback" xml:space="preserve">
+    <value>ارسل رايك</value>
+  </data>
+  <data name="MenuViewSettingsTitle" xml:space="preserve">
+    <value>الاعدادات</value>
+  </data>
+  <data name="MenuViewShare" xml:space="preserve">
+    <value>نشر</value>
+  </data>
+  <data name="MenuViewShowAsGrid" xml:space="preserve">
+    <value>عرض كشبكة</value>
+  </data>
+  <data name="MenuViewShowAsList" xml:space="preserve">
+    <value>عرض كقائمة</value>
+  </data>
+  <data name="MenuViewShowDirections" xml:space="preserve">
+    <value>عرض الاتجاهات</value>
+  </data>
+  <data name="MenuViewShowStoreOnMap" xml:space="preserve">
+    <value>عرض المتجر علي الخريطة</value>
+  </data>
+  <data name="MenuViewShowStoresOnMap" xml:space="preserve">
+    <value>عرض جميع المتاجر علي الخريطة</value>
+  </data>
+  <data name="MenuViewViewStock" xml:space="preserve">
+    <value>تحقق من مكان وجود العنصر في المتجر</value>
+  </data>
+  <data name="ModelAccessNotAllowed" xml:space="preserve">
+    <value>تم الرفض</value>
+  </data>
+  <data name="ModelAuthenticationFailed" xml:space="preserve">
+    <value>اسم المستخدم أو كلمة السر غير صحيحة. \ n يرجى المحاولة مرة أخرى.</value>
+  </data>
+  <data name="ModelDeviceBlocked" xml:space="preserve">
+    <value>تم حظر هذا الجهاز</value>
+  </data>
+  <data name="ModelEmailExists" xml:space="preserve">
+    <value>البربد الالكتروني موجود بالفعل</value>
+  </data>
+  <data name="ModelErrorTitle" xml:space="preserve">
+    <value>خطأ</value>
+  </data>
+  <data name="ModelGenericException" xml:space="preserve">
+    <value>خطا ,يرجي إعادة المحاولة</value>
+  </data>
+  <data name="ModelNetworkException" xml:space="preserve">
+    <value>لا يوجد اتصال بالشبكة</value>
+  </data>
+  <data name="ModelSecurityToken" xml:space="preserve">
+    <value>تم الرفض</value>
+  </data>
+  <data name="MoreTab" xml:space="preserve">
+    <value>المزيد</value>
+  </data>
+  <data name="MyCartTxt" xml:space="preserve">
+    <value>عربتي</value>
+  </data>
+  <data name="MyPoints" xml:space="preserve">
+    <value> نقاطي :</value>
+  </data>
+  <data name="NotificationBarContentText" xml:space="preserve">
+    <value>لديك {0} جديد {1}</value>
+  </data>
+  <data name="NotificationBarNotification" xml:space="preserve">
+    <value>اشعار</value>
+  </data>
+  <data name="NotificationBarNotifications" xml:space="preserve">
+    <value>الاشعارات</value>
+  </data>
+  <data name="NotificationModelDelete" xml:space="preserve">
+    <value>حذف {0}</value>
+  </data>
+  <data name="NotificationModelDeletingChecked" xml:space="preserve">
+    <value>حذف الإشعارات المختارة</value>
+  </data>
+  <data name="NotificationModelMarkingAsRead" xml:space="preserve">
+    <value>إعتبار {0} كمقروءة</value>
+  </data>
+  <data name="NotificationModelMarkingAsUnread" xml:space="preserve">
+    <value>إعتبار{0} كغير مقروءة</value>
+  </data>
+  <data name="NotificationModelMarkingCheckedAsRead" xml:space="preserve">
+    <value>إعتبار الاشعارات المختارة مقروءة</value>
+  </data>
+  <data name="NotificationModelMarkingCheckedAsUnread" xml:space="preserve">
+    <value>إعتبار الاشعارات المختارة غير مقروءة</value>
+  </data>
+  <data name="NotificationModelNotifications" xml:space="preserve">
+    <value>الإشعارات</value>
+  </data>
+  <data name="NotificationViewDeleteNotification" xml:space="preserve">
+    <value>حذف الاشعارات?</value>
+  </data>
+  <data name="NotificationViewDeleteNotifications" xml:space="preserve">
+    <value>حذف الاشعارات?</value>
+  </data>
+  <data name="NotificationViewExpires" xml:space="preserve">
+    <value>تنتهي الصلاحية: </value>
+  </data>
+  <data name="NotificationViewNotificationationsWillBeDeleted" xml:space="preserve">
+    <value>ستزول الاشعارات نهائيا</value>
+  </data>
+  <data name="NotificationViewNotificationationWillBeDeleted" xml:space="preserve">
+    <value>ستزول الاشعارات نهائيا</value>
+  </data>
+  <data name="NotificationViewRead" xml:space="preserve">
+    <value>اقرا</value>
+  </data>
+  <data name="NotificationViewUnread" xml:space="preserve">
+    <value>غير مقروء</value>
+  </data>
+  <data name="OfferRelatedItems" xml:space="preserve">
+    <value>عناصر ذات صلة</value>
+  </data>
+  <data name="OfferUse" xml:space="preserve">
+    <value>استخدام العرض</value>
+  </data>
+  <data name="OfferViewAddedToQRCode" xml:space="preserve">
+    <value>اضيف العرض الي رمز الاستجابة السريعة</value>
+  </data>
+  <data name="OfferViewAddToQRCode" xml:space="preserve">
+    <value>اضف العرض الي رمز الاستجابة السريعة</value>
+  </data>
+  <data name="OfferViewRemoveFromQRCode" xml:space="preserve">
+    <value>إزالة عرض من رمز الاستجابة السريعة</value>
+  </data>
+  <data name="OrdersTab" xml:space="preserve">
+    <value>الطلبات</value>
+  </data>
+  <data name="PlayServiceUtilInstall" xml:space="preserve">
+    <value>تثبيت</value>
+  </data>
+  <data name="PlayServiceUtilPlayServices" xml:space="preserve">
+    <value>Google Play Services</value>
+  </data>
+  <data name="PlayServiceUtilRequiresPlayService" xml:space="preserve">
+    <value>تتطلب الخريطة تثبيت خدمات Google play.</value>
+  </data>
+  <data name="play_services_error_fmt" xml:space="preserve">
+    <value>Google Play Services Error: {0}</value>
+  </data>
+  <data name="PointOffers" xml:space="preserve">
+    <value>عروض النقاط</value>
+  </data>
+  <data name="PricedetailTxt" xml:space="preserve">
+    <value>تفاصيل السعر</value>
+  </data>
+  <data name="ProceedTxt" xml:space="preserve">
+    <value>تقدم</value>
+  </data>
+  <data name="QRCodeViewNoSelected" xml:space="preserve">
+    <value>لم يتم تحديد اي عروض او قسائم.</value>
+  </data>
+  <data name="RadioButtonArabicLanguage" xml:space="preserve">
+    <value>العربيه</value>
+  </data>
+  <data name="RadioButtonEnglishLanguage" xml:space="preserve">
+    <value>English</value>
+  </data>
+  <data name="RemoveTxt" xml:space="preserve">
+    <value>مسح</value>
+  </data>
+  <data name="ResetPasswordInstructions" xml:space="preserve">
+    <value>أدخل البريد الإلكتروني وإعادة تعيين الرمز وكلمة المرور الجديدة لإعادة تعيين كلمة المرور الخاصة بك.</value>
+  </data>
+  <data name="ResetPasswordResetCode" xml:space="preserve">
+    <value>اعادة تعيين الرمز</value>
+  </data>
+  <data name="ResetPasswordResetCodeEmpty" xml:space="preserve">
+    <value>اعادة تعيين الرمز لا يجب ان يترك فارغ.</value>
+  </data>
+  <data name="ResetPasswordResetPassword" xml:space="preserve">
+    <value>اعادة تعيين كلمة السر</value>
+  </data>
+  <data name="ScannerViewScannerBottomText" xml:space="preserve">
+    <value>Wait for the barcode to automatically scan!</value>
+  </data>
+  <data name="ScannerViewScannerTopText" xml:space="preserve">
+    <value>وجه الكاميرا علي الباركود \ n على بُعد 15 سم</value>
+  </data>
+  <data name="server_client_id" xml:space="preserve">
+    <value>641451297819-nqqn78s0og5okkoqcak63490k1tfae13.apps.googleusercontent.com</value>
+  </data>
+  <data name="SettingsViewLanguage" xml:space="preserve">
+    <value>اللغه</value>
+  </data>
+  <data name="SettingsViewNewPinMessage" xml:space="preserve">
+    <value>إعادة تعيين رقم التعريف الشخصي</value>
+  </data>
+  <data name="SettingsViewNewPinTitle" xml:space="preserve">
+    <value>إعادة تعيين رقم التعريف الشخصي</value>
+  </data>
+  <data name="SettingsViewNewPinToShort" xml:space="preserve">
+    <value>رقم التعريف الشخصي الجديد يحب ان يكون ٤ ارقام علي الاقل</value>
+  </data>
+  <data name="SettingsViewNotifications" xml:space="preserve">
+    <value>إعدادات الاشعارات</value>
+  </data>
+  <data name="SettingsViewReceiveNotificationsSummary" xml:space="preserve">
+    <value>السماح للتطبيق بإعلامك عند وجود إشعارات جديدة</value>
+  </data>
+  <data name="SettingsViewResetPinError" xml:space="preserve">
+    <value>لا يمكن تغيير رقم التعيين الشخصي</value>
+  </data>
+  <data name="SettingsViewResetPinSuccess" xml:space="preserve">
+    <value>تم تغيير رقم التعريف الشخصي بنجاح</value>
+  </data>
+  <data name="ShoppingListDetailViewAddToAnotherList" xml:space="preserve">
+    <value>اضف إلي قائمة تسوق اخري</value>
+  </data>
+  <data name="ShoppingListDetailViewChangeQty" xml:space="preserve">
+    <value>تغيير الكمية</value>
+  </data>
+  <data name="ShoppingListDetailViewDeleteConfirmation" xml:space="preserve">
+    <value>هل انت متاكد انك تريد مسح عنصر?</value>
+  </data>
+  <data name="ShoppingListDetailViewDeleteItemFromList" xml:space="preserve">
+    <value>مسح عنصر من القائمة</value>
+  </data>
+  <data name="ShoppingListDetailViewEnterNewQuantity" xml:space="preserve">
+    <value>يرجي ادخال كمية جديدة</value>
+  </data>
+  <data name="ShoppingListDetailViewEnterShoppingListName" xml:space="preserve">
+    <value>يرجي ادخال اسم قائمة التسوق</value>
+  </data>
+  <data name="ShoppingListDetailViewGoToItemInfo" xml:space="preserve">
+    <value>معلومات العنصر</value>
+  </data>
+  <data name="ShoppingListDetailViewItemExistsAndWillBeOverwritten" xml:space="preserve">
+    <value>{0} already exists in {1} and will be overwritten</value>
+  </data>
+  <data name="ShoppingListDetailViewItemName" xml:space="preserve">
+    <value>عنصر</value>
+  </data>
+  <data name="ShoppingListDetailViewItemsExistAndWillBeOverwritten" xml:space="preserve">
+    <value>The following item already exists in {0} and will be overwritten</value>
+  </data>
+  <data name="ShoppingListDetailViewNameCannotBeEmpty" xml:space="preserve">
+    <value>الاسم لا يمكن ان يكون فارغا</value>
+  </data>
+  <data name="ShoppingListDetailViewNoItemsInShoppingList" xml:space="preserve">
+    <value>لا توجد عناصر في قائمة التسوق</value>
+  </data>
+  <data name="ShoppingListDetailViewSaveShoppingList" xml:space="preserve">
+    <value>حفظ قائمة التسوق</value>
+  </data>
+  <data name="ShoppingListDetailViewWishlist" xml:space="preserve">
+    <value>قائمة الرغبات</value>
+  </data>
+  <data name="ShoppingListModelItemAddedToShoppingList" xml:space="preserve">
+    <value>تم حفظ المنتج</value>
+  </data>
+  <data name="ShoppingListModelItemsAddedToShoppingList" xml:space="preserve">
+    <value>تم حفظ المنتج</value>
+  </data>
+  <data name="ShoppingListViewClearConfirmation" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف القائمة؟</value>
+  </data>
+  <data name="ShoppingListViewClearList" xml:space="preserve">
+    <value>مسح القائمة</value>
+  </data>
+  <data name="ShoppingListViewDeleteConfirmation" xml:space="preserve">
+    <value>هل أنت متأكد أنك تريد حذف القائمة؟</value>
+  </data>
+  <data name="ShoppingListViewDeleteList" xml:space="preserve">
+    <value>حذف السلة</value>
+  </data>
+  <data name="ShowPasswordTxt" xml:space="preserve">
+    <value>عرض كلمة المرور</value>
+  </data>
+  <data name="signed_in_fmt" xml:space="preserve">
+    <value>Signed in as: {0}</value>
+  </data>
+  <data name="signed_out" xml:space="preserve">
+    <value>Signed out</value>
+  </data>
+  <data name="signing_in" xml:space="preserve">
+    <value>Signing in…</value>
+  </data>
+  <data name="SignUpTxt" xml:space="preserve">
+    <value>اشتراك</value>
+  </data>
+  <data name="sign_out" xml:space="preserve">
+    <value>Sign Out</value>
+  </data>
+  <data name="StorelocatorDetailViewFriday" xml:space="preserve">
+    <value>الجمعة</value>
+  </data>
+  <data name="StorelocatorDetailViewKilometersAway" xml:space="preserve">
+    <value>علي بعد كيلومترات{0}</value>
+  </data>
+  <data name="StorelocatorDetailViewMonday" xml:space="preserve">
+    <value>الاثنين</value>
+  </data>
+  <data name="StorelocatorDetailViewOpeningHourDay" xml:space="preserve">
+    <value>{0} - {1} on {2}</value>
+  </data>
+  <data name="StorelocatorDetailViewPhone" xml:space="preserve">
+    <value>تليفون{0}</value>
+  </data>
+  <data name="StorelocatorDetailViewSaturday" xml:space="preserve">
+    <value>السبت</value>
+  </data>
+  <data name="StorelocatorDetailViewSundays" xml:space="preserve">
+    <value>الاحد</value>
+  </data>
+  <data name="StorelocatorDetailViewThursday" xml:space="preserve">
+    <value>الخميس</value>
+  </data>
+  <data name="StorelocatorDetailViewTuesday" xml:space="preserve">
+    <value>الثلاثاء</value>
+  </data>
+  <data name="StorelocatorDetailViewWednesday" xml:space="preserve">
+    <value>الاربعاء</value>
+  </data>
+  <data name="StorelocatorViewInStockStores" xml:space="preserve">
+    <value>{0} is in stock in these stores.</value>
+  </data>
+  <data name="StorelocatorViewNotInStock" xml:space="preserve">
+    <value>العنصر غير متوفر في مكان.</value>
+  </data>
+  <data name="StoreMapCannotAccessLocation" xml:space="preserve">
+    <value>لا يمكن للتطبيق الوصول إلى موقعك ، افتح الإعدادات لتغيير الأذونات.</value>
+  </data>
+  <data name="StoreModelGettingStores" xml:space="preserve">
+    <value>الحصول علي المتاجر </value>
+  </data>
+  <data name="StoreModelStoreLocator" xml:space="preserve">
+    <value>فروعنا</value>
+  </data>
+  <data name="TimeUtilsDaysAgo" xml:space="preserve">
+    <value>منذ عدة أيام</value>
+  </data>
+  <data name="TimeUtilsHourAgo" xml:space="preserve">
+    <value>منذ ساعة</value>
+  </data>
+  <data name="TimeUtilsHoursAgo" xml:space="preserve">
+    <value>منذ ساعات</value>
+  </data>
+  <data name="TimeUtilsMinuteAgo" xml:space="preserve">
+    <value>a منذ دقيقة واحدة</value>
+  </data>
+  <data name="TimeUtilsMinutesAgo" xml:space="preserve">
+    <value>منذ دقائق</value>
+  </data>
+  <data name="TimeUtilsMonthAgo" xml:space="preserve">
+    <value>منذ شهر واحد</value>
+  </data>
+  <data name="TimeUtilsMonthsAgo" xml:space="preserve">
+    <value>منذ عدة اشهر</value>
+  </data>
+  <data name="TimeUtilsSecondAgo" xml:space="preserve">
+    <value>منذ ثانية واحدة</value>
+  </data>
+  <data name="TimeUtilsSecondsAgo" xml:space="preserve">
+    <value>منذ ثواني</value>
+  </data>
+  <data name="TimeUtilsYearAgo" xml:space="preserve">
+    <value>منذ سنة واحدة</value>
+  </data>
+  <data name="TimeUtilsYearsAgo" xml:space="preserve">
+    <value>منذ عدة سنوات </value>
+  </data>
+  <data name="TimeUtilsYesterday" xml:space="preserve">
+    <value>أمس</value>
+  </data>
+  <data name="TotalMRPTxt" xml:space="preserve">
+    <value>إجمالي MRP</value>
+  </data>
+  <data name="TransactionDetailViewDiscountTotal" xml:space="preserve">
+    <value>إجمالي الخصم:</value>
+  </data>
+  <data name="TransactionDetailViewItemAmountHeaderText" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+  <data name="TransactionDetailViewItemDiscount" xml:space="preserve">
+    <value>Discount: {0}</value>
+  </data>
+  <data name="TransactionDetailViewItemNameHeaderText" xml:space="preserve">
+    <value>عنصر</value>
+  </data>
+  <data name="TransactionDetailViewTotal" xml:space="preserve">
+    <value>الاجمالي:</value>
+  </data>
+  <data name="TransactionDetailViewTotalWithoutVAT" xml:space="preserve">
+    <value>الاجمالي بدون ضريبة القيمة المضافة:</value>
+  </data>
+  <data name="TransactionViewNoTransactions" xml:space="preserve">
+    <value>ليس لديك معاملات</value>
+  </data>
+  <data name="TransactionViewTransactionCannotBeOpened" xml:space="preserve">
+    <value>لا يمكن فتح المعاملات</value>
+  </data>
+  <data name="txt6Digit" xml:space="preserve">
+    <value>6 أرقام</value>
+  </data>
+  <data name="txtApplied" xml:space="preserve">
+    <value>مطبق!</value>
+  </data>
+  <data name="txtAprtNo" xml:space="preserve">
+    <value>رقم الشقة.</value>
+  </data>
+  <data name="txtArea" xml:space="preserve">
+    <value>منطقة</value>
+  </data>
+  <data name="txtbestsellers" xml:space="preserve">
+    <value>الأفضل مبيعًا</value>
+  </data>
+  <data name="txtCardNumber" xml:space="preserve">
+    <value>Card Number</value>
+  </data>
+  <data name="txtCategory" xml:space="preserve">
+    <value>التصنيفات</value>
+  </data>
+  <data name="txtCVV" xml:space="preserve">
+    <value>CVV</value>
+  </data>
+  <data name="txtEnterPhoneNumber" xml:space="preserve">
+    <value>أدخل رقم هاتفك</value>
+  </data>
+  <data name="txtExpired" xml:space="preserve">
+    <value>منتهي الصلاحية</value>
+  </data>
+  <data name="txtExpiryDate" xml:space="preserve">
+    <value>تاريخ الانتهاء</value>
+  </data>
+  <data name="txtFloorNo" xml:space="preserve">
+    <value>رقم الطابق</value>
+  </data>
+  <data name="txtGenerateOtp" xml:space="preserve">
+    <value>توليد OTP</value>
+  </data>
+  <data name="txtImageSizeError" xml:space="preserve">
+    <value>الحجم يتجاوز !!</value>
+  </data>
+  <data name="txtImageSizeExceed" xml:space="preserve">
+    <value>حجم الملف كبير جدًا! يجب أن يكون أقل من 2 ميغا بايت</value>
+  </data>
+  <data name="txtImgListSizeExceed" xml:space="preserve">
+    <value>لم تتم إضافة بعض الصور لأن حجم الملف كبير جدًا! يجب أن يكون أقل من 2 ميغا بايت</value>
+  </data>
+  <data name="txtImgSizeNote" xml:space="preserve">
+    <value>يجب أن تكون جميع المستندات بتنسيقات Png و jpeg و jpg فقط ضمن الحد الأقصى لحجم الملف وهو 2 ميغابايت</value>
+  </data>
+  <data name="txtInvalidOtp" xml:space="preserve">
+    <value>OTP غير صحيح</value>
+  </data>
+  <data name="txtLandmark" xml:space="preserve">
+    <value>معلم معروف</value>
+  </data>
+  <data name="txtmostviewed" xml:space="preserve">
+    <value>كثيرا ما تطلب</value>
+  </data>
+  <data name="txtNumber" xml:space="preserve">
+    <value>عدد</value>
+  </data>
+  <data name="txtOrderHistory" xml:space="preserve">
+    <value>الطلبات السابقة</value>
+  </data>
+  <data name="txtpoints" xml:space="preserve">
+    <value>نقاط</value>
+  </data>
+  <data name="txtRemark" xml:space="preserve">
+    <value>ملاحظات :</value>
+  </data>
+  <data name="txtSelectCategory" xml:space="preserve">
+    <value>حدد قسيمة</value>
+  </data>
+  <data name="txtSelectCode" xml:space="preserve">
+    <value>حدد الرمز الترويجي</value>
+  </data>
+  <data name="txtStreet" xml:space="preserve">
+    <value>شارع</value>
+  </data>
+  <data name="txtVerificationCode" xml:space="preserve">
+    <value>شيفرة التأكيد</value>
+  </data>
+  <data name="txtWeWillShare" xml:space="preserve">
+    <value>سوف نشاركك في</value>
+  </data>
+  <data name="WelcomeViewLoginButtonText" xml:space="preserve">
+    <value>تسجيل الدخول</value>
+  </data>
+  <data name="WelcomeViewPageTitle" xml:space="preserve">
+    <value>مرحبا</value>
+  </data>
+  <data name="WelcomeViewWelcomeText" xml:space="preserve">
+    <value>للبدء ، انقر على الزر أدناه لتسجيل الدخول أو لإضافة حساب جديد وتكوين ملفك الشخصي. \ r \ n \ n \ n كونك عضوًا يسمح لك بالاستفادة من العروض الشخصية والقسائم بالإضافة إلى جمع النقاط ، والتي يمكن استخدامها للعطاءات أثناء تجربة التسوق الخاصة بك.</value>
+  </data>
+  <data name="WishListViewNoItemsInWishList" xml:space="preserve">
+    <value>لا توجد عناصر في قائمة الرغبات</value>
+  </data>
+</root>

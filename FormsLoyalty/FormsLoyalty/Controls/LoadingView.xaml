@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FormsLoyalty.Controls.LoadingView">
+  <ContentView.Content>
+        <!--<Image Source="loading.gif" IsAnimationPlaying="True"    Aspect="AspectFit"/>-->
+
+        <StackLayout x:Name="loadingStack" 
+                     VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="CenterAndExpand"
+            >
+
+
+            <ActivityIndicator Color="{StaticResource My_Header_Color}" x:Name="ProgressB"  IsRunning="True" Visual="Material"/>
+
+            <!--<Label Text="Loading..."  
+                   FontSize="Subtitle"
+                   IsVisible="{Binding IsVisible,Source={x:Reference ProgressB}}" 
+                   TextColor="Black" HorizontalOptions="CenterAndExpand" VerticalOptions="Center"/>-->
+            
+        </StackLayout>
+
+    </ContentView.Content>
+</ContentView>

@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.OffersPage"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+            xmlns:enums="clr-namespace:LSRetail.Omni.Domain.DataModel.Loyalty.Setup;assembly=LSRetail.Omni.Domain.DataModel.Loyalty" 
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             x:Name="offerPage"
+             Padding="10"
+             BackgroundColor="#f2f2ef"
+             Title="{x:Static resources:AppResources.ActionbarOffers}">
+    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+
+            <DataTemplate x:Key="ListView">
+                <Grid RowDefinitions="*">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Offer_Tapped" NumberOfTapsRequired="1"
+                                              CommandParameter="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+                    <Frame Visual="Material" Padding="10">
+
+                        <Grid>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                              VerticalOptions="CenterAndExpand"
+                                                  BorderThickness="0.4"
+                                                      BorderColor="Silver"
+                                              Grid.Row="0" Grid.Column="0"
+                                              Grid.RowSpan="2"
+                                                 Aspect="AspectFill" HeightRequest="40" WidthRequest="40"/>
+                            <Label Text="{Binding Description}" FontSize="Body" TextColor="Black" 
+                               Grid.Row="0"
+                               Grid.Column="1"
+                               VerticalTextAlignment="Center"/>
+
+                            <Label Grid.Row="1"  Text="{Binding Details}" 
+                               Grid.Column="1"
+                               LineBreakMode="TailTruncation"
+                                       TextColor="Silver"
+                                       FontSize="Caption"
+                                       />
+
+
+                            <Button    VerticalOptions="Start" Grid.Row="0"
+                                       Grid.Column="2" Grid.RowSpan="2"
+                                        HorizontalOptions="EndAndExpand"
+                                        BackgroundColor="Transparent"
+                                        WidthRequest="50"
+                                       IsVisible="False"
+                                        x:Name="addremovebtn"
+                                        Clicked="addremovebtn_Clicked"
+                                        BorderWidth="1"
+                                        Visual="Material"
+                                        HeightRequest="50"
+                                       
+                                        >
+                                <Button.Triggers>
+                                    <MultiTrigger TargetType="Button">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding Type}" Value="PointOffer"/>
+                                            <BindingCondition Binding="{Binding Selected}" Value="False"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="ImageSource" Value="ic_action_new"/>
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </MultiTrigger>
+
+                                    <MultiTrigger TargetType="Button">
+                                        <MultiTrigger.Conditions>
+                                            <BindingCondition Binding="{Binding Type}" Value="PointOffer"/>
+                                            <BindingCondition Binding="{Binding Selected}" Value="True"/>
+                                        </MultiTrigger.Conditions>
+                                        <Setter Property="ImageSource" Value="ic_action_remove"/>
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </MultiTrigger>
+
+                                </Button.Triggers>
+
+                            </Button>
+
+
+
+                        </Grid>
+                    </Frame>
+                </Grid>
+            </DataTemplate>
+
+            <DataTemplate x:Key="CardView">
+
+                <Grid RowDefinitions="Auto">
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Offer_Tapped" NumberOfTapsRequired="1"
+                                              CommandParameter="{Binding .}"/>
+                    </Grid.GestureRecognizers>
+
+                    <Frame Style="{StaticResource stlRigthStripeFrame}" 
+                           Margin="0,0,8,0"
+                           HasShadow="False"
+                           IsClippedToBounds="True"
+                           BackgroundColor="White"
+                           HeightRequest="200"
+                           Visual="Material">
+                        <Grid RowSpacing="5">
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+
+
+
+                            <Grid Grid.Row="0">
+                                <controls1:LoadingImageView/>
+                                <ffimage:CachedImage   Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                   DownsampleToViewSize="True"             
+                               VerticalOptions="CenterAndExpand"
+                              HeightRequest="120"
+                               Aspect="Fill"
+                               Margin="-20,0,-20,0"
+                               TranslationY="-20"
+                               />
+                            </Grid>
+                           
+
+
+                            <Grid VerticalOptions="Start" Grid.Row="0"
+                                   Margin="-20,-20,-20,0"
+                                  HeightRequest="50"
+                                        HorizontalOptions="EndAndExpand"
+                                        BackgroundColor="#8C808080"
+                                        WidthRequest="50"
+                                    IsVisible="false">
+                                <Image Source="ic_action_new" VerticalOptions="Center" HorizontalOptions="Center">
+                                    <Image.Triggers>
+                                       
+                                        <MultiTrigger TargetType="Image">
+                                            <MultiTrigger.Conditions>
+                                                <BindingCondition Binding="{Binding Type}" Value="PointOffer"/>
+                                                <BindingCondition Binding="{Binding Selected}" Value="False"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Source" Value="ic_action_new"/>
+                                            <Setter Property="IsVisible" Value="True"/>
+                                        </MultiTrigger>
+
+                                        <MultiTrigger TargetType="Image">
+                                            <MultiTrigger.Conditions>
+                                                <BindingCondition Binding="{Binding Type}" Value="PointOffer"/>
+                                                <BindingCondition Binding="{Binding Selected}" Value="True"/>
+                                            </MultiTrigger.Conditions>
+                                            <Setter Property="Source" Value="ic_action_remove"/>
+                                            <Setter Property="IsVisible" Value="True"/>
+                                        </MultiTrigger>
+
+                                    </Image.Triggers>
+                                </Image>
+
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="addremovebtn_Clicked"/>
+                                </Grid.GestureRecognizers>
+                                
+                                <Grid.Triggers>
+                                    <DataTrigger TargetType="Grid" Binding="{Binding Type}" Value="PointOffer">
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </DataTrigger>
+                                </Grid.Triggers>
+
+                            </Grid>
+                            
+                            <Label Grid.Row="1" 
+                               Margin="0,-20,0,0"
+                                   TextColor="Black"
+                                   FontSize="Body"
+                                   MaxLines="3"
+                                   LineBreakMode="TailTruncation"
+                               Text="{Binding Description}" />
+
+                            <Label Grid.Row="2"  Text="{Binding Details}" 
+                                       TextColor="Silver"
+                                       FontSize="Caption"
+                                       MaxLines="2"
+                                       VerticalOptions="End"
+                                       LineBreakMode="TailTruncation"
+                                       Style="{StaticResource stlRigthStripeDesc}"/>
+
+                        </Grid>
+                    </Frame>
+
+                </Grid>
+            </DataTemplate>
+
+        </ResourceDictionary>
+
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+            <ToolbarItem.CommandParameter>
+                <prism:NavigationParameters>
+                    <prism:NavigationParameter Key="page" Value="Offer" />
+                    <prism:NavigationParameter Key="searchType" Value="{x:Static enums:SearchType.Offer}" />
+                </prism:NavigationParameters>
+
+            </ToolbarItem.CommandParameter>
+        </ToolbarItem>
+        <ToolbarItem 
+                     x:Name="viewtoolbar"
+                     Order="Primary" Clicked="ToolbarItem_Clicked"/>
+        <ToolbarItem IconImageSource="ic_action_qr" Command="{Binding ToolBarCommand}" 
+                     Order="Primary"/>
+    </ContentPage.ToolbarItems>
+
+
+    <AbsoluteLayout>
+
+            <CollectionView ItemsSource="{Binding offers}"
+                    IsGrouped="True"
+                    x:Name="offerlist"
+                            HorizontalScrollBarVisibility="Never"
+                            VerticalScrollBarVisibility="Never"
+                            AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+
+
+            <CollectionView.Triggers>
+                <DataTrigger TargetType="CollectionView" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                        <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </CollectionView.Triggers>
+
+                <CollectionView.ItemsLayout>
+            <GridItemsLayout Orientation="Vertical"
+                             VerticalItemSpacing="10"
+                                 Span="{Binding count}" />
+        </CollectionView.ItemsLayout>
+
+        <CollectionView.GroupHeaderTemplate>
+            <DataTemplate>
+           
+                <Label 
+                       TextColor="Black"
+                       CharacterSpacing="2"
+                       
+                           Text="{Binding Name}"
+                           FontSize="Small"
+                           FontAttributes="Bold" />
+            </DataTemplate>
+        </CollectionView.GroupHeaderTemplate>
+        
+    </CollectionView>
+
+        <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls1:LoadingView.Triggers>
+                <DataTrigger TargetType="controls1:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls1:LoadingView.Triggers>
+
+        </controls1:LoadingView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:prism="http://prismlibrary.com"
+             x:Class="FormsLoyalty.Controls.LoginView">
+  <ContentView.Content>
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
+            <Image Source="imgmPIN" Grid.Row="1"/>
+
+
+            <Label Text="{x:Static resources:AppResources.txtEnterPhoneNumber}" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="Medium" Grid.Row="2" 
+                       Margin="0,10,0,0"/>
+
+            <Label HorizontalTextAlignment="Center" FontSize="Body" Grid.Row="3">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resources:AppResources.txtWeWillShare}"/>
+                        <Span Text=" "/>
+                        <Span Text="{x:Static resources:AppResources.txt6Digit}" FontAttributes="Bold" FontSize="Body"/>
+                        <Span Text=" "/>
+                        <Span Text="{x:Static resources:AppResources.txtVerificationCode}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+
+
+
+            <Frame Margin="0,10,0,0" Padding="0" Visual="Material" Grid.Row="4" BorderColor="LightGray">
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewMobile}" x:Name="numberText"
+                                                             LeadingIcon="mobile"
+                                                            Padding="3,0,3,0"
+                                                            BackgroundColor="White"
+                                                            LeadingIconTintColor="Black"
+                                       HorizontalOptions="FillAndExpand"
+                                            Text="{Binding MobileNumber}"
+                                      AlwaysShowUnderline="True"
+                                        FloatingPlaceholderColor="Silver"
+                                        ErrorText="{Binding ErrorText}" 
+                                        InputType="Telephone" 
+                                              TextChanged="MaterialTextField_TextChanged"
+                                               HasError="{Binding IsError}"/>
+
+
+
+
+
+            </Frame>
+
+            <Button Text="{x:Static resources:AppResources.txtGenerateOtp}" BackgroundColor="{StaticResource My_Button_Color}" Grid.Row="5"
+                       Command="{Binding OnOtpCommand}"
+                        Margin="0,50,0,0" HeightRequest="40"/>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>

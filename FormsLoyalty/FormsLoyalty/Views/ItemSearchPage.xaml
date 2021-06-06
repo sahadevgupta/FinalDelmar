@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.ItemSearchPage"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters" xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             Title="Item Search"
+             BackgroundColor="WhiteSmoke"
+             x:Name="thisPage">
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+            <Setter Property="BackgroundColor" Value="White"/>
+        </DataTrigger>
+    </ContentPage.Triggers>
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+    </ContentPage.Resources>
+    
+    <AbsoluteLayout >
+
+
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+
+            <StackLayout.Triggers>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </StackLayout.Triggers>
+
+            <Frame Padding="0" HeightRequest="45" Visual="Material" Margin="10">
+                <SearchBar Placeholder="Search Item" Text="{Binding SearchKey}"/>
+            </Frame>
+            <CollectionView ItemsSource="{Binding Items}" SelectionMode="Single"
+                           >
+                
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Visual="Material" Padding="10">
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.SelectedCommand,Source={x:Reference thisPage}}"
+                                                      CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+                            
+                        <StackLayout Orientation="Horizontal">
+                            <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                                  BorderColor="LightGray"
+                                                  BorderThickness="1"
+                                                 Aspect="AspectFill" HeightRequest="40" WidthRequest="40"/>
+                            <Label Text="{Binding Description}" FontSize="Body" TextColor="Black" VerticalTextAlignment="Center"/>
+
+                        </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            
+            
+        </StackLayout>
+
+        <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls1:LoadingView.Triggers>
+                <DataTrigger TargetType="controls1:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls1:LoadingView.Triggers>
+
+        </controls1:LoadingView>
+
+
+    </AbsoluteLayout>
+
+
+</ContentPage>

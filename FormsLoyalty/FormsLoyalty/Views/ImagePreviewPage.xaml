@@ -1,0 +1,56 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.ImagePreviewPage"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             x:Name="previewPage">
+
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+    </ContentPage.Resources>
+
+    <Grid RowDefinitions="*,Auto">
+
+        <Image  Aspect="AspectFit"  Source="{Binding ImageView,Converter={StaticResource BytesToImageSource}}" 
+                HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10,0,10,0"
+                />
+
+
+        <ScrollView Grid.Row="1" Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="10"
+                    HorizontalScrollBarVisibility="Always">
+            <FlexLayout Direction="Row" 
+                    JustifyContent="Center"
+                    HeightRequest="60"
+                    BindableLayout.ItemsSource="{Binding Images}"
+                    x:Name="ImageList" >
+
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <Frame HeightRequest="60" WidthRequest="60"
+                                Margin="3"
+                                Padding="2"
+                                BackgroundColor="White"
+                                BorderColor="Transparent"
+                                CornerRadius="0"
+                                >
+
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.ChangeImageCommand,Source={x:Reference previewPage}}" 
+                                                  CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+
+                            <Image Aspect="Fill" Source="{Binding Image,Converter={StaticResource BytesToImageSource}}" />
+                        </Frame>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+
+
+            </FlexLayout>
+        </ScrollView>
+
+    </Grid>
+    
+    
+</ContentPage>

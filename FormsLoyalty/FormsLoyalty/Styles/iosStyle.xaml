@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ResourceDictionary xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             x:Class="FormsLoyalty.Styles.iosStyle"
+                    xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core">
+    <Style TargetType="Entry">
+        <Setter Property="ios:Entry.AdjustsFontSizeToFitWidth" Value="True"/>
+    </Style>
+
+    <Style TargetType="Picker">
+        <Setter Property="ios:Picker.UpdateMode" Value="WhenFinished"/>
+    </Style>
+
+    <Style TargetType="DatePicker">
+        <Setter Property="ios:DatePicker.UpdateMode" Value="WhenFinished"/>
+    </Style>
+    <Style TargetType="TimePicker">
+        <Setter Property="ios:TimePicker.UpdateMode" Value="WhenFinished"/>
+    </Style>
+
+    <Style TargetType="MasterDetailPage">
+        <Setter Property="ios:Page.UseSafeArea" Value="True"/>
+    </Style>
+
+    <Style TargetType="TabbedPage">
+        <Setter Property="ios:Page.UseSafeArea" Value="True"/>
+        <Setter Property="ios:TabbedPage.TranslucencyMode" Value="Opaque"/>
+    </Style>
+    
+
+
+    <Style TargetType="SearchBar">
+        <Setter Property="ios:SearchBar.SearchBarStyle" Value="Minimal"/>
+    </Style>
+
+    
+
+</ResourceDictionary>

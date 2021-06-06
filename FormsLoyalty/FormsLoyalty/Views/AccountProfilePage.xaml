@@ -1,0 +1,106 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.AccountProfilePage"
+             BackgroundColor="WhiteSmoke"
+             xmlns:resources="clr-namespace:FormsLoyalty" xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             Visual="Material">
+    <ContentPage.Triggers>
+
+        <DataTrigger TargetType="ContentPage"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+            <Setter Property="BackgroundColor" Value="White"/>
+
+
+        </DataTrigger>
+    </ContentPage.Triggers>
+    <AbsoluteLayout>
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"
+                 AbsoluteLayout.LayoutFlags="All">
+
+            <StackLayout.Triggers>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                <Setter Property="Opacity" Value="0.5"/>
+                <Setter Property="IsEnabled" Value="False"/>
+            </DataTrigger>
+        </StackLayout.Triggers>
+
+        <Label TextColor="Black"
+               Margin="10"
+               Text="{x:Static resources:AppResources.AccountProfilesViewProfiles}"
+               FontSize="Large"
+               FontAttributes="Bold" />
+
+        <ListView ItemsSource="{Binding ProfileGroup}"
+                  HasUnevenRows="True"
+                  VerticalScrollBarVisibility="Never"
+                  SeparatorVisibility="Default">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="10" BackgroundColor="White" Orientation="Horizontal">
+                            <Label Text="{Binding Profile.Description}"
+                               TextColor="Black"
+                               VerticalTextAlignment="Center"
+                           FontSize="Body"/>
+                            <CheckBox VerticalOptions="Center"
+                                  Visual="Material"
+                                 Color="Accent"
+                                  HorizontalOptions="EndAndExpand"
+                              IsChecked="{Binding isChecked}"/>
+
+                        </StackLayout>
+                    </ViewCell>
+                    
+                </DataTemplate>
+            </ListView.ItemTemplate>
+
+            
+        </ListView>
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+                         Margin="10" Spacing="20"
+                         >
+            <Button Text="{x:Static resources:AppResources.AccountViewBack}"
+                        HeightRequest="40"
+                            
+                        Command="{prism:GoBack}"
+                        HorizontalOptions="FillAndExpand"/>
+
+                <Button Text="{x:Static resources:AppResources.AccountViewCreate}"
+                        HeightRequest="40"
+                           BackgroundColor="{StaticResource My_Button_Color}"
+                            TextColor="White"
+                        Command="{Binding CreateCommand}"
+                        HorizontalOptions="FillAndExpand">
+                    <Button.Triggers>
+                        <DataTrigger TargetType="Button"
+                                     Binding="{Binding editAccount}" Value="true">
+                            <Setter Property="Text" Value="{x:Static resources:AppResources.AccountViewUpdate}"/>
+                        </DataTrigger>
+                    </Button.Triggers>
+                </Button>
+
+            </StackLayout>
+
+    </StackLayout>
+
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+
+    </AbsoluteLayout>
+
+</ContentPage>

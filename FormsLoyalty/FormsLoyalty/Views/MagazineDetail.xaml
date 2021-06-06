@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.MagazineDetail"
+             Title="{Binding Title}">
+
+   
+
+
+    <StackLayout>
+
+        <ActivityIndicator x:Name="loadingStack" 
+                     VerticalOptions="CenterAndExpand"
+                     HorizontalOptions="Center"
+                     IsRunning="true">
+            <ActivityIndicator.Triggers>
+                <DataTrigger TargetType="ActivityIndicator"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="false">
+                    <Setter Property="IsRunning" Value="false"/>
+                    <Setter Property="IsVisible" Value="false"/>
+                </DataTrigger>
+            </ActivityIndicator.Triggers>
+
+        </ActivityIndicator>
+
+        
+        <WebView x:Name="Webview" 
+                    
+                 Source="{Binding URL}"
+             Navigated="Webview_Navigated"
+                 Navigating="Webview_Navigating"
+                  HorizontalOptions="FillAndExpand"
+             VerticalOptions="FillAndExpand"/>
+    </StackLayout>
+
+  
+   
+
+
+   
+
+
+</ContentPage>

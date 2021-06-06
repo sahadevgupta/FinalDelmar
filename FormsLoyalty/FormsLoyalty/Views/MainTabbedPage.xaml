@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<TabbedPage xmlns="http://xamarin.com/schemas/2014/forms"
+            xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+            xmlns:prism="http://prismlibrary.com"
+            prism:ViewModelLocator.AutowireViewModel="True"
+            x:Class="FormsLoyalty.Views.MainTabbedPage"
+            xmlns:views="clr-namespace:FormsLoyalty.Views"
+            xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
+            xmlns:plugin="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
+            xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+            xmlns:resources="clr-namespace:FormsLoyalty"
+            android:TabbedPage.ToolbarPlacement="Bottom"
+            android:TabbedPage.IsSwipePagingEnabled="False"
+            android:TabbedPage.IsSmoothScrollEnabled="True"
+            UnselectedTabColor="LightGray"
+            SelectedTabColor="{StaticResource My_Header_Color}"
+            FlowDirection="LeftToRight"
+            NavigationPage.HasNavigationBar="False"
+            BarBackgroundColor="White"
+            CurrentPageChanged="tabChanged">
+
+    <TabbedPage.Triggers>
+        <DataTrigger TargetType="TabbedPage" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                     Value="true">
+            <Setter Property="FlowDirection" Value="RightToLeft"/>
+        </DataTrigger>
+
+    </TabbedPage.Triggers>
+
+
+    <TabbedPage.Children>
+
+        <!--Home Page-->
+        <NavigationPage Title="{x:Static resources:AppResources.ActionbarHome}" IconImageSource="home.png">
+            <x:Arguments>
+                <views:MainPage />
+            </x:Arguments>
+        </NavigationPage>
+
+
+        <!--Categories Page-->
+        <NavigationPage Title="{x:Static resources:AppResources.txtCategory}" IconImageSource="category.png">
+            <x:Arguments>
+                <views:ItemCategoriesPage />
+            </x:Arguments>
+        </NavigationPage>
+
+        <!--Cart Page-->
+
+        <NavigationPage Title="{x:Static resources:AppResources.CartTab}" IconImageSource="cart.png">
+            <x:Arguments>
+
+                
+                        <views:CartPage  
+                                helpers:TabBadge.BadgeText="{Binding BadgeCount}"
+                                 helpers:TabBadge.BadgeColor="{StaticResource SecondaryColor}"
+                                 helpers:TabBadge.BadgeTextColor="White"/>
+                  
+                    
+                
+               
+
+            </x:Arguments>
+        </NavigationPage>
+
+        <!--Order Page-->
+        <NavigationPage Title="{x:Static resources:AppResources.OrdersTab}" IconImageSource="order.png">
+            <x:Arguments>
+                <views:TransactionPage />
+            </x:Arguments>
+        </NavigationPage>
+
+
+        <!--More Page-->
+        <NavigationPage Title="{x:Static resources:AppResources.MoreTab}" IconImageSource="{OnPlatform iOS=reveal-icon.png,Android=ic_menu_white_24dp.png}">
+            <x:Arguments>
+                <views:MoreInfoPage />
+            </x:Arguments>
+        </NavigationPage>
+
+
+        <!--<views:MainPage Title="Home" IconImageSource="camera.png" />
+        <views:ItemCategoriesPage Title="Categories" IconImageSource="camera.png"/>
+        <views:CartPage Title="Cart" IconImageSource="camera.png"/>
+        <views:TransactionPage Title="Order" IconImageSource="camera.png"/>
+        <views:ItemCategoriesPage Title="More" IconImageSource="camera.png"/>-->
+    </TabbedPage.Children>
+    
+    
+</TabbedPage>

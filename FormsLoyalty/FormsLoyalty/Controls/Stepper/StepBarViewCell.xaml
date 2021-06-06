@@ -1,0 +1,75 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FormsLoyalty.Controls.Stepper.StepBarViewCell"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:controls="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:StepColorConverter x:Key="StepColorConverter"/>
+            <converters:StepImageConverter x:Key="StepImageConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+  <ContentView.Content>
+      
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start"
+              x:Name="mainGrid"
+              ColumnSpacing="0" Margin="0"
+              Padding="0"
+              RowDefinitions="Auto,Auto"
+              ColumnDefinitions="Auto,Auto">
+
+            <Grid WidthRequest="20" Grid.Column="0"
+                  x:Name="trackergrid"
+                  HorizontalOptions="CenterAndExpand" VerticalOptions="Start"
+                  Padding="0"
+                  Margin="0,10,0,0" RowSpacing="1" ColumnSpacing="0"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="Auto">
+
+                <controls:PancakeView CornerRadius="{OnPlatform iOS='10', Android='20'}"
+                                      HeightRequest="20" WidthRequest="20"
+                                      IsClippedToBounds="True"
+                                      BorderColor="Black"
+                                      BackgroundColor="{Binding Status,Converter={StaticResource StepColorConverter}}">
+
+                    <Image Aspect="AspectFill" Margin="4"
+                           Source="{Binding Status,Converter={StaticResource StepImageConverter}}"/>
+
+                </controls:PancakeView>
+
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="StepTapped_Tapped"/>
+                </Grid.GestureRecognizers>
+                
+            </Grid>
+
+            <ProgressBar VerticalOptions="FillAndExpand"
+                         HorizontalOptions="FillAndExpand"
+                         Margin="0,10,0,0"
+                         x:Name="progress"
+                         IsVisible="{Binding IsNotLast}"
+                         ProgressColor="#127ABF"
+                         Grid.Column="1" Grid.Row="0"
+                         >
+                
+            </ProgressBar>
+
+
+            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" WidthRequest="60">
+                <Label Text="{Binding StepName}"
+                   x:Name="mainLabel"
+                   FontSize="Small"
+                   TextColor="#333333"
+                   
+                   HorizontalTextAlignment="Start"
+                   LineBreakMode="WordWrap"
+                   />
+
+            </StackLayout>
+        </Grid>
+
+    </ContentView.Content>
+</ContentView>

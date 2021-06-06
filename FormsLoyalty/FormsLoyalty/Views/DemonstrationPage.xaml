@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.DemonstrationPage"
+             Visual="Material"
+             BackgroundColor="WhiteSmoke"
+             x:Name="demoPage"
+             ios:Page.UseSafeArea="True">
+
+
+
+
+    <StackLayout>
+
+        <CarouselView x:Name="carousel" Grid.Row="2" ItemsSource="{Binding DemoContents}" 
+                      Position="{Binding CarouselPosition}"
+                      IndicatorView="indicatorView">
+        <CarouselView.ItemTemplate>
+            <DataTemplate>
+                <Grid RowDefinitions="50,1*,7*,60" Padding="10">
+
+                        <Button Text="Skip Tour" Visual="{OnPlatform iOS=Material}" HorizontalOptions="End" HeightRequest="40" IsVisible="{Binding SkipButtonIsVisible}"
+                                Command="{Binding BindingContext.SkipCommand,Source={x:Reference demoPage}}"/>
+
+                        <Label Text="{Binding MainText}" Grid.Row="1" HorizontalOptions="CenterAndExpand"
+                               FontSize="25" TextColor="#2271b7"/>
+
+                        <Frame BorderColor="Silver" Grid.Row="2" Padding="5" CornerRadius="5"  Visual="{OnPlatform iOS=MAterial,Android=Default}">
+                            <Image Source="{Binding ImageSource}" Aspect="AspectFit"/>
+
+
+                        </Frame>
+
+                       
+
+                        <Button Text="Next" Grid.Row="3" Margin="0,10,0,0" Visual="{OnPlatform iOS=Material}"
+                               Clicked="Button_Clicked"
+                                BackgroundColor="{StaticResource My_Button_Color}">
+                            <Button.Triggers>
+                                <DataTrigger TargetType="Button" Binding="{Binding SkipButtonIsVisible}" Value="False">
+                                    <Setter Property="Text" Value="Get Started Now"/>
+                                </DataTrigger>
+                            </Button.Triggers>
+                        </Button>
+                    </Grid>
+            </DataTemplate>
+        </CarouselView.ItemTemplate>
+        </CarouselView>
+
+        <IndicatorView x:Name="indicatorView"
+                   IndicatorColor="LightGray"
+                   SelectedIndicatorColor="#ff4f4f4f"
+                   HorizontalOptions="Center" IndicatorsShape="Square">
+            <IndicatorView.IndicatorTemplate>
+                <DataTemplate>
+                    <BoxView HeightRequest="3"/>
+                </DataTemplate>
+            </IndicatorView.IndicatorTemplate>
+        </IndicatorView>
+
+    </StackLayout>
+
+</ContentPage>

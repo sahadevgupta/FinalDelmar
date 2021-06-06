@@ -1,0 +1,161 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.SearchPage"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             Visual="Material"
+             x:Name="thisPage"
+             Title="{x:Static resources:AppResources.ActionbarSearch}">
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+            <Setter Property="BackgroundColor" Value="White"/>
+        </DataTrigger>
+    </ContentPage.Triggers>
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+        <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+    </ContentPage.Resources>
+
+   
+
+    <AbsoluteLayout>
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </DataTrigger>
+            </Grid.Triggers>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Frame Padding="0" HeightRequest="45"  Visual="Material" Margin="10">
+                <SearchBar Placeholder="Search items..."
+                       Text="{Binding SearchKey}"
+                       Keyboard="Default"
+           
+           FontSize="Medium"
+           />
+            </Frame>
+
+
+            <CollectionView ItemsSource="{Binding items}"
+                           Grid.Row="1"
+                  IsGrouped="True"
+                    x:Name="offerlist"
+                            >
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <Label 
+                       TextColor="Black"
+                       Padding="10"
+                       
+                           Text="{Binding Name}"
+                           FontSize="Small"
+                           FontAttributes="Bold" />
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
+                
+                
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        
+                        
+                        <StackLayout Orientation="Horizontal" Padding="10">
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.ItemSelectedCommand,Source={x:Reference thisPage}}" NumberOfTapsRequired="1"
+                                              CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+
+                            <controls:CircleImage Grid.Row="0"  Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                                 Aspect="AspectFill"
+                                                  BorderThickness="0.5"
+                                                  BorderColor="Silver"
+                               VerticalOptions="CenterAndExpand"
+                              HeightRequest="40"
+                               WidthRequest="40"
+                               />
+                            <Label  
+                               VerticalTextAlignment="Center"
+                                   TextColor="Black"
+                                   FontSize="Body"
+                               Text="{Binding Description}" />
+                        </StackLayout>
+                       
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+
+               
+                
+
+            </CollectionView>
+
+
+            <Grid Margin="10,0,20,22" Grid.Row="1" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand">
+                <BoxView HeightRequest="60" WidthRequest="60" CornerRadius="30"
+                         BackgroundColor="{StaticResource My_Header_Color}"/>
+                <Image Source="ic_filter_list_24dp" VerticalOptions="Center" HorizontalOptions="Center"
+                       HeightRequest="30"/>
+                <Grid.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding FilterCommand}"/>
+                </Grid.GestureRecognizers>
+
+                <Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding FromPage,Converter={StaticResource StringToBoolConverter}}"
+                                 Value="true">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </Grid.Triggers>
+
+            </Grid>
+
+
+            <!--<Button Grid.Row="1" 
+                BorderWidth="1" FontAttributes="Bold" 
+                    ImageSource="ic_filter_list_24dp"
+                BackgroundColor="#303F9F" BorderRadius="35" TextColor="White" 
+                WidthRequest="60" HeightRequest="60" Margin="0,0,20,22" 
+                  Command="{Binding FilterCommand}"
+                    HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand">
+
+                <Button.Triggers>
+                    <DataTrigger TargetType="Button" Binding="{Binding FromCategoryPage,Converter={StaticResource StringToBoolConverter}}"
+                                 Value="false">
+                        <Setter Property="IsVisible" Value="true"/>
+                    </DataTrigger>
+                </Button.Triggers>
+                
+            </Button>-->
+
+        </Grid>
+
+        <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls1:LoadingView.Triggers>
+                <DataTrigger TargetType="controls1:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls1:LoadingView.Triggers>
+
+        </controls1:LoadingView>
+
+
+    </AbsoluteLayout>
+
+
+</ContentPage>

@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.NotificationDetailPage"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             BackgroundColor="WhiteSmoke"
+             Padding="10"
+             xmlns:resources="clr-namespace:FormsLoyalty" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls">
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+            <Setter Property="BackgroundColor" Value="White"/>
+        </DataTrigger>
+    </ContentPage.Triggers>
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+    </ContentPage.Resources>
+
+    <AbsoluteLayout>
+        <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="200"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.Triggers>
+            <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                <Setter Property="Opacity" Value="0.5"/>
+                <Setter Property="IsEnabled" Value="False"/>
+            </DataTrigger>
+        </Grid.Triggers>
+
+
+        <StackLayout Grid.Row="0">
+            <CarouselView ItemsSource="{Binding SelectedNotification.Images}"
+                          x:Name="carousel"
+                  IndicatorView="indicatorView"
+                       CurrentItemChanged="CarouselView_CurrentItemChanged"
+                          >
+                <CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout>
+
+                                <StackLayout.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding BindingContext.ShowPreviewCommand,Source={x:Reference carousel}}"
+                                                              CommandParameter="{Binding .}"/>
+                                </StackLayout.GestureRecognizers>
+
+                                <Frame Visual="Material" HeightRequest="200">
+                                <Image Source="{Binding Image,Converter={StaticResource BytesToImageSource}}"
+                              
+                              
+                               Aspect="AspectFill"/>
+
+                            </Frame>
+
+                        </StackLayout>
+                    </DataTemplate>
+                </CarouselView.ItemTemplate>
+            </CarouselView>
+            <IndicatorView x:Name="indicatorView"
+                   IndicatorColor="LightGray"
+                   SelectedIndicatorColor="DarkGray"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+
+        <StackLayout Grid.Row="1">
+
+            <Label Margin="10"
+                   FontSize="Title"
+                   TextColor="{StaticResource My_Header_Color}"
+                   Text="{Binding SelectedNotification.Description}"/>
+
+            <Label Margin="10"
+                   FontSize="Body"
+                   TextColor="Black"
+                   Text="{Binding expirationDate}"/>
+
+            <Label Text="{x:Static resources:AppResources.DetailViewDetails}"
+                   FontSize="Medium"
+                   Margin="10"
+                   TextColor="Black"/>
+
+            <Label Margin="10"
+                   FontSize="Body"
+                   TextColor="Black"
+                   Text="{Binding SelectedNotification.Details}"/>
+        </StackLayout>
+        
+        
+    </Grid>
+
+
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+
+    </AbsoluteLayout>
+</ContentPage>

@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              android:orientation="vertical">
+
+  <android.support.design.widget.AppBarLayout android:id="@+id/appbar"
+                                              android:layout_width="match_parent"
+                                              android:layout_height="wrap_content"
+                                              android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    <android.support.v7.widget.Toolbar android:id="@+id/LoginScreenToolbar"
+                                       android:layout_width="match_parent"
+                                       android:layout_height="@dimen/ActionBarHeight"
+                                       app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+                                       app:layout_scrollFlags="scroll|enterAlways" />
+
+  </android.support.design.widget.AppBarLayout>
+
+  <ScrollView android:layout_width="fill_parent"
+              android:layout_height="fill_parent">
+
+    <LinearLayout android:orientation="vertical"
+                  android:layout_width="fill_parent"
+                  android:layout_height="fill_parent">
+
+      <ImageView android:id="@+id/LoginLogo"
+                 android:layout_width="fill_parent"
+                 android:layout_height="wrap_content"
+                 android:layout_marginLeft="@dimen/BasePadding"
+                 android:layout_marginTop="@dimen/BasePadding"
+                 android:layout_marginRight="@dimen/BasePadding"
+                 android:layout_marginBottom="@dimen/HalfBasePadding"
+                 android:maxHeight="208dp"
+                 android:src="@drawable/logodrawer"
+                 android:adjustViewBounds="true" />
+
+      <ViewSwitcher android:id="@+id/LoginViewSwitcher"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inAnimation="@android:anim/fade_in"
+                    android:outAnimation="@android:anim/fade_out">
+				<LinearLayout
+					android:id="@+id/LoginViewContent"
+					android:orientation="vertical"
+					android:layout_width="fill_parent"
+					android:layout_height="fill_parent">
+					<TextView
+						style="@style/Subhead"
+						android:id="@+id/LoginViewErrorText"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/BasePadding"
+						android:layout_marginTop="@dimen/HalfBasePadding"
+						android:layout_marginRight="@dimen/BasePadding"
+						android:layout_marginBottom="@dimen/HalfBasePadding"
+						android:gravity="center_horizontal"
+						android:textColor="@color/red"
+						android:visibility="gone" />
+					<android.support.design.widget.TextInputLayout
+						android:id="@+id/LoginScreenUsernameInputLayout"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:paddingTop="@dimen/HalfBasePadding"
+						android:layout_marginLeft="@dimen/BasePadding"
+						android:layout_marginRight="@dimen/BasePadding">
+						<EditText
+							android:id="@+id/LoginScreenUsername"
+							android:layout_width="fill_parent"
+							android:layout_height="wrap_content"
+							android:hint="@string/LoginViewUsername"
+							android:inputType="text"
+							android:imeOptions="actionNext" />
+					</android.support.design.widget.TextInputLayout>
+					<android.support.design.widget.TextInputLayout
+						android:id="@+id/LoginScreenPasswordInputLayout"
+						android:layout_width="match_parent"
+						android:layout_height="wrap_content"
+						android:paddingTop="@dimen/HalfBasePadding"
+						android:layout_marginLeft="@dimen/BasePadding"
+						android:layout_marginRight="@dimen/BasePadding">
+						<EditText
+							android:id="@+id/LoginScreenPassword"
+							android:layout_width="fill_parent"
+							android:layout_height="wrap_content"
+							android:hint="@string/LoginViewPassword"
+							android:inputType="textPassword"
+							android:imeOptions="actionDone" />
+					</android.support.design.widget.TextInputLayout>
+					<TextView
+						style="@style/Subhead"
+						android:id="@+id/LoginViewForgotPassword"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/BasePadding"
+						android:layout_marginTop="@dimen/BasePadding"
+						android:layout_marginRight="@dimen/BasePadding"
+						android:layout_marginBottom="@dimen/HalfBasePadding"
+						android:gravity="right"
+						android:text="@string/LoginViewForgotPassword"
+						android:textColor="@color/red" />
+					<presentation.views.ColoredButton
+						android:id="@+id/LoginViewLoginButton"
+						android:layout_width="fill_parent"
+						android:layout_height="@dimen/ButtonHeight"
+						android:layout_marginLeft="@dimen/BasePadding"
+						android:layout_marginTop="@dimen/abc_floating_window_z"
+						android:layout_marginRight="@dimen/BasePadding"
+						android:layout_marginBottom="@dimen/HalfBasePadding"
+						android:focusable="false"
+						android:clickable="true"
+						app:roundCorners="true"
+						app:normalText="@string/LoginViewLoginButton"
+						android:background="@drawable/butt_savestyle"
+	/>
+					<EditText
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:hint="@string/Login_OR"
+						android:inputType="text"
+						android:textAlignment="center"
+						android:imeOptions="actionNext"
+						android:editable = "false"
+						android:enabled = "false"
+						android:layout_marginBottom="1.3dp" 
+						/>
+					<LinearLayout
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:layout_centerInParent="true"
+						android:orientation="horizontal"
+						android:paddingLeft="16dp"
+						android:paddingRight="16dp"
+						android:weightSum="2"
+						android:layout_marginTop="3.7dp">
+						<com.facebook.login.widget.LoginButton
+							android:id="@+id/fblogin"
+							android:layout_width="133.3dp"
+							android:layout_height="31.3dp"
+							android:layout_centerInParent="true"
+							android:layout_marginLeft="9.6dp"
+							android:layout_marginBottom="0.0dp"
+							android:layout_marginTop="3.0dp" 
+							 />
+						<com.google.android.gms.common.SignInButton
+							android:id="@+id/Google_sign_in_button"
+							android:layout_width="141.0dp"
+							android:layout_height="35.0dp"
+							android:layout_centerInParent="true"
+							android:layout_marginLeft="35.3dp"
+							android:layout_marginBottom="0.0dp"
+							android:layout_marginTop="0.0dp" />
+					</LinearLayout>
+
+					 
+
+					<TextView
+						style="@style/Subhead"
+						android:id="@+id/LoginViewCreateAccountButton"
+						android:layout_width="fill_parent"
+						android:layout_height="wrap_content"
+						android:layout_marginLeft="@dimen/BasePadding"
+						android:layout_marginTop="@dimen/BasePadding"
+						android:layout_marginRight="@dimen/BasePadding"
+						android:layout_marginBottom="@dimen/HalfBasePadding"
+						android:gravity="center_vertical"
+						android:text="@string/LoginViewCreateAccountButton"
+						android:textColor="@color/accent" />
+				</LinearLayout>
+
+        <ProgressBar android:id="@+id/LoginViewLoadingSpinner"
+                     style="?android:progressBarStyleLarge"
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:layout_gravity="center" />
+
+      </ViewSwitcher>
+
+     
+
+    </LinearLayout>
+
+  </ScrollView>
+
+</LinearLayout>

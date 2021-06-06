@@ -1,0 +1,419 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.SignUpPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:resources="clr-namespace:FormsLoyalty" 
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:effects="clr-namespace:FormsLoyalty.Effects" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             Visual="Material"
+             ios:Page.UseSafeArea="True"
+             Title="{Binding Title}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="material:MaterialTextField">
+                <Setter Property="TintColor" Value="Blue"/>
+                
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <AbsoluteLayout>
+
+        <!--<Grid RowDefinitions="55,*" 
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All">
+            
+
+            <Grid.Triggers>
+                <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </Grid.Triggers>-->
+
+            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
+            x:Name="toolbarStack"
+            BackgroundColor="{StaticResource My_Header_Color}"
+            HeightRequest="55"
+            Spacing="0"
+            VerticalOptions="Start">
+
+                <ImageButton
+            Margin="10,17,0,0"
+            BackgroundColor="Transparent"
+            HeightRequest="22"
+                       Clicked="BackButton_Clicked"
+            HorizontalOptions="Start"
+            Source="BackWhite.png"
+            VerticalOptions="Start"
+            WidthRequest="22" />
+
+                <Label
+                x:Name="headerLbl"
+                Margin="40,0,0,0"
+                FontSize="16"
+                Text="{Binding Title}"
+                TextColor="White"
+                VerticalOptions="CenterAndExpand"
+                VerticalTextAlignment="Center" />
+
+
+
+
+
+            </StackLayout>-->
+
+
+            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All" >
+
+                <ScrollView.Triggers>
+                    <DataTrigger TargetType="ScrollView" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                        <Setter Property="Opacity" Value="0.5"/>
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
+                </ScrollView.Triggers>
+
+                <StackLayout>
+
+                <!--#region Account Information Section-->
+                <Button Text="{x:Static resources:AppResources.AccountInformationAccountInformation}"
+            TextColor="Black"
+           Padding="5"
+            IsEnabled="False"
+        IsVisible="false"
+            HeightRequest="50"
+           
+                    FontSize="Medium"
+            />
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewUserName}" 
+                                        x:Name="userName"
+                                            IsVisible="false"
+                                        Text="{Binding UserName}"
+                                       AlwaysShowUnderline="True"
+                                          BackgroundColor="WhiteSmoke"   
+                                        TextChanged="MaterialTextField_TextChanged"
+                                        Margin="5,10,5,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" >
+
+                    <material:MaterialTextField.Triggers>
+                        <DataTrigger TargetType="material:MaterialTextField" Binding="{Binding editAccount}"
+                                     Value="true">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </material:MaterialTextField.Triggers>
+
+
+                </material:MaterialTextField>
+
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewEmail}" 
+                                        x:Name="email"
+                                             IsVisible="false"
+                                        Text="{Binding memberContact.Email}"
+                                        ErrorColor="Red"
+                                        AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                        Margin="5,10,5,0"
+                                             TextChanged="MaterialTextField_TextChanged"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Email" />
+
+                <Button Text="{x:Static resources:AppResources.AccountManagementViewChangePassword}"
+                        BackgroundColor="{StaticResource My_Button_Color}"
+                        IsVisible="False"
+                        Margin="10"
+                         
+                        FontSize="Medium" Command="{prism:NavigateTo Name='ChangePasswordPage'}">
+
+                    <!--<Button.Triggers>
+                        <DataTrigger TargetType="Button" Binding="{Binding editAccount}"
+                                     Value="true">
+                            <Setter Property="IsVisible" Value="True"/>
+                        </DataTrigger>
+                    </Button.Triggers>-->
+                    
+                </Button>
+
+
+
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewPassword}" 
+                                       AlwaysShowUnderline="True"
+                                        x:Name="password"
+                                             IsVisible="false"
+                                        Text="{Binding memberContact.Password}"
+                                        BackgroundColor="White"
+                                        Margin="5,10,5,0"
+                                             TextChanged="MaterialTextField_TextChanged"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Password" >
+
+                    <material:MaterialTextField.Triggers>
+                        <DataTrigger TargetType="material:MaterialTextField" Binding="{Binding editAccount}"
+                                     Value="true">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </material:MaterialTextField.Triggers>
+
+                </material:MaterialTextField>
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewPasswordConfirmation}" 
+                                       AlwaysShowUnderline="True" 
+                                        x:Name="confPassword"
+                                             IsVisible="false"
+                                             TextChanged="MaterialTextField_TextChanged"
+                                        BackgroundColor="White"
+                                        Margin="5,10,5,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}"  
+                                        InputType="Password" >
+
+                    <material:MaterialTextField.Triggers>
+                        <DataTrigger TargetType="material:MaterialTextField" Binding="{Binding editAccount}"
+                                     Value="true">
+                            <Setter Property="IsVisible" Value="False"/>
+                        </DataTrigger>
+                    </material:MaterialTextField.Triggers>
+
+                </material:MaterialTextField>
+
+                <!--#endregion Account Information Section -->
+
+                <!--#region Start Personal Information Section-->
+
+                <!--<Button Text="{x:Static resources:AppResources.AccountInformationPersonalInformation}"
+            TextColor="Black"
+           Padding="5"
+            
+           IsEnabled="False"
+        
+            HeightRequest="50"
+           
+                    FontSize="Medium"
+            />-->
+
+                <controls:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.AccountInformationPersonalInformation}"
+                                       Margin="10,10,0,0"/>
+
+
+
+                <Frame Padding="10" BorderColor="Silver" CornerRadius="0" IsVisible="False">
+                    <StackLayout Orientation="Horizontal" >
+                        <Label Text="Add a new address" TextColor="Black" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
+                        <Image Source="right_arrow" HeightRequest="16" HorizontalOptions="Center" WidthRequest="16"
+                               Margin="5,0,5,0"
+                               effects:TintImageEffect.TintColor="Black"/>
+                    </StackLayout>
+
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="AddNewAddress"/>
+                    </Frame.GestureRecognizers>
+                    
+                </Frame>
+
+                    <StackLayout Orientation="Horizontal" Spacing="30">
+                        <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewFirstName}" 
+                                         AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                       x:Name="firstName"
+                                                     TextChanged="MaterialTextField_TextChanged"
+                                                    HorizontalOptions="FillAndExpand"
+                                        Text="{Binding FirstName}"
+                                        Margin="5,10,5,0"
+                                                    
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+
+                        <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewLastName}" 
+                                         AlwaysShowUnderline="True"
+                                       BackgroundColor="White"
+                                       x:Name="lastName"
+                                                     TextChanged="MaterialTextField_TextChanged"
+                                                    HorizontalOptions="FillAndExpand"
+                                        Text="{Binding LastName}"
+                                        Margin="5,10,5,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+
+                    </StackLayout>
+            
+                
+
+            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewPhone}" 
+                                        AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                       x:Name="phone"
+                                        IsVisible="false"
+                                         TextChanged="MaterialTextField_TextChanged"
+                                        Text="{Binding memberContact.Phone}"
+                                        Margin="5,10,5,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Telephone" />
+            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewMobile}" 
+                                         x:Name="mobile"
+                                         TextChanged="MaterialTextField_TextChanged"
+                                        Text="{Binding memberContact.MobilePhone}"
+                                        AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                        Margin="5,10,5,0"
+                                        MaxLength="11"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Telephone" />
+
+                <!--#Endregion Personal Information Section-->
+
+
+                <!--#region Start Address Section-->
+
+                <controls:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.txtAddress}"
+                                       Margin="10,10,0,0"/>
+
+
+
+                <!--<Button Text="{x:Static resources:AppResources.txtAddress}"
+                        TextColor="Black"
+                        Padding="5"
+                        IsEnabled="False"
+                        HeightRequest="50"
+                        FontSize="Medium" />-->
+
+
+                <controls:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
+                                       SelectedItem="{Binding SelectedCity}"
+                                       Title="{x:Static resources:AppResources.AccountInformationViewCity}" Visual="Default"  HeightRequest="50" Margin="5,10,5,0"/>
+
+                <controls:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
+                                       SelectedItem="{Binding SelectedArea}"
+                                       Title="{x:Static resources:AppResources.txtArea}" Visual="Default"  HeightRequest="50" Margin="5,10,5,0">
+
+                    <controls:CustomPicker.Triggers>
+                        <DataTrigger TargetType="controls:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"
+                                     Value="null">
+                            <Setter Property="IsEnabled" Value="False"/>
+                            
+                        </DataTrigger>
+                    </controls:CustomPicker.Triggers>
+                    
+                </controls:CustomPicker>
+
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtNumber}" 
+                                         AlwaysShowUnderline="True"
+                                         TextChanged="MaterialTextField_TextChanged"
+                                        Text="{Binding Address.Number}"
+                                       BackgroundColor="White"
+                                        x:Name="numberlbl"
+                                        Margin="5,0,5,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtStreet}" 
+                                        AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                        x:Name="streetlbl"
+                                         TextChanged="MaterialTextField_TextChanged"
+                                        Text="{Binding Address.Street}"
+                                        Margin="5,10,5,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtFloorNo}" 
+                                        x:Name="floorlbl"
+                                         TextChanged="MaterialTextField_TextChanged"
+                                        AlwaysShowUnderline="True"
+                                       BackgroundColor="White"
+                                       Margin="5,10,5,0"
+                                        Text="{Binding Address.FloorNo}"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtAprtNo}" 
+                                         x:Name="Apartmentlbl"
+                                         TextChanged="MaterialTextField_TextChanged"
+                                        AlwaysShowUnderline="True"
+                                       BackgroundColor="White"
+                                       Margin="5,10,5,0"
+                                        Text="{Binding Address.ApartmentNo}"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtLandmark}" 
+                                        IsVisible="false"
+                                         TextChanged="MaterialTextField_TextChanged"
+                                        AlwaysShowUnderline="True"
+                                       BackgroundColor="White"
+                                       Margin="5,10,5,0"
+                                        
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+
+
+                <!--<material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewState}" 
+                                         AlwaysShowUnderline="True"
+                                       BackgroundColor="White"
+                                        x:Name="state"
+                                         Text="{Binding Address.StateProvinceRegion}"
+                                        Margin="0,10,0,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewPostCode}" 
+                                        AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                        x:Name="code"
+                                         Text="{Binding Address.PostCode}"
+                                        Margin="0,10,0,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />
+            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewCountry}" 
+                                         AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                        Text="{Binding Address.Country}"
+                                        x:Name="country"
+                                        Margin="0,10,0,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Default" />-->
+
+                <!--#Endregion Address Section-->
+                    
+                    
+                <Button Text="{x:Static resources:AppResources.AccountViewCreate}" 
+                    BackgroundColor="{StaticResource My_Button_Color}"
+                    CornerRadius="5"
+                    x:Name="nextbtn"
+                    Clicked="nextbtn_Clicked"
+                    Margin="20"
+                    HeightRequest="40">
+                        <Button.Triggers>
+                            <DataTrigger TargetType="Button" Binding="{Binding editAccount}" Value="true">
+                                <Setter Property="Text" Value="{x:Static resources:AppResources.AccountViewUpdate}"/>
+                            </DataTrigger>
+                        </Button.Triggers>
+                    </Button>
+                </StackLayout>
+    </ScrollView>
+
+        <!--</Grid>-->
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+
+    </AbsoluteLayout>
+</ContentPage>

@@ -1,0 +1,204 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.ItemCategoriesPage"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin" 
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+             Visual="Material"
+             x:Name="itemCategory"
+             BackgroundColor="WhiteSmoke"
+             Title="Categories"
+             NavigationPage.HasNavigationBar="True"
+             ios:Page.UseSafeArea="True"
+             
+            >
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+            <Setter Property="BackgroundColor" Value="White"/>
+        </DataTrigger>
+    </ContentPage.Triggers>
+    
+    <ContentPage.Resources>
+        <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+    </ContentPage.Resources>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{Binding SearchCommand}"/>
+    </ContentPage.ToolbarItems>
+    
+
+    <AbsoluteLayout>
+        
+
+            <Grid RowSpacing="0" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All" ColumnDefinitions="Auto,*" RowDefinitions="Auto,*">
+              
+
+            <!--Left stripe-->
+
+                <controls1:SidebarControl x:Name="sidebar" Categories="{Binding itemCategories}" CategorySelected="{Binding SelectedCategory}"
+                                           Grid.Row="0"  Margin="0,10,0,0"
+                                          CurrentCategoryChangedCommand="{Binding CurrentCategoryChangedCommand}"
+                                 Grid.Column="0"
+                                 Grid.RowSpan="2"
+                                          WidthRequest="130"
+                                           />
+
+                
+                <!--Rigth stripe-->
+            <StackLayout Grid.Row="0" Grid.Column="1" Padding="27,18,27,5" >
+                <Frame Padding="0" Visual="Material" BorderColor="LightGray" IsClippedToBounds="True" CornerRadius="25"  
+                       BackgroundColor="{StaticResource My_Button_Color}">
+                    <StackLayout IsClippedToBounds="True">
+                        <Grid>
+                            <controls1:LoadingImageView/>
+                            <ffimage:CachedImage  Source="{Binding SelectedCategory.Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                               VerticalOptions="CenterAndExpand"
+                               HeightRequest="120" WidthRequest="120"
+                               Aspect="Fill"
+                                DownsampleToViewSize="True"
+                               />
+                        </Grid>
+                    
+                        <Label TextColor="White"
+                               HorizontalTextAlignment="Center" FontSize="21" Margin="0,0,0,10"
+                               FontAttributes="Bold"
+                               Text="{Binding SelectedCategory.Description}" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+
+                <!--Popular Foods-->
+                
+                <StackLayout  Margin="20" Grid.Row="1" Grid.Column="1" >
+                    <Label Text="Product Groups" FontSize="25" FontAttributes="Bold" TextColor="Black"/>
+                    <CollectionView ItemsSource="{Binding Products}" 
+                                 WidthRequest="110"
+                                 HeightRequest="90"
+                                    VerticalScrollBarVisibility="Never"
+                                 VerticalOptions="FillAndExpand">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                             VerticalItemSpacing="5"/>
+                        </CollectionView.ItemsLayout>
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+
+                            <Frame Visual="Material" Padding="5">
+
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer
+                                                          Tapped="Product_Tapped"
+                                                          CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
+
+                                <Grid ColumnDefinitions="60,*" RowDefinitions="Auto" >
+                                    <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
+                                                              BorderColor="#8C808080" BorderThickness="0.5"
+                                                          HeightRequest="60" WidthRequest="60"
+                                                          Grid.Column="0"/>
+
+                                    <Label  Text="{Binding Description}" TextColor="Black" FontAttributes="Bold"
+                                            VerticalTextAlignment="Center" Grid.Column="1" Margin="10,0"
+                                            MaxLines="2" LineBreakMode="TailTruncation"
+                                            />
+
+                                </Grid>
+                                
+                            </Frame>
+                                
+                                <!--<Grid>
+
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer
+                                                          Tapped="Product_Tapped"
+                                                          CommandParameter="{Binding .}"/>
+                                    </Grid.GestureRecognizers>
+
+
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="100"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="100"/>
+                                       
+                                    </Grid.RowDefinitions>
+
+                                    <Frame Grid.Row="0" Grid.Column="0" 
+                                           HeightRequest="50"
+                                           CornerRadius="20"
+                                           HasShadow="False"
+                                       BackgroundColor="{Binding FrameColor}" 
+                                           IsClippedToBounds="True"
+                                            Visual="Material"
+                                          HorizontalOptions="Start"
+                                       >
+
+                                    <Grid >
+                                        <controls1:LoadingImageView/>
+                                       
+
+
+
+                                        
+                                    </Grid>
+                                        
+                                    </Frame>
+                                <StackLayout VerticalOptions="CenterAndExpand" Grid.Column="1">
+                                    <Label  Text="{Binding Description}" TextColor="Black" FontAttributes="Bold" Margin="10,0">
+                                        --><!--<Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                                 Value="true">
+                                                <Setter Property="Text" Value="{Binding ArabicDescription}"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>--><!--
+                                    </Label>
+                                    <Label MaxLines="3" FontSize="12" TextColor="Silver" Margin="10,0"
+                                       >
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="Category : "/>
+                                                <Span Text="{Binding ItemCategoryId}"/>
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                </StackLayout>
+                                    
+                                   
+                                </Grid>-->
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </StackLayout>
+                
+            </Grid>
+
+
+        <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls1:LoadingView.Triggers>
+                <DataTrigger TargetType="controls1:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls1:LoadingView.Triggers>
+
+        </controls1:LoadingView>
+
+    </AbsoluteLayout>
+
+
+
+</ContentPage>
