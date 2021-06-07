@@ -110,6 +110,200 @@
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
   </PropertyGroup>
   <ItemGroup>
+    <BundleResource Include="Resources\action_new%402x.png" />
+    <BundleResource Include="Resources\action_new%403x.png" />
+    <BundleResource Include="Resources\action_new.png" />
+    <BundleResource Include="Resources\action_remove%402x.png" />
+    <BundleResource Include="Resources\action_remove%403x.png" />
+    <BundleResource Include="Resources\action_remove.png" />
+    <BundleResource Include="Resources\arrow_down%402x.png" />
+    <BundleResource Include="Resources\arrow_down%403x.png" />
+    <BundleResource Include="Resources\arrow_down.png" />
+    <BundleResource Include="Resources\camera%402x.png" />
+    <BundleResource Include="Resources\camera%403x.png" />
+    <BundleResource Include="Resources\camera.png" />
+    <BundleResource Include="Resources\cart%402x.png" />
+    <BundleResource Include="Resources\cart%403x.png" />
+    <BundleResource Include="Resources\cart.png" />
+    <BundleResource Include="Resources\category%402x.png" />
+    <BundleResource Include="Resources\category%403x.png" />
+    <BundleResource Include="Resources\category.png" />
+    <BundleResource Include="Resources\check%402x.png" />
+    <BundleResource Include="Resources\Clock%402x.png" />
+    <BundleResource Include="Resources\Clock%403x.png" />
+    <BundleResource Include="Resources\Clock.png" />
+    <BundleResource Include="Resources\coupon%403x.png" />
+    <BundleResource Include="Resources\edit.png" />
+    <BundleResource Include="Resources\empty.png" />
+    <BundleResource Include="Resources\facebook.png" />
+    <BundleResource Include="Resources\google.png" />
+    <BundleResource Include="Resources\hand.png" />
+    <BundleResource Include="Resources\help%403x.png" />
+    <BundleResource Include="Resources\home%402x.png" />
+    <BundleResource Include="Resources\home%403x.png" />
+    <BundleResource Include="Resources\home.png" />
+    <BundleResource Include="Resources\iconClose%402x.png" />
+    <BundleResource Include="Resources\iconClose%403x.png" />
+    <BundleResource Include="Resources\iconClose.png" />
+    <BundleResource Include="Resources\iconTimeGray%403x.png" />
+    <BundleResource Include="Resources\icon_camera%403x.png" />
+    <BundleResource Include="Resources\ic_aciton_reminder%402x.png" />
+    <BundleResource Include="Resources\ic_aciton_reminder%403x.png" />
+    <BundleResource Include="Resources\ic_aciton_reminder.png" />
+    <BundleResource Include="Resources\ic_action_barcode_colored%402x.png" />
+    <BundleResource Include="Resources\ic_action_barcode_colored%403x.png" />
+    <BundleResource Include="Resources\ic_action_barcode_colored.png" />
+    <BundleResource Include="Resources\ic_action_direction%402x.png" />
+    <BundleResource Include="Resources\ic_action_direction%403x.png" />
+    <BundleResource Include="Resources\ic_action_direction.png" />
+    <BundleResource Include="Resources\ic_action_discard%402x.png" />
+    <BundleResource Include="Resources\ic_action_discard%403x.png" />
+    <BundleResource Include="Resources\ic_action_discard.png" />
+    <BundleResource Include="Resources\ic_action_map%402x.png" />
+    <BundleResource Include="Resources\ic_action_map%403x.png" />
+    <BundleResource Include="Resources\ic_action_map.png" />
+    <BundleResource Include="Resources\ic_action_navigation_more_vert%402x.png" />
+    <BundleResource Include="Resources\ic_action_navigation_more_vert%403x.png" />
+    <BundleResource Include="Resources\ic_action_navigation_more_vert.png" />
+    <BundleResource Include="Resources\ic_action_new%402x.png" />
+    <BundleResource Include="Resources\ic_action_new%403x.png" />
+    <BundleResource Include="Resources\ic_action_new.png" />
+    <BundleResource Include="Resources\ic_action_qr%402x.png" />
+    <BundleResource Include="Resources\ic_action_qr%403x.png" />
+    <BundleResource Include="Resources\ic_action_qr.png" />
+    <BundleResource Include="Resources\ic_action_remove%402x.png" />
+    <BundleResource Include="Resources\ic_action_remove%403x.png" />
+    <BundleResource Include="Resources\ic_action_remove.png" />
+    <BundleResource Include="Resources\ic_action_stock%402x.png" />
+    <BundleResource Include="Resources\ic_action_stock%403x.png" />
+    <BundleResource Include="Resources\ic_action_stock.png" />
+    <BundleResource Include="Resources\ic_amex%402x.png" />
+    <BundleResource Include="Resources\ic_amex%403x.png" />
+    <BundleResource Include="Resources\ic_amex.png" />
+    <BundleResource Include="Resources\ic_amex_blue%402x.png" />
+    <BundleResource Include="Resources\ic_amex_blue%403x.png" />
+    <BundleResource Include="Resources\ic_amex_blue.png" />
+    <BundleResource Include="Resources\ic_amex_light%402x.png" />
+    <BundleResource Include="Resources\ic_amex_light%403x.png" />
+    <BundleResource Include="Resources\ic_amex_light.png" />
+    <BundleResource Include="Resources\ic_chip%402x.png" />
+    <BundleResource Include="Resources\ic_chip%403x.png" />
+    <BundleResource Include="Resources\ic_chip.png" />
+    <BundleResource Include="Resources\ic_clear_white_24dp%402x.png" />
+    <BundleResource Include="Resources\ic_clear_white_24dp%403x.png" />
+    <BundleResource Include="Resources\ic_clear_white_24dp.png" />
+    <BundleResource Include="Resources\ic_cvv%402x.png" />
+    <BundleResource Include="Resources\ic_cvv%403x.png" />
+    <BundleResource Include="Resources\ic_cvv.png" />
+    <BundleResource Include="Resources\ic_date%402x.png" />
+    <BundleResource Include="Resources\ic_date%403x.png" />
+    <BundleResource Include="Resources\ic_date.png" />
+    <BundleResource Include="Resources\ic_dinersclub%402x.png" />
+    <BundleResource Include="Resources\ic_dinersclub%403x.png" />
+    <BundleResource Include="Resources\ic_dinersclub.png" />
+    <BundleResource Include="Resources\ic_dinersclub_white%402x.png" />
+    <BundleResource Include="Resources\ic_dinersclub_white%403x.png" />
+    <BundleResource Include="Resources\ic_dinersclub_white.png" />
+    <BundleResource Include="Resources\ic_discover%402x.png" />
+    <BundleResource Include="Resources\ic_discover%403x.png" />
+    <BundleResource Include="Resources\ic_discover.png" />
+    <BundleResource Include="Resources\ic_discover_light%402x.png" />
+    <BundleResource Include="Resources\ic_discover_light%403x.png" />
+    <BundleResource Include="Resources\ic_discover_light.png" />
+    <BundleResource Include="Resources\ic_favorite_24dp%402x.png" />
+    <BundleResource Include="Resources\ic_favorite_24dp%403x.png" />
+    <BundleResource Include="Resources\ic_favorite_24dp.png" />
+    <BundleResource Include="Resources\ic_favorite_outline_24dp%402x.png" />
+    <BundleResource Include="Resources\ic_favorite_outline_24dp%403x.png" />
+    <BundleResource Include="Resources\ic_favorite_outline_24dp.png" />
+    <BundleResource Include="Resources\ic_filter_list_24dp%402x.png" />
+    <BundleResource Include="Resources\ic_filter_list_24dp%403x.png" />
+    <BundleResource Include="Resources\ic_filter_list_24dp.png" />
+    <BundleResource Include="Resources\ic_jcb%402x.png" />
+    <BundleResource Include="Resources\ic_jcb%403x.png" />
+    <BundleResource Include="Resources\ic_jcb.png" />
+    <BundleResource Include="Resources\ic_launcher%402x.png" />
+    <BundleResource Include="Resources\ic_launcher%403x.png" />
+    <BundleResource Include="Resources\ic_launcher.png" />
+    <BundleResource Include="Resources\ic_mastercard%402x.png" />
+    <BundleResource Include="Resources\ic_mastercard%403x.png" />
+    <BundleResource Include="Resources\ic_mastercard.png" />
+    <BundleResource Include="Resources\ic_mastercard_white%402x.png" />
+    <BundleResource Include="Resources\ic_mastercard_white%403x.png" />
+    <BundleResource Include="Resources\ic_mastercard_white.png" />
+    <BundleResource Include="Resources\ic_menu_white_24dp%402x.png" />
+    <BundleResource Include="Resources\ic_menu_white_24dp%403x.png" />
+    <BundleResource Include="Resources\ic_menu_white_24dp.png" />
+    <BundleResource Include="Resources\ic_search_24dp%402x.png" />
+    <BundleResource Include="Resources\ic_search_24dp%403x.png" />
+    <BundleResource Include="Resources\ic_search_24dp.png" />
+    <BundleResource Include="Resources\ic_view_list_white_24dp%402x.png" />
+    <BundleResource Include="Resources\ic_view_list_white_24dp%403x.png" />
+    <BundleResource Include="Resources\ic_view_list_white_24dp.png" />
+    <BundleResource Include="Resources\ic_view_module_white_24dp%402x.png" />
+    <BundleResource Include="Resources\ic_view_module_white_24dp%403x.png" />
+    <BundleResource Include="Resources\ic_view_module_white_24dp.png" />
+    <BundleResource Include="Resources\ic_visa%402x.png" />
+    <BundleResource Include="Resources\ic_visa%403x.png" />
+    <BundleResource Include="Resources\ic_visa.png" />
+    <BundleResource Include="Resources\ic_visa_white%402x.png" />
+    <BundleResource Include="Resources\ic_visa_white%403x.png" />
+    <BundleResource Include="Resources\ic_visa_white.png" />
+    <BundleResource Include="Resources\imgmPIN%402x.png" />
+    <BundleResource Include="Resources\imgmPIN%403x.png" />
+    <BundleResource Include="Resources\imgmPIN.png" />
+    <BundleResource Include="Resources\imgPINPopUp%402x.png" />
+    <BundleResource Include="Resources\imgPINPopUp%403x.png" />
+    <BundleResource Include="Resources\imgPINPopUp.png" />
+    <BundleResource Include="Resources\left_arrow%402x.png" />
+    <BundleResource Include="Resources\left_arrow%403x.png" />
+    <BundleResource Include="Resources\left_arrow.png" />
+    <BundleResource Include="Resources\logo%402x.png" />
+    <BundleResource Include="Resources\logo%403x.png" />
+    <BundleResource Include="Resources\logo.png" />
+    <BundleResource Include="Resources\logodrawer%402x.png" />
+    <BundleResource Include="Resources\logodrawer%403x.png" />
+    <BundleResource Include="Resources\logodrawer.png" />
+    <BundleResource Include="Resources\logout%403x.png" />
+    <BundleResource Include="Resources\magazine%403x.png" />
+    <BundleResource Include="Resources\mobile%403x.png" />
+    <BundleResource Include="Resources\more%402x.png" />
+    <BundleResource Include="Resources\more%403x.png" />
+    <BundleResource Include="Resources\more.png" />
+    <BundleResource Include="Resources\nocards%402x.png" />
+    <BundleResource Include="Resources\nocards%403x.png" />
+    <BundleResource Include="Resources\nocards.png" />
+    <BundleResource Include="Resources\noimage.png" />
+    <BundleResource Include="Resources\notification%403x.png" />
+    <BundleResource Include="Resources\offers%403x.png" />
+    <BundleResource Include="Resources\order%402x.png" />
+    <BundleResource Include="Resources\order%403x.png" />
+    <BundleResource Include="Resources\order.png" />
+    <BundleResource Include="Resources\placeholder.gif" />
+    <BundleResource Include="Resources\points%402x.png" />
+    <BundleResource Include="Resources\points%403x.png" />
+    <BundleResource Include="Resources\points.png" />
+    <BundleResource Include="Resources\reminder%403x.png" />
+    <BundleResource Include="Resources\right_arrow%402x.png" />
+    <BundleResource Include="Resources\right_arrow%403x.png" />
+    <BundleResource Include="Resources\right_arrow.png" />
+    <BundleResource Include="Resources\search%403x.png" />
+    <BundleResource Include="Resources\settings%402x.png" />
+    <BundleResource Include="Resources\settings%403x.png" />
+    <BundleResource Include="Resources\settings.png" />
+    <BundleResource Include="Resources\store%403x.png" />
+    <BundleResource Include="Resources\terms%402x.png" />
+    <BundleResource Include="Resources\terms%403x.png" />
+    <BundleResource Include="Resources\terms.png" />
+    <BundleResource Include="Resources\user%403x.png" />
+    <BundleResource Include="Resources\welcome.png" />
+    <BundleResource Include="Resources\wishlist%403x.png" />
+    <BundleResource Include="Resources\xf_checkbox_selected%402x.png" />
+    <BundleResource Include="Resources\xf_checkbox_selected%403x.png" />
+    <BundleResource Include="Resources\xf_checkbox_selected.png" />
+    <BundleResource Include="Resources\xf_checkbox_unselected%402x.png" />
+    <BundleResource Include="Resources\xf_checkbox_unselected%403x.png" />
+    <BundleResource Include="Resources\xf_checkbox_unselected.png" />
     <Compile Include="Effects\TintImageImpl.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
@@ -126,7 +320,6 @@
     <None Include="Info.plist" />
     <LinkDescription Include="LinkerSettings.xml" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <ItemGroup>
     <ImageAsset Include="Assets.xcassets\AppIcon.appiconset\Icon-App-20x20@1x1.png">
@@ -265,1006 +458,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\action_new.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\action_remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\arrow_down.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\basket.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\call_us_now.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\camera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Clock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_aciton_reminder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_barcode_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_basket.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_coupons_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_direction.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_discard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_discard_light.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_email.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_facebook.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_forward.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_google_plus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_history_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_info.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_items_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_logout_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_loyalty.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_magazine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map_dark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_my_location.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_navigation_more_vert.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_navigation_more_vert_dark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_new.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_new_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_notifications_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_offers_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_person_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_place.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_place_dark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_qr.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_read.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_refresh.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_remove.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_remove_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_save.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_scan.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_share.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_shoplists_colored.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_stock.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_time_dark.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_unread.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_web_site.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_add_shopping_cart_white_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_blue.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_light.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_chip.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_clear_white_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_cvv.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_date.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_delete_white_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover_light.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_drawer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_favorite_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_favorite_outline_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_fb.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_filter_list_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_google.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_jcb.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_launcher.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_menu_white_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_search_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_stat_loyalty.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_view_list_white_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_view_module_white_24dp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa_white.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\left_arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logodrawer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\nocards.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\noimage.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\right_arrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\action_new%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\action_new%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\action_remove%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\action_remove%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\arrow_down%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\arrow_down%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\basket%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\basket%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\call_us_now%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\call_us_now%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\camera%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\camera%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Clock%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Clock%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_barcode_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_barcode_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_basket%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_basket%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_coupons_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_coupons_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_delete%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_delete%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_direction%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_direction%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_discard%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_discard%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_discard_light%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_discard_light%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_email%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_email%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_facebook%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_facebook%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_forward%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_forward%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_google_plus%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_google_plus%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_history_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_history_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_home%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_home%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_info%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_info%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_items_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_items_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_logout_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_logout_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_loyalty%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_loyalty%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_magazine%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_magazine%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map_dark%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_map_dark%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_my_location%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_my_location%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_navigation_more_vert%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_navigation_more_vert%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_navigation_more_vert_dark%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_navigation_more_vert_dark%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_new%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_new%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_new_white%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_new_white%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_notifications_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_notifications_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_offers_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_offers_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_person_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_person_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_place%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_place%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_place_dark%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_place_dark%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_qr%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_qr%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_read%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_read%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_refresh%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_refresh%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_remove%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_remove%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_remove_white%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_remove_white%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_save%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_save%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_scan%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_scan%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_settings%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_settings%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_share%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_share%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_shoplists_colored%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_shoplists_colored%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_stock%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_stock%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_time_dark%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_time_dark%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_unread%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_unread%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_web_site%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_action_web_site%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_add_shopping_cart_white_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_add_shopping_cart_white_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_blue%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_blue%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_light%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_amex_light%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_chip%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_chip%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_clear_white_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_clear_white_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_cvv%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_cvv%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_date%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_date%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_delete_white_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_delete_white_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub_white%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_dinersclub_white%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover_light%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_discover_light%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_drawer%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_drawer%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_favorite_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_favorite_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_favorite_outline_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_favorite_outline_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_fb%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_fb%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_filter_list_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_filter_list_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_google%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_google%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_jcb%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_jcb%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_launcher%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_launcher%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard_white%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_mastercard_white%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_menu_white_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_menu_white_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_search_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_search_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_stat_loyalty%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_stat_loyalty%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_view_list_white_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_view_list_white_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_view_module_white_24dp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_view_module_white_24dp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa_white%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_visa_white%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\left_arrow%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\left_arrow%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logo%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logo%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logodrawer%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logodrawer%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\more%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\nocards%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\nocards%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\right_arrow%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\right_arrow%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\BackWhite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_aciton_reminder%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\ic_aciton_reminder%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xf_checkbox_selected.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xf_checkbox_selected%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xf_checkbox_selected%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xf_checkbox_unselected.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xf_checkbox_unselected%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\xf_checkbox_unselected%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\loader.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\loading.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\reveal-icon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\reveal-icon%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\backarrow.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\backarrow%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\backarrow%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\placeholder.gif" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\empty.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\facebook.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\google.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\points.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\points%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\points%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\order.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\order%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\order%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\home.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\home%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\home%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\cart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\cart%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\cart%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\hand.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\edit.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\category.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\category%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\category%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\iconLogo.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\help%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\logout%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\notification%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\offers%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\imgmPIN.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\imgPINPopUp.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\reminder%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\mobile%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\user%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\icon_camera%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\store%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\wishlist%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\iconClose.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\iconClose%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\iconClose%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\imgmPIN%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\imgmPIN%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\imgPINPopUp%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\imgPINPopUp%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\terms.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\terms%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\terms%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\settings%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\settings%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\iconTimeGray%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\magazine%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\coupon%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\search%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\welcome.png" />
+    <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
