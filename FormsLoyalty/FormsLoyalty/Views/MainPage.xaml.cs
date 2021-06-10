@@ -45,6 +45,7 @@ namespace FormsLoyalty.Views
             await frame.ScaleTo(1.5, 100);
             await frame.ScaleTo(1, 100);
 
+
            await _viewModel.NavigateToCategory((e as TappedEventArgs).Parameter.ToString());
         }
 

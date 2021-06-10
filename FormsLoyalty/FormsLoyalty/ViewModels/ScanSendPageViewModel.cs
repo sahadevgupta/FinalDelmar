@@ -107,11 +107,11 @@ namespace FormsLoyalty.ViewModels
             if (file != null)
             {
 
-                if (file.GetStream().ToByteArray().Length > 2097152)
-                {
-                    await MaterialDialog.Instance.AlertAsync(AppResources.txtImageSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
-                    return;
-                }
+                //if (file.GetStream().ToByteArray().Length > 2097152)
+                //{
+                //    await MaterialDialog.Instance.AlertAsync(AppResources.txtImageSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
+                //    return;
+                //}
 
                 var extension = Path.GetExtension(file.Path);
                 var scansend = new ScanSend
@@ -135,11 +135,11 @@ namespace FormsLoyalty.ViewModels
             var memberContact = contactRepo.GetLocalMemberContact();
             foreach (var item in imgInfo)
             {
-                if(item.Item1.Length > 2097152)
-                {
-                    IsSizeExceeds = true;
-                    continue;
-                }
+                //if(item.Item1.Length > 2097152)
+                //{
+                //    IsSizeExceeds = true;
+                //    continue;
+                //}
                 var scansend = new ScanSend();
                 scansend.ImagedBase64 = Convert.ToBase64String(item.Item1);
                 scansend.id = i + 1;
@@ -148,8 +148,8 @@ namespace FormsLoyalty.ViewModels
                 ImageList.Add(scansend);
                 i++;
             }
-            if(IsSizeExceeds)
-              MaterialDialog.Instance.AlertAsync(AppResources.txtImgListSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
+            //if(IsSizeExceeds)
+            //  MaterialDialog.Instance.AlertAsync(AppResources.txtImgListSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
 
             return i;
         }

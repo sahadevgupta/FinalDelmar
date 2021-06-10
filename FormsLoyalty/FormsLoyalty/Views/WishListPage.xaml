@@ -102,7 +102,7 @@
 
                             <ImageButton HeightRequest="25" Grid.RowSpan="2" Grid.Column="2"
                                          Source="more.png"
-                                         IsVisible="false"
+                                         
                                          VerticalOptions="CenterAndExpand"
                                          HorizontalOptions="EndAndExpand"
                                          Clicked="moreButton_Clicked"
@@ -112,7 +112,7 @@
                             <material:MaterialMenuButton ButtonType="Text" CornerRadius="24" 
                                                          Grid.RowSpan="2" Grid.Column="2"
                                                          HeightRequest="25"
-                                                         
+                                                          IsVisible="false"
                                                          HorizontalOptions="EndAndExpand"
                                                          Image="more.png" TintColor="Gray"
                                                          Choices="{Binding BindingContext.Actions,Source={x:Reference list}}"

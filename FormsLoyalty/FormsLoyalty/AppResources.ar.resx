@@ -1341,6 +1341,9 @@
   <data name="txtCategory" xml:space="preserve">
     <value>التصنيفات</value>
   </data>
+  <data name="txtComments" xml:space="preserve">
+    <value>تعليقات</value>
+  </data>
   <data name="txtCVV" xml:space="preserve">
     <value>CVV</value>
   </data>
@@ -1363,7 +1366,7 @@
     <value>الحجم يتجاوز !!</value>
   </data>
   <data name="txtImageSizeExceed" xml:space="preserve">
-    <value>حجم الملف كبير جدًا! يجب أن يكون أقل من 2 ميغا بايت</value>
+    <value>يجب أن تكون جميع المستندات بتنسيقات Png و jpeg و jpg فقط.</value>
   </data>
   <data name="txtImgListSizeExceed" xml:space="preserve">
     <value>لم تتم إضافة بعض الصور لأن حجم الملف كبير جدًا! يجب أن يكون أقل من 2 ميغا بايت</value>

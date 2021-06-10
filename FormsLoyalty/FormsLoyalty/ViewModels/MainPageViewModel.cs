@@ -402,11 +402,11 @@ namespace FormsLoyalty.ViewModels
                     imgBytes =  memoryStream.ToArray();
                 }
 
-                if(imgBytes.Length > 2097152)
-                {
-                    await MaterialDialog.Instance.AlertAsync(AppResources.txtImageSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
-                    return;
-                }
+                //if(imgBytes.Length > 2097152)
+                //{
+                //    await MaterialDialog.Instance.AlertAsync(AppResources.txtImageSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
+                //    return;
+                //}
                    
                 imgData.Add(new Tuple<byte[], string>(imgBytes, extension.Replace(".", "")));
                  NavigateToScanPage(imgData);
@@ -441,7 +441,7 @@ namespace FormsLoyalty.ViewModels
             try
             {
                 var model = new ItemModel();
-                var items = await model.GetItemsByPage(7, 1, string.Empty, string.Empty, SearchKey,false,string.Empty);
+                var items = await model.GetItemsByItemSearch(SearchKey,10);
                 Items = new ObservableCollection<LoyItem>(items);
 
                 LoadImages();

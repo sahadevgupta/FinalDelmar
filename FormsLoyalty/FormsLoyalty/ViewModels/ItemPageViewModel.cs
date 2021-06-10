@@ -225,7 +225,7 @@ namespace FormsLoyalty.ViewModels
                     if (isSuccess)
                     {
                         BasketBtn = AppResources.ResourceManager.GetString("ApplicationAddedToBasket", AppResources.Culture);
-                        DependencyService.Get<INotify>().ShowSnackBar($"{basketItem.ItemDescription} has been added to basket!!");
+                       // DependencyService.Get<INotify>().ShowSnackBar($"{basketItem.ItemDescription} has been added to basket!!");
                     }
                     
                    

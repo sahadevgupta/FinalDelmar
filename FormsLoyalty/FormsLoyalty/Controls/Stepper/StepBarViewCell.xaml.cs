@@ -71,7 +71,7 @@ namespace FormsLoyalty.Controls.Stepper
 
                 if (!selectedmodel.IsNotLast)
                 {
-                    mainGrid.ColumnDefinitions.RemoveAt(1);
+                    mainGrid.ColumnDefinitions.RemoveAt(0);
                 }
             }
 

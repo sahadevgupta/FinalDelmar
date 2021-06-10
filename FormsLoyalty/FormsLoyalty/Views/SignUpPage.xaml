@@ -258,7 +258,7 @@
                                         Margin="5,10,5,0"
                                         ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
                                         InputType="Telephone" />
-            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewMobile}" 
+                <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewMobile}" 
                                          x:Name="mobile"
                                          TextChanged="MaterialTextField_TextChanged"
                                         Text="{Binding memberContact.MobilePhone}"
@@ -267,7 +267,16 @@
                                         Margin="5,10,5,0"
                                         MaxLength="11"
                                         ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
-                                        InputType="Telephone" />
+                                        InputType="Telephone" >
+
+                    <material:MaterialTextField.Triggers>
+                        <DataTrigger TargetType="material:MaterialTextField" Binding="{Binding editAccount}"
+                                     Value="true">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </material:MaterialTextField.Triggers>
+
+                </material:MaterialTextField>
 
                 <!--#Endregion Personal Information Section-->
 

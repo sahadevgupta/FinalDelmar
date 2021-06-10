@@ -287,7 +287,7 @@ namespace FormsLoyalty.ViewModels
                 if (isSuccess)
                 {
                     loyItem.Quantity = 1;
-                    DependencyService.Get<INotify>().ShowSnackBar($"{basketItem.ItemDescription} has been added to basket!!");
+                    
                     IsPageEnabled = false;
                     return true;
                 }

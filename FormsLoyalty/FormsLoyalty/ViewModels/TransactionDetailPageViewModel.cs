@@ -98,8 +98,8 @@ namespace FormsLoyalty.ViewModels
                         else
                         {
                             await new BasketModel().AddItemToBasket(basketItem, openBasket: true, ShowIndicatorOption: false);
-                            await MaterialDialog.Instance.SnackbarAsync(message: "Items has been added to basket!!",
-                                                       msDuration: MaterialSnackbar.DurationLong);
+                            //await MaterialDialog.Instance.SnackbarAsync(message: "Items has been added to basket!!",
+                            //                           msDuration: MaterialSnackbar.DurationLong);
                             IsReOrderBtnVisible = false;
 
                         }

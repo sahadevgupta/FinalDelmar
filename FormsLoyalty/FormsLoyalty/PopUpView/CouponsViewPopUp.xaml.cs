@@ -42,12 +42,18 @@ namespace FormsLoyalty.PopUpView
         }
         internal async Task LoadCoupons()
         {
-
-            
-
             var coupons = await new CommonModel().GetDelmarCouponAsync(AppData.Device.UserLoggedOnToDevice.Account.Id);
-            coupons.Add(new DelmarCoupons { CouponID = "SAMPLE", CouponValue = 50, ExpirationDate = DateTime.Now.Date });
-            Coupons = new ObservableCollection<DelmarCoupons>(coupons);
+            Coupons = new ObservableCollection<DelmarCoupons>();
+            foreach (var coupon in coupons)
+            {
+                if (!coupon.Blocked && coupon.RedeemedAmount== 0)
+                {
+                    Coupons.Add(coupon);
+                }
+            }
+
+            //coupons.Add(new DelmarCoupons { CouponID = "SAMPLE", CouponValue = 50, ExpirationDate = DateTime.Now.Date });
+           
           
 
         }
@@ -56,10 +62,25 @@ namespace FormsLoyalty.PopUpView
             base.OnAppearing();
             var a = BindingContext;
         }
-        private void OnCouponSelected(object sender, EventArgs e)
+        private async void OnCouponSelected(object sender, EventArgs e)
         {
-            coupon = ((e as TappedEventArgs).Parameter as DelmarCoupons);
-            PopupNavigation.Instance.PopAsync(true);
+            var selectedCoupom = ((e as TappedEventArgs).Parameter as DelmarCoupons);
+
+            var dataDate = selectedCoupom.ExpirationDate.ToString("dd/MM/yyyy");
+            var currentDate = DateTime.Now.ToString("dd/MM/yyyy");
+
+            var response = dataDate.Equals(currentDate);
+            if (response)
+            {
+               await DisplayAlert("Alert!!", "Cannot add expired coupon", "OK");
+                return;
+            }
+            else
+            {
+                coupon = selectedCoupom;
+            }
+
+           await PopupNavigation.Instance.PopAsync(true);
         }
     }
 }

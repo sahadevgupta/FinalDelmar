@@ -1345,6 +1345,9 @@
   <data name="txtCategory" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="txtComments" xml:space="preserve">
+    <value>Comments</value>
+  </data>
   <data name="txtCVV" xml:space="preserve">
     <value>CVV</value>
   </data>
@@ -1373,7 +1376,7 @@
     <value>Some of the images are not added as file size too large! Should be less than 2MB</value>
   </data>
   <data name="txtImgSizeNote" xml:space="preserve">
-    <value>All Documents should be in Png , jpeg, jpg formats only within the file size limit of 2 MB</value>
+    <value>All Documents should be in Png , jpeg, jpg formats only.</value>
   </data>
   <data name="txtInvalidOtp" xml:space="preserve">
     <value>Invalid OTP</value>

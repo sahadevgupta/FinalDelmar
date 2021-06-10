@@ -92,9 +92,9 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Text="{x:Static resources:AppResources.txtRemark}" FontSize="Body" Margin="0,10,0,0" TextColor="Black"/>
+                <Label Text="{x:Static resources:AppResources.txtComments}" FontSize="Body" Margin="0,10,0,0" TextColor="Black"/>
 
-                <Editor Placeholder="Enter Remark" Text="{Binding Remark}" HeightRequest="100"  Visual="Default" />
+                <Editor Placeholder="Enter Comments" Text="{Binding Remark}" HeightRequest="100"  Visual="Default" />
 
                 <Button Text="{x:Static resources:AppResources.ProceedTxt}" Margin="0,10,0,0"
                         HeightRequest="40"

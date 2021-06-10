@@ -1,4 +1,5 @@
 ﻿using FormsLoyalty.Helpers;
+using FormsLoyalty.PopUpView;
 using FormsLoyalty.ViewModels;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using System.Collections.Generic;
@@ -81,26 +82,42 @@ namespace FormsLoyalty.Views
 
         private void MaterialMenuButton_Clicked(object sender, System.EventArgs e)
         {
-            var moreBtn = ((MaterialMenuButton)sender);
-            var SelelctedNotification = moreBtn.CommandParameter as Notification;
-
+            var moreBtn = (View)sender;
+            var SelelctedNotification = (e as TappedEventArgs).Parameter as Notification;
+            var choices = new System.Collections.Generic.List<MoreOptionModel>();
             switch (SelelctedNotification.Status)
             {
                 case NotificationStatus.New:
-                    moreBtn.Choices = new List<string>
+                    choices = new List<MoreOptionModel>
                     {
-                        AppResources.ResourceManager.GetString("MenuViewMarkAsReadTitle",AppResources.Culture),
-                        AppResources.ResourceManager.GetString("MenuViewDeleteTitle",AppResources.Culture)
+                        new MoreOptionModel
+                        {
+                             OptionName =  AppResources.ResourceManager.GetString("MenuViewMarkAsReadTitle",AppResources.Culture)
+                        },
+                        new MoreOptionModel
+                        {
+                            OptionName = AppResources.ResourceManager.GetString("MenuViewDeleteTitle",AppResources.Culture)
+
+                        }
                     };
 
                     
                     break;
                 case NotificationStatus.Read:
-                    moreBtn.Choices = new List<string>
+
+                    choices = new List<MoreOptionModel>
                     {
-                        AppResources.ResourceManager.GetString("MenuViewMarkAsUnreadTitle",AppResources.Culture),
-                        AppResources.ResourceManager.GetString("MenuViewDeleteTitle",AppResources.Culture)
+                        new MoreOptionModel
+                        {
+                             OptionName =  AppResources.ResourceManager.GetString("MenuViewMarkAsUnreadTitle",AppResources.Culture)
+                        },
+                        new MoreOptionModel
+                        {
+                            OptionName = AppResources.ResourceManager.GetString("MenuViewDeleteTitle",AppResources.Culture)
+
+                        }
                     };
+
                     break;
                 case NotificationStatus.Closed:
                     break;
@@ -109,6 +126,11 @@ namespace FormsLoyalty.Views
             }
 
            
+        }
+
+        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        {
+
         }
     }
 }

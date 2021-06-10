@@ -17,16 +17,16 @@
 
         <ContentView
             Margin="20,10,20,10"
-            HorizontalOptions="Center"
-            VerticalOptions="CenterAndExpand">
+            HorizontalOptions="FillAndExpand"
+            VerticalOptions="FillAndExpand">
             <CollectionView
                 x:Name="collectionView"
                HeightRequest="80"
-                HorizontalOptions="CenterAndExpand"
+                HorizontalOptions="FillAndExpand"
                 HorizontalScrollBarVisibility="Never"
                 ItemSizingStrategy="MeasureAllItems"
                 ItemsSource="{Binding Steps, Mode=TwoWay}"
-                VerticalOptions="CenterAndExpand">
+                VerticalOptions="FillAndExpand">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Horizontal" />
                 </CollectionView.ItemsLayout>

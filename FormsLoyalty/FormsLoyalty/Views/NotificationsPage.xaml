@@ -133,10 +133,27 @@
                                
                                />
                                 </Grid>
-                                
+
+                                <Image VerticalOptions="Start" Grid.Row="0"
+                                       Margin="-20,-20,-20,0"
+                                       IsVisible="false"
+                                       Visual="Material"
+                                       HeightRequest="60"
+                                       WidthRequest="60"
+                                       Source="more.png"
+                                       HorizontalOptions="EndAndExpand"
+                                        effects:TintImageEffect.TintColor="Black">
+                                    <Image.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="MaterialMenuButton_Clicked" CommandParameter="{Binding .}"/>
+                                    </Image.GestureRecognizers>
+                                </Image>
+                                         
+
+
 
 
                                 <material:MaterialMenuButton ButtonType="Text" 
+                                                             
                                                              VerticalOptions="Start" Grid.Row="0"
                                                             Margin="-20,-20,-20,0"
                                                              Visual="Material"
@@ -146,7 +163,7 @@
                                                              Command="{Binding BindingContext.ListMenuCommand,Source={x:Reference offerlist}}"
                                                              CommandParameter="{Binding .}"
                                                                  Clicked="MaterialMenuButton_Clicked"
-                                                         HorizontalOptions="EndAndExpand"
+                                                         
                                                          Image="more.png" TintColor="Black"/>
                                
 

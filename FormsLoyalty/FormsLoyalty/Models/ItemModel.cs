@@ -45,6 +45,32 @@ namespace FormsLoyalty.Models
             return items;
         }
 
+
+        public async Task<List<LoyItem>> GetItemsByItemSearch(string search, int maxResult)
+        {
+            List<LoyItem> items = null;
+
+            lastSearchKey = search;
+
+            BeginWsCall();
+
+            try
+            {
+                items = await service.GetItemsByItemSearchAsync(search, maxResult, true);
+
+                if (search != lastSearchKey)
+                {
+                    return null;
+                }
+            }
+            catch (Exception ex)
+            {
+                await HandleUIExceptionAsync(ex);
+            }
+
+            return items;
+        }
+
         private void BeginWsCall()
         {
             service = new ItemService(new LoyItemRepository());

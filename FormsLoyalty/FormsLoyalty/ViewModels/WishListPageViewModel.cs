@@ -67,21 +67,34 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        private async Task AddItemToBasket(OneListItem wishListItem)
+        public async Task AddItemToBasket(OneListItem wishListItem)
         {
+            IsPageEnabled = true;
             // Get the last data for the selected item, including its price
-            var item = await new ItemModel().GetItemById(wishListItem.ItemId);
-            if (item!=null)
+            try
             {
-                wishListItem.Price = item.AmtFromVariantsAndUOM(wishListItem.VariantId, wishListItem.UnitOfMeasureId);
+                var item = await new ItemModel().GetItemById(wishListItem.ItemId);
+                if (item != null)
+                {
+                    wishListItem.Price = item.AmtFromVariantsAndUOM(wishListItem.VariantId, wishListItem.UnitOfMeasureId);
 
-                await new BasketModel().AddItemToBasket(wishListItem);
+                    await new BasketModel().AddItemToBasket(wishListItem);
+                }
+            }
+            catch (Exception)
+            {
+
+               
+            }
+            finally
+            {
+                IsPageEnabled = false;
             }
             
 
-            
+
         }
-        private async Task DeleteShoppingListItem(OneListItem item)
+        public async Task DeleteShoppingListItem(OneListItem item)
         {
             IsPageEnabled = true;
             var existinItemIndex = WishList.IndexOf(item);

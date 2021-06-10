@@ -3743,6 +3743,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Comments.
+        /// </summary>
+        public static string txtComments {
+            get {
+                return ResourceManager.GetString("txtComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CVV.
         /// </summary>
         public static string txtCVV {
@@ -3824,7 +3833,7 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All Documents should be in Png , jpeg, jpg formats only within the file size limit of 2 MB.
+        ///   Looks up a localized string similar to All Documents should be in Png , jpeg, jpg formats only..
         /// </summary>
         public static string txtImgSizeNote {
             get {

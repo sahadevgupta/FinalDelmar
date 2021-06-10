@@ -125,7 +125,7 @@
             />
 
             <Label Text="{Binding shippingAddressName}" TextColor="Black" Margin="10,0"/>
-            <Label Text="{Binding shippingAddress.FormatAddress}" Margin="10,0"/>
+            <Label Text="{Binding ShippingAddressDesc}" Margin="10,0"/>
 
                     <StackLayout >
 
@@ -156,7 +156,7 @@
             />
 
                 <Label Text="{Binding billingAddressName}" TextColor="Black" Margin="10,0"/>
-                <Label Text="{Binding billingAddress.FormatAddress}" Margin="10,0"/>
+                <Label Text="{Binding BillingingAddressDesc}" Margin="10,0"/>
 
                     </StackLayout>
 
@@ -183,7 +183,7 @@
 
                         <Label Text="{x:Static resources:AppResources.txtSelectCode}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-                        <Button HorizontalOptions="End" Text="View Offers" Command="{Binding ViewOffersCommand}"
+                        <Button HorizontalOptions="End" Text="View Offers" x:Name="viewOfferBtn" Clicked="viewOfferBtn_Clicked"
                             CornerRadius="20"  Padding="0" BackgroundColor="#06A9B1"/>
 
 
@@ -211,9 +211,9 @@
 
                         <StackLayout HorizontalOptions="End">
                             <Label Text="{Binding SelectedCoupon.CouponValue,StringFormat='-{0:0.00}'}"/>
-                            <Label Text="{x:Static resources:AppResources.RemoveTxt}" TextColor="OrangeRed">
+                            <Label Text="{x:Static resources:AppResources.RemoveTxt}" TextColor="OrangeRed" x:Name="removeOfferBtn">
                                 <Label.GestureRecognizers>
-                                    <TapGestureRecognizer Command="{Binding RemoveCouponCommand}"/>
+                            <TapGestureRecognizer Tapped="removeOfferBtn_Tapped"/>
                                 </Label.GestureRecognizers>
                             </Label>
                         </StackLayout>
@@ -288,7 +288,7 @@
                     </Label>
                     <Label Text="{Binding SelectedCoupon.CouponValue,StringFormat='{0:0.00}'}"
                        Grid.Row="4" Grid.Column="1"
-                       FontSize="Body">
+                       FontSize="Body" TextColor="{DynamicResource My_Button_Color}">
                         <Label.Triggers>
                             <DataTrigger    TargetType="Label" Binding="{Binding SelectedCoupon,TargetNullValue=null}"
                                             Value="null">
@@ -312,8 +312,8 @@
 
                 <Button BackgroundColor="{StaticResource My_Button_Color}"
                     Margin="10" 
-                    Command="{Binding PlaceOrderCommand}"
-                    
+                    x:Name="placeOrderbtn"
+                    Clicked="placeOrderbtn_Clicked"
                     Text="{x:Static resources:AppResources.CheckoutViewOrder}"
                     FontSize="Medium"/>
 

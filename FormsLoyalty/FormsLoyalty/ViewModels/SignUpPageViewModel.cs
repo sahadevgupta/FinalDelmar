@@ -19,6 +19,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using NavigationParameters = Prism.Navigation.NavigationParameters;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -81,10 +82,14 @@ namespace FormsLoyalty.ViewModels
         {
             get { return _selectedArea; }
             set 
-            { 
-                SetProperty(ref _selectedArea, value);
-                if (value != null)
-                    Address.Area = value.Area;
+            {
+               
+               
+                    SetProperty(ref _selectedArea, value);
+                    if (_selectedArea != null)
+                        Address.Area = _selectedArea.Area;
+              
+               
             }
         }
 
@@ -103,21 +108,26 @@ namespace FormsLoyalty.ViewModels
             set 
             {
                 SetProperty(ref _selectedCity, value);
+                
                 if (value!=null)
                 {
-                    Task.Run(async () =>
-                    {
-                        Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync("cairo"));
-                        if (editAccount)
-                        {
-                            SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(memberContact.Addresses[0].Area));
-                        }
-                    });
-                   
+
+                    LoadAreas();
                     Address.City = value.City;
                     Address.Country = value.Country;
                 }
             }
+        }
+
+        private void LoadAreas()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync(SelectedCity.City));
+                if(editAccount)
+                    SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(memberContact.Addresses[0].Area, StringComparison.OrdinalIgnoreCase));
+
+            });
         }
 
         #endregion
@@ -139,8 +149,13 @@ namespace FormsLoyalty.ViewModels
             {
                
                 Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
-                if(editAccount)
-                SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(memberContact.Addresses[0].City, StringComparison.OrdinalIgnoreCase));
+               
+                if (editAccount)
+                {
+                    SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(memberContact.Addresses[0].City, StringComparison.OrdinalIgnoreCase));
+
+                }
+                
             });
         }
 
@@ -177,7 +192,7 @@ namespace FormsLoyalty.ViewModels
 
                     if (success)
                     {
-                        //await NavigationService.GoBackAsync(new NavigationParameters { { "updated", true } });
+                        await NavigationService.GoBackAsync(new NavigationParameters { { "updated", true } });
 
                         SendFCMTokenToServer();
 

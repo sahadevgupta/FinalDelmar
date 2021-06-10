@@ -13,11 +13,28 @@ namespace FormsLoyalty.Views.CheckoutStepperView
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ReviewSubmitView : ContentView
     {
+        CheckoutPageViewModel _viewModel;
         public ReviewSubmitView(CheckoutPageViewModel viewmodel)
         {
+            _viewModel = viewmodel;
             InitializeComponent();
-            BindingContext  = viewmodel;
+            BindingContext = _viewModel;
 
+        }
+
+        private async void viewOfferBtn_Clicked(object sender, EventArgs e)
+        {
+           await _viewModel.ShowCouponsPopUpView();
+        }
+
+        private async void removeOfferBtn_Tapped(object sender, EventArgs e)
+        {
+            await _viewModel.RemoveCoupon();
+        }
+
+        private async void placeOrderbtn_Clicked(object sender, EventArgs e)
+        {
+            await _viewModel.PlaceOrder();
         }
     }
 }

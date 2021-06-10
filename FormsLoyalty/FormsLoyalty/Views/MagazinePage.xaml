@@ -25,7 +25,7 @@
             </CollectionView.Triggers>
 
             <CollectionView.ItemsLayout>
-            <LinearItemsLayout ItemSpacing="10" Orientation="Vertical" />
+            <GridItemsLayout  Orientation="Vertical" HorizontalItemSpacing="10" VerticalItemSpacing="10"/>
         </CollectionView.ItemsLayout>
         <CollectionView.ItemTemplate>
             <DataTemplate>
@@ -34,163 +34,38 @@
                         <Frame HorizontalOptions="StartAndExpand"
                                Visual="Material"
                                 VerticalOptions="StartAndExpand"                                
-                                Padding="10,20,0,10" 
+                                Padding="5" 
                                 HasShadow="False"
                                 IsClippedToBounds="True" BackgroundColor="#ffffff" CornerRadius="15" >
-                            <StackLayout>
- 
-                                <Grid Padding="0" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="3.5*,1.5*">
+                            <Grid ColumnDefinitions="150,*" IsClippedToBounds="True" RowDefinitions="150" >
 
-
-
-
-                                    <StackLayout
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    HorizontalOptions="FillAndExpand"
-                    HeightRequest="40">
-                                        <Label
-                        x:Name="CardlblTitle"
-                        VerticalOptions="Start"
-                        Text="{Binding Description}"
-                       FontAttributes="Bold"
-                                            FontSize="16"
+                                <ffimage:CachedImage Source="{Binding Image}" CacheType="Memory" VerticalOptions="Start" 
+                                                     HorizontalOptions="Start"
+                                                     Grid.Column="0" />
+                                <StackLayout Grid.Column="1" VerticalOptions="Start">
+                                    <Label x:Name="CardlblTitle"
+                                           VerticalOptions="Start"
+                                           Text="{Binding Description}"
+                                           FontAttributes="Bold"
+                                            FontSize="Medium"
                                             TextColor="#465A54"/>
 
-                                        <Label Text="" TextColor="#849A93" FontAttributes="Bold" FontSize="11"/>
-                                    </StackLayout>
-
-
-                                    
-                                        <!--<ffimage:CachedImage Aspect="AspectFit" Source="{Binding ImageSource}" Grid.Row="0"  Grid.Column="1"
-                                                             HeightRequest="100"
-                                                             
-                                                             VerticalOptions="Center"
-                                                             Grid.RowSpan="3"
-                                                             Margin="10,0,10,0"/>-->
-
-
-                                   
-                                        <Image Aspect="AspectFit"  VerticalOptions="Center" HeightRequest="100" Grid.Row="0"  Grid.Column="1"
-                                                             Grid.RowSpan="3"
-                                                             Margin="10,0,10,0">
-                                            <Image.Source>
-                                                <UriImageSource Uri="{Binding ImageSource}" CachingEnabled="True" />
-                                            </Image.Source>
-                                        </Image>
-                                   
-                                    
-                                    
-                                    
-
-                                    <!--<yummy:PancakeView
-                    Grid.Row="0"
-                    Grid.Column="1"
-                    CornerRadius="{OnPlatform iOS='20,0,20,0', Android='45,0,45,0'}"
-                    HeightRequest="40">
-                                        <Button
-                        x:Name="ButtonStyle"
-                        BackgroundColor="#4E77D6"
-                        Text="TODO"
-                        FontFamily="{StaticResource BoldFont}"
-                        Style="{StaticResource buttonStyleList}" />
-                                    </yummy:PancakeView>-->
-
-                                    <Label
-                    x:Name="detailsText"
-                    Grid.Row="1"
-                    Grid.ColumnSpan="2"
-                    Text="{Binding description}"
-                                        LineBreakMode="TailTruncation"
-                    TextColor="#849A93"
-                    HorizontalOptions="FillAndExpand"
-                    HorizontalTextAlignment="Start"
-                    Padding="0, 15, 0, 0" />
-
-                                    <StackLayout
-                    Grid.Row="2"
-                    Grid.Column="0"
-                    HorizontalOptions="FillAndExpand">
-
-                                        <Grid
-                        Padding="0, 10, 0, 0">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition
-                                Height="Auto" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition
-                                Width="16" />
-                                                <ColumnDefinition
-                                Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <Image
-                            Source="Clock"
-                                                Aspect="AspectFit"
-                            WidthRequest="16"
-                            Grid.Row="0"
-                            Grid.Column="0" />
-                                            <Label
-                            x:Name="Icon1Lbl"
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="{Binding publish_date, StringFormat='{0:dddd, dd MMMM yyyy}'}"
-                           
-                            TextColor="#849A93"
-                            HorizontalOptions="FillAndExpand"
-                            HorizontalTextAlignment="Start" />
-                                        </Grid>
-                                    </StackLayout>
-
-                                  
-
-                                    <StackLayout
-                    Grid.Row="3"
-                    Grid.Column="0"
-                    HorizontalOptions="FillAndExpand">
-
-                                        <Grid
-                        Padding="0, 10, 0, 0">
-                                            <Grid.RowDefinitions>
-                                                <RowDefinition
-                                Height="Auto" />
-                                            </Grid.RowDefinitions>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition
-                                Width="18" />
-                                                <ColumnDefinition
-                                Width="*" />
-                                            </Grid.ColumnDefinitions>
-                                            <!--<ffimageloadingsvg:SvgCachedImage
-                            Source="Map.svg"
-                            WidthRequest="12"
-                            Grid.Row="0"
-                            Grid.Column="0" />-->
-                                            <Label
-                            x:Name="Icon3Lbl"
-                            Grid.Row="0"
-                            Grid.Column="1"
-                            Text="Marplestreet 22 4560 Eaton"
-                           
-                            HorizontalOptions="FillAndExpand"
-                            HorizontalTextAlignment="Start" />
-                                        </Grid>
-                                    </StackLayout>
-
-
-                                    <Button Text="View" CornerRadius="10" Grid.Row="3" Margin="10,0,10,0"
+                                    <Button Text="View" CornerRadius="10" 
                                             BackgroundColor="#b64e52"
                                             Visual="Material"
+                                            HorizontalOptions="Start"
                                             Clicked="TapGestureRecognizer_Tapped"
                                             CommandParameter="{Binding .}"
-                                                 Grid.Column="1">
-                                       
+                                               >
+
                                     </Button>
 
+                                </StackLayout>
 
-                                </Grid>
 
-                            </StackLayout>
+                              
+
+                            </Grid>
                         </Frame>
                     </StackLayout>
                 

@@ -45,18 +45,17 @@ namespace FormsLoyalty.Droid
                 stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
 
             // get notification sound
-            Android.Net.Uri alarmUri = Android.Net.Uri.Parse($"{ ContentResolver.SchemeAndroidResource}://{MainApplication.ActivityContext.PackageName}/{Resource.Drawable.Whistle}");
+            //Android.Net.Uri alarmUri = Android.Net.Uri.Parse($"{ ContentResolver.SchemeAndroidResource}://{MainApplication.ActivityContext.PackageName}/{Resource.Drawable.Whistle}");
 
             if (!channelInitialized)
             {
-                CreateNotificationChannel(alarmUri);
+                CreateNotificationChannel();
             }
 
             NotificationCompat.Builder builder = new NotificationCompat.Builder(AndroidApp.Context, channelId)
                 .SetContentIntent(resultPendingIntent)
                 .SetContentTitle(title)
                 .SetContentText(message)
-                .SetSound(alarmUri)
                 .SetVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
                 .SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.logo))
                 .SetSmallIcon(Resource.Drawable.logo);
@@ -80,7 +79,7 @@ namespace FormsLoyalty.Droid
 
 
         }
-        void CreateNotificationChannel(Android.Net.Uri alarmUri)
+        void CreateNotificationChannel()
         {
             manager = (NotificationManager)AndroidApp.Context.GetSystemService(AndroidApp.NotificationService);
 
@@ -104,7 +103,7 @@ namespace FormsLoyalty.Droid
 
                 channel.EnableVibration(true);
 
-                channel.SetSound(alarmUri, alarmAttributes);
+                //channel.SetSound(alarmUri, alarmAttributes);
 
                 manager.CreateNotificationChannel(channel);
             }

@@ -34,7 +34,7 @@ namespace FormsLoyalty.Models
         public async Task RegisterDevice()
         {
 
-
+            BeginWsCall();
             //ProgressDialog.Title = Context.GetString(Resource.String.MemberContactModelRegisterDevice);
             //ProgressDialog.Message = Context.GetString(Resource.String.MemberContactModelRegisteringDevice);
             //ProgressDialog.Show();
@@ -61,6 +61,7 @@ namespace FormsLoyalty.Models
 
         public async Task<bool> Logout()
         {
+            BeginWsCall();
             
            var isSuccess =  await LogoutOnServer(AppData.Device);
             if (isSuccess)

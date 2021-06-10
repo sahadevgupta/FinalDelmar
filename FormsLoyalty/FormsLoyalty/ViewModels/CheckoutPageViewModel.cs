@@ -87,6 +87,8 @@ namespace FormsLoyalty.ViewModels
                 {
                     shippingAddressName = string.Empty;
                     shippingAddress = new Address();
+                    SelectedCity = null;
+                    SelectedArea = null;
                     contact = new MemberContact();
                 }
 
@@ -114,7 +116,7 @@ namespace FormsLoyalty.ViewModels
 
 
        
-        private ObservableCollection<AreaModel> _areas;
+        private ObservableCollection<AreaModel> _areas = new ObservableCollection<AreaModel>();
         public ObservableCollection<AreaModel> Areas
         {
             get { return _areas; }
@@ -134,7 +136,7 @@ namespace FormsLoyalty.ViewModels
         }
 
 
-        private ObservableCollection<CitiesModel> _cities;
+        private ObservableCollection<CitiesModel> _cities = new ObservableCollection<CitiesModel>();
         public ObservableCollection<CitiesModel> Cities
         {
             get { return _cities; }
@@ -148,14 +150,10 @@ namespace FormsLoyalty.ViewModels
             set
             {
                 SetProperty(ref _selectedCity, value);
+               
                 if (value != null)
                 {
-                    Task.Run(async () =>
-                    {
-                        Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync("cairo"));
-                        SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
-                    });
-
+                    LoadArea();
                     shippingAddress.City = value.City;
                     shippingAddress.Country = value.Country;
                 }
@@ -333,7 +331,22 @@ namespace FormsLoyalty.ViewModels
             get { return _email; }
             set { SetProperty(ref _email, value); }
         }
-       
+
+
+        private string _shippingAddressDesc;
+        public string ShippingAddressDesc
+        {
+            get { return _shippingAddressDesc; }
+            set { SetProperty(ref _shippingAddressDesc, value); }
+        }
+
+        private string _billingingAddressDesc;
+        public string BillingingAddressDesc
+        {
+            get { return _billingingAddressDesc; }
+            set { SetProperty(ref _billingingAddressDesc, value); }
+        }
+
         private Order basketOrder;
 
 
@@ -349,17 +362,17 @@ namespace FormsLoyalty.ViewModels
                 SetProperty(ref _selectedCoupon, value);
                 if (value != null)
                 {
+
+                    basketOrder.CouponsNo = SelectedCoupon.CouponID;
                     totalTotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount - value.CouponValue);
                 }
                 else
                     totalTotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount);
+
+                
             }
         }
 
-     
-        public DelegateCommand ViewOffersCommand { get; set; }
-        public DelegateCommand RemoveCouponCommand { get; set; }
-        public DelegateCommand PlaceOrderCommand { get; set; }
 
 
         #region Amount
@@ -403,12 +416,11 @@ namespace FormsLoyalty.ViewModels
         #endregion
 
 
-        ClickCollectModel clickCollectModel;
-        StoreModel storeModel;
+       
         BasketModel basketModel;
         MemberContactModel memberContactModel;
 
-        public DelegateCommand NextCommand { get; set; }
+       
         public bool IsNewAddresAdded { get; private set; }
 
         public CheckoutPageViewModel(INavigationService navigationService): base(navigationService)
@@ -420,17 +432,12 @@ namespace FormsLoyalty.ViewModels
                 new StepBarModel(){ StepName="Review & Submit",Status=StepBarStatus.Pending,IsNotLast=false,MainContent=new ReviewSubmitView(this),IsCurrentContent=false},
             };
             StepListCount = Steps.Count;
-            clickCollectModel = new ClickCollectModel();
-            storeModel = new StoreModel();
-
-            NextCommand = new DelegateCommand(NavigateToNextStep);
-            ViewOffersCommand = new DelegateCommand(async () => await ShowCouponsPopUpView());
-            RemoveCouponCommand = new DelegateCommand(async () => await RemoveCoupon());
-            PlaceOrderCommand = new DelegateCommand(async () => await PlaceOrder());
-
-
+            
             basketModel = new BasketModel();
             memberContactModel = new MemberContactModel();
+
+           
+
 
             LoadData();
            
@@ -533,6 +540,8 @@ namespace FormsLoyalty.ViewModels
                 if(isCreditCard && string.IsNullOrEmpty(CardNumber))
                   CardDesc = $"{AppResources.ResourceManager.GetString("NotificationViewExpires", AppResources.Culture)} {CardExpirationDate}";
 
+                ShippingAddressDesc = shippingAddress.FormatAddress;
+                BillingingAddressDesc = billingAddress?.FormatAddress;
 
                 AddNewAddressToServer();
 
@@ -632,7 +641,7 @@ namespace FormsLoyalty.ViewModels
                 IsApartmentErrorVisible = true;
                 IsSucess = false;
             }
-            if (string.IsNullOrEmpty(shippingAddressName) || string.IsNullOrEmpty(shippingAddress.Address1))
+            if (string.IsNullOrEmpty(shippingAddressName) || string.IsNullOrEmpty(SelectedCity?.City) || string.IsNullOrEmpty(SelectedArea?.Area))
             {
                 DependencyService.Get<INotify>().ShowToast(AppResources.ResourceManager.GetString("CheckoutViewAllRequiredFieldsMustBeFilled", AppResources.Culture));
                 IsSucess = false;
@@ -683,8 +692,40 @@ namespace FormsLoyalty.ViewModels
             {
                 Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
                 SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
-
             });
+
+
+        }
+
+
+        void LoadArea()
+        {
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync(SelectedCity.City));
+                SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
+            });
+        }
+
+        private void SetSelectedCityArea()
+        {
+            if (!Cities.Any() || !Areas.Any())
+            {
+                Task.Run(async () =>
+                {
+                    Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
+                    Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync("cairo"));
+
+                    SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
+                    SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
+                });
+            }
+             else
+            {
+                SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
+                SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
+            }
+            
 
            
         }
@@ -714,7 +755,8 @@ namespace FormsLoyalty.ViewModels
             contact = AppData.Device.UserLoggedOnToDevice;
             shippingAddressName = contact.Name;
             shippingAddress = selectedAddress;
-
+            if(Cities.Any() && Areas.Any())
+               SetSelectedCityArea();
             IsNewAddresAdded = false;
         }
 
@@ -803,13 +845,13 @@ namespace FormsLoyalty.ViewModels
             }
             IsPageEnabled = false;
         }
-        private async Task RemoveCoupon()
+        public async Task RemoveCoupon()
         {
             SelectedCoupon = null;
             await ShowCouponsPopUpView();
         }
 
-        private async Task ShowCouponsPopUpView()
+        public async Task ShowCouponsPopUpView()
         {
             var couponsPopUp = new CouponsViewPopUp();
             couponsPopUp.Disappearing += (s, e) =>
@@ -851,8 +893,9 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
-        private async Task PlaceOrder()
+        public async Task PlaceOrder()
         {
+            IsPageEnabled = true;
             try
             {
                 var success = await basketModel.SendOrder(basketOrder);
@@ -869,6 +912,10 @@ namespace FormsLoyalty.ViewModels
             {
 
 
+            }
+            finally
+            {
+                IsPageEnabled = false;
             }
         }
 
