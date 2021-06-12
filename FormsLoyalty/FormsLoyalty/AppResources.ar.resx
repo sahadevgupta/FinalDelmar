@@ -244,7 +244,7 @@
     <value>يرجي تقديم عنوان بريد الكتروني صالح.</value>
   </data>
   <data name="AccountViewExistMobileNo" xml:space="preserve">
-    <value>موبايل موجود مسبقا</value>
+    <value>هاتفك النقال لا. موجود بالفعل على النظام ، يرجى التسجيل برقم هاتف محمول آخر</value>
   </data>
   <data name="AccountViewExistPhoneNo" xml:space="preserve">
     <value>رقم هاتف موجود مسبقا</value>

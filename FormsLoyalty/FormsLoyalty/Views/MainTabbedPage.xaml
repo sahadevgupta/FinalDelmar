@@ -31,6 +31,9 @@
 
     <TabbedPage.Children>
 
+        
+       
+        
         <!--Home Page-->
         <NavigationPage Title="{x:Static resources:AppResources.ActionbarHome}" IconImageSource="home.png">
             <x:Arguments>
@@ -48,21 +51,47 @@
 
         <!--Cart Page-->
 
-        <NavigationPage Title="{x:Static resources:AppResources.CartTab}" IconImageSource="cart.png">
-            <x:Arguments>
 
-                
+        <OnPlatform x:TypeArguments="NavigationPage">
+            <OnPlatform.iOS>
+                <NavigationPage Title="{x:Static resources:AppResources.CartTab}" IconImageSource="cart.png">
+                    <x:Arguments>
+
+
+                        <views:CartPage  
+                                plugin:TabBadge.BadgeText="{Binding BadgeCount}"
+                                 plugin:TabBadge.BadgeColor="{StaticResource SecondaryColor}"
+                                 plugin:TabBadge.BadgeTextColor="White"/>
+
+
+
+
+
+                    </x:Arguments>
+                </NavigationPage>
+            </OnPlatform.iOS>
+
+            <OnPlatform.Android>
+                <NavigationPage Title="{x:Static resources:AppResources.CartTab}" IconImageSource="cart.png">
+                    <x:Arguments>
+
+
                         <views:CartPage  
                                 helpers:TabBadge.BadgeText="{Binding BadgeCount}"
                                  helpers:TabBadge.BadgeColor="{StaticResource SecondaryColor}"
                                  helpers:TabBadge.BadgeTextColor="White"/>
-                  
-                    
-                
-               
 
-            </x:Arguments>
-        </NavigationPage>
+
+
+
+
+                    </x:Arguments>
+                </NavigationPage>
+            </OnPlatform.Android>
+
+        </OnPlatform>
+        
+        
 
         <!--Order Page-->
         <NavigationPage Title="{x:Static resources:AppResources.OrdersTab}" IconImageSource="order.png">

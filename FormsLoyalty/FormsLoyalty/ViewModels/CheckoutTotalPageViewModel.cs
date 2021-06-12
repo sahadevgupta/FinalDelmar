@@ -152,7 +152,7 @@ namespace FormsLoyalty.ViewModels
                 SetProperty(ref _selectedCoupon, value);
                 if (value != null)
                 {
-                    totalTotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount - value.CouponValue);
+                    totalTotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount - (decimal)value.CouponValue);
                 }
                 else
                     totalTotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount);

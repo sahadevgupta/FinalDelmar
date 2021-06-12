@@ -441,7 +441,7 @@ namespace FormsLoyalty.ViewModels
             try
             {
                 var model = new ItemModel();
-                var items = await model.GetItemsByItemSearch(SearchKey,10);
+                var items = await model.GetItemsByPage(10, 1, string.Empty, string.Empty, SearchKey, false, string.Empty);
                 Items = new ObservableCollection<LoyItem>(items);
 
                 LoadImages();

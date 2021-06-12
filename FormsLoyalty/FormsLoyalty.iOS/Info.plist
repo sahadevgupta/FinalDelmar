@@ -120,8 +120,6 @@
 		<string>fbauth2</string>
 		<string>fbshareextension</string>
 	</array>
-	<key>XSAppIconAssets</key>
-	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
@@ -139,5 +137,7 @@
 	<true/>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
+	<key>XSAppIconAssets</key>
+	<string>Media.xcassets/AppIcons.appiconset</string>
 </dict>
 </plist>

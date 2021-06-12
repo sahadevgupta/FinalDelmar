@@ -288,31 +288,31 @@
 
 
 
-                <!--<Button Text="{x:Static resources:AppResources.txtAddress}"
-                        TextColor="Black"
-                        Padding="5"
-                        IsEnabled="False"
-                        HeightRequest="50"
-                        FontSize="Medium" />-->
+                <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" BorderColor="#1A000000">
+                    <controls:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
+                                       SelectedItem="{Binding SelectedCity}" TextColor="Black"
+                                       Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
+                                   Visual="Default"   />
+                </Frame>
 
 
-                <controls:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
-                                       SelectedItem="{Binding SelectedCity}"
-                                       Title="{x:Static resources:AppResources.AccountInformationViewCity}" Visual="Default"  HeightRequest="50" Margin="5,10,5,0"/>
-
-                <controls:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
-                                       SelectedItem="{Binding SelectedArea}"
-                                       Title="{x:Static resources:AppResources.txtArea}" Visual="Default"  HeightRequest="50" Margin="5,10,5,0">
-
-                    <controls:CustomPicker.Triggers>
-                        <DataTrigger TargetType="controls:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"
+                <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" BorderColor="#1A000000">
+                    <controls:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
+                                       SelectedItem="{Binding SelectedArea}" TextColor="Black"
+                                       Title="{x:Static resources:AppResources.txtArea}" 
+                                   Visual="Default"   >
+                        <controls:CustomPicker.Triggers>
+                            <DataTrigger TargetType="controls:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"
                                      Value="null">
-                            <Setter Property="IsEnabled" Value="False"/>
-                            
-                        </DataTrigger>
-                    </controls:CustomPicker.Triggers>
-                    
-                </controls:CustomPicker>
+                                <Setter Property="IsEnabled" Value="False"/>
+
+                            </DataTrigger>
+                        </controls:CustomPicker.Triggers>
+                    </controls:CustomPicker>
+                </Frame>
+
+
+               
 
 
                 <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtNumber}" 

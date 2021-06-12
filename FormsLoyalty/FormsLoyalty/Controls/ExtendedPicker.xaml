@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             x:Class="FormsLoyalty.Controls.ExtendedPicker"
+             Visual="Material">
+  <ContentView.Content>
+        <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True">
+            <controls:CustomPicker x:Name="picker" Visual="Default"/>
+        </Frame>
+    </ContentView.Content>
+</ContentView>

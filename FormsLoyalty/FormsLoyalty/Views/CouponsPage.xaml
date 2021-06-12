@@ -223,6 +223,12 @@
             </Grid.Triggers>
 
             <StackLayout Grid.Row="0">
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding Coupons.Count}" Value="0">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </StackLayout.Triggers>
+                
                 <Label 
                        TextColor="Black"
                        CharacterSpacing="2"
@@ -252,6 +258,16 @@
 
 
             <StackLayout Grid.Row="1">
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding DelmarCoupons.Count}" Value="0">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding Coupons.Count}" Value="0">
+                        <Setter Property="Grid.Row" Value="0"/>
+                        <Setter Property="Grid.RowSpan" Value="2"/>
+                    </DataTrigger>
+                </StackLayout.Triggers>
+                
                 <Label 
                        TextColor="Black"
                        CharacterSpacing="2"
@@ -275,13 +291,22 @@
 
                     <CollectionView.ItemTemplate>
                         <DataTemplate>
-                            <Frame>
+                            <Frame Visual="Material">
+
+                                <Frame.Resources>
+                                    <ResourceDictionary>
+                                        <Style TargetType="Label">
+                                            <Setter Property="TextColor" Value="Black"/>
+                                        </Style>
+                                    </ResourceDictionary>
+                                </Frame.Resources>
+                                
                                 <Grid RowDefinitions="Auto,Auto">
                                     <Label >
                                         <Label.FormattedText>
                                             <FormattedString>
                                                 <Span Text="Code : "/>
-                                                <Span Text="{Binding CouponID}"/>
+                                                <Span Text="{Binding CouponID}" FontAttributes="Bold"/>
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>

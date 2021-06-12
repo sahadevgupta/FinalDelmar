@@ -1,17 +1,14 @@
 ﻿using FormsLoyalty.iOS.Renderers;
-using Foundation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Picker = Xamarin.Forms.Picker;
 
 [assembly: ExportRenderer(typeof(Picker), typeof(CustomPickerRenderer))]
 namespace FormsLoyalty.iOS.Renderers
 {
-	public class CustomPickerRenderer : PickerRenderer
+    public class CustomPickerRenderer : PickerRenderer
 	{
 		protected override void OnElementChanged(ElementChangedEventArgs<Picker> e)
 		{
@@ -23,7 +20,13 @@ namespace FormsLoyalty.iOS.Renderers
 			{
 				var downarrow = UIImage.FromBundle("arrow_down");
 				Control.RightViewMode = UITextFieldViewMode.Always;
-				Control.RightView = new UIImageView(downarrow);
+				var imageView = new UIImageView(downarrow);
+				imageView.Frame = new CoreGraphics.CGRect(0, 0, 5, 20);
+				Control.RightView = imageView;
+				Control.BorderStyle = UITextBorderStyle.None;
+
+
+
 			}
 		}
 	}

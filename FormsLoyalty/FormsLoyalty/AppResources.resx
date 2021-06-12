@@ -244,7 +244,7 @@
     <value>Please provide a valid email address.</value>
   </data>
   <data name="AccountViewExistMobileNo" xml:space="preserve">
-    <value>Mobile No is Exist</value>
+    <value>Your mobile no. already exist on the system, please register with another mobile no</value>
   </data>
   <data name="AccountViewExistPhoneNo" xml:space="preserve">
     <value>Phone No is Exist</value>

@@ -439,7 +439,7 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Mobile No is Exist.
+        ///   Looks up a localized string similar to Your mobile no. already exist on the system, please register with another mobile no.
         /// </summary>
         public static string AccountViewExistMobileNo {
             get {

@@ -4,10 +4,29 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.TermsConditionPage"
-             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:resources="clr-namespace:FormsLoyalty" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              Title="{x:Static resources:AppResources.ActionbarTerm}">
 
+
+    <Grid>
+        <WebView Source="{Binding HtmlSource}"  Navigating="WebView_Navigating" Navigated="WebView_Navigated"/>
+
+        <controls:LoadingView IsVisible="False" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+
+
+    </Grid>
     
-        <WebView Source="{Binding HtmlSource}" />
+        
    
 </ContentPage>

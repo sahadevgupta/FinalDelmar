@@ -6,6 +6,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace FormsLoyalty.ViewModels
@@ -35,17 +36,35 @@ namespace FormsLoyalty.ViewModels
 
         private void GetTermsData()
         {
-            if (string.IsNullOrEmpty(Settings.TermsConditions))
+            Device.BeginInvokeOnMainThread(async () =>
             {
-                var termsConditions = _termsRepo.GetTermsCondition();
-                Terms = termsConditions.Trim('\r', '\n');
-                Settings.TermsConditions = Terms;
-            }
-           
+                IsPageEnabled = true;
+                try
+                {
 
-            HtmlSource = new HtmlWebViewSource();
-            HtmlSource.Html = Settings.TermsConditions;
+                    if (string.IsNullOrEmpty(Settings.TermsConditions))
+                    {
+                        var termsConditions = await _termsRepo.GetTermsCondition();
+                        Terms = termsConditions.Trim('\r', '\n');
+                        Settings.TermsConditions = Terms;
+                    }
 
+
+                    HtmlSource = new HtmlWebViewSource();
+                    HtmlSource.Html = Settings.TermsConditions;
+
+
+                }
+                catch (Exception)
+                {
+
+
+                }
+                finally
+                {
+                    IsPageEnabled = false;
+                }
+            });
         }
     }
 }

@@ -1,14 +1,16 @@
-﻿using Xamarin.Forms;
+﻿using FormsLoyalty.ViewModels;
+using Xamarin.Forms;
 
 namespace FormsLoyalty.Views
 {
     public partial class TermsConditionPage : ContentPage
     {
+        TermsConditionPageViewModel _viewModel;
         public TermsConditionPage()
         {
             InitializeComponent();
 
-           
+            _viewModel = BindingContext as TermsConditionPageViewModel;
 
         }
 
@@ -16,6 +18,16 @@ namespace FormsLoyalty.Views
         {
             base.OnAppearing();
             
+        }
+
+        private void WebView_Navigating(object sender, WebNavigatingEventArgs e)
+        {
+            _viewModel.IsPageEnabled = true;
+        }
+
+        private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
+        {
+            _viewModel.IsPageEnabled = false;
         }
     }
 }

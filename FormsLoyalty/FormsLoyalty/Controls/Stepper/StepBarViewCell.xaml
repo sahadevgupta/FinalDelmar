@@ -31,6 +31,7 @@
 
                 <controls:PancakeView CornerRadius="{OnPlatform iOS='10', Android='20'}"
                                       HeightRequest="20" WidthRequest="20"
+                                      
                                       IsClippedToBounds="True"
                                       BorderColor="Black"
                                       BackgroundColor="{Binding Status,Converter={StaticResource StepColorConverter}}">
@@ -46,7 +47,7 @@
                 
             </Grid>
 
-            <ProgressBar VerticalOptions="FillAndExpand"
+            <ProgressBar VerticalOptions="{OnPlatform iOS='CenterAndExpand', Android='FillAndExpand'}"
                          HorizontalOptions="FillAndExpand"
                          Margin="0,10,0,0"
                          x:Name="progress"

@@ -46,7 +46,7 @@ namespace FormsLoyalty.PopUpView
             Coupons = new ObservableCollection<DelmarCoupons>();
             foreach (var coupon in coupons)
             {
-                if (!coupon.Blocked && coupon.RedeemedAmount== 0)
+                if (!coupon.Blocked && coupon.RedeemedAmount== 0 && string.IsNullOrEmpty(coupon.CustomerOrderNo))
                 {
                     Coupons.Add(coupon);
                 }

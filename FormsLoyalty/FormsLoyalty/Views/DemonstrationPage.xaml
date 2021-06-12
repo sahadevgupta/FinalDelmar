@@ -27,7 +27,7 @@
                                 Command="{Binding BindingContext.SkipCommand,Source={x:Reference demoPage}}"/>
 
                         <Label Text="{Binding MainText}" Grid.Row="1" HorizontalOptions="CenterAndExpand"
-                               FontSize="25" TextColor="#2271b7"/>
+                               FontSize="Large" TextColor="#080C0C"/>
 
                         <Frame BorderColor="Silver" Grid.Row="2" Padding="5" CornerRadius="5"  Visual="{OnPlatform iOS=MAterial,Android=Default}">
                             <Image Source="{Binding ImageSource}" Aspect="AspectFit"/>

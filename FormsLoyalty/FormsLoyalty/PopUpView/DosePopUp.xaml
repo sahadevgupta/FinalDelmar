@@ -6,7 +6,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
                   xmlns:resources="clr-namespace:FormsLoyalty"
-             x:Class="FormsLoyalty.PopUpView.DosePopUp">
+             x:Class="FormsLoyalty.PopUpView.DosePopUp"
+                  Visual="Material">
 
     <Grid  Padding="10"   VerticalOptions="CenterAndExpand" BackgroundColor="WhiteSmoke" Margin="20" RowDefinitions="Auto,Auto, Auto">
 

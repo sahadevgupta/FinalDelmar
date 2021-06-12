@@ -27,7 +27,7 @@ namespace FormsLoyalty.Droid.Renderers
             if (this.Control != null)
             {
 
-
+                Control.Background = null;
                 //Control.TextAlignment = Android.Views.TextAlignment.TextStart;
                 Control.TextAlignment = Android.Views.TextAlignment.TextStart;
 

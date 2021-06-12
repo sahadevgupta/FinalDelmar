@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Forms;
+using Xamarin.Forms.PlatformConfiguration;
+using Xamarin.Forms.PlatformConfiguration.iOSSpecific;
+using Picker = Xamarin.Forms.Picker;
 
 namespace FormsLoyalty.Controls
 {
@@ -30,6 +33,12 @@ namespace FormsLoyalty.Controls
 		{
 			get { return (int)GetValue(ImageWidthProperty); }
 			set { SetValue(ImageWidthProperty, value); }
+		}
+
+        public CustomPicker()
+        {
+			(this as Picker).On<iOS>().SetUpdateMode(UpdateMode.WhenFinished);
+			
 		}
 	}
 }

@@ -7,7 +7,8 @@
              xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors" 
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              x:Class="FormsLoyalty.Views.CheckoutStepperView.AddressDetailsView"
-             x:Name="thisPage">
+             x:Name="thisPage"
+             Visual="Material">
     <ContentView.Resources>
         <ResourceDictionary>
             <converters:CardNumberToImageConverter x:Key="CardConverter"
@@ -45,14 +46,15 @@
 
             <!--<Label Text="Select Address" />-->
 
-        <Frame Padding="0" Margin="5,0,5,0" CornerRadius="10" BackgroundColor="WhiteSmoke" HasShadow="True" Visual="Default">
+        <Frame Padding="5,0,5,0" Margin="5,0,5,0" CornerRadius="5" BackgroundColor="WhiteSmoke" HasShadow="True" Visual="Material">
             <StackLayout IsClippedToBounds="True">
             <Label Text="Select Address" FontSize="Body" Margin="5,0" FontAttributes="Bold"/>
             <Picker ItemsSource="{Binding addresses}" SelectedItem="{Binding selectedAddress}"
                     TextColor="{StaticResource My_Header_Color}" 
-                    BackgroundColor="White"
+                    BackgroundColor="WhiteSmoke"
                     ItemDisplayBinding="{Binding Address1}"
                     TitleColor="Black"
+                    
                     Title="Select Address"
                     Visual="Default"/>
             </StackLayout>
@@ -84,14 +86,26 @@
                                         InputType="Default" />
 
 
+
+        <controls:ExtendedPicker ItemsSource="{Binding Cities}" IsVisible="false"
+                                 DisplayMemberPath="{Binding City}"
+                                 SelectedItem="{Binding SelectedCity}"
+                                 TextColor="Black"
+                                  Title="{x:Static resources:AppResources.AccountInformationViewCity}" />
+
+        <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" >
             <controls:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
-                                       SelectedItem="{Binding SelectedCity}"
-                                       Title="{x:Static resources:AppResources.AccountInformationViewCity}" Visual="Default"  HeightRequest="50" Margin="5,10,5,0"/>
+                                       SelectedItem="{Binding SelectedCity}" TextColor="Black"
+                                       Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
+                                   Visual="Default"   />
+        </Frame>
 
+
+        <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True">
             <controls:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
-                                       SelectedItem="{Binding SelectedArea}"
-                                       Title="{x:Static resources:AppResources.txtArea}" Visual="Default"  HeightRequest="50" Margin="5,10,5,0">
-
+                                       SelectedItem="{Binding SelectedArea}" TextColor="Black"
+                                       Title="{x:Static resources:AppResources.txtArea}" 
+                                   Visual="Default">
                 <controls:CustomPicker.Triggers>
                     <DataTrigger TargetType="controls:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"
                                      Value="null">
@@ -101,7 +115,7 @@
                 </controls:CustomPicker.Triggers>
 
             </controls:CustomPicker>
-
+        </Frame>
 
 
             <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtNumber}" 
@@ -177,7 +191,7 @@
 
             </StackLayout>
 
-            <StackLayout Orientation="Horizontal">
+            <StackLayout Orientation="Horizontal" IsVisible="false">
                 <StackLayout.Spacing>
                     <OnPlatform x:TypeArguments="x:Double">
                         <On Platform="iOS" Value="-8" />

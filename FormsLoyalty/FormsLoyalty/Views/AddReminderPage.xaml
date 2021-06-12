@@ -9,7 +9,8 @@
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:mat="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              BackgroundColor="#33b6b6b6"
-             x:Name="thisPage">
+             x:Name="thisPage"
+             Visual="Material">
     <ContentPage.Triggers>
 
         <DataTrigger TargetType="ContentPage"
@@ -43,7 +44,22 @@
                     <StackLayout>
                         <Label Text="Medication Name" FontSize="Medium" TextColor="{StaticResource My_Header_Color}"/>
                         <Entry x:Name="namelbl" Text="{Binding medicineReminder.EventName}" Placeholder="Type active ingrident or brand name" Visual="Default"/>
-                        <Picker Title="Unit" 
+
+                        <Frame Padding="5,0,5,0" HeightRequest="40" HasShadow="True" >
+                            <controls:CustomPicker ItemsSource="{Binding Units}" 
+                                       SelectedItem="{Binding SelectedUnit}" TextColor="Black"
+                                       Title="Unit" 
+                                   Visual="Default"   />
+                            <Frame.Triggers>
+                                <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference namelbl},Path=Text,Converter={StaticResource StringToBoolConverter}}"
+                                     Value="false">
+                                    <Setter Property="IsVisible" Value="false"/>
+                                </DataTrigger>
+                            </Frame.Triggers>
+
+                        </Frame>
+
+                        <!--<Picker Title="Unit" 
                                          Visual="Default"      
                                                ItemsSource="{Binding Units}" SelectedItem="{Binding SelectedUnit}">
                             <Picker.Triggers>
@@ -52,7 +68,7 @@
                                     <Setter Property="IsVisible" Value="false"/>
                                 </DataTrigger>
                             </Picker.Triggers>
-                        </Picker>
+                        </Picker>-->
 
                     </StackLayout>
                 </Frame>
@@ -105,7 +121,21 @@
                         <Grid  RowDefinitions="Auto,Auto">
 
 
-                            <Picker x:Name="reminderPicker"  HorizontalOptions="FillAndExpand" Visual="Default" 
+                            <Frame Padding="5,0,5,0" HeightRequest="40"  HasShadow="True" >
+                                <controls:CustomPicker x:Name="reminderPicker" 
+                                                       HorizontalOptions="FillAndExpand"
+                                                       SelectedIndex="{Binding SelectedFreqIndex}"  
+                                                       TextColor="Black"
+                                                       Visual="Default"   >
+                                    <controls:CustomPicker.Items>
+                                        <x:String>Once daily</x:String>
+                                        <x:String>Twice daily</x:String>
+                                        <x:String>3 times a day</x:String>
+                                    </controls:CustomPicker.Items>
+                                </controls:CustomPicker>
+                            </Frame>
+
+                            <!--<Picker x:Name="reminderPicker"  HorizontalOptions="FillAndExpand" Visual="Default" 
                             SelectedIndex="{Binding SelectedFreqIndex}" 
                                                    
                                                    BackgroundColor="White" TitleColor="DimGray">
@@ -114,7 +144,7 @@
                                     <x:String>Twice daily</x:String>
                                     <x:String>3 times a day</x:String>
                                 </Picker.Items>
-                            </Picker>
+                            </Picker>-->
 
                             <CollectionView ItemsSource="{Binding frequencies}" Grid.Row="1" MinimumHeightRequest="40" HeightRequest="150">
                                 <CollectionView.ItemTemplate>
@@ -185,7 +215,7 @@
 
                         </Expander.Header>
                         <Grid Padding="10" ColumnDefinitions="Auto,*" RowDefinitions="Auto,0.5,Auto,Auto">
-                            <Label Text="Start Date:" FontAttributes="Bold" VerticalOptions="Center" HorizontalOptions="Start"/>
+                            <Label Text="Start Date:" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start"/>
                             <DatePicker Grid.Column="1" Date="{Binding medicineReminder.From}" Format="dd MMMM" Visual="Default" HorizontalOptions="Start"/>
                             <BoxView HeightRequest="0.5" Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Silver" HorizontalOptions="FillAndExpand"/>
 
@@ -198,7 +228,9 @@
                                             <On Platform="iOS" Value="-8" />
                                         </OnPlatform>
                                     </StackLayout.Spacing>
-                                    <RadioButton Text="Ongoing Treatment" x:Name="ongoingSwitch" GroupName="duration" IsChecked="True" CheckedChanged="duration_CheckedChanged" />
+                                    <RadioButton Visual="Material" x:Name="ongoingSwitch" 
+                                                 Text="Ongoing Treatment"
+                                                 GroupName="duration" IsChecked="True" CheckedChanged="duration_CheckedChanged" />
                                     <Label Text="Ongoing Treatment"  FontSize="Default" LineBreakMode="TailTruncation" 
                        VerticalOptions="Center"/>
                                 </StackLayout>
@@ -209,7 +241,9 @@
                                             <On Platform="iOS" Value="-8" />
                                         </OnPlatform>
                                     </StackLayout.Spacing>
-                                    <RadioButton Text="Numbers of days" GroupName="duration" CheckedChanged="duration_CheckedChanged"/>
+                                    <RadioButton Visual="Material" 
+                                                 Text="Numbers of days"
+                                                 GroupName="duration" CheckedChanged="duration_CheckedChanged"/>
                                     <Label Text="Numbers of days"  FontSize="Default" LineBreakMode="TailTruncation" 
                        VerticalOptions="Center"/>
                                 </StackLayout>
@@ -241,7 +275,9 @@
                                         </OnPlatform>
                                     </StackLayout.Spacing>
 
-                                    <RadioButton x:Name="everydaybtn" Text="Every day"
+                                    <RadioButton x:Name="everydaybtn" 
+                                                 Text="Every day"
+                                                 Visual="Material"
                                          GroupName="days" IsChecked="{Binding medicineReminder.AllDay}" CheckedChanged="days_CheckedChanged" />
                                     <Label Text="Every day"  FontSize="Default" LineBreakMode="TailTruncation" 
                        VerticalOptions="Center"/>
@@ -254,7 +290,9 @@
                                         </OnPlatform>
                                     </StackLayout.Spacing>
 
-                                    <RadioButton Text="Specific days of the week" GroupName="days" CheckedChanged="days_CheckedChanged"/>
+                                    <RadioButton Visual="Material" 
+                                                 Text="Specific days of the week"
+                                                 GroupName="days" CheckedChanged="days_CheckedChanged"/>
                                     <Label Text="Specific days of the week"  FontSize="Default" LineBreakMode="TailTruncation" 
                        VerticalOptions="Center"/>
                                 </StackLayout>

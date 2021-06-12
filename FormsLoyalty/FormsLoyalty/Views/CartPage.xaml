@@ -10,7 +10,7 @@
              x:Class="FormsLoyalty.Views.CartPage"
              Visual="Material"
              x:Name="cart"
-             BackgroundColor="#B3f2f2ef"
+            BackgroundColor="{StaticResource My_Header_Color}"
             NavigationPage.HasNavigationBar="False"
             
              ios:Page.UseSafeArea="True"
@@ -26,7 +26,7 @@
     <AbsoluteLayout>
 
         <Grid RowDefinitions="55,*,Auto,Auto" AbsoluteLayout.LayoutBounds="0,0,1,1"
-                    AbsoluteLayout.LayoutFlags="All">
+                    AbsoluteLayout.LayoutFlags="All" BackgroundColor="WhiteSmoke">
 
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"

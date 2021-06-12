@@ -3,6 +3,7 @@ using LSRetail.Omni.Infrastructure.Data.Omniservice.Base;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace FormsLoyalty.Repos
 {
@@ -15,10 +16,17 @@ namespace FormsLoyalty.Repos
             return base.PostData<bool>(jObject, methodName);
         }
 
-        public string GetTermsCondition()
+        public async Task<string> GetTermsCondition()
+        {
+
+            return await Task.Run(() => GetTermsAndConditionsAsync());
+
+        }
+
+        private string GetTermsAndConditionsAsync()
         {
             string methodName = "TermsAndConditions";
-            
+
             return base.PostData<string>(null, methodName);
         }
     }

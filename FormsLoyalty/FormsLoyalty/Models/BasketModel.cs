@@ -1,4 +1,5 @@
-﻿using FormsLoyalty.Utils;
+﻿using FormsLoyalty.Interfaces;
+using FormsLoyalty.Utils;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Orders;
@@ -40,6 +41,16 @@ namespace FormsLoyalty.Models
                 }
                 else
                 {
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        DependencyService.Get<INotify>().ShowSnackBar($"{list.Items[0].ItemDescription} has been added to basket!!");
+                    }
+                    else
+                    {
+                        MaterialDialog.Instance.SnackbarAsync($"{list.Items[0].ItemDescription} has been added to basket!!", 5000);
+                    }
+                    newList.Id = list.Id;
+
                     MessagingCenter.Send(this, "CartUpdated");
                     AppData.Device.UserLoggedOnToDevice.AddList(AppData.Device.CardId, list, ListType.Basket);
                     return true;
