@@ -92,7 +92,7 @@ namespace FormsLoyalty.ViewModels
         {
             if (obj.ToLower().Contains("Help".ToLower()))
             {
-               await NavigationService.NavigateAsync(nameof(HelpPage));
+               await NavigationService.NavigateAsync(nameof(DemonstrationPage),new NavigationParameters { {"FromHelp",true } });
             }
             else if(obj.ToLower().Contains("Terms".ToLower()))
                 await NavigationService.NavigateAsync(nameof(TermsConditionPage));
@@ -145,20 +145,20 @@ namespace FormsLoyalty.ViewModels
             #endregion
 
             #region Points Tab
-            var pointsTab = new DrawerMenuItem();
-            pointsTab.ActivityType = AppConstValues.Points;
-            pointsTab.IsVisible = true;
-            pointsTab.Image = "points";
-            pointsTab.IsLoading = false;
-            pointsTab.Title = AppResources.ResourceManager.GetString("txtpoints", AppResources.Culture);
+            //var pointsTab = new DrawerMenuItem();
+            //pointsTab.ActivityType = AppConstValues.Points;
+            //pointsTab.IsVisible = true;
+            //pointsTab.Image = "points";
+            //pointsTab.IsLoading = false;
+            //pointsTab.Title = AppResources.ResourceManager.GetString("txtpoints", AppResources.Culture);
 
-            if (EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null)
-            {
+            //if (EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null)
+            //{
 
-                pointsTab.SubTitle = AppData.Device.UserLoggedOnToDevice.Account.PointBalance.ToString("N0");
+            //    pointsTab.SubTitle = AppData.Device.UserLoggedOnToDevice.Account.PointBalance.ToString("N0");
 
-            }
-            drawerMenuItems.Add(pointsTab);
+            //}
+            //drawerMenuItems.Add(pointsTab);
 
             #endregion
 

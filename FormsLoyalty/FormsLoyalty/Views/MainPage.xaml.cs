@@ -32,8 +32,11 @@ namespace FormsLoyalty.Views
 
         private void GetFileData(App arg1, List<Tuple<byte[], string>> arg2)
         {
-            if (!_viewModel.CanNavigate)
+            if (_viewModel.CanNavigate)
                 return;
+
+            _viewModel.CanNavigate = true;
+
             _viewModel.NavigateToScanPage(arg2);
 
             _viewModel.CanNavigate = false;
@@ -131,29 +134,29 @@ namespace FormsLoyalty.Views
         {
             var item = ((Button)sender).BindingContext as LoyItem;
             bool IsSucess = await _viewModel.AddItemToBasket(item);
-            if (IsSucess)
-            {
-                text.Text = $"{item.Description} has been added to basket!!";
-                snackbar.IsVisible = true;
+            //if (IsSucess)
+            //{
+            //    text.Text = $"{item.Description} has been added to basket!!";
+            //    snackbar.IsVisible = true;
 
 
 
-                ((Button)sender).IsVisible = false;
+            //    ((Button)sender).IsVisible = false;
 
-                //function to fire to kill the app or the game
+            //    //function to fire to kill the app or the game
 
-                System.Timers.Timer timer = new System.Timers.Timer(5000);
-                timer.AutoReset = false; // the key is here so it repeats
-                timer.Elapsed += (s,e1)=>
-                {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
-                        snackbar.IsVisible = false;
-                    });
+            //    System.Timers.Timer timer = new System.Timers.Timer(5000);
+            //    timer.AutoReset = false; // the key is here so it repeats
+            //    timer.Elapsed += (s,e1)=>
+            //    {
+            //        Device.BeginInvokeOnMainThread(() =>
+            //        {
+            //            snackbar.IsVisible = false;
+            //        });
                     
-                };
-                timer.Start();
-            }
+            //    };
+            //    timer.Start();
+            //}
         }
         private async void minus_Tapped(object sender, EventArgs e)
         {

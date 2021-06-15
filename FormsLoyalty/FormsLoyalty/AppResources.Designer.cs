@@ -2833,6 +2833,24 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Offers Isn&apos;t Available Right Now.
+        /// </summary>
+        public static string OfferText1 {
+            get {
+                return ResourceManager.GetString("OfferText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This may be because you have not logged in yet. Kindly login to view the offers..
+        /// </summary>
+        public static string OfferText2 {
+            get {
+                return ResourceManager.GetString("OfferText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use offer.
         /// </summary>
         public static string OfferUse {
@@ -3761,6 +3779,33 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Now you can upload or scan your Medicine Prescription.
+        /// </summary>
+        public static string txtDemo1 {
+            get {
+                return ResourceManager.GetString("txtDemo1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search any item from the Inventory.
+        /// </summary>
+        public static string txtDemo2 {
+            get {
+                return ResourceManager.GetString("txtDemo2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Here, You can manage your Shopping Cart.
+        /// </summary>
+        public static string txtDemo3 {
+            get {
+                return ResourceManager.GetString("txtDemo3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your Phone Number.
         /// </summary>
         public static string txtEnterPhoneNumber {
@@ -3869,6 +3914,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to New User?.
+        /// </summary>
+        public static string txtNewUser {
+            get {
+                return ResourceManager.GetString("txtNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Number.
         /// </summary>
         public static string txtNumber {
@@ -3892,6 +3946,15 @@ namespace FormsLoyalty {
         public static string txtpoints {
             get {
                 return ResourceManager.GetString("txtpoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to REGISTER HERE.
+        /// </summary>
+        public static string txtRegisterHere {
+            get {
+                return ResourceManager.GetString("txtRegisterHere", resourceCulture);
             }
         }
         
@@ -3937,6 +4000,24 @@ namespace FormsLoyalty {
         public static string txtVerificationCode {
             get {
                 return ResourceManager.GetString("txtVerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to To get started, tap the button below to log on or to add a new account and configure your personal profile..
+        /// </summary>
+        public static string txtWelcome1 {
+            get {
+                return ResourceManager.GetString("txtWelcome1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Being a member allows you to benefit from personal offers and coupons as well as collecting points, which can be used for tendering during your shopping experience..
+        /// </summary>
+        public static string txtWelcome2 {
+            get {
+                return ResourceManager.GetString("txtWelcome2", resourceCulture);
             }
         }
         

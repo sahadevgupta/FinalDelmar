@@ -363,7 +363,7 @@ namespace FormsLoyalty.ViewModels
                 if (value != null)
                 {
 
-                    basketOrder.CouponsNo = SelectedCoupon.CouponID;
+                    basketOrder.CouponNo = SelectedCoupon.CouponID;
                     totalTotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount - (decimal)value.CouponValue);
                 }
                 else
@@ -714,16 +714,16 @@ namespace FormsLoyalty.ViewModels
                 Task.Run(async () =>
                 {
                     Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
-                    Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync("cairo"));
+                    //Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync("cairo"));
 
                     SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
-                    SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
+                    //SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
                 });
             }
              else
             {
                 SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
-                SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
+                //SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
             }
             
 

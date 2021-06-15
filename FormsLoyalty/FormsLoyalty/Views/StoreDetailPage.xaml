@@ -90,7 +90,7 @@
                         <Label Margin="10" HorizontalOptions="FillAndExpand"
                    FontSize="Body" VerticalTextAlignment="Center"
                    TextColor="Black"
-                   Text="{Binding storeAddress}"/>
+                   Text="{Binding selectedStore.FormatAddress}"/>
                     </StackLayout>
 
                     <StackLayout Orientation="Horizontal" Margin="10,0">

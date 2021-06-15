@@ -21,7 +21,14 @@
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
     </ContentPage.Resources>
 
-    
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+
+            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+        </DataTrigger>
+    </ContentPage.Triggers>
+
 
     <AbsoluteLayout>
 

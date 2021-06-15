@@ -1041,6 +1041,12 @@
   <data name="OfferRelatedItems" xml:space="preserve">
     <value>عناصر ذات صلة</value>
   </data>
+  <data name="OfferText1" xml:space="preserve">
+    <value>العروض غير متوفرة الآن</value>
+  </data>
+  <data name="OfferText2" xml:space="preserve">
+    <value>قد يكون هذا لأنك لم تقم بتسجيل الدخول بعد. يرجى تسجيل الدخول لمشاهدة العروض.</value>
+  </data>
   <data name="OfferUse" xml:space="preserve">
     <value>استخدام العرض</value>
   </data>
@@ -1321,7 +1327,7 @@
     <value>لا يمكن فتح المعاملات</value>
   </data>
   <data name="txt6Digit" xml:space="preserve">
-    <value>6 أرقام</value>
+    <value>ستة أرقام</value>
   </data>
   <data name="txtApplied" xml:space="preserve">
     <value>مطبق!</value>
@@ -1347,6 +1353,15 @@
   <data name="txtCVV" xml:space="preserve">
     <value>CVV</value>
   </data>
+  <data name="txtDemo1" xml:space="preserve">
+    <value>الآن يمكنك تحميل أو مسح الوصفة الطبية الخاصة بك</value>
+  </data>
+  <data name="txtDemo2" xml:space="preserve">
+    <value>ابحث عن أي عنصر من الجرد</value>
+  </data>
+  <data name="txtDemo3" xml:space="preserve">
+    <value>هنا ، يمكنك إدارة عربة التسوق الخاصة بك</value>
+  </data>
   <data name="txtEnterPhoneNumber" xml:space="preserve">
     <value>أدخل رقم هاتفك</value>
   </data>
@@ -1360,7 +1375,7 @@
     <value>رقم الطابق</value>
   </data>
   <data name="txtGenerateOtp" xml:space="preserve">
-    <value>توليد OTP</value>
+    <value>إرسال OTP</value>
   </data>
   <data name="txtImageSizeError" xml:space="preserve">
     <value>الحجم يتجاوز !!</value>
@@ -1372,7 +1387,7 @@
     <value>لم تتم إضافة بعض الصور لأن حجم الملف كبير جدًا! يجب أن يكون أقل من 2 ميغا بايت</value>
   </data>
   <data name="txtImgSizeNote" xml:space="preserve">
-    <value>يجب أن تكون جميع المستندات بتنسيقات Png و jpeg و jpg فقط ضمن الحد الأقصى لحجم الملف وهو 2 ميغابايت</value>
+    <value>يجب أن تكون جميع المستندات بتنسيقات Png و jpeg و jpg فقط.</value>
   </data>
   <data name="txtInvalidOtp" xml:space="preserve">
     <value>OTP غير صحيح</value>
@@ -1383,6 +1398,9 @@
   <data name="txtmostviewed" xml:space="preserve">
     <value>كثيرا ما تطلب</value>
   </data>
+  <data name="txtNewUser" xml:space="preserve">
+    <value>مستخدم جديد؟</value>
+  </data>
   <data name="txtNumber" xml:space="preserve">
     <value>عدد</value>
   </data>
@@ -1391,6 +1409,9 @@
   </data>
   <data name="txtpoints" xml:space="preserve">
     <value>نقاط</value>
+  </data>
+  <data name="txtRegisterHere" xml:space="preserve">
+    <value>سجل هنا</value>
   </data>
   <data name="txtRemark" xml:space="preserve">
     <value>ملاحظات :</value>
@@ -1406,6 +1427,12 @@
   </data>
   <data name="txtVerificationCode" xml:space="preserve">
     <value>شيفرة التأكيد</value>
+  </data>
+  <data name="txtWelcome1" xml:space="preserve">
+    <value>للبدء ، انقر فوق الزر أدناه لتسجيل الدخول أو لإضافة حساب جديد وتكوين ملف التعريف الشخصي الخاص بك.</value>
+  </data>
+  <data name="txtWelcome2" xml:space="preserve">
+    <value>يسمح لك كونك عضوًا بالاستفادة من العروض الشخصية والقسائم بالإضافة إلى جمع النقاط ، والتي يمكن استخدامها لتقديم العطاءات أثناء تجربة التسوق الخاصة بك.</value>
   </data>
   <data name="txtWeWillShare" xml:space="preserve">
     <value>سوف نشاركك في</value>

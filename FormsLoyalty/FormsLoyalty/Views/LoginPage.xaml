@@ -149,8 +149,9 @@
                 <Label HorizontalTextAlignment="Center" Grid.Row="4"  VerticalOptions="End" Margin="0,0,0,10">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="New User? "/>
-                            <Span Text="REGISTER HERE" TextColor="IndianRed" FontSize="Body" FontAttributes="Bold">
+                            <Span Text="{x:Static resources:AppResources.txtNewUser}"/>
+                            <Span Text=" "/>
+                            <Span Text="{x:Static resources:AppResources.txtRegisterHere}" TextColor="IndianRed" FontSize="Body" FontAttributes="Bold">
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Command="{prism:NavigateTo Name='SignUpPage'}">
                                         <TapGestureRecognizer.CommandParameter>

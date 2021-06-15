@@ -1041,6 +1041,12 @@
   <data name="OfferRelatedItems" xml:space="preserve">
     <value>Related items</value>
   </data>
+  <data name="OfferText1" xml:space="preserve">
+    <value>Offers Isn't Available Right Now</value>
+  </data>
+  <data name="OfferText2" xml:space="preserve">
+    <value>This may be because you have not logged in yet. Kindly login to view the offers.</value>
+  </data>
   <data name="OfferUse" xml:space="preserve">
     <value>Use offer</value>
   </data>
@@ -1351,6 +1357,15 @@
   <data name="txtCVV" xml:space="preserve">
     <value>CVV</value>
   </data>
+  <data name="txtDemo1" xml:space="preserve">
+    <value>Now you can upload or scan your Medicine Prescription</value>
+  </data>
+  <data name="txtDemo2" xml:space="preserve">
+    <value>Search any item from the Inventory</value>
+  </data>
+  <data name="txtDemo3" xml:space="preserve">
+    <value>Here, You can manage your Shopping Cart</value>
+  </data>
   <data name="txtEnterPhoneNumber" xml:space="preserve">
     <value>Enter your Phone Number</value>
   </data>
@@ -1387,6 +1402,9 @@
   <data name="txtmostviewed" xml:space="preserve">
     <value>Frequently Ordered</value>
   </data>
+  <data name="txtNewUser" xml:space="preserve">
+    <value>New User?</value>
+  </data>
   <data name="txtNumber" xml:space="preserve">
     <value>Number</value>
   </data>
@@ -1395,6 +1413,9 @@
   </data>
   <data name="txtpoints" xml:space="preserve">
     <value>Points</value>
+  </data>
+  <data name="txtRegisterHere" xml:space="preserve">
+    <value>REGISTER HERE</value>
   </data>
   <data name="txtRemark" xml:space="preserve">
     <value>Remarks :</value>
@@ -1410,6 +1431,12 @@
   </data>
   <data name="txtVerificationCode" xml:space="preserve">
     <value>verification code</value>
+  </data>
+  <data name="txtWelcome1" xml:space="preserve">
+    <value>To get started, tap the button below to log on or to add a new account and configure your personal profile.</value>
+  </data>
+  <data name="txtWelcome2" xml:space="preserve">
+    <value>Being a member allows you to benefit from personal offers and coupons as well as collecting points, which can be used for tendering during your shopping experience.</value>
   </data>
   <data name="txtWeWillShare" xml:space="preserve">
     <value>We will share you the</value>

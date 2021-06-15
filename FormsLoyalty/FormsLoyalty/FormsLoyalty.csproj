@@ -17,28 +17,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\arabic.png" />
-    <None Remove="Resources\Demo-Slide1.jpg" />
     <None Remove="Resources\Demo-Slide1.png" />
-    <None Remove="Resources\Demo-Slide2.jpg" />
     <None Remove="Resources\Demo-Slide2.png" />
-    <None Remove="Resources\Demo-Slide3.jpg" />
     <None Remove="Resources\Demo-Slide3.png" />
     <None Remove="Resources\ecommerce.gif" />
     <None Remove="Resources\Ecommerce.png" />
     <None Remove="Resources\ecommerce.webp" />
-    <None Remove="Resources\eng.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\arabic.png" />
-    <EmbeddedResource Include="Resources\Demo-Slide1.jpg" />
     <EmbeddedResource Include="Resources\Demo-Slide1.png" />
-    <EmbeddedResource Include="Resources\Demo-Slide2.jpg" />
     <EmbeddedResource Include="Resources\Demo-Slide2.png" />
-    <EmbeddedResource Include="Resources\Demo-Slide3.jpg" />
     <EmbeddedResource Include="Resources\Demo-Slide3.png" />
-    <EmbeddedResource Include="Resources\eng.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -294,10 +284,6 @@
     <EmbeddedResource Update="Views\WishListPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Resources\FontAwesome\" />
   </ItemGroup>
 
 </Project>

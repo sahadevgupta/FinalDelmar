@@ -22,12 +22,12 @@ namespace FormsLoyalty.Views
 
         private void WebView_Navigating(object sender, WebNavigatingEventArgs e)
         {
-            _viewModel.IsPageEnabled = true;
+            //_viewModel.IsPageEnabled = true;
         }
 
         private void WebView_Navigated(object sender, WebNavigatedEventArgs e)
         {
-            _viewModel.IsPageEnabled = false;
+            //_viewModel.IsPageEnabled = false;
         }
     }
 }

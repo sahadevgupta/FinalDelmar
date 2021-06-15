@@ -22,8 +22,6 @@
 	</array>
 	<key>MinimumOSVersion</key>
 	<string>10.0</string>
-	<key>CFBundleVersion</key>
-	<string>2.7</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>This app needs access to location.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
@@ -42,6 +40,13 @@
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>CFBundleIconFiles</key>
+	<array>
+		<string>Icon-App-60x60@2x.png</string>
+		<string>Icon-App-76x76@1x.png</string>
+		<string>Icon-App-76x76@2x.png</string>
+		<string>Icon-App-83.5x83.5@2x.png</string>
+	</array>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSExceptionDomains</key>
@@ -138,6 +143,10 @@
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
 	<key>XSAppIconAssets</key>
-	<string>Media.xcassets/AppIcons.appiconset</string>
+	<string>Assets.xcassets/AppIcons.appiconset</string>
+	<key>CFBundleShortVersionString</key>
+	<string>21</string>
+	<key>CFBundleVersion</key>
+	<string>2.9</string>
 </dict>
 </plist>

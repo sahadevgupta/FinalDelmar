@@ -324,12 +324,12 @@ namespace FormsLoyalty.ViewModels
 
         internal void ChangeLanguage(string param)
         {
-            
+            IsPageEnabled = true;
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
             {
-                IsPageEnabled = true;
+               
                 CultureInfo language;
-                if (param.Contains("en", StringComparison.OrdinalIgnoreCase))
+                if (param.Contains("ar", StringComparison.OrdinalIgnoreCase))
                 {
 
                     language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("Arabic"));
@@ -346,10 +346,10 @@ namespace FormsLoyalty.ViewModels
 
                 await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
 
-                IsPageEnabled = false;
+               
             });
-          
-           
+
+            IsPageEnabled = false;
         }
 
         internal async Task<bool> AddItemToBasket(LoyItem loyItem)

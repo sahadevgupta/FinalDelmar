@@ -19,9 +19,22 @@
             <Label Margin="0,10,0,0" Text="{x:Static resources:AppResources.WelcomeViewPageTitle}" 
                    TextColor="{StaticResource My_Header_Color}"
                    FontSize="34"/>
-            <Label Text="&#10;To get started, tap the button below to log on or to add a new account and configure your personal profile. &#10;&#10;&#10;Being a member allows you to benefit from personal offers and coupons as well as collecting points, which can be used for tendering during your shopping experience."
-                   TextColor="Black"
-                   FontSize="Body"/>
+
+            <Label TextColor="Black"
+                   FontSize="Body">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{x:Static resources:AppResources.txtWelcome1}"/>
+                        <Span Text="&#10;"/>
+                        <Span Text="&#10;"/>
+                        <Span Text="&#10;"/>
+                        <Span Text="{x:Static resources:AppResources.txtWelcome2}"/>
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            
+            
+           
         </StackLayout>
 
         <Button HorizontalOptions="FillAndExpand"

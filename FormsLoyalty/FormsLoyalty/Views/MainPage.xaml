@@ -91,12 +91,12 @@
                                         </DataTrigger>
                                     </Image.Triggers>
                                 </Image>
-                                <Label x:Name="langlbl" Text="EN"  VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" FontSize="Body" 
+                                <Label x:Name="langlbl" Text="AR"  VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" FontSize="Body" 
                                        TextColor="Black"
                                        FontAttributes="Bold">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
-                                            <Setter Property="Text" Value="AR"/>
+                                            <Setter Property="Text" Value="EN"/>
                                             
                                         </DataTrigger>
                                     </Label.Triggers>
@@ -129,9 +129,9 @@
 
                         <Frame BackgroundColor="#D03E3E" Padding="0" BorderColor="White" CornerRadius="5" HasShadow="False">
 
-                            <Frame.GestureRecognizers>
+                            <!--<Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="points_Tapped"/>
-                            </Frame.GestureRecognizers>
+                            </Frame.GestureRecognizers>-->
 
                             <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
                             BackgroundColor="Transparent"
@@ -755,14 +755,14 @@
 
                         <Frame>
                             <StackLayout VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
-                                <Label Text="Offers Isn't Available Right Now" HorizontalTextAlignment="Center" 
+                                <Label Text="{x:Static resources:AppResources.OfferText1}" HorizontalTextAlignment="Center" 
                                                TextColor="Black"
                                                FontAttributes="Bold"
                                                FontSize="18"/>
-                                <Label Text="This may be because you have not logged in yet. Kindly login to view the offers." Margin="0,10"
+                                <Label Text="{x:Static resources:AppResources.OfferText2}" Margin="0,10"
                                                TextColor="Black"
                                                FontSize="Body"/>
-                                <Button Text="Login" HorizontalOptions="Center" BackgroundColor="#D03E3E" Command="{prism:NavigateTo Name='LoginPage'}"/>
+                                <Button Text="{x:Static resources:AppResources.ActionbarLogin}" HorizontalOptions="Center" BackgroundColor="#D03E3E" Command="{prism:NavigateTo Name='LoginPage'}"/>
                             </StackLayout>
 
                             <Frame.Triggers>
@@ -843,9 +843,7 @@
   </ScrollView>
 
 
-            <StackLayout Grid.Row="0" x:Name="snackbar" VerticalOptions="Start" IsVisible="false"  BackgroundColor="Black" Padding="20" >
-                <Label x:Name="text" TextColor="White"/>
-            </StackLayout>
+           
 
         </Grid>
 

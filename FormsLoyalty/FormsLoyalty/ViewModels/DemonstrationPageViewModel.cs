@@ -27,6 +27,13 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _carouselPostion, value); }
         }
 
+        private bool _isFromHelp;
+        public bool IsFromHelp
+        {
+            get { return _isFromHelp; }
+            set { SetProperty(ref _isFromHelp, value); }
+        }
+
         public DelegateCommand SkipCommand { get; set; }
         public DemonstrationPageViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -46,6 +53,11 @@ namespace FormsLoyalty.ViewModels
 
         async Task GotoMainPage()
         {
+            if (IsFromHelp)
+            {
+                await NavigationService.GoBackAsync();
+            }
+            else
             await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
         }
 
@@ -55,21 +67,21 @@ namespace FormsLoyalty.ViewModels
             {
                  new TourCarouselContent
                  {
-                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide2.jpg"),
+                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide2.png"),
                      SkipButtonIsVisible = true,
-                     MainText="Now you can upload or scan your medicine prescription"
+                     MainText=AppResources.txtDemo1
                  },
                  new TourCarouselContent
                  {
-                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide1.jpg"),
+                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide1.png"),
                      SkipButtonIsVisible = true,
-                     MainText="Search any item from the Inventory"
+                     MainText=AppResources.txtDemo2
                  },
                  new TourCarouselContent
                  {
-                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide3.jpg"),
+                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide3.png"),
                      SkipButtonIsVisible = false,
-                     MainText="Here, You can manage your shopping cart"
+                     MainText=AppResources.txtDemo3
                  },
                  //new TourCarouselContent
                  //{
@@ -78,6 +90,12 @@ namespace FormsLoyalty.ViewModels
                  //    //MainText="Here, You can manage your shopping cart"
                  //}
             };
+        }
+
+        public override void Initialize(INavigationParameters parameters)
+        {
+            base.Initialize(parameters);
+            IsFromHelp = parameters.GetValue<bool>("FromHelp");
         }
     }
 }

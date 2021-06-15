@@ -118,7 +118,7 @@
                 <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
 
                     <Label Text="{Binding itemPrice}"
-                       Margin="20,0,0,0" FontSize="Body">
+                       Margin="20,0,20,0" FontSize="Body">
                         <Label.Triggers>
                             <DataTrigger TargetType="Label"
                                      Binding="{Binding Item.Prices.Count}"

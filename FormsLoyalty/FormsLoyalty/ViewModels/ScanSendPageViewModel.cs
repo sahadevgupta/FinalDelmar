@@ -61,7 +61,7 @@ namespace FormsLoyalty.ViewModels
             try
             {
                 var Id = Guid.NewGuid().ToString(); 
-                ImageList.ForEach(x => { x.CreationDate = DateTime.UtcNow; x.pComment = Remark; x.Description = Remark; x.pOrderNo = Id; }) ;
+                ImageList.ForEach(x => { x.CreationDate = DateTime.UtcNow; x.pComment = string.IsNullOrEmpty(Remark)? string.Empty : Remark; x.Description = Remark; x.pOrderNo = Id; }) ;
                 var IsSuccess = await _scanSendManager.CreateScanSend(ImageList.ToList());
                 
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
@@ -86,9 +86,9 @@ namespace FormsLoyalty.ViewModels
 
         private void GetFileData(App arg1, List<Tuple<byte[], string>> arg2)
         {
-            if (!CanNavigate)
+            if (CanNavigate)
                 return;
-
+            CanNavigate = true;
             var i = ImageList.Count();
             AddImage(arg2, i + 1);
 

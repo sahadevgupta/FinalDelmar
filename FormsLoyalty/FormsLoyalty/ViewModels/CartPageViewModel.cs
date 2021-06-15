@@ -159,6 +159,7 @@ namespace FormsLoyalty.ViewModels
             if (IsSucess)
             {
                 baskets.Remove(basket);
+                LoadBasketItems();
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
                 {
                     var action = await MaterialDialog.Instance.SnackbarAsync(message: AppResources.ResourceManager.GetString("ApplicatioItemDeleted", AppResources.Culture),
