@@ -5,9 +5,9 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.MagazinePage"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             xmlns:resources="clr-namespace:FormsLoyalty"
              BackgroundColor="#fff2f2ef"
-             Title="Magazines">
+             Title="{x:Static resources:AppResources.ActionbarMagazines}">
     
 
     <AbsoluteLayout>

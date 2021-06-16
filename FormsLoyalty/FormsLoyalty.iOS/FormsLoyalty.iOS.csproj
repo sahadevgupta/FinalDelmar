@@ -486,6 +486,21 @@
   <ItemGroup>
     <BundleResource Include="Resources\Icon-App-83.5x83.5%402x.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\barcode.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\call.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconDirection.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconDirection%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconDirection%403x.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

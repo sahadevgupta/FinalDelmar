@@ -28,6 +28,14 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _mobileNumber, value); }
         }
 
+
+        private bool _isResendEnabled = false;
+        public bool IsResendEnabled
+        {
+            get { return _isResendEnabled; }
+            set { SetProperty(ref _isResendEnabled, value); }
+        }
+
         public string Otp { get; private set; }
 
         private int _TimerCount;
@@ -50,7 +58,11 @@ namespace FormsLoyalty.ViewModels
                         otpComp.OtpTimer = $"Expires in {string.Format("{0:00}:{1:00}", _TimeSpan.Minutes, _TimeSpan.Seconds)} mins";
                 }
                 else
+                {
+                    IsResendEnabled = true;
                     otpComp.OtpTimer = string.Empty;
+                }
+                   
 
 
             }
@@ -80,7 +92,7 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
 
             Otp = await new CommonModel().GenerateOTPAsync(MobileNumber);
-            DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
+            //DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
 
             IsPageEnabled = false;
         }

@@ -6,7 +6,8 @@
              x:Class="FormsLoyalty.Views.TransactionDetailPage"
              BackgroundColor="WhiteSmoke"
              xmlns:resources="clr-namespace:FormsLoyalty"
-             xmlns:controls="clr-namespace:FormsLoyalty.Controls">
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             >
   
     <AbsoluteLayout>
     <StackLayout AbsoluteLayout.LayoutBounds="0,0,1,1"

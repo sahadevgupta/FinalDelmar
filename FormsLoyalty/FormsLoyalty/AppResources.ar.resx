@@ -1329,6 +1329,15 @@
   <data name="txt6Digit" xml:space="preserve">
     <value>ستة أرقام</value>
   </data>
+  <data name="txtAddReminder" xml:space="preserve">
+    <value>أضف تذكيرًا</value>
+  </data>
+  <data name="txtAddress" xml:space="preserve">
+    <value>خط عنوان</value>
+  </data>
+  <data name="txtAddressDetails" xml:space="preserve">
+    <value>تفاصيل العنوان</value>
+  </data>
   <data name="txtApplied" xml:space="preserve">
     <value>مطبق!</value>
   </data>
@@ -1347,11 +1356,17 @@
   <data name="txtCategory" xml:space="preserve">
     <value>التصنيفات</value>
   </data>
+  <data name="txtClose" xml:space="preserve">
+    <value>قريب</value>
+  </data>
   <data name="txtComments" xml:space="preserve">
     <value>تعليقات</value>
   </data>
   <data name="txtCVV" xml:space="preserve">
     <value>CVV</value>
+  </data>
+  <data name="txtDays" xml:space="preserve">
+    <value>أيام</value>
   </data>
   <data name="txtDemo1" xml:space="preserve">
     <value>الآن يمكنك تحميل أو مسح الوصفة الطبية الخاصة بك</value>
@@ -1362,8 +1377,23 @@
   <data name="txtDemo3" xml:space="preserve">
     <value>هنا ، يمكنك إدارة عربة التسوق الخاصة بك</value>
   </data>
+  <data name="txtDidnotReceiveOtp" xml:space="preserve">
+    <value>لم تستلم OTP؟</value>
+  </data>
+  <data name="txtDuration" xml:space="preserve">
+    <value>مدة</value>
+  </data>
+  <data name="txtEnterNewAddress" xml:space="preserve">
+    <value>ادخل عنوان جديد</value>
+  </data>
+  <data name="txtEnterOTP" xml:space="preserve">
+    <value>أدخل OTP المرسل إلى</value>
+  </data>
   <data name="txtEnterPhoneNumber" xml:space="preserve">
     <value>أدخل رقم هاتفك</value>
+  </data>
+  <data name="txtEvery day" xml:space="preserve">
+    <value>كل يوم</value>
   </data>
   <data name="txtExpired" xml:space="preserve">
     <value>منتهي الصلاحية</value>
@@ -1376,6 +1406,12 @@
   </data>
   <data name="txtGenerateOtp" xml:space="preserve">
     <value>إرسال OTP</value>
+  </data>
+  <data name="txtGuest" xml:space="preserve">
+    <value>زائر</value>
+  </data>
+  <data name="txtHighLow" xml:space="preserve">
+    <value>من الأكبر للأصغر</value>
   </data>
   <data name="txtImageSizeError" xml:space="preserve">
     <value>الحجم يتجاوز !!</value>
@@ -1395,20 +1431,56 @@
   <data name="txtLandmark" xml:space="preserve">
     <value>معلم معروف</value>
   </data>
+  <data name="txtLoginFirst" xml:space="preserve">
+    <value>الرجاء تسجيل الدخول أولا</value>
+  </data>
+  <data name="txtLowHigh" xml:space="preserve">
+    <value>من الأصغر للأكبر</value>
+  </data>
+  <data name="txtMedicationName" xml:space="preserve">
+    <value>اسم الطب</value>
+  </data>
+  <data name="txtMenu" xml:space="preserve">
+    <value>خيارات</value>
+  </data>
   <data name="txtmostviewed" xml:space="preserve">
     <value>كثيرا ما تطلب</value>
   </data>
   <data name="txtNewUser" xml:space="preserve">
     <value>مستخدم جديد؟</value>
   </data>
+  <data name="txtNoOrders" xml:space="preserve">
+    <value>لا توجد أوامر</value>
+  </data>
+  <data name="txtNote" xml:space="preserve">
+    <value>ملحوظة :</value>
+  </data>
   <data name="txtNumber" xml:space="preserve">
-    <value>عدد</value>
+    <value>رقم المنزل</value>
+  </data>
+  <data name="txtNumbersofdays" xml:space="preserve">
+    <value>عدد الايام</value>
+  </data>
+  <data name="txtOngoingTreatment" xml:space="preserve">
+    <value>العلاج المستمر</value>
   </data>
   <data name="txtOrderHistory" xml:space="preserve">
     <value>الطلبات السابقة</value>
   </data>
+  <data name="txtOTPVerification" xml:space="preserve">
+    <value>التحقق من OTP</value>
+  </data>
+  <data name="txtPhotosAdded" xml:space="preserve">
+    <value>تمت إضافة الصور</value>
+  </data>
   <data name="txtpoints" xml:space="preserve">
     <value>نقاط</value>
+  </data>
+  <data name="txtPrice" xml:space="preserve">
+    <value>السعر</value>
+  </data>
+  <data name="txtProductGroups" xml:space="preserve">
+    <value>مجموعات المنتجات</value>
   </data>
   <data name="txtRegisterHere" xml:space="preserve">
     <value>سجل هنا</value>
@@ -1416,17 +1488,59 @@
   <data name="txtRemark" xml:space="preserve">
     <value>ملاحظات :</value>
   </data>
+  <data name="txtReminderList1" xml:space="preserve">
+    <value>مرة في اليوم</value>
+  </data>
+  <data name="txtReminderList2" xml:space="preserve">
+    <value>مرتين يوميا</value>
+  </data>
+  <data name="txtReminderList3" xml:space="preserve">
+    <value>3 مرات في اليوم</value>
+  </data>
+  <data name="txtReminderTimes" xml:space="preserve">
+    <value>أوقات التذكير</value>
+  </data>
+  <data name="txtResend" xml:space="preserve">
+    <value>إعادة إرسال</value>
+  </data>
+  <data name="txtReviewSubmit" xml:space="preserve">
+    <value>مراجعة وإرسال</value>
+  </data>
+  <data name="txtSchedule" xml:space="preserve">
+    <value>الطاولة</value>
+  </data>
+  <data name="txtSelectAddress" xml:space="preserve">
+    <value>أختر عنوان</value>
+  </data>
   <data name="txtSelectCategory" xml:space="preserve">
     <value>حدد قسيمة</value>
   </data>
   <data name="txtSelectCode" xml:space="preserve">
-    <value>حدد الرمز الترويجي</value>
+    <value>اضافة كوبون</value>
+  </data>
+  <data name="txtSettings" xml:space="preserve">
+    <value>إعدادات</value>
+  </data>
+  <data name="txtSortBy" xml:space="preserve">
+    <value>ترتيب</value>
+  </data>
+  <data name="txtSpecificdaysweek" xml:space="preserve">
+    <value>أيام محددة من الأسبوع</value>
+  </data>
+  <data name="txtStartDate" xml:space="preserve">
+    <value>تاريخ البدء:</value>
   </data>
   <data name="txtStreet" xml:space="preserve">
     <value>شارع</value>
   </data>
   <data name="txtVerificationCode" xml:space="preserve">
     <value>شيفرة التأكيد</value>
+  </data>
+  <data name="txtVerifyContinue" xml:space="preserve">
+    <value>إكمال</value>
+  </data>
+  <data name="txtViewOffers" xml:space="preserve">
+    <value>عرض القسائم</value>
   </data>
   <data name="txtWelcome1" xml:space="preserve">
     <value>للبدء ، انقر فوق الزر أدناه لتسجيل الدخول أو لإضافة حساب جديد وتكوين ملف التعريف الشخصي الخاص بك.</value>

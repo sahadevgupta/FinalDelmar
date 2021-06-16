@@ -8,7 +8,8 @@
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              xmlns:resources="clr-namespace:FormsLoyalty" 
              x:Name="itemPage"
-             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             Title="{x:Static resources:AppResources.DetailViewDetails}">
 
 
     <ContentPage.Triggers>
@@ -23,10 +24,10 @@
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
     </ContentPage.Resources>
 
-    <ContentPage.ToolbarItems>
+    <!--<ContentPage.ToolbarItems>
         <ToolbarItem IconImageSource="ic_action_stock" Order="Primary" Command="{Binding StockCommand}"/>
         <ToolbarItem IconImageSource="ic_action_navigation_more_vert" Order="Primary" Priority="1" Clicked="moreOption_Clicked"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
     
 
     <AbsoluteLayout>
@@ -129,7 +130,7 @@
                     </Label>
 
 
-                    <Label Margin="20,0,0,0"
+                    <Label Margin="20,0,20,0"
                    FontSize="Medium"
                            
                            HorizontalOptions="CenterAndExpand"
@@ -196,7 +197,7 @@
                        Text="{Binding Item.Details}"/>
 
 
-                    <Label Margin="10,20,0,0"
+                    <Label Margin="10,20,10,0"
                        TextColor="Black"
                        CharacterSpacing="2"
                            Text="{x:Static resources:AppResources.OfferRelatedItems}"

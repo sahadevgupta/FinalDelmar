@@ -61,7 +61,7 @@ namespace FormsLoyalty.ViewModels
             }
             else
             {
-               var response =  await App.dialogService.DisplayAlertAsync(null, "Please login first", "LOGIN", "CANCEL");
+               var response =  await App.dialogService.DisplayAlertAsync(null, AppResources.txtLoginFirst, AppResources.ActionbarLogin, AppResources.ApplicationCancel);
                 if (response)
                 {
                     await NavigationService.NavigateAsync(nameof(LoginPage));
@@ -164,14 +164,14 @@ namespace FormsLoyalty.ViewModels
 
             #region Item Tab
 
-            //drawerMenuItems.Add(new DrawerMenuItem()
-            //    {
-            //        ActivityType = AppConstValues.Items,
-            //        IsVisible = true,
-            //        Image = "ic_action_items_colored",
-            //        IsLoading = false,
-            //        Title = AppResources.ResourceManager.GetString("ActionbarItems", AppResources.Culture),
-            //    });
+            drawerMenuItems.Add(new DrawerMenuItem()
+            {
+                ActivityType = AppConstValues.Items,
+                IsVisible = true,
+                Image = "items",
+                IsLoading = false,
+                Title = AppResources.ResourceManager.GetString("ActionbarItems", AppResources.Culture),
+            });
 
             #endregion
 
@@ -382,6 +382,18 @@ namespace FormsLoyalty.ViewModels
 
             return couponCount;
         }
+
+        /// <summary>
+        /// This method is triggered whenever code is scanned through bar code scanner.
+        /// Navigates to item page with barcode string as parameter. 
+        /// </summary>
+        /// <param name="barcode"></param>
+        internal async void NavigateToItemPage(string barcode)
+        {
+
+            await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "barcode", barcode } });
+        }
+
 
         /// <summary>
         /// Get Notification count to display on the screen

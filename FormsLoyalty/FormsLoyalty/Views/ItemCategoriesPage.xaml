@@ -10,10 +10,11 @@
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin" 
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+             xmlns:resources="clr-namespace:FormsLoyalty"
              Visual="Material"
              x:Name="itemCategory"
              BackgroundColor="WhiteSmoke"
-             Title="Categories"
+             Title="{x:Static resources:AppResources.txtCategory}"
              NavigationPage.HasNavigationBar="True"
              ios:Page.UseSafeArea="True"
              
@@ -67,11 +68,18 @@
                                 DownsampleToViewSize="True"
                                />
                         </Grid>
-                    
+
                         <Label TextColor="White"
                                HorizontalTextAlignment="Center" FontSize="21" Margin="0,0,0,10"
                                FontAttributes="Bold"
-                               Text="{Binding SelectedCategory.Description}" />
+                               Text="{Binding SelectedCategory.Description}" >
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                                 Value="true">
+                                    <Setter Property="Text" Value="{Binding SelectedCategory.ArabicDescription}"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
                     </StackLayout>
                 </Frame>
             </StackLayout>
@@ -79,7 +87,7 @@
                 <!--Popular Foods-->
                 
                 <StackLayout  Margin="20" Grid.Row="1" Grid.Column="1" >
-                    <Label Text="Product Groups" FontSize="25" FontAttributes="Bold" TextColor="Black"/>
+                    <Label Text="{x:Static resources:AppResources.txtProductGroups}" FontSize="25" FontAttributes="Bold" TextColor="Black"/>
                     <CollectionView ItemsSource="{Binding Products}" 
                                  WidthRequest="110"
                                  HeightRequest="90"

@@ -132,8 +132,9 @@ namespace FormsLoyalty.ViewModels
 
         #endregion
 
-        public bool CanNavigate = true;
-        
+        public bool CanNavigate;
+        public bool IsUploadBtnClicked;
+
 
         public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
@@ -148,7 +149,7 @@ namespace FormsLoyalty.ViewModels
 
             IsActiveChanged += HandleIsActiveTrue;
 
-
+            DependencyService.Get<INotify>().ChangeTabBarFlowDirection(RTL);
 
         }
 
@@ -194,12 +195,13 @@ namespace FormsLoyalty.ViewModels
                 try
                 {
                     var request = await App.dialogService.DisplayActionSheetAsync("Upload a new photo", "Cancel", null, "Camera", "Gallery");
-                    if (request == "Cancel")
+                    if (string.IsNullOrEmpty(request) || request == "Cancel" )
                     {
                         return;
                     }
                     if (request == "Gallery")
                     {
+                        IsUploadBtnClicked = true;
                         await ImageHelper.PickFromGallery(5);
                     }
                     else
@@ -325,6 +327,7 @@ namespace FormsLoyalty.ViewModels
         internal void ChangeLanguage(string param)
         {
             IsPageEnabled = true;
+            AppData.IsLanguageChanged = true;
             Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
             {
                
@@ -967,7 +970,7 @@ namespace FormsLoyalty.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            CanNavigate = true;
+           
             if(timer!=null)
                 timer.Start();
         }

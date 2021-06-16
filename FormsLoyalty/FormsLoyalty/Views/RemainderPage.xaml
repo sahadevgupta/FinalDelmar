@@ -6,6 +6,7 @@
              x:Class="FormsLoyalty.Views.RemainderPage"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
            BackgroundColor="#D9f2f2ef"
              Title="{x:Static resources:AppResources.ActionbarReminders}">
 
@@ -22,6 +23,14 @@
 
             <StackLayout Orientation="Horizontal" Grid.Row="1" >
                     <Image Source="left_arrow" HeightRequest="16" WidthRequest="16" HorizontalOptions="Center" effects:TintImageEffect.TintColor="Black">
+
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                        Value="true">
+                                <Setter Property="Rotation" Value="180"/>
+                            </DataTrigger>
+                        </Image.Triggers>
+
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="leftarrow_Tapped"/>
                         </Image.GestureRecognizers>
@@ -72,6 +81,12 @@
                         </CollectionView.ItemTemplate>
                 </CollectionView>
                     <Image Source="right_arrow" HeightRequest="16" HorizontalOptions="Center" WidthRequest="16" effects:TintImageEffect.TintColor="Black">
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                        Value="true">
+                                <Setter Property="Rotation" Value="180"/>
+                            </DataTrigger>
+                        </Image.Triggers>
                         <Image.GestureRecognizers>
                             <TapGestureRecognizer Tapped="rightarrow_Tapped"/>
                         </Image.GestureRecognizers>

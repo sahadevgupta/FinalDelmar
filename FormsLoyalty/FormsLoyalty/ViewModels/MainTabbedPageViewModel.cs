@@ -62,15 +62,20 @@ namespace FormsLoyalty.ViewModels
 
         private readonly IUnityContainer _unityContainer;
         public Page currentTab;
+       
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             RTL = Settings.RTL;
-            RefreshMemberContact();
+            if (!AppData.IsLanguageChanged)
+            {
+                RefreshMemberContact();
+            }
+               
 
             MessagingCenter.Subscribe<BasketModel>(this, "CartUpdated", CheckCartCount);
             MessagingCenter.Subscribe<App>((App)Xamarin.Forms.Application.Current, "LoggedIn", ReloadView);
 
-            DependencyService.Get<INotify>().ChangeTabBarFlowDirection(RTL);
+            
             
         }
 
@@ -92,6 +97,7 @@ namespace FormsLoyalty.ViewModels
         /// </summary>
         void RefreshMemberContact()
         {
+            AppData.IsFirstTimeMemberRefresh = true;
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 try
@@ -104,6 +110,7 @@ namespace FormsLoyalty.ViewModels
                             await memberContactModel.UserGetByCardId(AppData.Device.CardId);
 
                             CheckCartCount(null);
+                           
                             //GetPoints();
                             //NotificationCountChanged();
                             //GetWishlistCount();
@@ -153,6 +160,19 @@ namespace FormsLoyalty.ViewModels
         public void SetSelectedTab(int tabIndex)
         {
             SelectedTab = tabIndex;
+        }
+
+        public override void OnNavigatedFrom(INavigationParameters parameters)
+        {
+            base.OnNavigatedFrom(parameters);
+        }
+        public override void OnNavigatedTo(INavigationParameters parameters)
+        {
+            base.OnNavigatedTo(parameters);
+        }
+        public override void Initialize(INavigationParameters parameters)
+        {
+            base.Initialize(parameters);
         }
     }
 }

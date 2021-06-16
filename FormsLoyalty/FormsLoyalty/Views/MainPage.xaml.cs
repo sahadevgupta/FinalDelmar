@@ -10,6 +10,7 @@ namespace FormsLoyalty.Views
     public partial class MainPage : ContentPage
     {
         MainPageViewModel _viewModel;
+       
         public MainPage()
         {
             InitializeComponent();
@@ -20,13 +21,15 @@ namespace FormsLoyalty.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _viewModel.CanNavigate = true;
+          
             MessagingCenter.Subscribe<App, List<Tuple<byte[], string>>>((App)Xamarin.Forms.Application.Current, "ImagesSelected", GetFileData);
         }
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
             _viewModel.IsSuggestionFound = false;
+            if (!_viewModel.IsUploadBtnClicked)
+                MessagingCenter.Unsubscribe<App, List<Tuple<byte[], string>>>((App)Xamarin.Forms.Application.Current, "ImagesSelected");
         }
 
 
@@ -38,7 +41,7 @@ namespace FormsLoyalty.Views
             _viewModel.CanNavigate = true;
 
             _viewModel.NavigateToScanPage(arg2);
-
+            _viewModel.IsUploadBtnClicked = false;
             _viewModel.CanNavigate = false;
         }
 
@@ -65,8 +68,8 @@ namespace FormsLoyalty.Views
             view.Opacity = 0;
             await view.FadeTo(1, 250);
 
+          
             _viewModel.ScanSend();
-            
 
             view.Opacity = 1;
         }

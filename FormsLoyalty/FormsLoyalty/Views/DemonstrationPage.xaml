@@ -21,7 +21,7 @@
                       IndicatorView="indicatorView">
         <CarouselView.ItemTemplate>
             <DataTemplate>
-                <Grid RowDefinitions="50,1*,7*,60" Padding="10">
+                <Grid RowDefinitions="40,1*,7*,50" Padding="10">
 
                         <Button Text="Skip Tour" Visual="{OnPlatform iOS=Material}" HorizontalOptions="End" HeightRequest="40" IsVisible="{Binding SkipButtonIsVisible}"
                                 Command="{Binding BindingContext.SkipCommand,Source={x:Reference demoPage}}"/>
@@ -51,7 +51,7 @@
         </CarouselView.ItemTemplate>
         </CarouselView>
 
-        <IndicatorView x:Name="indicatorView"
+        <IndicatorView x:Name="indicatorView" Margin="0,0,0,10"
                    IndicatorColor="LightGray"
                    SelectedIndicatorColor="#ff4f4f4f"
                    HorizontalOptions="Center" IndicatorsShape="Square">

@@ -131,6 +131,8 @@ namespace FormsLoyalty.Utils
         public static bool IsLoggedIn = false;
         public static bool IsInsideApp = false;
         public static bool IsViewStock = false;
+        public static bool IsLanguageChanged = false;
+        public static bool IsFirstTimeMemberRefresh = false;
         public static string Msg { get; set; }
         public static string MyPoints { get; set; }
         public static Device device;

@@ -9,19 +9,26 @@
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls" 
              xmlns:pancake="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              x:Class="FormsLoyalty.Views.ItemGroupPage"
              BackgroundColor="WhiteSmoke"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:resources="clr-namespace:FormsLoyalty">
 
     <NavigationPage.TitleView>
-        <StackLayout Orientation="Horizontal" FlowDirection="LeftToRight">
+        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
+            <StackLayout.Triggers>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                         Value="true">
+                    <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                </DataTrigger>
+            </StackLayout.Triggers>
             <Image 
               
                     VerticalOptions="Center"          
                    Aspect="AspectFill"
                 HeightRequest="40" WidthRequest="40"
-                   HorizontalOptions="Start"
+                 
                    Source="{Binding product.Images[0].Image,Converter={StaticResource BytesToImageSource}}">
                 <Image.Clip>
                     <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
@@ -29,7 +36,8 @@
             </Image>
 
             <Label Text="{Binding product.Description}"
-                VerticalOptions="CenterAndExpand"
+                   HorizontalOptions="Start"
+                VerticalTextAlignment="Center"
                CharacterSpacing="2"
                FontAttributes="Bold"
                TextColor="White"
@@ -72,7 +80,7 @@
 
 
             <Grid Grid.Row="1" ColumnDefinitions="Auto,*" RowDefinitions="Auto" VerticalOptions="CenterAndExpand">
-                <Label Margin="10,0,10,0" Text="Sort By" FontSize="16" VerticalTextAlignment="Center"
+                <Label Margin="10,0,10,0" Text="{x:Static resources:AppResources.txtSortBy}" FontSize="16" VerticalTextAlignment="Center"
                        FontAttributes="Bold"
                        TextColor="Silver"
                        Grid.Column="0"/>
@@ -140,7 +148,7 @@
             </Grid>
 
 
-            <Label  
+            <!--<Label  
                        FontAttributes="Bold"
                        FontSize="Medium" 
                        x:Name="noitemlbl"
@@ -150,12 +158,12 @@
                        VerticalTextAlignment="Center"
                        IsVisible="{Binding IsNoItemFound}"
                        Text="No Item Found " >
-                <!--<Label.Triggers>
+                --><!--<Label.Triggers>
                     <DataTrigger TargetType="Label" Binding="{Binding Items.Count}" Value="0">
                         <Setter Property="IsVisible" Value="true"/>
                     </DataTrigger>
-                </Label.Triggers>-->
-            </Label>
+                </Label.Triggers>--><!--
+            </Label>-->
 
             <CollectionView ItemsSource="{Binding Items}" 
                         Margin="10,0,10,0"

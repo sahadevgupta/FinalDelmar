@@ -1,6 +1,8 @@
 ﻿using FormsLoyalty.Utils;
 using FormsLoyalty.ViewModels;
+using System.Collections.Generic;
 using Xamarin.Forms;
+using ZXing.Net.Mobile.Forms;
 
 namespace FormsLoyalty.Views
 {
@@ -15,7 +17,7 @@ namespace FormsLoyalty.Views
 
         private async void menu_Tapped(object sender, System.EventArgs e)
         {
-            var view = (Grid)sender;
+            var view = (View)sender;
             view.BackgroundColor = Color.LightPink;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
@@ -27,19 +29,100 @@ namespace FormsLoyalty.Views
        
         private async void BarcodeScan_Tapped(object sender, System.EventArgs e)
         {
-            var view = (Grid)sender;
+
+            var view = (View)sender;
             view.BackgroundColor = Color.LightPink;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
 
-            _viewModel.DrawerSelected((e as TappedEventArgs).Parameter as DrawerMenuItem);
+            ScanImage();
             view.BackgroundColor = Color.Transparent;
             view.Opacity = 1;
+
+
+
+           
+        }
+        private async void ScanImage()
+        {
+            _viewModel.IsPageEnabled = true;
+            //var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
+            // options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
+            //ZXingScannerView scan = new ZXingScannerView()
+            //{
+
+            //   IsScanning  = true,
+            //   IsTorchOn = true
+            //};
+
+            //// await Navigation.PushAsync(scan);
+            //Navigation.PushAsync(scan);
+            //scan.OnScanResult += (result) =>
+            //{
+            //    scan.IsScanning = false;
+            //    ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
+            //    string type = barcodeFormat.ToString();
+            //    Device.BeginInvokeOnMainThread(async () =>
+            //    {
+            //        //Navigation.PopAsync();
+            //        await Navigation.PopAsync();
+            //        string barcode = result.Text;
+            //        _viewModel.NavigateToItemPage(barcode);
+            //    });
+            //};
+            //var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+
+            //scanner.TopText = AppResources.ScannerViewScannerTopText;
+            //scanner.BottomText = AppResources.ScannerViewScannerBottomText;
+
+            var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
+            options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
+
+            //var result = await scanner.Scan(options);
+
+
+            var overlay = new ZXingDefaultOverlay
+            {
+                ShowFlashButton = false,
+                TopText = AppResources.ScannerViewScannerTopText,
+                BottomText = AppResources.ScannerViewScannerBottomText,
+
+            };
+            overlay.BindingContext = overlay;
+
+
+            ZXingScannerPage scan = new ZXingScannerPage(options, overlay);
+            scan.DefaultOverlayTopText = "Title";
+            scan.DefaultOverlayBottomText = "TEXT";
+            scan.AutoFocus();
+            scan.DefaultOverlayShowFlashButton = true;
+            scan.HasTorch = true;
+            scan.Title = "SCAN";
+            
+
+            await Navigation.PushAsync(scan);
+            //Navigation.PushAsync(scan);
+            scan.OnScanResult += (result) =>
+            {
+                scan.IsScanning = false;
+                ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
+                string type = barcodeFormat.ToString();
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    //Navigation.PopAsync();
+                    await Navigation.PopAsync();
+                    string barcode = result.Text;
+                    ;
+                    _viewModel.NavigateToItemPage(barcode);
+                });
+            };
+
+            _viewModel.IsPageEnabled = false;
         }
 
         private async void Profile_Tapped(object sender, System.EventArgs e)
         {
-            var view = (Grid)sender;
+            var view = (View)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
 
@@ -49,7 +132,7 @@ namespace FormsLoyalty.Views
         }
         private async void Settings_Tapped(object sender, System.EventArgs e)
         {
-            var view = (StackLayout)sender;
+            var view = (View)sender;
            
             view.Opacity = 0;
             await view.FadeTo(1, 250);

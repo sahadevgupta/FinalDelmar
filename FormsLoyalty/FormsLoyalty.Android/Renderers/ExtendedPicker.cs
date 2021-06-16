@@ -32,6 +32,10 @@ namespace FormsLoyalty.Droid.Renderers
                 Control.TextAlignment = Android.Views.TextAlignment.TextStart;
 
                 //Control.Background = AddPickerStyles();
+
+                if(FormsLoyalty.Helpers.Settings.RTL)
+                    Control.SetCompoundDrawablesWithIntrinsicBounds(GetDrawable(), null,null , null);
+                else
                 Control.SetCompoundDrawablesWithIntrinsicBounds(null, null, GetDrawable(), null);
             }
 

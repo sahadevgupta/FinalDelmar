@@ -47,6 +47,7 @@ namespace FormsLoyalty.ViewModels
         private async void ChangeLanguage()
         {
             IsPageEnabled = true;
+            AppData.IsLanguageChanged = true;
             CultureInfo language;
             if (IsEnLan)
             {

@@ -113,7 +113,6 @@ namespace FormsLoyalty.ViewModels
             }
             try
             {
-               // var success = await memberContactModel.Login("sahadevgupta13", "1234567890", (s) => { });
                 var Otp = await new CommonModel().GenerateOTPAsync(MobileNumber);
                 await NavigationService.NavigateAsync(nameof(LoginOtpView), new NavigationParameters { { "number", MobileNumber },{"otp", Otp },{ "itemPage", FromItemPage } }, false, true);
 
@@ -122,7 +121,7 @@ namespace FormsLoyalty.ViewModels
                 //    DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
                 //}
                 //else
-                    MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
+                  //  MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
                
                 
             }

@@ -4,7 +4,9 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.LoginOtpView"
-             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" xmlns:local="clr-namespace:FormsLoyalty.Controls"
+             xmlns:iOS="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core" 
+             xmlns:local="clr-namespace:FormsLoyalty.Controls"
+             xmlns:resources="clr-namespace:FormsLoyalty"
              Visual="Material"
              iOS:Page.UseSafeArea="True"
              NavigationPage.HasNavigationBar="False">
@@ -23,7 +25,7 @@
             </ScrollView.Triggers>
             <Grid Margin="20" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
 
-                <Label Text="CLOSE" HorizontalOptions="End" FontSize="Body" FontAttributes="Bold" TextColor="Black">
+                <Label Text="{x:Static resources:AppResources.txtClose}" HorizontalOptions="End" FontSize="Body" FontAttributes="Bold" TextColor="Black">
                     <Label.GestureRecognizers>
                         <TapGestureRecognizer Command="{prism:GoBack}"/>
                     </Label.GestureRecognizers>
@@ -35,21 +37,24 @@
                      Margin="0,20,0,0"
                      Spacing="10">
                     <Image Source="imgPINPopUp"/>
-                    <Label Text="OTP VERIFICATION" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0"
+                    <Label Text="{x:Static resources:AppResources.txtOTPVerification}" FontSize="Medium" FontAttributes="Bold" HorizontalTextAlignment="Center" Margin="0,20,0,0"
                    TextColor="Black"/>
                     <Label HorizontalTextAlignment="Center" TextColor="Black">
                         <Label.FormattedText>
                             <FormattedString>
-                                <Span Text="Enter the OTP Sent to "/>
+                                <Span Text="{x:Static resources:AppResources.txtEnterOTP}"/>
+                                <Span Text=" "/>
                                 <Span Text="{Binding MobileNumber,StringFormat='{0}'}"  FontSize="Body" FontAttributes="Bold">
                                     <Span.GestureRecognizers>
                                         <TapGestureRecognizer Command="{prism:GoBack}"/>
-
-
                                     </Span.GestureRecognizers>
                                 </Span>
                                 <Span Text="  "/>
-                                <Span Text="&#9997;" TextColor="Black" FontSize="Large"/>
+                                <Span Text="&#9997;" TextColor="Black" FontSize="Large">
+                                    <Span.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{prism:GoBack}"/>
+                                    </Span.GestureRecognizers>
+                                </Span>
                             </FormattedString>
                         </Label.FormattedText>
                     </Label>
@@ -66,11 +71,12 @@
 
                 </Grid>
 
-                <Label HorizontalTextAlignment="Center" Grid.Row="4"  TextColor="Black" IsEnabled="False">
+                <Label HorizontalTextAlignment="Center" Margin="0,10,0,0" Grid.Row="4"  TextColor="Black" IsEnabled="{Binding IsResendEnabled}">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Didn't receive OTP? "/>
-                            <Span Text="RESEND" TextColor="IndianRed" FontSize="Body" FontAttributes="Bold">
+                            <Span Text="{x:Static resources:AppResources.txtDidnotReceiveOtp}"/>
+                            <Span Text=" "/>
+                            <Span Text="{x:Static resources:AppResources.txtResend}" TextColor="IndianRed" FontSize="Body" FontAttributes="Bold">
 
                                 <Span.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding ResendOtpCommand}"/>
@@ -81,15 +87,10 @@
                         </FormattedString>
                     </Label.FormattedText>
 
-                    <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding TimerCount}" Value="0">
-                            <Setter Property="IsEnabled" Value="True"/>
-                        </DataTrigger>
-                    </Label.Triggers>
-
+                   
                 </Label>
 
-                <Button Text="Verify &amp; Continue" Grid.Row="5" BackgroundColor="{StaticResource My_Button_Color}" VerticalOptions="Start" Margin="0,30"
+                <Button Text="{x:Static resources:AppResources.txtVerifyContinue}" Grid.Row="5" BackgroundColor="{StaticResource My_Button_Color}" VerticalOptions="Start" Margin="0,30"
                 HeightRequest="40" Command="{Binding OnVerifyCommand}"/>
 
 

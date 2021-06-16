@@ -13,7 +13,7 @@
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:resources="clr-namespace:FormsLoyalty"
              x:Name="storePage"
-             Title="Stores"
+             Title="{x:Static resources:AppResources.ActionbarStores}"
              >
 
     <ContentPage.Triggers>

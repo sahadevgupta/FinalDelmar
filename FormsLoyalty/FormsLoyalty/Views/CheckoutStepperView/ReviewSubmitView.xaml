@@ -183,7 +183,7 @@
 
                         <Label Text="{x:Static resources:AppResources.txtSelectCode}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-                        <Button HorizontalOptions="End" Text="View Offers" x:Name="viewOfferBtn" Clicked="viewOfferBtn_Clicked"
+                        <Button HorizontalOptions="End" Text="{x:Static resources:AppResources.txtViewOffers}" x:Name="viewOfferBtn" Clicked="viewOfferBtn_Clicked"
                             CornerRadius="20"  Padding="0" BackgroundColor="#06A9B1"/>
 
 

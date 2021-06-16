@@ -1330,8 +1330,14 @@
   <data name="txt6Digit" xml:space="preserve">
     <value>6 digit</value>
   </data>
+  <data name="txtAddReminder" xml:space="preserve">
+    <value>Add Reminder</value>
+  </data>
   <data name="txtAddress" xml:space="preserve">
     <value>Address</value>
+  </data>
+  <data name="txtAddressDetails" xml:space="preserve">
+    <value>Address Details</value>
   </data>
   <data name="txtApplied" xml:space="preserve">
     <value>applied!</value>
@@ -1351,11 +1357,17 @@
   <data name="txtCategory" xml:space="preserve">
     <value>Categories</value>
   </data>
+  <data name="txtClose" xml:space="preserve">
+    <value>CLOSE</value>
+  </data>
   <data name="txtComments" xml:space="preserve">
     <value>Comments</value>
   </data>
   <data name="txtCVV" xml:space="preserve">
     <value>CVV</value>
+  </data>
+  <data name="txtDays" xml:space="preserve">
+    <value>Days</value>
   </data>
   <data name="txtDemo1" xml:space="preserve">
     <value>Now you can upload or scan your Medicine Prescription</value>
@@ -1366,8 +1378,23 @@
   <data name="txtDemo3" xml:space="preserve">
     <value>Here, You can manage your Shopping Cart</value>
   </data>
+  <data name="txtDidnotReceiveOtp" xml:space="preserve">
+    <value>Didn't receive OTP?</value>
+  </data>
+  <data name="txtDuration" xml:space="preserve">
+    <value>Duration</value>
+  </data>
+  <data name="txtEnterNewAddress" xml:space="preserve">
+    <value>Enter New Address</value>
+  </data>
+  <data name="txtEnterOTP" xml:space="preserve">
+    <value>Enter the OTP Sent to</value>
+  </data>
   <data name="txtEnterPhoneNumber" xml:space="preserve">
     <value>Enter your Phone Number</value>
+  </data>
+  <data name="txtEvery day" xml:space="preserve">
+    <value>Every day</value>
   </data>
   <data name="txtExpired" xml:space="preserve">
     <value>Expired</value>
@@ -1380,6 +1407,12 @@
   </data>
   <data name="txtGenerateOtp" xml:space="preserve">
     <value>Generate OTP</value>
+  </data>
+  <data name="txtGuest" xml:space="preserve">
+    <value>Guest</value>
+  </data>
+  <data name="txtHighLow" xml:space="preserve">
+    <value>High to Low</value>
   </data>
   <data name="txtImageSizeError" xml:space="preserve">
     <value>Size Exceeds!!</value>
@@ -1399,20 +1432,56 @@
   <data name="txtLandmark" xml:space="preserve">
     <value>Landmark</value>
   </data>
+  <data name="txtLoginFirst" xml:space="preserve">
+    <value>Please login first</value>
+  </data>
+  <data name="txtLowHigh" xml:space="preserve">
+    <value>Low to High</value>
+  </data>
+  <data name="txtMedicationName" xml:space="preserve">
+    <value>Medication Name</value>
+  </data>
+  <data name="txtMenu" xml:space="preserve">
+    <value>Menu</value>
+  </data>
   <data name="txtmostviewed" xml:space="preserve">
     <value>Frequently Ordered</value>
   </data>
   <data name="txtNewUser" xml:space="preserve">
     <value>New User?</value>
   </data>
+  <data name="txtNoOrders" xml:space="preserve">
+    <value>There is no Orders to Show</value>
+  </data>
+  <data name="txtNote" xml:space="preserve">
+    <value>Note :</value>
+  </data>
   <data name="txtNumber" xml:space="preserve">
-    <value>Number</value>
+    <value>Building Number</value>
+  </data>
+  <data name="txtNumbersofdays" xml:space="preserve">
+    <value>Numbers of days</value>
+  </data>
+  <data name="txtOngoingTreatment" xml:space="preserve">
+    <value>Ongoing Treatment</value>
   </data>
   <data name="txtOrderHistory" xml:space="preserve">
     <value>Order History</value>
   </data>
+  <data name="txtOTPVerification" xml:space="preserve">
+    <value>OTP VERIFICATION</value>
+  </data>
+  <data name="txtPhotosAdded" xml:space="preserve">
+    <value>photos added</value>
+  </data>
   <data name="txtpoints" xml:space="preserve">
     <value>Points</value>
+  </data>
+  <data name="txtPrice" xml:space="preserve">
+    <value>Price</value>
+  </data>
+  <data name="txtProductGroups" xml:space="preserve">
+    <value>Product Groups</value>
   </data>
   <data name="txtRegisterHere" xml:space="preserve">
     <value>REGISTER HERE</value>
@@ -1420,17 +1489,59 @@
   <data name="txtRemark" xml:space="preserve">
     <value>Remarks :</value>
   </data>
+  <data name="txtReminderList1" xml:space="preserve">
+    <value>Once daily</value>
+  </data>
+  <data name="txtReminderList2" xml:space="preserve">
+    <value>Twice daily</value>
+  </data>
+  <data name="txtReminderList3" xml:space="preserve">
+    <value>3 times a day</value>
+  </data>
+  <data name="txtReminderTimes" xml:space="preserve">
+    <value>Reminder Times</value>
+  </data>
+  <data name="txtResend" xml:space="preserve">
+    <value>RESEND</value>
+  </data>
+  <data name="txtReviewSubmit" xml:space="preserve">
+    <value>Review &amp; Submit</value>
+  </data>
+  <data name="txtSchedule" xml:space="preserve">
+    <value>Schedule</value>
+  </data>
+  <data name="txtSelectAddress" xml:space="preserve">
+    <value>Select Address</value>
+  </data>
   <data name="txtSelectCategory" xml:space="preserve">
     <value>Select A Coupon</value>
   </data>
   <data name="txtSelectCode" xml:space="preserve">
     <value>Select a promo code</value>
   </data>
+  <data name="txtSettings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="txtSortBy" xml:space="preserve">
+    <value>Sort By</value>
+  </data>
+  <data name="txtSpecificdaysweek" xml:space="preserve">
+    <value>Specific days of the week</value>
+  </data>
+  <data name="txtStartDate" xml:space="preserve">
+    <value>Start Date:</value>
+  </data>
   <data name="txtStreet" xml:space="preserve">
     <value>Street</value>
   </data>
   <data name="txtVerificationCode" xml:space="preserve">
     <value>verification code</value>
+  </data>
+  <data name="txtVerifyContinue" xml:space="preserve">
+    <value>Verify &amp; Continue</value>
+  </data>
+  <data name="txtViewOffers" xml:space="preserve">
+    <value>View Offers</value>
   </data>
   <data name="txtWelcome1" xml:space="preserve">
     <value>To get started, tap the button below to log on or to add a new account and configure your personal profile.</value>

@@ -39,7 +39,7 @@
                     AbsoluteLayout.LayoutFlags="All">
 
             <CollectionView.EmptyView>
-                <Label Text="There is no orders to show" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"/>
+                <Label Text="{x:Static resources:AppResources.txtNoOrders}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"/>
             </CollectionView.EmptyView>
 
             <CollectionView.Triggers>

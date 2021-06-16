@@ -44,7 +44,7 @@
                     <Label.Triggers>
                         <DataTrigger TargetType="Label" Binding="{Binding ProfileName,Converter={StaticResource StringToBoolConverter}}"
                                  Value="False">
-                            <Setter Property="Text" Value="Guest"/>
+                            <Setter Property="Text" Value="{x:Static resources:AppResources.txtGuest}"/>
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
@@ -75,7 +75,7 @@
             <ScrollView Grid.Row="1">
                 <Grid RowDefinitions="Auto,Auto,Auto">
 
-                    <Label Text="Menu" Margin="10,0,10,0" FontSize="Body"  FontAttributes="Bold" Grid.Row="0"/>
+                    <Label Text="{x:Static resources:AppResources.txtMenu}" Margin="10,0,10,0" FontSize="Body"  FontAttributes="Bold" Grid.Row="0"/>
 
                     <StackLayout BindableLayout.ItemsSource="{Binding drawerMenuItems}" 
                               BackgroundColor="White"
@@ -109,20 +109,20 @@
                                        effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
                                        />
 
-                                    <Image Source="ic_action_barcode_colored.png"
+                                    <Image Source="barcode.png"
                                        IsVisible="false"
-                                       HeightRequest="30"
-                                       WidthRequest="50"
+                                         HeightRequest="30"
+                                           
                                        effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
                                        Grid.Column="2" HorizontalOptions="End" Margin="0,0,10,0">
 
                                         <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="BarcodeScan_Tapped"/>
+                                            <TapGestureRecognizer Tapped="BarcodeScan_Tapped" CommandParameter="{Binding .}"/>
                                         </Image.GestureRecognizers>
 
                                         <Image.Triggers>
                                             <DataTrigger TargetType="Image" Binding="{Binding Title}"
-                                                     Value="Items">
+                                                     Value="{x:Static resources:AppResources.ActionbarItems}">
                                                 <Setter Property="IsVisible" Value="True"/>
                                             </DataTrigger>
                                         </Image.Triggers>
@@ -175,7 +175,7 @@
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
 
-                    <Label Text="Settings" Margin="10,0,10,0" FontSize="Body" FontAttributes="Bold" Grid.Row="2"/>
+                    <Label Text="{x:Static resources:AppResources.txtSettings}" Margin="10,0,10,0" FontSize="Body" FontAttributes="Bold" Grid.Row="2"/>
 
                     <Grid Grid.Row="3" BackgroundColor="White" RowDefinitions="Auto,Auto"  Padding="10">
 

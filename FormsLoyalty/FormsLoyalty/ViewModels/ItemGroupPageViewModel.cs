@@ -328,8 +328,8 @@ namespace FormsLoyalty.ViewModels
                             }
                            
                         }
-                        else
-                            item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
+                        //else
+                          //  item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
                         
                     }
                 });
@@ -356,17 +356,19 @@ namespace FormsLoyalty.ViewModels
         internal async Task FilterItems(string text)
         {
            
-            if (text.Contains("Price"))
+            if (text.Equals(AppResources.txtPrice))
             {
                 SelectedSortOption = "price";
-               var response =  await App.dialogService.DisplayActionSheetAsync(null, "Cancel",null, "High to low", "Low to High");
-                if (response.Equals("High to low"))
+               var response =  await App.dialogService.DisplayActionSheetAsync(null, AppResources.ApplicationCancel,null, AppResources.txtHighLow, AppResources.txtLowHigh);
+                if (response == null || response.Equals(AppResources.ApplicationCancel))
+                    return;
+                else if (response.Equals(AppResources.txtHighLow))
                 {
                     Items = new ObservableCollection<LoyItem>();
                     IsSortedDesc = true;
                     await LoadLoyItem();
                 }
-                else if(response.Equals("Low to High"))
+                else if(response.Equals(AppResources.txtLowHigh))
                 {
                     Items = new ObservableCollection<LoyItem>();
                     IsSortedDesc = false;
@@ -474,7 +476,7 @@ namespace FormsLoyalty.ViewModels
         public async override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-            SortingOptions = new ObservableCollection<string> { "Price", "A > Z", "Z < A" };
+            SortingOptions = new ObservableCollection<string> { AppResources.txtPrice, "A > Z", "Z < A" };
             product = parameters.GetValue<ProductGroup>("prodGroup");
             await LoadNextItems();
            

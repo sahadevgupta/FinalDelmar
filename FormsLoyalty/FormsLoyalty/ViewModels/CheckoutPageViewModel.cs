@@ -428,8 +428,8 @@ namespace FormsLoyalty.ViewModels
           
             Steps = new ObservableCollection<StepBarModel>()
             {
-                new StepBarModel(){ StepName="Address Details",Status=StepBarStatus.InProgress,IsNotLast=true,MainContent=new AddressDetailsView(this),IsCurrentContent=true},
-                new StepBarModel(){ StepName="Review & Submit",Status=StepBarStatus.Pending,IsNotLast=false,MainContent=new ReviewSubmitView(this),IsCurrentContent=false},
+                new StepBarModel(){ StepName=AppResources.txtAddressDetails,Status=StepBarStatus.InProgress,IsNotLast=true,MainContent=new AddressDetailsView(this),IsCurrentContent=true},
+                new StepBarModel(){ StepName=AppResources.txtReviewSubmit,Status=StepBarStatus.Pending,IsNotLast=false,MainContent=new ReviewSubmitView(this),IsCurrentContent=false},
             };
             StepListCount = Steps.Count;
             
@@ -685,7 +685,7 @@ namespace FormsLoyalty.ViewModels
 
                 addresses = new ObservableCollection<Address>(AppData.Device.UserLoggedOnToDevice.Addresses);
             }
-            addresses.Add(new Address { Address1 = "Enter New Address" });
+            addresses.Add(new Address { Address1 = AppResources.txtEnterNewAddress });
 
             selectedAddress = addresses.First();
             Task.Run(async () =>

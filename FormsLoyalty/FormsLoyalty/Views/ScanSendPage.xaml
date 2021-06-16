@@ -39,9 +39,17 @@
 
                 <StackLayout IsClippedToBounds="True">
 
-            <Label Text="{Binding ImageList.Count, StringFormat='{0} photos added'}"
+                <Label
                    FontSize="Body"
-                   TextColor="Black"/>
+                   TextColor="Black">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding ImageList.Count}"/>
+                            <Span Text=" "/>
+                            <Span Text="{x:Static resources:AppResources.txtPhotosAdded}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
 
                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand">
                     <Frame  WidthRequest="80" IsClippedToBounds="True" Padding="5" BorderColor="#404f4f4f"
@@ -84,7 +92,8 @@
                 <Label>
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="Note : " FontAttributes="Bold" FontSize="Body"/>
+                            <Span Text="{x:Static resources:AppResources.txtNote}" FontAttributes="Bold" FontSize="Body"/>
+                            <Span Text=" "/>
                             <Span Text="{x:Static resources:AppResources.txtImgSizeNote}"
                                   TextColor="red" FontSize="Caption"/>
 

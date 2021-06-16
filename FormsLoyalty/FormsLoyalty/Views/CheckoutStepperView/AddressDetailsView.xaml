@@ -48,23 +48,23 @@
 
         <Frame Padding="5,0,5,0" Margin="5,0,5,0" CornerRadius="5" BackgroundColor="WhiteSmoke" HasShadow="True" Visual="Material">
             <StackLayout IsClippedToBounds="True">
-            <Label Text="Select Address" FontSize="Body" Margin="5,0" FontAttributes="Bold"/>
+                <Label Text="{x:Static resources:AppResources.txtSelectAddress}" FontSize="Body" Margin="5,0" FontAttributes="Bold"/>
             <Picker ItemsSource="{Binding addresses}" SelectedItem="{Binding selectedAddress}"
                     TextColor="{StaticResource My_Header_Color}" 
                     BackgroundColor="WhiteSmoke"
                     ItemDisplayBinding="{Binding Address1}"
                     TitleColor="Black"
                     
-                    Title="Select Address"
+                    Title="{x:Static resources:AppResources.txtSelectAddress}"
                     Visual="Default"/>
             </StackLayout>
         </Frame>
-            
-            
 
 
 
-        <controls:ContentPageTitleView StepperContentPageTitle="Address Details"
+
+
+        <controls:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.txtAddressDetails}"
                                        Margin="10,10,0,0"/>
 
         <!--<Label Text="Address Details" Margin="0,10,0,0"

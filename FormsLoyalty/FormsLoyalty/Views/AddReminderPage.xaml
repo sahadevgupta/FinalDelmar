@@ -8,9 +8,11 @@
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:mat="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:resources="clr-namespace:FormsLoyalty"
              BackgroundColor="#33b6b6b6"
              x:Name="thisPage"
-             Visual="Material">
+             Visual="Material"
+             Title="{x:Static resources:AppResources.txtAddReminder}">
     <ContentPage.Triggers>
 
         <DataTrigger TargetType="ContentPage"
@@ -42,13 +44,13 @@
             <Grid Padding="10" RowDefinitions="Auto,Auto,Auto,Auto">
                 <Frame Margin="0,5">
                     <StackLayout>
-                        <Label Text="Medication Name" FontSize="Medium" TextColor="{StaticResource My_Header_Color}"/>
+                        <Label Text="{x:Static resources:AppResources.txtMedicationName}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}"/>
                         <Entry x:Name="namelbl" Text="{Binding medicineReminder.EventName}" Placeholder="Type active ingrident or brand name" Visual="Default"/>
 
                         <Frame Padding="5,0,5,0" HeightRequest="40" HasShadow="True" >
                             <controls:CustomPicker ItemsSource="{Binding Units}" 
                                        SelectedItem="{Binding SelectedUnit}" TextColor="Black"
-                                       Title="Unit" 
+                                       Title="{x:Static resources:AppResources.ItemViewUnitOfMeasure}" 
                                    Visual="Default"   />
                             <Frame.Triggers>
                                 <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference namelbl},Path=Text,Converter={StaticResource StringToBoolConverter}}"
@@ -95,7 +97,7 @@
 
                         <Expander.Header>
                             <StackLayout Orientation="Horizontal">
-                                <Label Text="Reminder Times" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{x:Static resources:AppResources.txtReminderTimes}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
 
 
                                 <Switch x:Name="reminderSwitch"  HorizontalOptions="End" IsToggled="{Binding medicineReminder.IsReminder}" OnColor="#f6ced0" 
@@ -196,7 +198,7 @@
                     <Expander x:Name="schexpander" HorizontalOptions="FillAndExpand">
                         <Expander.Header>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
-                                <Label Text="Schedule" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
+                                <Label Text="{x:Static resources:AppResources.txtSchedule}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
                                 <Image Source="left_arrow" BackgroundColor="Transparent" 
                                                  HeightRequest="16" Aspect="AspectFit"
                                            effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
@@ -215,12 +217,12 @@
 
                         </Expander.Header>
                         <Grid Padding="10" ColumnDefinitions="Auto,*" RowDefinitions="Auto,0.5,Auto,Auto">
-                            <Label Text="Start Date:" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start"/>
+                            <Label Text="{x:Static resources:AppResources.txtStartDate}" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start"/>
                             <DatePicker Grid.Column="1" Date="{Binding medicineReminder.From}" Format="dd MMMM" Visual="Default" HorizontalOptions="Start"/>
                             <BoxView HeightRequest="0.5" Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Silver" HorizontalOptions="FillAndExpand"/>
 
                             <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
-                                <Label Text="Duration" FontAttributes="Bold" TextColor="Black" FontSize="Body" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                <Label Text="{x:Static resources:AppResources.txtDuration}" FontAttributes="Bold" TextColor="Black" FontSize="Body" VerticalOptions="Center" HorizontalOptions="Start"/>
 
                                 <StackLayout Orientation="Horizontal">
                                     <StackLayout.Spacing>
@@ -231,7 +233,7 @@
                                     <RadioButton Visual="Material" x:Name="ongoingSwitch" 
                                                  Text="Ongoing Treatment"
                                                  GroupName="duration" IsChecked="True" CheckedChanged="duration_CheckedChanged" />
-                                    <Label Text="Ongoing Treatment"  FontSize="Default" LineBreakMode="TailTruncation" 
+                                    <Label Text="{x:Static resources:AppResources.txtOngoingTreatment}"  FontSize="Default" LineBreakMode="TailTruncation" 
                        VerticalOptions="Center"/>
                                 </StackLayout>
 
@@ -244,7 +246,7 @@
                                     <RadioButton Visual="Material" 
                                                  Text="Numbers of days"
                                                  GroupName="duration" CheckedChanged="duration_CheckedChanged"/>
-                                    <Label Text="Numbers of days"  FontSize="Default" LineBreakMode="TailTruncation" 
+                                    <Label Text="{x:Static resources:AppResources.txtNumbersofdays}"  FontSize="Default" LineBreakMode="TailTruncation" 
                        VerticalOptions="Center"/>
                                 </StackLayout>
                                 <Label Text="{Binding medicineReminder.NoOfDays}" Margin="10,0" TextColor="{StaticResource My_Header_Color}">
@@ -266,7 +268,7 @@
 
 
                             <StackLayout Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="150">
-                                <Label Text="Days" FontAttributes="Bold" TextColor="Black" FontSize="Body" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                <Label Text="{x:Static resources:AppResources.txtDays}" FontAttributes="Bold" TextColor="Black" FontSize="Body" VerticalOptions="Center" HorizontalOptions="Start"/>
 
                                 <StackLayout Orientation="Horizontal">
                                     <StackLayout.Spacing>
@@ -279,7 +281,7 @@
                                                  Text="Every day"
                                                  Visual="Material"
                                          GroupName="days" IsChecked="{Binding medicineReminder.AllDay}" CheckedChanged="days_CheckedChanged" />
-                                    <Label Text="Every day"  FontSize="Default" LineBreakMode="TailTruncation" 
+                                    <Label Text="{x:Static resources:AppResources.txtEvery_day}"  FontSize="Default" LineBreakMode="TailTruncation" 
                        VerticalOptions="Center"/>
                                 </StackLayout>
 
@@ -293,7 +295,7 @@
                                     <RadioButton Visual="Material" 
                                                  Text="Specific days of the week"
                                                  GroupName="days" CheckedChanged="days_CheckedChanged"/>
-                                    <Label Text="Specific days of the week"  FontSize="Default" LineBreakMode="TailTruncation" 
+                                    <Label Text="{x:Static resources:AppResources.txtSpecificdaysweek}"  FontSize="Default" LineBreakMode="TailTruncation" 
                        VerticalOptions="Center"/>
                                 </StackLayout>
                                 <Label x:Name="dayslbl" Margin="10,0" Text="{Binding medicineReminder.SpecificDays}" TextColor="{StaticResource My_Header_Color}"
@@ -318,7 +320,7 @@
                 </Frame>
 
 
-                <Button Text="Next" HorizontalOptions="End" BackgroundColor="#4f4f4f"  Visual="Material"
+                <Button Text="{x:Static resources:AppResources.ApplicationNext}" HorizontalOptions="End" BackgroundColor="#4f4f4f"  Visual="Material"
                         Clicked="Next_Clicked"
                  Grid.Row="3">
                     <Button.Triggers>

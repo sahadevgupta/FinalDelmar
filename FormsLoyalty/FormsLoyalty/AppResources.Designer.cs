@@ -3698,11 +3698,29 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Reminder.
+        /// </summary>
+        public static string txtAddReminder {
+            get {
+                return ResourceManager.GetString("txtAddReminder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string txtAddress {
             get {
                 return ResourceManager.GetString("txtAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address Details.
+        /// </summary>
+        public static string txtAddressDetails {
+            get {
+                return ResourceManager.GetString("txtAddressDetails", resourceCulture);
             }
         }
         
@@ -3761,6 +3779,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CLOSE.
+        /// </summary>
+        public static string txtClose {
+            get {
+                return ResourceManager.GetString("txtClose", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Comments.
         /// </summary>
         public static string txtComments {
@@ -3775,6 +3802,15 @@ namespace FormsLoyalty {
         public static string txtCVV {
             get {
                 return ResourceManager.GetString("txtCVV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Days.
+        /// </summary>
+        public static string txtDays {
+            get {
+                return ResourceManager.GetString("txtDays", resourceCulture);
             }
         }
         
@@ -3806,11 +3842,56 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Didn&apos;t receive OTP?.
+        /// </summary>
+        public static string txtDidnotReceiveOtp {
+            get {
+                return ResourceManager.GetString("txtDidnotReceiveOtp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Duration.
+        /// </summary>
+        public static string txtDuration {
+            get {
+                return ResourceManager.GetString("txtDuration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter New Address.
+        /// </summary>
+        public static string txtEnterNewAddress {
+            get {
+                return ResourceManager.GetString("txtEnterNewAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the OTP Sent to.
+        /// </summary>
+        public static string txtEnterOTP {
+            get {
+                return ResourceManager.GetString("txtEnterOTP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter your Phone Number.
         /// </summary>
         public static string txtEnterPhoneNumber {
             get {
                 return ResourceManager.GetString("txtEnterPhoneNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Every day.
+        /// </summary>
+        public static string txtEvery_day {
+            get {
+                return ResourceManager.GetString("txtEvery day", resourceCulture);
             }
         }
         
@@ -3847,6 +3928,24 @@ namespace FormsLoyalty {
         public static string txtGenerateOtp {
             get {
                 return ResourceManager.GetString("txtGenerateOtp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Guest.
+        /// </summary>
+        public static string txtGuest {
+            get {
+                return ResourceManager.GetString("txtGuest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to High to Low.
+        /// </summary>
+        public static string txtHighLow {
+            get {
+                return ResourceManager.GetString("txtHighLow", resourceCulture);
             }
         }
         
@@ -3905,6 +4004,42 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please login first.
+        /// </summary>
+        public static string txtLoginFirst {
+            get {
+                return ResourceManager.GetString("txtLoginFirst", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low to High.
+        /// </summary>
+        public static string txtLowHigh {
+            get {
+                return ResourceManager.GetString("txtLowHigh", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Medication Name.
+        /// </summary>
+        public static string txtMedicationName {
+            get {
+                return ResourceManager.GetString("txtMedicationName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Menu.
+        /// </summary>
+        public static string txtMenu {
+            get {
+                return ResourceManager.GetString("txtMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Frequently Ordered.
         /// </summary>
         public static string txtmostviewed {
@@ -3923,11 +4058,47 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Number.
+        ///   Looks up a localized string similar to There is no Orders to Show.
+        /// </summary>
+        public static string txtNoOrders {
+            get {
+                return ResourceManager.GetString("txtNoOrders", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Note :.
+        /// </summary>
+        public static string txtNote {
+            get {
+                return ResourceManager.GetString("txtNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Building Number.
         /// </summary>
         public static string txtNumber {
             get {
                 return ResourceManager.GetString("txtNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Numbers of days.
+        /// </summary>
+        public static string txtNumbersofdays {
+            get {
+                return ResourceManager.GetString("txtNumbersofdays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ongoing Treatment.
+        /// </summary>
+        public static string txtOngoingTreatment {
+            get {
+                return ResourceManager.GetString("txtOngoingTreatment", resourceCulture);
             }
         }
         
@@ -3941,11 +4112,47 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to OTP VERIFICATION.
+        /// </summary>
+        public static string txtOTPVerification {
+            get {
+                return ResourceManager.GetString("txtOTPVerification", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to photos added.
+        /// </summary>
+        public static string txtPhotosAdded {
+            get {
+                return ResourceManager.GetString("txtPhotosAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Points.
         /// </summary>
         public static string txtpoints {
             get {
                 return ResourceManager.GetString("txtpoints", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price.
+        /// </summary>
+        public static string txtPrice {
+            get {
+                return ResourceManager.GetString("txtPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product Groups.
+        /// </summary>
+        public static string txtProductGroups {
+            get {
+                return ResourceManager.GetString("txtProductGroups", resourceCulture);
             }
         }
         
@@ -3968,6 +4175,78 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Once daily.
+        /// </summary>
+        public static string txtReminderList1 {
+            get {
+                return ResourceManager.GetString("txtReminderList1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twice daily.
+        /// </summary>
+        public static string txtReminderList2 {
+            get {
+                return ResourceManager.GetString("txtReminderList2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 3 times a day.
+        /// </summary>
+        public static string txtReminderList3 {
+            get {
+                return ResourceManager.GetString("txtReminderList3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Reminder Times.
+        /// </summary>
+        public static string txtReminderTimes {
+            get {
+                return ResourceManager.GetString("txtReminderTimes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to RESEND.
+        /// </summary>
+        public static string txtResend {
+            get {
+                return ResourceManager.GetString("txtResend", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Review &amp; Submit.
+        /// </summary>
+        public static string txtReviewSubmit {
+            get {
+                return ResourceManager.GetString("txtReviewSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Schedule.
+        /// </summary>
+        public static string txtSchedule {
+            get {
+                return ResourceManager.GetString("txtSchedule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Address.
+        /// </summary>
+        public static string txtSelectAddress {
+            get {
+                return ResourceManager.GetString("txtSelectAddress", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select A Coupon.
         /// </summary>
         public static string txtSelectCategory {
@@ -3986,6 +4265,42 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string txtSettings {
+            get {
+                return ResourceManager.GetString("txtSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sort By.
+        /// </summary>
+        public static string txtSortBy {
+            get {
+                return ResourceManager.GetString("txtSortBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Specific days of the week.
+        /// </summary>
+        public static string txtSpecificdaysweek {
+            get {
+                return ResourceManager.GetString("txtSpecificdaysweek", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Date:.
+        /// </summary>
+        public static string txtStartDate {
+            get {
+                return ResourceManager.GetString("txtStartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Street.
         /// </summary>
         public static string txtStreet {
@@ -4000,6 +4315,24 @@ namespace FormsLoyalty {
         public static string txtVerificationCode {
             get {
                 return ResourceManager.GetString("txtVerificationCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Verify &amp; Continue.
+        /// </summary>
+        public static string txtVerifyContinue {
+            get {
+                return ResourceManager.GetString("txtVerifyContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Offers.
+        /// </summary>
+        public static string txtViewOffers {
+            get {
+                return ResourceManager.GetString("txtViewOffers", resourceCulture);
             }
         }
         
