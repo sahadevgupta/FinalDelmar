@@ -59,7 +59,7 @@ namespace FormsLoyalty.iOS
 
             UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
              // SetStatusBarColor();
-            GlobalExceptionHelper.RegisterForGlobalExceptionHandling();
+           // GlobalExceptionHelper.RegisterForGlobalExceptionHandling();
 
             //MessagingCenter.Subscribe<object, object>(this, "ShowMainScreen", (sender, args) =>
             //{

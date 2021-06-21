@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.AccountTierPage"
              xmlns:resources="clr-namespace:FormsLoyalty"
-             Title="{x:Static resources:AppResources.app_name}">
+             Title="{x:Static resources:AppResources.app_name}"
+             BackgroundColor="WhiteSmoke">
 
     
     

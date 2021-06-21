@@ -305,9 +305,17 @@ namespace FormsLoyalty.Models
                 AppData.Basket = contact.GetBasket(AppData.Device.CardId);
                 AppData.Device.SecurityToken = contact.LoggedOnToDevice.SecurityToken;
 
-               // SendBroadcast(Utils.BroadcastUtils.DomainModelUpdated); need to be configured
+                // SendBroadcast(Utils.BroadcastUtils.DomainModelUpdated); need to be configured
+                try
+                {
+                    deviceRepo.SaveDevice(AppData.Device);
+                }
+                catch (Exception)
+                {
 
-                deviceRepo.SaveDevice(AppData.Device);
+                    
+                }
+                
 
                 SaveLocalMemberContact(contact);
 

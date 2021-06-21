@@ -6,7 +6,8 @@
              x:Class="FormsLoyalty.Views.TermsConditionPage"
              xmlns:resources="clr-namespace:FormsLoyalty" 
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
-             Title="{x:Static resources:AppResources.ActionbarTerm}">
+             Title="{x:Static resources:AppResources.ActionbarTerm}"
+             BackgroundColor="WhiteSmoke">
 
 
     <Grid>

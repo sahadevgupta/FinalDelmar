@@ -55,6 +55,12 @@ namespace FormsLoyalty.ViewModels
             ProceedCommand = new DelegateCommand(async() => await UploadScanSend());
         }
 
+        internal async void NavigateToCameraView()
+        {
+            await NavigationService.NavigateAsync(nameof(CameraPage), null, true, false);
+
+        }
+
         private async Task UploadScanSend()
         {
             IsPageEnabled = true;
@@ -144,7 +150,7 @@ namespace FormsLoyalty.ViewModels
                 scansend.ImagedBase64 = Convert.ToBase64String(item.Item1);
                 scansend.id = i + 1;
                 scansend.imageExtension = item.Item2;
-                scansend.ContactNo = memberContact.Id;
+                scansend.ContactNo = memberContact?.Id;
                 ImageList.Add(scansend);
                 i++;
             }
@@ -168,6 +174,24 @@ namespace FormsLoyalty.ViewModels
             base.OnNavigatedTo(parameters);
             CanNavigate = true;
             MessagingCenter.Subscribe<App, List<Tuple<byte[], string>>>((App)Xamarin.Forms.Application.Current, "ImagesSelected", GetFileData);
+            var navigationMode = parameters.GetNavigationMode();
+            if (navigationMode == NavigationMode.Back)
+            {
+                
+                var imgData = parameters.GetValue<List<Tuple<byte[], string>>>("images");
+                var scansend = new ScanSend
+                {
+                    id = ImageList.Count() + 1,
+                    imageExtension = imgData[0].Item2,
+                    ImagedBase64 = Convert.ToBase64String(imgData[0].Item1),
+                    ContactNo = AppData.Device.UserLoggedOnToDevice.MobilePhone
+                };
+
+                ImageList.Add(scansend);
+
+
+                   
+            }
 
         }
         public override void OnNavigatedFrom(INavigationParameters parameters)

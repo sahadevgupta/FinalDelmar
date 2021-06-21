@@ -8,6 +8,7 @@
              xmlns:local="clr-namespace:FormsLoyalty.Controls"
              xmlns:resources="clr-namespace:FormsLoyalty"
              Visual="Material"
+             BackgroundColor="WhiteSmoke"
              iOS:Page.UseSafeArea="True"
              NavigationPage.HasNavigationBar="False">
 
@@ -23,7 +24,7 @@
                     <Setter Property="IsEnabled" Value="False"/>
                 </DataTrigger>
             </ScrollView.Triggers>
-            <Grid Margin="20" RowDefinitions="Auto,Auto,Auto,Auto,Auto">
+            <Grid Margin="20" RowDefinitions="Auto,Auto,Auto,Auto,Auto" >
 
                 <Label Text="{x:Static resources:AppResources.txtClose}" HorizontalOptions="End" FontSize="Body" FontAttributes="Bold" TextColor="Black">
                     <Label.GestureRecognizers>
@@ -54,6 +55,9 @@
                                     <Span.GestureRecognizers>
                                         <TapGestureRecognizer Command="{prism:GoBack}"/>
                                     </Span.GestureRecognizers>
+                                    
+                                    
+                                    
                                 </Span>
                             </FormattedString>
                         </Label.FormattedText>

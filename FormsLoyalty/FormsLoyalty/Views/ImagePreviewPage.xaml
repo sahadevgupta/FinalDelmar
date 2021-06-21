@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.ImagePreviewPage"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
-             x:Name="previewPage">
+             x:Name="previewPage"
+             BackgroundColor="WhiteSmoke">
 
     <ContentPage.Resources>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>

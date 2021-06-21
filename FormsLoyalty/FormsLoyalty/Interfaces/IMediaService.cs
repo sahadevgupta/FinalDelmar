@@ -1,7 +1,4 @@
 ﻿using FormsLoyalty.Helpers.Media;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace FormsLoyalty.Interfaces
@@ -17,7 +14,10 @@ namespace FormsLoyalty.Interfaces
 		/// <returns>Task&lt;IMediaFile&gt;.</returns>
 		Task<MediaFile> TakePhotoAsync(CameraMediaStorageOptions options);
 
-    }
+		byte[] CompressImage(byte[] imgBytes);
+
+
+	}
 
 	#region Base Options
 

@@ -19,7 +19,7 @@ namespace FormsLoyalty.Views
         {
             base.OnAppearing();
            _viewModel.LoadOffers();
-            ChangeToolbarIcon();
+           // ChangeToolbarIcon();
         }
 
         private void ChangeToolbarIcon()
@@ -61,7 +61,7 @@ namespace FormsLoyalty.Views
         private void ToolbarItem_Clicked(object sender, System.EventArgs e)
         {
             Settings.ShowCard = !Settings.ShowCard;
-            ChangeToolbarIcon();
+            //ChangeToolbarIcon();
         }
 
         private async void Offer_Tapped(object sender, System.EventArgs e)

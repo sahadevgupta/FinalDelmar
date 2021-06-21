@@ -8,7 +8,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XF.Material.Forms.Resources;
 using XF.Material.Forms.UI.Dialogs;
+using XF.Material.Forms.UI.Dialogs.Configurations;
 
 namespace FormsLoyalty.Views
 {
@@ -25,7 +27,7 @@ namespace FormsLoyalty.Views
         {
             var radioBtn = ((RadioButton)sender);
 
-            if (radioBtn.Text.Contains("Specific") && radioBtn.IsChecked)
+            if (radioBtn.Content.ToString().Contains("Specific") && radioBtn.IsChecked)
             {
                 await SetSpecificDaysReminder();
 
@@ -47,10 +49,23 @@ namespace FormsLoyalty.Views
 
         private async Task SetSpecificDaysReminder()
         {
+
+            var simpleDialogConfiguration = new MaterialConfirmationDialogConfiguration
+            {
+                // BackgroundColor = XF.Material.Forms.Material.GetResource<Color>(MaterialConstants.Color.PRIMARY),
+                // TitleTextColor = XF.Material.Forms.Material.GetResource<Color>(MaterialConstants.Color.ON_PRIMARY),
+                ButtonAllCaps = false,
+                
+                CornerRadius = 8,
+                ControlSelectedColor = Color.FromHex("#b72228"),
+                ControlUnselectedColor = Color.Black.MultiplyAlpha(0.66),
+                // ScrimColor = Color.FromHex("#232F34").MultiplyAlpha(0.32)
+            };
+
             var result = await MaterialDialog.Instance.SelectChoicesAsync(title: "Pick Days",
                                                                                      choices: App.choices,
                                                                                      selectedIndices: _viewModel.selectedDays,
-                                                                                     "OK", "Cancel");
+                                                                                     "OK", "Cancel",simpleDialogConfiguration);
             if (result != null && result.Count() < 7)
             {
                 var sortedList = result.OrderBy(x => x).ToList();
@@ -84,7 +99,7 @@ namespace FormsLoyalty.Views
         private void duration_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             var radioBtn = ((RadioButton)sender);
-            if (radioBtn.Text.ToLower().Contains("numbers".ToLower()) && radioBtn.IsChecked)
+            if (radioBtn.Content.ToString().ToLower().Contains("numbers".ToLower()) && radioBtn.IsChecked)
             {
                 InvokePopUp("Set number of days (from start date)","duration");
 

@@ -50,7 +50,15 @@ namespace FormsLoyalty.Views
                     await ImageHelper.PickFromGallery(5);
                 }
                 else
-                    await _viewModel.TakePickure();
+                {
+                    if (Device.RuntimePlatform == Device.Android)
+                    {
+                        _viewModel.NavigateToCameraView();
+                    }
+                    else
+                        await _viewModel.TakePickure();
+                }
+                    
 
             }
             catch (System.Exception ex)

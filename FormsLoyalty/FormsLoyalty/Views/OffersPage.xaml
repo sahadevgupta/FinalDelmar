@@ -242,7 +242,8 @@
                             HorizontalScrollBarVisibility="Never"
                             VerticalScrollBarVisibility="Never"
                             AbsoluteLayout.LayoutBounds="0,0,1,1"
-                    AbsoluteLayout.LayoutFlags="All">
+                    AbsoluteLayout.LayoutFlags="All"
+                            ItemTemplate="{StaticResource CardView}">
 
 
             <CollectionView.Triggers>
@@ -256,7 +257,7 @@
                 <CollectionView.ItemsLayout>
             <GridItemsLayout Orientation="Vertical"
                              VerticalItemSpacing="10"
-                                 Span="{Binding count}" />
+                                 Span="2" />
         </CollectionView.ItemsLayout>
 
         <CollectionView.GroupHeaderTemplate>

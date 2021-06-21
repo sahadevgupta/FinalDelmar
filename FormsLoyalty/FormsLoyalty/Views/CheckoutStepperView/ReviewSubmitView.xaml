@@ -5,7 +5,8 @@
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:resources="clr-namespace:FormsLoyalty" xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
              x:Class="FormsLoyalty.Views.CheckoutStepperView.ReviewSubmitView"            
-             Visual="Material">
+             Visual="Material"
+             BackgroundColor="WhiteSmoke">
     <ContentView.Resources>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>

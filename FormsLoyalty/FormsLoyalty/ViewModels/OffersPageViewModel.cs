@@ -95,64 +95,77 @@ namespace FormsLoyalty.ViewModels
         /// </summary>
         internal void LoadOffers()
         {
-            offers = new ObservableCollection<OfferGroup>();
-
+            //offers = new ObservableCollection<OfferGroup>();
+            var temp = new ObservableCollection<OfferGroup>();
             IsPageEnabled = true;
 
-            if (AppData.Device.UserLoggedOnToDevice == null)
+            try
             {
-                Task.Run(async () =>
+                if (AppData.Device.UserLoggedOnToDevice == null)
                 {
-                    await NavigationService.NavigateAsync("NavigationPage/LoginPage");
-                });
+                    Task.Run(async () =>
+                    {
+                        await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+                    });
 
-                return;
+                    return;
+                }
+
+                var publishedOffers = AppData.Device.UserLoggedOnToDevice.PublishedOffers.Where(x => x.Code != OfferDiscountType.Coupon);
+
+                var pointOfffer = publishedOffers.Where(x => x.Type == OfferType.PointOffer).ToList();
+                var clubOfffer = publishedOffers.Where(x => x.Type == OfferType.Club).ToList();
+                var memberOffer = publishedOffers.Where(x => x.Type == OfferType.SpecialMember).ToList();
+                var generalOffer = publishedOffers.Where(x => x.Type == OfferType.General).ToList();
+
+                if (pointOfffer.Any())
+                {
+                    temp.Add(new OfferGroup(
+                    AppResources.ResourceManager.GetString("PointOffers", AppResources.Culture),
+                    new List<PublishedOffer>(OfferWithImage(pointOfffer))
+
+                ));
+                }
+
+                if (clubOfffer.Any())
+                {
+                    temp.Add(new OfferGroup(
+                    AppResources.ResourceManager.GetString("ClubOffers", AppResources.Culture),
+                    new List<PublishedOffer>(OfferWithImage(clubOfffer))
+
+                ));
+                }
+
+                if (memberOffer.Any())
+                {
+                    temp.Add(new OfferGroup(
+                  AppResources.ResourceManager.GetString("MemberOffers", AppResources.Culture),
+                  new List<PublishedOffer>(OfferWithImage(memberOffer))
+
+              ));
+                }
+
+                if (generalOffer.Any())
+                {
+                    
+                        var data = new OfferGroup(AppResources.GeneralOffers, new List<PublishedOffer>(OfferWithImage(generalOffer)) );
+                        temp.Add(data);
+                   
+                    
+                }
+
+                offers = new ObservableCollection<OfferGroup>(temp);
             }
-
-            var publishedOffers = AppData.Device.UserLoggedOnToDevice.PublishedOffers.Where(x => x.Code != OfferDiscountType.Coupon);
-
-            var pointOfffer = publishedOffers.Where(x => x.Type == OfferType.PointOffer).ToList();
-            var clubOfffer = publishedOffers.Where(x => x.Type == OfferType.Club).ToList();
-            var memberOffer = publishedOffers.Where(x => x.Type == OfferType.SpecialMember).ToList();
-            var generalOffer = publishedOffers.Where(x => x.Type == OfferType.General).ToList();
-
-            if (pointOfffer.Any())
+            catch (Exception ex)
             {
-                offers.Add(new OfferGroup(
-                AppResources.ResourceManager.GetString("PointOffers", AppResources.Culture),
-                new List<PublishedOffer>(OfferWithImage(pointOfffer))
 
-            ));
+
             }
 
-            if (clubOfffer.Any())
+            finally
             {
-                offers.Add(new OfferGroup(
-                AppResources.ResourceManager.GetString("ClubOffers", AppResources.Culture),
-                new List<PublishedOffer>(OfferWithImage(clubOfffer))
-
-            ));
+                IsPageEnabled = false;
             }
-
-            if (memberOffer.Any())
-            {
-                offers.Add(new OfferGroup(
-              AppResources.ResourceManager.GetString("MemberOffers", AppResources.Culture),
-              new List<PublishedOffer>(OfferWithImage(memberOffer))
-
-          ));
-            }
-
-            if (generalOffer.Any())
-            {
-                offers.Add(new OfferGroup(
-               AppResources.ResourceManager.GetString("GeneralOffers", AppResources.Culture),
-               new List<PublishedOffer>(OfferWithImage(generalOffer))
-
-           ));
-            }
-
-            IsPageEnabled = false;
 
         }
 

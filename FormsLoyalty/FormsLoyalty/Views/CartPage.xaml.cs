@@ -49,7 +49,7 @@ namespace FormsLoyalty.Views
                 if (index > 0)
                 {
                     selectedItem.Quantity = qty;
-                    basketlist.ScrollTo(index);
+                    basketlist.ScrollTo(index,ScrollToPosition.Center,true);
                 }
             }
             await view.FadeTo(1, 250);
@@ -66,7 +66,7 @@ namespace FormsLoyalty.Views
                 if (index > 0)
                 {
                     selectedItem.Quantity = qty;
-                    basketlist.ScrollTo(index);
+                    basketlist.ScrollTo(index, ScrollToPosition.Center, true);
                 }
             }
             view.Opacity = 0;

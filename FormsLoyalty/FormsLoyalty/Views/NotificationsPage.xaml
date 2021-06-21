@@ -218,7 +218,7 @@
                 
             </ToolbarItem.CommandParameter>
         </ToolbarItem>
-        <ToolbarItem 
+        <ToolbarItem
                      x:Name="viewtoolbar"
                      Order="Primary" Clicked="ToolbarItem_Clicked"/>
     </ContentPage.ToolbarItems>
@@ -231,7 +231,8 @@
                     AbsoluteLayout.LayoutFlags="All"
                     IsGrouped="True"
                     x:Name="offerlist"
-                    Margin="10,10,10,0">
+                    Margin="10,10,10,0"
+                        ItemTemplate="{StaticResource CardView}">
 
             <CollectionView.Triggers>
                 <DataTrigger TargetType="CollectionView" Binding="{Binding IsPageEnabled}"
@@ -244,7 +245,7 @@
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
                                  VerticalItemSpacing="10"
-                                 Span="{Binding count}" />
+                                 Span="2" />
             </CollectionView.ItemsLayout>
 
             <CollectionView.GroupHeaderTemplate>

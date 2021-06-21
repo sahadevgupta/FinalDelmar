@@ -22,7 +22,7 @@ namespace FormsLoyalty.Views
         {
             base.OnAppearing();
             _viewModel.LoadNotifications();
-            ChangeToolbarIcon();
+            //ChangeToolbarIcon();
 
         }
 
@@ -76,14 +76,14 @@ namespace FormsLoyalty.Views
         private void ToolbarItem_Clicked(object sender, System.EventArgs e)
         {
             Settings.ShowCard = !Settings.ShowCard;
-            ChangeToolbarIcon();
+            //ChangeToolbarIcon();
 
         }
 
         private void MaterialMenuButton_Clicked(object sender, System.EventArgs e)
         {
-            var moreBtn = (View)sender;
-            var SelelctedNotification = (e as TappedEventArgs).Parameter as Notification;
+            var moreBtn = (MaterialMenuButton)sender;
+            var SelelctedNotification = moreBtn.CommandParameter as Notification;
             var choices = new System.Collections.Generic.List<MoreOptionModel>();
             switch (SelelctedNotification.Status)
             {
@@ -124,8 +124,9 @@ namespace FormsLoyalty.Views
                 default:
                     break;
             }
+            moreBtn.Choices = choices;
 
-           
+
         }
 
         private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)

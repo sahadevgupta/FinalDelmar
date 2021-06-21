@@ -1,0 +1,124 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FormsLoyalty.Views.CameraPage"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xct:SafeAreaEffect.SafeArea="True"
+             BackgroundColor="Black"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             Visual="Material"
+             NavigationPage.HasNavigationBar="False">
+    <ContentPage.Content>
+        <Grid RowDefinitions="*,Auto">
+
+
+
+            <xct:CameraView CameraOptions="Default" CaptureMode="Photo" 
+                            x:Name="cameraView"
+                            HorizontalOptions="FillAndExpand"
+                            VerticalOptions="FillAndExpand"
+                            MediaCaptured="CameraView_MediaCaptured"
+                            OnAvailable="CameraView_OnAvailable"
+                           Grid.Row="0"
+                            FlashMode="Auto">
+
+                <!--<xct:CameraView.Triggers>
+                    <DataTrigger TargetType="xct:CameraView" Binding="{Binding Source={x:Reference previewPicture},Path=IsVisible}"
+                                     Value="true">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </xct:CameraView.Triggers>-->
+
+            </xct:CameraView>
+
+
+            <!--<Image Grid.Row="0"
+                    x:Name="previewPicture"
+                    Aspect="AspectFit"
+                    HorizontalOptions="FillAndExpand"
+                    HeightRequest="350"
+                    
+                    IsVisible="False" />-->
+
+
+
+
+           
+                <ImageButton Source="iconClose" HorizontalOptions="StartAndExpand"  BackgroundColor="Transparent" 
+                     Command="{prism:GoBack}" xct:IconTintColorEffect.TintColor="White" 
+                             Margin="0,10,10,0"
+                             Grid.Row="0"
+                             VerticalOptions="Start"/>
+
+               
+               
+
+
+              
+
+
+        
+
+
+            <Grid ColumnDefinitions="*,*,*" Margin="0,0,0,20" Grid.Row="1">
+
+                <!--<Grid.Triggers>
+                    <DataTrigger TargetType="Grid" Binding="{Binding Source={x:Reference previewPicture},Path=IsVisible}"
+                                     Value="true">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </Grid.Triggers>-->
+
+                <Image x:Name="flashIcon" Source="iconFlashOff"  xct:IconTintColorEffect.TintColor="White" VerticalOptions="CenterAndExpand"
+                       HorizontalOptions="Center" Aspect="AspectFit"
+                             Margin="10,0,0,0">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="FlashSwitch_Toggled"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+                <Image Source="iconCameraButton" HorizontalOptions="FillAndExpand" Grid.Column="1" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding ShutterCommand, Source={x:Reference cameraView}}"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+
+                <Image x:Name="rotateIcon" Source="iconCameraRotate"  VerticalOptions="Center" xct:IconTintColorEffect.TintColor="White"
+                             Margin="0,0,10,0" Grid.Column="2">
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="FrontCameraSwitch_Toggled"/>
+                    </Image.GestureRecognizers>
+                </Image>
+
+            </Grid>
+
+
+
+            <!--<StackLayout Orientation="Horizontal" Grid.Row="1" Margin="20,0,20,20" VerticalOptions="CenterAndExpand" Spacing="30"
+                         IsVisible="false">
+
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Reference previewPicture},Path=IsVisible}"
+                                     Value="true">
+                        <Setter Property="IsVisible" Value="true"/>
+                    </DataTrigger>
+                </StackLayout.Triggers>
+
+                <Button Text="Retake" HorizontalOptions="FillAndExpand" x:Name="retakeBtn" Clicked="retakeBtn_Clicked"/>
+                <Button Text="Accept" BackgroundColor="{StaticResource My_Button_Color}" HorizontalOptions="FillAndExpand"
+                        Command="{Binding AcceptCommand}"/>
+            </StackLayout>-->
+           
+
+           
+
+
+
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

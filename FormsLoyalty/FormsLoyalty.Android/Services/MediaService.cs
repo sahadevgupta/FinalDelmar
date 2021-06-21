@@ -1,9 +1,11 @@
 ﻿using System;
+using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.Content.PM;
+using Android.Graphics;
 using Android.Net;
 using Android.OS;
 using Android.Provider;
@@ -227,5 +229,31 @@ namespace FormsLoyalty.Droid.Services
             return pickerIntent;
         }
 
+        public byte[] CompressImage(byte[] imgBytes)
+        {
+            byte[] imageBytes;
+            Bitmap originalImage = BitmapFactory.DecodeByteArray(imgBytes, 0, imgBytes.Length);
+
+            var width = 1244;
+            var height = 700;
+
+            var scaledImage = Bitmap.CreateScaledBitmap(originalImage, (int)width, (int)height, true);
+            Bitmap rotatedImage = scaledImage;
+
+            var matrix = new Matrix();
+            matrix.PostRotate(0);
+            rotatedImage = Bitmap.CreateBitmap(scaledImage, 0, 0, scaledImage.Width, scaledImage.Height, matrix, true);
+            scaledImage.Recycle();
+            scaledImage.Dispose();
+
+            using (var ms = new MemoryStream())
+            {
+                rotatedImage.Compress(Bitmap.CompressFormat.Jpeg, 75, ms);
+                imageBytes = ms.ToArray();
+            }
+            return imageBytes;
+            //Bitmap mutableBitmap = bmp.Copy(Bitmap.Config.ARGB_8888, true);
+            //Bitmap.CreateBitmap(GetRequestId,)
+        }
     }
 }

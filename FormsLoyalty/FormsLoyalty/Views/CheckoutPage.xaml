@@ -9,8 +9,7 @@
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
-           
-             
+             BackgroundColor="WhiteSmoke"
              Title="{x:Static resources:AppResources.ActionbarCheckout}">
    
     

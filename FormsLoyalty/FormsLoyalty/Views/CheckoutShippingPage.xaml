@@ -9,7 +9,8 @@
              xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors" 
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
              xmlns:vm="clr-namespace:FormsLoyalty.ViewModels" 
-             xmlns:controls="clr-namespace:FormsLoyalty.Controls">
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             BackgroundColor="WhiteSmoke">
 
 
 

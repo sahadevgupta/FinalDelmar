@@ -6,9 +6,10 @@
              x:Class="FormsLoyalty.Views.CheckoutTotalPage"
              xmlns:resources="clr-namespace:FormsLoyalty" 
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             xmlns:converters="clr-namespace:FormsLoyalty.Converters" xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
              Visual="Material"
-             >
+             BackgroundColor="WhiteSmoke">
     
 
     <ContentPage.Resources>

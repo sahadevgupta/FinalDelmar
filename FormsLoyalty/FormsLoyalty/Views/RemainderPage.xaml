@@ -7,6 +7,7 @@
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:resources="clr-namespace:FormsLoyalty"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
            BackgroundColor="#D9f2f2ef"
              Title="{x:Static resources:AppResources.ActionbarReminders}">
 
@@ -117,8 +118,8 @@
                 <DataTemplate>
 
                     <Frame CornerRadius="10" Padding="5" >
-                        <Expander x:Name="expander" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" Margin="-5,-5,-5,0" IsExpanded="True">
-                            <Expander.Header>
+                        <xct:Expander x:Name="expander" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" Margin="-5,-5,-5,0" IsExpanded="True">
+                            <xct:Expander.Header>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#4f4f4f" Padding="5">
                                     <Label Text="{Binding Key}" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20"/>
                                     <ImageButton Source="left_arrow" BackgroundColor="Transparent" 
@@ -135,7 +136,7 @@
                                         </ImageButton.Triggers>
                                     </ImageButton>
                                 </StackLayout>
-                            </Expander.Header>
+                            </xct:Expander.Header>
 
                             <StackLayout BindableLayout.ItemsSource="{Binding Value}">
                                 <BindableLayout.ItemTemplate>
@@ -188,7 +189,7 @@
                             </StackLayout>
 
 
-                        </Expander>
+                        </xct:Expander>
                     </Frame>
 
                 </DataTemplate>

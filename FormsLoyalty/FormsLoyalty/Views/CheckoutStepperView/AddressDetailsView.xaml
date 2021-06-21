@@ -8,7 +8,8 @@
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              x:Class="FormsLoyalty.Views.CheckoutStepperView.AddressDetailsView"
              x:Name="thisPage"
-             Visual="Material">
+             Visual="Material"
+             BackgroundColor="WhiteSmoke">
     <ContentView.Resources>
         <ResourceDictionary>
             <converters:CardNumberToImageConverter x:Key="CardConverter"

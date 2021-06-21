@@ -9,6 +9,7 @@
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:mat="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:resources="clr-namespace:FormsLoyalty"
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              BackgroundColor="#33b6b6b6"
              x:Name="thisPage"
              Visual="Material"
@@ -84,18 +85,18 @@
                         </DataTrigger>
                     </Frame.Triggers>
 
-                    <Expander x:Name="expander" HorizontalOptions="FillAndExpand" IsExpanded="True">
-                        <Expander.Triggers>
-                            <DataTrigger TargetType="Expander" Binding="{Binding Source={x:Reference reminderSwitch },Path=IsToggled}"
+                    <xct:Expander x:Name="expander" HorizontalOptions="FillAndExpand" IsExpanded="True">
+                        <xct:Expander.Triggers>
+                            <DataTrigger TargetType="xct:Expander" Binding="{Binding Source={x:Reference reminderSwitch },Path=IsToggled}"
                                  Value="true">
                                 <Setter Property="IsExpanded" Value="True"/>
                             </DataTrigger>
 
 
 
-                        </Expander.Triggers>
+                        </xct:Expander.Triggers>
 
-                        <Expander.Header>
+                        <xct:Expander.Header>
                             <StackLayout Orientation="Horizontal">
                                 <Label Text="{x:Static resources:AppResources.txtReminderTimes}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
 
@@ -119,7 +120,7 @@
                                 </Image>
 
                             </StackLayout>
-                        </Expander.Header>
+                        </xct:Expander.Header>
                         <Grid  RowDefinitions="Auto,Auto">
 
 
@@ -180,10 +181,10 @@
 
 
                         </Grid>
-                    </Expander>
+                    </xct:Expander>
                 </Frame>
 
-                <Frame Margin="0,5" Grid.Row="2">
+                <Frame Margin="0,5" Grid.Row="2" FlowDirection="LeftToRight">
                     <Frame.Triggers>
                         <DataTrigger TargetType="Frame" Binding="{Binding Source={x:Reference namelbl},Path=Text,Converter={StaticResource StringToBoolConverter}}"
                                      Value="false">
@@ -195,8 +196,8 @@
                         </DataTrigger>
 
                     </Frame.Triggers>
-                    <Expander x:Name="schexpander" HorizontalOptions="FillAndExpand">
-                        <Expander.Header>
+                    <xct:Expander x:Name="schexpander" HorizontalOptions="FillAndExpand">
+                        <xct:Expander.Header>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
                                 <Label Text="{x:Static resources:AppResources.txtSchedule}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
                                 <Image Source="left_arrow" BackgroundColor="Transparent" 
@@ -215,40 +216,25 @@
                                 </Image>
                             </StackLayout>
 
-                        </Expander.Header>
+                        </xct:Expander.Header>
                         <Grid Padding="10" ColumnDefinitions="Auto,*" RowDefinitions="Auto,0.5,Auto,Auto">
                             <Label Text="{x:Static resources:AppResources.txtStartDate}" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start"/>
                             <DatePicker Grid.Column="1" Date="{Binding medicineReminder.From}" Format="dd MMMM" Visual="Default" HorizontalOptions="Start"/>
                             <BoxView HeightRequest="0.5" Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Silver" HorizontalOptions="FillAndExpand"/>
 
                             <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
-                                <Label Text="{x:Static resources:AppResources.txtDuration}" FontAttributes="Bold" TextColor="Black" FontSize="Body" VerticalOptions="Center" HorizontalOptions="Start"/>
+                                <Label Text="{x:Static resources:AppResources.txtDuration}" FontAttributes="Bold" TextColor="Black" FontSize="Body" 
+                                       VerticalOptions="Center" HorizontalOptions="Start"/>
 
-                                <StackLayout Orientation="Horizontal">
-                                    <StackLayout.Spacing>
-                                        <OnPlatform x:TypeArguments="x:Double">
-                                            <On Platform="iOS" Value="-8" />
-                                        </OnPlatform>
-                                    </StackLayout.Spacing>
-                                    <RadioButton Visual="Material" x:Name="ongoingSwitch" 
-                                                 Text="Ongoing Treatment"
+                                <RadioButton Visual="Material" x:Name="ongoingSwitch" 
+                                                 Content="{x:Static resources:AppResources.txtOngoingTreatment}"
                                                  GroupName="duration" IsChecked="True" CheckedChanged="duration_CheckedChanged" />
-                                    <Label Text="{x:Static resources:AppResources.txtOngoingTreatment}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
-                                </StackLayout>
 
-                                <StackLayout Orientation="Horizontal">
-                                    <StackLayout.Spacing>
-                                        <OnPlatform x:TypeArguments="x:Double">
-                                            <On Platform="iOS" Value="-8" />
-                                        </OnPlatform>
-                                    </StackLayout.Spacing>
-                                    <RadioButton Visual="Material" 
-                                                 Text="Numbers of days"
+                                <RadioButton Visual="Material" 
+                                                 Content="{x:Static resources:AppResources.txtNumbersofdays}"
                                                  GroupName="duration" CheckedChanged="duration_CheckedChanged"/>
-                                    <Label Text="{x:Static resources:AppResources.txtNumbersofdays}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
-                                </StackLayout>
+
+                               
                                 <Label Text="{Binding medicineReminder.NoOfDays}" Margin="10,0" TextColor="{StaticResource My_Header_Color}">
                                     <Label.Triggers>
                                         <DataTrigger TargetType="Label" Binding="{Binding medicineReminder.NoOfDays}"
@@ -270,34 +256,19 @@
                             <StackLayout Grid.Row="3" Grid.ColumnSpan="2" HeightRequest="150">
                                 <Label Text="{x:Static resources:AppResources.txtDays}" FontAttributes="Bold" TextColor="Black" FontSize="Body" VerticalOptions="Center" HorizontalOptions="Start"/>
 
-                                <StackLayout Orientation="Horizontal">
-                                    <StackLayout.Spacing>
-                                        <OnPlatform x:TypeArguments="x:Double">
-                                            <On Platform="iOS" Value="-8" />
-                                        </OnPlatform>
-                                    </StackLayout.Spacing>
 
-                                    <RadioButton x:Name="everydaybtn" 
-                                                 Text="Every day"
+
+                                <RadioButton x:Name="everydaybtn" HorizontalOptions="FillAndExpand"
+                                                 Content="{x:Static resources:AppResources.txtEvery_day}"
                                                  Visual="Material"
+                                             BackgroundColor="Transparent"
                                          GroupName="days" IsChecked="{Binding medicineReminder.AllDay}" CheckedChanged="days_CheckedChanged" />
-                                    <Label Text="{x:Static resources:AppResources.txtEvery_day}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
-                                </StackLayout>
 
-                                <StackLayout Orientation="Horizontal">
-                                    <StackLayout.Spacing>
-                                        <OnPlatform x:TypeArguments="x:Double">
-                                            <On Platform="iOS" Value="-8" />
-                                        </OnPlatform>
-                                    </StackLayout.Spacing>
-
-                                    <RadioButton Visual="Material" 
-                                                 Text="Specific days of the week"
+                                <Grid ColumnDefinitions="*">
+                                <RadioButton Visual="Material" HorizontalOptions="FillAndExpand"
+                                                 Content="{x:Static resources:AppResources.txtSpecificdaysweek}"
                                                  GroupName="days" CheckedChanged="days_CheckedChanged"/>
-                                    <Label Text="{x:Static resources:AppResources.txtSpecificdaysweek}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
-                                </StackLayout>
+                                </Grid>
                                 <Label x:Name="dayslbl" Margin="10,0" Text="{Binding medicineReminder.SpecificDays}" TextColor="{StaticResource My_Header_Color}"
                                        >
 
@@ -316,7 +287,7 @@
                             </StackLayout>
 
                         </Grid>
-                    </Expander>
+                    </xct:Expander>
                 </Frame>
 
 

@@ -7,16 +7,10 @@ using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Base.Utils;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Items;
-using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
 using LSRetail.Omni.Domain.Services.Base.Loyalty;
-using LSRetail.Omni.Domain.Services.Loyalty.Items;
-using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.Setup;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Shared;
 using Microsoft.AppCenter.Crashes;
-using Prism;
-using Prism.Commands;
-using Prism.Mvvm;
 using Prism.Navigation;
 using Prism.Services;
 using System;
@@ -25,17 +19,13 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Timers;
-using Unity;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Internals;
-using XF.Material.Forms;
 using XF.Material.Forms.UI.Dialogs;
 using DependencyService = Xamarin.Forms.DependencyService;
+using NavigationMode = Prism.Navigation.NavigationMode;
 using Timer = System.Timers.Timer;
 
 namespace FormsLoyalty.ViewModels
@@ -190,7 +180,7 @@ namespace FormsLoyalty.ViewModels
         internal async void ScanSend()
         {
             IsPageEnabled = true;
-            if (await CheckLogin())
+            if (true)
             {
                 try
                 {
@@ -205,7 +195,15 @@ namespace FormsLoyalty.ViewModels
                         await ImageHelper.PickFromGallery(5);
                     }
                     else
-                        await TakePickure();
+                    {
+                        if (Device.RuntimePlatform == Device.Android)
+                        {
+                            await NavigationService.NavigateAsync(nameof(CameraPage),null,true,false);
+                        }
+                        else
+                            await TakePickure();
+                    }
+                       
                 }
                 catch (Exception)
                 {
@@ -405,13 +403,16 @@ namespace FormsLoyalty.ViewModels
                     imgBytes =  memoryStream.ToArray();
                 }
 
+               var bytes =  DependencyService.Get<IMediaService>().CompressImage(imgBytes);
+
+
                 //if(imgBytes.Length > 2097152)
                 //{
                 //    await MaterialDialog.Instance.AlertAsync(AppResources.txtImageSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
                 //    return;
                 //}
                    
-                imgData.Add(new Tuple<byte[], string>(imgBytes, extension.Replace(".", "")));
+                imgData.Add(new Tuple<byte[], string>(bytes, extension.Replace(".", "")));
                  NavigateToScanPage(imgData);
             }
 
@@ -970,13 +971,25 @@ namespace FormsLoyalty.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-           
-            if(timer!=null)
+
+            if (timer != null)
                 timer.Start();
+
+            var navigationMode = parameters.GetNavigationMode();
+            switch (navigationMode)
+            {
+                case NavigationMode.Back:
+                    var imgData = parameters.GetValue<List<Tuple<byte[], string>>>("images");
+                    NavigateToScanPage(imgData);
+
+                    break;
+                    //IsBackNavigation = true;
+            }
         }
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
+
         }
     }
 }

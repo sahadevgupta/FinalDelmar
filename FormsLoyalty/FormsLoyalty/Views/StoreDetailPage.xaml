@@ -9,7 +9,8 @@
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              xmlns:resources="clr-namespace:FormsLoyalty"
              x:Name="storeDetailsPage"
-             Title="{x:Static resources:AppResources.DetailViewDetails}">
+             Title="{x:Static resources:AppResources.DetailViewDetails}"
+             BackgroundColor="WhiteSmoke">
     <ContentPage.Triggers>
         <DataTrigger TargetType="ContentPage"
                              Binding="{Binding IsPageEnabled}"

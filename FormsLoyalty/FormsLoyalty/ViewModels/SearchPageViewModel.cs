@@ -17,7 +17,9 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XF.Material.Forms;
 using XF.Material.Forms.UI.Dialogs;
+using XF.Material.Forms.UI.Dialogs.Configurations;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -98,9 +100,26 @@ namespace FormsLoyalty.ViewModels
 
             var indexes = selectedTypes.Select((element, index) => element ? index : -1).Where(i => i >= 0).ToArray();
 
+
+            var simpleDialogConfiguration = new MaterialConfirmationDialogConfiguration
+            {
+                // BackgroundColor = XF.Material.Forms.Material.GetResource<Color>(MaterialConstants.Color.PRIMARY),
+                // TitleTextColor = XF.Material.Forms.Material.GetResource<Color>(MaterialConstants.Color.ON_PRIMARY),
+              
+                
+                TitleTextColor = Color.Black,
+                ButtonAllCaps = false,
+                
+
+                CornerRadius = 8,
+                ControlSelectedColor = Color.FromHex("#b72228"),
+                ControlUnselectedColor = Color.Black.MultiplyAlpha(0.66),
+                // ScrimColor = Color.FromHex("#232F34").MultiplyAlpha(0.32)
+            };
+
             var result = await MaterialDialog.Instance.SelectChoicesAsync(title: AppResources.ResourceManager.GetString("GeneralSearchViewChooseCategories",AppResources.Culture),
                                                                           selectedIndices: indexes,
-                                                                          choices: typeNames
+                                                                          choices: typeNames,configuration: simpleDialogConfiguration
                                                                           );
 
 
@@ -119,7 +138,7 @@ namespace FormsLoyalty.ViewModels
 
         public void OnSearchQuery()
         {
-            IsPageEnabled = true;
+           
             if (SearchKey.Length > 2)
             {
                 if (SearchKey.Length > lastSearchLength)
@@ -130,7 +149,7 @@ namespace FormsLoyalty.ViewModels
 
             lastSearchLength = SearchKey.Length;
 
-            IsPageEnabled = false;
+            
         }
 
         private async void Search(bool resetSearch)
@@ -145,47 +164,49 @@ namespace FormsLoyalty.ViewModels
 
             if (results != null)
             {
-               await LoadResults(results);
+               LoadResults(results);
             }
             IsPageEnabled = false;
         }
 
-        private async Task LoadResults(SearchRs results)
+        private void LoadResults(SearchRs results)
         {
-            IsPageEnabled = true;
-            items = new ObservableCollection<SearchGroup>();
+          
+           var tempItems = new ObservableCollection<SearchGroup>();
 
-           var result = await  LoadDataImage( results);
+            Task.Run(async() => await LoadDataImage(results));
+
+          
 
             foreach (var availableType in availableTypes.Where((t, i) => selectedTypes[i]))
             {
                 if (availableType == SearchType.Item)
                 {
-                        items.Add(new SearchGroup
+                    tempItems.Add(new SearchGroup
                             (
-                            string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewItemsGroupHeader", AppResources.Culture), result.Items.Count),
-                            new List<object>(results.Items)
+                            string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewItemsGroupHeader", AppResources.Culture), results.Items.Take(15).Count()),
+                            new List<object>(results.Items.Take(15))
                             ));
                    
 
                 }
                 else if (availableType == SearchType.Notification)
                 {
-                    
-                        items.Add(new SearchGroup
+
+                    tempItems.Add(new SearchGroup
                             (
-                            string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewNotificationsGroupHeader", AppResources.Culture), result.Notifications.Count),
-                            new List<object>(results.Notifications)
+                            string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewNotificationsGroupHeader", AppResources.Culture), results.Notifications.Take(15).Count()),
+                            new List<object>(results.Notifications.Take(15))
                             ));
 
                 }
                 else if (availableType == SearchType.SalesEntry)
                 {
-                   
-                        items.Add(new SearchGroup
+
+                    tempItems.Add(new SearchGroup
                            (
-                           string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewTransactionsGroupHeader", AppResources.Culture), result.SalesEntries.Count),
-                           new List<object>(results.SalesEntries)
+                           string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewTransactionsGroupHeader", AppResources.Culture), results.SalesEntries.Take(15).Count()),
+                           new List<object>(results.SalesEntries.Take(15))
                            ));
 
                        
@@ -193,11 +214,11 @@ namespace FormsLoyalty.ViewModels
                 }
                 else if (availableType == SearchType.OneList)
                 {
-                    
-                        items.Add(new SearchGroup
+
+                    tempItems.Add(new SearchGroup
                            (
-                           string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewWishListGroupHeader", AppResources.Culture), result.OneLists.Count),
-                           new List<object>(results.OneLists)
+                           string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewWishListGroupHeader", AppResources.Culture), results.OneLists.Take(15).Count()),
+                           new List<object>(results.OneLists.Take(15))
                            ));
 
                        
@@ -205,11 +226,11 @@ namespace FormsLoyalty.ViewModels
                 }
                 else if (availableType == SearchType.Store)
                 {
-                   
-                        items.Add(new SearchGroup
+
+                    tempItems.Add(new SearchGroup
                            (
-                           string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewStoresGroupHeader", AppResources.Culture), result.Stores.Count),
-                           new List<object>(results.Stores)
+                           string.Format(AppResources.ResourceManager.GetString("GeneralSearchViewStoresGroupHeader", AppResources.Culture), results.Stores.Take(15).Count()),
+                           new List<object>(results.Stores.Take(15))
                            ));
 
                        
@@ -217,12 +238,15 @@ namespace FormsLoyalty.ViewModels
                 }
             }
 
-            IsPageEnabled = false;
+           items = new ObservableCollection<SearchGroup>(tempItems);
+
+           
         }
 
         private async Task<SearchRs> LoadDataImage(SearchRs result)
         {
-            foreach (var item in result.Items)
+
+            foreach (var item in result.Items.Take(15))
             {
                 if (item.Images != null && item.Images.Count > 0)
                 {
@@ -230,7 +254,7 @@ namespace FormsLoyalty.ViewModels
                 }
             }
 
-            foreach (var item in result.Stores)
+            foreach (var item in result.Stores.Take(15))
             {
                 if (item.Images != null && item.Images.Count > 0)
                 {
@@ -238,7 +262,7 @@ namespace FormsLoyalty.ViewModels
                 }
             }
 
-            foreach (var item in result.Notifications)
+            foreach (var item in result.Notifications.Take(15))
             {
                 if (item.Images != null && item.Images.Count > 0)
                 {

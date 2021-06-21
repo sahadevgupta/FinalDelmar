@@ -130,14 +130,19 @@ namespace FormsLoyalty.ViewModels
         internal void LoadNotifications()
         {
             IsPageEnabled = true;
+            try
+            {
 
-            notifications = new ObservableCollection<NotificationGroup>();
+           
+            
+            var temp = new ObservableCollection<NotificationGroup>();
+
             var unread = AppData.Device.UserLoggedOnToDevice.Notifications.Where(x => x.Status == NotificationStatus.New).ToList();
             var read = AppData.Device.UserLoggedOnToDevice.Notifications.Where(x => x.Status == NotificationStatus.Read).ToList();
 
             if (unread.Any())
             {
-                notifications.Add(new NotificationGroup(
+                temp.Add(new NotificationGroup(
                 AppResources.ResourceManager.GetString("NotificationViewUnread", AppResources.Culture),
                 new List<Notification>(LoadWithImage(unread))
 
@@ -146,14 +151,24 @@ namespace FormsLoyalty.ViewModels
 
             if (read.Any())
             {
-                notifications.Add(new NotificationGroup(
+                temp.Add(new NotificationGroup(
                 AppResources.ResourceManager.GetString("NotificationViewRead", AppResources.Culture),
                 new List<Notification>(LoadWithImage(read))
 
             ));
             }
+            notifications = new ObservableCollection<NotificationGroup>(temp);
+            }
+            catch (Exception)
+            {
 
-            IsPageEnabled = false;
+
+            }
+            finally
+            {
+                IsPageEnabled = false;
+            }
+           
         }
 
         /// <summary>

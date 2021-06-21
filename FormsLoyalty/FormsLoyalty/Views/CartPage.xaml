@@ -10,7 +10,7 @@
              x:Class="FormsLoyalty.Views.CartPage"
              Visual="Material"
              x:Name="cart"
-            BackgroundColor="{StaticResource My_Header_Color}"
+           BackgroundColor="{StaticResource My_Header_Color}"
             NavigationPage.HasNavigationBar="False"
             
              ios:Page.UseSafeArea="True"
@@ -30,10 +30,10 @@
     </ContentPage.Triggers>
 
 
-    <AbsoluteLayout>
+    <AbsoluteLayout BackgroundColor="WhiteSmoke">
 
         <Grid RowDefinitions="55,*,Auto,Auto" AbsoluteLayout.LayoutBounds="0,0,1,1"
-                    AbsoluteLayout.LayoutFlags="All" BackgroundColor="WhiteSmoke">
+                    AbsoluteLayout.LayoutFlags="All" >
 
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
@@ -88,142 +88,148 @@
 
             </StackLayout>
 
-
-            <CollectionView ItemsSource="{Binding baskets}" Grid.Row="1" 
+                <ListView ItemsSource="{Binding baskets}" 
                              x:Name="basketlist"
-                            BackgroundColor="White">
-                <CollectionView.Triggers>
-                    <DataTrigger TargetType="CollectionView" Binding="{Binding baskets.Count}"
+                            HasUnevenRows="True" 
+                          Grid.Row="1"
+                          SeparatorVisibility="None"
+                          BackgroundColor="WhiteSmoke">
+                <ListView.Triggers>
+                    <DataTrigger TargetType="ListView" Binding="{Binding baskets.Count}"
                              Value="0">
                         <Setter Property="IsVisible" Value="false"/>
                     </DataTrigger>
-                </CollectionView.Triggers>
+                </ListView.Triggers>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Frame Padding="10"  VerticalOptions="CenterAndExpand" CornerRadius="0" Visual="Material">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer  CommandParameter="{Binding .}"/>
-                            </Frame.GestureRecognizers>
+                <ListView.ItemTemplate>
+                        <DataTemplate>
+                        <ViewCell>
+                            <Frame Padding="10"  VerticalOptions="CenterAndExpand" CornerRadius="0" >
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer  CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
 
-                            <Grid ColumnDefinitions="100,*,Auto">
-
-
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="0.7"/>
-                                </Grid.RowDefinitions>
+                                <Grid ColumnDefinitions="100,*,Auto">
 
 
-                                <Image Source="{Binding Image.Image,Converter={StaticResource BytesToImageSource}}" HeightRequest="80"  Grid.RowSpan="2" Grid.Column="0">
-                                   
-                                </Image>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="0.7"/>
+                                    </Grid.RowDefinitions>
 
 
-                                <Label Text="{Binding ItemDescription}"
+                                    <Image Source="{Binding Image.Image,Converter={StaticResource BytesToImageSource}}" HeightRequest="80"  Grid.RowSpan="2" Grid.Column="0">
+
+                                    </Image>
+
+
+                                    <Label Text="{Binding ItemDescription}"
                                        FontSize="16" MaxLines="2" LineBreakMode="TailTruncation"
                                        TextColor="Black"
                                        Grid.Column="1" Grid.Row="0" Grid.ColumnSpan="2"/>
 
-                                <StackLayout Grid.Column="1" Grid.Row="1">
+                                    <StackLayout Grid.Column="1" Grid.Row="1">
 
-                                    <Label Text="{Binding VariantDescription}"
+                                        <Label Text="{Binding VariantDescription}"
                                        FontSize="Small"
                                TextColor="Silver"
                                        >
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label"
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label"
                                                      Binding="{Binding VariantDescription,Converter={StaticResource StringToBoolConverter}}"
                                                      Value="false">
-                                                <Setter Property="IsVisible" Value="False"/>
-                                            </DataTrigger>
-                                        </Label.Triggers>
+                                                    <Setter Property="IsVisible" Value="False"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
 
-                                    </Label>
+                                        </Label>
 
-                                   
 
-                                    <Label IsVisible="false">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Total : " TextColor="Silver"/>
-                                                <Span Text="{Binding PriceWithoutDiscount,StringFormat='{0:F2}',Mode=OneWay}" TextColor="Black"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding DiscountAmount}" Value="0">
-                                                <Setter Property="IsVisible" Value="true"/>
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
 
-                                    <Label IsVisible="true">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Total : " TextColor="Silver"/>
-                                                <Span Text="{Binding PriceWithoutDiscount,StringFormat='{0:F2}',Mode=OneWay}" TextDecorations="Strikethrough" TextColor="Black"/>
-                                                <Span Text=" "/>
-                                                <Span Text="{Binding PriceWithDiscount,StringFormat=' {0:F2}',Mode=OneWay}" TextColor="Black"
+                                        <Label IsVisible="false">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Total : " TextColor="Silver"/>
+                                                    <Span Text="{Binding PriceWithoutDiscount,StringFormat='{0:F2}',Mode=OneWay}" TextColor="Black"/>
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding DiscountAmount}" Value="0">
+                                                    <Setter Property="IsVisible" Value="true"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
+
+                                        <Label IsVisible="true">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="Total : " TextColor="Silver"/>
+                                                    <Span Text="{Binding PriceWithoutDiscount,StringFormat='{0:F2}',Mode=OneWay}" TextDecorations="Strikethrough" TextColor="Black"/>
+                                                    <Span Text=" "/>
+                                                    <Span Text="{Binding PriceWithDiscount,StringFormat=' {0:F2}',Mode=OneWay}" TextColor="Black"
                                                       FontSize="Body"/>
-                                                <Span Text="{Binding DiscountPercent,StringFormat=' ({0:F2} % Off)',Mode=OneWay}" TextColor="Red" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                        <Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding DiscountAmount}" Value="0">
-                                                <Setter Property="IsVisible" Value="false"/>
-                                            </DataTrigger>
-                                        </Label.Triggers>
-                                    </Label>
+                                                    <Span Text="{Binding DiscountPercent,StringFormat=' ({0:F2} % Off)',Mode=OneWay}" TextColor="Red" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding DiscountAmount}" Value="0">
+                                                    <Setter Property="IsVisible" Value="false"/>
+                                                </DataTrigger>
+                                            </Label.Triggers>
+                                        </Label>
 
-                                    <Frame  Grid.ColumnSpan="2" Padding ="1"  BorderColor="Black"
+                                        <Frame  Grid.ColumnSpan="2" Padding ="1"  BorderColor="Black"
                                         HorizontalOptions="Start" Visual="Material"
                                        Grid.Column="1" Grid.Row="2" >
-                                        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" Padding="0" Spacing="1" 
+                                            <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" Padding="0" Spacing="1" 
                                                   BackgroundColor="Black" >
 
-                                            <Label HeightRequest="25" Text=" - " BackgroundColor="White"
+                                                <Label HeightRequest="25" Text=" - " BackgroundColor="White"
                                                VerticalOptions="Center" Padding="12,2,12,2">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="minus_Tapped"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="minus_Tapped"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
 
-                                            <Label HeightRequest="25" Text="{Binding Quantity,StringFormat='{0:N0}'}" BackgroundColor="White"
+                                                <Label HeightRequest="25" Text="{Binding Quantity,StringFormat='{0:N0}'}" BackgroundColor="White"
                                                TextColor="Gray"
                                                VerticalOptions="Center" Padding="12,2,12,2"/>
 
-                                            <Label HeightRequest="25" Text=" + " BackgroundColor="White"
+                                                <Label HeightRequest="25" Text=" + " BackgroundColor="White"
                                                VerticalOptions="Center" Padding="12,2,12,2">
-                                                <Label.GestureRecognizers>
-                                                    <TapGestureRecognizer Tapped="plus_Tapped"/>
-                                                </Label.GestureRecognizers>
-                                            </Label>
-                                        </StackLayout>
+                                                    <Label.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="plus_Tapped"/>
+                                                    </Label.GestureRecognizers>
+                                                </Label>
+                                            </StackLayout>
 
-                                    </Frame>
+                                        </Frame>
 
 
-                                </StackLayout>
-                                <Label Text="{x:Static resources:AppResources.RemoveTxt}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" TextColor="Red" 
+                                    </StackLayout>
+                                    <Label Text="{x:Static resources:AppResources.RemoveTxt}" HorizontalTextAlignment="Center" VerticalOptions="CenterAndExpand" TextColor="Red" 
                                        Grid.Row="2" Grid.Column="0">
 
-                                    <Label.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="Delete_Tapped" CommandParameter="{Binding .}"/>
-                                    </Label.GestureRecognizers>
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="Delete_Tapped" CommandParameter="{Binding .}"/>
+                                        </Label.GestureRecognizers>
 
-                                </Label>
+                                    </Label>
 
-                                <BoxView BackgroundColor="LightGray" HeightRequest="0.7" Grid.Row="3" Grid.ColumnSpan="3"/>
+                                    <BoxView BackgroundColor="LightGray" HeightRequest="0.7" Grid.Row="3" Grid.ColumnSpan="3"/>
 
-                            </Grid>
+                                </Grid>
 
 
-                        </Frame>
+                            </Frame>
+                        </ViewCell>
                     </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                    </ListView.ItemTemplate>
+                </ListView>
+           
+           
 
 
             <Grid Grid.Row="2" RowDefinitions="Auto,0.7,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" BackgroundColor="White">

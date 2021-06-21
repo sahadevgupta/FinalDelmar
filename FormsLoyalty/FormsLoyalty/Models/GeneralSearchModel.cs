@@ -47,7 +47,7 @@ namespace FormsLoyalty.Models
 
             try
             {
-                searchRs = await service.SearchAsync(userId, searchKey, Int32.MaxValue, searchType);
+                searchRs = await service.SearchAsync(userId, searchKey, 15, searchType);
 
                 if (lastSearchKey != searchKey)
                     return null;

@@ -67,7 +67,7 @@ namespace FormsLoyalty
 
         protected override async void OnInitialized()
         {
-            Xamarin.Forms.Device.SetFlags(new string[] { "CarouselView_Experimental", "RadioButton_Experimental", "IndicatorView_Experimental", "Expander_Experimental", "Shapes_Experimental", "SwipeView_Experimental","Brush_Experimental" });
+           // Xamarin.Forms.Device.SetFlags(new string[] { "CarouselView_Experimental", "RadioButton_Experimental", "IndicatorView_Experimental", "Expander_Experimental", "Shapes_Experimental", "SwipeView_Experimental","Brush_Experimental" });
             InitializeComponent();
             XF.Material.Forms.Material.Init(this);
             LoadStyles();
@@ -230,6 +230,7 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<TermsConditionPage, TermsConditionPageViewModel>();
             containerRegistry.RegisterForNavigation<ImagePreviewPage, ImagePreviewPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginOtpView, LoginOtpViewViewModel>();
+            containerRegistry.RegisterForNavigation<CameraPage, CameraPageViewModel>();
         }
     }
 }

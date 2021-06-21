@@ -19,6 +19,11 @@ namespace FormsLoyalty.iOS.Services
 {
     public class MediaService_iOS : IMediaService
     {
+        public byte[] CompressImage(byte[] imgBytes)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task OpenGallery(int imageCount)
         {
             var picker = ELCImagePickerViewController.Create(maxImages:imageCount);

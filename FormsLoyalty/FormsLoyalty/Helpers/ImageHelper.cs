@@ -105,7 +105,7 @@ namespace FormsLoyalty.Helpers
                         SaveMediaOnCapture = true,
                         DefaultCamera = CameraDevice.Front,
                         MaxPixelDimension = 400,
-                        PercentQuality = 75
+                        PercentQuality = 50
                     });
 
                     return new Plugin.Media.Abstractions.MediaFile(file.Path, () => streamgetter(file));

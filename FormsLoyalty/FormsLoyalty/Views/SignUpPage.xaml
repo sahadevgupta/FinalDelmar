@@ -11,7 +11,8 @@
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              Visual="Material"
              ios:Page.UseSafeArea="True"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="WhiteSmoke">
 
     <ContentPage.Resources>
         <ResourceDictionary>

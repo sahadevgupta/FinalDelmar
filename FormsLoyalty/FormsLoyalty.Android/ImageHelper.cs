@@ -23,8 +23,8 @@ namespace FormsLoyalty.Droid
 
             var originalImage = BitmapFactory.DecodeFile(path);
             var rotation = GetRotation(path);
-            var width = (originalImage.Width * 0.15);
-            var height = (originalImage.Height * 0.15);
+            var width = (originalImage.Width * 0.25);
+            var height = (originalImage.Height * 0.25);
             var scaledImage = Bitmap.CreateScaledBitmap(originalImage, (int)width, (int)height, true);
             Bitmap rotatedImage = scaledImage;
 
@@ -39,7 +39,7 @@ namespace FormsLoyalty.Droid
 
             using (var ms = new MemoryStream())
             {
-                rotatedImage.Compress(Bitmap.CompressFormat.Jpeg, 80, ms);
+                rotatedImage.Compress(Bitmap.CompressFormat.Jpeg, 60, ms);
                 imageBytes = ms.ToArray();
             }
 

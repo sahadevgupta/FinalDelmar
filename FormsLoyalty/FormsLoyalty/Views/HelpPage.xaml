@@ -5,6 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.HelpPage"
              xmlns:resources="clr-namespace:FormsLoyalty"
-             Title="{x:Static resources:AppResources.MenuViewHelp}">
+             Title="{x:Static resources:AppResources.MenuViewHelp}"
+             BackgroundColor="WhiteSmoke">
   
 </ContentPage>

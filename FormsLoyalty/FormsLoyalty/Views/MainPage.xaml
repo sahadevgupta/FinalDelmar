@@ -12,15 +12,22 @@
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              xmlns:utilities="clr-namespace:FormsLoyalty.Utils"
              xmlns:resources="clr-namespace:FormsLoyalty"
-             BackgroundColor="WhiteSmoke"
+             BackgroundColor="{StaticResource My_Header_Color}"
              Visual="Material"
-             NavigationPage.HasNavigationBar="{OnPlatform Android=False,iOS=true}"
+             NavigationPage.HasNavigationBar="False"
             ios:Page.UseSafeArea="True"
            >
 
-    
-    
-    
+    <ContentPage.Triggers>
+        <DataTrigger TargetType="ContentPage"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+            <Setter Property="BackgroundColor" Value="WhiteSmoke"/>
+
+        </DataTrigger>
+    </ContentPage.Triggers>
+
+
     <ContentPage.Resources>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
@@ -28,9 +35,9 @@
       
     </ContentPage.Resources>
 
-    <RelativeLayout>
+    <RelativeLayout BackgroundColor="WhiteSmoke">
 
-        <Grid RowDefinitions="180,*"  x:Name="mainGrid"
+        <Grid RowDefinitions="180,*"  x:Name="mainGrid" BackgroundColor="WhiteSmoke"
                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                        Property=Height,
                                                                        Factor=1,
@@ -158,7 +165,9 @@
 
                             <SearchBar TextChanged="SearchBar_TextChanged" Placeholder="{x:Static resources:AppResources.ActionbarSearch}"
                                        x:Name="autosuggestview" Visual="Material" PlaceholderColor="#B3FFFFFF"
-                                        TextColor="White" HorizontalOptions="FillAndExpand" Margin="-10,0,-20,0"/>
+                                       ios:SearchBar.SearchBarStyle="Minimal"
+                                       Margin="{OnPlatform iOS='-5,0,-5,0'}"
+                                        TextColor="White" HorizontalOptions="FillAndExpand" />
 
                             <!--<controls:CustomAutoSuggestBox IsVisible="false"
                                                        Margin="5,0,5,0"
