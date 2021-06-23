@@ -27,7 +27,7 @@ namespace FormsLoyalty.Views
         {
             var radioBtn = ((RadioButton)sender);
 
-            if (radioBtn.Content.ToString().Contains("Specific") && radioBtn.IsChecked)
+            if (radioBtn.Content.ToString().Equals(AppResources.txtSpecificdaysweek) && radioBtn.IsChecked)
             {
                 await SetSpecificDaysReminder();
 
@@ -59,13 +59,14 @@ namespace FormsLoyalty.Views
                 CornerRadius = 8,
                 ControlSelectedColor = Color.FromHex("#b72228"),
                 ControlUnselectedColor = Color.Black.MultiplyAlpha(0.66),
+                TintColor = Color.FromHex("#b72228")
                 // ScrimColor = Color.FromHex("#232F34").MultiplyAlpha(0.32)
             };
 
-            var result = await MaterialDialog.Instance.SelectChoicesAsync(title: "Pick Days",
+            var result = await MaterialDialog.Instance.SelectChoicesAsync(title: AppResources.txtPickDays,
                                                                                      choices: App.choices,
                                                                                      selectedIndices: _viewModel.selectedDays,
-                                                                                     "OK", "Cancel",simpleDialogConfiguration);
+                                                                                     AppResources.ApplicationOk, AppResources.ApplicationCancel,simpleDialogConfiguration);
             if (result != null && result.Count() < 7)
             {
                 var sortedList = result.OrderBy(x => x).ToList();
@@ -99,9 +100,9 @@ namespace FormsLoyalty.Views
         private void duration_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             var radioBtn = ((RadioButton)sender);
-            if (radioBtn.Content.ToString().ToLower().Contains("numbers".ToLower()) && radioBtn.IsChecked)
+            if (radioBtn.Content.ToString().Equals(AppResources.txtNumbersofdays) && radioBtn.IsChecked)
             {
-                InvokePopUp("Set number of days (from start date)","duration");
+                InvokePopUp(AppResources.txtSetNumberOfDays,"duration");
 
             }
             else if (radioBtn.IsChecked)
@@ -154,7 +155,7 @@ namespace FormsLoyalty.Views
             stack.Opacity = 0;
 
             await stack.FadeTo(1, 250);
-            InvokePopUp("How much / many do you take?","dose",stack.BindingContext);
+            InvokePopUp(AppResources.txtHowMuchTake,"dose",stack.BindingContext);
             stack.Opacity = 1;
         }
 
@@ -178,7 +179,7 @@ namespace FormsLoyalty.Views
             var view = (Label)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
-            InvokePopUp("Set number of days (from start date)", "duration");
+            InvokePopUp(AppResources.txtSetNumberOfDays, "duration");
             view.Opacity = 1;
         }
     }

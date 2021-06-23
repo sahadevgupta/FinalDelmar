@@ -1339,6 +1339,12 @@
   <data name="txtAddressDetails" xml:space="preserve">
     <value>Address Details</value>
   </data>
+  <data name="txtAmpules" xml:space="preserve">
+    <value>Ampule(s)</value>
+  </data>
+  <data name="txtAppExist" xml:space="preserve">
+    <value>Press Exit again to Close the app</value>
+  </data>
   <data name="txtApplied" xml:space="preserve">
     <value>applied!</value>
   </data>
@@ -1350,6 +1356,15 @@
   </data>
   <data name="txtbestsellers" xml:space="preserve">
     <value>Best Sellers</value>
+  </data>
+  <data name="txtBigspoons" xml:space="preserve">
+    <value>Bigspoon(s)</value>
+  </data>
+  <data name="txtCamera" xml:space="preserve">
+    <value>Camera</value>
+  </data>
+  <data name="txtCapsules" xml:space="preserve">
+    <value>Capsule(s)</value>
   </data>
   <data name="txtCardNumber" xml:space="preserve">
     <value>Card Number</value>
@@ -1369,6 +1384,9 @@
   <data name="txtDays" xml:space="preserve">
     <value>Days</value>
   </data>
+  <data name="txtDelmarCoupons" xml:space="preserve">
+    <value>Delmar Coupons</value>
+  </data>
   <data name="txtDemo1" xml:space="preserve">
     <value>Now you can upload or scan your Medicine Prescription</value>
   </data>
@@ -1380,6 +1398,9 @@
   </data>
   <data name="txtDidnotReceiveOtp" xml:space="preserve">
     <value>Didn't receive OTP?</value>
+  </data>
+  <data name="txtDrops" xml:space="preserve">
+    <value>Drop(s)</value>
   </data>
   <data name="txtDuration" xml:space="preserve">
     <value>Duration</value>
@@ -1405,14 +1426,23 @@
   <data name="txtFloorNo" xml:space="preserve">
     <value>Floor No.</value>
   </data>
+  <data name="txtGallery" xml:space="preserve">
+    <value>Gallery</value>
+  </data>
   <data name="txtGenerateOtp" xml:space="preserve">
     <value>Generate OTP</value>
+  </data>
+  <data name="txtGrams" xml:space="preserve">
+    <value>Gram(s)</value>
   </data>
   <data name="txtGuest" xml:space="preserve">
     <value>Guest</value>
   </data>
   <data name="txtHighLow" xml:space="preserve">
     <value>High to Low</value>
+  </data>
+  <data name="txtHowMuchTake" xml:space="preserve">
+    <value>How much / many do you take?</value>
   </data>
   <data name="txtImageSizeError" xml:space="preserve">
     <value>Size Exceeds!!</value>
@@ -1429,6 +1459,15 @@
   <data name="txtInvalidOtp" xml:space="preserve">
     <value>Invalid OTP</value>
   </data>
+  <data name="txtItemAddedToCart" xml:space="preserve">
+    <value>{0} has been added to cart !!</value>
+  </data>
+  <data name="txtItemSearch" xml:space="preserve">
+    <value>Type the item name to search</value>
+  </data>
+  <data name="txtIU" xml:space="preserve">
+    <value>IU</value>
+  </data>
   <data name="txtLandmark" xml:space="preserve">
     <value>Landmark</value>
   </data>
@@ -1438,11 +1477,26 @@
   <data name="txtLowHigh" xml:space="preserve">
     <value>Low to High</value>
   </data>
+  <data name="txtMcg" xml:space="preserve">
+    <value>mcg</value>
+  </data>
   <data name="txtMedicationName" xml:space="preserve">
     <value>Medication Name</value>
   </data>
+  <data name="txtMedicationPlaceholder" xml:space="preserve">
+    <value>Type active ingrident or brand name</value>
+  </data>
   <data name="txtMenu" xml:space="preserve">
     <value>Menu</value>
+  </data>
+  <data name="txtMg" xml:space="preserve">
+    <value>mg</value>
+  </data>
+  <data name="txtmL" xml:space="preserve">
+    <value>mL</value>
+  </data>
+  <data name="txtMobileEmpty" xml:space="preserve">
+    <value>Mobile Number cannot be empty</value>
   </data>
   <data name="txtmostviewed" xml:space="preserve">
     <value>Frequently Ordered</value>
@@ -1473,6 +1527,15 @@
   </data>
   <data name="txtPhotosAdded" xml:space="preserve">
     <value>photos added</value>
+  </data>
+  <data name="txtPickDays" xml:space="preserve">
+    <value>Pick Days</value>
+  </data>
+  <data name="txtPieces" xml:space="preserve">
+    <value>Piece(s)</value>
+  </data>
+  <data name="txtPills" xml:space="preserve">
+    <value>Pill(s)</value>
   </data>
   <data name="txtpoints" xml:space="preserve">
     <value>Points</value>
@@ -1519,8 +1582,14 @@
   <data name="txtSelectCode" xml:space="preserve">
     <value>Select a promo code</value>
   </data>
+  <data name="txtSetNumberOfDays" xml:space="preserve">
+    <value>Set number of days (from start date)</value>
+  </data>
   <data name="txtSettings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="txtSmallspoons" xml:space="preserve">
+    <value>Smallspoon(s)</value>
   </data>
   <data name="txtSortBy" xml:space="preserve">
     <value>Sort By</value>
@@ -1533,6 +1602,12 @@
   </data>
   <data name="txtStreet" xml:space="preserve">
     <value>Street</value>
+  </data>
+  <data name="txtToday" xml:space="preserve">
+    <value>Today</value>
+  </data>
+  <data name="txtUploadPhoto" xml:space="preserve">
+    <value>Upload a new photo</value>
   </data>
   <data name="txtVerificationCode" xml:space="preserve">
     <value>verification code</value>

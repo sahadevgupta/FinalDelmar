@@ -272,7 +272,7 @@
                        TextColor="Black"
                        CharacterSpacing="2"
                        
-                           Text="Delmar Coupons"
+                           Text="{x:Static resources:AppResources.txtDelmarCoupons}"
                            FontSize="Small"
                            FontAttributes="Bold" />
                 <CollectionView ItemsSource="{Binding DelmarCoupons}"

@@ -4,9 +4,9 @@
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:resources="clr-namespace:FormsLoyalty"
              xmlns:prism="http://prismlibrary.com"
-             x:Class="FormsLoyalty.Controls.LoginView"
-             BackgroundColor="WhiteSmoke">
-  <ContentView.Content>
+             x:Class="FormsLoyalty.Controls.LoginView">
+
+    <ContentView.Content>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
             <Image Source="imgmPIN" Grid.Row="1"/>
 

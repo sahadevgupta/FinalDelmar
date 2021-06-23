@@ -80,7 +80,7 @@ namespace FormsLoyalty.Controls
             {
 
                 view.HasError = true;
-                view.ErrorText = "Mobile Number cannot be empty";
+                view.ErrorText = AppResources.txtMobileEmpty;
             }
             else
             {

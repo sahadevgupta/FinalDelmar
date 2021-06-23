@@ -105,15 +105,16 @@ namespace FormsLoyalty.ViewModels
             {
                 // BackgroundColor = XF.Material.Forms.Material.GetResource<Color>(MaterialConstants.Color.PRIMARY),
                 // TitleTextColor = XF.Material.Forms.Material.GetResource<Color>(MaterialConstants.Color.ON_PRIMARY),
-              
-                
+
+
                 TitleTextColor = Color.Black,
                 ButtonAllCaps = false,
-                
+
 
                 CornerRadius = 8,
                 ControlSelectedColor = Color.FromHex("#b72228"),
                 ControlUnselectedColor = Color.Black.MultiplyAlpha(0.66),
+                TintColor = Color.FromHex("#b72228")
                 // ScrimColor = Color.FromHex("#232F34").MultiplyAlpha(0.32)
             };
 

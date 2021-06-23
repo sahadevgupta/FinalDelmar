@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CoreGraphics;
 using FFImageLoading;
 using FormsLoyalty.Interfaces;
 using FormsLoyalty.iOS.Services;
@@ -21,7 +22,17 @@ namespace FormsLoyalty.iOS.Services
     {
         public byte[] CompressImage(byte[] imgBytes)
         {
-            throw new NotImplementedException();
+            try
+            {
+                NSData data = NSData.FromArray(imgBytes);
+                UIImage image = UIImage.LoadFromData(data);
+                var bytes = image.AsJPEG(0.8f).ToArray();
+                return bytes;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public async Task OpenGallery(int imageCount)

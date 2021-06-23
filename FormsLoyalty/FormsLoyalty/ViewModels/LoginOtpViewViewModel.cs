@@ -50,7 +50,7 @@ namespace FormsLoyalty.ViewModels
                 {
 
 
-                    if (AppResources.Culture.IetfLanguageTag == "ar-EG")
+                    if (Settings.RTL)
                     {
                         otpComp.OtpTimer = $"تنتهي الصلاحية في {string.Format("{0:00}: {1:00}", _TimeSpan.Minutes, _TimeSpan.Seconds)} دقيقة";
                     }
@@ -61,6 +61,7 @@ namespace FormsLoyalty.ViewModels
                 {
                     IsResendEnabled = true;
                     otpComp.OtpTimer = string.Empty;
+                    //Otp = string.Empty;
                 }
                    
 
@@ -153,12 +154,12 @@ namespace FormsLoyalty.ViewModels
 
                 if (!string.IsNullOrEmpty(Otp))
                 {
-                    if (Otp.Equals(otpComp.OtpValue))
+                    if (Otp.Equals(otpComp.OtpValue) && TimerCount > 0)
                     {
                         var response = await _commonModel.VerifyPhoneAsync(MobileNumber);
                         if (response == false)
                         {
-                            await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}");
+                            await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}",new NavigationParameters { {"number", MobileNumber } });
                         }
                         else if(response == true)
                             GoToMainScreen();
@@ -173,8 +174,8 @@ namespace FormsLoyalty.ViewModels
                 }
                 else
                 {
-                    var Otp = await _commonModel.GenerateOTPAsync(MobileNumber);
-                    DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
+                     Otp = await _commonModel.GenerateOTPAsync(MobileNumber);
+                    //DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
                 }
             }
             catch (Exception)

@@ -9,6 +9,7 @@
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
            BackgroundColor="#D9f2f2ef"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              Title="{x:Static resources:AppResources.ActionbarReminders}">
 
 
@@ -18,7 +19,8 @@
         <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
         <Grid Padding="10" ColumnDefinitions="*" RowDefinitions="Auto,60,*" BackgroundColor="White">
 
-            <Label Grid.Row="0" Grid.Column="0" Margin="0,20,0,0" Text="July 2020" FontAttributes="Bold"
+                <Label Grid.Row="0" Grid.Column="0" Margin="0,20,0,0" Text="{Binding Source={x:Static sys:DateTime.UtcNow}, StringFormat='{0:MMMM, yyyy}'}" 
+                       FontAttributes="Bold"
                        HorizontalTextAlignment="Start" 
                        FontSize="20" TextColor="Black"/>
 
@@ -96,7 +98,7 @@
                 </StackLayout>
 
 
-                <Button Grid.Row="2" Text="&lt;&lt; Today" HorizontalOptions="End" Clicked="Today_Clicked"/>
+                <Button Grid.Row="2" Text="{Binding Source={x:Static resources:AppResources.txtToday},StringFormat='&lt;&lt; {0}'}" HorizontalOptions="End" Clicked="Today_Clicked"/>
 
 
 
@@ -142,32 +144,20 @@
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate>
 
-                                        <SwipeView IsClippedToBounds="True" Visual="Material">
-                                            <SwipeView.RightItems>
-
-                                                <SwipeItems>
-                                                    <SwipeItem Text="Edit"
-                                                               Command="{Binding BindingContext.EditCommand,Source={x:Reference reminderlist}}"
-                                                               CommandParameter="{Binding .}"
-                                                               IconImageSource="edit.png"
-                                                                BackgroundColor="LightGray"/>
-
-                                                    <SwipeItem Text="Delete"
-                                                               Command="{Binding BindingContext.DeleteCommand,Source={x:Reference reminderlist}}"
-                                                               CommandParameter="{Binding .}"
-                                                               IconImageSource="ic_action_discard.png"
-                                                               BackgroundColor="LightPink"
-                                                                />
-                                                </SwipeItems>
-
-                                              
-
-                                            </SwipeView.RightItems>
                                        
-                                        <Grid RowDefinitions="Auto,Auto,0.7"  Padding="10">
+                                        <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,0.7"  Padding="10">
 
-                                            <Label Grid.Row="0"  Text="{Binding EventName}" FontSize="Medium" TextColor="Black"/>
-                                            <Label Grid.Row="1" >
+                                                <ImageButton Grid.RowSpan="2" VerticalOptions="CenterAndExpand"
+                                                             HorizontalOptions="Center"
+                                                             Aspect="AspectFit"
+                                                             Grid.Column="0"
+                                                              Command="{Binding BindingContext.DeleteCommand,Source={x:Reference reminderlist}}"
+                                                               CommandParameter="{Binding .}"
+                                                         BackgroundColor="Transparent"
+                                                         Source="ic_action_discard" xct:IconTintColorEffect.TintColor="{StaticResource My_Button_Color}"/>
+
+                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding EventName}" FontSize="Medium" TextColor="Black"/>
+                                                <Label Grid.Row="1" Grid.Column="1" >
                                                 <Label.Text>
                                                     <MultiBinding StringFormat="{}{0} {1}">
 
@@ -177,12 +167,19 @@
                                                 </Label.Text>
                                             </Label>
 
-                                            
+                                                <ImageButton Grid.RowSpan="2" VerticalOptions="CenterAndExpand"
+                                                             HorizontalOptions="Center"
+                                                             Aspect="AspectFit"
+                                                             Grid.Column="2"
+                                                             Command="{Binding BindingContext.EditCommand,Source={x:Reference reminderlist}}"
+                                                               CommandParameter="{Binding .}"
+                                                         BackgroundColor="Transparent"
+                                                         Source="edit" />
 
-                                            <BoxView Grid.Row="2"  BackgroundColor="Silver" HeightRequest="0.7" />
+                                                <BoxView Grid.Row="2" Grid.ColumnSpan="3" BackgroundColor="Silver" HeightRequest="0.7" />
                                         </Grid>
 
-                                        </SwipeView>
+                                       
 
                                     </DataTemplate>
                                 </BindableLayout.ItemTemplate>

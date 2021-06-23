@@ -118,7 +118,14 @@
                                     <Label  Text="{Binding Description}" TextColor="Black" FontAttributes="Bold"
                                             VerticalTextAlignment="Center" Grid.Column="1" Margin="10,0"
                                             MaxLines="2" LineBreakMode="TailTruncation"
-                                            />
+                                            >
+                                        <Label.Triggers>
+                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                                 Value="true">
+                                                <Setter Property="Text" Value="{Binding ArabicDescription}"/>
+                                            </DataTrigger>
+                                        </Label.Triggers>
+                                    </Label>
 
                                 </Grid>
                                 

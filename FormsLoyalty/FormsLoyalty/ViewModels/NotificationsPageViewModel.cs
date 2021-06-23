@@ -1,5 +1,6 @@
 ﻿using FormsLoyalty.Helpers;
 using FormsLoyalty.Models;
+using FormsLoyalty.PopUpView;
 using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
@@ -83,6 +84,34 @@ namespace FormsLoyalty.ViewModels
                 IsPageEnabled = false;
             }
             IsPageEnabled = false;
+        }
+
+
+        internal async Task ListMenuSelected(MoreOptionModel options, Notification notification)
+        {
+            IsPageEnabled = true;
+            try
+            {
+                if (options.OptionName.Equals(AppResources.MenuViewMarkAsReadTitle))
+                {
+                    await UpdateNotificationStatus(notification, NotificationStatus.Read);
+                }
+                else if(options.OptionName.Equals(AppResources.MenuViewDeleteTitle))
+                    await UpdateNotificationStatus(notification, NotificationStatus.Closed);
+                else if (options.OptionName.Equals(AppResources.MenuViewMarkAsUnreadTitle))
+                    await UpdateNotificationStatus(notification, NotificationStatus.New);
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+            finally
+            {
+                IsPageEnabled = false;
+            }
+           
         }
 
         /// <summary>

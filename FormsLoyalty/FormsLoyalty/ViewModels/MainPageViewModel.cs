@@ -149,7 +149,7 @@ namespace FormsLoyalty.ViewModels
             {
                 if (AppData.Device.UserLoggedOnToDevice.Account != null)
                 {
-                    MyPoints = $"{AppData.Device.UserLoggedOnToDevice.Account.PointBalance.ToString("N0")} pts";
+                    MyPoints = $"{AppData.Device.UserLoggedOnToDevice.Account.PointBalance.ToString("N0")} {AppResources.txtpoints}";
                 }
             }
         }
@@ -184,12 +184,12 @@ namespace FormsLoyalty.ViewModels
             {
                 try
                 {
-                    var request = await App.dialogService.DisplayActionSheetAsync("Upload a new photo", "Cancel", null, "Camera", "Gallery");
-                    if (string.IsNullOrEmpty(request) || request == "Cancel" )
+                    var request = await App.dialogService.DisplayActionSheetAsync(AppResources.txtUploadPhoto, AppResources.ApplicationCancel, null, AppResources.txtCamera, AppResources.txtGallery);
+                    if (string.IsNullOrEmpty(request) || request.Equals(AppResources.ApplicationCancel) )
                     {
                         return;
                     }
-                    if (request == "Gallery")
+                    if (request.Equals(AppResources.txtGallery))
                     {
                         IsUploadBtnClicked = true;
                         await ImageHelper.PickFromGallery(5);
@@ -330,16 +330,16 @@ namespace FormsLoyalty.ViewModels
             {
                
                 CultureInfo language;
-                if (param.Contains("ar", StringComparison.OrdinalIgnoreCase))
-                {
-
-                    language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("Arabic"));
-                    Settings.RTL = true;
-                }
-                else
+                if (param.Equals("en", StringComparison.OrdinalIgnoreCase))
                 {
                     language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("English"));
                     Settings.RTL = false;
+                    
+                }
+                else
+                {
+                    language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("Arabic"));
+                    Settings.RTL = true;
                 }
 
                 Thread.CurrentThread.CurrentUICulture = language;
@@ -411,9 +411,12 @@ namespace FormsLoyalty.ViewModels
                 //    await MaterialDialog.Instance.AlertAsync(AppResources.txtImageSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
                 //    return;
                 //}
+                if (bytes != null)
+                {
+                    imgData.Add(new Tuple<byte[], string>(bytes, extension.Replace(".", "")));
                    
-                imgData.Add(new Tuple<byte[], string>(bytes, extension.Replace(".", "")));
-                 NavigateToScanPage(imgData);
+                }
+                NavigateToScanPage(imgData);
             }
 
            
@@ -483,10 +486,7 @@ namespace FormsLoyalty.ViewModels
         internal async Task NavigateToAccountTier()
         {
             IsPageEnabled = true;
-            if (await CheckLogin() )
-            {
-                await NavigationService.NavigateAsync(nameof(AccountTierPage));
-            }
+            await CheckLogin();
 
             IsPageEnabled = false;
         }

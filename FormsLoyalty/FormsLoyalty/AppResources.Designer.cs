@@ -3725,6 +3725,24 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ampule(s).
+        /// </summary>
+        public static string txtAmpules {
+            get {
+                return ResourceManager.GetString("txtAmpules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Press Exit again to Close the app.
+        /// </summary>
+        public static string txtAppExist {
+            get {
+                return ResourceManager.GetString("txtAppExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to applied!.
         /// </summary>
         public static string txtApplied {
@@ -3757,6 +3775,33 @@ namespace FormsLoyalty {
         public static string txtbestsellers {
             get {
                 return ResourceManager.GetString("txtbestsellers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bigspoon(s).
+        /// </summary>
+        public static string txtBigspoons {
+            get {
+                return ResourceManager.GetString("txtBigspoons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Camera.
+        /// </summary>
+        public static string txtCamera {
+            get {
+                return ResourceManager.GetString("txtCamera", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Capsule(s).
+        /// </summary>
+        public static string txtCapsules {
+            get {
+                return ResourceManager.GetString("txtCapsules", resourceCulture);
             }
         }
         
@@ -3815,6 +3860,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delmar Coupons.
+        /// </summary>
+        public static string txtDelmarCoupons {
+            get {
+                return ResourceManager.GetString("txtDelmarCoupons", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Now you can upload or scan your Medicine Prescription.
         /// </summary>
         public static string txtDemo1 {
@@ -3847,6 +3901,15 @@ namespace FormsLoyalty {
         public static string txtDidnotReceiveOtp {
             get {
                 return ResourceManager.GetString("txtDidnotReceiveOtp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Drop(s).
+        /// </summary>
+        public static string txtDrops {
+            get {
+                return ResourceManager.GetString("txtDrops", resourceCulture);
             }
         }
         
@@ -3923,11 +3986,29 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Gallery.
+        /// </summary>
+        public static string txtGallery {
+            get {
+                return ResourceManager.GetString("txtGallery", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Generate OTP.
         /// </summary>
         public static string txtGenerateOtp {
             get {
                 return ResourceManager.GetString("txtGenerateOtp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gram(s).
+        /// </summary>
+        public static string txtGrams {
+            get {
+                return ResourceManager.GetString("txtGrams", resourceCulture);
             }
         }
         
@@ -3946,6 +4027,15 @@ namespace FormsLoyalty {
         public static string txtHighLow {
             get {
                 return ResourceManager.GetString("txtHighLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How much / many do you take?.
+        /// </summary>
+        public static string txtHowMuchTake {
+            get {
+                return ResourceManager.GetString("txtHowMuchTake", resourceCulture);
             }
         }
         
@@ -3995,6 +4085,33 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} has been added to cart !!.
+        /// </summary>
+        public static string txtItemAddedToCart {
+            get {
+                return ResourceManager.GetString("txtItemAddedToCart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type the item name to search.
+        /// </summary>
+        public static string txtItemSearch {
+            get {
+                return ResourceManager.GetString("txtItemSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IU.
+        /// </summary>
+        public static string txtIU {
+            get {
+                return ResourceManager.GetString("txtIU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Landmark.
         /// </summary>
         public static string txtLandmark {
@@ -4022,6 +4139,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to mcg.
+        /// </summary>
+        public static string txtMcg {
+            get {
+                return ResourceManager.GetString("txtMcg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Medication Name.
         /// </summary>
         public static string txtMedicationName {
@@ -4031,11 +4157,47 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Type active ingrident or brand name.
+        /// </summary>
+        public static string txtMedicationPlaceholder {
+            get {
+                return ResourceManager.GetString("txtMedicationPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Menu.
         /// </summary>
         public static string txtMenu {
             get {
                 return ResourceManager.GetString("txtMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mg.
+        /// </summary>
+        public static string txtMg {
+            get {
+                return ResourceManager.GetString("txtMg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mL.
+        /// </summary>
+        public static string txtmL {
+            get {
+                return ResourceManager.GetString("txtmL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mobile Number cannot be empty.
+        /// </summary>
+        public static string txtMobileEmpty {
+            get {
+                return ResourceManager.GetString("txtMobileEmpty", resourceCulture);
             }
         }
         
@@ -4126,6 +4288,33 @@ namespace FormsLoyalty {
         public static string txtPhotosAdded {
             get {
                 return ResourceManager.GetString("txtPhotosAdded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pick Days.
+        /// </summary>
+        public static string txtPickDays {
+            get {
+                return ResourceManager.GetString("txtPickDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Piece(s).
+        /// </summary>
+        public static string txtPieces {
+            get {
+                return ResourceManager.GetString("txtPieces", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pill(s).
+        /// </summary>
+        public static string txtPills {
+            get {
+                return ResourceManager.GetString("txtPills", resourceCulture);
             }
         }
         
@@ -4265,11 +4454,29 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set number of days (from start date).
+        /// </summary>
+        public static string txtSetNumberOfDays {
+            get {
+                return ResourceManager.GetString("txtSetNumberOfDays", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string txtSettings {
             get {
                 return ResourceManager.GetString("txtSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Smallspoon(s).
+        /// </summary>
+        public static string txtSmallspoons {
+            get {
+                return ResourceManager.GetString("txtSmallspoons", resourceCulture);
             }
         }
         
@@ -4306,6 +4513,24 @@ namespace FormsLoyalty {
         public static string txtStreet {
             get {
                 return ResourceManager.GetString("txtStreet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today.
+        /// </summary>
+        public static string txtToday {
+            get {
+                return ResourceManager.GetString("txtToday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Upload a new photo.
+        /// </summary>
+        public static string txtUploadPhoto {
+            get {
+                return ResourceManager.GetString("txtUploadPhoto", resourceCulture);
             }
         }
         

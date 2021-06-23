@@ -42,7 +42,7 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Frame Padding="0" HeightRequest="45"  Visual="Material" Margin="10">
-                <SearchBar Placeholder="Search items..." Margin="{OnPlatform iOS=-5}"
+                <SearchBar Placeholder="{x:Static resources:AppResources.ActionbarSearch}" Margin="{OnPlatform iOS=-5}"
                        Text="{Binding SearchKey}"
                            TextColor="{StaticResource My_Button_Color}"
                            PlaceholderColor="Silver"

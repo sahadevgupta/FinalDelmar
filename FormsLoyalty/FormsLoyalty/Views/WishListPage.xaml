@@ -100,9 +100,8 @@
                             </Label>
 
 
-                            <ImageButton HeightRequest="25" Grid.RowSpan="2" Grid.Column="2"
+                            <ImageButton Grid.RowSpan="2" Grid.Column="2"
                                          Source="more.png"
-                                         
                                          VerticalOptions="CenterAndExpand"
                                          HorizontalOptions="EndAndExpand"
                                          Clicked="moreButton_Clicked"

@@ -105,7 +105,9 @@ namespace FormsLoyalty.Controls
                         MaxLength = 1,
                         HeightRequest = 50 ,
                         FontAttributes = FontAttributes.Bold,
-                        WidthRequest = 50
+                        WidthRequest = 50,
+                        TextColor = Color.Black
+
                          
                     };
                     newentry.SetBinding(Entry.TextProperty, "Value", BindingMode.TwoWay);

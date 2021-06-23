@@ -41,13 +41,15 @@ namespace FormsLoyalty.Models
                 }
                 else
                 {
+                    var msg = string.Format(AppResources.txtItemAddedToCart, list.Items[0].ItemDescription);
+
                     if (Device.RuntimePlatform == Device.Android)
                     {
-                        DependencyService.Get<INotify>().ShowSnackBar($"{list.Items[0].ItemDescription} has been added to basket!!");
+                        DependencyService.Get<INotify>().ShowSnackBar(msg);
                     }
                     else
                     {
-                        MaterialDialog.Instance.SnackbarAsync($"{list.Items[0].ItemDescription} has been added to basket!!", 5000);
+                        MaterialDialog.Instance.SnackbarAsync(msg, 5000);
                     }
                     newList.Id = list.Id;
 

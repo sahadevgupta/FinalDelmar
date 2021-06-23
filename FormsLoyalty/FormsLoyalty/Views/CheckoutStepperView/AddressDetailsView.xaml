@@ -173,64 +173,31 @@
             />-->
 
 
-            <StackLayout Orientation="Horizontal">
-                <StackLayout.Spacing>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="iOS" Value="-8" />
-                    </OnPlatform>
-                </StackLayout.Spacing>
-
-                <RadioButton TextColor="{StaticResource My_Button_Color}"
-                         FontSize="Body" Margin="10,0"
-                         x:Name="cod"
-                         CheckedChanged="RadioButton_CheckedChanged"
+        <RadioButton TextColor="{StaticResource My_Button_Color}" FlowDirection="LeftToRight"
+                     FontSize="Body" Margin="10,0"
+                     x:Name="cod"
+                     ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                     Content="{x:Static resources:AppResources.CheckoutViewPayOnDelivery}"
+                     CheckedChanged="RadioButton_CheckedChanged"
                      IsChecked="True"
                      GroupName="payment"/>
 
-                <Label x:Name="codText" Text="{x:Static resources:AppResources.CheckoutViewPayOnDelivery}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
+        <RadioButton  FontSize="Body" TextColor="{StaticResource My_Button_Color}" FlowDirection="LeftToRight"
+                      CheckedChanged="RadioButton_CheckedChanged"
+                      ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                      Content="{x:Static resources:AppResources.CheckoutViewPayCreditCard}"
+                      x:Name="card"
+                      IsVisible="false"
+                      Margin="10,0"
+                      GroupName="payment"/>
 
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal" IsVisible="false">
-                <StackLayout.Spacing>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="iOS" Value="-8" />
-                    </OnPlatform>
-                </StackLayout.Spacing>
-
-                <RadioButton  FontSize="Body" TextColor="{StaticResource My_Button_Color}"
-                         CheckedChanged="RadioButton_CheckedChanged"
-                       x:Name="card"
-                         Margin="10,0"
-                     GroupName="payment"/>
-
-                <Label    Text="{x:Static resources:AppResources.CheckoutViewPayCreditCard}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
-
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
-                <StackLayout.Spacing>
-                    <OnPlatform x:TypeArguments="x:Double">
-                        <On Platform="iOS" Value="-8" />
-                    </OnPlatform>
-                </StackLayout.Spacing>
-
-                <RadioButton FontSize="Body" TextColor="{StaticResource My_Button_Color}"
-                         x:Name="visadelivery"
-                         CheckedChanged="RadioButton_CheckedChanged"
-                         Margin="10,0"
-                     GroupName="payment"/>
-
-                <Label  Text="{x:Static resources:AppResources.CheckoutViewPayCreditOnDelivery}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
-
-            </StackLayout>
-
-
-
-
+        <RadioButton  FontSize="Body" TextColor="{StaticResource My_Button_Color}" FlowDirection="LeftToRight"
+                      CheckedChanged="RadioButton_CheckedChanged"
+                      ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                      Content="{x:Static resources:AppResources.CheckoutViewPayCreditOnDelivery}"
+                      x:Name="visadelivery"
+                      Margin="10,0"
+                      GroupName="payment"/>
 
 
             <StackLayout IsVisible="false">

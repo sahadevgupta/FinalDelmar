@@ -4,7 +4,9 @@ using FormsLoyalty.Utils;
 using FormsLoyalty.ViewModels;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
+using XF.Material.Forms.Dialogs;
 
 namespace FormsLoyalty.Views
 {
@@ -40,8 +42,64 @@ namespace FormsLoyalty.Views
             _viewModel.CheckCartCount(null);
         }
 
-        
-    protected void tabChanged(object sender, EventArgs args)
+        bool value = true;
+        protected override bool OnBackButtonPressed()
+        {
+            //var selectedTabIndex = this.Children.IndexOf(this.CurrentPage);
+            //if (selectedTabIndex == 0)
+            //{
+            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
+            //    if (!currentPage.Title.Equals(AppResources.ActionbarHome))
+            //    {
+            //        return true;
+            //    }
+            //}
+            //else if (selectedTabIndex == 1)
+            //{
+            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
+            //    if (!currentPage.Title.Equals(AppResources.txtCategory))
+            //    {
+            //        return true;
+            //    }
+            //}
+            //else if (selectedTabIndex == 2)
+            //{
+            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
+            //    if (!currentPage.Title.Equals(AppResources.CartTab))
+            //    {
+            //        return true;
+            //    }
+            //}
+            //else if (selectedTabIndex == 3)
+            //{
+            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
+            //    if (!currentPage.Title.Equals(AppResources.OrdersTab))
+            //    {
+            //        return true;
+            //    }
+            //}
+            //else if (selectedTabIndex == 4)
+            //{
+            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
+            //    if (!currentPage.Title.Equals(AppResources.MoreTab))
+            //    {
+            //        return true;
+            //    }
+            //}
+
+
+            if (value)
+            {
+               
+                DependencyService.Get<INotify>().ShowToast(AppResources.txtAppExist);
+                value = false;
+                Task.Delay(2000).ContinueWith((s, e) => { value = true; }, null);
+                return true;
+            }
+            else
+                return false;
+        }
+        protected void tabChanged(object sender, EventArgs args)
     {
         //The children are navigation pages so we can easily pop to root of previous selected page 
         //if you have something else than NavigationPages make sure to get the good reference 

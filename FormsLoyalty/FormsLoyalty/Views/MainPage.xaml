@@ -86,10 +86,10 @@
                                VerticalOptions="Start" Aspect="AspectFit" HeightRequest="50" WidthRequest="50"/>
                         </StackLayout>
 
-                        <Frame Padding="5" Grid.Column="1" HorizontalOptions="End" Margin="10,0,10,10" Visual="Material" BorderColor="White" 
+                        <Frame Padding="2" Grid.Column="1" HorizontalOptions="End" Margin="10,0,10,10" Visual="Material" BorderColor="White" 
                                CornerRadius="{OnPlatform Android=20, iOS=15}"
                                VerticalOptions="Start" >
-                            <StackLayout Orientation="Horizontal" Spacing="10" WidthRequest="50" >
+                            <StackLayout Orientation="Horizontal" Spacing="10" WidthRequest="50" IsClippedToBounds="True">
                                 <Image Source="{helpers:ImageResource Resource=eng.png}" HeightRequest="20" WidthRequest="20" IsVisible="false">
                                     <Image.Triggers>
                                         <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
@@ -98,7 +98,7 @@
                                         </DataTrigger>
                                     </Image.Triggers>
                                 </Image>
-                                <Label x:Name="langlbl" Text="AR"  VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" FontSize="Body" 
+                                <Label x:Name="langlbl" Text="ع"  VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" FontSize="Body" 
                                        TextColor="Black"
                                        FontAttributes="Bold">
                                     <Label.Triggers>
@@ -136,9 +136,9 @@
 
                         <Frame BackgroundColor="#D03E3E" Padding="0" BorderColor="White" CornerRadius="5" HasShadow="False">
 
-                            <!--<Frame.GestureRecognizers>
+                            <Frame.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="points_Tapped"/>
-                            </Frame.GestureRecognizers>-->
+                            </Frame.GestureRecognizers>
 
                             <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
                             BackgroundColor="Transparent"

@@ -9,6 +9,7 @@
              xmlns:effects="clr-namespace:FormsLoyalty.Effects" 
              xmlns:enums="clr-namespace:LSRetail.Omni.Domain.DataModel.Loyalty.Setup;assembly=LSRetail.Omni.Domain.DataModel.Loyalty"
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin" 
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
              BackgroundColor="WhiteSmoke"
@@ -71,7 +72,20 @@
                                        FontSize="Caption"
                                        />
 
+
+                            <ImageButton VerticalOptions="CenterAndExpand" Grid.Row="0"
+                                         Grid.Column="2"
+                                         HorizontalOptions="EndAndExpand"
+                                         Grid.RowSpan="2"
+                                         Source="more.png"
+                                         Clicked="moreButton_Clicked"
+                                         CommandParameter="{Binding .}" 
+                                         BackgroundColor="Transparent"
+                                         xct:IconTintColorEffect.TintColor="Black"/>
+
+
                             <material:MaterialMenuButton ButtonType="Text" 
+                                                         IsVisible="false"
                                                              VerticalOptions="CenterAndExpand" Grid.Row="0"
                                                      Grid.Column="2"
                                                      HorizontalOptions="EndAndExpand"
@@ -147,19 +161,27 @@
                                         <TapGestureRecognizer Tapped="MaterialMenuButton_Clicked" CommandParameter="{Binding .}"/>
                                     </Image.GestureRecognizers>
                                 </Image>
-                                         
 
 
+                                <ImageButton VerticalOptions="Start" Grid.Row="0"
+                                             Source="more.png"
+                                             Margin="-20,-10,-10,0"
+                                             BorderWidth="10"
+                                             HorizontalOptions="EndAndExpand"
+                                             Clicked="moreButton_Clicked"
+                                             CommandParameter="{Binding .}" 
+                                             BackgroundColor="Transparent"
+                                             xct:IconTintColorEffect.TintColor="Black"/>
 
 
                                 <material:MaterialMenuButton ButtonType="Text" 
-                                                             
+                                                             IsVisible="false"
                                                              VerticalOptions="Start" Grid.Row="0"
-                                                            Margin="-20,-20,-20,0"
+                                                            Margin="-20,-10,-20,0"
                                                              Visual="Material"
                                                              HeightRequest="60"
                                                              WidthRequest="60"
-                                                       BorderWidth="10"
+                                                      
                                                              Command="{Binding BindingContext.ListMenuCommand,Source={x:Reference offerlist}}"
                                                              CommandParameter="{Binding .}"
                                                                  Clicked="MaterialMenuButton_Clicked"
@@ -232,7 +254,7 @@
                     IsGrouped="True"
                     x:Name="offerlist"
                     Margin="10,10,10,0"
-                        ItemTemplate="{StaticResource CardView}">
+                        ItemTemplate="{StaticResource ListView}">
 
             <CollectionView.Triggers>
                 <DataTrigger TargetType="CollectionView" Binding="{Binding IsPageEnabled}"
@@ -245,7 +267,7 @@
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical"
                                  VerticalItemSpacing="10"
-                                 Span="2" />
+                                />
             </CollectionView.ItemsLayout>
 
             <CollectionView.GroupHeaderTemplate>

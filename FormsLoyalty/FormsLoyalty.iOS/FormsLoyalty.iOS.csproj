@@ -324,6 +324,7 @@
     <Compile Include="Renderers\NoBounceRenderer.cs" />
     <Compile Include="Renderers\NoBounceScrollViewRenderer.cs" />
     <Compile Include="Renderers\OTPRenderer.cs" />
+    <Compile Include="Renderers\RadioButton_iOS.cs" />
     <Compile Include="Services\MediaService_iOS.cs" />
     <Compile Include="Services\Notification_iOS.cs" />
     <Compile Include="VideoController.cs" />
@@ -512,6 +513,12 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\barcode%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\unchecked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\checked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>

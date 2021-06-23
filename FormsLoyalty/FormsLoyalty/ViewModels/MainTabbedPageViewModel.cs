@@ -66,10 +66,10 @@ namespace FormsLoyalty.ViewModels
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             RTL = Settings.RTL;
-            if (!AppData.IsLanguageChanged)
-            {
+            //if (!AppData.IsLanguageChanged)
+            //{
                 RefreshMemberContact();
-            }
+            //}
                
 
             MessagingCenter.Subscribe<BasketModel>(this, "CartUpdated", CheckCartCount);

@@ -391,7 +391,7 @@
     <value>متجر</value>
   </data>
   <data name="ActionbarStores" xml:space="preserve">
-    <value>المتاجر</value>
+    <value>الفروع</value>
   </data>
   <data name="ActionbarTerm" xml:space="preserve">
     <value>الأحكام والشروط</value>
@@ -469,7 +469,7 @@
     <value>الإجمالي</value>
   </data>
   <data name="ApplicationUndo" xml:space="preserve">
-    <value>Undo</value>
+    <value>إلغاء</value>
   </data>
   <data name="ApplicationYes" xml:space="preserve">
     <value>نعم</value>
@@ -748,7 +748,7 @@
     <value>المتاجر ({0})</value>
   </data>
   <data name="GeneralSearchViewTransaction" xml:space="preserve">
-    <value>History</value>
+    <value>تاريخ الطلبات</value>
   </data>
   <data name="GeneralSearchViewTransactionsGroupHeader" xml:space="preserve">
     <value>History ({0})</value>
@@ -1108,7 +1108,7 @@
     <value>اعادة تعيين كلمة السر</value>
   </data>
   <data name="ScannerViewScannerBottomText" xml:space="preserve">
-    <value>Wait for the barcode to automatically scan!</value>
+    <value>انتظر حتى يقوم الباركود بعمل مسح تلقائى</value>
   </data>
   <data name="ScannerViewScannerTopText" xml:space="preserve">
     <value>وجه الكاميرا علي الباركود \ n على بُعد 15 سم</value>
@@ -1336,7 +1336,13 @@
     <value>خط عنوان</value>
   </data>
   <data name="txtAddressDetails" xml:space="preserve">
-    <value>تفاصيل العنوان</value>
+    <value>العنوان</value>
+  </data>
+  <data name="txtAmpules" xml:space="preserve">
+    <value>أمبولات</value>
+  </data>
+  <data name="txtAppExist" xml:space="preserve">
+    <value>اضغط على خروج مرة أخرى لإغلاق التطبيق</value>
   </data>
   <data name="txtApplied" xml:space="preserve">
     <value>مطبق!</value>
@@ -1349,6 +1355,15 @@
   </data>
   <data name="txtbestsellers" xml:space="preserve">
     <value>الأفضل مبيعًا</value>
+  </data>
+  <data name="txtBigspoons" xml:space="preserve">
+    <value>ملعقة كبيرة</value>
+  </data>
+  <data name="txtCamera" xml:space="preserve">
+    <value>آلة تصوير</value>
+  </data>
+  <data name="txtCapsules" xml:space="preserve">
+    <value>كبسولات</value>
   </data>
   <data name="txtCardNumber" xml:space="preserve">
     <value>Card Number</value>
@@ -1368,17 +1383,23 @@
   <data name="txtDays" xml:space="preserve">
     <value>أيام</value>
   </data>
+  <data name="txtDelmarCoupons" xml:space="preserve">
+    <value>كوبونات دلمار</value>
+  </data>
   <data name="txtDemo1" xml:space="preserve">
-    <value>الآن يمكنك تحميل أو مسح الوصفة الطبية الخاصة بك</value>
+    <value>الان يمكنك إضافة أو رفع صورة الروشتة الخاصة بك</value>
   </data>
   <data name="txtDemo2" xml:space="preserve">
-    <value>ابحث عن أي عنصر من الجرد</value>
+    <value>استخدم خانة البحث للبحث عن الاصناف بالاسم او المادة الفعالة</value>
   </data>
   <data name="txtDemo3" xml:space="preserve">
     <value>هنا ، يمكنك إدارة عربة التسوق الخاصة بك</value>
   </data>
   <data name="txtDidnotReceiveOtp" xml:space="preserve">
     <value>لم تستلم OTP؟</value>
+  </data>
+  <data name="txtDrops" xml:space="preserve">
+    <value>قطرات</value>
   </data>
   <data name="txtDuration" xml:space="preserve">
     <value>مدة</value>
@@ -1404,14 +1425,23 @@
   <data name="txtFloorNo" xml:space="preserve">
     <value>رقم الطابق</value>
   </data>
+  <data name="txtGallery" xml:space="preserve">
+    <value>صالة عرض</value>
+  </data>
   <data name="txtGenerateOtp" xml:space="preserve">
     <value>إرسال OTP</value>
+  </data>
+  <data name="txtGrams" xml:space="preserve">
+    <value>جرامات</value>
   </data>
   <data name="txtGuest" xml:space="preserve">
     <value>زائر</value>
   </data>
   <data name="txtHighLow" xml:space="preserve">
     <value>من الأكبر للأصغر</value>
+  </data>
+  <data name="txtHowMuchTake" xml:space="preserve">
+    <value>كم / كم تأخذ؟</value>
   </data>
   <data name="txtImageSizeError" xml:space="preserve">
     <value>الحجم يتجاوز !!</value>
@@ -1428,6 +1458,15 @@
   <data name="txtInvalidOtp" xml:space="preserve">
     <value>OTP غير صحيح</value>
   </data>
+  <data name="txtItemAddedToCart" xml:space="preserve">
+    <value>تمت إضافة {0} إلى سلة التسوق !!</value>
+  </data>
+  <data name="txtItemSearch" xml:space="preserve">
+    <value>اكتب اسم العنصر للبحث</value>
+  </data>
+  <data name="txtIU" xml:space="preserve">
+    <value>IU</value>
+  </data>
   <data name="txtLandmark" xml:space="preserve">
     <value>معلم معروف</value>
   </data>
@@ -1437,11 +1476,26 @@
   <data name="txtLowHigh" xml:space="preserve">
     <value>من الأصغر للأكبر</value>
   </data>
+  <data name="txtMcg" xml:space="preserve">
+    <value>ميكروغرام</value>
+  </data>
   <data name="txtMedicationName" xml:space="preserve">
     <value>اسم الطب</value>
   </data>
+  <data name="txtMedicationPlaceholder" xml:space="preserve">
+    <value>ضع اسم الصنف أو المادة الفعالة</value>
+  </data>
   <data name="txtMenu" xml:space="preserve">
     <value>خيارات</value>
+  </data>
+  <data name="txtMg" xml:space="preserve">
+    <value>ملغ</value>
+  </data>
+  <data name="txtmL" xml:space="preserve">
+    <value>مل</value>
+  </data>
+  <data name="txtMobileEmpty" xml:space="preserve">
+    <value>يجب إدخال رقم الموبايل</value>
   </data>
   <data name="txtmostviewed" xml:space="preserve">
     <value>كثيرا ما تطلب</value>
@@ -1462,7 +1516,7 @@
     <value>عدد الايام</value>
   </data>
   <data name="txtOngoingTreatment" xml:space="preserve">
-    <value>العلاج المستمر</value>
+    <value>علاج مزمن</value>
   </data>
   <data name="txtOrderHistory" xml:space="preserve">
     <value>الطلبات السابقة</value>
@@ -1472,6 +1526,15 @@
   </data>
   <data name="txtPhotosAdded" xml:space="preserve">
     <value>تمت إضافة الصور</value>
+  </data>
+  <data name="txtPickDays" xml:space="preserve">
+    <value>اختر الأيام</value>
+  </data>
+  <data name="txtPieces" xml:space="preserve">
+    <value>قطعة</value>
+  </data>
+  <data name="txtPills" xml:space="preserve">
+    <value>حبوب</value>
   </data>
   <data name="txtpoints" xml:space="preserve">
     <value>نقاط</value>
@@ -1495,7 +1558,7 @@
     <value>مرتين يوميا</value>
   </data>
   <data name="txtReminderList3" xml:space="preserve">
-    <value>3 مرات في اليوم</value>
+    <value>ثلاث مرات يوميا</value>
   </data>
   <data name="txtReminderTimes" xml:space="preserve">
     <value>أوقات التذكير</value>
@@ -1518,8 +1581,14 @@
   <data name="txtSelectCode" xml:space="preserve">
     <value>اضافة كوبون</value>
   </data>
+  <data name="txtSetNumberOfDays" xml:space="preserve">
+    <value>تحديد عدد الأيام (من تاريخ البدء)</value>
+  </data>
   <data name="txtSettings" xml:space="preserve">
     <value>إعدادات</value>
+  </data>
+  <data name="txtSmallspoons" xml:space="preserve">
+    <value>ملعقة صغيرة</value>
   </data>
   <data name="txtSortBy" xml:space="preserve">
     <value>ترتيب</value>
@@ -1533,6 +1602,12 @@
   <data name="txtStreet" xml:space="preserve">
     <value>شارع</value>
   </data>
+  <data name="txtToday" xml:space="preserve">
+    <value>اليوم</value>
+  </data>
+  <data name="txtUploadPhoto" xml:space="preserve">
+    <value>قم بتحميل صورة جديدة</value>
+  </data>
   <data name="txtVerificationCode" xml:space="preserve">
     <value>شيفرة التأكيد</value>
   </data>
@@ -1540,7 +1615,7 @@
     <value>إكمال</value>
   </data>
   <data name="txtViewOffers" xml:space="preserve">
-    <value>عرض القسائم</value>
+    <value>لكوبونات المتاحة</value>
   </data>
   <data name="txtWelcome1" xml:space="preserve">
     <value>للبدء ، انقر فوق الزر أدناه لتسجيل الدخول أو لإضافة حساب جديد وتكوين ملف التعريف الشخصي الخاص بك.</value>

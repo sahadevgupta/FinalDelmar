@@ -60,6 +60,13 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
+        private List<string> _doseFrequencies;
+        public List<string> DoseFrequencies
+        {
+            get { return _doseFrequencies; }
+            set { SetProperty(ref _doseFrequencies, value); }
+        }
+
         public List<int> selectedDays = new List<int>();
 
         IReminderRepo _reminderRepo;
@@ -67,7 +74,17 @@ namespace FormsLoyalty.ViewModels
         public AddReminderPageViewModel(INavigationService navigationService,IReminderRepo reminderRepo) : base(navigationService)
         {
             _reminderRepo = reminderRepo;
-            Units = new ObservableCollection<string> { "Pill(s)", "Capsule(s)", "Drop(s)", "Bigspoon(s)", "Smallspoon(s)", "Piece(s)", "Gram(s)", "IU", "mL", "mg", "mcg", "Ampule(s)" };
+            Units = new ObservableCollection<string> 
+            { 
+                AppResources.txtAmpules,AppResources.txtBigspoons,AppResources.txtCapsules,AppResources.txtDrops,
+                AppResources.txtGrams,AppResources.txtIU,
+                AppResources.txtMcg,AppResources.txtMg,AppResources.txtmL,
+                AppResources.txtPieces,AppResources.txtPills
+
+            };
+
+            
+
             medicineReminder = new MedicineReminder { Frequency = 1, From = DateTime.UtcNow.Date, AllDay = true, IsReminder = true };
         }
         /// <summary>   
@@ -140,9 +157,15 @@ namespace FormsLoyalty.ViewModels
         private void LoadData()
         {
             SelectedUnit = Units.First();
-            
+
             //frequencies = new ObservableCollection<FrequencyTime> { new FrequencyTime { Id = Guid.NewGuid().ToString() } };
-            SelectedFreqIndex = 0;
+            DoseFrequencies = new List<string>
+            {
+                AppResources.txtReminderList1,
+                AppResources.txtReminderList2,
+                AppResources.txtReminderList3
+            };
+            SelectedFreqIndex = DoseFrequencies.Count;
         }
 
         public override void Initialize(INavigationParameters parameters)

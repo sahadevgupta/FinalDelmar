@@ -172,7 +172,6 @@ namespace FormsLoyalty.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            CanNavigate = true;
             MessagingCenter.Subscribe<App, List<Tuple<byte[], string>>>((App)Xamarin.Forms.Application.Current, "ImagesSelected", GetFileData);
             var navigationMode = parameters.GetNavigationMode();
             if (navigationMode == NavigationMode.Back)

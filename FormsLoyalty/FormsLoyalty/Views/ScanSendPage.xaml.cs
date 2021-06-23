@@ -1,8 +1,6 @@
 ﻿using FormsLoyalty.Helpers;
-using FormsLoyalty.Interfaces;
 using FormsLoyalty.Models;
 using FormsLoyalty.ViewModels;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace FormsLoyalty.Views
@@ -19,7 +17,7 @@ namespace FormsLoyalty.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-            _viewModel.CanNavigate = true;
+           
         }
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
@@ -40,12 +38,12 @@ namespace FormsLoyalty.Views
         {
             try
             {
-                var request = await DisplayActionSheet("Upload a new photo", "Cancel", null, "Camera", "Gallery");
-                if (request == "Cancel")
+                var request = await DisplayActionSheet(AppResources.txtUploadPhoto, AppResources.ApplicationCancel, null, AppResources.txtCamera, AppResources.txtGallery);
+                if (request == null || request.Equals(AppResources.ApplicationCancel))
                 {
                     return;
                 }
-                if (request == "Gallery")
+                if (request.Equals(AppResources.txtGallery))
                 {
                     await ImageHelper.PickFromGallery(5);
                 }

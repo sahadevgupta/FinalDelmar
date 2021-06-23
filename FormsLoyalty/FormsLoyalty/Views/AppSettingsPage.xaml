@@ -10,7 +10,18 @@
              BackgroundColor="WhiteSmoke"
             Title="{x:Static resources:AppResources.AppConfigurationappbar}">
 
-    <AbsoluteLayout>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Color x:Key="LightRadioButtonColor">#F3F2F1</Color>
+            <Color x:Key="DarkRadioButtonColor">#9B9A99</Color>
+
+           
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+
+    <AbsoluteLayout BackgroundColor="White" FlowDirection="LeftToRight">
         <StackLayout Padding="10" AbsoluteLayout.LayoutBounds="0,0,1,1"
                  AbsoluteLayout.LayoutFlags="All">
 
@@ -24,37 +35,33 @@
         <Label Text="{x:Static resources:AppResources.SettingsViewLanguage}"
                />
 
+            <!--<controls:CustomRadioButton Content="{x:Static resources:AppResources.RadioButtonEnglishLanguage}"
+                                        IsChecked="{Binding IsEnLan}"
+                                        TextColor="Black"/>-->
 
-            <StackLayout Orientation="Horizontal">
-               
 
-                <RadioButton TextColor="{StaticResource My_Button_Color}"
-                     Visual="Material"
+            <RadioButton TextColor="Black" 
+                     ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                         
                      IsChecked="{Binding IsEnLan}"
-                     GroupName="language"/>
-
-                <Label Text="{x:Static resources:AppResources.RadioButtonEnglishLanguage}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
-                
-            </StackLayout>
-
-            <StackLayout Orientation="Horizontal">
+                     GroupName="language"
+                         Content="{x:Static resources:AppResources.RadioButtonEnglishLanguage}"/>
 
 
-                <RadioButton TextColor="{StaticResource My_Button_Color}"
+
+            <RadioButton TextColor="Black"
                      Visual="Material"
+                         ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                         FontSize="Default"
                      IsChecked="{Binding IsArLan}"
-                     GroupName="language"/>
-
-                <Label Text="{x:Static resources:AppResources.RadioButtonArabicLanguage}"  FontSize="Default" LineBreakMode="TailTruncation" 
-                       VerticalOptions="Center"/>
-
-            </StackLayout>
+                     GroupName="language"
+                         Content="{x:Static resources:AppResources.RadioButtonArabicLanguage}"/>
 
 
-           
 
-        <Button Text="{x:Static resources:AppResources.ApplyBtn}"
+
+
+            <Button Text="{x:Static resources:AppResources.ApplyBtn}"
                 Margin="0,20,0,0"
                 HeightRequest="40"
                 TextColor="White"

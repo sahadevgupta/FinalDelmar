@@ -29,7 +29,7 @@
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
     </ContentPage.Resources>
 
-    <AbsoluteLayout>
+    <AbsoluteLayout BackgroundColor="WhiteSmoke">
         <ScrollView VerticalScrollBarVisibility="Never"
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All">
@@ -46,7 +46,7 @@
                 <Frame Margin="0,5">
                     <StackLayout>
                         <Label Text="{x:Static resources:AppResources.txtMedicationName}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}"/>
-                        <Entry x:Name="namelbl" Text="{Binding medicineReminder.EventName}" Placeholder="Type active ingrident or brand name" Visual="Default"/>
+                        <Entry x:Name="namelbl" Text="{Binding medicineReminder.EventName}" Placeholder="{x:Static resources:AppResources.txtMedicationPlaceholder}" Visual="Default"/>
 
                         <Frame Padding="5,0,5,0" HeightRequest="40" HasShadow="True" >
                             <controls:CustomPicker ItemsSource="{Binding Units}" 
@@ -127,15 +127,12 @@
                             <Frame Padding="5,0,5,0" HeightRequest="40"  HasShadow="True" >
                                 <controls:CustomPicker x:Name="reminderPicker" 
                                                        HorizontalOptions="FillAndExpand"
+                                                       ItemsSource="{Binding DoseFrequencies}"
                                                        SelectedIndex="{Binding SelectedFreqIndex}"  
                                                        TextColor="Black"
-                                                       Visual="Default"   >
-                                    <controls:CustomPicker.Items>
-                                        <x:String>Once daily</x:String>
-                                        <x:String>Twice daily</x:String>
-                                        <x:String>3 times a day</x:String>
-                                    </controls:CustomPicker.Items>
-                                </controls:CustomPicker>
+                                                       Visual="Default"   />
+
+
                             </Frame>
 
                             <!--<Picker x:Name="reminderPicker"  HorizontalOptions="FillAndExpand" Visual="Default" 
@@ -196,7 +193,7 @@
                         </DataTrigger>
 
                     </Frame.Triggers>
-                    <xct:Expander x:Name="schexpander" HorizontalOptions="FillAndExpand">
+                    <xct:Expander x:Name="schexpander" HorizontalOptions="FillAndExpand" IsExpanded="True">
                         <xct:Expander.Header>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
                                 <Label Text="{x:Static resources:AppResources.txtSchedule}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
@@ -227,10 +224,14 @@
                                        VerticalOptions="Center" HorizontalOptions="Start"/>
 
                                 <RadioButton Visual="Material" x:Name="ongoingSwitch" 
+                                             TextColor="Black"
+                                             ControlTemplate="{StaticResource ThemeRadioTemplate}"
                                                  Content="{x:Static resources:AppResources.txtOngoingTreatment}"
                                                  GroupName="duration" IsChecked="True" CheckedChanged="duration_CheckedChanged" />
 
                                 <RadioButton Visual="Material" 
+                                             TextColor="Black"
+                                             ControlTemplate="{StaticResource ThemeRadioTemplate}"
                                                  Content="{x:Static resources:AppResources.txtNumbersofdays}"
                                                  GroupName="duration" CheckedChanged="duration_CheckedChanged"/>
 
@@ -261,11 +262,15 @@
                                 <RadioButton x:Name="everydaybtn" HorizontalOptions="FillAndExpand"
                                                  Content="{x:Static resources:AppResources.txtEvery_day}"
                                                  Visual="Material"
+                                             TextColor="Black"
+                                             ControlTemplate="{StaticResource ThemeRadioTemplate}"
                                              BackgroundColor="Transparent"
                                          GroupName="days" IsChecked="{Binding medicineReminder.AllDay}" CheckedChanged="days_CheckedChanged" />
 
                                 <Grid ColumnDefinitions="*">
                                 <RadioButton Visual="Material" HorizontalOptions="FillAndExpand"
+                                             TextColor="Black"
+                                             ControlTemplate="{StaticResource ThemeRadioTemplate}"
                                                  Content="{x:Static resources:AppResources.txtSpecificdaysweek}"
                                                  GroupName="days" CheckedChanged="days_CheckedChanged"/>
                                 </Grid>
