@@ -37,6 +37,7 @@ namespace FormsLoyalty.Droid
         public static int PICKFOLDERCODE = 9999;
         public static Context context;
         public static Window _window;
+        internal static MainActivity Instance { get; private set; }
         readonly string[] LocationPermissions =
         {
             Manifest.Permission.AccessCoarseLocation,
@@ -78,7 +79,7 @@ namespace FormsLoyalty.Droid
 #if DEBUG
             PrintHashKey(this);
 #endif
-
+            Instance = this;
             //For Add SMS Read
             string Value = AppHashKeyHelper.GetAppHashKey(this);
             Console.WriteLine("SMS Read >>>   ------GetAppHashKey Value:" + Value);// Add

@@ -1,10 +1,12 @@
 ﻿using FormsLoyalty.ConstantValues;
+using FormsLoyalty.Interfaces;
 using FormsLoyalty.Models;
 using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
+using Plugin.StoreReview;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -15,6 +17,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Unity;
+using Xamarin.Forms;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -440,9 +443,26 @@ namespace FormsLoyalty.ViewModels
                     App.Current.MainPage = new HomeMasterDetailPage();
 
                     break;
-                //case AppConstValues.Items:
-                //    await Detail.Navigation.PushAsync(new ItemCategoriesPage());
-                //    break;
+                case AppConstValues.Items:
+                    try
+                    {
+
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
+                        {
+                            //await DependencyService.Get<IAppRating>().RateApp();
+                            await CrossStoreReview.Current.RequestReview(true);
+                        });
+
+                         
+                       
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Console.WriteLine(ex.Message);
+                    }
+                   
+                    break;
                 case AppConstValues.Search:
                     await NavigationService.NavigateAsync(nameof(SearchPage));
                     break;

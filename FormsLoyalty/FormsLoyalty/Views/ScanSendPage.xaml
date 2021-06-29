@@ -7,6 +7,7 @@
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              BackgroundColor="#f2f2ef"
              Visual="Material"
              Title="{x:Static resources:AppResources.ActionbarScanSend}">
@@ -35,9 +36,9 @@
                 </DataTrigger>
             </Frame.Triggers>
 
-            
 
-                <StackLayout IsClippedToBounds="True">
+            <Grid>
+                <StackLayout IsClippedToBounds="True" IsVisible="false">
 
                 <Label
                    FontSize="Body"
@@ -112,6 +113,15 @@
 
             </StackLayout>
 
+                <xct:MediaElement Source="https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4"
+                                  AutoPlay="True" BackgroundColor="Transparent"
+                                  VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand"
+                                  HeightRequest="185" IsLooping="True"
+                                  Volume="1"
+                                   KeepScreenOn="True" ShowsPlaybackControls="True"/>
+
+
+            </Grid>
         </Frame>
 
         <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"

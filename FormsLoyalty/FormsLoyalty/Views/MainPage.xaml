@@ -87,7 +87,7 @@
                         </StackLayout>
 
                         <Frame Padding="2" Grid.Column="1" HorizontalOptions="End" Margin="10,0,10,10" Visual="Material" BorderColor="White" 
-                               CornerRadius="{OnPlatform Android=20, iOS=15}"
+                               CornerRadius="{OnPlatform Android=20, iOS=13}"
                                VerticalOptions="Start" >
                             <StackLayout Orientation="Horizontal" Spacing="10" WidthRequest="50" IsClippedToBounds="True">
                                 <Image Source="{helpers:ImageResource Resource=eng.png}" HeightRequest="20" WidthRequest="20" IsVisible="false">

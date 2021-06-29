@@ -180,40 +180,43 @@ namespace FormsLoyalty.ViewModels
         internal async void ScanSend()
         {
             IsPageEnabled = true;
-            if (true)
+            if (await CheckLogin())
             {
-                try
-                {
-                    var request = await App.dialogService.DisplayActionSheetAsync(AppResources.txtUploadPhoto, AppResources.ApplicationCancel, null, AppResources.txtCamera, AppResources.txtGallery);
-                    if (string.IsNullOrEmpty(request) || request.Equals(AppResources.ApplicationCancel) )
-                    {
-                        return;
-                    }
-                    if (request.Equals(AppResources.txtGallery))
-                    {
-                        IsUploadBtnClicked = true;
-                        await ImageHelper.PickFromGallery(5);
-                    }
-                    else
-                    {
-                        if (Device.RuntimePlatform == Device.Android)
-                        {
-                            await NavigationService.NavigateAsync(nameof(CameraPage),null,true,false);
-                        }
-                        else
-                            await TakePickure();
-                    }
+
+                await NavigationService.NavigateAsync(nameof(ScanSendPage));
+
+                //try
+                //{
+                //    var request = await App.dialogService.DisplayActionSheetAsync(AppResources.txtUploadPhoto, AppResources.ApplicationCancel, null, AppResources.txtCamera, AppResources.txtGallery);
+                //    if (string.IsNullOrEmpty(request) || request.Equals(AppResources.ApplicationCancel) )
+                //    {
+                //        return;
+                //    }
+                //    if (request.Equals(AppResources.txtGallery))
+                //    {
+                //        IsUploadBtnClicked = true;
+                //        await ImageHelper.PickFromGallery(5);
+                //    }
+                //    else
+                //    {
+                //        if (Device.RuntimePlatform == Device.Android)
+                //        {
+                //            await NavigationService.NavigateAsync(nameof(CameraPage),null,true,false);
+                //        }
+                //        else
+                //            await TakePickure();
+                //    }
                        
-                }
-                catch (Exception)
-                {
+                //}
+                //catch (Exception)
+                //{
 
 
-                }
-                finally
-                {
-                    IsPageEnabled = false;
-                }
+                //}
+                //finally
+                //{
+                //    IsPageEnabled = false;
+                //}
             }
             else
             {

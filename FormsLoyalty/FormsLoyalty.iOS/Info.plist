@@ -145,8 +145,8 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleShortVersionString</key>
-	<string>21</string>
-	<key>CFBundleVersion</key>
 	<string>2.0.10</string>
+	<key>CFBundleVersion</key>
+	<string>2</string>
 </dict>
 </plist>

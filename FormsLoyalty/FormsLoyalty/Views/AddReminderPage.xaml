@@ -46,7 +46,9 @@
                 <Frame Margin="0,5">
                     <StackLayout>
                         <Label Text="{x:Static resources:AppResources.txtMedicationName}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}"/>
-                        <Entry x:Name="namelbl" Text="{Binding medicineReminder.EventName}" Placeholder="{x:Static resources:AppResources.txtMedicationPlaceholder}" Visual="Default"/>
+                        <Entry x:Name="namelbl" Text="{Binding medicineReminder.EventName}" 
+                               BackgroundColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
+                               Placeholder="{x:Static resources:AppResources.txtMedicationPlaceholder}" Visual="Default"/>
 
                         <Frame Padding="5,0,5,0" HeightRequest="40" HasShadow="True" >
                             <controls:CustomPicker ItemsSource="{Binding Units}" 
@@ -147,6 +149,9 @@
                             </Picker>-->
 
                             <CollectionView ItemsSource="{Binding frequencies}" Grid.Row="1" MinimumHeightRequest="40" HeightRequest="150">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
+                                </CollectionView.ItemsLayout>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
                                         <StackLayout Orientation="Horizontal" >
@@ -155,6 +160,7 @@
                                             </StackLayout.GestureRecognizers>
                                             <TimePicker Grid.Row="1" Grid.Column="0" Visual="Default"  Format="hh:mm tt" 
                                 Time="{Binding Time}"
+                                                        BackgroundColor="{AppThemeBinding Dark=LightGray, Light=LightGray}"
                                 HorizontalOptions="StartAndExpand"
                                 FontSize="20" />
 

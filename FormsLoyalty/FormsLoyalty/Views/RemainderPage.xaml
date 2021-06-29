@@ -107,6 +107,7 @@
 
         <CollectionView ItemsSource="{Binding MedicineReminderDict}" Grid.Row="1"
                         Margin="10"
+                        
                         x:Name="reminderlist"
                         VerticalScrollBarVisibility="Never">
 
@@ -119,7 +120,7 @@
             <CollectionView.ItemTemplate>
                 <DataTemplate>
 
-                    <Frame CornerRadius="10" Padding="5" >
+                    <Frame CornerRadius="10" Padding="5" BackgroundColor="White">
                         <xct:Expander x:Name="expander" IsClippedToBounds="True" HorizontalOptions="FillAndExpand" Margin="-5,-5,-5,0" IsExpanded="True">
                             <xct:Expander.Header>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#4f4f4f" Padding="5">

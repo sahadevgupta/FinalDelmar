@@ -229,6 +229,33 @@
 
                         </StackLayout>
 
+                        <!--#region Contact Us View-->
+                        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5">
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="Settings_Tapped" CommandParameter="Settings"/>
+                            </StackLayout.GestureRecognizers>
+
+                            <Image Source="settings" Aspect="AspectFit" effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"/>
+
+
+                            <Label Text="{x:Static resources:AppResources.AppConfigurationappbar}" 
+                           TextColor="Black" FontSize="Body" Margin="10,0,10,0"
+                           VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
+
+                            <Image Source="right_arrow.png" HeightRequest="12" HorizontalOptions="End" effects:TintImageEffect.TintColor="Black" Margin="10">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                         Value="true">
+                                        <Setter Property="Rotation" Value="180"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+
+                        </StackLayout>
+                        <!--#endregion-->
+                        
+                        
                         <!--Help-->
                         <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="5">
 
