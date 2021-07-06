@@ -262,7 +262,7 @@
                 <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewMobile}" 
                                          x:Name="mobile"
                                          TextChanged="MaterialTextField_TextChanged"
-                                        Text="{Binding memberContact.MobilePhone}"
+                                        Text="{Binding MobileNumber}"
                                         AlwaysShowUnderline="True"
                                         BackgroundColor="White"
                                         Margin="5,10,5,0"
@@ -272,6 +272,10 @@
 
                     <material:MaterialTextField.Triggers>
                         <DataTrigger TargetType="material:MaterialTextField" Binding="{Binding editAccount}"
+                                     Value="true">
+                            <Setter Property="IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger TargetType="material:MaterialTextField" Binding="{Binding IsMobileNumberExist}"
                                      Value="true">
                             <Setter Property="IsEnabled" Value="False"/>
                         </DataTrigger>

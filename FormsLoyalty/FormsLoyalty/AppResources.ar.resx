@@ -400,7 +400,7 @@
     <value>السجل</value>
   </data>
   <data name="AddToCartTxt" xml:space="preserve">
-    <value>إضافة الي السلة</value>
+    <value>إضافة إلى السلة</value>
   </data>
   <data name="AppConfigurationappbar" xml:space="preserve">
     <value>اعدادات التطبيق</value>
@@ -1372,7 +1372,7 @@
     <value>التصنيفات</value>
   </data>
   <data name="txtClose" xml:space="preserve">
-    <value>قريب</value>
+    <value>إغلاق</value>
   </data>
   <data name="txtComments" xml:space="preserve">
     <value>تعليقات</value>
@@ -1403,6 +1403,9 @@
   </data>
   <data name="txtDuration" xml:space="preserve">
     <value>مدة</value>
+  </data>
+  <data name="txtEnterComments" xml:space="preserve">
+    <value>أدخل التعليقات (اختياري)</value>
   </data>
   <data name="txtEnterNewAddress" xml:space="preserve">
     <value>ادخل عنوان جديد</value>
@@ -1461,8 +1464,11 @@
   <data name="txtItemAddedToCart" xml:space="preserve">
     <value>تمت إضافة {0} إلى سلة التسوق !!</value>
   </data>
+  <data name="txtItemNotFound" xml:space="preserve">
+    <value>الصنف غير موجود</value>
+  </data>
   <data name="txtItemSearch" xml:space="preserve">
-    <value>اكتب اسم العنصر للبحث</value>
+    <value>اكتب اسم الصنف للبحث</value>
   </data>
   <data name="txtIU" xml:space="preserve">
     <value>IU</value>
@@ -1499,6 +1505,9 @@
   </data>
   <data name="txtmostviewed" xml:space="preserve">
     <value>كثيرا ما تطلب</value>
+  </data>
+  <data name="txtNewPrescription" xml:space="preserve">
+    <value>وصفة طبية جديدة</value>
   </data>
   <data name="txtNewUser" xml:space="preserve">
     <value>مستخدم جديد؟</value>
@@ -1545,6 +1554,9 @@
   <data name="txtProductGroups" xml:space="preserve">
     <value>مجموعات المنتجات</value>
   </data>
+  <data name="txtRateApp" xml:space="preserve">
+    <value>قيم تطبيقنا</value>
+  </data>
   <data name="txtRegisterHere" xml:space="preserve">
     <value>سجل هنا</value>
   </data>
@@ -1577,6 +1589,9 @@
   </data>
   <data name="txtSelectCategory" xml:space="preserve">
     <value>حدد قسيمة</value>
+  </data>
+  <data name="txtSelectCityArea" xml:space="preserve">
+    <value>الرجاء تحديد المدينة و منطقة</value>
   </data>
   <data name="txtSelectCode" xml:space="preserve">
     <value>اضافة كوبون</value>
@@ -1624,7 +1639,7 @@
     <value>يسمح لك كونك عضوًا بالاستفادة من العروض الشخصية والقسائم بالإضافة إلى جمع النقاط ، والتي يمكن استخدامها لتقديم العطاءات أثناء تجربة التسوق الخاصة بك.</value>
   </data>
   <data name="txtWeWillShare" xml:space="preserve">
-    <value>سوف نشاركك في</value>
+    <value>سوف نشاركك فى</value>
   </data>
   <data name="WelcomeViewLoginButtonText" xml:space="preserve">
     <value>تسجيل الدخول</value>

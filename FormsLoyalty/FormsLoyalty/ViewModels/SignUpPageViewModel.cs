@@ -93,6 +93,20 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
+        private bool _isMobileNumberEnabled;
+        public bool IsMobileNumberExist
+        {
+            get { return _isMobileNumberEnabled; }
+            set { SetProperty(ref _isMobileNumberEnabled, value); }
+        }
+
+        private string _mobileNumber;
+        public string MobileNumber
+        {
+            get { return _mobileNumber; }
+            set { SetProperty(ref _mobileNumber, value); }
+        }
+
 
         private ObservableCollection<CitiesModel> _cities;
         public ObservableCollection<CitiesModel> Cities
@@ -321,8 +335,9 @@ namespace FormsLoyalty.ViewModels
             memberContact.Name = $"{FirstName} {LastName}";
             memberContact.Addresses = new List<Address> { Address };
             memberContact.LoggedOnToDevice = AppData.Device;
-            memberContact.UserName = memberContact.MobilePhone;
-            memberContact.Phone = memberContact.MobilePhone;
+            memberContact.MobilePhone = MobileNumber;
+            memberContact.UserName = MobileNumber;
+            memberContact.Phone = MobileNumber;
 
             await CreateUpdateMemberContact();
            
@@ -343,9 +358,10 @@ namespace FormsLoyalty.ViewModels
                 UserName = memberContact.UserName;
                 FirstName = memberContact.FirstName;
                 LastName = memberContact.LastName;
+            MobileNumber = memberContact.MobilePhone;
 
-            
-            
+
+
         }
 
         internal async Task GoBack()
@@ -395,6 +411,12 @@ namespace FormsLoyalty.ViewModels
             base.Initialize(parameters);
             editAccount = parameters.GetValue<bool>("edit");
             FromItemPage = parameters.GetValue<bool>("itemPage");
+            var MobilePhone = parameters.GetValue<string>("number");
+            if (!string.IsNullOrEmpty(MobilePhone))
+            {
+                IsMobileNumberExist = true;
+                MobileNumber = MobilePhone;
+            }
             LoadAddressData();
             if (editAccount)
             {

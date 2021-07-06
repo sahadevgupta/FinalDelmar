@@ -12,7 +12,7 @@
              x:Name="cart"
            BackgroundColor="{StaticResource My_Header_Color}"
             NavigationPage.HasNavigationBar="False"
-            
+            xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              ios:Page.UseSafeArea="True"
              >
 
@@ -30,7 +30,7 @@
     </ContentPage.Triggers>
 
 
-    <AbsoluteLayout BackgroundColor="WhiteSmoke">
+    <AbsoluteLayout BackgroundColor="White">
 
         <Grid RowDefinitions="55,*,Auto,Auto" AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All" >
@@ -43,15 +43,20 @@
                 </DataTrigger>
             </Grid.Triggers>
 
-            <Image x:Name="loaderView" Source="empty.png" Grid.Row="0" Grid.RowSpan="4"  
-                 
-                   VerticalOptions="CenterAndExpand"
-                Aspect="AspectFill" IsVisible="false">
+            <Image x:Name="loaderView" Source="imgEmptyCart_en.jpg" Grid.Row="0" Grid.RowSpan="4"  
+                   VerticalOptions="FillAndExpand"
+                Aspect="AspectFit" IsVisible="false">
                 <Image.Triggers>
                     <DataTrigger TargetType="Image" Binding="{Binding baskets.Count}"
                              Value="0">
                         <Setter Property="IsVisible" Value="true"/>
                     </DataTrigger>
+                    
+                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                         Value="true">
+                        <Setter Property="Source" Value="imgEmptyCart_ar.jpg"/>
+                    </DataTrigger>
+
                 </Image.Triggers>
             </Image>
 

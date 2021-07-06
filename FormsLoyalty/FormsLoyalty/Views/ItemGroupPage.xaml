@@ -41,7 +41,14 @@
                CharacterSpacing="2"
                FontAttributes="Bold"
                TextColor="White"
-               />
+               >
+                <Label.Triggers>
+                <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                         Value="true">
+                        <Setter Property="Text" Value="{Binding product.ArabicDescription}"/>
+                </DataTrigger>
+                </Label.Triggers>
+            </Label>
 
         </StackLayout>
     </NavigationPage.TitleView>
@@ -148,7 +155,7 @@
             </Grid>
 
 
-            <!--<Label  
+            <Label  
                        FontAttributes="Bold"
                        FontSize="Medium" 
                        x:Name="noitemlbl"
@@ -157,8 +164,8 @@
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
                        IsVisible="{Binding IsNoItemFound}"
-                       Text="No Item Found " >
-                --><!--<Label.Triggers>
+                       Text="{x:Static resources:AppResources.txtItemNotFound}" />
+            <!--<Label.Triggers>
                     <DataTrigger TargetType="Label" Binding="{Binding Items.Count}" Value="0">
                         <Setter Property="IsVisible" Value="true"/>
                     </DataTrigger>

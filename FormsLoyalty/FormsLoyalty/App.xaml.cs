@@ -156,6 +156,10 @@ namespace FormsLoyalty
             }
         }
 
+        protected override void OnAppLinkRequestReceived(Uri uri)
+        {
+            base.OnAppLinkRequestReceived(uri);
+        }
         protected override void OnStart()
         {
             base.OnStart();

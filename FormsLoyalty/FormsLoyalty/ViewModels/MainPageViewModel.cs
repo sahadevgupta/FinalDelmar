@@ -983,6 +983,7 @@ namespace FormsLoyalty.ViewModels
             {
                 case NavigationMode.Back:
                     var imgData = parameters.GetValue<List<Tuple<byte[], string>>>("images");
+                    if(imgData !=null)
                     NavigateToScanPage(imgData);
 
                     break;

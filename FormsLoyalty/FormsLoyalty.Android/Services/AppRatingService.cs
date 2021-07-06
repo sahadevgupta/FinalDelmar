@@ -15,6 +15,7 @@ using Plugin.StoreReview;
 using FormsLoyalty.Services;
 using Application = Xamarin.Essentials.Platform;
 using FormsLoyalty.Droid;
+using Android.Content.PM;
 
 [assembly:Dependency(typeof(AppRatingService))]
 namespace FormsLoyalty.Services
@@ -138,12 +139,12 @@ namespace FormsLoyalty.Services
         {
         }
 
-            public async Task RateApp()
+        public async Task RateApp()
         {
 #if DEBUG
-           // FakeReviewManager does not interact with the Play Store, so no UI is shown
-           // and no review is performed. Useful for unit tests.
-           var manager = new FakeReviewManager(MainActivity.context);
+            // FakeReviewManager does not interact with the Play Store, so no UI is shown
+            // and no review is performed. Useful for unit tests.
+            var manager = new FakeReviewManager(MainActivity.context);
 #else         
             var manager = ReviewManagerFactory.Create(MainActivity.context);
 #endif            
@@ -151,28 +152,60 @@ namespace FormsLoyalty.Services
             request.AddOnCompleteListener(new OnCompleteListener(manager));
 
         }
-    }
-    public class OnCompleteListener : Java.Lang.Object, IOnCompleteListener
-    {
-        FakeReviewManager _fakeReviewManager;
-        IReviewManager _reviewManager;
-        bool _usesFakeManager;
-        void IOnCompleteListener.OnComplete(Com.Google.Android.Play.Core.Tasks.Task p0)
+
+        public void RateAppFromStore()
         {
-           
+
+            var activity = Xamarin.Essentials.Platform.CurrentActivity;
+            var url = $"market://details?id={(activity as Context)?.PackageName}";
+
             try
             {
-                LaunchReview(p0);
+                activity.PackageManager.GetPackageInfo("com.LinkedGates.DelmarAttalla", PackageInfoFlags.Activities);
+                Intent intent = new Intent(activity.Intent.Action, Android.Net.Uri.Parse(url));
+
+                activity.StartActivity(intent);
             }
-            catch (Exception ex)
+            catch (PackageManager.NameNotFoundException ex)
             {
+                // this won't happen. But catching just in case the user has downloaded the app without having Google Play installed.
+
                 Console.WriteLine(ex.Message);
             }
-        }
+            catch (ActivityNotFoundException)
+            {
+                // if Google Play fails to load, open the App link on the browser 
 
-        private void LaunchReview(Com.Google.Android.Play.Core.Tasks.Task p0)
+                var playStoreUrl = "https://play.google.com/store/apps/details?id=com.yourapplicationpackagename"; //Add here the url of your application on the store
+
+                var browserIntent = new Intent(activity.Intent.Action, Android.Net.Uri.Parse(playStoreUrl));
+                browserIntent.AddFlags(ActivityFlags.NewTask | ActivityFlags.ResetTaskIfNeeded);
+
+                activity.StartActivity(browserIntent);
+            }
+
+        }
+        public class OnCompleteListener : Java.Lang.Object, IOnCompleteListener
         {
-            
+            FakeReviewManager _fakeReviewManager;
+            IReviewManager _reviewManager;
+            bool _usesFakeManager;
+            void IOnCompleteListener.OnComplete(Com.Google.Android.Play.Core.Tasks.Task p0)
+            {
+
+                try
+                {
+                    LaunchReview(p0);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+            }
+
+            private void LaunchReview(Com.Google.Android.Play.Core.Tasks.Task p0)
+            {
+
                 var review = p0.GetResult(Java.Lang.Class.FromType(typeof(ReviewInfo)));
                 if (_usesFakeManager)
                 {
@@ -184,17 +217,18 @@ namespace FormsLoyalty.Services
                     var x = _reviewManager.LaunchReviewFlow(MainActivity.Instance, (ReviewInfo)review);
                     x.AddOnCompleteListener(new OnCompleteListener(_reviewManager));
                 }
-            
-        }
 
-        public OnCompleteListener(FakeReviewManager fakeReviewManager)
-        {
-            _fakeReviewManager = fakeReviewManager;
-            _usesFakeManager = true;
-        }
-        public OnCompleteListener(IReviewManager reviewManager)
-        {
-            _reviewManager = reviewManager;
+            }
+
+            public OnCompleteListener(FakeReviewManager fakeReviewManager)
+            {
+                _fakeReviewManager = fakeReviewManager;
+                _usesFakeManager = true;
+            }
+            public OnCompleteListener(IReviewManager reviewManager)
+            {
+                _reviewManager = reviewManager;
+            }
         }
     }
 }

@@ -43,7 +43,15 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _Remark, value); }
         }
 
+        private bool _isPrescriptionViewVisible;
+        public bool IsPrescriptionViewVisible
+        {
+            get { return _isPrescriptionViewVisible; }
+            set { SetProperty(ref _isPrescriptionViewVisible, value); }
+        }
+
         public DelegateCommand ProceedCommand { get; set; }
+        public DelegateCommand PrescriptionCommand { get; set; }
         public bool CanNavigate { get;  set; }
 
         IScanSendManager _scanSendManager;
@@ -53,6 +61,12 @@ namespace FormsLoyalty.ViewModels
             _scanSendManager = scanSendManager;
             ImageList = new ObservableCollection<ScanSend>();
             ProceedCommand = new DelegateCommand(async() => await UploadScanSend());
+            PrescriptionCommand = new DelegateCommand(OnPrescription_Tapped);
+        }
+
+        private void OnPrescription_Tapped()
+        {
+            IsPrescriptionViewVisible = true;
         }
 
         internal async void NavigateToCameraView()

@@ -28,7 +28,7 @@ using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 namespace FormsLoyalty.Droid
 {
     [Activity(Label = "@string/app_name", Icon = "@mipmap/ic_launcher", Theme = "@style/SplashTheme", LaunchMode = LaunchMode.SingleTop,
-        MainLauncher = true,
+        
          ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {

@@ -9,6 +9,7 @@ namespace FormsLoyalty.Utils
 {
     public class DrawerMenuItem : BindableBase
     {
+        public int Id { get; set; }
         public string Title { get; set; }
 
         private string _subTitle;

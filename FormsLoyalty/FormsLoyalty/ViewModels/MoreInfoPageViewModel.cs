@@ -18,6 +18,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Unity;
 using Xamarin.Forms;
+using ZXing.Net.Mobile.Forms;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -44,7 +45,8 @@ namespace FormsLoyalty.ViewModels
             get { return _mobileNo; }
             set { SetProperty(ref _mobileNo, value); }
         }
-
+        public INavigation navigation;
+        public DelegateCommand RateAppCommand { get; set; }
         public MoreInfoPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             if (AppData.Device.UserLoggedOnToDevice != null)
@@ -53,6 +55,29 @@ namespace FormsLoyalty.ViewModels
                 MobileNumber = AppData.Device.UserLoggedOnToDevice.MobilePhone;
             }
             IsActiveChanged += MoreInfoPageViewModel_IsActiveChanged;
+
+            RateAppCommand = new DelegateCommand(RateApp);
+        }
+
+        private void RateApp()
+        {
+            try
+            {
+
+                Xamarin.Forms.Device.BeginInvokeOnMainThread( () =>
+                {
+                     DependencyService.Get<IAppRating>().RateAppFromStore();
+                    //await CrossStoreReview.Current.RequestReview(true);
+                });
+
+
+
+            }
+            catch (Exception ex)
+            {
+
+                Console.WriteLine(ex.Message);
+            }
         }
 
         internal async Task NavigateToProfile()
@@ -444,24 +469,85 @@ namespace FormsLoyalty.ViewModels
 
                     break;
                 case AppConstValues.Items:
-                    try
-                    {
+                    
+                        IsPageEnabled = true;
+                        //var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
+                        // options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
+                        //ZXingScannerView scan = new ZXingScannerView()
+                        //{
 
-                        Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
+                        //   IsScanning  = true,
+                        //   IsTorchOn = true
+                        //};
+
+                        //// await Navigation.PushAsync(scan);
+                        //Navigation.PushAsync(scan);
+                        //scan.OnScanResult += (result) =>
+                        //{
+                        //    scan.IsScanning = false;
+                        //    ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
+                        //    string type = barcodeFormat.ToString();
+                        //    Device.BeginInvokeOnMainThread(async () =>
+                        //    {
+                        //        //Navigation.PopAsync();
+                        //        await Navigation.PopAsync();
+                        //        string barcode = result.Text;
+                        //        _viewModel.NavigateToItemPage(barcode);
+                        //    });
+                        //};
+                        //var scanner = new ZXing.Mobile.MobileBarcodeScanner();
+
+                        //scanner.TopText = AppResources.ScannerViewScannerTopText;
+                        //scanner.BottomText = AppResources.ScannerViewScannerBottomText;
+
+                        var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
+                        options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
+
+                        //var result = await scanner.Scan(options);
+
+
+                        var overlay = new ZXingDefaultOverlay
                         {
-                            //await DependencyService.Get<IAppRating>().RateApp();
-                            await CrossStoreReview.Current.RequestReview(true);
-                        });
+                            ShowFlashButton = false,
+                            TopText = AppResources.ScannerViewScannerTopText,
+                            BottomText = AppResources.ScannerViewScannerBottomText,
 
-                         
-                       
-                    }
-                    catch (Exception ex)
-                    {
+                        };
+                        overlay.BindingContext = overlay;
 
-                        Console.WriteLine(ex.Message);
-                    }
-                   
+
+                        ZXingScannerPage scan = new ZXingScannerPage(options, overlay);
+                        scan.DefaultOverlayTopText = "Title";
+                        scan.DefaultOverlayBottomText = "TEXT";
+                        scan.AutoFocus();
+                        scan.DefaultOverlayShowFlashButton = true;
+                        scan.HasTorch = true;
+                        scan.Title = "SCAN";
+
+
+                        await navigation.PushAsync(scan);
+                        //Navigation.PushAsync(scan);
+                        scan.OnScanResult += (result) =>
+                        {
+                            scan.IsScanning = false;
+                            ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
+                            string type = barcodeFormat.ToString();
+
+
+                           Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                            {
+                                DependencyService.Get<INotify>().ShowToast($"Scan Successful!!, Code : {result.Text}");
+                                //Navigation.PopAsync();
+                                navigation.PopAsync();
+                                string barcode = result.Text;
+                                ;
+                                NavigateToItemPage(barcode);
+                            });
+                        };
+
+                        IsPageEnabled = false;
+                    
+
                     break;
                 case AppConstValues.Search:
                     await NavigationService.NavigateAsync(nameof(SearchPage));

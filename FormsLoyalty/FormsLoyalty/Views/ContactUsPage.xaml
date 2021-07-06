@@ -6,28 +6,118 @@
              x:Class="FormsLoyalty.Views.ContactUsPage"
              xmlns:resources="clr-namespace:FormsLoyalty"
               xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              ios:Page.UseSafeArea="True"
              Title="Conatact Us"
-             BackgroundColor="WhiteSmoke">
+             BackgroundColor="White"
+             
+             x:Name="thisPage">
 
-    <Grid>
+    <Grid RowDefinitions="Auto,*">
+
+
+        <Image Source="imgContactUs.jpg" Grid.RowSpan="2" Aspect="AspectFit"/>
+
+        <Label Text="{x:Static resources:AppResources.txtClose}" HorizontalOptions="End" FontSize="Body" FontAttributes="Bold" 
+               Padding="10"
+               TextColor="Black">
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{prism:GoBack}"/>
+            </Label.GestureRecognizers>
+        </Label>
+
        
-        <StackLayout VerticalOptions="Center" HorizontalOptions="CenterAndExpand">
-            <Image Source="logodrawer"/>
+
+        <ImageButton Source="iconClose" HorizontalOptions="StartAndExpand" VerticalOptions="Start" BackgroundColor="Transparent" 
+                     Command="{prism:GoBack}" xct:IconTintColorEffect.TintColor="Black"/>
 
 
 
-            <Button InputTransparent="False"
-                TextColor="White"
-                HeightRequest="60"
-                FontSize="Title"
-                Visual="Material"
-                CornerRadius="10"
-                FontAttributes="Bold"
-                BackgroundColor="{StaticResource My_Button_Color}"
-                Text="Conatct Us 19955"/>
+      
 
-        </StackLayout>
+
+            <StackLayout BindableLayout.ItemsSource="{Binding ContactMethods}" Grid.Row="1" Margin="20,150,20,20" >
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" 
+                         xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                         xct:TouchEffect.PressedBackgroundColor="LightPink"
+                         xct:TouchEffect.NormalBackgroundColor="Transparent">
+
+                            <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding BindingContext.ContactMethodCommand,Source={x:Reference thisPage}}" CommandParameter="{Binding .}"/>
+                            </StackLayout.GestureRecognizers>
+
+                            <ImageButton BackgroundColor="Transparent" Source="{Binding Image}" HeightRequest="60" Grid.Column="0" Grid.Row="0"/>
+                            <Label Text="{Binding Title}" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Medium"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </StackLayout>
+            
+            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" 
+                         xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                         xct:TouchEffect.PressedBackgroundColor="LightPink"
+                         xct:TouchEffect.NormalBackgroundColor="Transparent">
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ContactMethodCommand}" CommandParameter="Call"/>
+                </StackLayout.GestureRecognizers>
+                
+                <ImageButton BackgroundColor="Transparent" Source="iconCall" HeightRequest="60" Grid.Column="0" Grid.Row="0"/>
+                <Label Text="19955" HorizontalOptions="FillAndExpand" VerticalTextAlignment="Center" FontSize="Medium"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="1"
+                         xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                         xct:TouchEffect.PressedBackgroundColor="LightPink"
+                         xct:TouchEffect.NormalBackgroundColor="Transparent">
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ContactMethodCommand}" CommandParameter="facebook"/>
+                </StackLayout.GestureRecognizers>
+
+                <ImageButton BackgroundColor="Transparent" Source="iconFacebook" HeightRequest="60" Grid.Column="0" Grid.Row="1"/>
+                <Label Text="https://www.facebook.com/DelmarWeAttalla" Grid.Column="1" Grid.Row="1" VerticalTextAlignment="Center"
+                   FontSize="Medium" TextDecorations="Underline" TextColor="DodgerBlue"/>
+            </StackLayout>
+
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="2"
+                         xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                         xct:TouchEffect.PressedBackgroundColor="LightPink"
+                         xct:TouchEffect.NormalBackgroundColor="Transparent">
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ContactMethodCommand}" CommandParameter="instagram"/>
+                </StackLayout.GestureRecognizers>
+
+                <ImageButton BackgroundColor="Transparent" Source="Instagram" HeightRequest="60" Grid.Column="0" Grid.Row="2"/>
+                <Label Text="https://www.instagram.com/delmarweattalla/" Grid.Column="1" Grid.Row="2" VerticalTextAlignment="Center"
+                   TextDecorations="Underline" TextColor="DodgerBlue" FontSize="Medium"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="3"
+                         xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                         xct:TouchEffect.PressedBackgroundColor="LightPink"
+                         xct:TouchEffect.NormalBackgroundColor="Transparent">
+
+                <StackLayout.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ContactMethodCommand}" CommandParameter="whatsapp"/>
+                </StackLayout.GestureRecognizers>
+
+                <ImageButton BackgroundColor="Transparent" Source="WhatsApp" HeightRequest="60" Grid.Column="0" Grid.Row="3"/>
+                <Label Text="01002199551" Grid.Column="1" Grid.Row="3" VerticalTextAlignment="Center" FontSize="Medium"/>
+            </StackLayout>-->
+
+            
+            
+           
+
+          
+       
+        
 
     </Grid>
 </ContentPage>

@@ -11,6 +11,7 @@ namespace FormsLoyalty.Views
         public ScanSendPage()
         {
             InitializeComponent();
+            videoPlayer.Play();
             _viewModel = BindingContext as ScanSendPageViewModel;
         }
 
@@ -20,20 +21,7 @@ namespace FormsLoyalty.Views
            
         }
 
-        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
-        {
-            var selected = (e as TappedEventArgs).Parameter as GMFileInfo;
-            
-                //var frame = (Frame)sender;
-
-              // await frame.ScaleTo(2, 2000);
-            
-           
-
-            
-
-        }
-
+       
         private async void UploadImg_Tapped(object sender, System.EventArgs e)
         {
             try
@@ -70,5 +58,15 @@ namespace FormsLoyalty.Views
                 
         }
 
+        private void Prescription_Clicked(object sender, System.EventArgs e)
+        {
+            videoPlayer.Stop();
+            _viewModel.IsPrescriptionViewVisible = true;
+        }
+
+        private void videoPlayer_MediaOpened(object sender, System.EventArgs e)
+        {
+            prescriptionBtn.IsEnabled = true;
+        }
     }
 }

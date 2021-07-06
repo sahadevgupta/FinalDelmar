@@ -1,4 +1,5 @@
-﻿using FormsLoyalty.ViewModels;
+﻿using FormsLoyalty.Interfaces;
+using FormsLoyalty.ViewModels;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Members;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
@@ -97,6 +98,12 @@ namespace FormsLoyalty.Views
             //        confPassword.ErrorText = "Password does not match";
             //    }
             //}
+
+            if (string.IsNullOrEmpty(_viewModel.SelectedArea?.Area) || string.IsNullOrEmpty(_viewModel.SelectedCity?.City))
+            {
+                DependencyService.Get<INotify>().ShowToast(AppResources.txtSelectCityArea);
+               
+            }
 
             if (/*string.IsNullOrEmpty(email.Text) ||*/
                 //(string.IsNullOrEmpty(password.Text) && !_viewModel.editAccount) || (string.IsNullOrEmpty(confPassword.Text) && !_viewModel.editAccount) ||

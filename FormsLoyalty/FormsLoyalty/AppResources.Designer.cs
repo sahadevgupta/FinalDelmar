@@ -3923,6 +3923,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter Comments (Optional).
+        /// </summary>
+        public static string txtEnterComments {
+            get {
+                return ResourceManager.GetString("txtEnterComments", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enter New Address.
         /// </summary>
         public static string txtEnterNewAddress {
@@ -4094,6 +4103,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Item Not Found.
+        /// </summary>
+        public static string txtItemNotFound {
+            get {
+                return ResourceManager.GetString("txtItemNotFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Type the item name to search.
         /// </summary>
         public static string txtItemSearch {
@@ -4207,6 +4225,15 @@ namespace FormsLoyalty {
         public static string txtmostviewed {
             get {
                 return ResourceManager.GetString("txtmostviewed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Prescription.
+        /// </summary>
+        public static string txtNewPrescription {
+            get {
+                return ResourceManager.GetString("txtNewPrescription", resourceCulture);
             }
         }
         
@@ -4346,6 +4373,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rate Our App.
+        /// </summary>
+        public static string txtRateApp {
+            get {
+                return ResourceManager.GetString("txtRateApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to REGISTER HERE.
         /// </summary>
         public static string txtRegisterHere {
@@ -4441,6 +4477,15 @@ namespace FormsLoyalty {
         public static string txtSelectCategory {
             get {
                 return ResourceManager.GetString("txtSelectCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the City and Area.
+        /// </summary>
+        public static string txtSelectCityArea {
+            get {
+                return ResourceManager.GetString("txtSelectCityArea", resourceCulture);
             }
         }
         

@@ -9,6 +9,7 @@
              xmlns:resources="clr-namespace:FormsLoyalty"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
              xmlns:utils="clr-namespace:FormsLoyalty.Utils"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              NavigationPage.HasNavigationBar="False"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers" xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              BackgroundColor="#B3f2f2ef"
@@ -179,8 +180,37 @@
 
                     <Grid Grid.Row="3" BackgroundColor="White" RowDefinitions="Auto,Auto"  Padding="10">
 
+                        <!--#region Rate App-->
+                        <StackLayout Orientation="Horizontal" Grid.Row="0" Padding="5"
+                                     xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                           xct:TouchEffect.PressedBackgroundColor="LightPink"
+                           xct:TouchEffect.NormalBackgroundColor="Transparent">
+
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding RateAppCommand}"/>
+                            </StackLayout.GestureRecognizers>
+
+                            <Image Source="iconRate" Aspect="AspectFit" />
+
+
+                            <Label Text="{x:Static resources:AppResources.txtRateApp}" 
+                           TextColor="Black" FontSize="Body" Margin="10,0,10,0"
+                           VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
+
+                            <Image Source="right_arrow.png" HeightRequest="12" HorizontalOptions="End" effects:TintImageEffect.TintColor="Black" Margin="10">
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                         Value="true">
+                                        <Setter Property="Rotation" Value="180"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+
+                        </StackLayout>
+                        <!--#endregion-->
+                        
                         <!--#region Terms&Condition-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="0" Padding="5">
+                        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5">
 
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Settings_Tapped" CommandParameter="Terms"/>
@@ -205,7 +235,7 @@
                         <!--#endregion-->
 
                         <!--App Settings-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5">
+                        <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="5">
 
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Settings_Tapped" CommandParameter="Settings"/>
@@ -230,16 +260,20 @@
                         </StackLayout>
 
                         <!--#region Contact Us View-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5">
+                        <StackLayout Orientation="Horizontal" Grid.Row="3" Padding="5"
+                                     xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                           
+                           xct:TouchEffect.PressedBackgroundColor="LightPink"
+                           xct:TouchEffect.NormalBackgroundColor="Transparent">
 
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Settings_Tapped" CommandParameter="Settings"/>
+                                <TapGestureRecognizer Command="{prism:NavigateTo Name='ContactUsPage', UseModalNavigation=true}"/>
                             </StackLayout.GestureRecognizers>
 
-                            <Image Source="settings" Aspect="AspectFit" effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"/>
+                            <Image Source="IconContactUs" Aspect="AspectFit" />
 
 
-                            <Label Text="{x:Static resources:AppResources.AppConfigurationappbar}" 
+                            <Label Text="{x:Static resources:AppResources.ActionbarContactUs}" 
                            TextColor="Black" FontSize="Body" Margin="10,0,10,0"
                            VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
 
@@ -257,7 +291,7 @@
                         
                         
                         <!--Help-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="5">
+                        <StackLayout Orientation="Horizontal" Grid.Row="4" Padding="5">
 
                             <StackLayout.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="Settings_Tapped" CommandParameter="Help"/>

@@ -8,6 +8,8 @@ namespace FormsLoyalty.Interfaces
     public interface IAppRating
     {
         Task RateApp();
+        void RateAppFromStore();
+        void OpenStoreReviewPage(string appId);
        void  OpenStoreListing(string appId);
     }
 }

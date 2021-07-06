@@ -1,7 +1,9 @@
-﻿using FormsLoyalty.Utils;
+﻿using FormsLoyalty.Interfaces;
+using FormsLoyalty.Utils;
 using FormsLoyalty.ViewModels;
 using System.Collections.Generic;
 using Xamarin.Forms;
+using XF.Material.Forms.Dialogs;
 using ZXing.Net.Mobile.Forms;
 
 namespace FormsLoyalty.Views
@@ -13,6 +15,7 @@ namespace FormsLoyalty.Views
         {
             InitializeComponent();
             _viewModel = BindingContext as MoreInfoPageViewModel;
+            _viewModel.navigation = Navigation;
         }
 
         private async void menu_Tapped(object sender, System.EventArgs e)
@@ -107,8 +110,11 @@ namespace FormsLoyalty.Views
                 scan.IsScanning = false;
                 ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
                 string type = barcodeFormat.ToString();
+                
+
                 Device.BeginInvokeOnMainThread(async () =>
                 {
+                    DependencyService.Get<INotify>().ShowToast($"Scan Successful!!, Code : {result.Text}");
                     //Navigation.PopAsync();
                     await Navigation.PopAsync();
                     string barcode = result.Text;

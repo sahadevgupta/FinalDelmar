@@ -76,7 +76,7 @@ namespace FormsLoyalty.iOS
             Duration = 0.0f;
             Repeat = true;
             Sound = true;
-            VideoUrl = new NSUrl(NSBundle.MainBundle.PathForResource("splash", "mp4"), false);
+            VideoUrl = new NSUrl(NSBundle.MainBundle.PathForResource("Intro", "mp4"), false);
         }
 
         #region Property

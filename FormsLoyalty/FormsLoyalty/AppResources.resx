@@ -1405,6 +1405,9 @@
   <data name="txtDuration" xml:space="preserve">
     <value>Duration</value>
   </data>
+  <data name="txtEnterComments" xml:space="preserve">
+    <value>Enter Comments (Optional)</value>
+  </data>
   <data name="txtEnterNewAddress" xml:space="preserve">
     <value>Enter New Address</value>
   </data>
@@ -1462,6 +1465,9 @@
   <data name="txtItemAddedToCart" xml:space="preserve">
     <value>{0} has been added to cart !!</value>
   </data>
+  <data name="txtItemNotFound" xml:space="preserve">
+    <value>Item Not Found</value>
+  </data>
   <data name="txtItemSearch" xml:space="preserve">
     <value>Type the item name to search</value>
   </data>
@@ -1500,6 +1506,9 @@
   </data>
   <data name="txtmostviewed" xml:space="preserve">
     <value>Frequently Ordered</value>
+  </data>
+  <data name="txtNewPrescription" xml:space="preserve">
+    <value>New Prescription</value>
   </data>
   <data name="txtNewUser" xml:space="preserve">
     <value>New User?</value>
@@ -1546,6 +1555,9 @@
   <data name="txtProductGroups" xml:space="preserve">
     <value>Product Groups</value>
   </data>
+  <data name="txtRateApp" xml:space="preserve">
+    <value>Rate Our App</value>
+  </data>
   <data name="txtRegisterHere" xml:space="preserve">
     <value>REGISTER HERE</value>
   </data>
@@ -1578,6 +1590,9 @@
   </data>
   <data name="txtSelectCategory" xml:space="preserve">
     <value>Select A Coupon</value>
+  </data>
+  <data name="txtSelectCityArea" xml:space="preserve">
+    <value>Please select the City and Area</value>
   </data>
   <data name="txtSelectCode" xml:space="preserve">
     <value>Select a promo code</value>

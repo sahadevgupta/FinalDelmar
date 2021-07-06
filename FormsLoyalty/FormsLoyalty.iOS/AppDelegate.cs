@@ -38,10 +38,10 @@ namespace FormsLoyalty.iOS
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             global::Xamarin.Forms.Forms.Init();
 
-            //Window = new UIWindow(UIScreen.MainScreen.Bounds);
-            //var control = new VideoController();                          //Video Splash Screen 
-            //Window.RootViewController = control;
-            //Window.MakeKeyAndVisible();
+            Window = new UIWindow(UIScreen.MainScreen.Bounds);
+            var control = new VideoController();                          //Video Splash Screen 
+            Window.RootViewController = control;
+            Window.MakeKeyAndVisible();
 
             Xamarin.FormsMaps.Init();
             global::Xamarin.Forms.FormsMaterial.Init();
@@ -58,26 +58,27 @@ namespace FormsLoyalty.iOS
             UIApplication.SharedApplication.RegisterForRemoteNotifications();
 
             UIApplication.SharedApplication.RegisterUserNotificationSettings(pushSettings);
-             // SetStatusBarColor();
-           // GlobalExceptionHelper.RegisterForGlobalExceptionHandling();
-
-            //MessagingCenter.Subscribe<object, object>(this, "ShowMainScreen", (sender, args) =>
-            //{
-            //    if (IsAnimationOver)
-            //    {
-
-            //        System.Diagnostics.Debug.WriteLine("IsAnimation over ");
-            //        LoadApplication(new App());
-            //        base.FinishedLaunching(app, options);
-            //        IsAnimationOver = false;
-            //    }
-            //});
-            LoadApplication(new App(new iOSInitializer()));
-            
-
+            // SetStatusBarColor();
+            // GlobalExceptionHelper.RegisterForGlobalExceptionHandling();
             FirebasePushNotificationManager.Initialize(options);
-            
-            return base.FinishedLaunching(app, options); ;
+            MessagingCenter.Subscribe<object, object>(this, "ShowMainScreen", (sender, args) =>
+            {
+                if (IsAnimationOver)
+                {
+
+                    System.Diagnostics.Debug.WriteLine("IsAnimation over ");
+                    LoadApplication(new App(new iOSInitializer()));
+                    base.FinishedLaunching(app, options);
+                    IsAnimationOver = false;
+                }
+            });
+            return true;
+            //LoadApplication(new App(new iOSInitializer()));
+
+
+
+
+            // return base.FinishedLaunching(app, options); ;
         }
 
         private void SetStatusBarColor()

@@ -49,6 +49,7 @@
     <ConsolePause>false</ConsolePause>
     <CodesignKey>iPhone Distribution: Michael Bneyamine (N8NGKDY9BU)</CodesignKey>
     <CodesignProvision>Delmar_Distribution</CodesignProvision>
+    <MtouchUseLlvm>true</MtouchUseLlvm>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -522,6 +523,39 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconCall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconFacebook.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\imgContactUs.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\imgEmptyCart_ar.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\imgEmptyCart_en.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Instagram.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\WhatsApp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Intro.mp4" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\IconContactUs.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\IconContactUs%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\iconRate%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>

@@ -38,12 +38,7 @@ namespace FormsLoyalty.ViewModels
             set 
             { 
                 SetProperty(ref _items, value);
-                if (value.Any())
-                {
-                    IsNoItemFound = false;
-                }
-                else
-                    IsNoItemFound = true;
+               
             }
         }
         private ObservableCollection<LoyItem> _TempList = new ObservableCollection<LoyItem>();
@@ -448,6 +443,7 @@ namespace FormsLoyalty.ViewModels
 
         public async Task LoadLoyItem()
         {
+            IsNoItemFound = false;
             if (Items.Count % pageSize == 0)
             {
                 double num = ((double)Items.Count / (double)pageSize) + 1.00;

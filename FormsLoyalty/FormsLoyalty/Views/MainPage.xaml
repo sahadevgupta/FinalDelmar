@@ -880,7 +880,7 @@
                                                                   Constant=0}"
                             Margin="30,165,30,0"
                 BackgroundColor="White"
-                EmptyView="No results found"
+                EmptyView="{x:Static resources:AppResources.txtItemNotFound}"
                 IsVisible="{Binding IsSuggestionFound}"
                 ItemsSource="{Binding Items}"
                 
