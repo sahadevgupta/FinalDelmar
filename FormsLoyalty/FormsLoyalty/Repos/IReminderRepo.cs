@@ -9,6 +9,7 @@ namespace FormsLoyalty.Repos
     {
         void AddReminder(MedicineReminder medicineReminder, List<FrequencyTime> frequencies);
         void DeleteReminder(MedicineReminder medicineReminder, List<FrequencyTime> frequencies);
+        void DeleteReminderFrequency(MedicineReminder medicineReminder, FrequencyTime frequency);
         List<MedicineReminder> GetReminder(ReminderDate date);
         TableQuery<MedicineReminder> GetTable();
         void UpdateReminder(MedicineReminder medicineReminder, List<FrequencyTime> frequencies);

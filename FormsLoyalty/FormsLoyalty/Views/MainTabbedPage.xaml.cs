@@ -45,12 +45,14 @@ namespace FormsLoyalty.Views
         bool value = true;
         protected override bool OnBackButtonPressed()
         {
-            //var selectedTabIndex = this.Children.IndexOf(this.CurrentPage);
+            var selectedTabIndex = this.Children.IndexOf(this.CurrentPage);
             //if (selectedTabIndex == 0)
             //{
-            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
-            //    if (!currentPage.Title.Equals(AppResources.ActionbarHome))
+            //    var Page = (this.Children[selectedTabIndex] as NavigationPage);
+
+            //    if (Page.CurrentPage != Page.RootPage)
             //    {
+            //        Page.CurrentPage.Navigation.PopAsync();
             //        return true;
             //    }
             //}
@@ -59,14 +61,16 @@ namespace FormsLoyalty.Views
             //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
             //    if (!currentPage.Title.Equals(AppResources.txtCategory))
             //    {
+            //        currentPage.Navigation.PopAsync();
             //        return true;
             //    }
             //}
             //else if (selectedTabIndex == 2)
             //{
             //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
-            //    if (!currentPage.Title.Equals(AppResources.CartTab))
+            //    if ( !currentPage.Title.Equals(AppResources.CartTab))
             //    {
+            //        currentPage.Navigation.PopAsync();
             //        return true;
             //    }
             //}
@@ -75,6 +79,7 @@ namespace FormsLoyalty.Views
             //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
             //    if (!currentPage.Title.Equals(AppResources.OrdersTab))
             //    {
+            //        currentPage.Navigation.PopAsync();
             //        return true;
             //    }
             //}
@@ -83,9 +88,18 @@ namespace FormsLoyalty.Views
             //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
             //    if (!currentPage.Title.Equals(AppResources.MoreTab))
             //    {
+            //        currentPage.Navigation.PopAsync();
             //        return true;
             //    }
             //}
+
+            var Page = (this.Children[selectedTabIndex] as NavigationPage);
+
+            if (Page.CurrentPage != Page.RootPage)
+            {
+                Page.CurrentPage.Navigation.PopAsync();
+                return true;
+            }
 
 
             if (value)

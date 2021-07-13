@@ -30,7 +30,13 @@ namespace FormsLoyalty.Models
 
             OneList newList = AppData.Device.UserLoggedOnToDevice.GetBasket(AppData.Device.CardId);
             newList.CardId = AppData.Device.CardId;
-            newList.AddItem(item);
+
+           var data =  newList.Items.FirstOrDefault(x => x.ItemId == item.ItemId);
+            if(data!=null)
+                data.Quantity += item.Quantity;
+            
+            else
+               newList.AddItem(item);
 
             try
             {

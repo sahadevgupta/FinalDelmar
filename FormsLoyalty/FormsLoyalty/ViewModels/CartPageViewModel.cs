@@ -220,16 +220,31 @@ namespace FormsLoyalty.ViewModels
                 if (basketItem.Image!=null)
                 {
                     item.Image = basketItem.Image;
-                    item.Image.Image = SetImage(basketItem);
+                    Task.Run(async () =>
+                    {
+                        var imgView = await ImageHelper.GetImageById(basketItem.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(114, 114));
+                        item.Image.Image = imgView?.Image;
+
+
+
+                    });
+                    
                 }
                
                 baskets.Add(item);
 
                
             }
+
+            LoadCartItemImage();
           
             CalculateBasketPrice();
 
+        }
+
+        private void LoadCartItemImage()
+        {
+            
         }
 
         private void CalculateBasketPrice()
@@ -269,7 +284,7 @@ namespace FormsLoyalty.ViewModels
             {
                imageView = await  ImageHelper.GetImageById(basketItem.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(114, 114));
 
-                
+                return imageView?.Image;
 
             });
             return imageView?.Image;

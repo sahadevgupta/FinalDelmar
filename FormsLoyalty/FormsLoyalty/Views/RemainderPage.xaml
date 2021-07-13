@@ -148,16 +148,25 @@
                                        
                                         <Grid ColumnDefinitions="Auto,*,Auto" RowDefinitions="Auto,Auto,0.7"  Padding="10">
 
-                                                <ImageButton Grid.RowSpan="2" VerticalOptions="CenterAndExpand"
+                                            <Image Grid.RowSpan="2" VerticalOptions="CenterAndExpand"
                                                              HorizontalOptions="Center"
                                                              Aspect="AspectFit"
                                                              Grid.Column="0"
-                                                              Command="{Binding BindingContext.DeleteCommand,Source={x:Reference reminderlist}}"
-                                                               CommandParameter="{Binding .}"
-                                                         BackgroundColor="Transparent"
-                                                         Source="ic_action_discard" xct:IconTintColorEffect.TintColor="{StaticResource My_Button_Color}"/>
+                                                             
+                                                              
+                                                         
+                                                          xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                                                         xct:TouchEffect.PressedBackgroundColor="LightPink"
+                                                         xct:TouchEffect.NormalBackgroundColor="Transparent"
+                                                         Source="ic_action_discard" xct:IconTintColorEffect.TintColor="{StaticResource My_Button_Color}">
+                                                <Image.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="ImageButton_Clicked" CommandParameter="{Binding .}"/>
+                                                </Image.GestureRecognizers>
+                                            </Image>
 
-                                                <Label Grid.Row="0" Grid.Column="1" Text="{Binding EventName}" FontSize="Medium" TextColor="Black"/>
+
+
+                                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding EventName}" FontSize="Medium" TextColor="Black"/>
                                                 <Label Grid.Row="1" Grid.Column="1" >
                                                 <Label.Text>
                                                     <MultiBinding StringFormat="{}{0} {1}">

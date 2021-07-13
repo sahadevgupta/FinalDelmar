@@ -128,27 +128,33 @@ namespace FormsLoyalty.ViewModels
         {
             this.timer = new Timer(x =>
             {
-                this.GetMenuOnSearch(value);
+                this.GetItemOnSearch(value);
             }, null, alertTime, Timeout.InfiniteTimeSpan);
         }
 
-        private void GetMenuOnSearch(string s_word)
+        private void GetItemOnSearch(string s_word)
         {
-
-            Device.BeginInvokeOnMainThread(() =>
+            IsNoItemFound = false;
+            Device.BeginInvokeOnMainThread(async() =>
             {
                 IsPageEnabled = true;
                 if (!string.IsNullOrEmpty(s_word))
                 {
-                    if (TempList != null)
+                    var items = await itemModel.GetItemsByPage(10, 1, string.Empty, string.Empty, s_word, false, string.Empty);
+                    Items = new ObservableCollection<LoyItem>(items);
+                   
+                    if (Items.Any())
                     {
-                        Items = new ObservableCollection<LoyItem>(TempList.Where(x => x.Description.ToLower().Contains(s_word.ToLower())));
+                        IsNoItemFound = false;
+                        LoadItemImage();
                     }
+                       
+                    else
+                        IsNoItemFound = true;
+
                 }
                 else
                     Items = new ObservableCollection<LoyItem>(TempList);
-
-                
 
                 IsPageEnabled = false;
             });
@@ -309,6 +315,19 @@ namespace FormsLoyalty.ViewModels
                 {
                     foreach (var item in Items)
                     {
+
+                        if (AppData.Basket != null)
+                        {
+                            var isExist = AppData.Basket.Items?.Any(x => x.ItemId == item.Id);
+                            if (isExist == true)
+                            {
+                                var basketItem = AppData.Basket.Items.FirstOrDefault(x => x.ItemId == item.Id);
+                                item.Quantity = basketItem.Quantity;
+                            }
+                            else
+                                item.Quantity = 0;
+                        }
+
                         if (item.Images.Count > 0)
                         {
                             if (string.IsNullOrEmpty(item.Images[0].Image))

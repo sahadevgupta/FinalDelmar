@@ -49,15 +49,39 @@ namespace FormsLoyalty.ViewModels
         {
             _reminderRepo = reminderRepo;
             EditCommand = new DelegateCommand<object>(async(data) => await EditReminder(data));
-            DeleteCommand = new DelegateCommand<object>( (data) =>  DeleteReminder(data));
+            //DeleteCommand = new DelegateCommand<object>( (data) =>  DeleteReminder(data));
 
             LoadData();
         }
 
-        private void DeleteReminder(object data)
+        public void DeleteReminder(string key, MedicineReminder reminder)
         {
-            var reminder = data as MedicineReminder;
-            _reminderRepo.DeleteReminder(reminder, reminder.FrequencyTimes);
+
+            if (reminder.FrequencyTimes.Count >1)
+            {
+                var data = key.Split(':');
+                int hours;
+                if (data[1].Contains("PM"))
+                {
+                    var hr = Convert.ToInt32(data[0]);
+                    
+                    hours = hr < 12 ? hr + 12 : hr;
+                }
+                else
+                    hours = Convert.ToInt32(data[0]);
+
+                if (hours == 12)
+                    hours = 0;
+
+                var minutes = Convert.ToInt32(data[1].Substring(0, 2));
+
+                var time = new TimeSpan(hours, minutes, 0);
+
+                var record = reminder.FrequencyTimes.Where(x => x.Time == time).FirstOrDefault();
+                _reminderRepo.DeleteReminderFrequency(reminder, record);
+            }
+            else
+             _reminderRepo.DeleteReminder(reminder, reminder.FrequencyTimes);
 
             GetReminder();
         }

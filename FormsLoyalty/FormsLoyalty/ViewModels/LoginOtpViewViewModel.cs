@@ -93,6 +93,12 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
 
             Otp = await new CommonModel().GenerateOTPAsync(MobileNumber);
+            if (!string.IsNullOrEmpty(Otp))
+            {
+                IsResendEnabled = false;
+                StartTimer();
+            }
+                
             //DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
 
             IsPageEnabled = false;
@@ -157,12 +163,19 @@ namespace FormsLoyalty.ViewModels
                     if (Otp.Equals(otpComp.OtpValue) && TimerCount > 0)
                     {
                         var response = await _commonModel.VerifyPhoneAsync(MobileNumber);
-                        if (response == false)
+                        if (response==null)
                         {
                             await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}",new NavigationParameters { {"number", MobileNumber } });
                         }
-                        else if(response == true)
-                            GoToMainScreen();
+                        else if(!string.IsNullOrEmpty(response.Id))
+                        {
+                            if (response.Cards.Any())
+                            {
+                                GoToMainScreen();
+                            }
+                            else
+                                await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}", new NavigationParameters { { "edit", true } });
+                        } 
                         else
                             await App.dialogService.DisplayAlertAsync("Error!!", AppData.Msg, "OK");
                     }

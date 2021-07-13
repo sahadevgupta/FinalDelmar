@@ -35,6 +35,8 @@
 
         <Label Text="{x:Static resources:AppResources.txtSelectCategory}" FontSize="Medium" Padding="5" FontAttributes="Bold"/>
 
+            
+            
         <CollectionView   VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
                           Grid.Row="1" 
                           HeightRequest="400"
@@ -107,7 +109,19 @@
             </CollectionView.ItemTemplate>
 
         </CollectionView>
-        </Grid>
+
+        <Label  
+                       FontAttributes="Bold"
+                       FontSize="Medium" 
+                       x:Name="noitemlbl"
+                       Grid.Row="1"  
+                       TextColor="Black" x:Uid="nit" 
+                       HorizontalTextAlignment="Center"
+                       VerticalTextAlignment="Center"
+                       IsVisible="false"
+                       Text="{x:Static resources:AppResources.txtNoCoupon}" />
+
+    </Grid>
 
         <!--<StackLayout x:Name="couponsStack" BindableLayout.ItemsSource="{Binding Coupons}" HeightRequest="300">
             <BindableLayout.ItemTemplate>

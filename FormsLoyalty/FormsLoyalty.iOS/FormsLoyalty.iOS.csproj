@@ -319,13 +319,16 @@
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
+    <Compile Include="Renderers\CustomCollectionViewRenderer.cs" />
     <Compile Include="Renderers\CustomPickerRenderer.cs" />
     <Compile Include="Renderers\CustomSearchBarRenderer.cs" />
+    <Compile Include="Renderers\CustomTabbedPageRenderer.cs" />
     <Compile Include="Renderers\MyPageRenderer.cs" />
     <Compile Include="Renderers\NoBounceRenderer.cs" />
     <Compile Include="Renderers\NoBounceScrollViewRenderer.cs" />
     <Compile Include="Renderers\OTPRenderer.cs" />
     <Compile Include="Renderers\RadioButton_iOS.cs" />
+    <Compile Include="Services\AppRatingService.cs" />
     <Compile Include="Services\MediaService_iOS.cs" />
     <Compile Include="Services\Notification_iOS.cs" />
     <Compile Include="VideoController.cs" />

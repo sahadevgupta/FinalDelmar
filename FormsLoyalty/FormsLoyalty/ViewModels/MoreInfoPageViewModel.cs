@@ -471,34 +471,11 @@ namespace FormsLoyalty.ViewModels
                 case AppConstValues.Items:
                     
                         IsPageEnabled = true;
-                        //var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
-                        // options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
-                        //ZXingScannerView scan = new ZXingScannerView()
-                        //{
 
-                        //   IsScanning  = true,
-                        //   IsTorchOn = true
-                        //};
+                    try
+                    {
 
-                        //// await Navigation.PushAsync(scan);
-                        //Navigation.PushAsync(scan);
-                        //scan.OnScanResult += (result) =>
-                        //{
-                        //    scan.IsScanning = false;
-                        //    ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
-                        //    string type = barcodeFormat.ToString();
-                        //    Device.BeginInvokeOnMainThread(async () =>
-                        //    {
-                        //        //Navigation.PopAsync();
-                        //        await Navigation.PopAsync();
-                        //        string barcode = result.Text;
-                        //        _viewModel.NavigateToItemPage(barcode);
-                        //    });
-                        //};
-                        //var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-
-                        //scanner.TopText = AppResources.ScannerViewScannerTopText;
-                        //scanner.BottomText = AppResources.ScannerViewScannerBottomText;
+                   
 
                         var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
                         options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
@@ -546,7 +523,13 @@ namespace FormsLoyalty.ViewModels
                         };
 
                         IsPageEnabled = false;
-                    
+                    }
+                    catch (Exception)
+                    {
+
+                        
+                    }
+
 
                     break;
                 case AppConstValues.Search:
@@ -627,6 +610,8 @@ namespace FormsLoyalty.ViewModels
 
                         if (AppData.Basket != null)
                             AppData.Basket.Items.Clear();
+
+                        AppData.Device.UserLoggedOnToDevice = null;
 
                         AppData.BestSellers.Clear();
                         await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");

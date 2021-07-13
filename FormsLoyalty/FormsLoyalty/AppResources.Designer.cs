@@ -2833,7 +2833,7 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Offers Isn&apos;t Available Right Now.
+        ///   Looks up a localized string similar to Offers aren&apos;t Available Right Now.
         /// </summary>
         public static string OfferText1 {
             get {
@@ -3995,6 +3995,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fri.
+        /// </summary>
+        public static string txtFriday {
+            get {
+                return ResourceManager.GetString("txtFriday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gallery.
         /// </summary>
         public static string txtGallery {
@@ -4139,6 +4148,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Get Started Now.
+        /// </summary>
+        public static string txtletStart {
+            get {
+                return ResourceManager.GetString("txtletStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Please login first.
         /// </summary>
         public static string txtLoginFirst {
@@ -4220,6 +4238,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mon.
+        /// </summary>
+        public static string txtMonday {
+            get {
+                return ResourceManager.GetString("txtMonday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Frequently Ordered.
         /// </summary>
         public static string txtmostviewed {
@@ -4247,7 +4274,16 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to There is no Orders to Show.
+        ///   Looks up a localized string similar to There are no coupons available right now.
+        /// </summary>
+        public static string txtNoCoupon {
+            get {
+                return ResourceManager.GetString("txtNoCoupon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no Orders to Show.
         /// </summary>
         public static string txtNoOrders {
             get {
@@ -4454,6 +4490,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sat.
+        /// </summary>
+        public static string txtSaturday {
+            get {
+                return ResourceManager.GetString("txtSaturday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Schedule.
         /// </summary>
         public static string txtSchedule {
@@ -4499,6 +4544,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Set.
+        /// </summary>
+        public static string txtSet {
+            get {
+                return ResourceManager.GetString("txtSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set number of days (from start date).
         /// </summary>
         public static string txtSetNumberOfDays {
@@ -4513,6 +4567,15 @@ namespace FormsLoyalty {
         public static string txtSettings {
             get {
                 return ResourceManager.GetString("txtSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skip Tour.
+        /// </summary>
+        public static string txtSkipTour {
+            get {
+                return ResourceManager.GetString("txtSkipTour", resourceCulture);
             }
         }
         
@@ -4562,11 +4625,47 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sun.
+        /// </summary>
+        public static string txtSunday {
+            get {
+                return ResourceManager.GetString("txtSunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to يؤخذ.
+        /// </summary>
+        public static string txtTake {
+            get {
+                return ResourceManager.GetString("txtTake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thu.
+        /// </summary>
+        public static string txtThrusday {
+            get {
+                return ResourceManager.GetString("txtThrusday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Today.
         /// </summary>
         public static string txtToday {
             get {
                 return ResourceManager.GetString("txtToday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tue.
+        /// </summary>
+        public static string txtTuesday {
+            get {
+                return ResourceManager.GetString("txtTuesday", resourceCulture);
             }
         }
         
@@ -4603,6 +4702,15 @@ namespace FormsLoyalty {
         public static string txtViewOffers {
             get {
                 return ResourceManager.GetString("txtViewOffers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wed.
+        /// </summary>
+        public static string txtWednesday {
+            get {
+                return ResourceManager.GetString("txtWednesday", resourceCulture);
             }
         }
         

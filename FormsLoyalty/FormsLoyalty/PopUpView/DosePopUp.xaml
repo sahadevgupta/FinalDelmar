@@ -49,7 +49,7 @@
                     TextColor="Black"
                     Clicked="CancelBtn_Clicked"
                     FontSize="Medium"/>
-            <Button Text="Set"
+            <Button Text="{x:Static resources:AppResources.txtSet}"
                     x:Name="okBtn"
                     BackgroundColor="#4f4f4f"
                    

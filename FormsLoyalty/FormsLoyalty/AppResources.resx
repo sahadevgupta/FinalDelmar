@@ -1042,7 +1042,7 @@
     <value>Related items</value>
   </data>
   <data name="OfferText1" xml:space="preserve">
-    <value>Offers Isn't Available Right Now</value>
+    <value>Offers aren't Available Right Now</value>
   </data>
   <data name="OfferText2" xml:space="preserve">
     <value>This may be because you have not logged in yet. Kindly login to view the offers.</value>
@@ -1429,6 +1429,9 @@
   <data name="txtFloorNo" xml:space="preserve">
     <value>Floor No.</value>
   </data>
+  <data name="txtFriday" xml:space="preserve">
+    <value>Fri</value>
+  </data>
   <data name="txtGallery" xml:space="preserve">
     <value>Gallery</value>
   </data>
@@ -1477,6 +1480,9 @@
   <data name="txtLandmark" xml:space="preserve">
     <value>Landmark</value>
   </data>
+  <data name="txtletStart" xml:space="preserve">
+    <value>Get Started Now</value>
+  </data>
   <data name="txtLoginFirst" xml:space="preserve">
     <value>Please login first</value>
   </data>
@@ -1504,6 +1510,9 @@
   <data name="txtMobileEmpty" xml:space="preserve">
     <value>Mobile Number cannot be empty</value>
   </data>
+  <data name="txtMonday" xml:space="preserve">
+    <value>Mon</value>
+  </data>
   <data name="txtmostviewed" xml:space="preserve">
     <value>Frequently Ordered</value>
   </data>
@@ -1513,8 +1522,11 @@
   <data name="txtNewUser" xml:space="preserve">
     <value>New User?</value>
   </data>
+  <data name="txtNoCoupon" xml:space="preserve">
+    <value>There are no coupons available right now</value>
+  </data>
   <data name="txtNoOrders" xml:space="preserve">
-    <value>There is no Orders to Show</value>
+    <value>There are no Orders to Show</value>
   </data>
   <data name="txtNote" xml:space="preserve">
     <value>Note :</value>
@@ -1582,6 +1594,9 @@
   <data name="txtReviewSubmit" xml:space="preserve">
     <value>Review &amp; Submit</value>
   </data>
+  <data name="txtSaturday" xml:space="preserve">
+    <value>Sat</value>
+  </data>
   <data name="txtSchedule" xml:space="preserve">
     <value>Schedule</value>
   </data>
@@ -1597,11 +1612,17 @@
   <data name="txtSelectCode" xml:space="preserve">
     <value>Select a promo code</value>
   </data>
+  <data name="txtSet" xml:space="preserve">
+    <value>Set</value>
+  </data>
   <data name="txtSetNumberOfDays" xml:space="preserve">
     <value>Set number of days (from start date)</value>
   </data>
   <data name="txtSettings" xml:space="preserve">
     <value>Settings</value>
+  </data>
+  <data name="txtSkipTour" xml:space="preserve">
+    <value>Skip Tour</value>
   </data>
   <data name="txtSmallspoons" xml:space="preserve">
     <value>Smallspoon(s)</value>
@@ -1618,8 +1639,20 @@
   <data name="txtStreet" xml:space="preserve">
     <value>Street</value>
   </data>
+  <data name="txtSunday" xml:space="preserve">
+    <value>Sun</value>
+  </data>
+  <data name="txtTake" xml:space="preserve">
+    <value>يؤخذ</value>
+  </data>
+  <data name="txtThrusday" xml:space="preserve">
+    <value>Thu</value>
+  </data>
   <data name="txtToday" xml:space="preserve">
     <value>Today</value>
+  </data>
+  <data name="txtTuesday" xml:space="preserve">
+    <value>Tue</value>
   </data>
   <data name="txtUploadPhoto" xml:space="preserve">
     <value>Upload a new photo</value>
@@ -1632,6 +1665,9 @@
   </data>
   <data name="txtViewOffers" xml:space="preserve">
     <value>View Offers</value>
+  </data>
+  <data name="txtWednesday" xml:space="preserve">
+    <value>Wed</value>
   </data>
   <data name="txtWelcome1" xml:space="preserve">
     <value>To get started, tap the button below to log on or to add a new account and configure your personal profile.</value>

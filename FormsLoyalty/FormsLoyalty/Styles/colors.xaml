@@ -25,8 +25,8 @@
     <Setter Property="ios:SearchBar.SearchBarStyle" Value="Minimal"/>
     </Style>
 
-    
 
+    <x:Array x:Key="EmptyArray" Type="{x:Type x:String}" />
 
     <Style x:Key="stlRigthStripeFrame" TargetType="Frame">
         <Setter Property="Margin"          Value = "0,20"   />

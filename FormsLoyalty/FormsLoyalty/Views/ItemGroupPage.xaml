@@ -155,12 +155,12 @@
             </Grid>
 
 
-            <Label  
+            <Label 
                        FontAttributes="Bold"
                        FontSize="Medium" 
                        x:Name="noitemlbl"
-                 Grid.Row="2" 
-                       TextColor="Black" x:Uid="nit" 
+                       Grid.Row="2" 
+                       TextColor="{OnPlatform Android=Black,iOS=White}" x:Uid="nit" 
                        HorizontalTextAlignment="Center"
                        VerticalTextAlignment="Center"
                        IsVisible="{Binding IsNoItemFound}"
@@ -197,9 +197,6 @@
                             </Grid.GestureRecognizers>
 
 
-
-
-
                             <Frame WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material"  Margin="0,0,8,0" >
 
 
@@ -219,7 +216,7 @@
 
 
                                     <Frame Grid.Row="0" HorizontalOptions="End" VerticalOptions="StartAndExpand" Padding="4" Margin="5"  
-                                   CornerRadius="20" BackgroundColor="Red" >
+                                   CornerRadius="{OnPlatform Android='20', iOS='15'}" BackgroundColor="Red" >
                                         <Label Text="{Binding Discount,StringFormat='{0:N0}% Off'}" VerticalOptions="Center" HorizontalTextAlignment="Center" 
                                                        TextColor = "White" FontSize ="14" />
 
@@ -242,7 +239,22 @@
                            Grid.Row="1"
                            />
 
-                                    <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0">
+                                    <StackLayout IsVisible="{OnPlatform iOS=true, Android=false}" VerticalOptions="Center" Grid.Row="2" 
+                                                 Orientation="Horizontal"
+                                                 Margin="10,0,10,0">
+                                        <Label Text="{Binding NewPrice,StringFormat='{0} '}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                        <Label Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
+
+                                        <StackLayout.Triggers>
+                                            <DataTrigger TargetType="StackLayout" Binding="{Binding Discount}" Value="0">
+                                                <Setter Property="IsVisible" Value="false"/>
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+
+                                    </StackLayout>
+
+
+                                    <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0" IsVisible="{OnPlatform iOS=false, Android=true}">
                                       
                                         <Label.FormattedText>
                                             <FormattedString>

@@ -138,8 +138,12 @@ namespace FormsLoyalty.ViewModels
             Device.BeginInvokeOnMainThread(async () =>
             {
                 Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync(SelectedCity.City));
-                if(editAccount)
-                    SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(memberContact.Addresses[0].Area, StringComparison.OrdinalIgnoreCase));
+                if (editAccount)
+                {
+                    if(memberContact.Addresses.Any())
+                        SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(memberContact.Addresses[0].Area, StringComparison.OrdinalIgnoreCase));
+
+                }
 
             });
         }
@@ -351,13 +355,15 @@ namespace FormsLoyalty.ViewModels
         }
         internal void FetchExistingMemberContact()
         {
-            
-                Title = AppResources.MenuViewAccountManagementTitle;
-                memberContact = AppData.Device.UserLoggedOnToDevice;
+            Title = AppResources.MenuViewAccountManagementTitle;
+            memberContact = AppData.Device.UserLoggedOnToDevice;
+
+            if(memberContact.Addresses.Any())
                 Address = memberContact.Addresses[0];
-                UserName = memberContact.UserName;
-                FirstName = memberContact.FirstName;
-                LastName = memberContact.LastName;
+
+            UserName = memberContact.UserName;
+            FirstName = memberContact.FirstName;
+            LastName = memberContact.LastName;
             MobileNumber = memberContact.MobilePhone;
 
 
@@ -417,12 +423,13 @@ namespace FormsLoyalty.ViewModels
                 IsMobileNumberExist = true;
                 MobileNumber = MobilePhone;
             }
-            LoadAddressData();
             if (editAccount)
             {
                 FetchExistingMemberContact();
 
             }
+            LoadAddressData();
+            
 
         }
 

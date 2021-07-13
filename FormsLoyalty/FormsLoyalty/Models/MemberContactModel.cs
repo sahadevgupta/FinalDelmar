@@ -390,6 +390,7 @@ namespace FormsLoyalty.Models
                     SaveLocalMemberContact(contact);
 
                     DependencyService.Get<INotify>().ShowToast(AppResources.ResourceManager.GetString("AccountViewUpdateSuccess", AppResources.Culture));
+                    return true;
                 }
                 //MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "MemberContactUpdated");
                 
@@ -403,7 +404,7 @@ namespace FormsLoyalty.Models
               //  ProgressDialog.Dismiss();
             }
 
-            return true;
+            return false;
         }
 
         public async Task MemberContactGetPointBalance(string cardId)

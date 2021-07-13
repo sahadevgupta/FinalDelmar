@@ -31,15 +31,23 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
 
-    <AbsoluteLayout>    
-        <CollectionView ItemsSource="{Binding transactions}"
+    <AbsoluteLayout>
+        <CollectionView ItemsSource="{Binding transactions, TargetNullValue={StaticResource EmptyArray}}"
                     SelectionMode="Single" Margin="10"
                         VerticalScrollBarVisibility="Never"
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All">
 
             <CollectionView.EmptyView>
-                <Label Text="{x:Static resources:AppResources.txtNoOrders}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"/>
+                <Label Text="{x:Static resources:AppResources.txtNoOrders}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"
+                       IsVisible="{OnPlatform iOS='False', Default=True}">
+                    <Label.Triggers>
+                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
+
+                            <Setter Property="ScaleX" Value="{OnPlatform iOS='-1'}"/>
+                        </DataTrigger>
+                    </Label.Triggers>
+                </Label>
             </CollectionView.EmptyView>
 
             <CollectionView.Triggers>

@@ -120,8 +120,10 @@ namespace FormsLoyalty.ViewModels
 
             var result = await MaterialDialog.Instance.SelectChoicesAsync(title: AppResources.ResourceManager.GetString("GeneralSearchViewChooseCategories",AppResources.Culture),
                                                                           selectedIndices: indexes,
-                                                                          choices: typeNames,configuration: simpleDialogConfiguration
-                                                                          );
+                                                                          choices: typeNames,
+                                                                          confirmingText: AppResources.ApplicationOk, 
+                                                                          dismissiveText: AppResources.ApplicationCancel, configuration: simpleDialogConfiguration
+                                                                           );
 
 
             if (result!=null)

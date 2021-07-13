@@ -29,15 +29,15 @@
                            FontSize="Large"
                            FontAttributes="Bold" />
 
-        <CollectionView ItemsSource="{Binding transaction.Lines}" VerticalScrollBarVisibility="Never"
+        <controls:CustomCollectionView ItemsSource="{Binding transaction.Lines}" VerticalScrollBarVisibility="Never"
                   
                         SelectionMode="Single">
 
-                <CollectionView.ItemsLayout>
+                <controls:CustomCollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
-                </CollectionView.ItemsLayout>
-            
-                <CollectionView.Header>
+                </controls:CustomCollectionView.ItemsLayout>
+
+                <controls:CustomCollectionView.Header>
                 <Grid HeightRequest="40" BackgroundColor="{StaticResource My_Header_Color}" RowDefinitions="40" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="6*"/>
@@ -64,8 +64,8 @@
                                TextColor="White"/>
                    
                 </Grid>
-            </CollectionView.Header>
-                <CollectionView.ItemTemplate>
+            </controls:CustomCollectionView.Header>
+                <controls:CustomCollectionView.ItemTemplate>
             <DataTemplate>
                      
                     <Frame Visual="Material" Padding="0" >
@@ -106,9 +106,9 @@
                     </Frame>
                       
                     </DataTemplate>
-        </CollectionView.ItemTemplate>
+        </controls:CustomCollectionView.ItemTemplate>
 
-                <CollectionView.Footer>
+                <controls:CustomCollectionView.Footer>
                 <Grid  Padding="10" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="7*"/>
@@ -184,9 +184,9 @@
                             IsVisible="{Binding IsReOrderBtnVisible}"/>
 
                 </Grid>
-            </CollectionView.Footer>
+            </controls:CustomCollectionView.Footer>
             
-    </CollectionView>
+    </controls:CustomCollectionView>
 
        
     </StackLayout>

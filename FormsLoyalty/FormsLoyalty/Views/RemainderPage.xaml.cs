@@ -1,4 +1,5 @@
-﻿using FormsLoyalty.ViewModels;
+﻿using FormsLoyalty.Models;
+using FormsLoyalty.ViewModels;
 using System;
 using System.CodeDom.Compiler;
 using System.Collections.Generic;
@@ -118,6 +119,14 @@ namespace FormsLoyalty.Views
 
            await _viewModel.NavigateToAddReminderPage();
             view.Opacity = 1;
+        }
+
+        private void ImageButton_Clicked(object sender, EventArgs e)
+        {
+            var view = (Image)sender;
+           var data = view.Parent.Parent.BindingContext;
+            var key = data.GetType().GetProperty("Key").GetValue(data)?.ToString();
+            _viewModel.DeleteReminder(key, ((e as TappedEventArgs).Parameter as MedicineReminder));
         }
     }
 }

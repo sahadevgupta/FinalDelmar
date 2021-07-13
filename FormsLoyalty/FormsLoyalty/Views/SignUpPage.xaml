@@ -297,6 +297,7 @@
                     <controls:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
                                        SelectedItem="{Binding SelectedCity}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
+                                           TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
                                    Visual="Default"   />
                 </Frame>
 
@@ -305,6 +306,7 @@
                     <controls:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
                                        SelectedItem="{Binding SelectedArea}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.txtArea}" 
+                                            TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
                                    Visual="Default"   >
                         <controls:CustomPicker.Triggers>
                             <DataTrigger TargetType="controls:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"

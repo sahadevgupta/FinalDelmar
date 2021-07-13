@@ -124,6 +124,16 @@ namespace FormsLoyalty.Repos
 
             }
         }
+        public void DeleteReminderFrequency(MedicineReminder medicineReminder, FrequencyTime frequency)
+        {
+            lock (locker)
+            {
+                if(frequency.MedicineReminderId.Equals(medicineReminder.ID))
+                    DBHelper.DBConnection.Delete<FrequencyTime>(frequency.ID);
+               
+
+            }
+        }
 
         public TableQuery<MedicineReminder> GetTable()
         {

@@ -139,7 +139,7 @@ namespace FormsLoyalty.ViewModels
                     id = ImageList.Count() + 1,
                     imageExtension = extension.Replace(".", ""),
                     ImagedBase64 = Convert.ToBase64String(file.GetStream().ToByteArray()),
-                     ContactNo = AppData.Device.UserLoggedOnToDevice.MobilePhone
+                     ContactNo = AppData.Device.CardId
                 };
 
                 ImageList.Add(scansend);
@@ -151,8 +151,7 @@ namespace FormsLoyalty.ViewModels
         bool IsSizeExceeds;
         private int AddImage(List<Tuple<byte[], string>> imgInfo, int i)
         {
-            var contactRepo = PrismApplicationBase.Current.Container.Resolve<IMemberContactLocalRepository>();
-            var memberContact = contactRepo.GetLocalMemberContact();
+          
             foreach (var item in imgInfo)
             {
                 //if(item.Item1.Length > 2097152)
@@ -164,7 +163,7 @@ namespace FormsLoyalty.ViewModels
                 scansend.ImagedBase64 = Convert.ToBase64String(item.Item1);
                 scansend.id = i + 1;
                 scansend.imageExtension = item.Item2;
-                scansend.ContactNo = memberContact?.Id;
+                scansend.ContactNo = AppData.Device.CardId;
                 ImageList.Add(scansend);
                 i++;
             }
@@ -197,7 +196,7 @@ namespace FormsLoyalty.ViewModels
                     id = ImageList.Count() + 1,
                     imageExtension = imgData[0].Item2,
                     ImagedBase64 = Convert.ToBase64String(imgData[0].Item1),
-                    ContactNo = AppData.Device.UserLoggedOnToDevice.MobilePhone
+                    ContactNo = AppData.Device.CardId
                 };
 
                 ImageList.Add(scansend);

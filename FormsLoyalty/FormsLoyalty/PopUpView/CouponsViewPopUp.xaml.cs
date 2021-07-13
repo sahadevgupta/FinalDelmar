@@ -52,9 +52,15 @@ namespace FormsLoyalty.PopUpView
                 }
             }
 
+            if (coupons.Any())
+            {
+                noitemlbl.IsVisible = false;
+            }
+            else
+                noitemlbl.IsVisible = true;
             //coupons.Add(new DelmarCoupons { CouponID = "SAMPLE", CouponValue = 50, ExpirationDate = DateTime.Now.Date });
-           
-          
+
+
 
         }
         protected override void OnAppearing()

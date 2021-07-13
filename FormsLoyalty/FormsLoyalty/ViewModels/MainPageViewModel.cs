@@ -471,8 +471,12 @@ namespace FormsLoyalty.ViewModels
                 {
                     foreach (var item in Items)
                     {
-                        var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(110, 110));
-                        item.Images[0].Image = imgView.Image;
+                        if (item.Images.Any())
+                        {
+                            var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(110, 110));
+                            item.Images[0].Image = imgView.Image;
+                        }
+                       
                     }
                 });
             }
@@ -496,7 +500,7 @@ namespace FormsLoyalty.ViewModels
         async Task<bool> CheckLogin()
         {
             
-            if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
+            if (AppData.Device.UserLoggedOnToDevice == null)
             {
                 AppData.IsLoggedIn = false;
                 await NavigationService.NavigateAsync(nameof(LoginPage));

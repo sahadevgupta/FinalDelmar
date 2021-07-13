@@ -54,7 +54,8 @@ namespace FormsLoyalty
          */
 
         public static IPageDialogService dialogService;
-        public static List<string> choices = new List<string> { "Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat" };
+        public static List<string> choices = new List<string> { AppResources.txtSunday, AppResources.txtMonday, AppResources.txtTuesday, AppResources.txtWednesday, AppResources.txtThrusday,
+                                                                AppResources.txtFriday, AppResources.txtSaturday };
 
         public static void CallPCLMethod(List<string> imageData)
         {

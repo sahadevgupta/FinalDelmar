@@ -11,6 +11,7 @@ using Prism;
 using Prism.Ioc;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace FormsLoyalty.Models
@@ -39,7 +40,7 @@ namespace FormsLoyalty.Models
             return _service.GenerateOTP(_repository, number);
         }
 
-        public async Task<bool?> VerifyPhoneAsync(string number)
+        public async Task<MemberContact> VerifyPhoneAsync(string number)
         {
            
             try
@@ -48,12 +49,15 @@ namespace FormsLoyalty.Models
                 if (contact == null)
                 {
                     
-                    return false;
+                    return null;
                 }
                 AppData.Device.UserLoggedOnToDevice = contact;
                 AppData.Device.UserLoggedOnToDevice.Cards = contact.Cards;
                 AppData.Device.SecurityToken = contact.LoggedOnToDevice?.SecurityToken;
-                AppData.Device.CardId = contact.Cards[0].Id;
+
+                if(contact.Cards.Any())
+                    AppData.Device.CardId = contact.Cards[0].Id;
+
                 AppData.Basket = contact.GetBasket(AppData.Device.CardId);
 
                 SaveLocalMemberContact(contact);
@@ -64,12 +68,12 @@ namespace FormsLoyalty.Models
                 {
                     await new FormsLoyalty.Models.MemberContactModel().RegisterDevice();
                 }
-                return true;
+                return contact;
             }
             catch (Exception ex)
             {
-                var errorMessage = await HandleUIExceptionAsync(ex, showToastOnNetworkError: false, displayAlert: false);
-                return null;
+                await HandleUIExceptionAsync(ex, showToastOnNetworkError: false, displayAlert: false);
+                return new MemberContact();
             }
           
         }

@@ -169,7 +169,7 @@
                                                 <Label.Text>
 
                                                     <MultiBinding StringFormat="{}{0} {1}">
-                                                        <Binding Path="Qty" StringFormat="Take {0}" />
+                                                        <Binding Path="Qty" StringFormat="{x:Static resources:AppResources.txtTake} {0}" />
                                                         <Binding Path="BindingContext.SelectedUnit" Source="{x:Reference thisPage}" />
 
                                                     </MultiBinding>

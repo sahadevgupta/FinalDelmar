@@ -1,4 +1,5 @@
-﻿using LSRetail.Omni.Domain.DataModel.Base.Retail;
+﻿using FormsLoyalty.Helpers;
+using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -46,12 +48,26 @@ namespace FormsLoyalty.ViewModels
 
         }
 
+        void LoadImages()
+        {
+            Task.Run(async () =>
+            {
+                foreach (var item in Images)
+                {
+
+                    var imageView = await ImageHelper.GetImageById(item.Id, new ImageSize(396, 396));
+                    item.Image = imageView.Image;
+
+                }
+            });
+        }
+
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
             ImageView = parameters.GetValue<string>("previewImage");
             Images = new ObservableCollection<ImageView>(parameters.GetValue<List<ImageView>>("images"));
-            
+            LoadImages();
         }
     }
 }

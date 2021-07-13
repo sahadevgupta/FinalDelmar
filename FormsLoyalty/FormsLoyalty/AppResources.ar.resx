@@ -1360,7 +1360,7 @@
     <value>ملعقة كبيرة</value>
   </data>
   <data name="txtCamera" xml:space="preserve">
-    <value>آلة تصوير</value>
+    <value>تصوير</value>
   </data>
   <data name="txtCapsules" xml:space="preserve">
     <value>كبسولات</value>
@@ -1428,8 +1428,11 @@
   <data name="txtFloorNo" xml:space="preserve">
     <value>رقم الطابق</value>
   </data>
+  <data name="txtFriday" xml:space="preserve">
+    <value>الجمعة</value>
+  </data>
   <data name="txtGallery" xml:space="preserve">
-    <value>صالة عرض</value>
+    <value>اختيار من الهاتف</value>
   </data>
   <data name="txtGenerateOtp" xml:space="preserve">
     <value>إرسال OTP</value>
@@ -1476,6 +1479,9 @@
   <data name="txtLandmark" xml:space="preserve">
     <value>معلم معروف</value>
   </data>
+  <data name="txtletStart" xml:space="preserve">
+    <value>ابدأ تسوق الان</value>
+  </data>
   <data name="txtLoginFirst" xml:space="preserve">
     <value>الرجاء تسجيل الدخول أولا</value>
   </data>
@@ -1486,7 +1492,7 @@
     <value>ميكروغرام</value>
   </data>
   <data name="txtMedicationName" xml:space="preserve">
-    <value>اسم الطب</value>
+    <value>اسم الدواء</value>
   </data>
   <data name="txtMedicationPlaceholder" xml:space="preserve">
     <value>ضع اسم الصنف أو المادة الفعالة</value>
@@ -1503,14 +1509,20 @@
   <data name="txtMobileEmpty" xml:space="preserve">
     <value>يجب إدخال رقم الموبايل</value>
   </data>
+  <data name="txtMonday" xml:space="preserve">
+    <value>الاثنين</value>
+  </data>
   <data name="txtmostviewed" xml:space="preserve">
     <value>كثيرا ما تطلب</value>
   </data>
   <data name="txtNewPrescription" xml:space="preserve">
-    <value>وصفة طبية جديدة</value>
+    <value>اضغط هنا لارسال روشتة أو صورة</value>
   </data>
   <data name="txtNewUser" xml:space="preserve">
     <value>مستخدم جديد؟</value>
+  </data>
+  <data name="txtNoCoupon" xml:space="preserve">
+    <value>لا يوجد كوبونات متاحة الان</value>
   </data>
   <data name="txtNoOrders" xml:space="preserve">
     <value>لا توجد أوامر</value>
@@ -1522,7 +1534,7 @@
     <value>رقم المنزل</value>
   </data>
   <data name="txtNumbersofdays" xml:space="preserve">
-    <value>عدد الايام</value>
+    <value>علاج محدد المدة</value>
   </data>
   <data name="txtOngoingTreatment" xml:space="preserve">
     <value>علاج مزمن</value>
@@ -1581,6 +1593,9 @@
   <data name="txtReviewSubmit" xml:space="preserve">
     <value>مراجعة وإرسال</value>
   </data>
+  <data name="txtSaturday" xml:space="preserve">
+    <value>السبت</value>
+  </data>
   <data name="txtSchedule" xml:space="preserve">
     <value>الطاولة</value>
   </data>
@@ -1588,7 +1603,7 @@
     <value>أختر عنوان</value>
   </data>
   <data name="txtSelectCategory" xml:space="preserve">
-    <value>حدد قسيمة</value>
+    <value>اختر كوبون</value>
   </data>
   <data name="txtSelectCityArea" xml:space="preserve">
     <value>الرجاء تحديد المدينة و منطقة</value>
@@ -1596,11 +1611,17 @@
   <data name="txtSelectCode" xml:space="preserve">
     <value>اضافة كوبون</value>
   </data>
+  <data name="txtSet" xml:space="preserve">
+    <value>موافق</value>
+  </data>
   <data name="txtSetNumberOfDays" xml:space="preserve">
     <value>تحديد عدد الأيام (من تاريخ البدء)</value>
   </data>
   <data name="txtSettings" xml:space="preserve">
     <value>إعدادات</value>
+  </data>
+  <data name="txtSkipTour" xml:space="preserve">
+    <value>إغلاق</value>
   </data>
   <data name="txtSmallspoons" xml:space="preserve">
     <value>ملعقة صغيرة</value>
@@ -1617,8 +1638,20 @@
   <data name="txtStreet" xml:space="preserve">
     <value>شارع</value>
   </data>
+  <data name="txtSunday" xml:space="preserve">
+    <value>الأحد</value>
+  </data>
+  <data name="txtTake" xml:space="preserve">
+    <value>يؤخذ</value>
+  </data>
+  <data name="txtThrusday" xml:space="preserve">
+    <value>الخميس</value>
+  </data>
   <data name="txtToday" xml:space="preserve">
     <value>اليوم</value>
+  </data>
+  <data name="txtTuesday" xml:space="preserve">
+    <value>الثلاثاء</value>
   </data>
   <data name="txtUploadPhoto" xml:space="preserve">
     <value>قم بتحميل صورة جديدة</value>
@@ -1630,7 +1663,10 @@
     <value>إكمال</value>
   </data>
   <data name="txtViewOffers" xml:space="preserve">
-    <value>لكوبونات المتاحة</value>
+    <value>الكوبونات المتاحة</value>
+  </data>
+  <data name="txtWednesday" xml:space="preserve">
+    <value>الاربعاء</value>
   </data>
   <data name="txtWelcome1" xml:space="preserve">
     <value>للبدء ، انقر فوق الزر أدناه لتسجيل الدخول أو لإضافة حساب جديد وتكوين ملف التعريف الشخصي الخاص بك.</value>

@@ -516,6 +516,7 @@ namespace FormsLoyalty.ViewModels
                 {
                    await NavigationService.GoBackAsync();
                    await MaterialDialog.Instance.SnackbarAsync(AppResources.ItemModelItemNotFound);
+                    return;
                 }
                 Item = item;
                 LoadItem();
