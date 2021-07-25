@@ -16,7 +16,8 @@
              Visual="Material"
              NavigationPage.HasNavigationBar="False"
             ios:Page.UseSafeArea="True"
-           >
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             x:Name="thisPage">
 
     <ContentPage.Triggers>
         <DataTrigger TargetType="ContentPage"
@@ -223,17 +224,34 @@
                           >
                     <CarouselView.ItemTemplate>
                         <DataTemplate>
-                                <Frame  Padding="0" Visual="Material" CornerRadius="10">
+                                <Frame  Padding="0" Visual="Material" CornerRadius="10" 
+                                        x:Name="frame"
+                                        xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                                        
+                                        xct:TouchEffect.PressedBackgroundColor="LightPink"
+                                        xct:TouchEffect.NormalBackgroundColor="Transparent"
+                                        >
+
+                                       
+
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.OnAdTappedCommand,Source={x:Reference carousel}}"
+                                                                  CommandParameter="{Binding .}"/>
+
+                                           
+
+                                        </Frame.GestureRecognizers>
+                                    
                                     <Grid IsClippedToBounds="True">
 
                                         <controls:LoadingImageView/>
-                                        <ffimage:CachedImage Source="{Binding ImageView.Image,Converter={StaticResource BytesToImageSource}}"
+                                            <ffimage:CachedImage Source="{Binding ImageView.Image,Converter={StaticResource BytesToImageSource}}"
                                                              Aspect="AspectFill" HeightRequest="100" 
                                                              DownsampleToViewSize="true"/>
 
 
                                         <StackLayout  VerticalOptions="EndAndExpand" BackgroundColor="#8C808080">
-                                            <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                                Padding="5" 
                                                
                                               VerticalOptions="CenterAndExpand"
@@ -242,11 +260,19 @@
                                                VerticalTextAlignment="Center"
                                                FontAttributes="Bold"
                                                FontSize="Large"
-                                               />
-                                           
+                                               >
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                                 Value="true">
+                                                            <Setter Property="Text" Value="{Binding ArabicDescription}"/>
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+
+                                                </Label>
 
 
-                                        </StackLayout>
+
+                                            </StackLayout>
                                        
                                     </Grid>
                                 </Frame>

@@ -236,6 +236,7 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<ImagePreviewPage, ImagePreviewPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginOtpView, LoginOtpViewViewModel>();
             containerRegistry.RegisterForNavigation<CameraPage, CameraPageViewModel>();
+            containerRegistry.RegisterForNavigation<SocialMediaLogin, SocialMediaLoginViewModel>();
         }
     }
 }

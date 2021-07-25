@@ -137,17 +137,7 @@
 
                             </Frame>
 
-                            <!--<Picker x:Name="reminderPicker"  HorizontalOptions="FillAndExpand" Visual="Default" 
-                            SelectedIndex="{Binding SelectedFreqIndex}" 
-                                                   
-                                                   BackgroundColor="White" TitleColor="DimGray">
-                                <Picker.Items>
-                                    <x:String>Once daily</x:String>
-                                    <x:String>Twice daily</x:String>
-                                    <x:String>3 times a day</x:String>
-                                </Picker.Items>
-                            </Picker>-->
-
+                           
                             <CollectionView ItemsSource="{Binding frequencies}" Grid.Row="1" MinimumHeightRequest="40" HeightRequest="150">
                                 <CollectionView.ItemsLayout>
                                     <LinearItemsLayout ItemSpacing="5" Orientation="Vertical"/>
@@ -169,7 +159,7 @@
                                                 <Label.Text>
 
                                                     <MultiBinding StringFormat="{}{0} {1}">
-                                                        <Binding Path="Qty" StringFormat="{x:Static resources:AppResources.txtTake} {0}" />
+                                                        <Binding Path="Qty" StringFormat="{x:Static resources:AppResources.txtTake, '{0}'}" />
                                                         <Binding Path="BindingContext.SelectedUnit" Source="{x:Reference thisPage}" />
 
                                                     </MultiBinding>

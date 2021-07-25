@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com" xmlns:converters="clr-namespace:FormsLoyalty.Converters" xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="FormsLoyalty.Views.SocialMediaLogin"
+             BackgroundColor="#40FFFAFA"
+             Visual="Material">
+
+    <AbsoluteLayout BackgroundColor="WhiteSmoke">
+        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All"
+                    Padding="20">
+
+            <ScrollView.Triggers>
+                <DataTrigger TargetType="ScrollView" Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="Opacity" Value="0.5"/>
+                    <Setter Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+            </ScrollView.Triggers>
+
+            
+           <controls:LoginView x:Name="loginView" Grid.Row="0" Margin="0,50,0,0"/>
+
+
+        </ScrollView>
+
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+               AbsoluteLayout.LayoutFlags="All" IsVisible="False">
+            <controls:LoadingView.Triggers>
+                <DataTrigger TargetType="controls:LoadingView"
+                             Binding="{Binding IsPageEnabled}"
+                             Value="true">
+                    <Setter Property="IsVisible" Value="True"/>
+
+                </DataTrigger>
+            </controls:LoadingView.Triggers>
+
+        </controls:LoadingView>
+    </AbsoluteLayout>
+
+
+</ContentPage>

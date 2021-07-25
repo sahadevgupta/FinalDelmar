@@ -75,6 +75,35 @@
            FontSize="Body"
             />-->
 
+        <Label Padding="10,0,10,0">
+            <Label.Triggers>
+                <DataTrigger TargetType="Label" Binding="{Binding selectedAddress.LineNO}"
+                             Value="0">
+                    <Setter Property="IsVisible" Value="false"/>
+                </DataTrigger>
+            </Label.Triggers>
+
+            <Label.FormattedText>
+                <FormattedString>
+                    <Span Text="{x:Static resources:AppResources.txtNote}" TextColor="Red"/>
+                   
+                    <Span Text=" All address fields are disabled as you have not allowed to making any changes."/>
+                    <Span  Text="&#10;"/>
+                    <Span Text="Kindly choose new address option to enter the address or update your profile"/>
+                </FormattedString>
+            </Label.FormattedText>
+            
+        </Label>
+
+        <StackLayout IsEnabled="False" x:Name="addressStack">
+            <StackLayout.Triggers>
+                <DataTrigger TargetType="StackLayout" Binding="{Binding selectedAddress.LineNO}"
+                             Value="0">
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>
+            </StackLayout.Triggers>
+
+
             <material:MaterialTextField Placeholder="{x:Static resources:AppResources.CheckoutViewName}" 
                                         Margin="5,0,5,0"
                                         x:Name="userName"
@@ -84,41 +113,44 @@
                                         HasError="{Binding IsNameErrorVisible}"
                                         HelperTextColor="Red"
                                         ErrorText="Error Text" 
-                                        InputType="Default" />
+                                        InputType="Default" 
+                                    />
 
 
 
-        <controls:ExtendedPicker ItemsSource="{Binding Cities}" IsVisible="false"
+
+
+            <controls:ExtendedPicker ItemsSource="{Binding Cities}" IsVisible="false"
                                  DisplayMemberPath="{Binding City}"
                                  SelectedItem="{Binding SelectedCity}"
                                  TextColor="Black"
                                   Title="{x:Static resources:AppResources.AccountInformationViewCity}" />
 
-        <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" >
-            <controls:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
+            <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" >
+                <controls:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
                                        SelectedItem="{Binding SelectedCity}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
                                     TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
                                    Visual="Default"   />
-        </Frame>
+            </Frame>
 
 
-        <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True">
-            <controls:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
+            <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True">
+                <controls:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
                                        SelectedItem="{Binding SelectedArea}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.txtArea}" 
                                     TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
                                    Visual="Default">
-                <controls:CustomPicker.Triggers>
-                    <DataTrigger TargetType="controls:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"
+                    <controls:CustomPicker.Triggers>
+                        <DataTrigger TargetType="controls:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"
                                      Value="null">
-                        <Setter Property="IsEnabled" Value="False"/>
+                            <Setter Property="IsEnabled" Value="False"/>
 
-                    </DataTrigger>
-                </controls:CustomPicker.Triggers>
+                        </DataTrigger>
+                    </controls:CustomPicker.Triggers>
 
-            </controls:CustomPicker>
-        </Frame>
+                </controls:CustomPicker>
+            </Frame>
 
 
             <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtNumber}" 
@@ -130,7 +162,7 @@
                                         Margin="5,0,5,0"
                                         ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
                                         InputType="Chat" />
-            
+
             <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtStreet}" 
                                         AlwaysShowUnderline="True"
                                         BackgroundColor="White"
@@ -162,7 +194,7 @@
                                         ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
                                         InputType="Chat" />
 
-            
+        </StackLayout>
 
         <controls:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.CheckoutViewPaymentOptions}"
                                        Margin="10,10,0,0"/>

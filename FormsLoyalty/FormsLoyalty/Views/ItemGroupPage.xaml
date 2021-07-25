@@ -35,7 +35,7 @@
                 </Image.Clip>
             </Image>
 
-            <Label Text="{Binding product.Description}"
+            <Label Text="{Binding Description}"
                    HorizontalOptions="Start"
                 VerticalTextAlignment="Center"
                CharacterSpacing="2"
@@ -45,7 +45,7 @@
                 <Label.Triggers>
                 <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                          Value="true">
-                        <Setter Property="Text" Value="{Binding product.ArabicDescription}"/>
+                        <Setter Property="Text" Value="{Binding ArabicDescription}"/>
                 </DataTrigger>
                 </Label.Triggers>
             </Label>
@@ -80,6 +80,9 @@
             <Frame x:Name="searchView" Grid.Row="0" CornerRadius="{OnPlatform Android=30, iOS=25}" Padding="0" Margin="10"
                    BackgroundColor="White" BorderColor="#33BDC3C7"
                    Visual="Material">
+
+                
+                
                 <SearchBar HeightRequest="40" Placeholder="{x:Static resources:AppResources.txtItemSearch}" FontSize="Body" Text="{Binding SearchText}"/>
             </Frame>
 

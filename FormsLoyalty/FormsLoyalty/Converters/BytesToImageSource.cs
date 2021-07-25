@@ -12,7 +12,8 @@ namespace FormsLoyalty.Converters
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             ImageSource imgSource = null;
-
+          
+            //var context = (type as ImageSource).BindingContext;
             if (value == null)
             {
                 return null;
@@ -22,15 +23,32 @@ namespace FormsLoyalty.Converters
 
             if (value is string img)
             {
-
+                
                 if ( img.Contains("noimage"))
                 {
                     imgSource = ImageSource.FromFile("noimage.png");
                 }
                 else
                 {
-                    byte[] Base64Stream = System.Convert.FromBase64String(img);
-                    imgSource = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
+                    try
+                    {
+                        Span<byte> buffer = new Span<byte>(new byte[img.Length]);
+                        var IsBase64 = System.Convert.TryFromBase64String(img, buffer, out int bytesParsed);
+                        if (IsBase64)
+                        {
+                            byte[] Base64Stream = System.Convert.FromBase64String(img);
+                            imgSource = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
+                        }
+
+                       
+                    }
+                    catch (Exception)
+                    {
+
+                        
+                    }
+
+                    
                 }
                     
 

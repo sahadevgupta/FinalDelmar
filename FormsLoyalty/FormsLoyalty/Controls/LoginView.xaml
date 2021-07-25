@@ -3,8 +3,24 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:resources="clr-namespace:FormsLoyalty"
-             xmlns:prism="http://prismlibrary.com"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
              x:Class="FormsLoyalty.Controls.LoginView">
+
+
+    <ContentView.Resources>
+
+        <ResourceDictionary>
+
+            <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+
+            <Style TargetType="material:MaterialTextField">
+                <Setter Property="TintColor" Value="Blue"/>
+            </Style>
+        </ResourceDictionary>
+
+
+    </ContentView.Resources>
 
     <ContentView.Content>
         <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="10">

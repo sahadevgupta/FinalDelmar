@@ -108,7 +108,7 @@
                    TextColor="Black"
                    Text="{Binding selectedOffer.Details}"/>
 
-                    <Label Margin="10,20,0,0"
+                    <Label Margin="10,20,10,0"
                        TextColor="Black"
                        CharacterSpacing="2"
                            Text="{x:Static resources:AppResources.OfferRelatedItems}"

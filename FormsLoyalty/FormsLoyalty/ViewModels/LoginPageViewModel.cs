@@ -4,6 +4,7 @@ using FormsLoyalty.Models;
 using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Utils;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using Plugin.FacebookClient;
@@ -240,8 +241,9 @@ namespace FormsLoyalty.ViewModels
             }
             catch (Exception ex)
             {
-                await MaterialDialog.Instance.SnackbarAsync(message: ex.ToString(),
-                                           msDuration: MaterialSnackbar.DurationLong);
+                Crashes.TrackError(ex);
+                //await MaterialDialog.Instance.SnackbarAsync(message: ex.ToString(),
+                //                           msDuration: MaterialSnackbar.DurationLong);
                 Debug.WriteLine(ex.ToString());
             }
         }
@@ -368,11 +370,11 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
             if (fbProfile != null && isFbLogin)
             {
-                await NavigationService.NavigateAsync(nameof(SignUpPage), new NavigationParameters { { "fb", fbProfile } });
+                await NavigationService.NavigateAsync(nameof(FormsLoyalty.Views.SocialMediaLogin), new NavigationParameters { { "fb", fbProfile } });
             }
             else if(GoogleProfile !=null)
             {
-                await NavigationService.NavigateAsync(nameof(SignUpPage), new NavigationParameters { { "google", GoogleProfile } });
+                await NavigationService.NavigateAsync(nameof(FormsLoyalty.Views.SocialMediaLogin), new NavigationParameters { { "google", GoogleProfile } });
             }
 
 

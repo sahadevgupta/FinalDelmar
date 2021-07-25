@@ -36,7 +36,7 @@
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" BackgroundColor="White" Padding="15"
                   xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
                            xct:TouchEffect.PressedBackgroundColor="LightPink"
-                           xct:TouchEffect.NormalBackgroundColor="Transparent">
+                           xct:TouchEffect.NormalBackgroundColor="White">
 
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Profile_Tapped" CommandParameter="Profile"/>

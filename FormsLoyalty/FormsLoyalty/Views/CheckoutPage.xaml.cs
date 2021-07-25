@@ -29,12 +29,30 @@ namespace FormsLoyalty.Views
            // (this.Parent.Parent as HomeMasterDetailPage).ToolbarItems
           
         }
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+        }
         protected override void OnBindingContextChanged()
         {
             base.OnBindingContextChanged();
             
         }
 
-        
+        protected override bool OnBackButtonPressed()
+        {
+            
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                var result = await this.DisplayAlert("Alert!", AppResources.txtExist, AppResources.ApplicationYes, AppResources.ApplicationNo);
+                if (result)
+                {
+                    MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "RegisterHardwareBackPressed");
+                    await Navigation.PopAsync();
+                }// or anything else
+            });
+            return true;
+        }
+
     }
 }

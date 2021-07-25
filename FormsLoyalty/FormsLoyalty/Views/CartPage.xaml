@@ -171,9 +171,9 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="Total : " TextColor="Silver"/>
-                                                    <Span Text="{Binding PriceWithoutDiscount,StringFormat='{0:F2}',Mode=OneWay}" TextDecorations="Strikethrough" TextColor="Black"/>
+                                                    <Span Text="{Binding PriceWithoutDiscount,StringFormat='{0:F2}',Mode=OneWay}" TextDecorations="Strikethrough" TextColor="IndianRed"/>
                                                     <Span Text=" "/>
-                                                    <Span Text="{Binding PriceWithDiscount,StringFormat=' {0:F2}',Mode=OneWay}" TextColor="Black"
+                                                    <Span Text="{Binding PriceWithDiscount,StringFormat=' {0:F2}',Mode=OneWay}" FontAttributes="Bold" TextColor="Black"
                                                       FontSize="Body"/>
                                                     <Span Text="{Binding DiscountPercent,StringFormat=' ({0:F2} % Off)',Mode=OneWay}" TextColor="Red" />
                                                 </FormattedString>

@@ -171,7 +171,7 @@
                                                 <Label.Text>
                                                     <MultiBinding StringFormat="{}{0} {1}">
 
-                                                        <Binding Path="DoseQty" StringFormat="Take {0}"/>
+                                                        <Binding Path="DoseQty" StringFormat="{x:Static resources:AppResources.txtTake, '{0}'}" />
                                                         <Binding Path="unit"/>
                                                     </MultiBinding>
                                                 </Label.Text>

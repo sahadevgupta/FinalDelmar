@@ -114,7 +114,11 @@ namespace FormsLoyalty.ViewModels
         }
         private async Task GoToCheckOutPage()
         {
+            if (IsPageEnabled)
+                return;
+            IsPageEnabled = true;
            await NavigationService.NavigateAsync("CheckoutPage");
+            IsPageEnabled = false;
         }
 
         internal async Task<int> OnQtyChanged(Basket basket,decimal Qty)

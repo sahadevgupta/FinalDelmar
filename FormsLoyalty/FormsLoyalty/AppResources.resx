@@ -310,7 +310,7 @@
     <value>User name cannot be empty</value>
   </data>
   <data name="AccountViewUserNameExists" xml:space="preserve">
-    <value>This user name is already in use.\nPlease select another user name.</value>
+    <value>This Phone no already exist. Please use another Phone no.</value>
   </data>
   <data name="AccountViewUserNameInvalid" xml:space="preserve">
     <value>Please enter a valid user name.</value>
@@ -1420,6 +1420,9 @@
   <data name="txtEvery day" xml:space="preserve">
     <value>Every day</value>
   </data>
+  <data name="txtExist" xml:space="preserve">
+    <value>Are you sure you want to exit from this page?</value>
+  </data>
   <data name="txtExpired" xml:space="preserve">
     <value>Expired</value>
   </data>
@@ -1643,7 +1646,7 @@
     <value>Sun</value>
   </data>
   <data name="txtTake" xml:space="preserve">
-    <value>يؤخذ</value>
+    <value>Take: {0}</value>
   </data>
   <data name="txtThrusday" xml:space="preserve">
     <value>Thu</value>

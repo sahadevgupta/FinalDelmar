@@ -637,7 +637,7 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to This user name is already in use.\nPlease select another user name..
+        ///   Looks up a localized string similar to This Phone no already exist. Please use another Phone no..
         /// </summary>
         public static string AccountViewUserNameExists {
             get {
@@ -3968,6 +3968,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to exit from this page?.
+        /// </summary>
+        public static string txtExist {
+            get {
+                return ResourceManager.GetString("txtExist", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Expired.
         /// </summary>
         public static string txtExpired {
@@ -4634,7 +4643,7 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to يؤخذ.
+        ///   Looks up a localized string similar to Take: {0}.
         /// </summary>
         public static string txtTake {
             get {

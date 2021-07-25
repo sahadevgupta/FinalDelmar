@@ -38,6 +38,8 @@ namespace FormsLoyalty.ViewModels
 
         public string Otp { get; private set; }
 
+        private FacebookProfile fbProfile;
+        private GoogleProfile googleProfile;
         private int _TimerCount;
         public int TimerCount
         {
@@ -165,13 +167,53 @@ namespace FormsLoyalty.ViewModels
                         var response = await _commonModel.VerifyPhoneAsync(MobileNumber);
                         if (response==null)
                         {
-                            await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}",new NavigationParameters { {"number", MobileNumber } });
+                            var navParam = new NavigationParameters();
+                            navParam.Add("number", MobileNumber);
+
+                            if (fbProfile != null)
+                            {
+                                navParam.Add("fb", fbProfile);
+                            }
+                            else if (googleProfile != null)
+                            {
+                                navParam.Add("google", googleProfile);
+                            }
+                          
+                            await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}", navParam);
                         }
                         else if(!string.IsNullOrEmpty(response.Id))
                         {
                             if (response.Cards.Any())
                             {
                                 GoToMainScreen();
+                                
+
+                                if(fbProfile != null)
+                                {
+                                    Task.Run(async() =>
+                                    {
+                                        response.FacebookID = fbProfile.Id;
+                                        response.UserName = MobileNumber;
+                                        response.FirstName = string.IsNullOrEmpty(response.FirstName) ? fbProfile.FirstName : response.FirstName;
+                                        response.LastName = string.IsNullOrEmpty(response.LastName) ? fbProfile.LastName : response.LastName ;
+                                        AppData.Device.UserLoggedOnToDevice = response;
+                                        await new MemberContactModel().UpdateMemberContact(response);
+                                    });
+                                    
+                                }
+                                else if (googleProfile != null)
+                                {
+                                    Task.Run(async () =>
+                                    {
+                                        response.GoogleID = googleProfile.Id;
+                                        response.UserName = MobileNumber;
+                                        response.FirstName = string.IsNullOrEmpty(response.FirstName) ? googleProfile.FirstName : response.FirstName;
+                                        response.LastName = string.IsNullOrEmpty(response.LastName) ? googleProfile.LastName : response.LastName;
+                                        AppData.Device.UserLoggedOnToDevice = response;
+                                        await new MemberContactModel().UpdateMemberContact(response);
+                                    });
+                                }
+
                             }
                             else
                                 await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}", new NavigationParameters { { "edit", true } });
@@ -242,6 +284,8 @@ namespace FormsLoyalty.ViewModels
             FromItemPage = parameters.GetValue<bool>("itemPage");
             MobileNumber = parameters.GetValue<string>("number");
             Otp = parameters.GetValue<string>("otp");
+            fbProfile = parameters.GetValue<FacebookProfile>("fb");
+            googleProfile = parameters.GetValue<GoogleProfile>("google");
         }
     }
 }

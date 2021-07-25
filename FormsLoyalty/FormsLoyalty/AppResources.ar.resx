@@ -1419,6 +1419,9 @@
   <data name="txtEvery day" xml:space="preserve">
     <value>كل يوم</value>
   </data>
+  <data name="txtExist" xml:space="preserve">
+    <value>هل حقا تريد الخروج؟</value>
+  </data>
   <data name="txtExpired" xml:space="preserve">
     <value>منتهي الصلاحية</value>
   </data>
@@ -1642,7 +1645,7 @@
     <value>الأحد</value>
   </data>
   <data name="txtTake" xml:space="preserve">
-    <value>يؤخذ</value>
+    <value>يؤخذ: {0}</value>
   </data>
   <data name="txtThrusday" xml:space="preserve">
     <value>الخميس</value>

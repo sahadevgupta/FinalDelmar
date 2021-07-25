@@ -21,6 +21,8 @@ namespace FormsLoyalty.Views.CheckoutStepperView
             _viewModel = viewmodel;
         }
 
+       
+
         private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
 

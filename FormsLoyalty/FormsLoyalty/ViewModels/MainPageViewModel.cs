@@ -11,6 +11,7 @@ using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
 using LSRetail.Omni.Domain.Services.Base.Loyalty;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Shared;
 using Microsoft.AppCenter.Crashes;
+using Prism.Commands;
 using Prism.Navigation;
 using Prism.Services;
 using System;
@@ -125,6 +126,9 @@ namespace FormsLoyalty.ViewModels
         public bool CanNavigate;
         public bool IsUploadBtnClicked;
 
+        #region Commands
+        public DelegateCommand<Advertisement> OnAdTappedCommand { get; set; }
+        #endregion
 
         public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
@@ -141,13 +145,57 @@ namespace FormsLoyalty.ViewModels
 
             DependencyService.Get<INotify>().ChangeTabBarFlowDirection(RTL);
 
+            OnAdTappedCommand = new DelegateCommand<Advertisement>(async(data) => await OnAdSelected(data));
+
+        }
+
+        private async Task OnAdSelected(Advertisement data)
+        {
+            IsPageEnabled = true;
+            switch (data.AdsType)
+            {
+                case AdsType.Item:
+
+                    await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "itemId", data.AppValue } });
+
+                    break;
+                case AdsType.Offer:
+
+                    var offer = AppData.Device.UserLoggedOnToDevice.PublishedOffers.FirstOrDefault(x => x.Id == data.AppValue);
+                    if(offer !=null)
+                    {
+                      
+                        await NavigationService.NavigateAsync(nameof(OfferDetailsPage), new NavigationParameters { { "offer", offer } });
+                        
+                    }
+                    break;
+                case AdsType.Magazine:
+                       await Launcher.TryOpenAsync(new Uri(data.AppValue));
+                    break;
+                case AdsType.Search:
+                    var result = data.AppValue.Split(',');
+
+                    
+
+                    var items = await itemModel.GetItemsByPage(7, 1, result[0], result[1], result[2], false, string.Empty);
+                    if (items.Any())
+                    {
+                        await NavigationService.NavigateAsync(nameof(ItemGroupPage), new NavigationParameters { { "items", items } });
+
+                    }
+
+                    break;
+                default:
+                    break;
+            }
+            IsPageEnabled = false;
         }
 
         private void LoadPoints()
         {
             if (AppData.IsLoggedIn)
             {
-                if (AppData.Device.UserLoggedOnToDevice.Account != null)
+                if (AppData.Device.UserLoggedOnToDevice?.Account != null)
                 {
                     MyPoints = $"{AppData.Device.UserLoggedOnToDevice.Account.PointBalance.ToString("N0")} {AppResources.txtpoints}";
                 }
@@ -476,7 +524,8 @@ namespace FormsLoyalty.ViewModels
                             var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(110, 110));
                             item.Images[0].Image = imgView.Image;
                         }
-                       
+                        else
+                            item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
                     }
                 });
             }
@@ -602,7 +651,8 @@ namespace FormsLoyalty.ViewModels
                             var imageView = await ImageHelper.GetImageById(offer.Images[0].Id, new ImageSize(396, 396));
                             offer.Images[0].Image = imageView.Image;
                         }
-                        
+                        else
+                            offer.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
                     }
                 });
             }
@@ -939,8 +989,12 @@ namespace FormsLoyalty.ViewModels
                     {
                         foreach (var ad in advertisements)
                         {
-                            var imgview = await ImageHelper.GetImageById(ad.ImageView.Id, new ImageSize(500, 500));
-                            ad.ImageView.Image = imgview.Image;
+                            if (ad.ImageView != null)
+                            {
+                                var imgview = await ImageHelper.GetImageById(ad.ImageView.Id, new ImageSize(500, 500));
+                                ad.ImageView.Image = imgview.Image;
+                            }
+                           
                         }
 
                     });

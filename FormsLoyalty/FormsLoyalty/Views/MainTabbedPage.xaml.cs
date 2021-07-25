@@ -97,7 +97,22 @@ namespace FormsLoyalty.Views
 
             if (Page.CurrentPage != Page.RootPage)
             {
-                Page.CurrentPage.Navigation.PopAsync();
+                if (selectedTabIndex == 2)
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                        var result = await this.DisplayAlert("Alert!", AppResources.txtExist, AppResources.ApplicationYes, AppResources.ApplicationNo);
+                        if (result)
+                        {
+                            await Page.CurrentPage.Navigation.PopAsync();
+                        }// or anything else
+                    });
+                }
+                else
+                {
+                    Page.CurrentPage.Navigation.PopAsync();
+                }
+                
                 return true;
             }
 

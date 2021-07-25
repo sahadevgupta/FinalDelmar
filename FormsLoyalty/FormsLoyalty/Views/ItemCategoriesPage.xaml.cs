@@ -22,7 +22,10 @@ namespace FormsLoyalty.Views
             base.OnAppearing();
         }
 
-
+        protected override bool OnBackButtonPressed()
+        {
+            return base.OnBackButtonPressed();
+        }
         private async void Product_Tapped(object sender, System.EventArgs e)
         {
             var view = (Frame)sender;

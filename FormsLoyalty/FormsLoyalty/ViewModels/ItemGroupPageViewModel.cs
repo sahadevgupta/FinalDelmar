@@ -101,6 +101,40 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _isNoItemFound, value); }
         }
 
+
+        private string _itemCategoryId;
+        public string ItemCategoryId
+        {
+            get { return _itemCategoryId; }
+            set { SetProperty(ref _itemCategoryId, value); }
+        }
+        private string _productGroupId;
+        public string ProductGroupId
+        {
+            get { return _productGroupId; }
+            set { SetProperty(ref _productGroupId, value); }
+        }
+        private string _description;
+        public string Description
+        {
+            get { return _description; }
+            set { SetProperty(ref _description, value); }
+        }
+
+        private string _arabicDescription;
+        public string ArabicDescription
+        {
+            get { return _arabicDescription; }
+            set { SetProperty(ref _arabicDescription, value); }
+        }
+
+        private string _image;
+        public string Image
+        {
+            get { return _image; }
+            set { SetProperty(ref _image, value); }
+        }
+
         Timer timer;
 
 
@@ -108,6 +142,7 @@ namespace FormsLoyalty.ViewModels
         private int pageNumber = 1;
 
         ItemModel itemModel;
+        private List<LoyItem> LoyItems;
        
         public ItemGroupPageViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -140,12 +175,28 @@ namespace FormsLoyalty.ViewModels
                 IsPageEnabled = true;
                 if (!string.IsNullOrEmpty(s_word))
                 {
-                    var items = await itemModel.GetItemsByPage(10, 1, string.Empty, string.Empty, s_word, false, string.Empty);
-                    Items = new ObservableCollection<LoyItem>(items);
+                    var items = await itemModel.GetItemsByPage(10, 1, ItemCategoryId, ProductGroupId, s_word, false, string.Empty);
+                    Items = new ObservableCollection<LoyItem>();
                    
-                    if (Items.Any())
+                    if (items.Any())
                     {
                         IsNoItemFound = false;
+
+                        foreach (var loyItem in items)
+                        {
+                            if (loyItem.Prices.Count > 0)
+                            {
+                                loyItem.Price = loyItem.PriceFromVariantsAndUOM(loyItem.SelectedVariant?.Id, loyItem.SelectedUnitOfMeasure?.Id);
+                                if (loyItem.Discount > 0)
+                                {
+                                    var discountedPrice = (loyItem.Discount / 100) * Convert.ToDecimal(loyItem.Price);
+                                    loyItem.NewPrice = (Convert.ToDecimal(loyItem.Price) - discountedPrice).ToString("F", CultureInfo.InvariantCulture);
+                                }
+                            }
+                            Items.Add(loyItem);
+
+                        }
+                        //TempList.ToList().AddRange(items);
                         LoadItemImage();
                     }
                        
@@ -160,7 +211,63 @@ namespace FormsLoyalty.ViewModels
             });
         }
         #endregion
-          internal async Task NavigateToItemPage(LoyItem loyItem)
+
+
+        #region Image Function
+        private void LoadItemImage()
+        {
+            try
+            {
+                Task.Run(async () =>
+                {
+                    foreach (var item in Items)
+                    {
+
+                        if (AppData.Basket != null)
+                        {
+                            var isExist = AppData.Basket.Items?.Any(x => x.ItemId == item.Id);
+                            if (isExist == true)
+                            {
+                                var basketItem = AppData.Basket.Items.FirstOrDefault(x => x.ItemId == item.Id);
+                                item.Quantity = basketItem.Quantity;
+                            }
+                            else
+                                item.Quantity = 0;
+                        }
+
+                        if (item.Images.Count > 0)
+                        {
+                            if (string.IsNullOrEmpty(item.Images[0].Image))
+                            {
+                                var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
+                                if (imgView == null)
+                                {
+                                    item.Images[0].Image = "noimage.png";
+                                }
+                                else
+                                    item.Images[0].Image = imgView.Image;
+                            }
+
+                        }
+                        //else
+                        //  item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
+
+                    }
+                });
+
+            }
+            catch (Exception)
+            {
+
+
+            }
+        }
+
+        
+
+        #endregion
+
+        internal async Task NavigateToItemPage(LoyItem loyItem)
         {
             IsPageEnabled = true;
             await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "item", loyItem } });
@@ -307,63 +414,17 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        private void LoadItemImage()
-        {
-            try
-            {
-                Task.Run(async() =>
-                {
-                    foreach (var item in Items)
-                    {
 
-                        if (AppData.Basket != null)
-                        {
-                            var isExist = AppData.Basket.Items?.Any(x => x.ItemId == item.Id);
-                            if (isExist == true)
-                            {
-                                var basketItem = AppData.Basket.Items.FirstOrDefault(x => x.ItemId == item.Id);
-                                item.Quantity = basketItem.Quantity;
-                            }
-                            else
-                                item.Quantity = 0;
-                        }
-
-                        if (item.Images.Count > 0)
-                        {
-                            if (string.IsNullOrEmpty(item.Images[0].Image))
-                            {
-                                var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
-                                if (imgView == null)
-                                {
-                                    item.Images[0].Image = "noimage.png" ;
-                                }
-                                else
-                                item.Images[0].Image = imgView.Image;
-                            }
-                           
-                        }
-                        //else
-                          //  item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-                        
-                    }
-                });
-                
-            }
-            catch (Exception)
-            {
-
-                
-            }
-        }
 
         internal async Task LoadMore()
         {
-
             if (IsBusy)
                 return;
 
             IsBusy = true;
-            await LoadLoyItem();
+
+            await LoadLoyItem(ItemCategoryId, ProductGroupId);
+
             IsBusy = false;
         }
 
@@ -380,13 +441,13 @@ namespace FormsLoyalty.ViewModels
                 {
                     Items = new ObservableCollection<LoyItem>();
                     IsSortedDesc = true;
-                    await LoadLoyItem();
+                    await LoadLoyItem(ItemCategoryId, ProductGroupId);
                 }
                 else if(response.Equals(AppResources.txtLowHigh))
                 {
                     Items = new ObservableCollection<LoyItem>();
                     IsSortedDesc = false;
-                    await LoadLoyItem();
+                    await LoadLoyItem(ItemCategoryId, ProductGroupId);
                 }
             }
             else if (text.Equals("Z < A"))
@@ -394,14 +455,14 @@ namespace FormsLoyalty.ViewModels
                 Items = new ObservableCollection<LoyItem>();
                 SelectedSortOption = "name";
                 IsSortedDesc = true;
-                await LoadLoyItem();
+                await LoadLoyItem(ItemCategoryId, ProductGroupId);
             }
             else
             {
                 Items = new ObservableCollection<LoyItem>();
                 SelectedSortOption = "name";
                 IsSortedDesc = false;
-                await LoadLoyItem();
+                await LoadLoyItem(ItemCategoryId, ProductGroupId);
             }
         }
 
@@ -415,7 +476,7 @@ namespace FormsLoyalty.ViewModels
             try
             {
 
-                if (product.Items.Count > 0)
+                if (product?.Items.Count > 0)
                 {
                     CalculateItemPrice(product.Items);
 
@@ -424,7 +485,7 @@ namespace FormsLoyalty.ViewModels
 
                 else 
                 {
-                    await LoadLoyItem();
+                    await LoadLoyItem(ItemCategoryId,ProductGroupId);
                 } 
              
                 
@@ -460,7 +521,7 @@ namespace FormsLoyalty.ViewModels
             TempList = new ObservableCollection<LoyItem>(Items);
         }
 
-        public async Task LoadLoyItem()
+        public async Task LoadLoyItem(string ItemCategoryId,string productGroupId)
         {
             IsNoItemFound = false;
             if (Items.Count % pageSize == 0)
@@ -475,7 +536,7 @@ namespace FormsLoyalty.ViewModels
                 pageNumber = Convert.ToInt32(num);
 
 
-                var items = await itemModel.GetItemsByPage(pageSize, pageNumber, product.ItemCategoryId, product.Id, string.Empty,IsSortedDesc,SelectedSortOption);
+                var items = await itemModel.GetItemsByPage(pageSize, pageNumber, ItemCategoryId, productGroupId, string.Empty,IsSortedDesc,SelectedSortOption);
                 if (items.Any())
                 {
                     IsNoItemFound = false;
@@ -484,7 +545,8 @@ namespace FormsLoyalty.ViewModels
                 else
                     IsNoItemFound = true;
                 LoadItemImage();
-                product.Items = Items.ToList();
+                if(product!=null)
+                   product.Items = Items.ToList();
             }
         }
 
@@ -492,8 +554,28 @@ namespace FormsLoyalty.ViewModels
         {
             base.Initialize(parameters);
             SortingOptions = new ObservableCollection<string> { AppResources.txtPrice, "A > Z", "Z < A" };
-            product = parameters.GetValue<ProductGroup>("prodGroup");
-            await LoadNextItems();
+
+            if (parameters.TryGetValue<List<LoyItem>>("items",out List<LoyItem> items))
+            {
+                LoyItems = items;
+                ItemCategoryId = LoyItems[0].ItemFamilyCode;
+                ProductGroupId = LoyItems[0].ProductGroupId;
+                Description = LoyItems[0].ProductGroupId;
+                ArabicDescription = string.Empty;
+                CalculateItemPrice(items);
+
+                LoadItemImage();
+            }
+            else
+            {
+                product = parameters.GetValue<ProductGroup>("prodGroup");
+                ItemCategoryId = product.ItemCategoryId;
+                ProductGroupId = product.Id;
+                Description = product.Description;
+                ArabicDescription = product.ArabicDescription;
+                await LoadNextItems();
+            }
+            
            
         }
         
