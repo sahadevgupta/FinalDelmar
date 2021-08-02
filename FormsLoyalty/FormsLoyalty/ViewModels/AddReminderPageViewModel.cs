@@ -17,6 +17,14 @@ namespace FormsLoyalty.ViewModels
     public class AddReminderPageViewModel : ViewModelBase
     {
         private MedicineReminder _medicineReminder;
+
+        private bool _isEdit;
+        public bool IsEdit
+        {
+            get { return _isEdit; }
+            set { SetProperty(ref _isEdit, value); }
+        }
+        
         public MedicineReminder medicineReminder
         {
             get { return _medicineReminder; }
@@ -83,7 +91,12 @@ namespace FormsLoyalty.ViewModels
 
             };
 
-            
+            DoseFrequencies = new List<string>
+            {
+                AppResources.txtReminderList1,
+                AppResources.txtReminderList2,
+                AppResources.txtReminderList3
+            };
 
             medicineReminder = new MedicineReminder { Frequency = 1, From = DateTime.UtcNow.Date, AllDay = true, IsReminder = true };
         }
@@ -117,23 +130,33 @@ namespace FormsLoyalty.ViewModels
         internal void AddMedicineScheduleAndReminder()
         {
             IsPageEnabled = true;
+
             try
             {
-                medicineReminder.ID = Guid.NewGuid().ToString();
                 medicineReminder.unit = SelectedUnit;
+                if (IsEdit)
+                {
+                    _reminderRepo.DeleteAllNotification(frequencies);
+                    _reminderRepo.UpdateReminder(medicineReminder, frequencies.ToList());
+                }
+                else
+                {
 
-                frequencies.ToList().ForEach(x => x.MedicineReminderId = medicineReminder.ID);
+                    medicineReminder.ID = Guid.NewGuid().ToString();
+                   
+                    frequencies.ToList().ForEach(x => x.MedicineReminderId = medicineReminder.ID);
 
-                _reminderRepo.AddReminder(medicineReminder, frequencies.ToList());
+                    _reminderRepo.AddReminder(medicineReminder, frequencies.ToList());
+                }
 
                 if (medicineReminder.IsReminder)
                 {
                     foreach (var item in frequencies)
                     {
                         var random = new Random();
-                        int no = random.Next();
+                        item.NotificationId = random.Next();
 
-                        DependencyService.Get<INotify>().SetReminder(medicineReminder.EventName, $"Hi! It's time to take your {SelectedUnit}", no, item.Time, medicineReminder.From, medicineReminder.SpecificDays);
+                        DependencyService.Get<INotify>().SetReminder(medicineReminder.EventName, $"Hi! It's time to take your {SelectedUnit}", item.NotificationId, item.Time, medicineReminder.From, medicineReminder.SpecificDays);
                     }
                 }
                 NavigationService.GoBackAsync();
@@ -159,12 +182,7 @@ namespace FormsLoyalty.ViewModels
             SelectedUnit = Units.First();
 
             //frequencies = new ObservableCollection<FrequencyTime> { new FrequencyTime { Id = Guid.NewGuid().ToString() } };
-            DoseFrequencies = new List<string>
-            {
-                AppResources.txtReminderList1,
-                AppResources.txtReminderList2,
-                AppResources.txtReminderList3
-            };
+            
             SelectedFreqIndex = DoseFrequencies.Count;
         }
 
@@ -173,10 +191,13 @@ namespace FormsLoyalty.ViewModels
             base.Initialize(parameters);
             if (parameters.TryGetValue("reminder",out MedicineReminder reminder))
             {
+                IsEdit = true;
                 medicineReminder = reminder;
                 frequencies = new ObservableCollection<FrequencyTime>(reminder.FrequencyTimes);
-                SelectedUnit = reminder.unit;
-                
+                SelectedUnit = Units.First(x=> x.Equals(reminder.unit));
+                SelectedFreqIndex = DoseFrequencies.IndexOf(  DoseFrequencies[frequencies.Count - 1]);
+
+
             }
             else
               LoadData();

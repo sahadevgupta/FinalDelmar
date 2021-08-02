@@ -7,23 +7,22 @@
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
-             xmlns:mat="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              xmlns:resources="clr-namespace:FormsLoyalty"
             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              BackgroundColor="#33b6b6b6"
              x:Name="thisPage"
              Visual="Material"
              Title="{x:Static resources:AppResources.txtAddReminder}">
+
     <ContentPage.Triggers>
-
-        <DataTrigger TargetType="ContentPage"
-                             Binding="{Binding IsPageEnabled}"
-                             Value="true">
-            <Setter Property="BackgroundColor" Value="White"/>
-
-
+        <DataTrigger TargetType="ContentPage" Binding="{Binding IsEdit}" Value="true">
+            
+            <Setter Property="Title" Value="{x:Static resources:AppResources.UpdateReminder}"/>
         </DataTrigger>
     </ContentPage.Triggers>
+    
 
     <ContentPage.Resources>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
@@ -212,7 +211,9 @@
                         </xct:Expander.Header>
                         <Grid Padding="10" ColumnDefinitions="Auto,*" RowDefinitions="Auto,0.5,Auto,Auto">
                             <Label Text="{x:Static resources:AppResources.txtStartDate}" FontAttributes="Bold" TextColor="Black" VerticalOptions="Center" HorizontalOptions="Start"/>
-                            <DatePicker Grid.Column="1" Date="{Binding medicineReminder.From}" Format="dd MMMM" Visual="Default" HorizontalOptions="Start"/>
+                            <DatePicker Grid.Column="1" Date="{Binding medicineReminder.From}" Format="dd MMMM" Visual="Default" 
+                                        MinimumDate="{x:Static sys:DateTime.Today}"
+                                        HorizontalOptions="Start"/>
                             <BoxView HeightRequest="0.5" Grid.Row="1" Grid.ColumnSpan="2" BackgroundColor="Silver" HorizontalOptions="FillAndExpand"/>
 
                             <StackLayout Grid.Row="2" Grid.ColumnSpan="2">

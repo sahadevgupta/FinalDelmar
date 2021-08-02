@@ -98,13 +98,13 @@ namespace FormsLoyalty.ViewModels
 
             templist = new List<ReminderDate>();
 
-            var a = GetDates(DateTime.Now.Year, DateTime.Now.Month);
-            foreach (var item in a)
+            var datetimes = GetDates(DateTime.Now.Year, DateTime.Now.Month);
+            foreach (var item in datetimes)
             {
                 var reminder = new ReminderDate();
                 reminder.day = item.Day;
                 reminder.DayofWeek = item.DayOfWeek.ToString().Substring(0, 3);
-
+                reminder.DateTime = item;
                 if (DateTime.Now.Day == item.Day)
                 {
                     reminder.IsSelected = true;
@@ -214,6 +214,8 @@ namespace FormsLoyalty.ViewModels
             get { return _isSelected; }
             set { SetProperty(ref _isSelected, value); }
         }
+
+        public DateTime DateTime { get; set; }
     }
 
     

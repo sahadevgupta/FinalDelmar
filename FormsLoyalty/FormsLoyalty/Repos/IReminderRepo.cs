@@ -13,5 +13,8 @@ namespace FormsLoyalty.Repos
         List<MedicineReminder> GetReminder(ReminderDate date);
         TableQuery<MedicineReminder> GetTable();
         void UpdateReminder(MedicineReminder medicineReminder, List<FrequencyTime> frequencies);
+        void DeleteAllNotification(System.Collections.ObjectModel.ObservableCollection<FrequencyTime> frequencies);
+
+        void DeleteNotification(int notificationId);
     }
 }

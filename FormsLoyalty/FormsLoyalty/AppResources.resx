@@ -412,7 +412,7 @@
     <value>Added to basket</value>
   </data>
   <data name="ApplicationAddToBasket" xml:space="preserve">
-    <value>Add to basket</value>
+    <value>Add To Cart</value>
   </data>
   <data name="ApplicationAddToWishList" xml:space="preserve">
     <value>Add to wish list</value>
@@ -1680,6 +1680,9 @@
   </data>
   <data name="txtWeWillShare" xml:space="preserve">
     <value>We will share you the</value>
+  </data>
+  <data name="UpdateReminder" xml:space="preserve">
+    <value>Update Reminder</value>
   </data>
   <data name="WelcomeViewLoginButtonText" xml:space="preserve">
     <value>Logon</value>

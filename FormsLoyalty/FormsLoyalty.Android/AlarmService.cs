@@ -58,17 +58,29 @@ namespace FormsLoyalty.Droid
             
 
 
-            Intent broadcastIntent = new Intent(Xamarin.Essentials.Platform.CurrentActivity, typeof(AlarmReceiver));
+            Intent broadcastIntent = new Intent(Xamarin.Essentials.Platform.CurrentActivity, typeof(AlarmReceiver)).SetAction("localNotifierIntent" + notificatonId); ;
             broadcastIntent.PutExtra("title", title);
             broadcastIntent.PutExtra("message", message);
-            
 
-            Calendar setcalendar = Calendar.GetInstance(Java.Util.TimeZone.GetTimeZone("UTC"));
+
+            Calendar setcalendar = Calendar.Instance;
 
             //setcalendar.Set(CalendarField.)
             setcalendar.Set(CalendarField.HourOfDay, t.Hours);
             setcalendar.Set(CalendarField.Minute, t.Minutes);
             setcalendar.Set(CalendarField.Second, 0);
+
+
+            Calendar cal = Calendar.Instance;
+            int year = cal.Get(CalendarField.Year);
+            int month = cal.Get(CalendarField.Month);
+            int day = cal.Get(CalendarField.Date);
+
+            DateTime notificateDate = new DateTime(year, month, day).AddHours(t.Hours)
+                                                                     .AddMinutes(t.Minutes).AddSeconds(0);
+           
+
+            long triggerTime = GetNotifyTime(notificateDate);
 
             if (!string.IsNullOrEmpty(days))
             {
@@ -86,12 +98,24 @@ namespace FormsLoyalty.Droid
 
                 PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, 0, broadcastIntent, PendingIntentFlags.CancelCurrent);
                 AlarmManager am = (AlarmManager)GetSystemService(AlarmService);
-                am.SetInexactRepeating(AlarmType.RtcWakeup, setcalendar.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
+               // var interval = (long)TimeSpan.fro(Constant.One).TotalMilliseconds;
+                am.SetRepeating(AlarmType.RtcWakeup, triggerTime, AlarmManager.IntervalDay, pendingIntent);
             }
 
             return StartCommandResult.Sticky;
         }
+        private long GetNotifyTime(DateTime notifyTime)
+        {
+            int DefaultDay = 1;
+            int DefaultMonth = 1;
+            int DefaultYear = 1970;
+            int MinYear = 0001;
 
+            DateTime utcTime = TimeZoneInfo.ConvertTimeToUtc(notifyTime);
+            double epochDiff = (new DateTime(DefaultYear, DefaultMonth, DefaultDay) - DateTime.MinValue).TotalSeconds;
+            long utcAlarmTime = utcTime.AddSeconds(-epochDiff).Ticks / 10000;
+            return utcAlarmTime;
+        }
         private void SetForDayAlarm(int week,Calendar calSet,Intent broadcastIntent)
         {
             calSet.Set(CalendarField.DayOfWeek, week);

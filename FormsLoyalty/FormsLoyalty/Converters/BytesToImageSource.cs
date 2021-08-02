@@ -39,13 +39,14 @@ namespace FormsLoyalty.Converters
                             byte[] Base64Stream = System.Convert.FromBase64String(img);
                             imgSource = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
                         }
+                        else
+                            imgSource = ImageSource.FromFile("noimage.png");
 
-                       
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
 
-                        
+                        imgSource = ImageSource.FromFile("noimage.png");
                     }
 
                     

@@ -409,7 +409,7 @@
     <value>تم حذف المنتج</value>
   </data>
   <data name="ApplicationAddedToBasket" xml:space="preserve">
-    <value>اضيفت إلي السلة</value>
+    <value>إضافة إلى السلة</value>
   </data>
   <data name="ApplicationAddToBasket" xml:space="preserve">
     <value>اضف إلي السلة</value>
@@ -1679,6 +1679,9 @@
   </data>
   <data name="txtWeWillShare" xml:space="preserve">
     <value>سوف نشاركك فى</value>
+  </data>
+  <data name="UpdateReminder" xml:space="preserve">
+    <value>تذكير التحديث</value>
   </data>
   <data name="WelcomeViewLoginButtonText" xml:space="preserve">
     <value>تسجيل الدخول</value>

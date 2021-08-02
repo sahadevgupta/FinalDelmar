@@ -511,11 +511,12 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
             try
             {
+                
                 var item = await itemModel.GetItemByBarcode(barcode);
                 if (item == null)
                 {
-                   await NavigationService.GoBackAsync();
-                   await MaterialDialog.Instance.SnackbarAsync(AppResources.ItemModelItemNotFound);
+                    NavigationService.GoBackAsync();
+                  // await MaterialDialog.Instance.SnackbarAsync(AppResources.ItemModelItemNotFound);
                     return;
                 }
                 Item = item;

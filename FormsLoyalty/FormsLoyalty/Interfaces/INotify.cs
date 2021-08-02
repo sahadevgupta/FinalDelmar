@@ -17,6 +17,9 @@ namespace FormsLoyalty.Interfaces
 
         void SetReminder(string title, string body, int id, TimeSpan time, DateTime startDate, string days);
 
+        void DeleteReminderNotification(int notificationId);
+        void DeleteAllReminderNotification(List<int> notificationIds);
+
         void ChangeTabBarFlowDirection(bool rtl);
 
     }

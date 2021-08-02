@@ -13,7 +13,8 @@
              x:Class="FormsLoyalty.Views.ItemGroupPage"
              BackgroundColor="WhiteSmoke"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
-             xmlns:resources="clr-namespace:FormsLoyalty">
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             x:Name="thisPage">
 
     <NavigationPage.TitleView>
         <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
@@ -65,7 +66,7 @@
     <AbsoluteLayout>
         <Grid AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All"
-              RowDefinitions="Auto,Auto,*">
+              RowDefinitions="Auto,Auto,*,Auto">
 
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
@@ -177,13 +178,16 @@
 
             <CollectionView ItemsSource="{Binding Items}" 
                         Margin="10,0,10,0"
-                        SelectionMode="Single"
-                       x:Name="itemlist"
                         Grid.Row="2" 
-                            
-                        
+                            x:Name="itemList"
+                            VerticalScrollBarVisibility="Never"
                             Scrolled="collectionView_Scrolled">
 
+                <CollectionView.Triggers>
+                    <DataTrigger TargetType="CollectionView" Binding="{Binding Items.Count}" Value="0">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </CollectionView.Triggers>
                 
                 
                 <CollectionView.ItemsLayout>
@@ -365,15 +369,21 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
-                <CollectionView.Footer>
-                    <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource My_Header_Color}" Visual="Material"/>
-
-
-                </CollectionView.Footer>
+               
 
 
             </CollectionView>
 
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource My_Header_Color}" Visual="Material"
+                                Grid.Row="3" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
+                <ActivityIndicator.Triggers>
+                    <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Items.Count}" Value="0">
+                        <Setter Property="Grid.Row" Value="2"/>
+                    </DataTrigger>
+                </ActivityIndicator.Triggers>
+
+            </ActivityIndicator>
 
 
         </Grid>

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 
 using Android.App;
@@ -232,6 +234,33 @@ namespace FormsLoyalty.Droid.Services
             }
             else
                 MainActivity._window.DecorView.LayoutDirection = Android.Views.LayoutDirection.Ltr;
+        }
+
+        public void DeleteReminderNotification(int notificationId)
+        {
+            PendingIntent pendingIntent = GetPendingIntent(notificationId);
+            var alarmManager = MainActivity.Instance.GetSystemService(Context.AlarmService) as AlarmManager;
+        }
+
+        private PendingIntent GetPendingIntent(int id)
+        {
+            Intent intent = CreateIntent(id);
+            var pendingIntent = PendingIntent.GetBroadcast(MainActivity.Instance, id, intent, PendingIntentFlags.UpdateCurrent);
+            return pendingIntent;
+        }
+
+        private Intent CreateIntent(int id)
+        {
+            return new Intent(MainActivity.Instance, typeof(AlarmReceiver))
+                .SetAction("localNotifierIntent" + id);
+        }
+
+        public void DeleteAllReminderNotification(List<int> notificationIds)
+        {
+            foreach (var notificationId in notificationIds)
+            {
+                DeleteReminderNotification(notificationId);
+            }
         }
     }
 }

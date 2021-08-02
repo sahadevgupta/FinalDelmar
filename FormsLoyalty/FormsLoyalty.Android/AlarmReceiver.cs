@@ -56,7 +56,9 @@ namespace FormsLoyalty.Droid
                 .SetContentIntent(resultPendingIntent)
                 .SetContentTitle(title)
                 .SetContentText(message)
+                .SetAutoCancel(true)
                 .SetVibrate(new long[] { 1000, 1000, 1000, 1000, 1000 })
+                .SetDefaults((int)NotificationDefaults.All | (int)NotificationDefaults.Vibrate)
                 .SetLargeIcon(BitmapFactory.DecodeResource(AndroidApp.Context.Resources, Resource.Drawable.logo))
                 .SetSmallIcon(Resource.Drawable.logo);
 

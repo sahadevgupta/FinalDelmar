@@ -27,11 +27,7 @@ namespace FormsLoyalty.Views
             base.OnAppearing();
         }
 
-        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var item = e.CurrentSelection.Cast<LoyItem>();
-           await _viewModel.NavigateToItemPage(item.First());
-        }
+       
 
         private async void Item_Tapped(object sender, System.EventArgs e)
         {
@@ -44,10 +40,7 @@ namespace FormsLoyalty.Views
             view.Opacity = 1;
         }
 
-        private void TranslateForScrollViewBehavior_ViewVisible(object sender, System.EventArgs e)
-        {
-            //headerView.IsVisible = true;
-        }
+       
 
         bool _firstInstance = false;
         private async void collectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
@@ -73,6 +66,8 @@ namespace FormsLoyalty.Views
             {
                await _viewModel.LoadMore();
             }
+
+           
 
         }
 

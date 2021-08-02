@@ -73,7 +73,7 @@ namespace FormsLoyalty.Models
     {
         [PrimaryKey]
         public string ID { get; set; }
-        
+        public int NotificationId { get; set; }
         public string MedicineReminderId { get; set; } // medicineReminder primary key
         private decimal _qty = 1;
         public decimal Qty

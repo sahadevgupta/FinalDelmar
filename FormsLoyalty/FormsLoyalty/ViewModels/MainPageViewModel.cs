@@ -152,43 +152,53 @@ namespace FormsLoyalty.ViewModels
         private async Task OnAdSelected(Advertisement data)
         {
             IsPageEnabled = true;
-            switch (data.AdsType)
+            try
             {
-                case AdsType.Item:
+                switch (data.AdsType)
+                {
+                    case AdsType.Item:
 
-                    await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "itemId", data.AppValue } });
+                        await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "itemId", data.AppValue } });
 
-                    break;
-                case AdsType.Offer:
+                        break;
+                    case AdsType.Offer:
 
-                    var offer = AppData.Device.UserLoggedOnToDevice.PublishedOffers.FirstOrDefault(x => x.Id == data.AppValue);
-                    if(offer !=null)
-                    {
-                      
-                        await NavigationService.NavigateAsync(nameof(OfferDetailsPage), new NavigationParameters { { "offer", offer } });
-                        
-                    }
-                    break;
-                case AdsType.Magazine:
-                       await Launcher.TryOpenAsync(new Uri(data.AppValue));
-                    break;
-                case AdsType.Search:
-                    var result = data.AppValue.Split(',');
+                        var offer = AppData.Device.UserLoggedOnToDevice.PublishedOffers.FirstOrDefault(x => x.Id == data.AppValue);
+                        if (offer != null)
+                        {
 
-                    
+                            await NavigationService.NavigateAsync(nameof(OfferDetailsPage), new NavigationParameters { { "offer", offer } });
 
-                    var items = await itemModel.GetItemsByPage(7, 1, result[0], result[1], result[2], false, string.Empty);
-                    if (items.Any())
-                    {
-                        await NavigationService.NavigateAsync(nameof(ItemGroupPage), new NavigationParameters { { "items", items } });
+                        }
+                        break;
+                    case AdsType.Magazine:
+                        await Launcher.TryOpenAsync(new Uri(data.AppValue));
+                        break;
+                    case AdsType.Search:
+                        var result = data.AppValue.Split(',');
 
-                    }
+                        var items = await itemModel.GetItemsByPage(7, 1, result[0], result[1], result[2], false, string.Empty);
+                        if (items.Any())
+                        {
+                            await NavigationService.NavigateAsync(nameof(ItemGroupPage), new NavigationParameters { { "items", items } });
 
-                    break;
-                default:
-                    break;
+                        }
+
+                        break;
+                    default:
+                        break;
+                }
             }
-            IsPageEnabled = false;
+            catch (Exception ex)
+            {
+
+                Crashes.TrackError(ex);
+            }
+            finally
+            {
+
+                IsPageEnabled = false;
+            }
         }
 
         private void LoadPoints()

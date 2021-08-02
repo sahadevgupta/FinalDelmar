@@ -31,7 +31,7 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _product, value); }
         }
 
-        private ObservableCollection<LoyItem> _items = new ObservableCollection<LoyItem>();
+        private ObservableCollection<LoyItem> _items;
         public ObservableCollection<LoyItem> Items
         {
             get { return _items; }
@@ -147,6 +147,8 @@ namespace FormsLoyalty.ViewModels
         public ItemGroupPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             itemModel = new ItemModel();
+
+            Items = new ObservableCollection<LoyItem>();
             
         }
         #region SearchFilter
@@ -249,8 +251,8 @@ namespace FormsLoyalty.ViewModels
                             }
 
                         }
-                        //else
-                        //  item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
+                        else
+                          item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
 
                     }
                 });

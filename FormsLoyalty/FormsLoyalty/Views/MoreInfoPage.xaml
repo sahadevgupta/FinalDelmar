@@ -121,9 +121,7 @@
                                        effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
                                        Grid.Column="2" HorizontalOptions="End" Margin="0,0,10,0">
 
-                                        <Image.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="BarcodeScan_Tapped" CommandParameter="{Binding .}"/>
-                                        </Image.GestureRecognizers>
+
 
                                         <Image.Triggers>
                                             <DataTrigger TargetType="Image" Binding="{Binding Title}"

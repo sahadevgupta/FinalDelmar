@@ -1,12 +1,15 @@
-﻿using FormsLoyalty.Models;
+﻿using FormsLoyalty.Interfaces;
+using FormsLoyalty.Models;
 using FormsLoyalty.Utils;
 using FormsLoyalty.ViewModels;
 using Infrastructure.Data.SQLite.DB;
 using SQLite;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
+using Xamarin.Forms;
 
 namespace FormsLoyalty.Repos
 {
@@ -56,11 +59,15 @@ namespace FormsLoyalty.Repos
                     {
                         var remDate = reminder.From;
                         var noOfDays = remDate.AddDays(reminder.NoOfDays);
-                        if (noOfDays.Day >= date.day)
+                        if (noOfDays.Month >= date.DateTime.Month)
                         {
                             medicineReminders.Add(reminder);
                         }
-                       
+                        else
+                        {
+                            var freqs =  GetFrequenctTimeForReminderById(reminder.ID);
+                            DeleteReminder(reminder, freqs);
+                        }
 
                     }
                     else if (reminder.AllDay)
@@ -103,6 +110,11 @@ namespace FormsLoyalty.Repos
             }
         }
 
+        private List<FrequencyTime> GetFrequenctTimeForReminderById(string reminderId)
+        {
+            return DBHelper.DBConnection.Table<FrequencyTime>().Where(x => x.MedicineReminderId == reminderId).ToList();
+        }
+
         public void UpdateReminder(MedicineReminder medicineReminder, List<FrequencyTime> frequencies)
         {
             lock (locker)
@@ -117,19 +129,26 @@ namespace FormsLoyalty.Repos
             lock (locker)
             {
                 DBHelper.DBConnection.Delete<MedicineReminder>(medicineReminder.ID);
+                DeleteAllNotification(new ObservableCollection<FrequencyTime>(frequencies));
                 foreach (var frequencyTime in frequencies)
                 {
+                    
                     DBHelper.DBConnection.Delete<FrequencyTime>(frequencyTime.ID);
                 }
 
             }
+
         }
         public void DeleteReminderFrequency(MedicineReminder medicineReminder, FrequencyTime frequency)
         {
             lock (locker)
             {
-                if(frequency.MedicineReminderId.Equals(medicineReminder.ID))
+                if (frequency.MedicineReminderId.Equals(medicineReminder.ID))
+                {
+                    DeleteNotification(frequency.NotificationId);
                     DBHelper.DBConnection.Delete<FrequencyTime>(frequency.ID);
+                }
+                    
                
 
             }
@@ -155,6 +174,16 @@ namespace FormsLoyalty.Repos
             }
 
             return reminders;
+        }
+
+        public void DeleteAllNotification(ObservableCollection<FrequencyTime> frequencies)
+        {
+            DependencyService.Get<INotify>().DeleteAllReminderNotification(frequencies.Select(x => x.NotificationId).ToList());
+        }
+
+        public void DeleteNotification(int notificationId)
+        {
+            DependencyService.Get<INotify>().DeleteReminderNotification(notificationId);
         }
     }
 }

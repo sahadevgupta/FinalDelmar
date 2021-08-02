@@ -441,6 +441,29 @@ namespace FormsLoyalty.ViewModels
             return notificationCount;
         }
 
+
+        /// <summary>
+        /// Get item using barcode
+        /// </summary>
+        /// <param name="barcode"></param>
+        private async void GetItemByBarCode(string barcode)
+        {
+            IsPageEnabled = true;
+            try
+            {
+
+                var item = await new ItemModel().GetItemByBarcode(barcode);
+                if (item != null)
+                    await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "item", item } });
+            }
+            catch (Exception)
+            {
+                IsPageEnabled = false;
+
+            }
+            IsPageEnabled = false;
+        }
+
         internal async void DrawerSelected(DrawerMenuItem obj)
         {
             switch (obj.ActivityType)

@@ -20,6 +20,7 @@
     </ContentPage.Triggers>
     <ContentPage.Resources>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+        <converters:VideoSourceConverter x:Key="VideoSourceConverter"/>
     </ContentPage.Resources>
 
     <AbsoluteLayout>
@@ -119,14 +120,14 @@
             
         </Frame>
 
-        <Grid RowDefinitions="200,*" ColumnDefinitions="*" HorizontalOptions="FillAndExpand" Margin="0,20,0,0">
+        <Grid RowDefinitions="*,Auto" ColumnDefinitions="*" HorizontalOptions="FillAndExpand" >
                 <Grid.Triggers>
                     <DataTrigger TargetType="Grid" Binding="{Binding IsPrescriptionViewVisible}"
                                  Value="true">
                         <Setter Property="IsVisible" Value="false"/>
                     </DataTrigger>
                 </Grid.Triggers>
-                <xct:MediaElement Source="https://archive.org/download/BigBuckBunny_328/BigBuckBunny_512kb.mp4"
+                <xct:MediaElement Source="{Binding Source=scan_send_demo.mp4, Converter={StaticResource VideoSourceConverter}}"
                                x:Name="videoPlayer"
                             Grid.Row="0"
                             Margin="0"
@@ -134,11 +135,9 @@
                             BackgroundColor="Transparent"
                             HorizontalOptions="FillAndExpand"
                             MediaOpened="videoPlayer_MediaOpened"
-                            
                                    IsLooping="True"
                                   Volume="1"
                                    KeepScreenOn="True" ShowsPlaybackControls="True"/>
-
 
 
                 <Button Text="{x:Static resources:AppResources.txtNewPrescription}" Margin="20" CornerRadius="10" VerticalOptions="EndAndExpand"

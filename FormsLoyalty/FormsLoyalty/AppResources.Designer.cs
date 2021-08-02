@@ -952,7 +952,7 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Add to basket.
+        ///   Looks up a localized string similar to Add To Cart.
         /// </summary>
         public static string ApplicationAddToBasket {
             get {
@@ -4747,6 +4747,15 @@ namespace FormsLoyalty {
         public static string txtWeWillShare {
             get {
                 return ResourceManager.GetString("txtWeWillShare", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update Reminder.
+        /// </summary>
+        public static string UpdateReminder {
+            get {
+                return ResourceManager.GetString("UpdateReminder", resourceCulture);
             }
         }
         

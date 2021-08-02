@@ -1345,6 +1345,12 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\iconRate.png" />
   </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\scan_send_demo.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\raw\scan_send_demo.mp4" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
