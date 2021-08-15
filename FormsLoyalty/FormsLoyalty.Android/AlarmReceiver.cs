@@ -16,6 +16,7 @@ using AndroidApp = Android.App.Application;
 namespace FormsLoyalty.Droid
 {
     [BroadcastReceiver(Enabled = true,Name = "com.LinkedGates.LinkedCommerce.AlarmReceiver", Label = "Local Notifications Broadcast Receiver")]
+    [IntentFilter(new[] { Intent.ActionBootCompleted })]
     public class AlarmReceiver : BroadcastReceiver
     {
         public const string LocalNotificationKey = "LocalNotification";
@@ -26,7 +27,7 @@ namespace FormsLoyalty.Droid
         const string channelDescription = "The default channel for notifications."; 
         NotificationManager manager;
 
-        [Obsolete]
+       
         public override void OnReceive(Context context, Intent intent)
         {
             // NotificationManager nManager = (NotificationManager)context.GetSystemService(Context.NotificationService);
@@ -43,6 +44,10 @@ namespace FormsLoyalty.Droid
             stackBuilder.AddNextIntent(resultIntent);
             var resultPendingIntent =
                 stackBuilder.GetPendingIntent(0, (int)PendingIntentFlags.UpdateCurrent);
+
+
+            var pendingIntent = PendingIntent.GetActivity(MainActivity.Instance, notificatonId, intent, PendingIntentFlags.UpdateCurrent);
+
 
             // get notification sound
             //Android.Net.Uri alarmUri = Android.Net.Uri.Parse($"{ ContentResolver.SchemeAndroidResource}://{MainApplication.ActivityContext.PackageName}/{Resource.Drawable.Whistle}");

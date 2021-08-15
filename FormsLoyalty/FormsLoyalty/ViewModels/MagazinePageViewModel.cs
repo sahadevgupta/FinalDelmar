@@ -47,30 +47,8 @@ namespace FormsLoyalty.ViewModels
             try
             {
 
-                //string token = await _magazineManager.GetAuthorizationToken("sahadev", "Linked@2020");
-
-                //var magazines = await _magazineManager.GetMagazinesByToken(token);
-
-                //foreach (var item in magazines.OrderBy(x =>x.created_at))
-                //{
-                //    item.ImageSource = $"{AppData.magazineURL}media/mageplaza/blog/post/{item.image}";
-
-                //    var strlength = item.content.Length;
-
-                //    int firstStringPosition = item.content.IndexOf("=&quot;");
-                //    int secondStringPosition = item.content.IndexOf("&quot;}}");
-
-                //    var endIndex = secondStringPosition - (firstStringPosition + 7);
-
-                //    var str = item.content.Substring(firstStringPosition + 7, endIndex);
-                //    item.Url = str;
-
-                //}
-
                var magazines = await new CommonModel().GetMagazineAsync();
-
-                  
-                    Magazines = new ObservableCollection<MagazineModel>(magazines);
+               Magazines = new ObservableCollection<MagazineModel>(magazines.Where(x => !string.IsNullOrEmpty(x.URL)));
                    
                 
             }

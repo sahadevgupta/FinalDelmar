@@ -375,17 +375,20 @@
             </CollectionView>
 
 
-            <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource My_Header_Color}" Visual="Material"
-                                Grid.Row="3" IsVisible="{Binding IsBusy}" HorizontalOptions="Center" VerticalOptions="CenterAndExpand">
-                <ActivityIndicator.Triggers>
-                    <DataTrigger TargetType="ActivityIndicator" Binding="{Binding Items.Count}" Value="0">
+            <StackLayout Grid.Row="3" HorizontalOptions="Center" VerticalOptions="CenterAndExpand" IsVisible="{Binding IsBusy}">
+
+
+                <ActivityIndicator IsRunning="{Binding IsBusy}" Color="{StaticResource My_Header_Color}" Visual="Material"
+                                  />
+                <StackLayout.Triggers>
+                    <DataTrigger TargetType="StackLayout" Binding="{Binding Items.Count}" Value="0">
                         <Setter Property="Grid.Row" Value="2"/>
                     </DataTrigger>
-                </ActivityIndicator.Triggers>
-
-            </ActivityIndicator>
+                </StackLayout.Triggers>
 
 
+
+            </StackLayout>
         </Grid>
 
         <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"

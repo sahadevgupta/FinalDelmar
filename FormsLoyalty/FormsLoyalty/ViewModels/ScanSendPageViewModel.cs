@@ -82,6 +82,7 @@ namespace FormsLoyalty.ViewModels
             {
                 var Id = Guid.NewGuid().ToString(); 
                 ImageList.ForEach(x => { x.CreationDate = DateTime.UtcNow; x.pComment = string.IsNullOrEmpty(Remark)? string.Empty : Remark; x.Description = Remark; x.pOrderNo = Id; }) ;
+               
                 var IsSuccess = await _scanSendManager.CreateScanSend(ImageList.ToList());
                 
                 Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
@@ -163,7 +164,7 @@ namespace FormsLoyalty.ViewModels
                 scansend.ImagedBase64 = Convert.ToBase64String(item.Item1);
                 scansend.id = i + 1;
                 scansend.imageExtension = item.Item2;
-                scansend.ContactNo = AppData.Device.CardId;
+                scansend.ContactNo = AppData.Device.UserLoggedOnToDevice.Id;
                 ImageList.Add(scansend);
                 i++;
             }
@@ -196,13 +197,10 @@ namespace FormsLoyalty.ViewModels
                     id = ImageList.Count() + 1,
                     imageExtension = imgData[0].Item2,
                     ImagedBase64 = Convert.ToBase64String(imgData[0].Item1),
-                    ContactNo = AppData.Device.CardId
+                    ContactNo = AppData.Device.UserLoggedOnToDevice.Id
                 };
 
-                ImageList.Add(scansend);
-
-
-                   
+                ImageList.Add(scansend);    
             }
 
         }

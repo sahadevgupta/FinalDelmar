@@ -331,6 +331,7 @@
     <Compile Include="Services\AppRatingService.cs" />
     <Compile Include="Services\MediaService_iOS.cs" />
     <Compile Include="Services\Notification_iOS.cs" />
+    <Compile Include="UserNotificationCenterDelegate.cs" />
     <Compile Include="VideoController.cs" />
     <None Include="Entitlements.plist" />
     <BundleResource Include="GoogleService-Info.plist" />

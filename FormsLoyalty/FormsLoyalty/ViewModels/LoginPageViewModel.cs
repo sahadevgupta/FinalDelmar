@@ -128,8 +128,15 @@ namespace FormsLoyalty.ViewModels
             }
             catch (Exception ex)
             {
-
-                DependencyService.Get<INotify>().ShowSnackBar(ex.Message);
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    DependencyService.Get<INotify>().ShowSnackBar(ex.Message);
+                }
+                else
+                {
+                    MaterialDialog.Instance.SnackbarAsync(ex.Message, 5000);
+                }
+                
             }
             finally
             {

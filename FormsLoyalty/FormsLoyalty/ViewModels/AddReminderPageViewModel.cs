@@ -156,7 +156,7 @@ namespace FormsLoyalty.ViewModels
                         var random = new Random();
                         item.NotificationId = random.Next();
 
-                        DependencyService.Get<INotify>().SetReminder(medicineReminder.EventName, $"Hi! It's time to take your {SelectedUnit}", item.NotificationId, item.Time, medicineReminder.From, medicineReminder.SpecificDays);
+                        DependencyService.Get<INotify>().SetReminder(medicineReminder.EventName, $"Hi! It's time to take your {item.Qty} {SelectedUnit}", item.NotificationId, item.Time, medicineReminder.From, medicineReminder.SpecificDays);
                     }
                 }
                 NavigationService.GoBackAsync();

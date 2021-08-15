@@ -33,6 +33,11 @@ namespace FormsLoyalty.Views
             CameraOptions = CameraOptions.Front;
             FlashMode = CameraFlashMode.Off;
         }
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            cameraView.FlashMode = FlashMode;
+        }
 
         void ZoomSlider_ValueChanged(object sender, ValueChangedEventArgs e)
         {

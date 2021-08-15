@@ -68,7 +68,7 @@
                 <Frame  Visual="Material"
                         HorizontalOptions="StartAndExpand"
                                 VerticalOptions="StartAndExpand"                                
-                                Padding="10,20,0,0" 
+                                Padding="10,20,0,10" 
                                 HasShadow="False"
                                 IsClippedToBounds="True" BackgroundColor="#ffffff" CornerRadius="15" >
 
@@ -77,44 +77,7 @@
                                               CommandParameter="{Binding .}"/>
                     </Frame.GestureRecognizers>
                     
-                    <!--<Grid RowSpacing="5" IsClippedToBounds="True">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="Auto"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
-
-                        <Label Text="{Binding DocumentRegTime,StringFormat='{0:f}'}"
-                               FontSize="Body"
-
-                               TextColor="Black"/>
-
-                            <yummy:PancakeView
-                    Grid.Row="0" BackgroundColor="White"
-                                VerticalOptions="StartAndExpand"
-                    Grid.Column="1"
-                    CornerRadius="45,0,45,0"
-                    HeightRequest="40">
-                                
-                                <Button WidthRequest="100" HeightRequest="30" TextColor="White"
-                        x:Name="ButtonStyle" FontAttributes="Bold" Visual="Default"
-                        BackgroundColor="{Binding Status, Converter={StaticResource SalesEntryStatusToColorConverter}}"
-                        Text="{Binding Status}"
-                        />
-                            </yummy:PancakeView>
-
-
-                            <Label Text="{Binding StoreName}"
-                               Grid.Row="1" Grid.Column="0"
-                               />
-                        <Label Text="{Binding TotalAmount,StringFormat=' {0:N02}'}"
-                                    Grid.Row="1" Grid.Column="1"
-                               HorizontalOptions="End" Margin="10,0,10,0"
-                               TextColor="Black"/>
-                    </Grid>-->
+                   
 
 
 

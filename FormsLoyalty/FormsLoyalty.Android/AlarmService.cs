@@ -18,7 +18,7 @@ namespace FormsLoyalty.Droid
     [Service(Exported = true, Name = "com.LinkedGates.LinkedCommerce.AlarmService")]
     public class AlarmService : Service
     {
-
+        const int RQS_1 = 1;
         public override void OnCreate()
         {
             base.OnCreate();
@@ -58,29 +58,52 @@ namespace FormsLoyalty.Droid
             
 
 
-            Intent broadcastIntent = new Intent(Xamarin.Essentials.Platform.CurrentActivity, typeof(AlarmReceiver)).SetAction("localNotifierIntent" + notificatonId); ;
+            Intent broadcastIntent = new Intent(Xamarin.Essentials.Platform.CurrentActivity, typeof(AlarmReceiver));
             broadcastIntent.PutExtra("title", title);
             broadcastIntent.PutExtra("message", message);
 
+            Locale current = Resources.Configuration.Locale;
 
-            Calendar setcalendar = Calendar.Instance;
+            Calendar calNow = Calendar.GetInstance(current);
+            Calendar calSet = (Calendar)calNow.Clone();
 
+
+            calSet.Set(CalendarField.HourOfDay, t.Hours);
+            calSet.Set(CalendarField.Minute, t.Minutes);
+            calSet.Set(CalendarField.Second, 0);
+            calSet.Set(CalendarField.Millisecond, 0);
+
+
+            if (calSet.CompareTo(calNow) <= 0)
+            {
+                //Today Set time passed, count to tomorrow
+                calSet.Add(CalendarField.Date, 1);
+            }
+
+
+            //Calendar setcalendar = Calendar.Instance;
+            //setcalendar.TimeInMillis = SystemClock.CurrentThreadTimeMillis();
             //setcalendar.Set(CalendarField.)
-            setcalendar.Set(CalendarField.HourOfDay, t.Hours);
-            setcalendar.Set(CalendarField.Minute, t.Minutes);
-            setcalendar.Set(CalendarField.Second, 0);
+            //setcalendar.Set(CalendarField.HourOfDay, t.Hours);
+            //setcalendar.Set(CalendarField.Minute, t.Minutes);
+            //setcalendar.Set(CalendarField.Second, 0);
 
 
-            Calendar cal = Calendar.Instance;
-            int year = cal.Get(CalendarField.Year);
-            int month = cal.Get(CalendarField.Month);
-            int day = cal.Get(CalendarField.Date);
+            //Calendar cal = Calendar.Instance;
+            //int year = cal.Get(CalendarField.Year);
+            //int month = cal.Get(CalendarField.Month);
+            //int day = cal.Get(CalendarField.Date);
 
-            DateTime notificateDate = new DateTime(year, month, day).AddHours(t.Hours)
-                                                                     .AddMinutes(t.Minutes).AddSeconds(0);
-           
+            //DateTime notificateDate = new DateTime(year, month, day).AddHours(t.Hours)
+            //                                                         .AddMinutes(t.Minutes).AddSeconds(0);
 
-            long triggerTime = GetNotifyTime(notificateDate);
+            //Date curr = new Date();
+            //curr.Hours = t.Hours;
+            //curr.Minutes = t.Minutes;
+            //setcalendar.Time = curr;
+            //setcalendar.Set(CalendarField.Second, 0);
+
+            //long triggerTime = setcalendar.TimeInMillis;
 
             if (!string.IsNullOrEmpty(days))
             {
@@ -88,7 +111,7 @@ namespace FormsLoyalty.Droid
                 for (int i = 0; i < weekdays.Count(); i++)
                 {
                     broadcastIntent.PutExtra("id", notificatonId+i);
-                    SetForDayAlarm(Convert.ToInt32(weekdays[i]) + 1, setcalendar, broadcastIntent);
+                    SetForDayAlarm(Convert.ToInt32(weekdays[i]) + 1, calSet, broadcastIntent, notificatonId + i);
                 } 
                
             }
@@ -96,10 +119,10 @@ namespace FormsLoyalty.Droid
             {
                 broadcastIntent.PutExtra("id", notificatonId);
 
-                PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, 0, broadcastIntent, PendingIntentFlags.CancelCurrent);
+                PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, notificatonId, broadcastIntent, 0);
                 AlarmManager am = (AlarmManager)GetSystemService(AlarmService);
                // var interval = (long)TimeSpan.fro(Constant.One).TotalMilliseconds;
-                am.SetRepeating(AlarmType.RtcWakeup, triggerTime, AlarmManager.IntervalDay, pendingIntent);
+                am.SetRepeating(AlarmType.RtcWakeup, calSet.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
             }
 
             return StartCommandResult.Sticky;
@@ -111,18 +134,18 @@ namespace FormsLoyalty.Droid
             int DefaultYear = 1970;
             int MinYear = 0001;
 
-            DateTime utcTime = TimeZoneInfo.ConvertTimeToUtc(notifyTime);
+            DateTime utcTime = notifyTime;
             double epochDiff = (new DateTime(DefaultYear, DefaultMonth, DefaultDay) - DateTime.MinValue).TotalSeconds;
             long utcAlarmTime = utcTime.AddSeconds(-epochDiff).Ticks / 10000;
             return utcAlarmTime;
         }
-        private void SetForDayAlarm(int week,Calendar calSet,Intent broadcastIntent)
+        private void SetForDayAlarm(int week,Calendar calSet,Intent broadcastIntent, int id)
         {
             calSet.Set(CalendarField.DayOfWeek, week);
 
-            PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, 0, broadcastIntent, PendingIntentFlags.CancelCurrent);
+            PendingIntent pendingIntent = PendingIntent.GetBroadcast(this, id, broadcastIntent, PendingIntentFlags.CancelCurrent);
             AlarmManager am = (AlarmManager)GetSystemService(AlarmService);
-            am.SetInexactRepeating(AlarmType.RtcWakeup, calSet.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
+            am.SetRepeating(AlarmType.RtcWakeup, calSet.TimeInMillis, AlarmManager.IntervalDay, pendingIntent);
         }
 
         public override void OnDestroy()

@@ -88,7 +88,8 @@ namespace FormsLoyalty
                 {
                     System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
                 }
-                DependencyService.Get<INotify>().ShowLocalNotification("titleforeground", "test");
+                if(Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android )
+                  DependencyService.Get<INotify>().ShowLocalNotification("titleforeground", "test");
 
             };
             CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>

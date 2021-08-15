@@ -190,8 +190,8 @@
     </ContentPage.Resources>
 
 
-    <ContentPage.ToolbarItems>
-        <!--<ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+    <!--<ContentPage.ToolbarItems>
+        --><!--<ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
             <ToolbarItem.CommandParameter>
                 <prism:NavigationParameters>
                     <prism:NavigationParameter Key="page" Value="Offer" />
@@ -202,10 +202,10 @@
         </ToolbarItem>-->
         <!--<ToolbarItem 
                      x:Name="viewtoolbar"
-                     Order="Primary" />-->
+                     Order="Primary" />--><!--
         <ToolbarItem IconImageSource="ic_action_qr" Command="{prism:NavigateTo Name='QRCodePage'}" 
                      Order="Primary"/>
-    </ContentPage.ToolbarItems>
+    </ContentPage.ToolbarItems>-->
 
 
     <AbsoluteLayout>

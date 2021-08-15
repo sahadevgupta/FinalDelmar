@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using FormsLoyalty.Interfaces;
 using FormsLoyalty.iOS.Services;
 using Foundation;
@@ -17,7 +19,8 @@ namespace FormsLoyalty.iOS.Services
         NSTimer alertDelay;
         UIAlertController alert;
         private static UNUserNotificationCenter notificationCenter;
-
+        string notificationIdentifier = "Local";
+        string NotificationType = "MedicineReminder";
         public string getDeviceUuid()
         {
             var query = new SecRecord(SecKind.GenericPassword);
@@ -89,7 +92,7 @@ namespace FormsLoyalty.iOS.Services
             }
         }
 
-        public void SetReminder(string title, string body, int id, TimeSpan time, DateTime startDate, string days)
+        public void SetReminder(string title, string body, int notificationId, TimeSpan time, DateTime startDate, string days)
         {
             int count = 0;
             if (count>0)
@@ -101,11 +104,13 @@ namespace FormsLoyalty.iOS.Services
                 });
             }
 
+            var Id = notificationIdentifier + notificationId;
 
             var content = new UNMutableNotificationContent();
             content.Title = title;
             content.Body = body;
             content.Sound = UNNotificationSound.Default;
+            content.UserInfo = NSDictionary.FromObjectAndKey(NSObject.FromObject(Id), NSObject.FromObject(NotificationType));
 
             var dateComponents = new NSDateComponents();
             dateComponents.Hour = time.Hours;
@@ -117,19 +122,19 @@ namespace FormsLoyalty.iOS.Services
                 {
                     dateComponents.Weekday = Convert.ToInt32(day);
 
-                    RegisterNotificationRequest(content, dateComponents);
+                    RegisterNotificationRequest(content, dateComponents, Id);
                 }
             }
-            RegisterNotificationRequest(content, dateComponents);
+            else
+              RegisterNotificationRequest(content, dateComponents, Id);
 
 
             //UIApplication.SharedApplication.ScheduleLocalNotification(notification);
         }
 
-        private static void RegisterNotificationRequest(UNMutableNotificationContent content, NSDateComponents dateComponents)
+        private void RegisterNotificationRequest(UNMutableNotificationContent content, NSDateComponents dateComponents,string uuid)
         {
-            // Create the request
-            var uuid = Guid.NewGuid().ToString();
+            
 
             var trigger = UNCalendarNotificationTrigger.CreateTrigger(dateComponents, true);
             var request = UNNotificationRequest.FromIdentifier(uuid, content, trigger);
@@ -137,6 +142,8 @@ namespace FormsLoyalty.iOS.Services
             // Schedule the request with the system.
             notificationCenter = UNUserNotificationCenter.Current;
             notificationCenter.AddNotificationRequest(request, (error) => { });
+
+            notificationCenter.Delegate = new UserNotificationCenterDelegate();
         }
 
         public void ShowLocalNotification(string title, string body)
@@ -151,7 +158,24 @@ namespace FormsLoyalty.iOS.Services
 
         public void ShowSnackBar(string description)
         {
-            throw new NotImplementedException();
+            // create the notification
+            var notification = new UILocalNotification();
+
+            // set the fire date (the date time in which it will fire)
+            //notification.FireDate = NSDate.FromTimeIntervalSinceNow(60);
+
+            // configure the alert
+            notification.AlertAction = "View Alert";
+            notification.AlertBody = "Your one minute alert has fired!";
+
+            // modify the badge
+            notification.ApplicationIconBadgeNumber = 1;
+
+            // set the sound to be the default sound
+            notification.SoundName = UILocalNotification.DefaultSoundName;
+
+            // schedule it
+            UIApplication.SharedApplication.ScheduleLocalNotification(notification);
         }
 
        
@@ -181,7 +205,33 @@ namespace FormsLoyalty.iOS.Services
            
         }
 
-        
+        public void DeleteReminderNotification(int notificationId)
+        {
+            var Id = notificationIdentifier + notificationId;
+            if (string.IsNullOrEmpty(Id))
+            {
+                return;
+            }
 
+            var notifications = UIApplication.SharedApplication.ScheduledLocalNotifications;
+            if (notifications is null)
+            {
+                return;
+            }
+            var notificationToDelete = notifications.Where(notification => notification.UserInfo.ContainsKey(NSObject.FromObject(NotificationType)))
+                .FirstOrDefault(notification => notification.UserInfo[NotificationType].Equals(NSObject.FromObject(Id)));
+            if (notificationToDelete is object)
+            {
+                UIApplication.SharedApplication.CancelLocalNotification(notificationToDelete);
+            }
+        }
+
+        public void DeleteAllReminderNotification(List<int> notificationIds)
+        {
+            foreach (var notificationId in notificationIds)
+            {
+                DeleteReminderNotification(notificationId);
+            }
+        }
     }
 }

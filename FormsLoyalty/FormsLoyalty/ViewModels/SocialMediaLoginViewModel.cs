@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -83,7 +84,15 @@ namespace FormsLoyalty.ViewModels
             catch (Exception ex)
             {
 
-                DependencyService.Get<INotify>().ShowSnackBar(ex.Message);
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    DependencyService.Get<INotify>().ShowSnackBar(ex.Message);
+                }
+                else
+                {
+                    MaterialDialog.Instance.SnackbarAsync(ex.Message, 5000);
+                }
+               
             }
             finally
             {

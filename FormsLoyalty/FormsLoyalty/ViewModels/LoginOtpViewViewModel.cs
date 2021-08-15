@@ -185,35 +185,56 @@ namespace FormsLoyalty.ViewModels
                         {
                             if (response.Cards.Any())
                             {
-                                GoToMainScreen();
-                                
 
                                 if(fbProfile != null)
                                 {
-                                    Task.Run(async() =>
+                                   await Task.Run(async() =>
                                     {
+                                        IsPageEnabled = true;
                                         response.FacebookID = fbProfile.Id;
                                         response.UserName = MobileNumber;
                                         response.FirstName = string.IsNullOrEmpty(response.FirstName) ? fbProfile.FirstName : response.FirstName;
                                         response.LastName = string.IsNullOrEmpty(response.LastName) ? fbProfile.LastName : response.LastName ;
-                                        AppData.Device.UserLoggedOnToDevice = response;
-                                        await new MemberContactModel().UpdateMemberContact(response);
+                                        response.Email = string.IsNullOrEmpty(response.Email) ? fbProfile.Email : response.Email ;
+                                        //AppData.Device.UserLoggedOnToDevice = response;
+                                        try
+                                        {
+                                            await new MemberContactModel().UpdateMemberContact(response);
+                                        }
+                                        catch (Exception)
+                                        {
+
+                                            IsPageEnabled = false;
+                                        }
+                                        
                                     });
                                     
                                 }
                                 else if (googleProfile != null)
                                 {
-                                    Task.Run(async () =>
+                                   await Task.Run(async () =>
                                     {
+                                        IsPageEnabled = true;
+
                                         response.GoogleID = googleProfile.Id;
                                         response.UserName = MobileNumber;
                                         response.FirstName = string.IsNullOrEmpty(response.FirstName) ? googleProfile.FirstName : response.FirstName;
                                         response.LastName = string.IsNullOrEmpty(response.LastName) ? googleProfile.LastName : response.LastName;
-                                        AppData.Device.UserLoggedOnToDevice = response;
-                                        await new MemberContactModel().UpdateMemberContact(response);
+                                        response.Email = string.IsNullOrEmpty(response.Email) ? googleProfile.Email : response.Email;
+                                        //AppData.Device.UserLoggedOnToDevice = response;
+                                        try
+                                        {
+                                            await new MemberContactModel().UpdateMemberContact(response);
+                                        }
+                                        catch (Exception)
+                                        {
+
+                                            IsPageEnabled = false;
+                                        }
                                     });
                                 }
 
+                                GoToMainScreen();
                             }
                             else
                                 await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}", new NavigationParameters { { "edit", true } });
@@ -284,6 +305,7 @@ namespace FormsLoyalty.ViewModels
             FromItemPage = parameters.GetValue<bool>("itemPage");
             MobileNumber = parameters.GetValue<string>("number");
             Otp = parameters.GetValue<string>("otp");
+            Console.WriteLine("OTP :" + Otp);
             fbProfile = parameters.GetValue<FacebookProfile>("fb");
             googleProfile = parameters.GetValue<GoogleProfile>("google");
         }

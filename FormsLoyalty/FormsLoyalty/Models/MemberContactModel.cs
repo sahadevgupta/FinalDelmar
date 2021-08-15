@@ -386,8 +386,13 @@ namespace FormsLoyalty.Models
                     contact.LoggedOnToDevice.UserLoggedOnToDevice = updateContact;
 
                     AppData.Device = updateContact.LoggedOnToDevice;
+                    AppData.Device.UserLoggedOnToDevice = updateContact;
+                    AppData.Device.UserLoggedOnToDevice.Cards = updateContact.Cards;
+                    AppData.Device.SecurityToken = updateContact.LoggedOnToDevice.SecurityToken;
+                    AppData.Device.CardId = updateContact.Cards[0].Id;
+                    AppData.Basket = updateContact.GetBasket(AppData.Device.CardId);
 
-                    SaveLocalMemberContact(contact);
+                    SaveLocalMemberContact(updateContact);
 
                     DependencyService.Get<INotify>().ShowToast(AppResources.ResourceManager.GetString("AccountViewUpdateSuccess", AppResources.Culture));
                     return true;
