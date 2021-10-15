@@ -1303,6 +1303,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You can select to add new address or update current from your profile.
+        /// </summary>
+        public static string CheckoutAddressNote {
+            get {
+                return ResourceManager.GetString("CheckoutAddressNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address 1.
         /// </summary>
         public static string CheckoutViewAddressOne {

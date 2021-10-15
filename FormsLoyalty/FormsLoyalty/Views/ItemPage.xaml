@@ -119,16 +119,64 @@
 
                 <StackLayout Grid.Row="2" Grid.ColumnSpan="2">
 
-                    <Label Text="{Binding itemPrice}"
-                       Margin="20,0,20,0" FontSize="Body">
-                        <Label.Triggers>
-                            <DataTrigger TargetType="Label"
+
+                    <StackLayout  Margin="20,0,20,0">
+                        <!--<StackLayout.Triggers>
+                            <DataTrigger TargetType="StackLayout"
                                      Binding="{Binding Item.Prices.Count}"
                                      Value="0">
                                 <Setter Property="IsVisible" Value="False"/>
                             </DataTrigger>
+                        </StackLayout.Triggers>-->
+                      
+
+                    <StackLayout IsVisible="{OnPlatform iOS=true, Android=false}" VerticalOptions="Center" Grid.Row="2" 
+                                                 Orientation="Horizontal"
+                                                 Margin="10,0,10,0">
+                            <Label Text="{Binding Item.NewPrice,StringFormat='{0} '}" FontSize="16" FontAttributes="Bold" />
+                            <Label Text="{Binding Item.ItemPrice}" FontSize="12" TextDecorations="Strikethrough" />
+                            <Label Text="{Binding Item.Discount,StringFormat=' ({0:F2} % Off)',Mode=OneWay}" FontSize="16" TextDecorations="Strikethrough" />
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout" Binding="{Binding Item.Discount}" Value="0">
+                                <Setter Property="IsVisible" Value="false"/>
+                            </DataTrigger>
+                        </StackLayout.Triggers>
+
+                    </StackLayout>
+
+
+                    <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0" IsVisible="{OnPlatform iOS=false, Android=true}">
+
+                        <Label.FormattedText>
+                            <FormattedString>
+                                    <Span Text="{Binding Item.NewPrice}" FontSize="16" FontAttributes="Bold" />
+                                <Span Text="  " FontSize="16" FontAttributes="Bold" />
+                                    <Span Text="{Binding Item.ItemPrice}" FontSize="12" TextDecorations="Strikethrough" />
+                                    <Span Text="{Binding Item.Discount,StringFormat=' ({0:F2} % Off)',Mode=OneWay}" TextColor="Red" />
+                                </FormattedString>
+                        </Label.FormattedText>
+
+                        <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Item.Discount}" Value="0">
+                                <Setter Property="IsVisible" Value="false"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+
+                    </Label>
+
+
+                        <Label Text="{Binding itemPrice}" IsVisible="false" 
+                                                   Margin="10,0,10,0" 
+                                                   FontSize="16" FontAttributes="Bold">
+                        <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding Item.Discount}" Value="0">
+                                <Setter Property="IsVisible" Value="true"/>
+                            </DataTrigger>
                         </Label.Triggers>
                     </Label>
+
+
+                    </StackLayout>
 
 
                     <Label Margin="20,0,20,0"

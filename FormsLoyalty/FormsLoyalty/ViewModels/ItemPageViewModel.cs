@@ -15,6 +15,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -293,8 +294,15 @@ namespace FormsLoyalty.ViewModels
 
                 }
 
-                if (Item.Prices.Count > 0)
+               // if (Item.Prices.Count > 0)
                     itemPrice = Item.PriceFromVariantsAndUOM(Item.SelectedVariant?.Id, Item.SelectedUnitOfMeasure?.Id);
+
+                if (Item.Discount > 0)
+                {
+                    var discountedPrice = (Item.Discount / 100) * Convert.ToDecimal(Item.ItemPrice);
+                    Item.NewPrice = (Convert.ToDecimal(Item.ItemPrice) - discountedPrice).ToString("F", CultureInfo.InvariantCulture);
+                }
+
 
                 if (AppData.Device.UserLoggedOnToDevice != null)
                 {

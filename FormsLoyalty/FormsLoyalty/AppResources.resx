@@ -531,6 +531,9 @@
   <data name="ChangePasswordViewPasswordConfirmation" xml:space="preserve">
     <value>New password confirmation</value>
   </data>
+  <data name="CheckoutAddressNote" xml:space="preserve">
+    <value>You can select to add new address or update current from your profile</value>
+  </data>
   <data name="CheckoutViewAddressOne" xml:space="preserve">
     <value>Address 1</value>
   </data>

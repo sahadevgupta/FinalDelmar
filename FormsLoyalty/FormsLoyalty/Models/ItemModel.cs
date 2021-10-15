@@ -197,7 +197,7 @@ namespace FormsLoyalty.Models
                 item = await service.GetItemByBarcodeAsync(barcode);
 
                 if (item == null)
-                    throw new NullReferenceException();
+                    return null;
             }
             catch (Exception ex)
             {

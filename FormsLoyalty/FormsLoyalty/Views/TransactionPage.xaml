@@ -13,10 +13,12 @@
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              ios:Page.UseSafeArea="True"
               Title="{x:Static resources:AppResources.txtOrderHistory}">
     <ContentPage.Resources>
         <converters:SalesEntryStatusToColorConverter x:Key="SalesEntryStatusToColorConverter"/>
+      
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
@@ -38,7 +40,7 @@
                     AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All">
 
-            <CollectionView.EmptyView>
+            <!--<CollectionView.EmptyView>
                 <Label Text="{x:Static resources:AppResources.txtNoOrders}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"
                        IsVisible="{OnPlatform iOS='False', Default=True}">
                     <Label.Triggers>
@@ -48,7 +50,7 @@
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
-            </CollectionView.EmptyView>
+            </CollectionView.EmptyView>-->
 
             <CollectionView.Triggers>
                 <DataTrigger TargetType="CollectionView" Binding="{Binding IsPageEnabled}"
@@ -209,7 +211,7 @@
                             x:Name="Icon3Lbl"
                             Grid.Row="0"
                             Grid.Column="1"
-                            Text="{Binding DocumentRegTime,StringFormat='{0:f}'}"
+                            Text="{Binding OrderDate,StringFormat='{0:dd MMMM yyyy hh:mm tt}'}"
                            
                             HorizontalOptions="FillAndExpand"
                             HorizontalTextAlignment="Start" />

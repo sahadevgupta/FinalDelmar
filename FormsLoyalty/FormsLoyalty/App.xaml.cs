@@ -41,6 +41,7 @@ using System.Collections.Generic;
 using Plugin.FirebasePushNotification;
 using static LSRetail.Omni.Infrastructure.Data.Omniservice.Utils.Utils;
 using FormsLoyalty.PopUpView;
+using FormsLoyalty.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace FormsLoyalty
@@ -57,9 +58,22 @@ namespace FormsLoyalty
         public static List<string> choices = new List<string> { AppResources.txtSunday, AppResources.txtMonday, AppResources.txtTuesday, AppResources.txtWednesday, AppResources.txtThrusday,
                                                                 AppResources.txtFriday, AppResources.txtSaturday };
 
-        public static void CallPCLMethod(List<string> imageData)
+        public static async Task CallPCLMethod()
         {
-            throw new NotImplementedException();
+
+            var serverTasks = new List<Task>();
+
+            //var memberConatctTask = MemberConatcts.RefreshMemberContactAsync();
+            //serverTasks.Add(memberConatctTask);
+            var adsTask = MemberConatcts.LoadAdvertisementsFromServer();
+            serverTasks.Add(adsTask);
+            var categoriesTask = MemberConatcts.LoadCategories();
+            serverTasks.Add(categoriesTask);
+
+            var bestSellerItemsTask = MemberConatcts.LoadBestSellerItems();
+            serverTasks.Add(bestSellerItemsTask);
+
+            await Task.WhenAll(serverTasks).ConfigureAwait(false);
         }
 
         public App() : this(null) { }
@@ -127,9 +141,23 @@ namespace FormsLoyalty
 
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = Thread.CurrentThread.CurrentUICulture;
-            
 
-                
+            if(Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
+            {
+                Task.Run(async() =>
+                {
+                    try
+                    {
+                        AppData.GetSocialMediaStatusResult = await new CommonModel().GetSocialMediaDisplayStatusAsync();
+                    }
+                    catch (Exception ex)
+                    {
+
+                        Crashes.TrackError(ex);
+                    }
+
+                });
+            }
 
             var deviceId = DependencyService.Get<INotify>().getDeviceUuid();
 

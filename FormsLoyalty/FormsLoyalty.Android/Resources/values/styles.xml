@@ -38,7 +38,6 @@
   <style name="SplashTheme" parent="SplashTheme.Base">
   </style>
   <style name="SplashTheme.Base" parent="Theme.AppCompat.DayNight.DarkActionBar">
-    <item name="android:windowBackground">@drawable/welcome</item>
     <item name="android:windowNoTitle">true</item>
     <item name="android:windowIsTranslucent">false</item>
     <item name="android:windowIsFloating">false</item>

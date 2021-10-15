@@ -14,7 +14,7 @@
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers" xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              BackgroundColor="#B3f2f2ef"
              ios:Page.UseSafeArea="True"
-             >
+             x:Name="thisPage">
 
     <ContentPage.Resources>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
@@ -43,18 +43,29 @@
                 </Grid.GestureRecognizers>
 
                 <Label Text="{Binding ProfileName}" FontAttributes="Bold" FontSize="Body"
+                       x:Name="profilename"
                        MaxLines="2" LineBreakMode="TailTruncation"
                    HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"
-                   TextColor="Black" Grid.Row="0" Grid.Column="0">
+                   TextColor="Black" Grid.Row="0" Grid.Column="0"
+                       IsVisible="{Binding ProfileName,Converter={StaticResource StringToBoolConverter}}"/>
+
+
+
+                <Label Text="{Binding MobileNumber}" IsVisible="{Binding MobileNumber,Converter={StaticResource StringToBoolConverter}}" Grid.Row="1"/>
+
+                <Label FontAttributes="Bold" FontSize="Body"
+                       HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand"
+                       TextColor="Black" Grid.Row="0" Grid.RowSpan="2"
+                       Text="{x:Static resources:AppResources.txtGuest}">
                     <Label.Triggers>
-                        <DataTrigger TargetType="Label" Binding="{Binding ProfileName,Converter={StaticResource StringToBoolConverter}}"
-                                 Value="False">
-                            <Setter Property="Text" Value="{x:Static resources:AppResources.txtGuest}"/>
+                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Reference profilename},Path=IsVisible}"
+                                     Value="true">
+                            <Setter Property="IsVisible" Value="false"/>
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
 
-                <Label Text="{Binding MobileNumber}" IsVisible="{Binding MobileNumber,Converter={StaticResource StringToBoolConverter}}" Grid.Row="1"/>
+
 
                 <Image Source="right_arrow.png" Aspect="AspectFit"
                        HeightRequest="20"

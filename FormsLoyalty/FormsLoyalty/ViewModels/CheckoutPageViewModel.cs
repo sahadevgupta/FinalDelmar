@@ -254,8 +254,13 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _contact, value); }
         }
 
-
-
+            
+        private bool _isVisaOnDelivery;
+        public bool IsVisaOnDelivery
+        {
+            get { return _isVisaOnDelivery; }
+            set { SetProperty(ref _isVisaOnDelivery, value); }
+        }
 
 
         private bool _isSameAddress;
@@ -536,8 +541,9 @@ namespace FormsLoyalty.ViewModels
         {
             if (ValidateFields())
             {
+                CalculateBasket();
 
-                if(isCreditCard && string.IsNullOrEmpty(CardNumber))
+                if (isCreditCard && string.IsNullOrEmpty(CardNumber))
                   CardDesc = $"{AppResources.ResourceManager.GetString("NotificationViewExpires", AppResources.Culture)} {CardExpirationDate}";
 
                 ShippingAddressDesc = shippingAddress.FormatAddress;
@@ -768,16 +774,15 @@ namespace FormsLoyalty.ViewModels
 
         private void LoadBasket()
         {
-            basketItems = new ObservableCollection<OneListItem>(AppData.Basket.Items);
+            
             LoadBasketImage();
-            CalculateBasket();
+            
         }
 
         private void CalculateBasket()
         {
             try
             {
-
                 Task.Run(async () =>
                 {
 
@@ -796,39 +801,53 @@ namespace FormsLoyalty.ViewModels
                     basketOrder.ContactName = AppData.Device.UserLoggedOnToDevice.Name;
                     basketOrder.PhoneNumber = AppData.Device.UserLoggedOnToDevice.Phone;
 
-                   
-                        basketOrder.ShipToAddress = shippingAddress;
-                        basketOrder.ContactAddress = billingAddress;
-                        basketOrder.ShippingAgentServiceCode = "ISP";
-                        basketOrder.ClickAndCollectOrder = false;
 
-                        if (isCreditCard && !string.IsNullOrEmpty(CardNumber))
+                    basketOrder.ShipToAddress = shippingAddress;
+                    basketOrder.ContactAddress = billingAddress;
+                    basketOrder.ShippingAgentServiceCode = "ISP";
+                    basketOrder.ClickAndCollectOrder = false;
+
+                    if (isCreditCard && !string.IsNullOrEmpty(CardNumber))
+                    {
+                        basketOrder.OrderPayments.Add(new OrderPayment()
                         {
-                            basketOrder.OrderPayments.Add(new OrderPayment()
-                            {
-                                Amount = AppData.Basket.TotalAmount,
-                                CardType = "VISA",
-                                CurrencyCode = AppData.Device.UserLoggedOnToDevice.Environment.Currency.Id,
-                                AuthorizationCode = CardCvv,
-                                CardNumber = CardNumber,
-                                LineNumber = 1,
-                                TenderType = ((int)LoyTenderType.Card).ToString(),
-                            });
+                            Amount = AppData.Basket.TotalAmount,
+                            CardType = "VISA",
+                            CurrencyCode = AppData.Device.UserLoggedOnToDevice.Environment.Currency.Id,
+                            AuthorizationCode = CardCvv,
+                            CardNumber = CardNumber,
+                            LineNumber = 1,
+                            TenderType = ((int)LoyTenderType.Card).ToString(),
+                        });
+                    }
+                    else
+                    {
+                        var payment = new OrderPayment()
+                        {
+                            Amount = AppData.Basket.TotalAmount,
+                            CurrencyCode = AppData.Device.UserLoggedOnToDevice.Environment.Currency.Id,
+                            LineNumber = 1,
+
+                        };
+
+
+                        if (IsVisaOnDelivery)
+                        {
+                            payment.TenderType = ((int)LoyTenderType.Visa_On_Delivery).ToString();
                         }
                         else
                         {
-                            basketOrder.OrderPayments.Add(new OrderPayment()
-                            {
-                                Amount = AppData.Basket.TotalAmount,
-                                CurrencyCode = AppData.Device.UserLoggedOnToDevice.Environment.Currency.Id,
-                                LineNumber = 1,
-                                TenderType = ((int)LoyTenderType.Cash).ToString(),
-                            });
+                            payment.TenderType = ((int)LoyTenderType.Cash).ToString();
                         }
-                    
+                            
+                        basketOrder.OrderPayments.Add(payment);
+                    }
+
 
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
+                        
+                       
                         totalSubtotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalNetAmount + basketOrder.TotalDiscount);
                         totalShipping = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(AppData.Basket.ShippingAmount);
                         totalVAT = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount - basketOrder.TotalNetAmount);
@@ -837,6 +856,7 @@ namespace FormsLoyalty.ViewModels
                     });
                     IsPageEnabled = false;
                 });
+
             }
             catch (Exception)
             {
@@ -866,25 +886,29 @@ namespace FormsLoyalty.ViewModels
 
         public void LoadBasketImage()
         {
+            basketItems = new ObservableCollection<OneListItem>();
             try
             {
-                Task.Run(async () =>
+                foreach (var basketItem in AppData.Basket.Items)
                 {
-                    foreach (var basketItem in basketItems)
-                    {
-                        //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
-                        //{
-                        //    basketItem.= string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
-                        //}
-                        //else
-                        //{
-                        //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
-                        //}
+                    //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
+                    //{
+                    //    basketItem.= string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
+                    //}
+                    //else
+                    //{
+                    //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
+                    //}
 
+                    basketItem.DiscountAmount = basketItem.DiscountAmount * basketItem.Quantity;
+                    Task.Run(async () =>
+                    {
                         var imgView = await ImageHelper.GetImageById(basketItem.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
                         basketItem.Image.Image = imgView.Image;
-                    }
-                });
+                    });
+                    basketItems.Add(basketItem);
+                }
+
             }
             catch (Exception)
             {

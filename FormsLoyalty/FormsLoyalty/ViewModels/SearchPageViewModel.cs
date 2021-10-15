@@ -47,10 +47,7 @@ namespace FormsLoyalty.ViewModels
             set 
             { 
                 SetProperty(ref _SearchKey, value);
-                if (!string.IsNullOrEmpty(value))
-                {
-                    OnSearchQuery();
-                }
+                
             }
         }
 
@@ -71,15 +68,19 @@ namespace FormsLoyalty.ViewModels
 
 
         public DelegateCommand<object> ItemSelectedCommand { get; set; }
+        public DelegateCommand SearchCommand { get; set; }
         public SearchPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             FilterCommand = new DelegateCommand(async() => await OnFilterClicked());
             searchModel = new GeneralSearchModel();
 
             ItemSelectedCommand = new DelegateCommand<object>(async (data) => await NaviagteToNextPage(data));
+            SearchCommand = new DelegateCommand(async() => await ExecuteSearchCommand());
 
-           
+
         }
+
+       
 
         private async Task NaviagteToNextPage(object data)
         {
@@ -139,13 +140,18 @@ namespace FormsLoyalty.ViewModels
 
         #region Search
 
-        public void OnSearchQuery()
+        private async Task ExecuteSearchCommand()
+        {
+           await OnSearchQuery().ConfigureAwait(false);
+        }
+
+        public async Task OnSearchQuery()
         {
            
             if (SearchKey.Length > 2)
             {
                 if (SearchKey.Length > lastSearchLength)
-                    Search(false);
+                   await Search(false).ConfigureAwait(false);
                 else
                     searchModel.ResetSearch();
             }
@@ -155,7 +161,7 @@ namespace FormsLoyalty.ViewModels
             
         }
 
-        private async void Search(bool resetSearch)
+        private async Task Search(bool resetSearch)
         {
             IsPageEnabled = true;
             if (resetSearch)
@@ -163,7 +169,7 @@ namespace FormsLoyalty.ViewModels
 
             SearchType searchType = availableTypes.Where((t, i) => selectedTypes[i]).Aggregate<SearchType, SearchType>(0, (current, t) => current | t);
 
-            var results = await searchModel.Search(SearchKey, searchType);
+            var results = await searchModel.Search(SearchKey, searchType).ConfigureAwait(false);
 
             if (results != null)
             {

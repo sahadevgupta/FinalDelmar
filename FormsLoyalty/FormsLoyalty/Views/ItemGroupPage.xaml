@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com" 
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
-             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:behaviors="clr-namespace:FormsLoyalty.Behaviors" 
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls" 
@@ -82,9 +82,16 @@
                    BackgroundColor="White" BorderColor="#33BDC3C7"
                    Visual="Material">
 
-                
-                
-                <SearchBar HeightRequest="40" Placeholder="{x:Static resources:AppResources.txtItemSearch}" FontSize="Body" Text="{Binding SearchText}"/>
+
+
+                <SearchBar HeightRequest="40" Placeholder="{x:Static resources:AppResources.txtItemSearch}" FontSize="Body" Text="{Binding SearchText}">
+                    <SearchBar.Behaviors>
+                        <xct:UserStoppedTypingBehavior MinimumLengthThreshold="3" 
+                                                       Command="{Binding SearchCommand}"
+                                                       StoppedTypingTimeThreshold="1000"
+                                                       ShouldDismissKeyboardAutomatically="True"/>
+                    </SearchBar.Behaviors>
+                </SearchBar>
             </Frame>
 
 
@@ -250,7 +257,7 @@
                                                  Orientation="Horizontal"
                                                  Margin="10,0,10,0">
                                         <Label Text="{Binding NewPrice,StringFormat='{0} '}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                        <Label Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
+                                        <Label Text="{Binding ItemPrice}" FontSize="12" TextDecorations="Strikethrough" />
 
                                         <StackLayout.Triggers>
                                             <DataTrigger TargetType="StackLayout" Binding="{Binding Discount}" Value="0">
@@ -267,7 +274,7 @@
                                             <FormattedString>
                                                 <Span Text="{Binding NewPrice}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
                                                 <Span Text="  " FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                                <Span Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
+                                                <Span Text="{Binding ItemPrice}" FontSize="12" TextDecorations="Strikethrough" />
                                             </FormattedString>
                                         </Label.FormattedText>
 
@@ -280,7 +287,7 @@
                                     </Label>
 
 
-                                    <Label Text="{Binding Price}" IsVisible="false" 
+                                    <Label Text="{Binding ItemPrice}" IsVisible="false" 
                                                    Margin="10,0,10,0"
                                                    Grid.Row="2"
                                                    FontSize="16" FontAttributes="Bold">

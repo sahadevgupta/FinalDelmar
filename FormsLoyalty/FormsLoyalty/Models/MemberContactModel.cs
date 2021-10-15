@@ -20,6 +20,7 @@ using XF.Material.Forms.UI.Dialogs;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using Microsoft.AppCenter.Crashes;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
+using Infrastructure.Data.SQLite.MemberContacts;
 
 namespace FormsLoyalty.Models
 {
@@ -533,7 +534,7 @@ namespace FormsLoyalty.Models
         }
         public void SaveLocalMemberContact(MemberContact contact)
         {
-           var contactRepo = PrismApplicationBase.Current.Container.Resolve<IMemberContactLocalRepository>();
+           var contactRepo =  new MemberContactRepository();
 
             contactRepo.SaveMemberContact(contact);
         }
@@ -555,7 +556,7 @@ namespace FormsLoyalty.Models
         {
             service = new MemberContactService();
             repository = new MemberRepository();
-            deviceRepo = PrismApplicationBase.Current.Container.Resolve<IDeviceLocalRepository>();
+            deviceRepo = new DeviceRepository();
             sharedService = new SharedService(new SharedRepository());
         }
     }

@@ -15,13 +15,13 @@ namespace FormsLoyalty.Converters
             {
                 case SalesEntryStatus.Released:
                     return Color.FromHex("#06A9B1");
-                case SalesEntryStatus.Received_By_Store:
+                case SalesEntryStatus.Driver_Assigned:
                     return Color.FromHex("#E2BF79");
                 case SalesEntryStatus.Picking_Staff_Assigned:
                     return Color.FromHex("#858585");
-                case SalesEntryStatus.Driver_Assigned:
-                    return Color.FromHex("#080C0C");
                 case SalesEntryStatus.Delivered:
+                    return Color.FromHex("#080C0C");
+                case SalesEntryStatus.Cancelled:
                     return Color.FromHex("#B80606");
                 default:
                     return Color.FromHex("#06A9B1");

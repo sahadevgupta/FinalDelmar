@@ -39,7 +39,7 @@ namespace FormsLoyalty.ViewModels
         {
             if (IsActive)
             {
-                LoadData();
+               LoadData();
             }
         }
 
@@ -50,9 +50,17 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        void SetTransactions(List<SalesEntry> entries)
+        void LoadOrders(List<SalesEntry> entries)
         {
-            transactions = new ObservableCollection<SalesEntry>(entries);
+            transactions = new ObservableCollection<SalesEntry>();
+            foreach (var order in entries)
+            {
+
+                order.OrderDate = order.DocumentRegTime.ToLocalTime();
+                transactions.Add(order);
+            }
+
+            
         }
 
         private async void LoadData()
@@ -61,20 +69,12 @@ namespace FormsLoyalty.ViewModels
 
             if (AppData.Device.UserLoggedOnToDevice != null)
             {
-                if (AppData.Device.UserLoggedOnToDevice.SalesEntries?.Count > 0)
-                {
-                    var entries = AppData.Device.UserLoggedOnToDevice.TransactionOrderedByDate;
-                    SetTransactions(entries);
-
-                }
-                else
-                {
-                    await OnRefresh();
-                }
+                await GetOrderAsync();
+                
             }
             IsPageEnabled = false;
         }
-        public async Task OnRefresh()
+        public async Task GetOrderAsync()
         {
             try
             {
@@ -87,15 +87,25 @@ namespace FormsLoyalty.ViewModels
                     SaveLocalTransactions(loadedTransactions);
 
                     AppData.Device.UserLoggedOnToDevice.SalesEntries = loadedTransactions;
-                    SetTransactions(loadedTransactions);
+                    LoadOrders(loadedTransactions);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                LoadCacheOrder();
                 IsPageEnabled = false;
             }
           
+        }
+
+        private void LoadCacheOrder()
+        {
+            if (AppData.Device.UserLoggedOnToDevice.SalesEntries?.Count > 0)
+            {
+                var entries = AppData.Device.UserLoggedOnToDevice.TransactionOrderedByDate;
+                LoadOrders(entries);
+
+            }
         }
 
         private void SaveLocalTransactions(List<SalesEntry> transactions)

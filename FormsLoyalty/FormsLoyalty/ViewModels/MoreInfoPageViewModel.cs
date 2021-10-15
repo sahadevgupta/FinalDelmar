@@ -18,6 +18,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Unity;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 using ZXing.Net.Mobile.Forms;
 
 namespace FormsLoyalty.ViewModels
@@ -49,11 +50,7 @@ namespace FormsLoyalty.ViewModels
         public DelegateCommand RateAppCommand { get; set; }
         public MoreInfoPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            if (AppData.Device.UserLoggedOnToDevice != null)
-            {
-                ProfileName = AppData.Device.UserLoggedOnToDevice.Name;
-                MobileNumber = AppData.Device.UserLoggedOnToDevice.MobilePhone;
-            }
+            
             IsActiveChanged += MoreInfoPageViewModel_IsActiveChanged;
 
             RateAppCommand = new DelegateCommand(RateApp);
@@ -454,7 +451,13 @@ namespace FormsLoyalty.ViewModels
 
                 var item = await new ItemModel().GetItemByBarcode(barcode);
                 if (item != null)
+                {
                     await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "item", item } });
+                }  
+                else
+                {
+                    DependencyService.Get<INotify>().ShowToast(AppResources.ResourceManager.GetString("ItemModelItemNotFound", AppResources.Culture));
+                }
             }
             catch (Exception)
             {
@@ -497,14 +500,8 @@ namespace FormsLoyalty.ViewModels
 
                     try
                     {
-
-                   
-
                         var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
                         options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
-
-                        //var result = await scanner.Scan(options);
-
 
                         var overlay = new ZXingDefaultOverlay
                         {
@@ -534,14 +531,14 @@ namespace FormsLoyalty.ViewModels
                             string type = barcodeFormat.ToString();
 
 
-                           Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                           Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                             {
                                 DependencyService.Get<INotify>().ShowToast($"Scan Successful!!, Code : {result.Text}");
                                 //Navigation.PopAsync();
                                 navigation.PopAsync();
                                 string barcode = result.Text;
-                                ;
-                                NavigateToItemPage(barcode);
+                               
+                                GetItemByBarCode(barcode);
                             });
                         };
 
@@ -627,18 +624,17 @@ namespace FormsLoyalty.ViewModels
                     IsPageEnabled = true;
                     var membercontact = new MemberContactModel();
                     var isSuccess = await membercontact.Logout();
-                    if (true)
+                    if (isSuccess)
                     {
                         AppData.IsLoggedIn = false;
 
                         if (AppData.Basket != null)
                             AppData.Basket.Items.Clear();
 
+                        AppData.Device = null;
                         AppData.Device.UserLoggedOnToDevice = null;
-
                         AppData.BestSellers.Clear();
                         await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
-
                     }
 
                 }

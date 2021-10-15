@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Essentials;
+using XF.Material.Forms.Dialogs;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -55,7 +56,7 @@ namespace FormsLoyalty.ViewModels
             IsNotConnected = e.NetworkAccess != NetworkAccess.Internet;
             ConnectionChanged(IsNotConnected);
         }
-
+       
         public virtual void ConnectionChanged(bool IsNotConnected)
         {
 

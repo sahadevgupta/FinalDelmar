@@ -7,6 +7,7 @@ using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Items;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -87,10 +88,7 @@ namespace FormsLoyalty.ViewModels
             set
             {
                 SetProperty(ref _searchTextt, value);
-                if (value != null)
-                {
-                    SearchItems(value);
-                }
+                
             }
         }
 
@@ -135,7 +133,7 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _image, value); }
         }
 
-        Timer timer;
+        
 
 
         private int pageSize = 7;
@@ -143,31 +141,23 @@ namespace FormsLoyalty.ViewModels
 
         ItemModel itemModel;
         private List<LoyItem> LoyItems;
-       
+
+        public DelegateCommand SearchCommand { get; set; }
+
         public ItemGroupPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             itemModel = new ItemModel();
-
+            SearchCommand = new DelegateCommand(ExecuteSearchCommand);
             Items = new ObservableCollection<LoyItem>();
             
         }
-        #region SearchFilter
-        private void SearchItems(string value)
-        {
-            if (timer != null)
-            {
-                timer.Dispose();
-            }
-            SetUpTimer(TimeSpan.FromSeconds(1), value);
-        }
 
-        private void SetUpTimer(TimeSpan alertTime, string value)
+        private void ExecuteSearchCommand()
         {
-            this.timer = new Timer(x =>
-            {
-                this.GetItemOnSearch(value);
-            }, null, alertTime, Timeout.InfiniteTimeSpan);
+            GetItemOnSearch(SearchText);
         }
+        #region SearchFilter
+        
 
         private void GetItemOnSearch(string s_word)
         {
@@ -175,41 +165,69 @@ namespace FormsLoyalty.ViewModels
             Device.BeginInvokeOnMainThread(async() =>
             {
                 IsPageEnabled = true;
-                if (!string.IsNullOrEmpty(s_word))
+                try
                 {
-                    var items = await itemModel.GetItemsByPage(10, 1, ItemCategoryId, ProductGroupId, s_word, false, string.Empty);
-                    Items = new ObservableCollection<LoyItem>();
-                   
-                    if (items.Any())
+                    if (!string.IsNullOrEmpty(s_word) && s_word.Length >= 3)
                     {
-                        IsNoItemFound = false;
+                        var items = await itemModel.GetItemsByPage(7, 1, ItemCategoryId, ProductGroupId, s_word, false, string.Empty);
+                        Items = new ObservableCollection<LoyItem>();
 
-                        foreach (var loyItem in items)
+                        if (items.Any())
                         {
-                            if (loyItem.Prices.Count > 0)
+                            IsNoItemFound = false;
+
+                            foreach (var loyItem in items)
                             {
-                                loyItem.Price = loyItem.PriceFromVariantsAndUOM(loyItem.SelectedVariant?.Id, loyItem.SelectedUnitOfMeasure?.Id);
+                                if (AppData.Basket != null)
+                                {
+                                    var isExist = AppData.Basket.Items?.Any(x => x.ItemId == loyItem.Id);
+                                    if (isExist == true)
+                                    {
+                                        var basketItem = AppData.Basket.Items.FirstOrDefault(x => x.ItemId == loyItem.Id);
+                                        loyItem.Quantity = basketItem.Quantity;
+                                    }
+                                    else
+                                        loyItem.Quantity = 0;
+                                }
+
+                                if (AppData.Device.UserLoggedOnToDevice?.GetWishList(AppData.Device.CardId).Items?.Any(x => x.ItemId == loyItem.Id) == true)
+                                {
+                                    loyItem.IsWishlisted = true;
+                                }
+                                else
+                                    loyItem.IsWishlisted = false;
+
                                 if (loyItem.Discount > 0)
                                 {
-                                    var discountedPrice = (loyItem.Discount / 100) * Convert.ToDecimal(loyItem.Price);
-                                    loyItem.NewPrice = (Convert.ToDecimal(loyItem.Price) - discountedPrice).ToString("F", CultureInfo.InvariantCulture);
+                                    var discountedPrice = (loyItem.Discount / 100) * Convert.ToDecimal(loyItem.ItemPrice);
+                                    loyItem.NewPrice = (Convert.ToDecimal(loyItem.ItemPrice) - discountedPrice).ToString("F", CultureInfo.InvariantCulture);
                                 }
+
+                                Items.Add(loyItem);
+
                             }
-                            Items.Add(loyItem);
-
+                            //TempList.ToList().AddRange(items);
+                            LoadItemImage();
                         }
-                        //TempList.ToList().AddRange(items);
-                        LoadItemImage();
+
+                        else
+                            IsNoItemFound = true;
+
                     }
-                       
                     else
-                        IsNoItemFound = true;
-
+                        Items = new ObservableCollection<LoyItem>(TempList);
                 }
-                else
-                    Items = new ObservableCollection<LoyItem>(TempList);
+                catch (Exception ex)
+                {
 
-                IsPageEnabled = false;
+                    Crashes.TrackError(ex);
+                }
+                finally
+                {
+                    IsPageEnabled = false;
+                }
+
+                
             });
         }
         #endregion
@@ -236,6 +254,13 @@ namespace FormsLoyalty.ViewModels
                             else
                                 item.Quantity = 0;
                         }
+
+                        if (AppData.Device.UserLoggedOnToDevice?.GetWishList(AppData.Device.CardId).Items?.Any(x => x.ItemId == item.Id) == true)
+                        {
+                            item.IsWishlisted = true;
+                        }
+                        else
+                            item.IsWishlisted = false;
 
                         if (item.Images.Count > 0)
                         {
@@ -508,15 +533,22 @@ namespace FormsLoyalty.ViewModels
         {
             foreach (var loyItem in loyItems)
             {
-                if (loyItem.Prices.Count > 0)
+                //if (loyItem.Prices.Count > 0)
+                //{
+                //    loyItem.Price = loyItem.PriceFromVariantsAndUOM(loyItem.SelectedVariant?.Id, loyItem.SelectedUnitOfMeasure?.Id);
+                //    if (loyItem.Discount > 0)
+                //    {
+                //        var discountedPrice = (loyItem.Discount / 100) * Convert.ToDecimal( loyItem.Price);
+                //        loyItem.NewPrice = (Convert.ToDecimal(loyItem.Price) - discountedPrice).ToString("F",CultureInfo.InvariantCulture);
+                //    }
+                //}
+
+                if (loyItem.Discount > 0)
                 {
-                    loyItem.Price = loyItem.PriceFromVariantsAndUOM(loyItem.SelectedVariant?.Id, loyItem.SelectedUnitOfMeasure?.Id);
-                    if (loyItem.Discount > 0)
-                    {
-                        var discountedPrice = (loyItem.Discount / 100) * Convert.ToDecimal( loyItem.Price);
-                        loyItem.NewPrice = (Convert.ToDecimal(loyItem.Price) - discountedPrice).ToString("F",CultureInfo.InvariantCulture);
-                    }
+                    var discountedPrice = (loyItem.Discount / 100) * Convert.ToDecimal(loyItem.ItemPrice);
+                    loyItem.NewPrice = (Convert.ToDecimal(loyItem.ItemPrice) - discountedPrice).ToString("F", CultureInfo.InvariantCulture);
                 }
+
                 Items.Add(loyItem);
                
             }
@@ -537,9 +569,8 @@ namespace FormsLoyalty.ViewModels
 
                 pageNumber = Convert.ToInt32(num);
 
-
-                var items = await itemModel.GetItemsByPage(pageSize, pageNumber, ItemCategoryId, productGroupId, string.Empty,IsSortedDesc,SelectedSortOption);
-                if (items.Any())
+                var items = await itemModel.GetItemsByPage(pageSize, pageNumber, ItemCategoryId, productGroupId, SearchText,IsSortedDesc,SelectedSortOption);
+                if (items!=null && items.Any())
                 {
                     IsNoItemFound = false;
                     CalculateItemPrice(items);

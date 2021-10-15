@@ -24,8 +24,16 @@ namespace FormsLoyalty.Helpers
                 ItemDescription = loyItem.Description,
                 Image = loyItem.DefaultImage,
                 Quantity = Quantity,
-                Price = loyItem.AmtFromVariantsAndUOM(loyItem.SelectedVariant?.Id, loyItem.SelectedUnitOfMeasure?.Id)
+                Price = loyItem.AmtFromVariantsAndUOM(loyItem.SelectedVariant?.Id, loyItem.SelectedUnitOfMeasure?.Id),
+                
+               
             };
+
+            if (loyItem.Discount > 0)
+            {
+                basketItem.DiscountAmount = loyItem.ItemPrice - Convert.ToDecimal(loyItem.NewPrice);
+                basketItem.DiscountPercent = loyItem.Discount;
+            }
 
             if (loyItem.SelectedVariant != null)
             {

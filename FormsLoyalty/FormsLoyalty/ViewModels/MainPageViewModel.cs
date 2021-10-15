@@ -62,12 +62,7 @@ namespace FormsLoyalty.ViewModels
         }
 
 
-        private int _carouselPostion;
-        public int CarouselPosition
-        {
-            get { return _carouselPostion; }
-            set { SetProperty(ref _carouselPostion, value); }
-        }
+        
 
         #region Search
         private int lastSearchLength;
@@ -79,9 +74,9 @@ namespace FormsLoyalty.ViewModels
             set
             {
                 SetProperty(ref _searchKey, value);
-                if (!string.IsNullOrEmpty(value))
+                if (string.IsNullOrEmpty(value))
                 {
-                    //OnSearchQuery();
+                    IsSuggestionFound = false;
                 }
             }
         }
@@ -100,7 +95,7 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _myPoints, value); }
         }
 
-        public Timer timer { get; set; }
+       
 
         GeneralSearchModel searchModel;
         ItemModel itemModel;
@@ -128,6 +123,7 @@ namespace FormsLoyalty.ViewModels
 
         #region Commands
         public DelegateCommand<Advertisement> OnAdTappedCommand { get; set; }
+        public DelegateCommand SearchCommand { get; set; }
         #endregion
 
         public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
@@ -146,8 +142,10 @@ namespace FormsLoyalty.ViewModels
             DependencyService.Get<INotify>().ChangeTabBarFlowDirection(RTL);
 
             OnAdTappedCommand = new DelegateCommand<Advertisement>(async(data) => await OnAdSelected(data));
-
+            SearchCommand = new DelegateCommand(async() => await ExecuteSearchCommandAsync());
         }
+
+       
 
         private async Task OnAdSelected(Advertisement data)
         {
@@ -157,33 +155,41 @@ namespace FormsLoyalty.ViewModels
                 switch (data.AdsType)
                 {
                     case AdsType.Item:
-
-                        await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "itemId", data.AppValue } });
+                        if(!string.IsNullOrEmpty(data.AppValue))
+                             await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "itemId", data.AppValue } });
 
                         break;
                     case AdsType.Offer:
-
-                        var offer = AppData.Device.UserLoggedOnToDevice.PublishedOffers.FirstOrDefault(x => x.Id == data.AppValue);
-                        if (offer != null)
+                        if (!string.IsNullOrEmpty(data.AppValue))
                         {
 
-                            await NavigationService.NavigateAsync(nameof(OfferDetailsPage), new NavigationParameters { { "offer", offer } });
+                            var offer = AppData.Device.UserLoggedOnToDevice.PublishedOffers.FirstOrDefault(x => x.Id == data.AppValue);
+                            if (offer != null)
+                            {
 
+                                await NavigationService.NavigateAsync(nameof(OfferDetailsPage), new NavigationParameters { { "offer", offer } });
+
+                            }
                         }
                         break;
                     case AdsType.Magazine:
-                        await Launcher.TryOpenAsync(new Uri(data.AppValue));
+                        if (!string.IsNullOrEmpty(data.AppValue))
+                            await Launcher.TryOpenAsync(new Uri(data.AppValue));
                         break;
                     case AdsType.Search:
-                        var result = data.AppValue.Split(',');
-
-                        var items = await itemModel.GetItemsByPage(7, 1, result[0], result[1], result[2], false, string.Empty);
-                        if (items.Any())
+                        if (!string.IsNullOrEmpty(data.AppValue))
                         {
-                            await NavigationService.NavigateAsync(nameof(ItemGroupPage), new NavigationParameters { { "items", items } });
 
+
+                            var result = data.AppValue.Split(',');
+
+                            var items = await itemModel.GetItemsByPage(7, 1, result[0], result[1], result[2], false, string.Empty);
+                            if (items.Any())
+                            {
+                                await NavigationService.NavigateAsync(nameof(ItemGroupPage), new NavigationParameters { { "items", items } });
+
+                            }
                         }
-
                         break;
                     default:
                         break;
@@ -480,10 +486,27 @@ namespace FormsLoyalty.ViewModels
                 NavigateToScanPage(imgData);
             }
 
-           
+
         }
 
         #region Search
+
+        private async Task ExecuteSearchCommandAsync()
+        {
+            if (IsPageEnabled) return;
+            IsPageEnabled = true;
+
+            if (!string.IsNullOrEmpty(SearchKey))
+            {
+                await OnSearchQuery(SearchKey);
+
+            }
+            else
+               IsSuggestionFound = false;
+
+            IsPageEnabled = false;
+        }
+       
 
         public async Task OnSearchQuery(string SearchKey)
         {
@@ -491,10 +514,7 @@ namespace FormsLoyalty.ViewModels
             if (SearchKey.Length > 2)
             {
                 IsSuggestionFound = true;
-                if (SearchKey.Length > lastSearchLength)
-                    await LoadSearch(SearchKey);
-                else
-                    searchModel.ResetSearch();
+                await LoadSearch(SearchKey).ConfigureAwait(false);
             }
             else
             IsSuggestionFound = false;
@@ -509,7 +529,7 @@ namespace FormsLoyalty.ViewModels
             try
             {
                 var model = new ItemModel();
-                var items = await model.GetItemsByPage(10, 1, string.Empty, string.Empty, SearchKey, false, string.Empty);
+                var items = await model.GetItemsByPage(10, 1, string.Empty, string.Empty, SearchKey, false, string.Empty).ConfigureAwait(false);
                 Items = new ObservableCollection<LoyItem>(items);
 
                 LoadImages();
@@ -606,15 +626,19 @@ namespace FormsLoyalty.ViewModels
         /// <summary>
         /// This method is used to load data on page startup
         /// </summary>
-        private void LoadData()
+        private async void LoadData()
         {
             IsPageEnabled = true;
+            var loading = await MaterialDialog.Instance.LoadingDialogAsync(message: AppResources.loading);
             try
             {
+                
+
+
                 if (AppData.Advertisements != null && AppData.Advertisements.Count > 0)
                 {
                     LoadAdvertisements();
-                    StartTimer();
+                    
                 }
                 else
                 {
@@ -626,12 +650,14 @@ namespace FormsLoyalty.ViewModels
                 // LoadMostViewedItems();
 
                 LoadOffers();
+
+               await loading.DismissAsync();
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
                 IsPageEnabled = false;
-                
+                await loading.DismissAsync();
             }
             IsPageEnabled = false;
         }
@@ -677,37 +703,11 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
-        int count = 0;
+      
 
        
 
-        public void StartTimer()
-        {
-            //Xamarin.Forms.Device.StartTimer(TimeSpan.FromSeconds(5), (Func<bool>)(() =>
-            //{
-            //    //var num = count + 10;
-            //    //double point = (double)num / 50;
-            //    //Progress = point;
-            //    //count += 10;
-            //    //if (Progress > 1)
-            //    //{
-            //    //    Progress = count = 0;
-            //    //    CarouselPosition = (CarouselPosition + 1) % advertisements.Count;
-            //    //}
-            //    CarouselPosition = (CarouselPosition + 1) % advertisements.Count;
-            //    return true;
-            //}));
-
-           timer = new System.Timers.Timer(7000);
-            timer.AutoReset = true;
-            timer.Elapsed += (s, e) =>
-            {
-                CarouselPosition = (CarouselPosition + 1) % advertisements.Count;
-
-            };
-            timer.Start();
-
-        }
+       
         private void LoadMostViewedItems(int retryCounter = 3)
         {
             if (AppData.MostViewed == null || AppData.MostViewed?.Count == 0)
@@ -834,7 +834,13 @@ namespace FormsLoyalty.ViewModels
                                 else
                                     item.Quantity = 0;
                             }
-                         
+
+                            if (AppData.Device.UserLoggedOnToDevice?.GetWishList(AppData.Device.CardId).Items?.Any(x => x.ItemId == item.Id) == true)
+                            {
+                                item.IsWishlisted = true;
+                            }
+                            else
+                                item.IsWishlisted = false;
 
                             if (item.Images.Count > 0)
                             {
@@ -959,6 +965,7 @@ namespace FormsLoyalty.ViewModels
         public void LoadAdvertisements()
         {
             advertisements = new ObservableCollection<Advertisement>(AppData.Advertisements);
+            LoadAdsImage();
         }
 
         private async void LoadAdvertisementsFromServer()
@@ -971,7 +978,7 @@ namespace FormsLoyalty.ViewModels
                     var ads = await service.AdvertisementsGetByIdAsync("LOY", AppData.Device?.UserLoggedOnToDevice?.Id);
 
                     advertisements = new ObservableCollection<Advertisement>(ads);
-                    StartTimer();
+                    
                     LoadAdsImage();
 
                     AppData.Advertisements = advertisements.ToList();
@@ -1034,7 +1041,7 @@ namespace FormsLoyalty.ViewModels
         public override void OnNavigatedFrom(INavigationParameters parameters)
         {
             base.OnNavigatedFrom(parameters);
-            timer.Stop();
+            
             MessagingCenter.Unsubscribe<App, List<Tuple<byte[], string>>>((App)Xamarin.Forms.Application.Current, "ImagesSelected");
 
         }
@@ -1043,8 +1050,6 @@ namespace FormsLoyalty.ViewModels
         {
             base.OnNavigatedTo(parameters);
 
-            if (timer != null)
-                timer.Start();
 
             var navigationMode = parameters.GetNavigationMode();
             switch (navigationMode)

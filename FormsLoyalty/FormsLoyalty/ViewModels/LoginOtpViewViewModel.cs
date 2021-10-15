@@ -12,6 +12,7 @@ using FormsLoyalty.Utils;
 using FormsLoyalty.Helpers;
 using FormsLoyalty.Interfaces;
 using FormsLoyalty.Views;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -100,8 +101,9 @@ namespace FormsLoyalty.ViewModels
                 IsResendEnabled = false;
                 StartTimer();
             }
-                
-            //DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
+              
+            if(!AppData.GetSocialMediaStatusResult && Device.RuntimePlatform == Device.iOS)
+                MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
 
             IsPageEnabled = false;
         }

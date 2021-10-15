@@ -140,7 +140,7 @@ namespace FormsLoyalty.ViewModels
                     id = ImageList.Count() + 1,
                     imageExtension = extension.Replace(".", ""),
                     ImagedBase64 = Convert.ToBase64String(file.GetStream().ToByteArray()),
-                     ContactNo = AppData.Device.CardId
+                     ContactNo = AppData.Device.UserLoggedOnToDevice.Id
                 };
 
                 ImageList.Add(scansend);

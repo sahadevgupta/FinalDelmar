@@ -226,16 +226,7 @@ namespace FormsLoyalty.Views
             view.Opacity = 1;
         }
 
-        private async void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (!string.IsNullOrEmpty(autosuggestview.Text))
-            {
-                await _viewModel.OnSearchQuery(autosuggestview.Text);
-
-            }
-            else
-                _viewModel.IsSuggestionFound = false;
-        }
+        
 
         private void itemsuggestionListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

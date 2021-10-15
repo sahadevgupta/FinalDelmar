@@ -337,7 +337,17 @@ namespace FormsLoyalty.ViewModels
             memberContact.FirstName = FirstName;
             memberContact.LastName = LastName;
             memberContact.Name = $"{FirstName} {LastName}";
-            memberContact.Addresses = new List<Address> { Address };
+
+            if (memberContact.Addresses.Any())
+            {
+                memberContact.Addresses.Remove(memberContact.Addresses.First(x => x.LineNO == Address.LineNO));
+                memberContact.Addresses.Add(Address);
+            }
+            else
+            {
+                memberContact.Addresses = new List<Address> { Address };
+            }
+
             memberContact.LoggedOnToDevice = AppData.Device;
             memberContact.MobilePhone = MobileNumber;
             memberContact.UserName = MobileNumber;

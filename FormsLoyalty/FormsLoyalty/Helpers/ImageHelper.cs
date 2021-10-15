@@ -96,22 +96,22 @@ namespace FormsLoyalty.Helpers
                     return null;  
                 }
                
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    var file = await DependencyService.Get<IMediaService>().TakePhotoAsync(new CameraMediaStorageOptions()
-                    {
+                //if (Device.RuntimePlatform == Device.Android)
+                //{
+                //    var file = await DependencyService.Get<IMediaService>().TakePhotoAsync(new CameraMediaStorageOptions()
+                //    {
 
-                        Name = "test",
-                        SaveMediaOnCapture = true,
-                        DefaultCamera = CameraDevice.Front,
-                        MaxPixelDimension = 400,
-                        PercentQuality = 50
-                    });
+                //        Name = "test",
+                //        SaveMediaOnCapture = true,
+                //        DefaultCamera = CameraDevice.Front,
+                //        MaxPixelDimension = 400,
+                //        PercentQuality = 50
+                //    });
 
-                    return new Plugin.Media.Abstractions.MediaFile(file.Path, () => streamgetter(file));
-                }
-                else
-                {
+                //    return new Plugin.Media.Abstractions.MediaFile(file.Path, () => streamgetter(file));
+                //}
+                //else
+                //{
                     await CrossMedia.Current.Initialize();
 
                     if (!CrossMedia.Current.IsCameraAvailable || !CrossMedia.Current.IsTakePhotoSupported)
@@ -136,7 +136,7 @@ namespace FormsLoyalty.Helpers
 
                     }
                     return file;
-                }
+                //}
             }
             catch (Exception ex)
             {

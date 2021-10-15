@@ -29,11 +29,14 @@ namespace FormsLoyalty.Views
         private void CarouselView_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
         {
             var currentImgView = e.CurrentItem as ImageView;
-
-            Task.Run(async() =>
+            if(currentImgView != null)
             {
-                currentImgView.Image = await _viewModel.GetImageById(currentImgView.Id);
-            });
+                Task.Run(async () =>
+                {
+                    currentImgView.Image = await _viewModel.GetImageById(currentImgView.Id);
+                }).ConfigureAwait(false);
+            }
+           
 
             
         }

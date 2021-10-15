@@ -38,8 +38,7 @@ namespace FormsLoyalty.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            _viewModel.CheckCartCount(null);
+           
         }
 
         bool value = true;

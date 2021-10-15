@@ -106,7 +106,7 @@
 
 
                 <StackLayout Margin="0,30,0,0" Orientation="Horizontal" HorizontalOptions="FillAndExpand" Grid.Row="2"
-                             VerticalOptions="End">
+                             VerticalOptions="End" IsVisible="{Binding IsSocialMediaLoginVisible}">
 
                     <BoxView BackgroundColor="#33222222" HorizontalOptions="FillAndExpand" HeightRequest="0.5" VerticalOptions="Center"/>
                     <Label 
@@ -119,7 +119,7 @@
                 </StackLayout>
 
 
-                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center" Grid.Row="3"  >
+                <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center" Grid.Row="3"  IsVisible="{Binding IsSocialMediaLoginVisible}">
                     <Grid HeightRequest="40" WidthRequest="40">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OnSocialLoginCommand}"

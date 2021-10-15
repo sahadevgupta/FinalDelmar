@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using System.Globalization;
 using System.IO;
 using System.Text;
@@ -73,6 +73,24 @@ namespace FormsLoyalty.Converters
                 imgSource = ImageSource.FromFile("no_image.png");
                 return imgSource;
             }
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class DefaultImageConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if(value is string img && !string.IsNullOrEmpty(img))
+            {
+               
+                   return img.Equals("noimage.png");
+            }
+            return false;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)

@@ -2,6 +2,7 @@
 using Foundation;
 using ImageCircle.Forms.Plugin.iOS;
 using Microsoft.AppCenter.Crashes;
+using PanCardView.iOS;
 using Plugin.FacebookClient;
 using Plugin.FirebasePushNotification;
 using Plugin.GoogleClient;
@@ -50,7 +51,7 @@ namespace FormsLoyalty.iOS
             ImageCircleRenderer.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             XF.Material.iOS.Material.Init();
-
+            CardsViewRenderer.Preserve();
             var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
                                UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,
                                new NSSet());

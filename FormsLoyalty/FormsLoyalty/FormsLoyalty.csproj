@@ -32,6 +32,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="CardsView" Version="2.8.0" />
     <PackageReference Include="Microsoft.AppCenter" Version="3.4.1" />
     <PackageReference Include="Microsoft.AppCenter.Analytics" Version="3.4.1" />
     <PackageReference Include="Microsoft.AppCenter.Crashes" Version="3.4.1" />
@@ -89,6 +90,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ContentPageTitleView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Controls\CustomImageControl.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Controls\ExtendedPicker.xaml">

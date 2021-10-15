@@ -148,12 +148,12 @@ namespace FormsLoyalty.iOS.Services
 
         public void ShowLocalNotification(string title, string body)
         {
-            throw new NotImplementedException();
+            
         }
 
         public void ShowLocalNotification(string title, string body, int id, DateTime notifyTime)
         {
-            throw new NotImplementedException();
+           
         }
 
         public void ShowSnackBar(string description)

@@ -37,11 +37,11 @@ namespace FormsLoyalty.Views
                 }
                 else
                 {
-                    if (Device.RuntimePlatform == Device.Android)
-                    {
-                        _viewModel.NavigateToCameraView();
-                    }
-                    else
+                    //if (Device.RuntimePlatform == Device.Android)
+                    //{
+                    //    _viewModel.NavigateToCameraView();
+                    //}
+                    //else
                         await _viewModel.TakePickure();
                 }
                     

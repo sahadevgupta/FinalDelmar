@@ -89,14 +89,19 @@
                        
                         <StackLayout  Margin="-5,-5,-5,0">
 
-                            <Grid>
+
+                            <controls1:CustomImageControl ImageHeight="150"  UriImageSource="{Binding Images[0].Image}"
+                                                                             Grid.Row="0"/>
+
+
+                            <!--<Grid>
                                 <controls1:LoadingImageView/>
                                 <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
                                          DownsampleToViewSize="True"
                                    HeightRequest="150"
                                    Aspect="AspectFill"
                                    />
-                            </Grid>
+                            </Grid>-->
                             
                             <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                            FontSize="Small"

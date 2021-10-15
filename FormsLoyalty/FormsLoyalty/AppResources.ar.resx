@@ -531,6 +531,9 @@
   <data name="ChangePasswordViewPasswordConfirmation" xml:space="preserve">
     <value>تأكيد كلمة السر الجديدة</value>
   </data>
+  <data name="CheckoutAddressNote" xml:space="preserve">
+    <value>يمكنك اضافة عنوان جديد او تعديل العنوان الحالي من ملفك الشخصي</value>
+  </data>
   <data name="CheckoutViewAddressOne" xml:space="preserve">
     <value>عنوان ١</value>
   </data>

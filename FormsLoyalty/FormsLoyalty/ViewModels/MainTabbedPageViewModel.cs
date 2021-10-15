@@ -15,6 +15,7 @@ using Unity;
 using Unity.Lifetime;
 using Xamarin.Essentials;
 using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -60,23 +61,27 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _badgeCount, value); }
         }
 
-        private readonly IUnityContainer _unityContainer;
+        public static bool _isInitialized = false;
         public Page currentTab;
        
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            RTL = Settings.RTL;
-            //if (!AppData.IsLanguageChanged)
-            //{
-                RefreshMemberContact();
-            //}
-               
+            if (!_isInitialized)
+            {
+                _isInitialized = true;
+                LoadData();
+            }
+            
+        }
 
+        void LoadData()
+        {
+            RTL = Settings.RTL;
+            
+            RefreshMemberContact();
+            
             MessagingCenter.Subscribe<BasketModel>(this, "CartUpdated", CheckCartCount);
             MessagingCenter.Subscribe<App>((App)Xamarin.Forms.Application.Current, "LoggedIn", ReloadView);
-
-            
-            
         }
 
         private void ReloadView(App obj)
@@ -86,36 +91,42 @@ namespace FormsLoyalty.ViewModels
 
         internal void CheckCartCount(BasketModel obj)
         {
-            if (AppData.Basket!=null)
-            {
-                BadgeCount = AppData.Basket.Items.Count == 0 ? null : AppData.Basket.Items.Count.ToString();
-            }
+            
+                BadgeCount = AppData.Basket?.Items.Count == 0 ? null : AppData.Basket.Items.Count.ToString();
+            
         }
 
         /// <summary>
         /// Get User info 
         /// </summary>
-        void RefreshMemberContact()
+         void RefreshMemberContact()
         {
             AppData.IsFirstTimeMemberRefresh = true;
+
+           
+
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 try
                 {
                     Task.Run(async() =>
                     {
-                        if (EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null)
+
+                       // var loading = await MaterialDialog.Instance.LoadingDialogAsync(message: AppResources.loading);
+
+                        if (AppData.Device.UserLoggedOnToDevice != null)
                         {
                             var memberContactModel = new MemberContactModel();
                             await memberContactModel.UserGetByCardId(AppData.Device.CardId);
-
                             CheckCartCount(null);
-                           
+
                             //GetPoints();
                             //NotificationCountChanged();
                             //GetWishlistCount();
                             //CouponsCountChanged();
                         }
+                        
+                     // await  loading.DismissAsync();
                     });
                    
                 }

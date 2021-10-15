@@ -15,6 +15,7 @@ using Prism.Services;
 using Prism.Unity;
 using Prism;
 using Xamarin.Essentials;
+using Infrastructure.Data.SQLite.Devices;
 
 namespace FormsLoyalty.Utils
 {
@@ -54,7 +55,7 @@ namespace FormsLoyalty.Utils
             {
                 if (device == null)
                 {
-                    _deviceLocalRepository = PrismApplicationBase.Current.Container.Resolve<IDeviceLocalRepository>();
+                    _deviceLocalRepository = new DeviceRepository();
                     device = _deviceLocalRepository.GetDevice();
                                                                                
                     if (device.UserLoggedOnToDevice == null)
@@ -64,7 +65,7 @@ namespace FormsLoyalty.Utils
                     {
                         if (device.UserLoggedOnToDevice != null)
                         {
-                            _memberContactRepo = PrismApplicationBase.Current.Container.Resolve<IMemberContactLocalRepository>();
+                            _memberContactRepo = new MemberContactRepository();
                             var contact = _memberContactRepo.GetLocalMemberContact();
 
                             if (contact != null)
@@ -133,6 +134,9 @@ namespace FormsLoyalty.Utils
         public static bool IsViewStock = false;
         public static bool IsLanguageChanged = false;
         public static bool IsFirstTimeMemberRefresh = false;
+
+        public static bool GetSocialMediaStatusResult;
+
         public static string Msg { get; set; }
         public static string MyPoints { get; set; }
         public static Device device;

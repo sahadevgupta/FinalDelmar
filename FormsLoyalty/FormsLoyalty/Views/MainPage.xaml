@@ -4,6 +4,7 @@
              xmlns:prism="http://prismlibrary.com" xmlns:converters="clr-namespace:FormsLoyalty.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.MainPage"
+             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
@@ -16,7 +17,9 @@
              Visual="Material"
              NavigationPage.HasNavigationBar="False"
             ios:Page.UseSafeArea="True"
-            xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+            xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:cardView="clr-namespace:PanCardView;assembly=PanCardView"
+             xmlns:cardViewControls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              x:Name="thisPage">
 
     <ContentPage.Triggers>
@@ -30,10 +33,18 @@
 
 
     <ContentPage.Resources>
+        <ResourceDictionary>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
 
-      
+            <Style x:Key="ActiveIndicatorColor" TargetType="cardViewControls:IndicatorsControl">
+                <Setter Property="BackgroundColor" Value="{DynamicResource My_Button_Color}" />
+        </Style>
+        <Style x:Key="InactiveIndicatorColor" TargetType="Frame">
+            <Setter Property="BackgroundColor" Value="Transparent" />
+            <Setter Property="OutlineColor" Value="#bdbdbd" />
+        </Style>
+        </ResourceDictionary>
     </ContentPage.Resources>
 
     <RelativeLayout BackgroundColor="WhiteSmoke">
@@ -160,15 +171,25 @@
 
                     <Grid  ColumnDefinitions="*,Auto" RowDefinitions="60" VerticalOptions="End" Margin="20,0,20,0"
                          HorizontalOptions="FillAndExpand"  >
+                        
                         <Frame HeightRequest="60"   Margin="10" Padding="0" VerticalOptions="End" HorizontalOptions="FillAndExpand" 
                                  BackgroundColor="#D03E3E" Visual="Material"
                                  IsClippedToBounds="True" CornerRadius="10">
 
-                            <SearchBar TextChanged="SearchBar_TextChanged" Placeholder="{x:Static resources:AppResources.ActionbarSearch}"
+                            <SearchBar Placeholder="{x:Static resources:AppResources.ActionbarSearch}"
                                        x:Name="autosuggestview" Visual="Material" PlaceholderColor="#B3FFFFFF"
                                        ios:SearchBar.SearchBarStyle="Minimal"
                                        Margin="{OnPlatform iOS='-5,0,-5,0'}"
-                                        TextColor="White" HorizontalOptions="FillAndExpand" />
+                                       Text="{Binding SearchKey}"
+                                        TextColor="White" HorizontalOptions="FillAndExpand" >
+                                <SearchBar.Behaviors>
+                                    <xct:UserStoppedTypingBehavior MinimumLengthThreshold="3" 
+                                                       Command="{Binding SearchCommand}"
+                                                       StoppedTypingTimeThreshold="1000"
+                                                       ShouldDismissKeyboardAutomatically="True"/>
+                                </SearchBar.Behaviors>
+
+                            </SearchBar>
 
                             <!--<controls:CustomAutoSuggestBox IsVisible="false"
                                                        Margin="5,0,5,0"
@@ -215,42 +236,41 @@
                         >
 
                 <Grid RowDefinitions="200,Auto,Auto,Auto">
-            
-            <StackLayout  Margin="5,0,5,10">
-                <CarouselView ItemsSource="{Binding advertisements}"
-                          x:Name="carousel" Position="{Binding CarouselPosition}"
-                  IndicatorView="indicatorView"
-                       HorizontalScrollBarVisibility="Never"
-                          >
-                    <CarouselView.ItemTemplate>
-                        <DataTemplate>
-                                <Frame  Padding="0" Visual="Material" CornerRadius="10" 
-                                        x:Name="frame"
+
+                   
+                        <cardView:CoverFlowView Grid.Row="0"
+                            Margin="5,0,5,0"
+                x:Name="carousel"
+                
+                IsCyclical="False"
+                ItemsSource="{Binding advertisements}"
+                PositionShiftValue="65"
+                SlideShowDuration="3500">
+
+                            <cardView:CardsView.ItemTemplate>
+                                <DataTemplate>
+
+                                    <yummy:PancakeView
                                         xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
-                                        
                                         xct:TouchEffect.PressedBackgroundColor="LightPink"
                                         xct:TouchEffect.NormalBackgroundColor="Transparent"
-                                        >
+                            Margin="35,0,44,35"
+                            Padding="0"
+                            BackgroundColor="White"
+                            CornerRadius="10"
+                            Elevation="10"
+                            HasShadow="False"
+                            HeightRequest="200">
 
-                                       
+                                        <Grid IsClippedToBounds="True">
 
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.OnAdTappedCommand,Source={x:Reference carousel}}"
-                                                                  CommandParameter="{Binding .}"/>
-
-                                           
-
-                                        </Frame.GestureRecognizers>
-                                    
-                                    <Grid IsClippedToBounds="True">
-
-                                        <controls:LoadingImageView/>
+                                            <controls:LoadingImageView/>
                                             <ffimage:CachedImage Source="{Binding ImageView.Image,Converter={StaticResource BytesToImageSource}}"
-                                                             Aspect="AspectFill" HeightRequest="100" 
+                                                             Aspect="AspectFill" HeightRequest="200" 
                                                              DownsampleToViewSize="true"/>
 
 
-                                        <StackLayout  VerticalOptions="EndAndExpand" BackgroundColor="#8C808080">
+                                            <StackLayout  VerticalOptions="EndAndExpand" BackgroundColor="#8C808080">
                                                 <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                                Padding="5" 
                                                
@@ -273,17 +293,33 @@
 
 
                                             </StackLayout>
-                                       
-                                    </Grid>
-                                </Frame>
-                            </DataTemplate>
-                    </CarouselView.ItemTemplate>
-                </CarouselView>
-                        <IndicatorView x:Name="indicatorView" IndicatorSize="{OnPlatform Android='9', iOS='10'}"
-                   IndicatorColor="LightGray"
-                   SelectedIndicatorColor="{StaticResource My_Button_Color}"
-                   HorizontalOptions="FillAndExpand" IndicatorsShape="Circle" />
-            </StackLayout>
+
+                                        </Grid>
+
+                                        <yummy:PancakeView.GestureRecognizers>
+                                            <TapGestureRecognizer Command="{Binding BindingContext.OnAdTappedCommand,Source={x:Reference carousel}}"
+                                                                  CommandParameter="{Binding .}"/>
+
+
+
+                                        </yummy:PancakeView.GestureRecognizers>
+
+                                    </yummy:PancakeView>
+
+
+
+                                </DataTemplate>
+                            </cardView:CardsView.ItemTemplate>
+
+                            <cardViewControls:IndicatorsControl
+                    Margin="0,10,0,0"
+                    IsVisible="true"
+                    SelectedIndicatorStyle="{StaticResource ActiveIndicatorColor}"
+                    UnselectedIndicatorStyle="{StaticResource InactiveIndicatorColor}" />
+                        </cardView:CoverFlowView>
+                        
+
+                    
            
 
             <StackLayout Grid.Row="1" Margin="0,10,0,10">
@@ -309,7 +345,6 @@
                             <GridItemsLayout Orientation="Horizontal"
                                              SnapPointsAlignment="Start"
                                                SnapPointsType="None"
-                                             
                                               HorizontalItemSpacing="10"
                                              />
                         </CollectionView.ItemsLayout>
@@ -323,16 +358,8 @@
                                     <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
                                     <StackLayout>
 
-                                            <Grid>
-                                                <controls:LoadingImageView/>
-                                                
-
-                                                <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" 
-                                                             DownsampleToViewSize="True"
-                                                            HeightRequest="80"
-                                                             Aspect="AspectFill"/>
-
-                                            </Grid>
+                                                <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Image}"
+                                                                             Grid.Row="0"/>
 
 
                                             <Label VerticalOptions="End" Text="{Binding Description}" 
@@ -405,19 +432,10 @@
                                         <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
                                             <Grid RowDefinitions="95,Auto,Auto,Auto" IsClippedToBounds="True" >
 
-                                                <Grid Grid.Row="0" >
-                                                    <controls:LoadingImageView/>
-                                                    <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" 
-                                                   VerticalOptions="Center"
-                                                                 
-                                                                 DownsampleToViewSize="True"
-                                                              Aspect="AspectFit"
-                                                          HeightRequest="95"
-                                                   WidthRequest="100"
-                                                             />
 
-
-                                                </Grid>
+                                                <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Image}"
+                                                                             Grid.Row="0"/>
+                                                
 
 
                                                 <Frame Grid.Row="0" HorizontalOptions="End" VerticalOptions="StartAndExpand" Padding="4" Margin="5"  
@@ -766,7 +784,7 @@
                     <!-- OFFER VIEW-->
                     <StackLayout Grid.Row="3" Padding="10">
 
-                        <Label 
+                        <!--<Label 
                        TextColor="Black"
                      
                            Text="{x:Static resources:AppResources.ActionbarOffers}"
@@ -808,7 +826,7 @@
                                 </DataTrigger>
                             </Frame.Triggers>
 
-                        </Frame>
+                        </Frame>-->
 
                         <CollectionView ItemsSource="{Binding offers}" HeightRequest="160"
                                      HorizontalScrollBarVisibility="Never"
@@ -836,33 +854,13 @@
                                         <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
                                             <Grid RowDefinitions="95,Auto" IsClippedToBounds="True" >
 
-                                                <Grid Grid.Row="0" >
-                                                    <controls:LoadingImageView/>
-                                                    <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" 
-                                                   VerticalOptions="Center"
-                                                                 
-                                                                 DownsampleToViewSize="True"
-                                                              Aspect="AspectFit"
-                                                          HeightRequest="95"
-                                                   WidthRequest="100"
-                                                             />
-
-
-                                                </Grid>
-
-
-                                               
-
+                                                <controls:CustomImageControl ImageHeight="95" ImageWeight="100"  UriImageSource="{Binding Images[0].Image}"
+                                                                             Grid.Row="0"/>
+                                                
 
                                                 <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                                        MaxLines="2"
                                                       Grid.Row="1" TextColor="Silver" FontSize="Small" Margin="10,0,10,0"/>
-
-
-
-
-
-
 
                                             </Grid>
                                         </Frame>
@@ -878,15 +876,21 @@
   </ScrollView>
 
 
-           
 
         </Grid>
 
-       
-          
-            <CollectionView VerticalScrollBarVisibility="Always"
-                x:Name="itemsuggestionListView"
-                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
+
+
+        <Frame Visual="Material" CornerRadius="5"
+               BorderColor="LightGray"
+               android:VisualElement.Elevation="15"
+               xct:ShadowEffect.Color="Silver" 
+              xct:ShadowEffect.OffsetY="18"
+                Margin="30,150,60,0"
+                BackgroundColor="White"
+               Padding="2"
+               IsVisible="{Binding IsSuggestionFound}"
+               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                        Property=Height,
                                                                        Factor=.7,
                                                                        Constant=0}"
@@ -903,11 +907,14 @@
                                                                   ElementName=mainGrid,
                                                                   Property=Y,
                                                                   Factor=0,
-                                                                  Constant=0}"
-                            Margin="30,165,30,0"
-                BackgroundColor="White"
+                                                                  Constant=0}">
+
+
+            <CollectionView VerticalScrollBarVisibility="Always"
+                x:Name="itemsuggestionListView"
+                           
                 EmptyView="{x:Static resources:AppResources.txtItemNotFound}"
-                IsVisible="{Binding IsSuggestionFound}"
+                
                 ItemsSource="{Binding Items}"
                 
                 
@@ -918,10 +925,10 @@
                     <DataTemplate>
                         <!--<ViewCell>-->
                         <Frame CornerRadius="0" Padding="0" Visual="Material"  BackgroundColor="WhiteSmoke" >
-                        <Frame.GestureRecognizers>
-                            <TapGestureRecognizer Tapped="OnAutoSuggestionSelect" CommandParameter="{Binding .}"/>
-                        </Frame.GestureRecognizers>
-                            
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnAutoSuggestionSelect" CommandParameter="{Binding .}"/>
+                            </Frame.GestureRecognizers>
+
                             <Grid ColumnDefinitions="50,*" RowDefinitions="Auto,Auto">
 
                                 <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
@@ -946,6 +953,11 @@
 
 
             </CollectionView>
+
+
+        </Frame>
+        
+           
 
 
         <controls:LoadingView 

@@ -23,17 +23,17 @@
 	<key>MinimumOSVersion</key>
 	<string>10.0</string>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>This app needs access to location.</string>
+	<string>Please grant permission to customize your experience based on your current location, including helping you find &quot;Stores&quot; near you.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs access to location.</string>
+	<string>Please grant permission to customize your experience based on your current location, including helping you find &quot;Stores&quot; near you.</string>
 	<key>NSCameraUsageDescription</key>
-	<string>This app needs access to the camera to take photos.</string>
+	<string>Please grant permission to use the Camera so that you can add photos to your &quot;Delmar&quot; account to share your medicine prescription.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>This app needs access to photos.</string>
+	<string>Please grant permission to use the photo library so that you send photos from your library and save the ones you capture.</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This app needs access to microphone.</string>
+	<string>This lets you to take voice recoder right from within &quot;Delmar&quot;.</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>This app needs access to the photo gallery.</string>
+	<string>Please grant permission to use the Camera so that you can add photos to your &quot;Delmar&quot; account</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleLightContent</string>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
@@ -152,12 +152,12 @@
 	<key>XSAppIconAssets</key>
 	<string>Assets.xcassets/AppIcons.appiconset</string>
 	<key>CFBundleShortVersionString</key>
-	<string>2.0.10</string>
+	<string>2.0.11</string>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>LaunchScreen</string>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>1</string>
 </dict>
 </plist>

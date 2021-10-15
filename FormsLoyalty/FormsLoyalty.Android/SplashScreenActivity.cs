@@ -7,6 +7,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
+using Java.Lang;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,15 @@ namespace FormsLoyalty.Droid
             Display display = WindowManager.DefaultDisplay;
             Point size = new Point();
             display.GetSize(size);
+
+            Rg.Plugins.Popup.Popup.Init(this);
+            var apiCallService = new Runnable(async () =>
+            {
+                await App.CallPCLMethod().ConfigureAwait(false);
+
+            });
+            apiCallService.Run();
+
 
 
             FrameLayout.LayoutParams rootViewParams = (FrameLayout.LayoutParams)rootView.LayoutParameters;

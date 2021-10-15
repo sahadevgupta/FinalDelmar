@@ -11,8 +11,10 @@ using AndroidX.AppCompat.App;
 using FormsLoyalty.Droid.Helper;
 using FormsLoyalty.Models;
 using ImageCircle.Forms.Plugin.Droid;
+using Java.Lang;
 using Java.Security;
 using Java.Util;
+using PanCardView.Droid;
 using Plugin.FacebookClient;
 using Plugin.FirebasePushNotification;
 using Plugin.GoogleClient;
@@ -24,11 +26,11 @@ using System.IO;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
+using Exception = System.Exception;
 
 namespace FormsLoyalty.Droid
 {
     [Activity(Label = "@string/app_name", Icon = "@mipmap/ic_launcher", Theme = "@style/SplashTheme", LaunchMode = LaunchMode.SingleTop,
-        
          ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -62,9 +64,14 @@ namespace FormsLoyalty.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             //Android.Glide.Forms.Init(this);
+            
+
+            
+
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);
             ImageCircleRenderer.Init();
+            CardsViewRenderer.Preserve();
             //Android.Glide.Forms.Init();
             //var notificationManager = GetSystemService(Context.NotificationService) as NotificationManager;
             //notificationManager.CancelAll();
@@ -263,7 +270,7 @@ namespace FormsLoyalty.Droid
         }
 
         [Obsolete]
-        public String GetRealPathFromURI(Android.Net.Uri contentURI)
+        public string GetRealPathFromURI(Android.Net.Uri contentURI)
         {
             try
             {
@@ -315,7 +322,7 @@ namespace FormsLoyalty.Droid
                     MessageDigest md = MessageDigest.GetInstance("SHA");
                     md.Update(signature.ToByteArray());
                     string HashKey = Convert.ToBase64String(md.Digest());
-                    System.Diagnostics.Debug.WriteLine(HashKey);
+                    Console.WriteLine("HashKey : " + HashKey);
                 }
             }
             catch (NoSuchAlgorithmException e)

@@ -87,9 +87,9 @@
                 <FormattedString>
                     <Span Text="{x:Static resources:AppResources.txtNote}" TextColor="Red"/>
                    
-                    <Span Text=" All address fields are disabled as you have not allowed to making any changes."/>
-                    <Span  Text="&#10;"/>
-                    <Span Text="Kindly choose new address option to enter the address or update your profile"/>
+                    <Span Text=" "/>
+                    <Span  Text="{x:Static resources:AppResources.CheckoutAddressNote}"/>
+                   
                 </FormattedString>
             </Label.FormattedText>
             
@@ -226,7 +226,7 @@
                       GroupName="payment"/>
 
         <RadioButton  FontSize="Body" TextColor="{StaticResource My_Button_Color}" FlowDirection="LeftToRight"
-                      CheckedChanged="RadioButton_CheckedChanged"
+                      IsChecked="{Binding IsVisaOnDelivery}"
                       ControlTemplate="{StaticResource ThemeRadioTemplate}"
                       Content="{x:Static resources:AppResources.CheckoutViewPayCreditOnDelivery}"
                       x:Name="visadelivery"

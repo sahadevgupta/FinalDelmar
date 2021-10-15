@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using TabbedPage = Xamarin.Forms.TabbedPage;
 using FormsLoyalty.Helpers;
+using System.ComponentModel;
 
 [assembly: ExportRenderer(typeof(MainTabbedPage), typeof(CustomTabRenderer))]
 namespace FormsLoyalty.Droid.Renderers
@@ -67,6 +68,15 @@ namespace FormsLoyalty.Droid.Renderers
          
 
         }
+        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            base.OnElementPropertyChanged(sender, e);
+            if(e.PropertyName == TabBadge.BadgeTextProperty.PropertyName)
+            {
+
+            }
+        }
+
         private void AddTabBadge(int tabIndex)
         {
             var page = Element.GetChildPageWithBadge(tabIndex);

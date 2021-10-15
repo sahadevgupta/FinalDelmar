@@ -3,12 +3,14 @@ using FormsLoyalty.Models;
 using FormsLoyalty.Utils;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Unity;
@@ -185,65 +187,91 @@ namespace FormsLoyalty.ViewModels
         }
         private void LoadBasketItems()
         {
-
-            baskets = new ObservableCollection<Basket>();
-
-            var items = new ObservableCollection<OneListItem>(AppData.Basket.Items);
-
-            foreach (var basketItem in items)
+            try
             {
-                
-                var item = new Basket();
-               
-                item.Id = basketItem.Id;
-                item.ItemDescription = basketItem.ItemDescription;
-                item.DiscountAmount = basketItem.DiscountAmount;
-                item.DiscountPercent = basketItem.DiscountPercent;
-                item.VariantDescription = basketItem.VariantDescription;
-                item.PriceWithoutDiscount = ((basketItem.NetPrice > 0 ? basketItem.NetPrice : basketItem.Amount)  * basketItem.Quantity);
-                item.ItemId = basketItem.ItemId;
-                item.Quantity = basketItem.Quantity;
-                item.Price = basketItem.Price;
+                baskets = new ObservableCollection<Basket>();
 
-                if (basketItem.DiscountAmount != 0)
-                {
-                    item.PriceWithDiscount = item.PriceWithoutDiscount - basketItem.DiscountAmount;
-                }
+                var items = new ObservableCollection<OneListItem>(AppData.Basket.Items);
 
-                item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
-                item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
-                item.VariantId = basketItem.VariantId;
-                if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
+                foreach (var basketItem in items)
                 {
-                    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
-                }
-                else
-                {
-                    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
-                }
-                if (basketItem.Image!=null)
-                {
-                    item.Image = basketItem.Image;
-                    Task.Run(async () =>
+
+                    var item = new Basket();
+
+                    item.Id = basketItem.Id;
+                    item.ItemDescription = basketItem.ItemDescription;
+                    //item.DiscountAmount = basketItem.DiscountAmount;
+
+
+                    item.VariantDescription = basketItem.VariantDescription;
+                    item.PriceWithoutDiscount = ((basketItem.NetPrice > 0 ? basketItem.NetPrice : basketItem.Amount) * basketItem.Quantity);
+                    item.ItemId = basketItem.ItemId;
+                    item.Quantity = basketItem.Quantity;
+                    item.Price = basketItem.Price;
+
+                    if (basketItem.DiscountAmount != 0 && basketItem.DiscountPercent == 0)
                     {
-                        var imgView = await ImageHelper.GetImageById(basketItem.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(114, 114));
-                        item.Image.Image = imgView?.Image;
+                        item.DiscountPercent = (basketItem.DiscountAmount / item.PriceWithoutDiscount) * 100;
+                    }
+                    else
+                    {
+                        item.DiscountPercent = basketItem.DiscountPercent;
+                    }
+
+                    if (item.DiscountPercent > 0)
+                    {
+                        var discountedPrice = (item.DiscountPercent / 100) * Convert.ToDecimal(basketItem.Price);
+                        item.NewPrice = ((Convert.ToDecimal(item.Price) - discountedPrice) * item.Quantity).ToString("F", CultureInfo.InvariantCulture);
+
+                        item.DiscountAmount = item.PriceWithoutDiscount - Convert.ToDecimal(item.NewPrice);
+                    }
+
+                    if (item.DiscountAmount != 0)
+                    {
+                        item.PriceWithDiscount = item.PriceWithoutDiscount - item.DiscountAmount;
+                    }
+
+                    item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
+                    item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
+                    item.VariantId = basketItem.VariantId;
+                    if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
+                    {
+                        item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
+                    }
+                    else
+                    {
+                        item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
+                    }
+                    if (basketItem.Image != null)
+                    {
+                        item.Image = basketItem.Image;
+                        Task.Run(async () =>
+                        {
+                            var imgView = await ImageHelper.GetImageById(basketItem.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(114, 114));
+                            item.Image.Image = imgView?.Image;
 
 
 
-                    });
-                    
+                        });
+
+                    }
+
+                    baskets.Add(item);
+
+
                 }
-               
-                baskets.Add(item);
 
-               
+                LoadCartItemImage();
+
+                CalculateBasketPrice();
+
             }
+            catch (Exception ex)
+            {
 
-            LoadCartItemImage();
+                Crashes.TrackError(ex);
+            }
           
-            CalculateBasketPrice();
-
         }
 
         private void LoadCartItemImage()
@@ -253,30 +281,39 @@ namespace FormsLoyalty.ViewModels
 
         private void CalculateBasketPrice()
         {
-            if (baskets.Any())
+            try
             {
-                
-                var discAmount = baskets.Sum(x => x.DiscountAmount);
-                decimal totalMRP = baskets.Sum(x => x.PriceWithoutDiscount);
-                totalSubtotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(totalMRP);
-         
-                totalShipping = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(AppData.Basket.ShippingAmount);
-                totalVAT = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(AppData.Basket.TotalAmount - AppData.Basket.TotalNetAmount);
-
-
-                totalDiscount = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(discAmount);
-
-
-                if (AppData.Basket.State == BasketState.Dirty)
+                if (baskets.Any())
                 {
-                    totalPrice = "~" + AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(totalMRP - discAmount);
-                }
-                else
-                {
-                    totalPrice = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(totalMRP - discAmount);
-                }
 
+                    var discAmount = baskets.Sum(x => x.DiscountAmount);
+                    decimal totalMRP = baskets.Sum(x => x.PriceWithoutDiscount);
+                    totalSubtotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(totalMRP);
+
+                    totalShipping = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(AppData.Basket.ShippingAmount);
+                    totalVAT = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(AppData.Basket.TotalAmount - AppData.Basket.TotalNetAmount);
+
+
+                    totalDiscount = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(discAmount);
+
+
+                    if (AppData.Basket.State == BasketState.Dirty)
+                    {
+                        totalPrice = "~" + AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(totalMRP - discAmount);
+                    }
+                    else
+                    {
+                        totalPrice = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(totalMRP - discAmount);
+                    }
+
+                }
             }
+            catch (Exception ex)
+            {
+
+                Crashes.TrackError(ex) ;
+            }
+            
         }
 
        

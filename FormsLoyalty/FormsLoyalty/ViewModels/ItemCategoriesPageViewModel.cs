@@ -179,7 +179,7 @@ namespace FormsLoyalty.ViewModels
             try
             {
                 
-                Products = new ObservableCollection<ProductGroup>(SelectedCategory.ProductGroups);
+                Products = new ObservableCollection<ProductGroup>(SelectedCategory?.ProductGroups);
 
                 Task.Run(async() =>
                 {

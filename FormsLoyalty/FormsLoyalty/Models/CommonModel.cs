@@ -143,5 +143,20 @@ namespace FormsLoyalty.Models
         #endregion
 
 
+        #region Check_Social_Media_Display_Status
+
+        public async Task<bool> GetSocialMediaDisplayStatusAsync()
+        {
+            return await Task.Run(() => GetSocialMediaDisplayStatus());
+
+        }
+
+        private bool GetSocialMediaDisplayStatus()
+        {
+            return _service.GetSocialMediaDisplayStatus(_repository);
+        }
+
+        #endregion
+
     }
 }

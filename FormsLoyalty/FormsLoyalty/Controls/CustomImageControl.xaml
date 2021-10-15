@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls" 
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             
+             x:Class="FormsLoyalty.Controls.CustomImageControl"
+             x:Name="thisPage">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+            <converters:DefaultImageConverter x:Key="DefaultImageConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    
+  <ContentView.Content>
+        <Grid>
+
+            <Grid.Resources>
+                <ResourceDictionary>
+                    
+                </ResourceDictionary>
+            </Grid.Resources>
+            
+            <controls:LoadingImageView>
+                <controls:LoadingImageView.Triggers>
+                    <DataTrigger TargetType="controls:LoadingImageView" Binding="{Binding UriImageSource,Converter={StaticResource DefaultImageConverter}, Source={x:Reference thisPage}}"
+                                 Value="true" >
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </controls:LoadingImageView.Triggers>
+            </controls:LoadingImageView>
+            <ffimage:CachedImage Source="{Binding UriImageSource,Converter={StaticResource BytesToImageSource}, Source={x:Reference thisPage}}" 
+                                 x:Name="img"
+                                 VerticalOptions="CenterAndExpand"
+                                 DownsampleToViewSize="True"
+                                 Aspect="AspectFit"
+                                 HeightRequest="{Binding ImageHeight,Source={x:Reference thisPage}}"
+                                 WidthRequest="{Binding ImageWeight,Source={x:Reference thisPage}}"/>
+
+
+        </Grid>
+    </ContentView.Content>
+</ContentView>

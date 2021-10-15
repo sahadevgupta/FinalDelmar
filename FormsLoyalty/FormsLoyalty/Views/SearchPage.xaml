@@ -8,6 +8,7 @@
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
              xmlns:resources="clr-namespace:FormsLoyalty"
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              Visual="Material"
              x:Name="thisPage"
              BackgroundColor="WhiteSmoke"
@@ -49,7 +50,14 @@
                        Keyboard="Default"
                            Visual="Material"
            FontSize="Medium"
-           />
+           >
+                    <SearchBar.Behaviors>
+                        <xct:UserStoppedTypingBehavior MinimumLengthThreshold="3" 
+                                                       Command="{Binding SearchCommand}"
+                                                       StoppedTypingTimeThreshold="1000"
+                                                       ShouldDismissKeyboardAutomatically="True"/>
+                    </SearchBar.Behaviors>
+                </SearchBar>
             </Frame>
 
 

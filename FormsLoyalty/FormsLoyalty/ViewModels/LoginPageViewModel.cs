@@ -60,6 +60,13 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _IsError, value); }
         }
 
+
+        private bool _isSocialMediaLoginVisible;
+        public bool IsSocialMediaLoginVisible
+        {
+            get { return _isSocialMediaLoginVisible; }
+            set { SetProperty(ref _isSocialMediaLoginVisible, value); }
+        }
         public FacebookProfile fbProfile { get; set; }
         public GoogleProfile GoogleProfile { get; set; }
 
@@ -84,7 +91,7 @@ namespace FormsLoyalty.ViewModels
             OnOtpCommand = new DelegateCommand(async()=> { await NavigateToOtpView(); });
             memberContactModel = new MemberContactModel();
 
-           
+            IsSocialMediaLoginVisible = Device.RuntimePlatform == Device.iOS ? AppData.GetSocialMediaStatusResult : true;
         }
 
         private async Task NavigateToOtpView()
@@ -117,14 +124,17 @@ namespace FormsLoyalty.ViewModels
                 var Otp = await new CommonModel().GenerateOTPAsync(MobileNumber);
                 await NavigationService.NavigateAsync(nameof(LoginOtpView), new NavigationParameters { { "number", MobileNumber },{"otp", Otp },{ "itemPage", FromItemPage } }, false, true);
 
+                if (!AppData.GetSocialMediaStatusResult && Device.RuntimePlatform == Device.iOS)
+                    MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
+
                 //if (Device.RuntimePlatform == Device.Android)
                 //{
                 //    DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
                 //}
                 //else
-                  //  MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
-               
-                
+                //  MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
+
+
             }
             catch (Exception ex)
             {
