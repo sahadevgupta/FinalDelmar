@@ -24,7 +24,7 @@ namespace FormsLoyalty.Models
             string msg = string.Empty;
 
 
-            msg = AppResources.ResourceManager.GetString("ModelGenericException", AppResources.Culture);
+            msg = ex.Message;
 
             if (ex is LSOmniException)
             {

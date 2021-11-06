@@ -95,23 +95,22 @@ namespace FormsLoyalty.ViewModels
         /// </summary>
         internal void LoadOffers()
         {
-            //offers = new ObservableCollection<OfferGroup>();
             var temp = new ObservableCollection<OfferGroup>();
             IsPageEnabled = true;
 
             try
             {
-                if (AppData.Device.UserLoggedOnToDevice == null)
-                {
-                    Task.Run(async () =>
-                    {
-                        await NavigationService.NavigateAsync("NavigationPage/LoginPage");
-                    });
+                //if (AppData.Device.UserLoggedOnToDevice == null)
+                //{
+                //    Task.Run(async () =>
+                //    {
+                //        await NavigationService.NavigateAsync("NavigationPage/LoginPage");
+                //    });
 
-                    return;
-                }
+                //    return;
+                //}
 
-                var publishedOffers = AppData.Device.UserLoggedOnToDevice.PublishedOffers.Where(x => x.Code != OfferDiscountType.Coupon);
+                var publishedOffers = AppData.PublishedOffers.Where(x => x.Code != OfferDiscountType.Coupon);
 
                 var pointOfffer = publishedOffers.Where(x => x.Type == OfferType.PointOffer).ToList();
                 var clubOfffer = publishedOffers.Where(x => x.Type == OfferType.Club).ToList();

@@ -67,15 +67,11 @@ namespace FormsLoyalty.Models
            var isSuccess =  await LogoutOnServer(AppData.Device);
             if (isSuccess)
             {
+                AppData.IsLoggedIn = false;
                 AppData.Basket.Clear();
                 AppData.Device.UserLoggedOnToDevice = null;
                 AppData.Device.CardId = string.Empty;
                 AppData.Device.SecurityToken = "";
-                AppData.ItemCategories = null;
-                AppData.Stores = null;
-                SharedService.ClearImageCache();
-                AppData.Advertisements = null;
-
                 deviceRepo.SaveDevice(AppData.Device);
             }
             return isSuccess;

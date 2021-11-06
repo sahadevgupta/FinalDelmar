@@ -17,15 +17,18 @@ using static Android.Media.MediaPlayer;
 
 namespace FormsLoyalty.Droid
 {
-    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation, LaunchMode = LaunchMode.SingleTask,
+    [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         MainLauncher = true,
-        Theme = "@android:style/Theme.NoTitleBar.Fullscreen")]
+        Theme = "@style/SplashTheme",
+    NoHistory = true,
+    ScreenOrientation = ScreenOrientation.Portrait,
+    LaunchMode = LaunchMode.SingleTop)]
     public class SplashScreenActivity : Activity, IOnCompletionListener
     {
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
-            base.SetTheme(Resource.Style.MainTheme);
+          
             SetContentView(Resource.Layout.splash);
             RelativeLayout rootView = (RelativeLayout)FindViewById(Resource.Id.rootLayout);
             rootView.SetBackgroundColor(Color.Black);
@@ -84,8 +87,12 @@ namespace FormsLoyalty.Droid
         {
             if (IsFinishing)
                 return;
-            StartActivity(new Intent(this, typeof(MainActivity)));
-            Finish();
+           
+            var mainActivityIntent = new Intent(this, typeof(MainActivity));
+            mainActivityIntent.AddFlags(ActivityFlags.NoAnimation); //Add this line
+
+            StartActivity(mainActivityIntent);
+           // Finish();
         }
 
 

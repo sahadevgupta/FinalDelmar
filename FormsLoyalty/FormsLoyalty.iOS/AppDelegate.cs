@@ -51,6 +51,7 @@ namespace FormsLoyalty.iOS
             ImageCircleRenderer.Init();
             ZXing.Net.Mobile.Forms.iOS.Platform.Init();
             XF.Material.iOS.Material.Init();
+            Firebase.Core.App.Configure();
             CardsViewRenderer.Preserve();
             var pushSettings = UIUserNotificationSettings.GetSettingsForTypes(
                                UIUserNotificationType.Alert | UIUserNotificationType.Badge | UIUserNotificationType.Sound,

@@ -258,6 +258,10 @@ namespace FormsLoyalty.ViewModels
         private void CalculatePrice()
         {
             itemPrice = Item.PriceFromVariantsAndUOM(Item.SelectedVariant?.Id, Item.SelectedUnitOfMeasure?.Id);
+            if (string.IsNullOrEmpty(itemPrice))
+            {
+                itemPrice = Item.ItemPrice.ToString();
+            }
         }
 
         /// <summary>
@@ -296,6 +300,10 @@ namespace FormsLoyalty.ViewModels
 
                // if (Item.Prices.Count > 0)
                     itemPrice = Item.PriceFromVariantsAndUOM(Item.SelectedVariant?.Id, Item.SelectedUnitOfMeasure?.Id);
+                if (string.IsNullOrEmpty(itemPrice))
+                {
+                    itemPrice = Item.ItemPrice.ToString();
+                }
 
                 if (Item.Discount > 0)
                 {

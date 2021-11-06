@@ -4,7 +4,6 @@
              xmlns:controls="clr-namespace:FormsLoyalty.Controls" 
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms" 
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
-             
              x:Class="FormsLoyalty.Controls.CustomImageControl"
              x:Name="thisPage">
 
@@ -30,6 +29,11 @@
                                  Value="true" >
                         <Setter Property="IsVisible" Value="false"/>
                     </DataTrigger>
+
+                    <DataTrigger TargetType="controls:LoadingImageView" Binding="{Binding Source={x:Reference img},Path=Source}" Value="No_image_available.png">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                    
                 </controls:LoadingImageView.Triggers>
             </controls:LoadingImageView>
             <ffimage:CachedImage Source="{Binding UriImageSource,Converter={StaticResource BytesToImageSource}, Source={x:Reference thisPage}}" 

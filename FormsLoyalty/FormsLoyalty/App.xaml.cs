@@ -60,7 +60,7 @@ namespace FormsLoyalty
 
         public static async Task CallPCLMethod()
         {
-
+            
             var serverTasks = new List<Task>();
 
             //var memberConatctTask = MemberConatcts.RefreshMemberContactAsync();
@@ -142,23 +142,6 @@ namespace FormsLoyalty
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = Thread.CurrentThread.CurrentUICulture;
 
-            if(Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
-            {
-                Task.Run(async() =>
-                {
-                    try
-                    {
-                        AppData.GetSocialMediaStatusResult = await new CommonModel().GetSocialMediaDisplayStatusAsync();
-                    }
-                    catch (Exception ex)
-                    {
-
-                        Crashes.TrackError(ex);
-                    }
-
-                });
-            }
-
             var deviceId = DependencyService.Get<INotify>().getDeviceUuid();
 
              LSRetail.Omni.Infrastructure.Data.Omniservice.Utils.Utils.InitWebService( deviceId, AppType.Loyalty, DefaultUrlLoyalty, AppResources.Culture.TwoLetterISOLanguageName);
@@ -182,7 +165,8 @@ namespace FormsLoyalty
             }
             else
             {
-                await NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage?selectedTab=MainPage");
+                // Current.MainPage = new TabbedPage1();
+                await NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage");
             }
         }
 
@@ -266,6 +250,7 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<LoginOtpView, LoginOtpViewViewModel>();
             containerRegistry.RegisterForNavigation<CameraPage, CameraPageViewModel>();
             containerRegistry.RegisterForNavigation<SocialMediaLogin, SocialMediaLoginViewModel>();
+            
         }
     }
 }

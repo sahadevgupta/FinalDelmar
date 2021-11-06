@@ -16,6 +16,8 @@ using Prism.Unity;
 using Prism;
 using Xamarin.Essentials;
 using Infrastructure.Data.SQLite.Devices;
+using System;
+using LSRetail.Omni.Domain.DataModel.Base.Retail;
 
 namespace FormsLoyalty.Utils
 {
@@ -55,29 +57,38 @@ namespace FormsLoyalty.Utils
             {
                 if (device == null)
                 {
-                    _deviceLocalRepository = new DeviceRepository();
-                    device = _deviceLocalRepository.GetDevice();
-                                                                               
-                    if (device.UserLoggedOnToDevice == null)
-                        device.CardId = string.Empty;
-
-                    if (!(device is UnknownDevice))
+                    try
                     {
-                        if (device.UserLoggedOnToDevice != null)
+                        _deviceLocalRepository = new DeviceRepository();
+                        device = _deviceLocalRepository.GetDevice();
+
+                        if (device.UserLoggedOnToDevice == null)
+                            device.CardId = string.Empty;
+
+                        if (!(device is UnknownDevice))
                         {
-                            _memberContactRepo = new MemberContactRepository();
-                            var contact = _memberContactRepo.GetLocalMemberContact();
-
-                            if (contact != null)
+                            if (device.UserLoggedOnToDevice != null)
                             {
-                                contact.LoggedOnToDevice = device;
+                                _memberContactRepo = new MemberContactRepository();
+                                var contact = _memberContactRepo.GetLocalMemberContact();
 
-                                device.CardId = contact.LoggedOnToDevice.CardId;
-                                device.SecurityToken = contact.LoggedOnToDevice.SecurityToken;
-                                device.UserLoggedOnToDevice = contact;
+                                if (contact != null)
+                                {
+                                    contact.LoggedOnToDevice = device;
+
+                                    device.CardId = contact.LoggedOnToDevice.CardId;
+                                    device.SecurityToken = contact.LoggedOnToDevice.SecurityToken;
+                                    device.UserLoggedOnToDevice = contact;
+                                }
                             }
                         }
                     }
+                    catch (Exception ex)
+                    {
+
+                        
+                    }
+                    
                 }
 
                 return device;
@@ -102,6 +113,14 @@ namespace FormsLoyalty.Utils
             get { return _mostViewed; }
             set { _mostViewed = value; }
         }
+
+        private static List<PublishedOffer> _publishedOffers;
+        public static List<PublishedOffer> PublishedOffers
+        {
+            get { return _publishedOffers; }
+            set { _publishedOffers = value; }
+        }
+
         public static List<Store> Stores
         {
             get { return stores; }

@@ -47,9 +47,11 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <RelativeLayout BackgroundColor="WhiteSmoke">
+    <RelativeLayout BackgroundColor="#cccccc">
 
-        <Grid RowDefinitions="180,*"  x:Name="mainGrid" BackgroundColor="WhiteSmoke"
+
+
+        <Grid RowDefinitions="180,*"  x:Name="mainGrid" BackgroundColor="#F0F0F0"
                RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
                                                                        Property=Height,
                                                                        Factor=1,
@@ -63,7 +65,9 @@
                                                                   Factor=.0,
                                                                   Constant=0}"
               
-              >
+             >
+
+
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
                              Value="true">
@@ -72,63 +76,66 @@
                 </DataTrigger>
             </Grid.Triggers>
 
-            <yummy:PancakeView CornerRadius="0,0,50,50" HeightRequest="180" BackgroundColor="{StaticResource My_Header_Color}">
 
-                <StackLayout Margin="0,10,0,0">
+           
 
-                    <Grid ColumnDefinitions="*,Auto"   RowDefinitions="Auto" ColumnSpacing="0">
-                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0,0,0">
+                        <yummy:PancakeView CornerRadius="0,0,50,50" HeightRequest="180" BackgroundColor="{StaticResource My_Header_Color}">
 
-                            <StackLayout.Triggers>
-                                <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
-                                    <Setter Property="Margin" Value="0,0,50,0"/>
-                                </DataTrigger>
-                            </StackLayout.Triggers>
-                            
-                            
-                        <Label Text="{x:Static resources:AppResources.app_name}"
+                            <StackLayout Margin="0,10,0,0">
+
+                                <Grid ColumnDefinitions="*,Auto"   RowDefinitions="Auto" ColumnSpacing="0">
+                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0,0,0">
+
+                                        <StackLayout.Triggers>
+                                            <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
+                                                <Setter Property="Margin" Value="0,0,50,0"/>
+                                            </DataTrigger>
+                                        </StackLayout.Triggers>
+
+
+                                        <Label Text="{x:Static resources:AppResources.app_name}"
                        TextColor="White" Grid.Column="0" 
                                HorizontalTextAlignment="Center"
                        FontSize="26" FontAttributes="Bold"/>
 
-                        <Image Source="iconLogo.jpg" Margin="-10,-7,0,0" 
+                                        <Image Source="iconLogo.jpg" Margin="-10,-7,0,0" 
                                HorizontalOptions="Center"
                                Grid.Column="1" 
                                IsVisible="false"
                                VerticalOptions="Start" Aspect="AspectFit" HeightRequest="50" WidthRequest="50"/>
-                        </StackLayout>
+                                    </StackLayout>
 
-                        <Frame Padding="2" Grid.Column="1" HorizontalOptions="End" Margin="10,0,10,10" Visual="Material" BorderColor="White" 
+                                    <Frame Padding="2" Grid.Column="1" HorizontalOptions="End" Margin="10,0,10,10" Visual="Material" BorderColor="White" 
                                CornerRadius="{OnPlatform Android=20, iOS=13}"
                                VerticalOptions="Start" >
-                            <StackLayout Orientation="Horizontal" Spacing="10" WidthRequest="50" IsClippedToBounds="True">
-                                <Image Source="{helpers:ImageResource Resource=eng.png}" HeightRequest="20" WidthRequest="20" IsVisible="false">
-                                    <Image.Triggers>
-                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
-                                            <Setter Property="Source" Value="{helpers:ImageResource Resource=arabic.png}"/>
+                                        <StackLayout Orientation="Horizontal" Spacing="10" WidthRequest="50" IsClippedToBounds="True">
+                                            <Image Source="{helpers:ImageResource Resource=eng.png}" HeightRequest="20" WidthRequest="20" IsVisible="false">
+                                                <Image.Triggers>
+                                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
+                                                        <Setter Property="Source" Value="{helpers:ImageResource Resource=arabic.png}"/>
 
-                                        </DataTrigger>
-                                    </Image.Triggers>
-                                </Image>
-                                <Label x:Name="langlbl" Text="ع"  VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" FontSize="Body" 
+                                                    </DataTrigger>
+                                                </Image.Triggers>
+                                            </Image>
+                                            <Label x:Name="langlbl" Text="ع"  VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" FontSize="Body" 
                                        TextColor="Black"
                                        FontAttributes="Bold">
-                                    <Label.Triggers>
-                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
-                                            <Setter Property="Text" Value="EN"/>
-                                            
-                                        </DataTrigger>
-                                    </Label.Triggers>
-                                </Label>
-                            </StackLayout>
+                                                <Label.Triggers>
+                                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
+                                                        <Setter Property="Text" Value="EN"/>
 
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnLanguageSelected" CommandParameter="{Binding Source={x:Reference langlbl},Path=Text}"/>
-                            </Frame.GestureRecognizers>
-                            
-                        </Frame>
-                        
-                        <!--<Button Text="EN" Grid.Column="1" HorizontalOptions="End" BackgroundColor="White"  Visual="Material"
+                                                    </DataTrigger>
+                                                </Label.Triggers>
+                                            </Label>
+                                        </StackLayout>
+
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="OnLanguageSelected" CommandParameter="{Binding Source={x:Reference langlbl},Path=Text}"/>
+                                        </Frame.GestureRecognizers>
+
+                                    </Frame>
+
+                                    <!--<Button Text="EN" Grid.Column="1" HorizontalOptions="End" BackgroundColor="White"  Visual="Material"
                                 Margin="10,0,10,0" FontSize="Body" Padding="0" ContentLayout="Left,0"
                                 ImageSource="{helpers:ImageResource Resource=eng.png}"
                                 CornerRadius="10" BorderColor="Silver"  WidthRequest="60" >
@@ -140,58 +147,58 @@
                             </Button.Triggers>
                         </Button>-->
 
-                    </Grid>
-                   
+                                </Grid>
 
-                    <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Margin="0,10,0,10">
-                        <Label  TextColor="White" Text="{Binding Source={x:Static resources:AppResources.MyPoints}}"/>
 
-                        <Frame BackgroundColor="#D03E3E" Padding="0" BorderColor="White" CornerRadius="5" HasShadow="False">
+                                <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Margin="0,10,0,10">
+                                    <Label  TextColor="White" Text="{Binding Source={x:Static resources:AppResources.MyPoints}}"/>
 
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="points_Tapped"/>
-                            </Frame.GestureRecognizers>
+                                    <Frame BackgroundColor="#D03E3E" Padding="0" BorderColor="White" CornerRadius="5" HasShadow="False">
 
-                            <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="points_Tapped"/>
+                                        </Frame.GestureRecognizers>
+
+                                        <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
                             BackgroundColor="Transparent"
                            Text="{Binding MyPoints}">
-                            
 
-                            <Label.Triggers>
-                                <DataTrigger TargetType="Label" Binding="{Binding MyPoints,Converter={StaticResource StringToBoolConverter}}"
+
+                                            <Label.Triggers>
+                                                <DataTrigger TargetType="Label" Binding="{Binding MyPoints,Converter={StaticResource StringToBoolConverter}}"
                                          Value="false">
-                                    <Setter Property="Text" Value="{x:Static resources:AppResources.LoginToCheckPtTxt}"/>
-                                   
-                                </DataTrigger>
-                            </Label.Triggers>
+                                                    <Setter Property="Text" Value="{x:Static resources:AppResources.LoginToCheckPtTxt}"/>
 
-                        </Label>
-                        </Frame>
-                    </StackLayout>
+                                                </DataTrigger>
+                                            </Label.Triggers>
 
-                    <Grid  ColumnDefinitions="*,Auto" RowDefinitions="60" VerticalOptions="End" Margin="20,0,20,0"
+                                        </Label>
+                                    </Frame>
+                                </StackLayout>
+
+                                <Grid  ColumnDefinitions="*,Auto" RowDefinitions="60" VerticalOptions="End" Margin="20,0,20,0"
                          HorizontalOptions="FillAndExpand"  >
-                        
-                        <Frame HeightRequest="60"   Margin="10" Padding="0" VerticalOptions="End" HorizontalOptions="FillAndExpand" 
+
+                                    <Frame HeightRequest="60"   Margin="10" Padding="0" VerticalOptions="End" HorizontalOptions="FillAndExpand" 
                                  BackgroundColor="#D03E3E" Visual="Material"
                                  IsClippedToBounds="True" CornerRadius="10">
 
-                            <SearchBar Placeholder="{x:Static resources:AppResources.ActionbarSearch}"
+                                        <SearchBar Placeholder="{x:Static resources:AppResources.ActionbarSearch}"
                                        x:Name="autosuggestview" Visual="Material" PlaceholderColor="#B3FFFFFF"
                                        ios:SearchBar.SearchBarStyle="Minimal"
                                        Margin="{OnPlatform iOS='-5,0,-5,0'}"
                                        Text="{Binding SearchKey}"
                                         TextColor="White" HorizontalOptions="FillAndExpand" >
-                                <SearchBar.Behaviors>
-                                    <xct:UserStoppedTypingBehavior MinimumLengthThreshold="3" 
+                                            <SearchBar.Behaviors>
+                                                <xct:UserStoppedTypingBehavior MinimumLengthThreshold="3" 
                                                        Command="{Binding SearchCommand}"
                                                        StoppedTypingTimeThreshold="1000"
-                                                       ShouldDismissKeyboardAutomatically="True"/>
-                                </SearchBar.Behaviors>
+                                                       ShouldDismissKeyboardAutomatically="False"/>
+                                            </SearchBar.Behaviors>
 
-                            </SearchBar>
+                                        </SearchBar>
 
-                            <!--<controls:CustomAutoSuggestBox IsVisible="false"
+                                        <!--<controls:CustomAutoSuggestBox IsVisible="false"
                                                        Margin="5,0,5,0"
                                                        TextColor="White"
                                                            PlaceholderTextColor="White"
@@ -208,49 +215,148 @@
                             </controls:CustomAutoSuggestBox>-->
 
 
-                        </Frame>
+                                    </Frame>
 
 
-                        <Grid Margin="-5,10,5,10" HorizontalOptions="End" VerticalOptions="End" Grid.Column="1">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="CameraImg_Tapped"/>
-                            </Grid.GestureRecognizers>
-                            <BoxView HeightRequest="40" WidthRequest="40" CornerRadius="20"
+                                    <Grid Margin="-5,10,5,10" HorizontalOptions="End" VerticalOptions="End" Grid.Column="1">
+                                        <Grid.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="CameraImg_Tapped"/>
+                                        </Grid.GestureRecognizers>
+                                        <BoxView HeightRequest="40" WidthRequest="40" CornerRadius="20"
                          BackgroundColor="White"/>
-                            <Image Source="camera" VerticalOptions="Center" HorizontalOptions="Center" effects:TintImageEffect.TintColor="{StaticResource My_Header_Color}"
+                                        <Image Source="camera" VerticalOptions="Center" HorizontalOptions="Center" effects:TintImageEffect.TintColor="{StaticResource My_Header_Color}"
                        HeightRequest="25" WidthRequest="25"/>
-                        </Grid>
-                    </Grid>
+                                    </Grid>
+                                </Grid>
 
 
-                </StackLayout>
-                
-              
-            </yummy:PancakeView>
+                            </StackLayout>
 
 
-            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                        </yummy:PancakeView>
+
+
+                        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All"
                     VerticalScrollBarVisibility="Never"
                     Grid.Row="1"
                         >
 
-                <Grid RowDefinitions="200,Auto,Auto,Auto">
+                            <Grid RowDefinitions="200,Auto,Auto,Auto" ColumnDefinitions="*">
 
-                   
-                        <cardView:CoverFlowView Grid.Row="0"
+
+                    <Grid xct:StateLayout.CurrentState="{Binding CurrentState}">
+
+                        <xct:StateLayout.StateViews>
+
+                            <xct:StateView StateKey="Loading" Margin="5,10">
+                                <xct:StateView.Template>
+                                    <DataTemplate>
+                                        <!--<Grid>
+                                            <controls:SkeletonView StartColor="LightGray"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                      Margin="10,7"
+                                                      HeightRequest="{Binding BindingContext.Height,Source={x:Reference thisPage}}"/>
+                                        </Grid>-->
+
+                                        <Grid ColumnDefinitions="1*,7*,1*" HeightRequest="200" HorizontalOptions="FillAndExpand" Margin="5,0,5,0" ColumnSpacing="10">
+                                            <yummy:PancakeView Grid.Column="0" Grid.Row="0"
+                                        xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                                        xct:TouchEffect.PressedBackgroundColor="LightPink"
+                                        xct:TouchEffect.NormalBackgroundColor="Transparent"
+                            Margin="0,0,0,35"
+                            Padding="0"
+                            BackgroundColor="White"
+                            CornerRadius="10"
+                            Elevation="10"
+                            HasShadow="False"
+                            HeightRequest="200">
+
+                                                <!--<BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="200" BackgroundColor="#cccccc" HorizontalOptions="FillAndExpand" 
+                                                                />-->
+
+                                                <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     
+                                                      HeightRequest="200"/>
+
+                                            </yummy:PancakeView>
+
+                                            <yummy:PancakeView Grid.Row="0" Grid.Column="1"
+                                        xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                                        xct:TouchEffect.PressedBackgroundColor="LightPink"
+                                        xct:TouchEffect.NormalBackgroundColor="Transparent"
+                            Margin="0,0,0,35"
+                            Padding="0"
+                            BackgroundColor="White"
+                            CornerRadius="10"
+                            Elevation="10"
+                            HasShadow="False"
+                            HeightRequest="200">
+
+                                                <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     
+                                                      HeightRequest="200"/>
+
+                                            </yummy:PancakeView>
+
+                                            <yummy:PancakeView Grid.Row="0" Grid.Column="2"
+                                        xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                                        xct:TouchEffect.PressedBackgroundColor="LightPink"
+                                        xct:TouchEffect.NormalBackgroundColor="Transparent"
+                            Margin="0,0,0,35"
+                            Padding="0"
+                            BackgroundColor="White"
+                            CornerRadius="10"
+                            Elevation="10"
+                            HasShadow="False"
+                            HeightRequest="200">
+
+                                                <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     
+                                                      HeightRequest="200"/>
+
+                                            </yummy:PancakeView>
+
+                                            <StackLayout Grid.Row="0" Grid.ColumnSpan="3" VerticalOptions="End"
+                                                         Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+
+                                                <BoxView WidthRequest="10" HeightRequest="10" CornerRadius="5" BackgroundColor="{DynamicResource My_Button_Color}"/>
+                                                <BoxView WidthRequest="10" HeightRequest="10" CornerRadius="5" BackgroundColor="#cccccc"/>
+                                                <BoxView WidthRequest="10" HeightRequest="10" CornerRadius="5" BackgroundColor="#cccccc"/>
+
+                                            </StackLayout>
+                                            
+                                            
+                                        </Grid>
+                                        
+                                       
+
+                                    </DataTemplate>
+                                </xct:StateView.Template>
+                            </xct:StateView>
+
+
+                            <xct:StateView StateKey="Success">
+                                <cardView:CoverFlowView Grid.Row="0"
                             Margin="5,0,5,0"
                 x:Name="carousel"
                 
-                IsCyclical="False"
+                IsCyclical="True"
                 ItemsSource="{Binding advertisements}"
                 PositionShiftValue="65"
                 SlideShowDuration="3500">
 
-                            <cardView:CardsView.ItemTemplate>
-                                <DataTemplate>
+                                <cardView:CardsView.ItemTemplate>
+                                    <DataTemplate>
 
-                                    <yummy:PancakeView
+                                        <yummy:PancakeView
                                         xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
                                         xct:TouchEffect.PressedBackgroundColor="LightPink"
                                         xct:TouchEffect.NormalBackgroundColor="Transparent"
@@ -262,16 +368,20 @@
                             HasShadow="False"
                             HeightRequest="200">
 
-                                        <Grid IsClippedToBounds="True">
+                                            <Grid IsClippedToBounds="True">
 
-                                            <controls:LoadingImageView/>
-                                            <ffimage:CachedImage Source="{Binding ImageView.Image,Converter={StaticResource BytesToImageSource}}"
+
+                                                <!--<controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding ImageView.Image}"
+                                                                             Grid.Row="0"/>-->
+
+                                                <controls:LoadingImageView/>
+                                                    <ffimage:CachedImage Source="{Binding ImageView.Image,Converter={StaticResource BytesToImageSource}}"
                                                              Aspect="AspectFill" HeightRequest="200" 
                                                              DownsampleToViewSize="true"/>
 
 
-                                            <StackLayout  VerticalOptions="EndAndExpand" BackgroundColor="#8C808080">
-                                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                                                    <StackLayout  VerticalOptions="EndAndExpand" BackgroundColor="#8C808080">
+                                                    <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                                Padding="5" 
                                                
                                               VerticalOptions="CenterAndExpand"
@@ -281,55 +391,55 @@
                                                FontAttributes="Bold"
                                                FontSize="Large"
                                                >
-                                                    <Label.Triggers>
-                                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                        <Label.Triggers>
+                                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                                                  Value="true">
-                                                            <Setter Property="Text" Value="{Binding ArabicDescription}"/>
-                                                        </DataTrigger>
-                                                    </Label.Triggers>
+                                                                <Setter Property="Text" Value="{Binding ArabicDescription}"/>
+                                                            </DataTrigger>
+                                                        </Label.Triggers>
 
-                                                </Label>
+                                                    </Label>
 
 
 
-                                            </StackLayout>
+                                                </StackLayout>
 
-                                        </Grid>
+                                            </Grid>
 
-                                        <yummy:PancakeView.GestureRecognizers>
-                                            <TapGestureRecognizer Command="{Binding BindingContext.OnAdTappedCommand,Source={x:Reference carousel}}"
+                                            <yummy:PancakeView.GestureRecognizers>
+                                                <TapGestureRecognizer Command="{Binding BindingContext.OnAdTappedCommand,Source={x:Reference carousel}}"
                                                                   CommandParameter="{Binding .}"/>
 
 
 
-                                        </yummy:PancakeView.GestureRecognizers>
+                                            </yummy:PancakeView.GestureRecognizers>
 
-                                    </yummy:PancakeView>
+                                        </yummy:PancakeView>
 
 
 
-                                </DataTemplate>
-                            </cardView:CardsView.ItemTemplate>
+                                    </DataTemplate>
+                                </cardView:CardsView.ItemTemplate>
 
-                            <cardViewControls:IndicatorsControl
+                                <cardViewControls:IndicatorsControl
                     Margin="0,10,0,0"
                     IsVisible="true"
                     SelectedIndicatorStyle="{StaticResource ActiveIndicatorColor}"
                     UnselectedIndicatorStyle="{StaticResource InactiveIndicatorColor}" />
-                        </cardView:CoverFlowView>
-                        
+                                </cardView:CoverFlowView>
+                            </xct:StateView>
+                        </xct:StateLayout.StateViews>
+                    </Grid>
 
-                    
-           
 
-            <StackLayout Grid.Row="1" Margin="0,10,0,10">
-                    <StackLayout.Triggers>
-                        <DataTrigger TargetType="StackLayout" Binding="{Binding itemCategories.Count}"
+                    <StackLayout Grid.Row="1" Margin="0,10,0,10" Spacing="10">
+                                    <StackLayout.Triggers>
+                                        <DataTrigger TargetType="StackLayout" Binding="{Binding itemCategories.Count}"
                                      Value="0">
-                            <Setter Property="IsVisible" Value="false"/>
-                        </DataTrigger>
-                    </StackLayout.Triggers>
-            <Label 
+                                            <Setter Property="IsVisible" Value="false"/>
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>
+                                    <Label 
                        TextColor="Black"
                       Margin="10,0,10,0"
                            Text="{x:Static resources:AppResources.txtCategory}"
@@ -337,32 +447,115 @@
                         CharacterSpacing="2"
                            FontAttributes="Bold" />
 
-                    <CollectionView ItemsSource="{Binding itemCategories}" HeightRequest="120"
+
+
+                        <StackLayout xct:StateLayout.CurrentState="{Binding CurrentState}">
+
+                            <xct:StateLayout.StateViews>
+
+                                <xct:StateView StateKey="Loading" Margin="5,10"
+                                               >
+                                    <xct:StateView.Template>
+                                        <DataTemplate>
+                                            <!--<Grid>
+                                            <controls:SkeletonView StartColor="LightGray"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                      Margin="10,7"
+                                                      HeightRequest="{Binding BindingContext.Height,Source={x:Reference thisPage}}"/>
+                                        </Grid>-->
+
+
+                                            <Grid ColumnDefinitions="150,150,150" HeightRequest="100" ColumnSpacing="10">
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
+                                                    <StackLayout>
+
+                                                        <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     HeightRequest="80" Grid.Row="0"/>
+                                                        
+                                                        <!--<BoxView HorizontalOptions="Fill"
+                                                                 HeightRequest="80" Grid.Row="0"
+                                                                 BackgroundColor="#cccccc"/>-->
+
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="1">
+                                                    <StackLayout>
+
+
+                                                        <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     HeightRequest="80" Grid.Row="0"/>
+
+                                                        <!--<controls:SkeletonView StartColor="LightGray"
+                                                      EndColor="Gray"
+                                                      IsLoading="True" HeightRequest="80" 
+                                                                             Grid.Row="0"/>-->
+
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="2">
+                                                    <StackLayout>
+
+                                                        <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     HeightRequest="80" Grid.Row="0"/>
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </xct:StateView.Template>
+                                </xct:StateView>
+
+                                <xct:StateView StateKey="Success">
+
+                                    <CollectionView ItemsSource="{Binding itemCategories}" HeightRequest="120"
                                      HorizontalScrollBarVisibility="Never"
                                     ItemsUpdatingScrollMode="KeepItemsInView"
                                      RemainingItemsThreshold="5">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Horizontal"
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout Orientation="Horizontal"
                                              SnapPointsAlignment="Start"
                                                SnapPointsType="None"
                                               HorizontalItemSpacing="10"
                                              />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                               
-                                <StackLayout HeightRequest="100" >
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="Category_Tapped" CommandParameter="{Binding .}"/>
-                                    </StackLayout.GestureRecognizers>
-                                    <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
-                                    <StackLayout>
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
 
-                                                <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Image}"
+                                                <StackLayout HeightRequest="100" >
+                                                    <StackLayout.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="Category_Tapped" CommandParameter="{Binding .}"/>
+                                                    </StackLayout.GestureRecognizers>
+                                                    <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
+                                                        <StackLayout>
+
+                                                            <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Image}"
                                                                              Grid.Row="0"/>
 
 
-                                            <Label VerticalOptions="End" Text="{Binding Description}" 
+                                                            <Label VerticalOptions="End" Text="{Binding Description}" 
                                                    HorizontalOptions="Center"
                                                    MaxLines="2"
                                                    Padding="2"
@@ -370,128 +563,202 @@
                                                    HorizontalTextAlignment="Center"
                                                    TextColor="Black"
                                                    FontSize="Body">
-                                                <Label.Triggers>
-                                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                                <Label.Triggers>
+                                                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                                                  Value="true">
-                                                        <Setter Property="Text" Value="{Binding ArabicDescription}"/>
-                                                    </DataTrigger>
-                                                </Label.Triggers>
-                                                
-                                            </Label>
-                                        </StackLayout>
-                                </Frame>
-                                </StackLayout>
-                               
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-                   
+                                                                        <Setter Property="Text" Value="{Binding ArabicDescription}"/>
+                                                                    </DataTrigger>
+                                                                </Label.Triggers>
 
-                    
+                                                            </Label>
+                                                        </StackLayout>
+                                                    </Frame>
+                                                </StackLayout>
 
-            </StackLayout>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </xct:StateView>
 
-            
-            <!--BEST SELLER VIEW-->
-                <StackLayout Grid.Row="2" Padding="10">
+                            </xct:StateLayout.StateViews>
 
-                    <StackLayout.Triggers>
-                        <DataTrigger TargetType="StackLayout" Binding="{Binding BestSellerItems.Count}"
+                        </StackLayout>
+
+
+                    </StackLayout>
+
+
+                                <!--#region BEST SELLER VIEW-->
+                                <StackLayout Grid.Row="2" Padding="10">
+
+                                    <StackLayout.Triggers>
+                                        <DataTrigger TargetType="StackLayout" Binding="{Binding BestSellerItems.Count}"
                                      Value="0">
-                            <Setter Property="IsVisible" Value="false"/>
-                        </DataTrigger>
-                    </StackLayout.Triggers>
+                                            <Setter Property="IsVisible" Value="false"/>
+                                        </DataTrigger>
+                                    </StackLayout.Triggers>
 
-                    <Label 
+                                    <Label 
                        TextColor="Black" CharacterSpacing="2"
                       
                            Text="{x:Static resources:AppResources.txtbestsellers}"
                            FontSize="Subtitle"
                            FontAttributes="Bold" />
 
-                    <CollectionView ItemsSource="{Binding BestSellerItems}"
+
+                        <StackLayout xct:StateLayout.CurrentState="{Binding CurrentState}">
+
+                            <xct:StateLayout.StateViews>
+
+                                <xct:StateView StateKey="Loading" Margin="5,10"
+                                               >
+                                    <xct:StateView.Template>
+                                        <DataTemplate>
+                                            <!--<Grid>
+                                            <controls:SkeletonView StartColor="LightGray"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                      Margin="10,7"
+                                                      HeightRequest="{Binding BindingContext.Height,Source={x:Reference thisPage}}"/>
+                                        </Grid>-->
+
+
+                                            <Grid ColumnDefinitions="150,150,150" HeightRequest="100" ColumnSpacing="10">
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
+                                                    <StackLayout>
+
+                                                        <BoxView HorizontalOptions="Fill"
+                                                                 HeightRequest="80" Grid.Row="0"
+                                                                 BackgroundColor="#cccccc"/>
+
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="1">
+                                                    <StackLayout>
+
+                                                        <BoxView HorizontalOptions="Fill"
+                                                                 HeightRequest="80" Grid.Row="0"
+                                                                 BackgroundColor="#cccccc"/>
+
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="2">
+                                                    <StackLayout>
+
+                                                        <BoxView HorizontalOptions="Fill"
+                                                                 HeightRequest="80" Grid.Row="0"
+                                                                 BackgroundColor="#cccccc"/>
+
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </xct:StateView.Template>
+                                </xct:StateView>
+
+
+                                <xct:StateView StateKey="Success">
+
+                                    <CollectionView ItemsSource="{Binding BestSellerItems}"
                                      HorizontalScrollBarVisibility="Never"
                                     HeightRequest="200">
-                        <CollectionView.ItemsLayout>
-                            <GridItemsLayout Orientation="Horizontal"
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout Orientation="Horizontal"
                                               HorizontalItemSpacing="1"
                                              VerticalItemSpacing="10"
                                                />
 
 
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
 
-                                    <Grid RowDefinitions="*">
+                                                <Grid RowDefinitions="*">
 
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="Item_Tapped" CommandParameter="{Binding .}"/>
-                                        </Grid.GestureRecognizers>
-                                        
-                                        <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
-                                            <Grid RowDefinitions="95,Auto,Auto,Auto" IsClippedToBounds="True" >
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="Item_Tapped" CommandParameter="{Binding .}"/>
+                                                    </Grid.GestureRecognizers>
+
+                                                    <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
+                                                        <Grid RowDefinitions="95,Auto,Auto,Auto" IsClippedToBounds="True" >
 
 
-                                                <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Image}"
+                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Image}"
                                                                              Grid.Row="0"/>
-                                                
 
 
-                                                <Frame Grid.Row="0" HorizontalOptions="End" VerticalOptions="StartAndExpand" Padding="4" Margin="5"  
+
+                                                            <Frame Grid.Row="0" HorizontalOptions="End" VerticalOptions="StartAndExpand" Padding="4" Margin="5"  
                                    CornerRadius="20" BackgroundColor="Red" >
-                                                    <Label Text="{Binding Discount,StringFormat='{0:N0}% Off'}" VerticalOptions="Center" HorizontalTextAlignment="Center" 
+                                                                <Label Text="{Binding Discount,StringFormat='{0:N0}% Off'}" VerticalOptions="Center" HorizontalTextAlignment="Center" 
                                                        TextColor = "White" FontSize ="14" />
 
-                                                    <Frame.Triggers>
-                                                        <DataTrigger TargetType="Frame" Binding="{Binding Discount}" Value="0">
-                                                            <Setter Property="IsVisible" Value="false"/>
-                                                        </DataTrigger>
-                                                    </Frame.Triggers>
+                                                                <Frame.Triggers>
+                                                                    <DataTrigger TargetType="Frame" Binding="{Binding Discount}" Value="0">
+                                                                        <Setter Property="IsVisible" Value="false"/>
+                                                                    </DataTrigger>
+                                                                </Frame.Triggers>
 
-                                                </Frame>
+                                                            </Frame>
 
 
-                                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                                                            <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                                       Grid.Row="1" TextColor="Silver" FontSize="Small" Margin="10,0,10,0"/>
 
 
 
 
 
-                                                <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0">
+                                                            <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0">
 
-                                                    <Label.FormattedText>
-                                                        <FormattedString>
-                                                            <Span Text="{Binding NewPrice}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                                            <Span Text="  " FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                                            <Span Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
-                                                        </FormattedString>
-                                                    </Label.FormattedText>
+                                                                <Label.FormattedText>
+                                                                    <FormattedString>
+                                                                        <Span Text="{Binding NewPrice}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                                                        <Span Text="  " FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                                                        <Span Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
+                                                                    </FormattedString>
+                                                                </Label.FormattedText>
 
-                                                    <Label.Triggers>
-                                                        <DataTrigger TargetType="Label" Binding="{Binding Discount}" Value="0">
-                                                            <Setter Property="IsVisible" Value="false"/>
-                                                        </DataTrigger>
-                                                    </Label.Triggers>
+                                                                <Label.Triggers>
+                                                                    <DataTrigger TargetType="Label" Binding="{Binding Discount}" Value="0">
+                                                                        <Setter Property="IsVisible" Value="false"/>
+                                                                    </DataTrigger>
+                                                                </Label.Triggers>
 
-                                                </Label>
+                                                            </Label>
 
 
-                                                <Label Text="{Binding Price}" IsVisible="false" 
+                                                            <Label Text="{Binding Price}" IsVisible="false" 
                                                    Margin="10,0,10,0"
                                                    Grid.Row="2"
                                                    FontSize="16" FontAttributes="Bold">
-                                                    <Label.Triggers>
-                                                        <DataTrigger TargetType="Label" Binding="{Binding Discount}" Value="0">
-                                                            <Setter Property="IsVisible" Value="true"/>
-                                                        </DataTrigger>
-                                                    </Label.Triggers>
-                                                </Label>
+                                                                <Label.Triggers>
+                                                                    <DataTrigger TargetType="Label" Binding="{Binding Discount}" Value="0">
+                                                                        <Setter Property="IsVisible" Value="true"/>
+                                                                    </DataTrigger>
+                                                                </Label.Triggers>
+                                                            </Label>
 
 
-                                                <Grid Grid.Row="3" ColumnDefinitions="*,Auto" RowDefinitions="Auto" Margin="5,0,5,0">
-                                                    <Button BackgroundColor="Black" TextColor="White" 
+                                                            <Grid Grid.Row="3" ColumnDefinitions="*,Auto" RowDefinitions="Auto" Margin="5,0,5,0">
+                                                                <Button BackgroundColor="Black" TextColor="White" 
                                                             HeightRequest="30"
                                                             Padding="0"
                                                             HorizontalOptions="FillAndExpand"
@@ -501,103 +768,108 @@
                                                             Clicked="AddToCart_Clicked" 
                                                             Visual="Default" Text="{x:Static resources:AppResources.AddToCartTxt}" 
                                                             VerticalOptions="EndAndExpand" >
-                                                        <Button.Triggers>
-                                                            <DataTrigger TargetType="Button" Binding="{Binding Quantity}" Value="0">
-                                                                <Setter Property="IsVisible" Value="true"/>
-                                                            </DataTrigger>
-                                                        </Button.Triggers>
-                                                    </Button>
+                                                                    <Button.Triggers>
+                                                                        <DataTrigger TargetType="Button" Binding="{Binding Quantity}" Value="0">
+                                                                            <Setter Property="IsVisible" Value="true"/>
+                                                                        </DataTrigger>
+                                                                    </Button.Triggers>
+                                                                </Button>
 
 
-                                                    <Frame Padding ="1"  BorderColor="Black"
+                                                                <Frame Padding ="1"  BorderColor="Black"
                                                            HorizontalOptions="Start" Visual="Material"  
                                                            Grid.Column="0" >
 
-                                                        <Frame.Triggers>
-                                                            <DataTrigger TargetType="Frame" Binding="{Binding Quantity}" Value="0">
-                                                                <Setter Property="IsVisible" Value="false"/>
-                                                            </DataTrigger>
-                                                        </Frame.Triggers>
+                                                                    <Frame.Triggers>
+                                                                        <DataTrigger TargetType="Frame" Binding="{Binding Quantity}" Value="0">
+                                                                            <Setter Property="IsVisible" Value="false"/>
+                                                                        </DataTrigger>
+                                                                    </Frame.Triggers>
 
-                                                        <StackLayout Orientation="Horizontal" VerticalOptions="End" Padding="0" Spacing="1" 
+                                                                    <StackLayout Orientation="Horizontal" VerticalOptions="End" Padding="0" Spacing="1" 
                                                   BackgroundColor="Black" >
 
-                                                            <Label HeightRequest="25" Text=" - " BackgroundColor="White"
+                                                                        <Label HeightRequest="25" Text=" - " BackgroundColor="White"
                                                VerticalOptions="Center" Padding="10,2,10,2">
-                                                                <Label.GestureRecognizers>
-                                                                    <TapGestureRecognizer Tapped="minus_Tapped"/>
-                                                                </Label.GestureRecognizers>
-                                                            </Label>
+                                                                            <Label.GestureRecognizers>
+                                                                                <TapGestureRecognizer Tapped="minus_Tapped"/>
+                                                                            </Label.GestureRecognizers>
+                                                                        </Label>
 
-                                                            <Label HeightRequest="25" Text="{Binding Quantity,StringFormat='{0:N0}'}" BackgroundColor="White"
+                                                                        <Label HeightRequest="25" Text="{Binding Quantity,StringFormat='{0:N0}'}" BackgroundColor="White"
                                                TextColor="Gray"
                                                VerticalOptions="Center" Padding="12,2,12,2"/>
 
-                                                            <Label HeightRequest="25" Text=" + " BackgroundColor="White"
+                                                                        <Label HeightRequest="25" Text=" + " BackgroundColor="White"
                                                VerticalOptions="Center" Padding="10,2,10,2">
-                                                                <Label.GestureRecognizers>
-                                                                    <TapGestureRecognizer Tapped="plus_Tapped"/>
-                                                                </Label.GestureRecognizers>
-                                                            </Label>
+                                                                            <Label.GestureRecognizers>
+                                                                                <TapGestureRecognizer Tapped="plus_Tapped"/>
+                                                                            </Label.GestureRecognizers>
+                                                                        </Label>
 
-                                                        </StackLayout>
+                                                                    </StackLayout>
 
-                                                    </Frame>
+                                                                </Frame>
 
 
-                                                    <Image Source="ic_favorite_24dp.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30"
+                                                                <Image Source="ic_favorite_24dp.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30"
                                                            x:Name="wishlistImg"
                                                            Aspect="AspectFit" Grid.Column="1" IsVisible="{Binding IsWishlisted}"
                                                                  BackgroundColor="Transparent" effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}">
-                                                        <Image.GestureRecognizers>
-                                                            <TapGestureRecognizer Tapped="WishList_Tapped"/>
-                                                        </Image.GestureRecognizers>
+                                                                    <Image.GestureRecognizers>
+                                                                        <TapGestureRecognizer Tapped="WishList_Tapped"/>
+                                                                    </Image.GestureRecognizers>
 
-                                                        <!--<Image.Triggers>
+                                                                    <!--<Image.Triggers>
                                                             <DataTrigger TargetType="Image" Binding="{Binding IsWishlisted}" Value="true">
                                                                 <Setter Property="Source" Value="ic_favorite_24dp"/>
                                                             </DataTrigger>
                                                         </Image.Triggers>-->
 
-                                                    </Image>
+                                                                </Image>
 
-                                                    <Image Source="ic_favorite_outline_24dp.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30"
+                                                                <Image Source="ic_favorite_outline_24dp.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30"
                                                            Aspect="AspectFit" Grid.Column="1" IsVisible="false"
                                                                  BackgroundColor="Transparent" effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}">
-                                                        <Image.GestureRecognizers>
-                                                            <TapGestureRecognizer Tapped="WishList_Tapped"/>
-                                                        </Image.GestureRecognizers>
+                                                                    <Image.GestureRecognizers>
+                                                                        <TapGestureRecognizer Tapped="WishList_Tapped"/>
+                                                                    </Image.GestureRecognizers>
 
-                                                        <Image.Triggers>
-                                                            <DataTrigger TargetType="Image" Binding="{Binding IsWishlisted}" 
+                                                                    <Image.Triggers>
+                                                                        <DataTrigger TargetType="Image" Binding="{Binding IsWishlisted}" 
                                                                          Value="false">
-                                                                <Setter Property="IsVisible" Value="true"/>
-                                                            </DataTrigger>
-                                                        </Image.Triggers>
-                                                        
-                                                    </Image>
-                                                    
-                                                    
-                                                    
+                                                                            <Setter Property="IsVisible" Value="true"/>
+                                                                        </DataTrigger>
+                                                                    </Image.Triggers>
 
+                                                                </Image>
+
+
+
+
+                                                            </Grid>
+
+
+                                                        </Grid>
+                                                    </Frame>
                                                 </Grid>
-                                               
 
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
+
+
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+
+                                </xct:StateView>
+                            </xct:StateLayout.StateViews>
+                        </StackLayout>
+
+                    </StackLayout>
                                 
-                                
-                            
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                <!--#endregion-->
 
-
-                  
-                </StackLayout>
-
-                <!--MOST VIEWED ITEM VIEW--><!--
+                               <!-- #region MOST VIEWED ITEM VIEW-->
+                                <!--
                 <StackLayout Grid.Row="3" Padding="10">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" Binding="{Binding MostViewedItems.Count}"
@@ -780,19 +1052,20 @@
 
 
                 </StackLayout>-->
+                                <!--#endregion-->
 
-                    <!-- OFFER VIEW-->
-                    <StackLayout Grid.Row="3" Padding="10">
+                                <!-- #region OFFER VIEW-->
+                                <StackLayout Grid.Row="3" Padding="10">
 
-                        <!--<Label 
+                                    <Label 
                        TextColor="Black"
                      
                            Text="{x:Static resources:AppResources.ActionbarOffers}"
                            FontSize="Subtitle"
                         CharacterSpacing="2"
-                           FontAttributes="Bold" >
+                           FontAttributes="Bold" />
 
-                            <Label.Triggers>
+                                    <!-- <Label.Triggers>
                                 <MultiTrigger TargetType="Label">
                                     <MultiTrigger.Conditions>
                                         <BindingCondition Binding="{Binding MyPoints,Converter={StaticResource StringToBoolConverter}}"
@@ -828,54 +1101,130 @@
 
                         </Frame>-->
 
-                        <CollectionView ItemsSource="{Binding offers}" HeightRequest="160"
+
+                        <StackLayout xct:StateLayout.CurrentState="{Binding CurrentState}">
+
+                            <xct:StateLayout.StateViews>
+
+                                <xct:StateView StateKey="Loading" Margin="5,10"
+                                               >
+                                    <xct:StateView.Template>
+                                        <DataTemplate>
+                                            <!--<Grid>
+                                            <controls:SkeletonView StartColor="LightGray"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                      Margin="10,7"
+                                                      HeightRequest="{Binding BindingContext.Height,Source={x:Reference thisPage}}"/>
+                                        </Grid>-->
+
+
+                                            <Grid ColumnDefinitions="150,150,150" HeightRequest="100" ColumnSpacing="10">
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
+                                                    <StackLayout>
+
+                                                        <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     HeightRequest="80" Grid.Row="0"/>
+
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="1">
+                                                    <StackLayout>
+
+                                                        <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     HeightRequest="80" Grid.Row="0"/>
+
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                                <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="2">
+                                                    <StackLayout>
+
+                                                        <controls:SkeletonView StartColor="#cccccc"
+                                                      EndColor="Gray"
+                                                      IsLoading="True"
+                                                     HeightRequest="80" Grid.Row="0"/>
+
+
+                                                        <BoxView Grid.Row="0" Grid.ColumnSpan="2"  HeightRequest="20" BackgroundColor="#cccccc" HorizontalOptions="Fill" 
+                                                                 VerticalOptions="End"/>
+
+                                                    </StackLayout>
+                                                </Frame>
+
+                                            </Grid>
+
+                                        </DataTemplate>
+                                    </xct:StateView.Template>
+                                </xct:StateView>
+
+                                <xct:StateView StateKey="Success">
+
+                                    <CollectionView ItemsSource="{Binding offers}" HeightRequest="160"
                                      HorizontalScrollBarVisibility="Never"
                                     >
-                            <CollectionView.Triggers>
-                                <DataTrigger TargetType="CollectionView" Binding="{Binding offers.Count}" Value="0">
-                                    <Setter Property="IsVisible" Value="false"/>
-                                </DataTrigger>
-                            </CollectionView.Triggers>
-                            <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Horizontal"
+                                        <CollectionView.Triggers>
+                                            <DataTrigger TargetType="CollectionView" Binding="{Binding offers.Count}" Value="0">
+                                                <Setter Property="IsVisible" Value="false"/>
+                                            </DataTrigger>
+                                        </CollectionView.Triggers>
+                                        <CollectionView.ItemsLayout>
+                                            <GridItemsLayout Orientation="Horizontal"
                                               HorizontalItemSpacing="1"
                                              VerticalItemSpacing="10"
                                                />
-                            </CollectionView.ItemsLayout>
+                                        </CollectionView.ItemsLayout>
 
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate>
 
 
-                                    <Grid RowDefinitions="*">
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="Offer_Tapped" CommandParameter="{Binding .}"/>
-                                        </Grid.GestureRecognizers>
-                                        <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
-                                            <Grid RowDefinitions="95,Auto" IsClippedToBounds="True" >
+                                                <Grid RowDefinitions="*">
+                                                    <Grid.GestureRecognizers>
+                                                        <TapGestureRecognizer Tapped="Offer_Tapped" CommandParameter="{Binding .}"/>
+                                                    </Grid.GestureRecognizers>
+                                                    <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
+                                                        <Grid RowDefinitions="95,Auto" IsClippedToBounds="True" >
 
-                                                <controls:CustomImageControl ImageHeight="95" ImageWeight="100"  UriImageSource="{Binding Images[0].Image}"
+                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100"  UriImageSource="{Binding Images[0].Image}"
                                                                              Grid.Row="0"/>
-                                                
 
-                                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+
+                                                            <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                                        MaxLines="2"
                                                       Grid.Row="1" TextColor="Silver" FontSize="Small" Margin="10,0,10,0"/>
 
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
+                                                        </Grid>
+                                                    </Frame>
+                                                </Grid>
 
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </xct:StateView>
+                            </xct:StateLayout.StateViews>
+                        </StackLayout>
                     </StackLayout>
 
-                </Grid>
-  </ScrollView>
-
-
+                                    <!--#endregion-->
+                                    
+                            </Grid>
+                        </ScrollView>
+                    
 
         </Grid>
 

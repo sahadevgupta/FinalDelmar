@@ -1,4 +1,5 @@
 ﻿using FormsLoyalty.Utils;
+using Infrastructure.Data.SQLite.Devices;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Address;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Coupons;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Magazine;
@@ -20,12 +21,12 @@ namespace FormsLoyalty.Models
     {
         private CommonModelRepository _repository;
         private CommonModelService _service;
-        private IDeviceLocalRepository deviceRepo;
+        private DeviceRepository deviceRepo;
         public CommonModel()
         {
             _service = new CommonModelService();
             _repository = new CommonModelRepository();
-            deviceRepo = PrismApplicationBase.Current.Container.Resolve<IDeviceLocalRepository>();
+            deviceRepo = new DeviceRepository();
         }
 
         #region Phone Verification

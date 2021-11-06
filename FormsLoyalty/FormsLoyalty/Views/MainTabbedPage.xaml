@@ -18,7 +18,7 @@
             FlowDirection="LeftToRight"
             NavigationPage.HasNavigationBar="False"
             BarBackgroundColor="White"
-            CurrentPageChanged="tabChanged">
+            >
 
     <TabbedPage.Triggers>
         <DataTrigger TargetType="TabbedPage" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"

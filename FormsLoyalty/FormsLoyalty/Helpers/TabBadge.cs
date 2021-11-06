@@ -9,9 +9,9 @@ namespace FormsLoyalty.Helpers
     {
         public static BindableProperty BadgeTextProperty = BindableProperty.CreateAttached("BadgeText", typeof(string), typeof(TabBadge), default(string), BindingMode.TwoWay,propertyChanged: OnTextChanged);
 
-        private static void OnTextChanged(BindableObject bindable, object oldValue, object newValue)
+        private static void OnTextChanged(BindableObject view, object oldValue, object newValue)
         {
-            
+            view.SetValue(BadgeTextProperty, newValue);
         }
 
         public static string GetBadgeText(BindableObject view)

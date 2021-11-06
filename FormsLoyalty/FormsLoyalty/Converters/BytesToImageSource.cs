@@ -26,7 +26,7 @@ namespace FormsLoyalty.Converters
                 
                 if ( img.Contains("noimage"))
                 {
-                    imgSource = ImageSource.FromFile("noimage.png");
+                    imgSource = ImageSource.FromFile("No_image_available.png");
                 }
                 else
                 {
@@ -39,14 +39,13 @@ namespace FormsLoyalty.Converters
                             byte[] Base64Stream = System.Convert.FromBase64String(img);
                             imgSource = ImageSource.FromStream(() => new MemoryStream(Base64Stream));
                         }
-                        else
-                            imgSource = ImageSource.FromFile("noimage.png");
+                       
 
                     }
                     catch (Exception ex)
                     {
 
-                        imgSource = ImageSource.FromFile("noimage.png");
+                        imgSource = ImageSource.FromFile("No_image_available.png");
                     }
 
                     
@@ -70,7 +69,7 @@ namespace FormsLoyalty.Converters
             else
             {
 
-                imgSource = ImageSource.FromFile("no_image.png");
+                imgSource = ImageSource.FromFile("No_image_available.png");
                 return imgSource;
             }
         }
@@ -88,7 +87,7 @@ namespace FormsLoyalty.Converters
             if(value is string img && !string.IsNullOrEmpty(img))
             {
                
-                   return img.Equals("noimage.png");
+                   return img.Equals("No_image_available.png");
             }
             return false;
         }

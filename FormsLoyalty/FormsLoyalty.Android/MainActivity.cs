@@ -9,11 +9,8 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using FormsLoyalty.Droid.Helper;
-using FormsLoyalty.Models;
 using ImageCircle.Forms.Plugin.Droid;
-using Java.Lang;
 using Java.Security;
-using Java.Util;
 using PanCardView.Droid;
 using Plugin.FacebookClient;
 using Plugin.FirebasePushNotification;
@@ -24,13 +21,12 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 using Exception = System.Exception;
 
 namespace FormsLoyalty.Droid
 {
-    [Activity(Label = "@string/app_name", Icon = "@mipmap/ic_launcher", Theme = "@style/SplashTheme", LaunchMode = LaunchMode.SingleTop,
+    [Activity(Label = "@string/app_name", Icon = "@mipmap/ic_launcher", Theme = "@style/MainTheme", LaunchMode = LaunchMode.SingleTop,
          ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
@@ -49,7 +45,6 @@ namespace FormsLoyalty.Droid
         {
             AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
             base.Window.RequestFeature(WindowFeatures.ActionBar);
-            base.SetTheme(Resource.Style.MainTheme);
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 

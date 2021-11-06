@@ -66,22 +66,30 @@ namespace FormsLoyalty.ViewModels
        
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            if (!_isInitialized)
-            {
-                _isInitialized = true;
-                LoadData();
-            }
+
+            LoadData();
+           
             
+            
+
+
         }
 
         void LoadData()
         {
             RTL = Settings.RTL;
-            
+
             RefreshMemberContact();
-            
+
             MessagingCenter.Subscribe<BasketModel>(this, "CartUpdated", CheckCartCount);
             MessagingCenter.Subscribe<App>((App)Xamarin.Forms.Application.Current, "LoggedIn", ReloadView);
+
+
+            if (_isInitialized) return;
+            _isInitialized = true;
+            DependencyService.Get<INotify>().ChangeTabBarFlowDirection(RTL);
+
+            
         }
 
         private void ReloadView(App obj)
@@ -91,7 +99,7 @@ namespace FormsLoyalty.ViewModels
 
         internal void CheckCartCount(BasketModel obj)
         {
-            
+            if(AppData.Basket !=null)
                 BadgeCount = AppData.Basket?.Items.Count == 0 ? null : AppData.Basket.Items.Count.ToString();
             
         }
@@ -112,9 +120,9 @@ namespace FormsLoyalty.ViewModels
                     Task.Run(async() =>
                     {
 
-                       // var loading = await MaterialDialog.Instance.LoadingDialogAsync(message: AppResources.loading);
+                        // var loading = await MaterialDialog.Instance.LoadingDialogAsync(message: AppResources.loading);
 
-                        if (AppData.Device.UserLoggedOnToDevice != null)
+                        if (AppData.Device?.UserLoggedOnToDevice != null && !AppData.Device.UserLoggedOnToDevice.OneLists.Any())
                         {
                             var memberContactModel = new MemberContactModel();
                             await memberContactModel.UserGetByCardId(AppData.Device.CardId);
@@ -125,9 +133,11 @@ namespace FormsLoyalty.ViewModels
                             //GetWishlistCount();
                             //CouponsCountChanged();
                         }
-                        
+                        else
+
+                            CheckCartCount(null);
                      // await  loading.DismissAsync();
-                    });
+                    }).ConfigureAwait(false);
                    
                 }
                 catch (Exception)

@@ -235,9 +235,19 @@ namespace FormsLoyalty.iOS
             //View = new UniversalView();
             base.ViewDidLoad();
 
+            //Task.Run(async () =>
+            //{
+                 App.CallPCLMethod();
+            //});
+
+            //nint taskID = UIApplication.SharedApplication.BeginBackgroundTask(() => { });
+            //new Task(async() => {
+            //    await App.CallPCLMethod();
+            //    UIApplication.SharedApplication.EndBackgroundTask(taskID);
+            //}).Start();
             //NSTimer.CreateScheduledTimer(7, false, (obj) =>
             //{
-               
+
             //});
         }
     }

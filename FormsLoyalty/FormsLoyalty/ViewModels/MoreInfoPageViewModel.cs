@@ -232,17 +232,14 @@ namespace FormsLoyalty.ViewModels
 
             #region Offer Tab
 
-            if (EnabledItems.HasOffers)
-            {
-                var offerCount = string.Empty;
+             var offerCount = string.Empty;
 
-                if (EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null)
-                {
-                    if (AppData.Device.UserLoggedOnToDevice.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon) > 0)
+               
+                    if (AppData.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon) > 0)
                     {
-                        offerCount = AppData.Device.UserLoggedOnToDevice.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon).ToString();
+                        offerCount = AppData.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon).ToString();
                     }
-                }
+                
 
                 drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
                 {
@@ -253,7 +250,7 @@ namespace FormsLoyalty.ViewModels
                     Title = AppResources.ResourceManager.GetString("ActionbarOffers", AppResources.Culture),
                     SubTitle = offerCount
                 });
-            }
+            
 
             #endregion
 
@@ -456,7 +453,7 @@ namespace FormsLoyalty.ViewModels
                 }  
                 else
                 {
-                    DependencyService.Get<INotify>().ShowToast(AppResources.ResourceManager.GetString("ItemModelItemNotFound", AppResources.Culture));
+                    DependencyService.Get<INotify>().ShowToast($"{AppResources.ResourceManager.GetString("ItemModelItemNotFound", AppResources.Culture)} with barcode {barcode}");
                 }
             }
             catch (Exception)
@@ -533,7 +530,7 @@ namespace FormsLoyalty.ViewModels
 
                            Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                             {
-                                DependencyService.Get<INotify>().ShowToast($"Scan Successful!!, Code : {result.Text}");
+                                //DependencyService.Get<INotify>().ShowToast($"Scan Successful!!, Code : {result.Text}");
                                 //Navigation.PopAsync();
                                 navigation.PopAsync();
                                 string barcode = result.Text;
@@ -562,13 +559,9 @@ namespace FormsLoyalty.ViewModels
 
                 case AppConstValues.Offer:
 
-                    AppData.IsLoggedIn = AppData.Device.UserLoggedOnToDevice == null ? false : true;
-                    if (AppData.IsLoggedIn)
-                    {
+                  
                         await NavigationService.NavigateAsync(nameof(OffersPage));
-                    }
-                    else
-                        await NavigationService.NavigateAsync(nameof(LoginPage));
+                   
 
                     break;
                 case AppConstValues.Coupons:
@@ -626,14 +619,6 @@ namespace FormsLoyalty.ViewModels
                     var isSuccess = await membercontact.Logout();
                     if (isSuccess)
                     {
-                        AppData.IsLoggedIn = false;
-
-                        if (AppData.Basket != null)
-                            AppData.Basket.Items.Clear();
-
-                        AppData.Device = null;
-                        AppData.Device.UserLoggedOnToDevice = null;
-                        AppData.BestSellers.Clear();
                         await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
                     }
 

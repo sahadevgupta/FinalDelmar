@@ -1,4 +1,5 @@
 ﻿using FormsLoyalty.Controls.Stepper;
+using FormsLoyalty.Interfaces;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -6,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 using XF.Material.Forms.Dialogs;
 
 namespace FormsLoyalty.ViewModels
@@ -40,12 +42,22 @@ namespace FormsLoyalty.ViewModels
             get { return this._isNotConnected; }
             set { SetProperty(ref _isNotConnected, value); }
         }
+
+        private readonly IFirebaseAnalytics eventTracker;
+
         public ViewModelBase(INavigationService navigationService)
         {
             NavigationService = navigationService;
 
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             IsNotConnected = Connectivity.NetworkAccess != NetworkAccess.Internet;
+
+            eventTracker = DependencyService.Get<IFirebaseAnalytics>();
+            var page = this;
+            eventTracker?.SendEvent("Page Opened", new Dictionary<string, string>() { { "Page", nameof(page) } });
+            
+            
+
         }
         ~ViewModelBase()
         {
@@ -68,7 +80,11 @@ namespace FormsLoyalty.ViewModels
         }
         public virtual void Initialize(INavigationParameters parameters)
         {
-
+            if (parameters is object && parameters.Count >= 0)
+            {
+                var page = this;
+                Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Page Initialized", new Dictionary<string, string>() { { "Page", nameof(page) } });
+            }
         }
 
         public virtual void OnNavigatedFrom(INavigationParameters parameters)

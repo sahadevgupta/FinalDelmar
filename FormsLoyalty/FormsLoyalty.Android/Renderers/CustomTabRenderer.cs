@@ -68,14 +68,7 @@ namespace FormsLoyalty.Droid.Renderers
          
 
         }
-        protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            base.OnElementPropertyChanged(sender, e);
-            if(e.PropertyName == TabBadge.BadgeTextProperty.PropertyName)
-            {
-
-            }
-        }
+       
 
         private void AddTabBadge(int tabIndex)
         {

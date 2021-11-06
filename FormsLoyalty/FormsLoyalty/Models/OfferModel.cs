@@ -1,5 +1,6 @@
 ﻿using FormsLoyalty.Interfaces;
 using FormsLoyalty.Utils;
+using Infrastructure.Data.SQLite.Offers;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.Services.Base.Loyalty;
 using LSRetail.Omni.Domain.Services.Loyalty.Offers;
@@ -27,8 +28,10 @@ namespace FormsLoyalty.Models
             try
             {
                 var offers = await service.GetPublishedOffersByCardIdAsync(cardId);
+                AppData.PublishedOffers = offers;
 
-                AppData.Device.UserLoggedOnToDevice.PublishedOffers = offers;
+                if(AppData.Device?.UserLoggedOnToDevice !=null)
+                     AppData.Device.UserLoggedOnToDevice.PublishedOffers = offers;
 
                 //SendBroadcast(Utils.BroadcastUtils.CouponsUpdated);
                 //SendBroadcast(Utils.BroadcastUtils.OffersUpdated);
@@ -90,6 +93,7 @@ namespace FormsLoyalty.Models
         protected void BeginWsCall()
         {
             service = new SharedService(new SharedRepository());
+            localService = new OfferLocalService(new OfferRepository());
         }
     }
 }
