@@ -127,6 +127,10 @@ namespace FormsLoyalty.ViewModels
                 if (!AppData.GetSocialMediaStatusResult && Device.RuntimePlatform == Device.iOS)
                     MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
 
+#if DEBUG
+                MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
+#endif
+
                 //if (Device.RuntimePlatform == Device.Android)
                 //{
                 //    DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");

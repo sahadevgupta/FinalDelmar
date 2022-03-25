@@ -233,20 +233,33 @@
                     </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-           
-           
 
 
-            <Grid Grid.Row="2" RowDefinitions="Auto,0.7,Auto,Auto,Auto,Auto" ColumnDefinitions="Auto,*" BackgroundColor="White">
+
+            <StackLayout  Grid.Row="2" >
+            <Grid RowDefinitions="Auto,0.7,Auto,Auto,Auto" ColumnDefinitions="Auto,*" BackgroundColor="White" >
                 <Label Text="{x:Static resources:AppResources.PricedetailTxt}" FontAttributes="Bold" TextColor="Black" Grid.Row="0" Grid.ColumnSpan="2"  Padding="10,0,10,0" />
                 <BoxView Grid.Row="1" Grid.ColumnSpan="2" HeightRequest="0.7" Color="Silver" />
 
-                <Label Grid.Column="0" Grid.Row="3" Padding="10,0,10,0" Text="{x:Static resources:AppResources.TotalMRPTxt}" FontSize="10" />
-                <Label x:Name="lblTotal"  Padding="10,0,10,0" Text="{Binding totalSubtotal}" Grid.Column="1" Grid.Row="3" FontAttributes="Bold" 
+                <Label Grid.Column="0" Grid.Row="2" Padding="10,0,10,0" Text="{x:Static resources:AppResources.TotalMRPTxt}" FontSize="10" />
+                <Label x:Name="lblTotal"  Padding="10,0,10,0" Text="{Binding totalSubtotal}" Grid.Column="1" Grid.Row="2" FontAttributes="Bold" 
                        FontSize="12" HorizontalTextAlignment="End"/>
-                <Label Grid.Column="0" Padding="10,0,10,0" Grid.Row="4" Text="{x:Static resources:AppResources.CheckoutViewDiscount}" FontSize="10" />
-                <Label x:Name="lblDiscount" Padding="10,0,10,0" Text="{Binding totalDiscount}"  Grid.Column="1" Grid.Row="4" 
+                <Label Grid.Column="0" Padding="10,0,10,0" Grid.Row="3" Text="{x:Static resources:AppResources.CheckoutViewDiscount}" FontSize="10" />
+                <Label x:Name="lblDiscount" Padding="10,0,10,0" Text="{Binding totalDiscount}"  Grid.Column="1" Grid.Row="3" 
                        FontSize="12" HorizontalTextAlignment="End"/>
+
+                <Label FontSize="Small" 
+                       Padding="10,0,10,0"
+                       TextColor="Red"
+                       Grid.Row="4" Grid.ColumnSpan="2">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="* " />
+                            <Span Text="{x:Static resources:AppResources.CartAdditionalDiscountMsg}"/>
+                        </FormattedString>
+                    </Label.FormattedText>
+                    
+                </Label>
 
                 <Grid.Triggers>
                     <DataTrigger TargetType="Grid" Binding="{Binding baskets.Count }"
@@ -255,7 +268,7 @@
                     </DataTrigger>
                 </Grid.Triggers>
             </Grid>
-
+            </StackLayout>
             <StackLayout Orientation="Horizontal" Grid.Row="3" HorizontalOptions="FillAndExpand" VerticalOptions="CenterAndExpand" Margin="10,5,10,5">
                 <StackLayout.Triggers>
                     <DataTrigger TargetType="StackLayout" Binding="{Binding baskets.Count }"

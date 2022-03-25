@@ -35,6 +35,45 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _reOrderBtnVisible, value); }
         }
 
+        #region Order Detail Price
+
+        private string _totalSubtotal;
+        public string TotalSubtotal
+        {
+            get { return _totalSubtotal; }
+            set { SetProperty(ref _totalSubtotal, value); }
+        }
+
+        private string _totalShipping;
+        public string TotalShipping
+        {
+            get { return _totalShipping; }
+            set { SetProperty(ref _totalShipping, value); }
+        }
+
+        private string _totalVAT;
+        public string TotalVat
+        {
+            get { return _totalVAT; }
+            set { SetProperty(ref _totalVAT, value); }
+        }
+
+        private string _totalDiscount;
+        public string TotalDiscount
+        {
+            get { return _totalDiscount; }
+            set { SetProperty(ref _totalDiscount, value); }
+        }
+
+        private string _total;
+        public string Total
+        {
+            get { return _total; }
+            set { SetProperty(ref _total, value); }
+        }
+
+        #endregion
+
         public DelegateCommand ReOrderCommand { get; set; }
         public TransactionDetailPageViewModel(INavigationService navigationService) : base (navigationService)
         {
@@ -135,6 +174,14 @@ namespace FormsLoyalty.ViewModels
                 }
                 else
                     transaction = loadedTransaction;
+
+               
+                    TotalSubtotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(transaction.TotalNetAmount + transaction.TotalDiscount);
+                    TotalShipping = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(AppData.Basket.ShippingAmount);
+                    TotalVat = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(transaction.TotalAmount - transaction.TotalNetAmount);
+                    TotalDiscount = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(transaction.TotalDiscount);
+                    Total = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(transaction.TotalAmount);
+                
             }
             catch (Exception)
             {

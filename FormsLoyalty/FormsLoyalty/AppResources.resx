@@ -495,6 +495,10 @@
   <data name="BasketViewGoToCheckout" xml:space="preserve">
     <value>Go to checkout</value>
   </data>
+  <data name="CartAdditionalDiscountMsg" xml:space="preserve">
+    <value>Some items may have an additional discount.
+Please continue to check.</value>
+  </data>
   <data name="CartTab" xml:space="preserve">
     <value>Cart</value>
   </data>
@@ -1076,6 +1080,9 @@
   </data>
   <data name="play_services_error_fmt" xml:space="preserve">
     <value>Google Play Services Error: {0}</value>
+  </data>
+  <data name="PleaseLoginToSeeOrders" xml:space="preserve">
+    <value>Please login to see your orders</value>
   </data>
   <data name="PointOffers" xml:space="preserve">
     <value>Point offers</value>

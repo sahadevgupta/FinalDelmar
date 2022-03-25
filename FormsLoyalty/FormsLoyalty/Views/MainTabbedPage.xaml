@@ -13,7 +13,7 @@
             android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.IsSwipePagingEnabled="False"
             android:TabbedPage.IsSmoothScrollEnabled="True"
-            UnselectedTabColor="LightGray"
+            UnselectedTabColor="Black"
             SelectedTabColor="{StaticResource My_Header_Color}"
             FlowDirection="LeftToRight"
             NavigationPage.HasNavigationBar="False"

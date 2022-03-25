@@ -10,6 +10,7 @@ using Android.Widget;
 using AndroidX.AppCompat.App;
 using FormsLoyalty.Droid.Helper;
 using ImageCircle.Forms.Plugin.Droid;
+using Java.Lang;
 using Java.Security;
 using PanCardView.Droid;
 using Plugin.FacebookClient;
@@ -54,7 +55,8 @@ namespace FormsLoyalty.Droid
             FacebookClientManager.Initialize(this);
             GoogleClientManager.Initialize(this);
             context = this;
-           // AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
+            // AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
+            //Rg.Plugins.Popup.Popup.Init(this);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
@@ -72,6 +74,14 @@ namespace FormsLoyalty.Droid
             //notificationManager.CancelAll();
             // setReminder();
 
+            //var apiCallService = new Runnable(async () =>
+            //{
+            //    await App.CallPCLMethod().ConfigureAwait(false);
+
+            //});
+            //apiCallService.Run();
+
+
             XF.Material.Droid.Material.Init(this, savedInstanceState);
             LoadApplication(new App(new AndroidInitializer()));
             Xamarin.Forms.Application.Current.On<Xamarin.Forms.PlatformConfiguration.Android>().UseWindowSoftInputModeAdjust(WindowSoftInputModeAdjust.Resize);
@@ -82,14 +92,16 @@ namespace FormsLoyalty.Droid
             PrintHashKey(this);
 #endif
             Instance = this;
-            //For Add SMS Read
-            string Value = AppHashKeyHelper.GetAppHashKey(this);
-            Console.WriteLine("SMS Read >>>   ------GetAppHashKey Value:" + Value);// Add
-            //Toast.MakeText(this, "GetAppHashKey => " + Value, ToastLength.Long).Show();
-            //Toast.MakeText(this, " GetIPAddress => " + AndroidNativeUtility.GetIPAddress(), ToastLength.Long).Show();
-            Intent intent = new Intent(this, typeof(SmsReceiver));
-            StartService(intent);
+            #region For Add SMS Read
 
+
+            //string Value = AppHashKeyHelper.GetAppHashKey(this);
+            //Console.WriteLine("SMS Read >>>   ------GetAppHashKey Value:" + Value);// Add
+            ////Toast.MakeText(this, "GetAppHashKey => " + Value, ToastLength.Long).Show();
+            ////Toast.MakeText(this, " GetIPAddress => " + AndroidNativeUtility.GetIPAddress(), ToastLength.Long).Show();
+            //Intent intent = new Intent(this, typeof(SmsReceiver));
+            //StartService(intent);
+            #endregion
 
         }
 

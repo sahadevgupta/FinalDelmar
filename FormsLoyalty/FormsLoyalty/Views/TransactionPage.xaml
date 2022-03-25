@@ -34,13 +34,14 @@
     </ContentPage.ToolbarItems>
 
     <AbsoluteLayout>
-        <CollectionView ItemsSource="{Binding transactions, TargetNullValue={StaticResource EmptyArray}}"
+        <Grid RowDefinitions="*" AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    AbsoluteLayout.LayoutFlags="All">
+            <CollectionView ItemsSource="{Binding transactions, TargetNullValue={StaticResource EmptyArray}}"
                     SelectionMode="Single" Margin="10"
                         VerticalScrollBarVisibility="Never"
-                    AbsoluteLayout.LayoutBounds="0,0,1,1"
-                    AbsoluteLayout.LayoutFlags="All">
+                    >
 
-            <!--<CollectionView.EmptyView>
+                <!--<CollectionView.EmptyView>
                 <Label Text="{x:Static resources:AppResources.txtNoOrders}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" FontSize="Medium"
                        IsVisible="{OnPlatform iOS='False', Default=True}">
                     <Label.Triggers>
@@ -52,50 +53,56 @@
                 </Label>
             </CollectionView.EmptyView>-->
 
-            <CollectionView.Triggers>
-                <DataTrigger TargetType="CollectionView" Binding="{Binding IsPageEnabled}"
+                <CollectionView.Triggers>
+                    <DataTrigger TargetType="CollectionView" Binding="{Binding IsPageEnabled}"
                              Value="true">
-                    <Setter Property="Opacity" Value="0.5"/>
-                    <Setter Property="IsEnabled" Value="False"/>
-                </DataTrigger>
-            </CollectionView.Triggers>
+                        <Setter Property="Opacity" Value="0.5"/>
+                        <Setter Property="IsEnabled" Value="False"/>
+                    </DataTrigger>
 
-            <CollectionView.ItemsLayout>
-            <GridItemsLayout VerticalItemSpacing="5"
+                   
+                        <DataTrigger TargetType="CollectionView" Binding="{Binding IsLoggedIn}" Value="false">
+                            <Setter Property="IsVisible" Value="false"/>
+                        </DataTrigger>
+                   
+                </CollectionView.Triggers>
+
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout VerticalItemSpacing="5"
                              
                              Orientation="Vertical"/>
-        </CollectionView.ItemsLayout>
-        <CollectionView.ItemTemplate>
-            <DataTemplate>
-                <Frame  Visual="Material"
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame  Visual="Material"
                         HorizontalOptions="StartAndExpand"
                                 VerticalOptions="StartAndExpand"                                
                                 Padding="10,20,0,10" 
                                 HasShadow="False"
                                 IsClippedToBounds="True" BackgroundColor="#ffffff" CornerRadius="15" >
 
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding BindingContext.onSelectedCommand,Source={x:Reference thisPage}}" 
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding BindingContext.onSelectedCommand,Source={x:Reference thisPage}}" 
                                               CommandParameter="{Binding .}"/>
-                    </Frame.GestureRecognizers>
-                    
-                   
-
-
-
-                        <Grid Padding="0" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="3.5*,1.5*">
+                            </Frame.GestureRecognizers>
 
 
 
 
-                            <StackLayout Orientation="Horizontal"
+
+                            <Grid Padding="0" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="3.5*,1.5*">
+
+
+
+
+                                <StackLayout Orientation="Horizontal"
                     Grid.Row="0"
                     Grid.Column="0"
                     HorizontalOptions="FillAndExpand"
                     HeightRequest="40">
 
-                              
-                                <Label
+
+                                    <Label
                         x:Name="CardlblTitle"
                                    
                         VerticalOptions="Start"
@@ -104,31 +111,31 @@
                                             FontSize="20"
                                             TextColor="#465A54"/>
 
-                                <Label Text="" TextColor="#849A93" FontAttributes="Bold" FontSize="11"/>
-                            </StackLayout>
+                                    <Label Text="" TextColor="#849A93" FontAttributes="Bold" FontSize="11"/>
+                                </StackLayout>
 
 
-                            <yummy:PancakeView 
+                                <yummy:PancakeView 
                     Grid.Row="0" BackgroundColor="White"
                                 VerticalOptions="StartAndExpand"
                     Grid.Column="1"
                     CornerRadius="45,0,45,0"
                     HeightRequest="40">
 
-                                <Button WidthRequest="100" HeightRequest="30" TextColor="White"
+                                    <Button WidthRequest="100" HeightRequest="30" TextColor="White"
                         x:Name="ButtonStyle" FontAttributes="Bold" Visual="Default"
                         BackgroundColor="{Binding Status, Converter={StaticResource SalesEntryStatusToColorConverter}}"
                         Text="{Binding Status}"
                         />
 
-                                <yummy:PancakeView.Triggers>
-                                    <DataTrigger TargetType="yummy:PancakeView" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                    <yummy:PancakeView.Triggers>
+                                        <DataTrigger TargetType="yummy:PancakeView" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                                  Value="true">
-                                        <Setter Property="CornerRadius" Value="0,45,0,45"/>
-                                    </DataTrigger>
-                                </yummy:PancakeView.Triggers>
-                                
-                            </yummy:PancakeView>
+                                            <Setter Property="CornerRadius" Value="0,45,0,45"/>
+                                        </DataTrigger>
+                                    </yummy:PancakeView.Triggers>
+
+                                </yummy:PancakeView>
 
 
 
@@ -137,25 +144,25 @@
 
 
 
-                            <StackLayout
+                                <StackLayout
                     Grid.Row="2"
                     Grid.Column="0"
                     HorizontalOptions="FillAndExpand">
 
-                                <Grid
+                                    <Grid
                         Padding="0, 10, 0, 0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition
                                 Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition
                                 Width="16" />
-                                        <ColumnDefinition
+                                            <ColumnDefinition
                                 Width="*" />
-                                    </Grid.ColumnDefinitions>
+                                        </Grid.ColumnDefinitions>
 
-                                    <Path Data="M489.4,171.05c0-2.1-0.5-4.1-1.6-5.9l-72.8-128c-2.1-3.7-6.1-6.1-10.4-6.1H84.7c-4.3,0-8.3,2.3-10.4,6.1l-72.7,128
+                                        <Path Data="M489.4,171.05c0-2.1-0.5-4.1-1.6-5.9l-72.8-128c-2.1-3.7-6.1-6.1-10.4-6.1H84.7c-4.3,0-8.3,2.3-10.4,6.1l-72.7,128
 			c-1,1.8-1.6,3.8-1.6,5.9c0,28.7,17.3,53.3,42,64.2v211.1c0,6.6,5.4,12,12,12h66.3c0.1,0,0.2,0,0.3,0h93c0.1,0,0.2,0,0.3,0h221.4
 			c6.6,0,12-5.4,12-12v-209.6c0-0.5,0-0.9-0.1-1.3C472,224.55,489.4,199.85,489.4,171.05z M91.7,55.15h305.9l56.9,100.1H34.9
 			L91.7,55.15z M348.3,179.15c-3.8,21.6-22.7,38-45.4,38c-22.7,0-41.6-16.4-45.4-38H348.3z M232,179.15c-3.8,21.6-22.7,38-45.4,38
@@ -167,8 +174,8 @@
 			C460.8,200.75,441.9,217.25,419.2,217.25z" Stroke="#849A93" Fill="#849A93" Grid.Row="0" Aspect="Uniform"
                             Grid.Column="0" HeightRequest="16"/>
 
-                                  
-                                    <Label
+
+                                        <Label
                             x:Name="Icon1Lbl"
                             Grid.Row="0"
                             Grid.Column="1"
@@ -177,29 +184,29 @@
                         
                             HorizontalOptions="FillAndExpand"
                             HorizontalTextAlignment="Start" />
-                                </Grid>
-                            </StackLayout>
+                                    </Grid>
+                                </StackLayout>
 
 
 
-                            <StackLayout
+                                <StackLayout
                     Grid.Row="3"
                     Grid.Column="0"
                     HorizontalOptions="FillAndExpand">
 
-                                <Grid
+                                    <Grid
                         Padding="0, 10, 0, 0">
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition
                                 Height="Auto" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition
+                                        </Grid.RowDefinitions>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition
                                 Width="18" />
-                                        <ColumnDefinition
+                                            <ColumnDefinition
                                 Width="*" />
-                                    </Grid.ColumnDefinitions>
-                                    <Path Data="M426.667,51.2h-51.2V17.067C375.467,7.641,367.826,0,358.4,0s-17.067,7.641-17.067,17.067V51.2h-204.8V17.067
+                                        </Grid.ColumnDefinitions>
+                                        <Path Data="M426.667,51.2h-51.2V17.067C375.467,7.641,367.826,0,358.4,0s-17.067,7.641-17.067,17.067V51.2h-204.8V17.067
 			C136.533,7.641,128.892,0,119.467,0S102.4,7.641,102.4,17.067V51.2H51.2C22.923,51.2,0,74.123,0,102.4v324.267
 			c0,28.277,22.923,51.2,51.2,51.2h375.467c28.277,0,51.2-22.923,51.2-51.2V102.4C477.867,74.123,454.944,51.2,426.667,51.2z
 			 M443.733,426.667c0,9.426-7.641,17.067-17.067,17.067H51.2c-9.426,0-17.067-7.641-17.067-17.067V204.8h409.6V426.667z
@@ -207,7 +214,7 @@
 			s17.067-7.641,17.067-17.067V85.333h204.8v34.133c0,9.426,7.641,17.067,17.067,17.067s17.067-7.641,17.067-17.067V85.333h51.2
 			c9.426,0,17.067,7.641,17.067,17.067V170.667z"      
                                       Aspect="Uniform" Stroke="#849A93" Fill="#849A93" Grid.Row="0" Grid.Column="0" HeightRequest="16"/>
-                                    <Label
+                                        <Label
                             x:Name="Icon3Lbl"
                             Grid.Row="0"
                             Grid.Column="1"
@@ -215,18 +222,18 @@
                            
                             HorizontalOptions="FillAndExpand"
                             HorizontalTextAlignment="Start" />
-                                </Grid>
-                            </StackLayout>
+                                    </Grid>
+                                </StackLayout>
 
 
-                            <StackLayout
+                                <StackLayout
                     Grid.Row="3"
                     Grid.Column="1"
                     HorizontalOptions="FillAndExpand">
 
-                                <Grid Padding="0, 10, 0, 0" RowDefinitions="Auto" ColumnDefinitions="16,*">
-                                    
-                                    <Path Data="M458.667,0H323.349c-25.643,0-49.749,9.984-67.883,28.117L18.197,265.387C6.464,277.12,0,292.715,0,309.376
+                                    <Grid Padding="0, 10, 0, 0" RowDefinitions="Auto" ColumnDefinitions="16,*">
+
+                                        <Path Data="M458.667,0H323.349c-25.643,0-49.749,9.984-67.883,28.117L18.197,265.387C6.464,277.12,0,292.715,0,309.376
 			c0,16.576,6.464,32.171,18.197,43.904L158.72,493.803C170.453,505.536,186.048,512,202.709,512
 			c16.576,0,32.171-6.464,43.904-18.197l237.269-237.269C502.016,238.4,512,214.293,512,188.651V53.333
 			C512,23.936,488.064,0,458.667,0z M490.667,188.651c0,19.947-7.765,38.699-21.845,52.779L231.531,478.72
@@ -235,7 +242,7 @@
                                       Aspect="Uniform" Stroke="#849A93" Fill="#849A93" Grid.Row="0" Grid.Column="0" HeightRequest="16"/>
 
 
-                                    <Label
+                                        <Label
                            
                             Grid.Row="0"
                             Grid.Column="1"
@@ -244,22 +251,37 @@
                             HorizontalTextAlignment="Start" />
 
 
-                                   
-
-                                   
-                                </Grid>
-                            </StackLayout>
-
-
-                        </Grid>
 
 
 
+                                    </Grid>
+                                </StackLayout>
 
-                    </Frame>
-            </DataTemplate>
-        </CollectionView.ItemTemplate>
-    </CollectionView>
+
+                            </Grid>
+
+
+
+
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Label Text="{x:Static resources:AppResources.PleaseLoginToSeeOrders}"
+                   Grid.Row="0"
+                   HorizontalOptions="Center" VerticalOptions="CenterAndExpand"
+                   FontSize="Large">
+                <Label.Triggers>
+                    <DataTrigger TargetType="Label" Binding="{Binding IsLoggedIn}" Value="true">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </Label.Triggers>
+            </Label>
+                   
+            
+        </Grid>
+       
 
         <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
                AbsoluteLayout.LayoutFlags="All" IsVisible="False">

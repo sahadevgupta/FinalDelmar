@@ -19,7 +19,7 @@ namespace FormsLoyalty {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class AppResources {
@@ -1191,6 +1191,16 @@ namespace FormsLoyalty {
         public static string BasketViewGoToCheckout {
             get {
                 return ResourceManager.GetString("BasketViewGoToCheckout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Some items may have an additional discount.
+        ///Please continue to check..
+        /// </summary>
+        public static string CartAdditionalDiscountMsg {
+            get {
+                return ResourceManager.GetString("CartAdditionalDiscountMsg", resourceCulture);
             }
         }
         
@@ -2937,6 +2947,15 @@ namespace FormsLoyalty {
         public static string PlayServiceUtilRequiresPlayService {
             get {
                 return ResourceManager.GetString("PlayServiceUtilRequiresPlayService", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please login to see your orders.
+        /// </summary>
+        public static string PleaseLoginToSeeOrders {
+            get {
+                return ResourceManager.GetString("PleaseLoginToSeeOrders", resourceCulture);
             }
         }
         

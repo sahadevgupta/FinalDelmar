@@ -245,7 +245,7 @@
                             <Grid RowDefinitions="200,Auto,Auto,Auto" ColumnDefinitions="*">
 
 
-                    <Grid xct:StateLayout.CurrentState="{Binding CurrentState}">
+                    <Grid xct:StateLayout.CurrentState="{Binding AdsCurrentState}">
 
                         <xct:StateLayout.StateViews>
 
@@ -371,13 +371,13 @@
                                             <Grid IsClippedToBounds="True">
 
 
-                                                <!--<controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding ImageView.Image}"
-                                                                             Grid.Row="0"/>-->
+                                                <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding ImageView.Location}"
+                                                                             Grid.Row="0"/>
 
-                                                <controls:LoadingImageView/>
+                                                <!--<controls:LoadingImageView/>
                                                     <ffimage:CachedImage Source="{Binding ImageView.Image,Converter={StaticResource BytesToImageSource}}"
                                                              Aspect="AspectFill" HeightRequest="200" 
-                                                             DownsampleToViewSize="true"/>
+                                                             DownsampleToViewSize="true"/>-->
 
 
                                                     <StackLayout  VerticalOptions="EndAndExpand" BackgroundColor="#8C808080">
@@ -432,7 +432,7 @@
                     </Grid>
 
 
-                    <StackLayout Grid.Row="1" Margin="0,10,0,10" Spacing="10">
+                    <StackLayout Grid.Row="1" Margin="0,10,0,10" Padding="10">
                                     <StackLayout.Triggers>
                                         <DataTrigger TargetType="StackLayout" Binding="{Binding itemCategories.Count}"
                                      Value="0">
@@ -441,7 +441,6 @@
                                     </StackLayout.Triggers>
                                     <Label 
                        TextColor="Black"
-                      Margin="10,0,10,0"
                            Text="{x:Static resources:AppResources.txtCategory}"
                            FontSize="Subtitle"
                         CharacterSpacing="2"
@@ -449,7 +448,7 @@
 
 
 
-                        <StackLayout xct:StateLayout.CurrentState="{Binding CurrentState}">
+                        <StackLayout xct:StateLayout.CurrentState="{Binding CategoryCurrentState}">
 
                             <xct:StateLayout.StateViews>
 
@@ -536,9 +535,7 @@
                                      RemainingItemsThreshold="5">
                                         <CollectionView.ItemsLayout>
                                             <GridItemsLayout Orientation="Horizontal"
-                                             SnapPointsAlignment="Start"
-                                               SnapPointsType="None"
-                                              HorizontalItemSpacing="10"
+                                                             HorizontalItemSpacing="10"
                                              />
                                         </CollectionView.ItemsLayout>
                                         <CollectionView.ItemTemplate>
@@ -551,18 +548,19 @@
                                                     <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
                                                         <StackLayout>
 
-                                                            <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Image}"
-                                                                             Grid.Row="0"/>
+                                                            <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Location}"
+                                                                                         Grid.Row="0"/>
 
 
-                                                            <Label VerticalOptions="End" Text="{Binding Description}" 
-                                                   HorizontalOptions="Center"
-                                                   MaxLines="2"
-                                                   Padding="2"
-                                                   LineBreakMode="TailTruncation"
-                                                   HorizontalTextAlignment="Center"
-                                                   TextColor="Black"
-                                                   FontSize="Body">
+                                                            <Label VerticalOptions="End" 
+                                                                   Text="{Binding Description}" 
+                                                                   HorizontalOptions="Center"
+                                                                   MaxLines="2"
+                                                                   Padding="2"
+                                                                   LineBreakMode="TailTruncation"
+                                                                   HorizontalTextAlignment="Center"
+                                                                   TextColor="Black"
+                                                                   FontSize="Body">
                                                                 <Label.Triggers>
                                                                     <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                                                  Value="true">
@@ -606,7 +604,7 @@
                            FontAttributes="Bold" />
 
 
-                        <StackLayout xct:StateLayout.CurrentState="{Binding CurrentState}">
+                        <StackLayout xct:StateLayout.CurrentState="{Binding BestSellerCurrentState}">
 
                             <xct:StateLayout.StateViews>
 
@@ -1102,7 +1100,7 @@
                         </Frame>-->
 
 
-                        <StackLayout xct:StateLayout.CurrentState="{Binding CurrentState}">
+                        <StackLayout xct:StateLayout.CurrentState="{Binding OfferCurrentState}">
 
                             <xct:StateLayout.StateViews>
 
@@ -1200,8 +1198,9 @@
                                                     <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
                                                         <Grid RowDefinitions="95,Auto" IsClippedToBounds="True" >
 
-                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100"  UriImageSource="{Binding Images[0].Image}"
-                                                                             Grid.Row="0"/>
+                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100"  
+                                                                                         UriImageSource="{Binding Images[0].Location}"
+                                                                                         Grid.Row="0"/>
 
 
                                                             <Label Text="{Binding Description}" LineBreakMode="TailTruncation"

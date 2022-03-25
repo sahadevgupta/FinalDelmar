@@ -24,6 +24,12 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _salesEntries, value); }
         }
 
+        private bool _isLoggedIn;
+        public bool IsLoggedIn
+        {
+            get { return _isLoggedIn; }
+            set { SetProperty(ref _isLoggedIn, value); }
+        }
 
         public DelegateCommand<SalesEntry> onSelectedCommand { get; set; }
         public TransactionPageViewModel(INavigationService navigationService) : base(navigationService)
@@ -39,6 +45,7 @@ namespace FormsLoyalty.ViewModels
         {
             if (IsActive)
             {
+                IsLoggedIn = AppData.IsLoggedIn;
                LoadData();
             }
         }

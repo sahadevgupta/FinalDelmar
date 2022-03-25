@@ -60,7 +60,7 @@ namespace FormsLoyalty
 
         public static async Task CallPCLMethod()
         {
-            
+
             var serverTasks = new List<Task>();
 
             //var memberConatctTask = MemberConatcts.RefreshMemberContactAsync();

@@ -54,7 +54,8 @@ namespace FormsLoyalty.ViewModels
 
             eventTracker = DependencyService.Get<IFirebaseAnalytics>();
             var page = this;
-            eventTracker?.SendEvent("Page Opened", new Dictionary<string, string>() { { "Page", nameof(page) } });
+           
+            eventTracker?.SendEvent("Page Opened", new Dictionary<string, string>() { { "Page", page.ToString() } });
             
             
 
@@ -83,7 +84,7 @@ namespace FormsLoyalty.ViewModels
             if (parameters is object && parameters.Count >= 0)
             {
                 var page = this;
-                Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Page Initialized", new Dictionary<string, string>() { { "Page", nameof(page) } });
+                Microsoft.AppCenter.Analytics.Analytics.TrackEvent("Page Initialized", new Dictionary<string, string>() { { "Page", page.ToString() } });
             }
         }
 

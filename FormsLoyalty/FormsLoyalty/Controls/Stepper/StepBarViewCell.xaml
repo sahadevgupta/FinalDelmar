@@ -14,12 +14,12 @@
     
   <ContentView.Content>
       
-        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="Start"
+        <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
               x:Name="mainGrid"
               ColumnSpacing="0" Margin="0"
               Padding="0"
               RowDefinitions="Auto,Auto"
-              ColumnDefinitions="Auto,Auto">
+              ColumnDefinitions="Auto,*">
 
             <Grid WidthRequest="20" Grid.Column="0"
                   x:Name="trackergrid"

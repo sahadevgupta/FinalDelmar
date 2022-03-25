@@ -234,12 +234,13 @@ namespace FormsLoyalty.ViewModels
 
              var offerCount = string.Empty;
 
-               
-                    if (AppData.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon) > 0)
-                    {
-                        offerCount = AppData.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon).ToString();
-                    }
-                
+            if (AppData.PublishedOffers is object)
+            {
+                if (AppData.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon) > 0)
+                {
+                    offerCount = AppData.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon).ToString();
+                }
+
 
                 drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
                 {
@@ -250,6 +251,9 @@ namespace FormsLoyalty.ViewModels
                     Title = AppResources.ResourceManager.GetString("ActionbarOffers", AppResources.Culture),
                     SubTitle = offerCount
                 });
+            }
+               
+                    
             
 
             #endregion

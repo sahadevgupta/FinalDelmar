@@ -59,15 +59,12 @@
                 <Frame Padding="0" Visual="Material" BorderColor="LightGray" IsClippedToBounds="True" CornerRadius="25"  
                        BackgroundColor="{StaticResource My_Button_Color}">
                     <StackLayout IsClippedToBounds="True">
-                        <Grid>
-                            <controls1:LoadingImageView/>
-                            <ffimage:CachedImage  Source="{Binding SelectedCategory.Images[0].Image,Converter={StaticResource BytesToImageSource}}"
-                               VerticalOptions="CenterAndExpand"
-                               HeightRequest="120" WidthRequest="120"
-                               Aspect="Fill"
-                                DownsampleToViewSize="True"
-                               />
-                        </Grid>
+
+                        <controls1:CustomImageControl ImageHeight="120" 
+                                                     WidthRequest="120"
+                                                     UriImageSource="{Binding SelectedCategory.Images[0].Location}"/>
+
+                        
 
                         <Label TextColor="White"
                                HorizontalTextAlignment="Center" FontSize="21" Margin="0,0,0,10"
@@ -110,8 +107,10 @@
                                 </Frame.GestureRecognizers>
 
                                 <Grid ColumnDefinitions="60,*" RowDefinitions="Auto" >
-                                    <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
-                                                              BorderColor="#8C808080" BorderThickness="0.5"
+
+
+                                    <controls:CircleImage Source="{Binding Images[0].Location}" Aspect="Fill"
+                                                          BorderColor="#8C808080" BorderThickness="0.5"
                                                           HeightRequest="60" WidthRequest="60"
                                                           Grid.Column="0"/>
 

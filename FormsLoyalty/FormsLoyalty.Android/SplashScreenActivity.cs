@@ -36,7 +36,12 @@ namespace FormsLoyalty.Droid
             Point size = new Point();
             display.GetSize(size);
 
+
             Rg.Plugins.Popup.Popup.Init(this);
+
+            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
             var apiCallService = new Runnable(async () =>
             {
                 await App.CallPCLMethod().ConfigureAwait(false);

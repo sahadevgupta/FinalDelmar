@@ -17,12 +17,6 @@
   <ContentView.Content>
         <Grid>
 
-            <Grid.Resources>
-                <ResourceDictionary>
-                    
-                </ResourceDictionary>
-            </Grid.Resources>
-            
             <controls:LoadingImageView>
                 <controls:LoadingImageView.Triggers>
                     <DataTrigger TargetType="controls:LoadingImageView" Binding="{Binding UriImageSource,Converter={StaticResource DefaultImageConverter}, Source={x:Reference thisPage}}"
@@ -36,11 +30,12 @@
                     
                 </controls:LoadingImageView.Triggers>
             </controls:LoadingImageView>
-            <ffimage:CachedImage Source="{Binding UriImageSource,Converter={StaticResource BytesToImageSource}, Source={x:Reference thisPage}}" 
+            <ffimage:CachedImage Source="{Binding UriImageSource, Source={x:Reference thisPage}}" 
                                  x:Name="img"
+                                 ErrorPlaceholder="No_image_available.png"
                                  VerticalOptions="CenterAndExpand"
                                  DownsampleToViewSize="True"
-                                 Aspect="AspectFit"
+                                 Aspect="Fill"
                                  HeightRequest="{Binding ImageHeight,Source={x:Reference thisPage}}"
                                  WidthRequest="{Binding ImageWeight,Source={x:Reference thisPage}}"/>
 

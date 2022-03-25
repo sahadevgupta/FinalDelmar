@@ -495,6 +495,10 @@
   <data name="BasketViewGoToCheckout" xml:space="preserve">
     <value>انتقل للخروج</value>
   </data>
+  <data name="CartAdditionalDiscountMsg" xml:space="preserve">
+    <value>قد يكون لبعض العناصر خصم إضافي.
+من فضلك تابع لرؤية الخصومات المتاحة</value>
+  </data>
   <data name="CartTab" xml:space="preserve">
     <value>عربة التسوق</value>
   </data>
@@ -1076,6 +1080,9 @@
   </data>
   <data name="play_services_error_fmt" xml:space="preserve">
     <value>Google Play Services Error: {0}</value>
+  </data>
+  <data name="PleaseLoginToSeeOrders" xml:space="preserve">
+    <value>برجاء تسجيل الدخول لمتابعة الطلبات الخاصة بك</value>
   </data>
   <data name="PointOffers" xml:space="preserve">
     <value>عروض النقاط</value>

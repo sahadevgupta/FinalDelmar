@@ -62,12 +62,34 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _mostViewedItems, value); }
         }
 
-        private LayoutState _currentState;
-        public LayoutState CurrentState
+        private LayoutState _adsCurrentState;
+        public LayoutState AdsCurrentState
         {
-            get { return _currentState; }
-            set { SetProperty(ref _currentState, value); }
+            get { return _adsCurrentState; }
+            set { SetProperty(ref _adsCurrentState, value); }
         }
+
+        private LayoutState _categoryCurrentState;
+        public LayoutState CategoryCurrentState
+        {
+            get { return _categoryCurrentState; }
+            set { SetProperty(ref _categoryCurrentState, value); }
+        }
+
+        private LayoutState _bestSellerCurrentState;
+        public LayoutState BestSellerCurrentState
+        {
+            get { return _bestSellerCurrentState; }
+            set { SetProperty(ref _bestSellerCurrentState, value); }
+        }
+
+        private LayoutState _offerCurrentState;
+        public LayoutState OfferCurrentState
+        {
+            get { return _offerCurrentState; }
+            set { SetProperty(ref _offerCurrentState, value); }
+        }
+
 
         private double _height;
         public double Height
@@ -141,7 +163,7 @@ namespace FormsLoyalty.ViewModels
 
         public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
         {
-            CurrentState = LayoutState.Loading;
+            AdsCurrentState = CategoryCurrentState = BestSellerCurrentState = OfferCurrentState = LayoutState.Loading;
             Height = DeviceDisplay.MainDisplayInfo.Height;
             Title = AppResources.ResourceManager.GetString("ApplicationTitle",AppResources.Culture);
             AppData.IsLoggedIn = AppData.Device.UserLoggedOnToDevice == null ? false : true;
@@ -643,45 +665,106 @@ namespace FormsLoyalty.ViewModels
         /// <summary>
         /// This method is used to load data on page startup
         /// </summary>
-        private async void LoadData()
+        private void LoadData()
         {
             
-            CurrentState = LayoutState.Loading;
+            
             try
             {
 
-
-                var serverTasks = new List<Task>();
-                if (AppData.Advertisements != null && AppData.Advertisements.Count > 0)
+                #region Ads View
+                Task.Run(async() =>
                 {
-                   LoadAdvertisements();
+                    AdsCurrentState = LayoutState.Loading;
+                    if (AppData.Advertisements != null && AppData.Advertisements.Count > 0)
+                    {
+                        LoadAdvertisements();
+
+                    }
+                    else
+                    {
+                       await LoadAdvertisementsFromServer();
+                    }
+                    AdsCurrentState = LayoutState.Success;
+                });
+                #endregion
+
+
+                #region Category View
+                Task.Run(async () =>
+                {
+                    CategoryCurrentState = LayoutState.Loading;
                     
-                }
-                else
+                        await LoadCategoriesAsync();
+
+                    CategoryCurrentState = LayoutState.Success;
+                });
+                #endregion
+
+                #region Offer View
+                Task.Run(async () =>
                 {
-                   var adsTask =  LoadAdvertisementsFromServer();
-                    serverTasks.Add(adsTask);
-                }
+                    OfferCurrentState = LayoutState.Loading;
 
-                if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
+                    await LoadOffersAsync();
+
+                    OfferCurrentState = LayoutState.Success;
+                });
+                #endregion
+
+                #region Best Seller View
+                Task.Run(async () =>
                 {
-                   var socialMediaTask =  GetSocialMediaStatusForIos();
-                    serverTasks.Add(socialMediaTask);
+                    BestSellerCurrentState = LayoutState.Loading;
 
-                }
+                    await LoadBestSellerItemsAsync();
+
+                    BestSellerCurrentState = LayoutState.Success;
+                });
+                #endregion
 
 
-                var categoryTask = LoadCategories();
-                serverTasks.Add(categoryTask);
-                var bestSellerTask = LoadBestSellerItems();
-                serverTasks.Add(bestSellerTask);
+                //var serverTasks = new List<Task>();
+                //if (AppData.Advertisements != null && AppData.Advertisements.Count > 0)
+                //{
+                //    LoadAdvertisements();
 
-                var offerTask =  LoadOffersAsync();
-                serverTasks.Add(offerTask);
-                //await loading.DismissAsync();
+                //}
+                //else
+                //{
+                //    var adsTask = LoadAdvertisementsFromServer();
+                //    //await LoadAdvertisementsFromServer().ConfigureAwait(false);
+                //    serverTasks.Add(adsTask);
 
-                await Task.WhenAll(serverTasks).ConfigureAwait(false);
-               
+                //}
+
+                //if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
+                //{
+                //    var socialMediaTask = GetSocialMediaStatusForIos();
+                //    serverTasks.Add(socialMediaTask);
+
+                //}
+
+                //var categoriesTask = LoadCategoriesAsync();
+                //serverTasks.Add(categoriesTask);
+
+                //var bestSellerTask = LoadBestSellerItems();
+                //serverTasks.Add(bestSellerTask);
+
+                //var offersTask = LoadOffersAsync();
+                //serverTasks.Add(offersTask);
+
+                ////await LoadCategories().ConfigureAwait(false);
+                ////await LoadBestSellerItems().ConfigureAwait(false);
+                ////await LoadOffersAsync().ConfigureAwait(false);
+
+
+                //if (!(advertisements is object && advertisements.Any() && itemCategories is object && itemCategories.Any()
+                //    && offers is object && offers.Any()))
+                //{
+                //    await Task.WhenAll(serverTasks).ConfigureAwait(false);
+                //}
+
             }
             catch (Exception ex)
             {
@@ -689,7 +772,7 @@ namespace FormsLoyalty.ViewModels
                 IsPageEnabled = false;
                 //await loading.DismissAsync();
             }
-            CurrentState = LayoutState.Success;
+            //CurrentState = LayoutState.None;
         }
 
         private async Task GetSocialMediaStatusForIos()
@@ -713,7 +796,7 @@ namespace FormsLoyalty.ViewModels
             }
            
             offers = new ObservableCollection<PublishedOffer>(AppData.PublishedOffers.Where(x => x.Code != OfferDiscountType.Coupon).Take(10));
-            LoadOfferImage();  
+            //LoadOfferImage();  
         }
 
         private void LoadOfferImage()
@@ -765,7 +848,7 @@ namespace FormsLoyalty.ViewModels
                         MostViewedItems = new ObservableCollection<LoyItem>(LoadItemWithPrice(mostViewedItems));
                         if (MostViewedItems.Any())
                         {
-                            LoadItemImage(MostViewedItems);
+                            //LoadItemImage(MostViewedItems);
                             retryCounter = 0;
                         }
                     }
@@ -787,11 +870,11 @@ namespace FormsLoyalty.ViewModels
             else
             {
                 MostViewedItems = new ObservableCollection<LoyItem>(LoadItemWithPrice( AppData.MostViewed));
-                LoadItemImage(MostViewedItems);
+                //LoadItemImage(MostViewedItems);
             }
         }
 
-        private async Task LoadBestSellerItems(int retryCounter =3)
+        private async Task LoadBestSellerItemsAsync(int retryCounter =3)
         {
             if (AppData.BestSellers == null || AppData.BestSellers?.Count == 0)
             {
@@ -805,7 +888,7 @@ namespace FormsLoyalty.ViewModels
                             BestSellerItems = new ObservableCollection<LoyItem>(LoadItemWithPrice(bestSellerItems));
                             if (BestSellerItems.Any())
                             {
-                                LoadItemImage(BestSellerItems);
+                                //LoadItemImage(BestSellerItems);
                                 retryCounter = 0;
                             }
 
@@ -819,7 +902,7 @@ namespace FormsLoyalty.ViewModels
                             }
                             else
                             {
-                               await LoadBestSellerItems(--retryCounter);
+                               await LoadBestSellerItemsAsync(--retryCounter);
                             }
                         }
                    
@@ -828,7 +911,7 @@ namespace FormsLoyalty.ViewModels
             else
             {
                 BestSellerItems = new ObservableCollection<LoyItem>(LoadItemWithPrice(AppData.BestSellers));
-                LoadItemImage(BestSellerItems);
+                //LoadItemImage(BestSellerItems);
             }
 
 
@@ -910,7 +993,7 @@ namespace FormsLoyalty.ViewModels
         /// <summary>
         /// This method is used for loading all categories
         /// </summary>
-        private async Task LoadCategories(int retryCounter = 3)
+        private async Task LoadCategoriesAsync(int retryCounter = 3)
         {
 
             if (AppData.ItemCategories == null || AppData.ItemCategories?.Count == 0)
@@ -925,7 +1008,7 @@ namespace FormsLoyalty.ViewModels
                             if (cat?.Count > 0)
                             {
                                 itemCategories = new ObservableCollection<ItemCategory>(cat);
-                                loadCatWithImage(itemCategories);
+                                //loadCatWithImage(itemCategories);
 
                                 retryCounter = 0;
                             }
@@ -942,7 +1025,7 @@ namespace FormsLoyalty.ViewModels
 
                             }
                             else
-                               await LoadCategories(--retryCounter);
+                               await LoadCategoriesAsync(--retryCounter);
 
                         }
                     }
@@ -951,7 +1034,7 @@ namespace FormsLoyalty.ViewModels
             else
             {
                 itemCategories = new ObservableCollection<ItemCategory>(AppData.ItemCategories);
-                loadCatWithImage(itemCategories);
+                //loadCatWithImage(itemCategories);
             }
                 
         }
@@ -1005,7 +1088,7 @@ namespace FormsLoyalty.ViewModels
         public void LoadAdvertisements()
         {
             advertisements = new ObservableCollection<Advertisement>(AppData.Advertisements);
-            LoadAdsImage();
+            //LoadAdsImage();
         }
 
         private async Task LoadAdvertisementsFromServer()
@@ -1019,7 +1102,7 @@ namespace FormsLoyalty.ViewModels
 
                     advertisements = new ObservableCollection<Advertisement>(ads);
                     
-                    LoadAdsImage();
+                    //LoadAdsImage();
 
                     AppData.Advertisements = advertisements.ToList();
 

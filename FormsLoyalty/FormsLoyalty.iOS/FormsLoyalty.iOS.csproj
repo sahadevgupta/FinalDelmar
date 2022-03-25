@@ -365,7 +365,7 @@
       <Version>2.3.1</Version>
     </PackageReference>
     <PackageReference Include="Plugin.FacebookClient">
-      <Version>2.2.1</Version>
+      <Version>4.0.1</Version>
     </PackageReference>
     <PackageReference Include="Plugin.FirebasePushNotification">
       <Version>3.3.10</Version>

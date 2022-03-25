@@ -109,7 +109,7 @@
         </controls:CustomCollectionView.ItemTemplate>
 
                 <controls:CustomCollectionView.Footer>
-                <Grid  Padding="10" >
+                <Grid  Padding="10" RowDefinitions="Auto,Auto,Auto,Auto,0.5,Auto">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="7*"/>
                        
@@ -124,10 +124,10 @@
                         <RowDefinition Height="1"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>-->
-                    
 
 
-                    <Label Text="{x:Static resources:AppResources.CheckoutViewTotalWithoutVAT}"
+
+                        <Label Text="{x:Static resources:AppResources.CheckoutViewSubtotal}"
                            TextColor="Black" Grid.Row="0" Grid.Column="0" 
                            HorizontalOptions="End"
                            LineHeight="2"
@@ -135,14 +135,14 @@
                                FontSize="16"
                                />
 
-                    <Label Text="{Binding transaction.TotalNetAmount,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="0"
+                        <Label Text="{Binding TotalSubtotal,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="0"
                                VerticalTextAlignment="Center" 
                                FontSize="16"
                             LineHeight="2"
                            HorizontalOptions="End"
                                TextColor="Black"/>
 
-                    <Label Text="{x:Static resources:AppResources.CheckoutViewTotal}"
+                        <Label Text="{x:Static resources:AppResources.CheckoutViewShipping}"
                            TextColor="Black" Grid.Row="1" Grid.Column="0" 
                            HorizontalOptions="End"
                             LineHeight="2"
@@ -150,35 +150,64 @@
                                FontSize="16"
                                />
 
-                    <Label Text="{Binding transaction.TotalAmount,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="1"
+                        <Label Text="{Binding TotalShipping,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="1"
                                VerticalTextAlignment="Center" 
                                FontSize="16"
                             LineHeight="2"
                            HorizontalOptions="End"
                                TextColor="Black"/>
 
-                    <Label Text="{x:Static resources:AppResources.TransactionDetailViewDiscountTotal}"
+                        <Label Text="{x:Static resources:AppResources.CheckoutViewVAT}"
                            TextColor="Black" Grid.Row="2" Grid.Column="0" 
                            HorizontalOptions="End"
                                VerticalTextAlignment="Center" 
                                FontSize="16"
                                />
 
-                    <Label Text="{Binding transaction.TotalDiscount,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="2"
+                        <Label Text="{Binding TotalVat,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="2"
+                               VerticalTextAlignment="Center" 
+                           HorizontalOptions="End"
+                               FontSize="16"
+                               TextColor="Black"/>
+
+                        <Label Text="{x:Static resources:AppResources.CheckoutViewDiscount}"
+                           TextColor="Black" Grid.Row="3" Grid.Column="0" 
+                           HorizontalOptions="End"
+                               VerticalTextAlignment="Center" 
+                               FontSize="16"
+                               />
+
+                        <Label Text="{Binding TotalDiscount,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="3"
                                VerticalTextAlignment="Center" 
                            HorizontalOptions="End"
                                FontSize="16"
                                TextColor="Black"/>
 
 
-                    <Button Grid.Row="3"
+                        <BoxView Grid.Row="4" Grid.ColumnSpan="2" HeightRequest="0.5" BackgroundColor="Silver"/>
+
+                        <Label Text="{Binding Source= {x:Static resources:AppResources.CheckoutViewTotal},StringFormat='Grand {0}'}"
+                       Grid.Row="5" Grid.Column="0"
+                       HorizontalOptions="End"
+                               VerticalTextAlignment="Center" 
+                               FontSize="16"/>
+                        <Label Text="{Binding Total}" 
+                                VerticalTextAlignment="Center" 
+                           HorizontalOptions="End"
+                       Grid.Row="5" Grid.Column="1"
+                       FontSize="16"
+                               TextColor="Black"/>
+
+
+                        <Button Grid.Row="6"
+                                
                             Grid.ColumnSpan="2"
                             HeightRequest="40"
                             FontSize="Body"
                             Visual="Material"
                             TextColor="White"
                             Command="{Binding ReOrderCommand}"
-                            Margin="0,0,0,10"
+                            Margin="0,20,0,10"
                             BackgroundColor="{StaticResource My_Button_Color}"
                             Text="{x:Static resources:AppResources.HistoryViewReorderButton}"
                             IsVisible="{Binding IsReOrderBtnVisible}"/>

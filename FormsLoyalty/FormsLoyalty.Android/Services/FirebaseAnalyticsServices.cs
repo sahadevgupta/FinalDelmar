@@ -24,21 +24,21 @@ namespace FormsLoyalty.Droid.Services
         {
             //Microsoft.AppCenter.Analytics.Analytics.TrackEvent(eventId, parameters);
 
-            //var firebaseAnalytics = Firebase.Analytics.FirebaseAnalytics.GetInstance(Xamarin.Essentials.Platform.AppContext);
+            var firebaseAnalytics = Firebase.Analytics.FirebaseAnalytics.GetInstance(Xamarin.Essentials.Platform.AppContext);
 
-            //if (parameters == null)
-            //{
-            //    firebaseAnalytics.LogEvent(eventId, null);
-            //    return;
-            //}
+            if (parameters == null)
+            {
+                firebaseAnalytics.LogEvent(eventId, null);
+                return;
+            }
 
-            //var bundle = new Bundle();
-            //foreach (var param in parameters)
-            //{
-            //    bundle.PutString(param.Key, param.Value);
-            //}
+            var bundle = new Bundle();
+            foreach (var param in parameters)
+            {
+                bundle.PutString(param.Key, param.Value);
+            }
 
-            // firebaseAnalytics.LogEvent(eventId, bundle);
+            firebaseAnalytics.LogEvent(eventId, bundle);
         }
     }
 }
