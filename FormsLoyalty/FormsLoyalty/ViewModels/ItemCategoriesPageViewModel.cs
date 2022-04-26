@@ -120,7 +120,7 @@ namespace FormsLoyalty.ViewModels
                 var service = new ItemService(new LoyItemRepository());
                 var cat = await service.GetItemCategoriesAsync();
                 itemCategories = new ObservableCollection<ItemCategory>(cat);
-                loadDataWithImage(itemCategories);
+                //loadDataWithImage(itemCategories);
 
                 AppData.ItemCategories = new List<ItemCategory>(itemCategories);
             }
@@ -138,75 +138,14 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        private void SetImageSize(object context)
-        {
-            
-        }
-
        
-
-        private void loadDataWithImage(ObservableCollection<ItemCategory> itemCategories)
-        {
-            try
-            {
-                Task.Run(async() =>
-                {
-                    foreach (var itemCategory in itemCategories)
-                    {
-                        if (itemCategory.Images.Count > 0)
-                        {
-                            var image = await ImageHelper.GetImageById(itemCategory.Images[0].Id, new ImageSize(396, 396));
-                            itemCategory.Images[0].Image = image.Image;
-                        }
-                        else
-                        itemCategory.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-
-                    }
-                });
-            }
-            catch (Exception)
-            {
-
-            }
-           
-        }
 
         /// <summary>
         /// This method used to fetch the product group of the selected category
         /// </summary>
         internal void GetItemProductGroups()
         {
-            try
-            {
-                
-                Products = new ObservableCollection<ProductGroup>(SelectedCategory?.ProductGroups);
-
-                Task.Run(async() =>
-                {
-                    foreach (var item in Products)
-                    {
-                        if (item.Images.Count > 0)
-                        {
-                            var image = await ImageHelper.GetImageById(item.Images[0].Id, new ImageSize(396, 396));
-                            if (image!=null)
-                            {
-                                item.Images[0].Image = image.Image;
-                            }
-                            
-                        }
-                        else
-                            item.Images = new List<ImageView> { new ImageView { Image = "noimage" } };
-
-                    }
-                });
-
-               
-            }
-            catch (Exception)
-            {
-
-                
-            }
+             Products = new ObservableCollection<ProductGroup>(SelectedCategory?.ProductGroups);    
             
         }
 

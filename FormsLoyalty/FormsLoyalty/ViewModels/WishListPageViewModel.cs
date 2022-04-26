@@ -147,7 +147,7 @@ namespace FormsLoyalty.ViewModels
             var  wishList = AppData.Device.UserLoggedOnToDevice.GetWishList(AppData.Device.CardId);
             
             CalculateWishlistItemPrice(wishList.Items);
-            LoadImage();
+            
             IsPageEnabled = false;
         }
 
@@ -165,27 +165,6 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
-        private void LoadImage()
-        {
-            try
-            {
-                Task.Run(async() =>
-                {
-                    foreach (var item in WishList)
-                    {
-                      var imgView = await ImageHelper.GetImageById(item.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
-                        item.Image.Image = imgView.Image;
-                    }
-                });
-                
-            }
-            catch (Exception)
-            {
-
-                
-            }
-           
-        }
 
         public override void Initialize(INavigationParameters parameters)
         {

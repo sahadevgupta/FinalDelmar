@@ -106,6 +106,7 @@ namespace FormsLoyalty.Repos
         {
             foreach (var item in medicineReminders)
             {
+                var items = DBHelper.DBConnection.Table<FrequencyTime>().ToList();
                 item.FrequencyTimes = new List<FrequencyTime>(DBHelper.DBConnection.Table<FrequencyTime>().Where(x => x.MedicineReminderId == item.ID));
             }
         }
@@ -120,7 +121,16 @@ namespace FormsLoyalty.Repos
             lock (locker)
             {
                 DBHelper.DBConnection.Update(medicineReminder);
-                DBHelper.DBConnection.UpdateAll(frequencies);
+                DBHelper.DBConnection.InsertAll(frequencies);
+            }
+        }
+
+        public void DeleteFrequencyTime(IList<FrequencyTime> frequencies)
+        {
+            foreach (var frequencyTime in frequencies)
+            {
+
+                DBHelper.DBConnection.Delete<FrequencyTime>(frequencyTime.ID);
             }
         }
 
@@ -130,11 +140,7 @@ namespace FormsLoyalty.Repos
             {
                 DBHelper.DBConnection.Delete<MedicineReminder>(medicineReminder.ID);
                 DeleteAllNotification(new ObservableCollection<FrequencyTime>(frequencies));
-                foreach (var frequencyTime in frequencies)
-                {
-                    
-                    DBHelper.DBConnection.Delete<FrequencyTime>(frequencyTime.ID);
-                }
+                DeleteFrequencyTime(frequencies);
 
             }
 
@@ -176,9 +182,10 @@ namespace FormsLoyalty.Repos
             return reminders;
         }
 
-        public void DeleteAllNotification(ObservableCollection<FrequencyTime> frequencies)
+        public void DeleteAllNotification(IList<FrequencyTime> frequencies)
         {
             DependencyService.Get<INotify>().DeleteAllReminderNotification(frequencies.Select(x => x.NotificationId).ToList());
+            DeleteFrequencyTime(frequencies);
         }
 
         public void DeleteNotification(int notificationId)

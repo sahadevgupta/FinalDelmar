@@ -50,7 +50,7 @@
     </AndroidSupportedAbis>
     <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
     <AndroidTlsProvider>btls</AndroidTlsProvider>
-    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
     <AndroidKeyStore>true</AndroidKeyStore>
     <AndroidSigningKeyStore>KeyStore\LinkedCommerce.keystore</AndroidSigningKeyStore>

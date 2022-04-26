@@ -119,35 +119,29 @@ namespace FormsLoyalty.ViewModels
 
                 if (pointOfffer.Any())
                 {
-                    temp.Add(new OfferGroup(
-                    AppResources.ResourceManager.GetString("PointOffers", AppResources.Culture),
-                    new List<PublishedOffer>(OfferWithImage(pointOfffer))
+                    temp.Add(new OfferGroup(AppResources.PointOffers, pointOfffer));
 
-                ));
+                
                 }
 
                 if (clubOfffer.Any())
                 {
-                    temp.Add(new OfferGroup(
-                    AppResources.ResourceManager.GetString("ClubOffers", AppResources.Culture),
-                    new List<PublishedOffer>(OfferWithImage(clubOfffer))
+                    temp.Add(new OfferGroup(AppResources.ClubOffers, clubOfffer));
 
-                ));
+                
                 }
 
                 if (memberOffer.Any())
                 {
-                    temp.Add(new OfferGroup(
-                  AppResources.ResourceManager.GetString("MemberOffers", AppResources.Culture),
-                  new List<PublishedOffer>(OfferWithImage(memberOffer))
+                    temp.Add(new OfferGroup(AppResources.MemberOffers, memberOffer));
 
-              ));
+              
                 }
 
                 if (generalOffer.Any())
                 {
                     
-                        var data = new OfferGroup(AppResources.GeneralOffers, new List<PublishedOffer>(OfferWithImage(generalOffer)) );
+                        var data = new OfferGroup(AppResources.GeneralOffers, generalOffer);
                         temp.Add(data);
                    
                     
@@ -168,41 +162,7 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        /// <summary>
-        /// Get Offers Image
-        /// </summary>
-        /// <param name="Offfers"></param>
-        /// <returns></returns>
-        private List<PublishedOffer> OfferWithImage(List<PublishedOffer> Offfers)
-        {
-            try
-            {
-                Task.Run(async () =>
-                {
-                    foreach (var offer in Offfers)
-                    {
-                        if (offer.Images.Count > 0)
-                        {
-                            var imageView = await ImageHelper.GetImageById(offer.Images[0].Id, new ImageSize(396, 396));
-                            offer.Images[0].Image = imageView.Image;
-                        }
-                        else
-                            offer.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-                    }
-                });
-            }
-            catch (Exception)
-            {
-                Xamarin.Forms.Device.BeginInvokeOnMainThread(async() =>
-                {
-                    await MaterialDialog.Instance.SnackbarAsync(message: "Unable to fetch image.",
-                                           msDuration: MaterialSnackbar.DurationLong);
-                });
-                
-            }
-
-            return Offfers;
-        }
+        
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);

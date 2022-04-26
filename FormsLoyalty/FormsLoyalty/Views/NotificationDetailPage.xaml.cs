@@ -13,11 +13,6 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as NotificationDetailPageViewModel;
         }
 
-        private void CarouselView_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
-        {
-           var currentImgView = e.CurrentItem as ImageView;
-
-            _viewModel.LoadImage(currentImgView);
-        }
+        
     }
 }

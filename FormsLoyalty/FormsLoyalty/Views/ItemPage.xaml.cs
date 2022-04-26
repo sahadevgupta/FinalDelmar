@@ -26,20 +26,7 @@ namespace FormsLoyalty.Views
         {
             base.OnDisappearing();
         }
-        private void CarouselView_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
-        {
-            var currentImgView = e.CurrentItem as ImageView;
-            if(currentImgView != null)
-            {
-                Task.Run(async () =>
-                {
-                    currentImgView.Image = await _viewModel.GetImageById(currentImgView.Id);
-                }).ConfigureAwait(false);
-            }
-           
-
-            
-        }
+        
         private async void Offer_Tapped(object sender, System.EventArgs e)
         {
             var view = (StackLayout)sender;

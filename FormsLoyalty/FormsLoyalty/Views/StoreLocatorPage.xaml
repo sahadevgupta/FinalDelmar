@@ -52,7 +52,7 @@
                                 <ColumnDefinition Width="*"/>
                             </Grid.ColumnDefinitions>
 
-                            <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                            <controls:CircleImage Source="{Binding Images[0].Location}"
                                                   BorderThickness="0.4"
                                                       BorderColor="Silver"
                                               VerticalOptions="CenterAndExpand"
@@ -90,7 +90,7 @@
                         <StackLayout  Margin="-5,-5,-5,0">
 
 
-                            <controls1:CustomImageControl ImageHeight="150"  UriImageSource="{Binding Images[0].Image}"
+                            <controls1:CustomImageControl ImageHeight="150"  UriImageSource="{Binding Images[0].Location}"
                                                                              Grid.Row="0"/>
 
 

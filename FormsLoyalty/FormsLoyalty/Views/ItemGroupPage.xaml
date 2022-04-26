@@ -30,7 +30,7 @@
                    Aspect="AspectFill"
                 HeightRequest="40" WidthRequest="40"
                  
-                   Source="{Binding product.Images[0].Image,Converter={StaticResource BytesToImageSource}}">
+                   Source="{Binding product.Images[0].Location}">
                 <Image.Clip>
                     <EllipseGeometry Center="20,20" RadiusX="20" RadiusY="20"/>
                 </Image.Clip>
@@ -219,14 +219,10 @@
 
                                 <Grid IsClippedToBounds="True" RowDefinitions="100,Auto,Auto,*">
 
-                                    <Grid Grid.Row="0" HeightRequest="100">
-                                        <controls1:LoadingImageView/>
-                                        <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
-                                   HeightRequest="100"
-                           DownsampleToViewSize="True"
-                                   Aspect="AspectFit"
-                                   />
-                                    </Grid>
+
+                                    <controls1:CustomImageControl ImageHeight="100"  
+                                                                  UriImageSource="{Binding Images[0].Location}"
+                                                                  Grid.Row="0"/>
 
 
                                     <Frame Grid.Row="0" HorizontalOptions="End" VerticalOptions="StartAndExpand" Padding="4" Margin="5"  

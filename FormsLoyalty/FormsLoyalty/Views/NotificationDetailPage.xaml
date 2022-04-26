@@ -41,7 +41,6 @@
             <CarouselView ItemsSource="{Binding SelectedNotification.Images}"
                           x:Name="carousel"
                   IndicatorView="indicatorView"
-                       CurrentItemChanged="CarouselView_CurrentItemChanged"
                           >
                 <CarouselView.ItemTemplate>
                     <DataTemplate>
@@ -53,7 +52,7 @@
                                 </StackLayout.GestureRecognizers>
 
                                 <Frame Visual="Material" HeightRequest="200">
-                                <Image Source="{Binding Image,Converter={StaticResource BytesToImageSource}}"
+                                <Image Source="{Binding Location}"
                               
                               
                                Aspect="AspectFill"/>

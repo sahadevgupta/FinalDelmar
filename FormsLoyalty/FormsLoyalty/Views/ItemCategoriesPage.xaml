@@ -130,66 +130,7 @@
                                 
                             </Frame>
                                 
-                                <!--<Grid>
-
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer
-                                                          Tapped="Product_Tapped"
-                                                          CommandParameter="{Binding .}"/>
-                                    </Grid.GestureRecognizers>
-
-
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="100"/>
-                                        <ColumnDefinition Width="*"/>
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="100"/>
-                                       
-                                    </Grid.RowDefinitions>
-
-                                    <Frame Grid.Row="0" Grid.Column="0" 
-                                           HeightRequest="50"
-                                           CornerRadius="20"
-                                           HasShadow="False"
-                                       BackgroundColor="{Binding FrameColor}" 
-                                           IsClippedToBounds="True"
-                                            Visual="Material"
-                                          HorizontalOptions="Start"
-                                       >
-
-                                    <Grid >
-                                        <controls1:LoadingImageView/>
-                                       
-
-
-
-                                        
-                                    </Grid>
-                                        
-                                    </Frame>
-                                <StackLayout VerticalOptions="CenterAndExpand" Grid.Column="1">
-                                    <Label  Text="{Binding Description}" TextColor="Black" FontAttributes="Bold" Margin="10,0">
-                                        --><!--<Label.Triggers>
-                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
-                                                                 Value="true">
-                                                <Setter Property="Text" Value="{Binding ArabicDescription}"/>
-                                            </DataTrigger>
-                                        </Label.Triggers>--><!--
-                                    </Label>
-                                    <Label MaxLines="3" FontSize="12" TextColor="Silver" Margin="10,0"
-                                       >
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="Category : "/>
-                                                <Span Text="{Binding ItemCategoryId}"/>
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </StackLayout>
-                                    
-                                   
-                                </Grid>-->
+                               
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

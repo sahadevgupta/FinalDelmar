@@ -47,7 +47,7 @@
                    Aspect="AspectFill"
                 HeightRequest="200"
                    HorizontalOptions="FillAndExpand"
-                   Source="{Binding selectedStore.Images[0].Image,Converter={StaticResource BytesToImageSource}}">
+                   Source="{Binding selectedStore.Images[0].Location}">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding BindingContext.ShowPreviewCommand,Source={x:Reference storeDetailsPage}}"
                                                               />
@@ -133,11 +133,6 @@
                    TextColor="Black"
                    Text="{Binding opening}"/>
                     </StackLayout>
-
-
-
-
-                   
 
                 </StackLayout>
 

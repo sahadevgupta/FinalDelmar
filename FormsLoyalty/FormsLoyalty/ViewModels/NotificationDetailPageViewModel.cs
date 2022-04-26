@@ -45,24 +45,7 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        /// <summary>
-        /// Get Notification Image
-        /// </summary>
-        /// <param name="image"></param>
-       internal async void LoadImage(ImageView image)
-        {
-            try
-            {
-                var imageview = await ImageHelper.GetImageById(image.Id, new ImageSize(396, 396));
-                image.Image = imageview.Image;
-            }
-            catch (Exception)
-            {
-
-                
-            }
-           
-        }
+        
 
         /// <summary>
         /// Update Notification as Read When the notification is opened

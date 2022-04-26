@@ -171,20 +171,19 @@ namespace FormsLoyalty.ViewModels
 
             if (unread.Any())
             {
-                temp.Add(new NotificationGroup(
-                AppResources.ResourceManager.GetString("NotificationViewUnread", AppResources.Culture),
-                new List<Notification>(LoadWithImage(unread))
+                    temp.Add(new NotificationGroup(
+                    AppResources.ResourceManager.GetString("NotificationViewUnread", AppResources.Culture), unread));
 
-            ));
+           
             }
 
             if (read.Any())
             {
-                temp.Add(new NotificationGroup(
-                AppResources.ResourceManager.GetString("NotificationViewRead", AppResources.Culture),
-                new List<Notification>(LoadWithImage(read))
+                    temp.Add(new NotificationGroup(
+                    AppResources.ResourceManager.GetString("NotificationViewRead", AppResources.Culture),
+                    read));
 
-            ));
+            
             }
             notifications = new ObservableCollection<NotificationGroup>(temp);
             }
@@ -200,38 +199,7 @@ namespace FormsLoyalty.ViewModels
            
         }
 
-        /// <summary>
-        /// This method is used to load notification image
-        /// </summary>
-        /// <param name="notification"></param>
-        /// <returns>Notifcation with image</returns>
-        private IEnumerable<Notification> LoadWithImage(List<Notification> notifications)
-        {
-            try
-            {
-                Task.Run(async () =>
-                {
-                foreach (var notification in notifications)
-                {
-                    if (notification.Images.Count > 0)
-                    {
-                        
-                            var imageView = await ImageHelper.GetImageById(notification.Images[0].Id, new ImageSize(396, 396));
-                            notification.Images[0].Image = imageView.Image;
-                       
-                    }
-                    else
-                            notification.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-                    }
-                });
-            }
-            catch (Exception)
-            {
-
-                
-            }
-            return notifications;
-        }
+        
 
         public override void Initialize(INavigationParameters parameters)
         {

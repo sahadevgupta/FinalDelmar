@@ -77,7 +77,7 @@ namespace FormsLoyalty.ViewModels
                 var items = await model.GetItemsByPage(pageSize, pageNumber, string.Empty, string.Empty, SearchKey,false,string.Empty);
                 Items = new ObservableCollection<LoyItem>(items);
 
-                LoadImages();
+                //LoadImages();
             }
             catch (Exception)
             {

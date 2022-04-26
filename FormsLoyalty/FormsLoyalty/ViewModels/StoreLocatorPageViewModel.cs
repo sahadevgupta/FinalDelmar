@@ -119,9 +119,10 @@ namespace FormsLoyalty.ViewModels
             {
                 var service = new StoreService(new StoreRepository());
                 tempStores = new ObservableCollection<Store>(await service.GetStoresAsync());
-               
-                LoadStoreWithImage(tempStores);
+                AppData.Stores = tempStores.ToList();
+
                 stores = new ObservableCollection<Store>(tempStores.Take(15));
+                
             }
             catch (Exception)
             {
@@ -143,37 +144,7 @@ namespace FormsLoyalty.ViewModels
                
         }
 
-        private void LoadStoreWithImage(ObservableCollection<Store> stores)
-        {
-            try
-            {
-                Task.Run(async () =>
-                {
-                    foreach (var store in stores)
-                    {
-                        if (store.Images.Count > 0)
-                        {
-
-                            var imageView = await ImageHelper.GetImageById(store.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
-                            store.Images[0].Image = imageView.Image;
-
-
-                        }
-                        else
-                            store.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-
-                    }
-                    AppData.Stores = stores.ToList();
-                });
-            }
-            catch (Exception)
-            {
-
-                
-            }
-            
-           
-        }
+        
         private async void LoadStoresInStock(LoyItem item)
         {
             IsPageEnabled = true;
@@ -210,12 +181,12 @@ namespace FormsLoyalty.ViewModels
                 else
                 {
                    tempStores = new ObservableCollection<Store>(storesInStock);
-                    LoadStoreWithImage(tempStores);
+                    
                     stores = new ObservableCollection<Store>(tempStores.Take(15));
                     viewStockDesc =$"{item.Description} - {item.SelectedVariant.ToString()}";
 
                     viewStockDesc = string.Format(AppResources.ResourceManager.GetString("StorelocatorViewInStockStores", AppResources.Culture), viewStockDesc);
-
+                    AppData.Stores = stores.ToList();
                 }
             }
             catch (Exception ex)

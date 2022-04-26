@@ -774,9 +774,32 @@ namespace FormsLoyalty.ViewModels
 
         private void LoadBasket()
         {
-            
-            LoadBasketImage();
-            
+            basketItems = new ObservableCollection<OneListItem>();
+            try
+            {
+                foreach (var basketItem in AppData.Basket.Items)
+                {
+                    //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
+                    //{
+                    //    basketItem.= string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
+                    //}
+                    //else
+                    //{
+                    //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
+                    //}
+
+                    basketItem.DiscountAmount = basketItem.DiscountAmount * basketItem.Quantity;
+
+                    basketItems.Add(basketItem);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                
+            }
+
         }
 
         private void CalculateBasket()
@@ -884,39 +907,7 @@ namespace FormsLoyalty.ViewModels
             await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(couponsPopUp, true);
         }
 
-        public void LoadBasketImage()
-        {
-            basketItems = new ObservableCollection<OneListItem>();
-            try
-            {
-                foreach (var basketItem in AppData.Basket.Items)
-                {
-                    //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
-                    //{
-                    //    basketItem.= string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
-                    //}
-                    //else
-                    //{
-                    //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
-                    //}
-
-                    basketItem.DiscountAmount = basketItem.DiscountAmount * basketItem.Quantity;
-                    Task.Run(async () =>
-                    {
-                        var imgView = await ImageHelper.GetImageById(basketItem.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
-                        basketItem.Image.Image = imgView.Image;
-                    });
-                    basketItems.Add(basketItem);
-                }
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+       
         public async Task PlaceOrder()
         {
             IsPageEnabled = true;

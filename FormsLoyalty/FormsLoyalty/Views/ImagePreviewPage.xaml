@@ -14,7 +14,7 @@
 
     <Grid RowDefinitions="*,Auto">
 
-        <Image  Aspect="AspectFit"  Source="{Binding ImageView,Converter={StaticResource BytesToImageSource}}" 
+        <Image  Aspect="AspectFit"  Source="{Binding ImageView}" 
                 HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="10,0,10,0"
                 />
 
@@ -42,7 +42,7 @@
                                                   CommandParameter="{Binding .}"/>
                             </Frame.GestureRecognizers>
 
-                            <Image Aspect="Fill" Source="{Binding Image,Converter={StaticResource BytesToImageSource}}" />
+                            <Image Aspect="Fill" Source="{Binding Location}" />
                         </Frame>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>

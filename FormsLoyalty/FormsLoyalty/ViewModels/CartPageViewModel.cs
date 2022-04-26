@@ -242,20 +242,7 @@ namespace FormsLoyalty.ViewModels
                     {
                         item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
                     }
-                    if (basketItem.Image != null)
-                    {
-                        item.Image = basketItem.Image;
-                        Task.Run(async () =>
-                        {
-                            var imgView = await ImageHelper.GetImageById(basketItem.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(114, 114));
-                            item.Image.Image = imgView?.Image;
-
-
-
-                        });
-
-                    }
-
+                    
                     baskets.Add(item);
 
 
@@ -315,20 +302,6 @@ namespace FormsLoyalty.ViewModels
             }
             
         }
-
-       
-
-        private string SetImage(OneListItem basketItem)
-        {
-            ImageView imageView = null;
-            Task.Run(async() =>
-            {
-               imageView = await  ImageHelper.GetImageById(basketItem.Image.Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(114, 114));
-
-                return imageView?.Image;
-
-            });
-            return imageView?.Image;
-        }
+ 
     }
 }

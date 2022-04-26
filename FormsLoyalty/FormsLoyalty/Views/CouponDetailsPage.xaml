@@ -41,7 +41,6 @@
                     <CarouselView ItemsSource="{Binding SelectedCoupon.Images}"
                           x:Name="carousel"
                   IndicatorView="indicatorView"
-                       CurrentItemChanged="CarouselView_CurrentItemChanged"
                           >
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
@@ -51,7 +50,7 @@
                                                               CommandParameter="{Binding .}"/>
                                     </StackLayout.GestureRecognizers>
                                     <Frame Visual="Material" Padding="1">
-                                        <ffimage:CachedImage Source="{Binding Image,Converter={StaticResource BytesToImageSource}}"
+                                        <ffimage:CachedImage Source="{Binding Location}"
                                                HeightRequest="250" DownsampleToViewSize="True"
                                Aspect="AspectFill"/>
 

@@ -16,17 +16,7 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as CouponDetailsPageViewModel;
         }
 
-        private void CarouselView_CurrentItemChanged(object sender, CurrentItemChangedEventArgs e)
-        {
-            var currentImgView = e.CurrentItem as ImageView;
-
-            Task.Run(async () =>
-            {
-                currentImgView.Image = await _viewModel.GetImageById(currentImgView.Id);
-            });
-
-
-        }
+       
 
         private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {

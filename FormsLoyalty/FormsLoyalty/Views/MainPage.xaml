@@ -356,17 +356,17 @@
                                 <cardView:CardsView.ItemTemplate>
                                     <DataTemplate>
 
-                                        <yummy:PancakeView
-                                        xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
-                                        xct:TouchEffect.PressedBackgroundColor="LightPink"
-                                        xct:TouchEffect.NormalBackgroundColor="Transparent"
-                            Margin="35,0,44,35"
-                            Padding="0"
-                            BackgroundColor="White"
-                            CornerRadius="10"
-                            Elevation="10"
-                            HasShadow="False"
-                            HeightRequest="200">
+                                        <yummy:PancakeView xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                                                           xct:TouchEffect.PressedBackgroundColor="LightPink"
+                                                           xct:TouchEffect.NormalBackgroundColor="Transparent"
+                                                           Margin="35,0,44,35"
+                                                           Padding="0"
+                                                           BackgroundColor="White"
+                                                           BorderColor="Silver"
+                                                           CornerRadius="10"
+                                                           Elevation="10"
+                                                           HasShadow="False"
+                                                           HeightRequest="200">
 
                                             <Grid IsClippedToBounds="True">
 

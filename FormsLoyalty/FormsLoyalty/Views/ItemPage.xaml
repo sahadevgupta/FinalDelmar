@@ -60,7 +60,6 @@
                     <CarouselView ItemsSource="{Binding Item.Images}"
                           x:Name="carousel"
                   IndicatorView="indicatorView"
-                       CurrentItemChanged="CarouselView_CurrentItemChanged"
                           >
                         <CarouselView.ItemTemplate>
                             <DataTemplate>
@@ -72,7 +71,7 @@
                                     </StackLayout.GestureRecognizers>
                                     
                                     <Frame Visual="Material" Padding="1">
-                                        <ffimage:CachedImage Source="{Binding Image,Converter={StaticResource BytesToImageSource}}"
+                                        <ffimage:CachedImage Source="{Binding Location}"
                                                HeightRequest="300" DownsampleToViewSize="True"
                                Aspect="AspectFill"/>
 
@@ -290,14 +289,10 @@
                                     </StackLayout.GestureRecognizers>
 
                                     <Frame Padding="0" CornerRadius="5" BorderColor="LightGray" Visual="Material">
-                                    <Grid>
-                                        <controls:LoadingImageView/>
-                                        <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
-                                   HeightRequest="200"
-                                                         DownsampleToViewSize="True"
-                                   Aspect="AspectFill"
-                                   />
-                                    </Grid>
+                                        <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding Images[0].Location}"
+                                                                                         Grid.Row="0"/>
+                                        
+                                   
                                     </Frame>
                                     <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                    HorizontalTextAlignment="Center"/>

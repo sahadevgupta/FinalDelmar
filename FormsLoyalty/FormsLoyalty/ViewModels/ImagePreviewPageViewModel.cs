@@ -48,26 +48,14 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        void LoadImages()
-        {
-            Task.Run(async () =>
-            {
-                foreach (var item in Images)
-                {
-
-                    var imageView = await ImageHelper.GetImageById(item.Id, new ImageSize(396, 396));
-                    item.Image = imageView.Image;
-
-                }
-            });
-        }
+       
 
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
             ImageView = parameters.GetValue<string>("previewImage");
             Images = new ObservableCollection<ImageView>(parameters.GetValue<List<ImageView>>("images"));
-            LoadImages();
+            
         }
     }
 }

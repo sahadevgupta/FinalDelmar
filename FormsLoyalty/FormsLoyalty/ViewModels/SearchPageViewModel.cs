@@ -183,10 +183,6 @@ namespace FormsLoyalty.ViewModels
           
            var tempItems = new ObservableCollection<SearchGroup>();
 
-            Task.Run(async() => await LoadDataImage(results));
-
-          
-
             foreach (var availableType in availableTypes.Where((t, i) => selectedTypes[i]))
             {
                 if (availableType == SearchType.Item)
@@ -251,59 +247,6 @@ namespace FormsLoyalty.ViewModels
 
            
         }
-
-        private async Task<SearchRs> LoadDataImage(SearchRs result)
-        {
-
-            foreach (var item in result.Items.Take(15))
-            {
-                if (item.Images != null && item.Images.Count > 0)
-                {
-                    item.Images[0].Image = await GetImag(item.Images[0].Id);
-                }
-            }
-
-            foreach (var item in result.Stores.Take(15))
-            {
-                if (item.Images != null && item.Images.Count > 0)
-                {
-                    item.Images[0].Image = await GetImag(item.Images[0].Id);
-                }
-            }
-
-            foreach (var item in result.Notifications.Take(15))
-            {
-                if (item.Images != null && item.Images.Count > 0)
-                {
-                    item.Images[0].Image = await GetImag(item.Images[0].Id);
-                }
-            }
-
-            return result;
-        }
-
-       
-
-        public async Task<string> GetImag(string imageId)
-        {
-            ImageView imageView = new ImageView();
-            try
-            {
-               await Task.Run(async() =>
-                {
-                    imageView = await ImageHelper.GetImageById(imageId, new ImageSize(110, 110));
-                });
-               
-            }
-            catch (Exception)
-            {
-
-                
-            }
-            return imageView.Image;
-        }
-
-
         #endregion
 
         internal void LoadData()

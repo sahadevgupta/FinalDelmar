@@ -72,18 +72,6 @@ namespace FormsLoyalty.ViewModels
                     var loyItems = await service.GetItemsByPublishedOfferIdAsync(selectedOffer.Id, Int32.MaxValue);
 
                     relatedItems = new ObservableCollection<LoyItem>(loyItems);
-
-                    foreach (var item in relatedItems)
-                    {
-                        if (item.Images.Count > 0)
-                        {
-                            var img = await ImageHelper.GetImageById(item.Images[0].Id, new ImageSize(396, 396));
-                            item.Images[0].Image = img.Image;
-                        }
-                        else
-                            item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-                    }
-
                 });
             }
             catch (Exception)

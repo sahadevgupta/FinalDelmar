@@ -56,7 +56,7 @@
                             </Frame.GestureRecognizers>
                         
                         <Grid ColumnDefinitions="50,*,Auto" RowDefinitions="Auto,Auto">
-                            <controls:CircleImage Source="{Binding Image.Image,Converter={StaticResource BytesToImageSource}}"
+                            <controls:CircleImage Source="{Binding Image.Location}"
                                                   BorderThickness="0.4"
                                                   VerticalOptions="CenterAndExpand"
                                                       BorderColor="Silver"

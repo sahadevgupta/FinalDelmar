@@ -71,14 +71,7 @@ namespace FormsLoyalty.ViewModels
 
                     relatedItems = new ObservableCollection<LoyItem>(loyItems);
 
-                    foreach (var item in relatedItems)
-                    {
-                        if (item.Images.Count > 0)
-                        {
-                            var img = await GetImageById(item.Images[0].Id);
-                            item.Images[0].Image = img;
-                        }
-                    }
+                    
 
                 });
             }
@@ -91,27 +84,8 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        /// <summary>
-        /// Get item image
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns>Image in base64 format</returns>
-        internal async Task<string> GetImageById(string id)
-        {
-            ImageView imgview = new ImageView();
-            try
-            {
-
-                imgview = await ImageHelper.GetImageById(id, new ImageSize(396, 396));
-            }
-            catch (Exception)
-            {
-
-
-            }
-
-            return imgview.Image;
-        }
+        
+        
 
         /// <summary>
         /// This method is used when offer's item is clicked. It navigates to 

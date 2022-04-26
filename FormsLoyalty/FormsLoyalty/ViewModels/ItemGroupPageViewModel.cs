@@ -207,7 +207,7 @@ namespace FormsLoyalty.ViewModels
 
                             }
                             //TempList.ToList().AddRange(items);
-                            LoadItemImage();
+                            UpdateItemQuantityAndWishlist();
                         }
 
                         else
@@ -234,7 +234,7 @@ namespace FormsLoyalty.ViewModels
 
 
         #region Image Function
-        private void LoadItemImage()
+        private void UpdateItemQuantityAndWishlist()
         {
             try
             {
@@ -262,22 +262,22 @@ namespace FormsLoyalty.ViewModels
                         else
                             item.IsWishlisted = false;
 
-                        if (item.Images.Count > 0)
-                        {
-                            if (string.IsNullOrEmpty(item.Images[0].Image))
-                            {
-                                var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
-                                if (imgView == null)
-                                {
-                                    item.Images[0].Image = "noimage.png";
-                                }
-                                else
-                                    item.Images[0].Image = imgView.Image;
-                            }
+                        //if (item.Images.Count > 0)
+                        //{
+                        //    if (string.IsNullOrEmpty(item.Images[0].Image))
+                        //    {
+                        //        var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
+                        //        if (imgView == null)
+                        //        {
+                        //            item.Images[0].Image = "noimage.png";
+                        //        }
+                        //        else
+                        //            item.Images[0].Image = imgView.Image;
+                        //    }
 
-                        }
-                        else
-                          item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
+                        //}
+                        //else
+                        //  item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
 
                     }
                 });
@@ -507,7 +507,7 @@ namespace FormsLoyalty.ViewModels
                 {
                     CalculateItemPrice(product.Items);
 
-                    LoadItemImage();
+                    UpdateItemQuantityAndWishlist();
                 }
 
                 else 
@@ -575,11 +575,17 @@ namespace FormsLoyalty.ViewModels
                     IsNoItemFound = false;
                     CalculateItemPrice(items);
                 }
-                else
-                    IsNoItemFound = true;
-                LoadItemImage();
+
+
+                
+                UpdateItemQuantityAndWishlist();
                 if(product!=null)
                    product.Items = Items.ToList();
+
+                if (Items== null || !Items.Any())
+                {
+                    IsNoItemFound = true;
+                }
             }
         }
 
@@ -597,7 +603,7 @@ namespace FormsLoyalty.ViewModels
                 ArabicDescription = string.Empty;
                 CalculateItemPrice(items);
 
-                LoadItemImage();
+                UpdateItemQuantityAndWishlist();
             }
             else
             {

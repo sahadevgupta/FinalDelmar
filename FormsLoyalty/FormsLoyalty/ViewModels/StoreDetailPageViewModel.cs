@@ -50,7 +50,7 @@ namespace FormsLoyalty.ViewModels
             if (string.IsNullOrEmpty(selectedStore.Images[0].Image) || selectedStore.Images[0].Image.ToLower().Contains("noimage".ToLower()))
                 return;
            
-            await NavigationService.NavigateAsync(nameof(ImagePreviewPage), new NavigationParameters { { "previewImage", selectedStore.Images[0].Image }, { "images", selectedStore.Images } });
+            await NavigationService.NavigateAsync(nameof(ImagePreviewPage), new NavigationParameters { { "previewImage", selectedStore.Images[0].Location }, { "images", selectedStore.Images } });
         });
         #endregion
 
@@ -78,35 +78,6 @@ namespace FormsLoyalty.ViewModels
 
 
             CurrentLocation = await Geolocation.GetLastKnownLocationAsync();
-
-            if (Store.Images!=null && Store.Images.Count>0)
-            {
-                try
-                {
-                    if (string.IsNullOrEmpty(Store.Images[0].Image))
-                    {
-                        Task.Run(async () =>
-                        {
-                            if (Store.Images.Count>0)
-                            {
-                                var imagview = await ImageHelper.GetImageById(Store.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
-                                Store.Images[0].Image = imagview.Image;
-                            }
-                            else
-                                Store.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-                           
-                        });
-                    }
-                    
-                }
-                catch (Exception)
-                {
-
-                   
-                }
-                
-            }
-
 
             storeAddress = Store.Address.FormatAddress;
             if (Store.StoreHours.Count > 0)

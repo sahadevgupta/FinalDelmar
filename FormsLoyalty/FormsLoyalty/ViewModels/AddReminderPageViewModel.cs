@@ -102,7 +102,8 @@ namespace FormsLoyalty.ViewModels
         }
         /// <summary>   
         /// Add the time, to receive reminder
-        /// </summary>   
+        /// </summary>
+        bool PageInitialization = true;
         private void AddFrequencytime(int value)
         {
             if (value == 0)
@@ -136,7 +137,9 @@ namespace FormsLoyalty.ViewModels
                 medicineReminder.unit = SelectedUnit;
                 if (IsEdit)
                 {
-                    _reminderRepo.DeleteAllNotification(frequencies);
+                    _reminderRepo.DeleteAllNotification(medicineReminder.FrequencyTimes);
+                    frequencies.ToList().ForEach(x => x.MedicineReminderId = medicineReminder.ID);
+                    //medicineReminder.FrequencyTimes = new List<FrequencyTime>(frequencies);
                     _reminderRepo.UpdateReminder(medicineReminder, frequencies.ToList());
                 }
                 else
@@ -193,9 +196,9 @@ namespace FormsLoyalty.ViewModels
             {
                 IsEdit = true;
                 medicineReminder = reminder;
-                frequencies = new ObservableCollection<FrequencyTime>(reminder.FrequencyTimes);
+                SelectedFreqIndex = DoseFrequencies.IndexOf(DoseFrequencies[frequencies.Count - 1]);
                 SelectedUnit = Units.First(x=> x.Equals(reminder.unit));
-                SelectedFreqIndex = DoseFrequencies.IndexOf(  DoseFrequencies[frequencies.Count - 1]);
+                frequencies = new ObservableCollection<FrequencyTime>(reminder.FrequencyTimes);
 
 
             }

@@ -94,7 +94,7 @@ namespace FormsLoyalty.ViewModels
             if (string.IsNullOrEmpty(data.Image) || data.Image.ToLower().Contains("noimage".ToLower()))
                 return;
 
-            await NavigationService.NavigateAsync(nameof(ImagePreviewPage), new NavigationParameters { {"previewImage", data.Image },{"images",Item.Images } });
+            await NavigationService.NavigateAsync(nameof(ImagePreviewPage), new NavigationParameters { {"previewImage", data.Location },{"images",Item.Images } });
         });
 
         #endregion
@@ -124,7 +124,7 @@ namespace FormsLoyalty.ViewModels
                 var shareContent = new ShareFileRequest();
                 shareContent.Title = Item.Description;
 
-                var filePath = DependencyService.Get<INotify>().GetImageUri(Item.Images[0].Image, Item.Description);
+                var filePath = DependencyService.Get<INotify>().GetImageUri(Item.Images[0].Location, Item.Description);
                 shareContent.File = new ShareFile(filePath);
 
                 await Share.RequestAsync(shareContent);
@@ -373,10 +373,7 @@ namespace FormsLoyalty.ViewModels
                 var service = new SharedService(new SharedRepository());
                 relatedPublishedOffers = new ObservableCollection<PublishedOffer>(await GetPublishedOffer(service));
 
-                if (relatedPublishedOffers != null && relatedPublishedOffers.Count > 0)
-                {
-                    LoadOfferImages();
-                }
+                
             }
             catch (Exception)
             {
@@ -387,36 +384,6 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-
-        /// <summary>
-        /// Get Item's Related offer image.
-        /// </summary>
-        private void LoadOfferImages()
-        {
-            try
-            {
-                Task.Run(async() =>
-                {
-                    foreach (var item in relatedPublishedOffers)
-                    {
-                        if (item.Images.Count > 0)
-                        {
-                            item.Images[0].Image = await GetImageById(item.Images[0].Id);
-                        }
-                        else
-                            item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-                        
-                    }
-                });
-                
-
-            }
-            catch (Exception)
-            {
-
-
-            }
-        }
 
         private async Task<List<PublishedOffer>> GetPublishedOffer(SharedService service)
         {

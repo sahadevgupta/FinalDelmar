@@ -37,7 +37,10 @@
                                  DownsampleToViewSize="True"
                                  Aspect="Fill"
                                  HeightRequest="{Binding ImageHeight,Source={x:Reference thisPage}}"
-                                 WidthRequest="{Binding ImageWeight,Source={x:Reference thisPage}}"/>
+                                 WidthRequest="{Binding ImageWeight,Source={x:Reference thisPage}}"
+                                 CacheDuration= "30"
+                                 RetryCount = "5"
+                                 RetryDelay = "450"/>
 
 
         </Grid>

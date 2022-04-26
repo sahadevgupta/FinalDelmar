@@ -43,7 +43,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                            <controls:CircleImage Source="{Binding Images[0].Location}"
                                               VerticalOptions="CenterAndExpand"
                                                   BorderThickness="0.4"
                                                       BorderColor="Silver"
@@ -135,7 +135,7 @@
 
                             <Grid Grid.Row="0">
                                 <controls1:LoadingImageView/>
-                                <ffimage:CachedImage   Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                <ffimage:CachedImage   Source="{Binding Images[0].Location}"
                                    DownsampleToViewSize="True"             
                                VerticalOptions="CenterAndExpand"
                               HeightRequest="120"

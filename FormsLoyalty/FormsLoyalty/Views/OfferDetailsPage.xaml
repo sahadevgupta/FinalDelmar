@@ -42,7 +42,7 @@
                    Aspect="AspectFill"
                 HeightRequest="250"
                    HorizontalOptions="FillAndExpand"
-                   Source="{Binding selectedOffer.Images[0].Image,Converter={StaticResource BytesToImageSource}}">
+                   Source="{Binding selectedOffer.Images[0].Location}">
                     <Image.GestureRecognizers>
                         <TapGestureRecognizer Command="{Binding BindingContext.ShowPreviewCommand,Source={x:Reference offerDetailsPage}}"
                                                               />
@@ -147,7 +147,7 @@
                                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
                                 </StackLayout.GestureRecognizers>
                                 
-                                <Image Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                                <Image Source="{Binding Images[0].Location}"
                                    HeightRequest="200"
                                    Aspect="AspectFill"
                                    />

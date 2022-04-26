@@ -70,6 +70,23 @@ namespace FormsLoyalty.Helpers
             }
         }
 
+        public static async Task LoadOfferFromServer()
+        {
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                try
+                {
+                    await new OfferModel().GetOffersByCardId(string.Empty).ConfigureAwait(false);
+
+                }
+                catch (Exception ex)
+                {
+                    DependencyService.Get<INotify>().ShowToast(ex.Message);
+                }
+
+            }
+        }
+
         public static async Task LoadCategories(int retryCounter = 3)
         {
 

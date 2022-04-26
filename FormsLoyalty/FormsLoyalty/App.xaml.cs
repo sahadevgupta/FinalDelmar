@@ -65,6 +65,8 @@ namespace FormsLoyalty
 
             //var memberConatctTask = MemberConatcts.RefreshMemberContactAsync();
             //serverTasks.Add(memberConatctTask);
+            var offerTask = MemberConatcts.LoadOfferFromServer();
+            serverTasks.Add(offerTask);
             var adsTask = MemberConatcts.LoadAdvertisementsFromServer();
             serverTasks.Add(adsTask);
             var categoriesTask = MemberConatcts.LoadCategories();

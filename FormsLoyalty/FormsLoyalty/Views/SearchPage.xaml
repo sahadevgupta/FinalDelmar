@@ -90,7 +90,7 @@
                                               CommandParameter="{Binding .}"/>
                             </StackLayout.GestureRecognizers>
 
-                            <controls:CircleImage Grid.Row="0"  Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                            <controls:CircleImage Grid.Row="0"  Source="{Binding Images[0].Location}"
                                                  Aspect="AspectFill"
                                                   BorderThickness="0.5"
                                                   BorderColor="Silver"

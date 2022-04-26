@@ -51,7 +51,7 @@
                             </Frame.GestureRecognizers>
                             
                         <StackLayout Orientation="Horizontal">
-                            <controls:CircleImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}"
+                            <controls:CircleImage Source="{Binding Images[0].Location}"
                                                   BorderColor="LightGray"
                                                   BorderThickness="1"
                                                  Aspect="AspectFill" HeightRequest="40" WidthRequest="40"/>

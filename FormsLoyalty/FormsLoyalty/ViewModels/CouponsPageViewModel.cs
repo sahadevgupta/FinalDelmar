@@ -68,7 +68,7 @@ namespace FormsLoyalty.ViewModels
             var publishedOffers = AppData.Device.UserLoggedOnToDevice.PublishedOffers.Where(x => x.Code == OfferDiscountType.Coupon);
             Coupons = new ObservableCollection<PublishedOffer>(publishedOffers);
 
-            LoadCouponsImage();
+           
 
             var coupons = await new CommonModel().GetDelmarCouponAsync(AppData.Device.UserLoggedOnToDevice.Account.Id);
            // coupons.Add(new DelmarCoupons { CouponID = "SAMPLE", ExpirationDate = DateTime.Now.Date });
@@ -83,38 +83,7 @@ namespace FormsLoyalty.ViewModels
         /// </summary>
         /// <param name="Offfers"></param>
         /// <returns></returns>
-        private void LoadCouponsImage()
-        {
-            try
-            {
-                Task.Run(async () =>
-                {
-                    foreach (PublishedOffer coupon in Coupons)
-                    {
-                        if (coupon.Images.Count > 0)
-                        {
-                            var imageView = await ImageHelper.GetImageById(coupon.Images[0].Id, new ImageSize(396, 396));
-                            coupon.Images[0].Image = imageView.Image;
-                        }
-                        else
-                            coupon.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-
-                    }
-                });
-            }
-            catch (Exception)
-            {
-                Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await MaterialDialog.Instance.SnackbarAsync(message: "Unable to fetch image.",
-                                           msDuration: MaterialSnackbar.DurationLong);
-                });
-
-            }
-
-           
-        }
-
+        
         internal async Task NavigateToCouponDetail(PublishedOffer coupon)
         {
             if (IsPageEnabled)
