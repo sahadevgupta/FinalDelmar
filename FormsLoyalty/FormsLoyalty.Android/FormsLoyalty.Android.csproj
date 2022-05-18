@@ -198,6 +198,7 @@
     <Compile Include="Renderers\OtpRenderer.cs" />
     <Compile Include="Renderers\PdfWebViewRenderer.cs" />
     <Compile Include="Services\AppRatingService.cs" />
+    <Compile Include="Services\AppSettingsService.cs" />
     <Compile Include="Services\FirebaseAnalyticsServices.cs" />
     <Compile Include="Services\LocalFileProvider.cs" />
     <Compile Include="Services\MediaService.cs" />

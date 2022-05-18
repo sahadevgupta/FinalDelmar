@@ -1,4 +1,5 @@
-﻿using FormsLoyalty.Utils;
+﻿using FormsLoyalty.Interfaces;
+using FormsLoyalty.Utils;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -7,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -28,7 +30,7 @@ namespace FormsLoyalty.ViewModels
             ContactMethods = new ObservableCollection<DrawerMenuItem>
             {
                 new DrawerMenuItem{ Id =1, Title = "19955" , Image = "iconCall" },
-                 new DrawerMenuItem{Id =2, Title = "https://www.facebook.com/DelmarWeAttalla" , Image = "iconFacebook" },
+                 new DrawerMenuItem{Id =2, Title = "https://www.facebook.com/DelmarWeAttalla/" , Image = "iconFacebook" },
                   new DrawerMenuItem{Id =3, Title = "https://www.instagram.com/delmarweattalla/" , Image = "Instagram" },
                    new DrawerMenuItem{Id =4, Title = "01002199551" , Image = "WhatsApp" },
             };
@@ -43,7 +45,22 @@ namespace FormsLoyalty.ViewModels
                     PhoneDialer.Open(obj.Title);
                     break;
                 case 2:
+
+                    try
+                    {
+                        var fbUri = $"fb://page/324975484267147";
+                        await Launcher.OpenAsync(fbUri);
+                    }
+                    catch (Exception)
+                    {
+
+                        await Launcher.OpenAsync(obj.Title);
+                    }
+
+                   
+                    break;
                 case 3:
+                   
                     await Launcher.OpenAsync(obj.Title);
                     break;
                 case 4:

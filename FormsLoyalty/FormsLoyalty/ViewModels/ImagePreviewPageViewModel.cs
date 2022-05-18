@@ -44,7 +44,7 @@ namespace FormsLoyalty.ViewModels
         internal void ChangeImage(ImageView obj)
         {
             
-            ImageView = obj.Image;
+            ImageView = obj.Location;
 
         }
 

@@ -262,22 +262,8 @@ namespace FormsLoyalty.ViewModels
                         else
                             item.IsWishlisted = false;
 
-                        //if (item.Images.Count > 0)
-                        //{
-                        //    if (string.IsNullOrEmpty(item.Images[0].Image))
-                        //    {
-                        //        var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(396, 396));
-                        //        if (imgView == null)
-                        //        {
-                        //            item.Images[0].Image = "noimage.png";
-                        //        }
-                        //        else
-                        //            item.Images[0].Image = imgView.Image;
-                        //    }
-
-                        //}
-                        //else
-                        //  item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
+                        if (item.Images.Count == 0)
+                               item.Images = new List<ImageView> { new ImageView { Location = "No_image_available.png" } };
 
                     }
                 });

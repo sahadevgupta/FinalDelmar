@@ -33,21 +33,25 @@ namespace FormsLoyalty.Controls.Stepper
             base.OnSizeAllocated(width, height);
 
             double cellwidth = Application.Current.MainPage.Width / (vm.StepListCount);
-            this.WidthRequest = cellwidth;
-            progress.WidthRequest = cellwidth - 20;
-           // mainLabel.WidthRequest = cellwidth - 8 - 20;
-            if (BindingContext is StepBarModel selectedmodel)
-            {
-                if (selectedmodel.IsNotLast)
-                {
-                    trackergrid.HorizontalOptions = LayoutOptions.CenterAndExpand;
-                }
-                else
-                {
-                    trackergrid.HorizontalOptions = LayoutOptions.EndAndExpand;
-                }
-            }
-
+            //this.WidthRequest = Application.Current.MainPage.Width - 100;
+            //progress.WidthRequest = this.WidthRequest - 20;
+            // mainLabel.WidthRequest = cellwidth - 8 - 20;
+            //if (BindingContext is StepBarModel selectedmodel)
+            //{
+            //    if (selectedmodel.IsNotLast)
+            //    {
+                    
+            //        progress.WidthRequest = this.WidthRequest - 20;
+            //        trackergrid.HorizontalOptions = LayoutOptions.CenterAndExpand;
+            //    }
+            //    else
+            //    {
+            //        this.WidthRequest = 100;
+            //        progress.Margin = new Thickness(-80, 10, 0, 0);
+            //        //trackergrid.HorizontalOptions = LayoutOptions.EndAndExpand;
+            //    }
+            //}
+           
         }
 
         protected override void OnBindingContextChanged()

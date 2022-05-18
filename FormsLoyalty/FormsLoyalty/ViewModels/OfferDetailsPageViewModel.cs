@@ -16,6 +16,7 @@ using FormsLoyalty.Helpers;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.Setup;
 using FormsLoyalty.Views;
 using FormsLoyalty.Models;
+using FormsLoyalty.Repos;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -34,7 +35,7 @@ namespace FormsLoyalty.ViewModels
             get { return _relatedItems; }
             set { SetProperty(ref _relatedItems, value); }
         }
-
+        IGenericDatabaseRepo<PublishedOffer> _offerRepo;
         #region Command
         public DelegateCommand ShowPreviewCommand => new DelegateCommand(async () =>
         {
@@ -44,8 +45,9 @@ namespace FormsLoyalty.ViewModels
             await NavigationService.NavigateAsync(nameof(ImagePreviewPage), new NavigationParameters { { "previewImage", selectedOffer.Images[0].Image }, { "images", selectedOffer.Images } });
         });
         #endregion
-        public OfferDetailsPageViewModel(INavigationService navigationService):base(navigationService)
+        public OfferDetailsPageViewModel(INavigationService navigationService, IGenericDatabaseRepo<PublishedOffer> offerRepo) :base(navigationService)
         {
+            _offerRepo = offerRepo;
         }
 
         /// <summary>
@@ -101,13 +103,17 @@ namespace FormsLoyalty.ViewModels
             base.Initialize(parameters);
 
             selectedOffer = parameters.GetValue<PublishedOffer>("offer");
-            selectedOffer.PropertyChanged += SelectedOffer_PropertyChanged;
+            selectedOffer.IsViewed = true;
+            UpdateOfferRead();
+            
             LoadRelatedItems();
         }
 
-        private void SelectedOffer_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        private void UpdateOfferRead()
         {
-            
+            _offerRepo.Update(selectedOffer);
         }
+
+       
     }
 }

@@ -46,5 +46,22 @@ namespace FormsLoyalty.Controls
 			InitializeComponent ();
 			img.SetBinding(CachedImage.SourceProperty, new Binding(nameof(UriImageSource), BindingMode.TwoWay, source: this));
 		}
-	}
+
+        private void img_Finish(object sender, CachedImageEvents.FinishEventArgs e)
+        {
+            
+			loadingView.IsVisible = false;
+
+		}
+
+        private void img_Success(object sender, CachedImageEvents.SuccessEventArgs e)
+        {
+
+        }
+
+        private void img_Error(object sender, CachedImageEvents.ErrorEventArgs e)
+        {
+
+        }
+    }
 }

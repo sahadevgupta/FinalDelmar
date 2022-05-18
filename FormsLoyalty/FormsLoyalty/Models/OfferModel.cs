@@ -8,9 +8,13 @@ using LSRetail.Omni.Infrastructure.Data.Omniservice.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 using System.Text;
+using Prism;
+using Prism.Ioc;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using FormsLoyalty.Repos;
 
 namespace FormsLoyalty.Models
 {
@@ -28,6 +32,20 @@ namespace FormsLoyalty.Models
             try
             {
                 var offers = await service.GetPublishedOffersByCardIdAsync(cardId);
+                if (offers is object)
+                {
+                    var offerRepo = PrismApplicationBase.Current.Container.Resolve<IGenericDatabaseRepo<PublishedOffer>>();
+                    foreach (var offer in offers)
+                    {
+                       var queryTable =  await offerRepo.GetItemsAsync().ConfigureAwait(false);
+                        if (!queryTable.Any(x => x.Id == offer.Id))
+                        {
+                            await offerRepo.Insert(offer);
+                        }
+                         
+                    }
+                   
+                }
                 AppData.PublishedOffers = offers;
 
                 if(AppData.Device?.UserLoggedOnToDevice !=null)

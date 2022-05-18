@@ -42,6 +42,9 @@ using Plugin.FirebasePushNotification;
 using static LSRetail.Omni.Infrastructure.Data.Omniservice.Utils.Utils;
 using FormsLoyalty.PopUpView;
 using FormsLoyalty.Models;
+using Prism.Navigation;
+using LSRetail.Omni.Domain.DataModel.Base.Retail;
+using System.Net.Http;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace FormsLoyalty
@@ -55,15 +58,15 @@ namespace FormsLoyalty
          */
 
         public static IPageDialogService dialogService;
+        public static INavigationService navigationService;
         public static List<string> choices = new List<string> { AppResources.txtSunday, AppResources.txtMonday, AppResources.txtTuesday, AppResources.txtWednesday, AppResources.txtThrusday,
                                                                 AppResources.txtFriday, AppResources.txtSaturday };
 
         public static async Task CallPCLMethod()
         {
-
+            DbHelper.InitializeDatabase();
             var serverTasks = new List<Task>();
-
-            //var memberConatctTask = MemberConatcts.RefreshMemberContactAsync();
+            
             //serverTasks.Add(memberConatctTask);
             var offerTask = MemberConatcts.LoadOfferFromServer();
             serverTasks.Add(offerTask);
@@ -86,6 +89,8 @@ namespace FormsLoyalty
         {
            // Xamarin.Forms.Device.SetFlags(new string[] { "CarouselView_Experimental", "RadioButton_Experimental", "IndicatorView_Experimental", "Expander_Experimental", "Shapes_Experimental", "SwipeView_Experimental","Brush_Experimental" });
             InitializeComponent();
+            navigationService = NavigationService;
+            
             XF.Material.Forms.Material.Init(this);
             LoadStyles();
             await Init();
@@ -144,6 +149,21 @@ namespace FormsLoyalty
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = Thread.CurrentThread.CurrentUICulture;
 
+            #region Image API Call for SSL
+
+            var handler = new HttpClientHandler();
+            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
+            handler.ServerCertificateCustomValidationCallback =
+                (httpRequestMessage, cert, cetChain, policyErrors) => true;
+
+            var client = new HttpClient(handler);
+            FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
+            {
+                HttpClient = client
+            });
+
+            #endregion
+
             var deviceId = DependencyService.Get<INotify>().getDeviceUuid();
 
              LSRetail.Omni.Infrastructure.Data.Omniservice.Utils.Utils.InitWebService( deviceId, AppType.Loyalty, DefaultUrlLoyalty, AppResources.Culture.TwoLetterISOLanguageName);
@@ -200,11 +220,11 @@ namespace FormsLoyalty
             containerRegistry.RegisterSingleton<IReminderRepo, ReminderRepo>();
             containerRegistry.RegisterSingleton<IScanSendManager, ScanSendManager>();
             containerRegistry.RegisterSingleton<IScanSendRepo, ScanSendRepo>();
+            containerRegistry.RegisterSingleton<IGenericDatabaseRepo<PublishedOffer>, GenericDatabaseRepo<PublishedOffer>>();
 
 
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<HomeMasterDetailPage, HomeMasterDetailPageViewModel>();
             containerRegistry.RegisterForNavigation<ItemCategoriesPage, ItemCategoriesPageViewModel>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
@@ -232,8 +252,6 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<QRCodePage, QRCodePageViewModel>();
             containerRegistry.RegisterForNavigation<AccountProfilePage, AccountProfilePageViewModel>();
             containerRegistry.RegisterForNavigation<CheckoutPage, CheckoutPageViewModel>();
-            containerRegistry.RegisterForNavigation<CheckoutShippingPage, CheckoutShippingPageViewModel>();
-            containerRegistry.RegisterForNavigation<CheckoutTotalPage, CheckoutTotalPageViewModel>();
             containerRegistry.RegisterForNavigation<ItemSearchPage, ItemSearchPageViewModel>();
             containerRegistry.RegisterForNavigation<CouponsPage, CouponsPageViewModel>();
             containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();

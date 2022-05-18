@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<pages:PopupPage  xmlns:pages="http://rotorgames.com" 
+                  xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FormsLoyalty.PopUpView.ExistPopupView">
+
+    <pages:PopupPage.Animation>
+        <pages:MoveAnimation
+            DurationIn="400"
+            DurationOut="300"
+            EasingIn="SinOut"
+            EasingOut="SinIn"
+            HasBackgroundAnimation="False"
+            PositionIn="Bottom"
+            PositionOut="Bottom" />
+    </pages:PopupPage.Animation>
+
+
+    <Frame VerticalOptions="EndAndExpand"
+           Visual="Material"
+           CornerRadius="20">
+            <Grid ColumnSpacing="30">
+                <Label Text="Are you sure you want to exist the App ?" 
+                       
+                       Grid.ColumnSpan="2" 
+                       FontAttributes="Bold"
+                       FontSize="Body"/>
+                <Button Grid.Row="1"
+                        Clicked="OnCancelledClicked"
+                        BackgroundColor="#080C0C"
+                        Grid.Column="0"
+                        Text="Cancel"/>
+                <Button Grid.Row="1"
+                        BackgroundColor="{StaticResource My_Button_Color}"
+                        Grid.Column="1"
+                        Text="Proceed"
+                        Clicked="OnProceedClicked"/>
+            </Grid>
+        </Frame>
+   
+</pages:PopupPage>

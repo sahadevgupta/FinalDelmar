@@ -1349,6 +1349,9 @@ Please continue to check.</value>
   <data name="txtAddressDetails" xml:space="preserve">
     <value>Address Details</value>
   </data>
+  <data name="txtAdvancedSearch" xml:space="preserve">
+    <value>Advanced Search</value>
+  </data>
   <data name="txtAmpules" xml:space="preserve">
     <value>Ampule(s)</value>
   </data>
@@ -1675,6 +1678,9 @@ Please continue to check.</value>
   </data>
   <data name="txtVerifyContinue" xml:space="preserve">
     <value>Verify &amp; Continue</value>
+  </data>
+  <data name="txtViewCoupons" xml:space="preserve">
+    <value>View Coupons</value>
   </data>
   <data name="txtViewOffers" xml:space="preserve">
     <value>View Offers</value>

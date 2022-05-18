@@ -246,7 +246,7 @@
                            
                             Grid.Row="0"
                             Grid.Column="1"
-                            Text="{Binding TotalAmount,StringFormat=' {0:N02}'}"
+                            Text="{Binding TotalAmount,StringFormat='EGP {0:N02}'}"
                            FontSize="Body"
                             HorizontalTextAlignment="Start" />
 

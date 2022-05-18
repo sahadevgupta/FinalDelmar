@@ -252,8 +252,8 @@
                                     <StackLayout IsVisible="{OnPlatform iOS=true, Android=false}" VerticalOptions="Center" Grid.Row="2" 
                                                  Orientation="Horizontal"
                                                  Margin="10,0,10,0">
-                                        <Label Text="{Binding NewPrice,StringFormat='{0} '}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                        <Label Text="{Binding ItemPrice}" FontSize="12" TextDecorations="Strikethrough" />
+                                        <Label Text="{Binding NewPrice,StringFormat='EGP {0} '}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                        <Label Text="{Binding ItemPrice,StringFormat='EGP {0}'}" FontSize="12" TextDecorations="Strikethrough" />
 
                                         <StackLayout.Triggers>
                                             <DataTrigger TargetType="StackLayout" Binding="{Binding Discount}" Value="0">
@@ -268,9 +268,9 @@
                                       
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{Binding NewPrice}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                                <Span Text="{Binding NewPrice,StringFormat='EGP {0}'}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
                                                 <Span Text="  " FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                                <Span Text="{Binding ItemPrice}" FontSize="12" TextDecorations="Strikethrough" />
+                                                <Span Text="{Binding ItemPrice,StringFormat='EGP {0}'}" FontSize="12" TextDecorations="Strikethrough" />
                                             </FormattedString>
                                         </Label.FormattedText>
 
@@ -283,7 +283,7 @@
                                     </Label>
 
 
-                                    <Label Text="{Binding ItemPrice}" IsVisible="false" 
+                                    <Label Text="{Binding ItemPrice,StringFormat='EGP {0}'}" IsVisible="false" 
                                                    Margin="10,0,10,0"
                                                    Grid.Row="2"
                                                    FontSize="16" FontAttributes="Bold">

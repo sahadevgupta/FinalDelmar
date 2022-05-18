@@ -242,7 +242,7 @@ namespace FormsLoyalty.ViewModels
                     {
                         item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
                     }
-                    
+                    item.Image = basketItem.Image;
                     baskets.Add(item);
 
 

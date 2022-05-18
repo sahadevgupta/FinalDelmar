@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
+using System.Text.RegularExpressions;
+using Xamarin.CommunityToolkit.Behaviors;
 using Xamarin.Forms;
 
 namespace FormsLoyalty.Controls
@@ -45,10 +48,17 @@ namespace FormsLoyalty.Controls
                 BackgroundColor = Color.FromHex("#3FFF"),
                 FontSize = 15,
                 MaxLength = 2,
-                TextColor= Color.Black
+                TextColor= Color.Black,
+                Keyboard = Keyboard.Numeric,
+                
             };
             Entry.SetBinding(Entry.TextProperty, new Binding(nameof(Text), BindingMode.TwoWay, source: this));
             Entry.TextChanged += Entry_TextChanged;
+
+           
+
+            //Entry.Behaviors.Add(charactersValidationBehavior);
+
             Children.Add(MinusBtn);
             Children.Add(Entry);
             Children.Add(PlusBtn);
@@ -57,8 +67,13 @@ namespace FormsLoyalty.Controls
 
         private void Entry_TextChanged(object sender, TextChangedEventArgs e)
         {
+
             if (!string.IsNullOrEmpty(e.NewTextValue))
-                this.Text = int.Parse(e.NewTextValue);
+            {
+                var val = e.NewTextValue;
+                ((Entry)sender).Text = val.Replace(".", "");
+            }
+
 
             ValueChanged?.Invoke(this, e);
         }

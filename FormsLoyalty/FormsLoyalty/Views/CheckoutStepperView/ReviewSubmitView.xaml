@@ -74,7 +74,7 @@
                                       
                                        FontSize="Small" Grid.Row="1" Grid.Column="1"/>
 
-                                    <Label Text="{Binding Amount,StringFormat='{0:F2}'}" HorizontalOptions="End"
+                                    <Label Text="{Binding Amount,StringFormat='EGP {0:F2}'}" HorizontalOptions="End"
                                        TextColor="Black"
                                        FontSize="Small" Grid.Row="1" Grid.Column="2"/>
 
@@ -184,7 +184,7 @@
 
                         <Label Text="{x:Static resources:AppResources.txtSelectCode}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
-                        <Button HorizontalOptions="End" Text="{x:Static resources:AppResources.txtViewOffers}" x:Name="viewOfferBtn" Clicked="viewOfferBtn_Clicked"
+                        <Button HorizontalOptions="End" Text="{x:Static resources:AppResources.txtViewCoupons}" x:Name="viewOfferBtn" Clicked="viewOfferBtn_Clicked"
                             CornerRadius="20"  Padding="0" BackgroundColor="#06A9B1"/>
 
 
@@ -305,7 +305,7 @@
                     <Label Text="{Binding Source= {x:Static resources:AppResources.CheckoutViewTotal},StringFormat='Grand {0}'}"
                        Grid.Row="6" Grid.Column="0"
                        FontSize="Body"/>
-                    <Label Text="{Binding totalTotal}" 
+            <Label Text="{Binding totalTotal,StringFormat='EGP {0}'}" 
                        Grid.Row="6" Grid.Column="1"
                        FontSize="Medium"/>
 

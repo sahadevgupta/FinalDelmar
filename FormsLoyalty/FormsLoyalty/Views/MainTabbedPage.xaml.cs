@@ -1,7 +1,11 @@
 ﻿using FormsLoyalty.Helpers;
 using FormsLoyalty.Interfaces;
+using FormsLoyalty.PopUpView;
 using FormsLoyalty.Utils;
 using FormsLoyalty.ViewModels;
+using Prism;
+using Prism.Ioc;
+using Prism.Navigation;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -26,56 +30,10 @@ namespace FormsLoyalty.Views
         }
 
         bool value = true;
-        protected override bool OnBackButtonPressed()
+        protected  override bool OnBackButtonPressed()
         {
             var selectedTabIndex = this.Children.IndexOf(this.CurrentPage);
-            //if (selectedTabIndex == 0)
-            //{
-            //    var Page = (this.Children[selectedTabIndex] as NavigationPage);
-
-            //    if (Page.CurrentPage != Page.RootPage)
-            //    {
-            //        Page.CurrentPage.Navigation.PopAsync();
-            //        return true;
-            //    }
-            //}
-            //else if (selectedTabIndex == 1)
-            //{
-            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
-            //    if (!currentPage.Title.Equals(AppResources.txtCategory))
-            //    {
-            //        currentPage.Navigation.PopAsync();
-            //        return true;
-            //    }
-            //}
-            //else if (selectedTabIndex == 2)
-            //{
-            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
-            //    if ( !currentPage.Title.Equals(AppResources.CartTab))
-            //    {
-            //        currentPage.Navigation.PopAsync();
-            //        return true;
-            //    }
-            //}
-            //else if (selectedTabIndex == 3)
-            //{
-            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
-            //    if (!currentPage.Title.Equals(AppResources.OrdersTab))
-            //    {
-            //        currentPage.Navigation.PopAsync();
-            //        return true;
-            //    }
-            //}
-            //else if (selectedTabIndex == 4)
-            //{
-            //    var currentPage = (this.Children[selectedTabIndex] as NavigationPage).CurrentPage;
-            //    if (!currentPage.Title.Equals(AppResources.MoreTab))
-            //    {
-            //        currentPage.Navigation.PopAsync();
-            //        return true;
-            //    }
-            //}
-
+            
             var Page = (this.Children[selectedTabIndex] as NavigationPage);
 
             if (Page.CurrentPage != Page.RootPage)
@@ -98,18 +56,39 @@ namespace FormsLoyalty.Views
                 
                 return true;
             }
-
-
-            if (value)
+            else
             {
-               
-                DependencyService.Get<INotify>().ShowToast(AppResources.txtAppExist);
-                value = false;
-                Task.Delay(2000).ContinueWith((s, e) => { value = true; }, null);
+                if (selectedTabIndex == 0)
+                {
+                   
+                        var pageSatatus = true;
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            var page = new ExistPopupView();
+                            page.ProceedClicked += (s, e) =>
+                            {
+                                DependencyService.Get<IAppSettings>().SwitchToBackground();
+                            };
+                            await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(page, true);
+                        });
+                        //DependencyService.Get<INotify>().ShowToast(AppResources.txtAppExist);
+                        //value = false;
+                        //Task.Delay(2000).ContinueWith((s, e) => { value = true; }, null);
+                      
+                }
+                else
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                       await App.navigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage");
+                    });
+                   
+                }
+
                 return true;
             }
-            else
-                return false;
+
+           
         }
     
     }

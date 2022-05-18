@@ -1348,6 +1348,9 @@
   <data name="txtAddressDetails" xml:space="preserve">
     <value>العنوان</value>
   </data>
+  <data name="txtAdvancedSearch" xml:space="preserve">
+    <value>البحث المتقدم</value>
+  </data>
   <data name="txtAmpules" xml:space="preserve">
     <value>أمبولات</value>
   </data>
@@ -1674,6 +1677,9 @@
   </data>
   <data name="txtVerifyContinue" xml:space="preserve">
     <value>إكمال</value>
+  </data>
+  <data name="txtViewCoupons" xml:space="preserve">
+    <value>الكوبونات المتاحة</value>
   </data>
   <data name="txtViewOffers" xml:space="preserve">
     <value>الكوبونات المتاحة</value>

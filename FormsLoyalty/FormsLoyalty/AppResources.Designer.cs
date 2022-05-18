@@ -19,7 +19,7 @@ namespace FormsLoyalty {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class AppResources {
@@ -3753,6 +3753,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Advanced Search.
+        /// </summary>
+        public static string txtAdvancedSearch {
+            get {
+                return ResourceManager.GetString("txtAdvancedSearch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Ampule(s).
         /// </summary>
         public static string txtAmpules {
@@ -4730,6 +4739,15 @@ namespace FormsLoyalty {
         public static string txtVerifyContinue {
             get {
                 return ResourceManager.GetString("txtVerifyContinue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View Coupons.
+        /// </summary>
+        public static string txtViewCoupons {
+            get {
+                return ResourceManager.GetString("txtViewCoupons", resourceCulture);
             }
         }
         

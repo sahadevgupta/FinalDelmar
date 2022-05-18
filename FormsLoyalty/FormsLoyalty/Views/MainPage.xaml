@@ -698,7 +698,7 @@
                                                         <Grid RowDefinitions="95,Auto,Auto,Auto" IsClippedToBounds="True" >
 
 
-                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Image}"
+                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Location}"
                                                                              Grid.Row="0"/>
 
 
@@ -728,9 +728,9 @@
 
                                                                 <Label.FormattedText>
                                                                     <FormattedString>
-                                                                        <Span Text="{Binding NewPrice}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
+                                                                        <Span Text="{Binding NewPrice,StringFormat='EGP {0}'}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
                                                                         <Span Text="  " FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                                                        <Span Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
+                                                                        <Span Text="{Binding Price,StringFormat='EGP {0}'}" FontSize="12" TextDecorations="Strikethrough" />
                                                                     </FormattedString>
                                                                 </Label.FormattedText>
 
@@ -743,7 +743,7 @@
                                                             </Label>
 
 
-                                                            <Label Text="{Binding Price}" IsVisible="false" 
+                                                            <Label Text="{Binding Price,StringFormat='EGP {0}'}" IsVisible="false" 
                                                    Margin="10,0,10,0"
                                                    Grid.Row="2"
                                                    FontSize="16" FontAttributes="Bold">
@@ -1279,11 +1279,20 @@
 
                             <Grid ColumnDefinitions="50,*" RowDefinitions="Auto,Auto">
 
-                                <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
-                                                   Margin="5,0,5,0"
+                                
+                                
+                                <controls:CustomImageControl ImageHeight="50" ImageWeight="50" UriImageSource="{Binding Images[0].Location}"
+                                                                             />
+
+
+
+
+
+                                <!--<ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
+                                                   
                                                          VerticalOptions="Center"
                                                           HeightRequest="50" WidthRequest="50"
-                                                          Grid.Row="0"   Grid.Column="0"/>
+                                                          Grid.Row="0"   Grid.Column="0"/>-->
 
                                 <Label Text="{Binding Description}" VerticalTextAlignment="Center" MaxLines="2"
                                FontSize="Body" TextColor="Black"

@@ -571,7 +571,7 @@ namespace FormsLoyalty.ViewModels
                 var items = await model.GetItemsByPage(10, 1, string.Empty, string.Empty, SearchKey, false, string.Empty).ConfigureAwait(false);
                 Items = new ObservableCollection<LoyItem>(items);
 
-                LoadImages();
+                //LoadImages();
             }
             catch (Exception)
             {
@@ -933,6 +933,26 @@ namespace FormsLoyalty.ViewModels
                         loyItem.NewPrice = (Convert.ToDecimal(loyItem.Price) - discountedPrice).ToString("F", CultureInfo.InvariantCulture);
                     }
                 }
+
+                if (AppData.Basket != null)
+                {
+                    var isExist = AppData.Basket.Items?.Any(x => x.ItemId == loyItem.Id);
+                    if (isExist == true)
+                    {
+                        var basketItem = AppData.Basket.Items.FirstOrDefault(x => x.ItemId == loyItem.Id);
+                        loyItem.Quantity = basketItem.Quantity;
+                    }
+                    else
+                        loyItem.Quantity = 0;
+                }
+
+                if (AppData.Device.UserLoggedOnToDevice?.GetWishList(AppData.Device.CardId).Items?.Any(x => x.ItemId == loyItem.Id) == true)
+                {
+                    loyItem.IsWishlisted = true;
+                }
+                else
+                    loyItem.IsWishlisted = false;
+
             }
             return loyItems;
         }
@@ -947,24 +967,7 @@ namespace FormsLoyalty.ViewModels
                     {
                         foreach (var item in loyItems)
                         {
-                            if (AppData.Basket!= null )
-                            {
-                                var isExist = AppData.Basket.Items?.Any(x => x.ItemId == item.Id);
-                                if (isExist == true)
-                                {
-                                    var basketItem = AppData.Basket.Items.FirstOrDefault(x => x.ItemId == item.Id);
-                                    item.Quantity = basketItem.Quantity;
-                                }
-                                else
-                                    item.Quantity = 0;
-                            }
-
-                            if (AppData.Device.UserLoggedOnToDevice?.GetWishList(AppData.Device.CardId).Items?.Any(x => x.ItemId == item.Id) == true)
-                            {
-                                item.IsWishlisted = true;
-                            }
-                            else
-                                item.IsWishlisted = false;
+                           
 
                             if (item.Images.Count > 0)
                             {

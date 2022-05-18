@@ -17,8 +17,8 @@ namespace FormsLoyalty.Views
             StepBarComponent stepbar = new StepBarComponent(_viewModel);
 
             _viewModel.MainGrid = mainGrid;
-            stepbar.HorizontalOptions = LayoutOptions.Center;
-            stepbar.VerticalOptions = LayoutOptions.CenterAndExpand;
+            stepbar.HorizontalOptions = LayoutOptions.FillAndExpand;
+            stepbar.VerticalOptions = LayoutOptions.StartAndExpand;
             _viewModel.MainGrid.Children.Add(stepbar, 0, 0);
             _viewModel.AddContentForSelectedStep();
 

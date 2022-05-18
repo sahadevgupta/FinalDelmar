@@ -91,7 +91,7 @@ namespace FormsLoyalty.ViewModels
 
         public DelegateCommand<ImageView> ShowPreviewCommand => new DelegateCommand<ImageView>(async(data) =>
         {
-            if (string.IsNullOrEmpty(data.Image) || data.Image.ToLower().Contains("noimage".ToLower()))
+            if (string.IsNullOrEmpty(data.Location))
                 return;
 
             await NavigationService.NavigateAsync(nameof(ImagePreviewPage), new NavigationParameters { {"previewImage", data.Location },{"images",Item.Images } });

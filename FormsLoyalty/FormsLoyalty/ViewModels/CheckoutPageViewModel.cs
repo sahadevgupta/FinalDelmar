@@ -433,8 +433,23 @@ namespace FormsLoyalty.ViewModels
           
             Steps = new ObservableCollection<StepBarModel>()
             {
-                new StepBarModel(){ StepName=AppResources.txtAddressDetails,Status=StepBarStatus.InProgress,IsNotLast=true,MainContent=new AddressDetailsView(this),IsCurrentContent=true},
-                new StepBarModel(){ StepName=AppResources.txtReviewSubmit,Status=StepBarStatus.Pending,IsNotLast=false,MainContent=new ReviewSubmitView(this),IsCurrentContent=false},
+                new StepBarModel()
+                { 
+                    StepName=AppResources.txtAddressDetails,
+                    Status=StepBarStatus.InProgress,
+                    IsNotLast=true,
+                    
+                    MainContent=new AddressDetailsView(this),IsCurrentContent=true,
+                    
+                },
+                new StepBarModel()
+                { 
+                    StepName=AppResources.ActionbarCheckout,
+                    Status=StepBarStatus.Pending,
+                    
+                    IsNotLast=false,MainContent=new ReviewSubmitView(this),
+                    IsCurrentContent=false
+                },
             };
             StepListCount = Steps.Count;
             

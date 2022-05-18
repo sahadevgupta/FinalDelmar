@@ -125,9 +125,11 @@
                                     </Grid.RowDefinitions>
 
 
-                                    <Image Source="{Binding Image.Location}" 
-                                           HeightRequest="80"  Grid.RowSpan="2" Grid.Column="0"/>
+                                    <controls:CustomImageControl ImageHeight="80"
+                                                                 UriImageSource="{Binding Image.Location}"
+                                                                 Grid.RowSpan="2" Grid.Column="0"/>
 
+                                    
 
 
 
@@ -158,7 +160,7 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="Total : " TextColor="Silver"/>
-                                                    <Span Text="{Binding PriceWithoutDiscount,StringFormat='{0:F2}',Mode=OneWay}" TextColor="Black"/>
+                                                    <Span Text="{Binding PriceWithoutDiscount,StringFormat='EGP {0:F2}',Mode=OneWay}" TextColor="Black"/>
                                                 </FormattedString>
                                             </Label.FormattedText>
                                             <Label.Triggers>
@@ -172,11 +174,11 @@
                                             <Label.FormattedText>
                                                 <FormattedString>
                                                     <Span Text="Total : " TextColor="Silver"/>
-                                                    <Span Text="{Binding PriceWithoutDiscount,StringFormat='{0:F2}',Mode=OneWay}" TextDecorations="Strikethrough" TextColor="IndianRed"/>
+                                                    <Span Text="{Binding PriceWithoutDiscount,StringFormat='EGP {0:F2}',Mode=OneWay}" TextDecorations="Strikethrough" TextColor="IndianRed"/>
                                                     <Span Text=" "/>
-                                                    <Span Text="{Binding PriceWithDiscount,StringFormat=' {0:F2}',Mode=OneWay}" FontAttributes="Bold" TextColor="Black"
+                                                    <Span Text="{Binding PriceWithDiscount,StringFormat='EGP {0:F2}',Mode=OneWay}" FontAttributes="Bold" TextColor="Black"
                                                       FontSize="Body"/>
-                                                    <Span Text="{Binding DiscountPercent,StringFormat=' ({0:F2} % Off)',Mode=OneWay}" TextColor="Red" />
+                                                    <Span Text="{Binding DiscountPercent,StringFormat='EGP ({0:F2} % Off)',Mode=OneWay}" TextColor="Red" />
                                                 </FormattedString>
                                             </Label.FormattedText>
                                             <Label.Triggers>
@@ -282,7 +284,7 @@
                         <FormattedString>
                             <Span Text="{x:Static resources:AppResources.ApplicationTotal}" />
                             <Span Text=" : "/>
-                            <Span Text="{Binding totalPrice}" FontAttributes="Bold" FontSize="Body" TextColor="Black"/>
+                            <Span Text="{Binding totalPrice,StringFormat='EGP {0}'}" FontAttributes="Bold" FontSize="Body" TextColor="Black"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

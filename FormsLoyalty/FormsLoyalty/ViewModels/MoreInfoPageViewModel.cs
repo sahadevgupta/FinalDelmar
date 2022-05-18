@@ -1,6 +1,7 @@
 ﻿using FormsLoyalty.ConstantValues;
 using FormsLoyalty.Interfaces;
 using FormsLoyalty.Models;
+using FormsLoyalty.Repos;
 using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
@@ -48,9 +49,11 @@ namespace FormsLoyalty.ViewModels
         }
         public INavigation navigation;
         public DelegateCommand RateAppCommand { get; set; }
-        public MoreInfoPageViewModel(INavigationService navigationService) : base(navigationService)
+
+        IGenericDatabaseRepo<PublishedOffer> _offerRepo;
+        public MoreInfoPageViewModel(INavigationService navigationService, IGenericDatabaseRepo<PublishedOffer> offerRepo) : base(navigationService)
         {
-            
+            _offerRepo = offerRepo;
             IsActiveChanged += MoreInfoPageViewModel_IsActiveChanged;
 
             RateAppCommand = new DelegateCommand(RateApp);
@@ -128,7 +131,7 @@ namespace FormsLoyalty.ViewModels
         /// <summary>
         /// This method used to fill the drawer with title and respective icon
         /// </summary>
-        internal void FillDrawerList()
+        internal async void FillDrawerList()
         {
             drawerMenuItems = new ObservableCollection<DrawerMenuItem>();
 
@@ -207,7 +210,7 @@ namespace FormsLoyalty.ViewModels
                     IsVisible = true,
                     Image = "search",
                     IsLoading = false,
-                    Title = AppResources.ResourceManager.GetString("ActionbarSearch", AppResources.Culture),
+                    Title = AppResources.txtAdvancedSearch,
                 });
             #endregion
 
@@ -236,25 +239,25 @@ namespace FormsLoyalty.ViewModels
 
             if (AppData.PublishedOffers is object)
             {
-                if (AppData.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon) > 0)
+                var data = await _offerRepo.GetItemsAsync();
+                
+                if (data.Count(x => x.Code != OfferDiscountType.Coupon) > 0)
                 {
-                    offerCount = AppData.PublishedOffers.Count(x => x.Code != OfferDiscountType.Coupon).ToString();
-                }
-
-
-                drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
-                {
-                    ActivityType = AppConstValues.Offer,
-                    IsVisible = true,
-                    Image = "offers",
-                    IsLoading = false,
-                    Title = AppResources.ResourceManager.GetString("ActionbarOffers", AppResources.Culture),
-                    SubTitle = offerCount
-                });
+                    offerCount = data.Count(x => x.Code != OfferDiscountType.Coupon && !x.IsViewed).ToString();
+                }  
             }
-               
-                    
-            
+
+            drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
+            {
+                ActivityType = AppConstValues.Offer,
+                IsVisible = true,
+                Image = "offers",
+                IsLoading = false,
+                Title = AppResources.ResourceManager.GetString("ActionbarOffers", AppResources.Culture),
+                SubTitle = offerCount
+            });
+
+
 
             #endregion
 
@@ -491,10 +494,7 @@ namespace FormsLoyalty.ViewModels
                         await NavigationService.NavigateAsync(nameof(LoginPage));
                     break;
 
-                case AppConstValues.Home:
-                    App.Current.MainPage = new HomeMasterDetailPage();
-
-                    break;
+                
                 case AppConstValues.Items:
                     
                         IsPageEnabled = true;

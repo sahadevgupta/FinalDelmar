@@ -97,7 +97,7 @@
                         <Label Text="{Binding Quantity}" Margin="5,0" Grid.Column="1"
                                TextColor="Black" 
                                FontSize="14"/>
-                        <Label Text="{Binding Amount}" HorizontalTextAlignment="End" Grid.Column="2"
+                                <Label Text="{Binding Amount,StringFormat='EGP {0}'}" HorizontalTextAlignment="End" Grid.Column="2"
                                TextColor="Black" 
                                FontSize="14"/>
 
@@ -135,7 +135,7 @@
                                FontSize="16"
                                />
 
-                        <Label Text="{Binding TotalSubtotal,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="0"
+                        <Label Text="{Binding TotalSubtotal,StringFormat='EGP {0:N02}'}" Grid.Column="1" Grid.Row="0"
                                VerticalTextAlignment="Center" 
                                FontSize="16"
                             LineHeight="2"
@@ -164,7 +164,7 @@
                                FontSize="16"
                                />
 
-                        <Label Text="{Binding TotalVat,StringFormat='{0:N02}'}" Grid.Column="1" Grid.Row="2"
+                        <Label Text="{Binding TotalVat,StringFormat='EGP {0:N02}'}" Grid.Column="1" Grid.Row="2"
                                VerticalTextAlignment="Center" 
                            HorizontalOptions="End"
                                FontSize="16"
@@ -191,7 +191,7 @@
                        HorizontalOptions="End"
                                VerticalTextAlignment="Center" 
                                FontSize="16"/>
-                        <Label Text="{Binding Total}" 
+                        <Label Text="{Binding Total,StringFormat='EGP {0}'}" 
                                 VerticalTextAlignment="Center" 
                            HorizontalOptions="End"
                        Grid.Row="5" Grid.Column="1"

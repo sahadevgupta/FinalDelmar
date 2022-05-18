@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="FormsLoyalty.Controls.Stepper.StepBarViewCell"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
-             xmlns:controls="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
+             xmlns:controls="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:extensions="clr-namespace:FormsLoyalty.Extensions">
 
     <ContentView.Resources>
         <ResourceDictionary>
@@ -15,6 +16,7 @@
   <ContentView.Content>
       
         <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+            
               x:Name="mainGrid"
               ColumnSpacing="0" Margin="0"
               Padding="0"
@@ -51,6 +53,7 @@
                          HorizontalOptions="FillAndExpand"
                          Margin="0,10,0,0"
                          x:Name="progress"
+                        WidthRequest="{extensions:WidthPercent 0.32}"
                          IsVisible="{Binding IsNotLast}"
                          ProgressColor="#127ABF"
                          Grid.Column="1" Grid.Row="0"
@@ -59,13 +62,14 @@
             </ProgressBar>
 
 
-            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" WidthRequest="60">
+            <StackLayout Grid.Row="1" Grid.ColumnSpan="2" WidthRequest="45">
                 <Label Text="{Binding StepName}"
                    x:Name="mainLabel"
-                   FontSize="Small"
+                   FontSize="11"
+                      
                    TextColor="#333333"
-                   
-                   HorizontalTextAlignment="Start"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Start"
                    LineBreakMode="WordWrap"
                    />
 

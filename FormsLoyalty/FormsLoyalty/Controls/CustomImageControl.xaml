@@ -17,8 +17,8 @@
   <ContentView.Content>
         <Grid>
 
-            <controls:LoadingImageView>
-                <controls:LoadingImageView.Triggers>
+            <controls:LoadingImageView x:Name="loadingView">
+                <!--<controls:LoadingImageView.Triggers>
                     <DataTrigger TargetType="controls:LoadingImageView" Binding="{Binding UriImageSource,Converter={StaticResource DefaultImageConverter}, Source={x:Reference thisPage}}"
                                  Value="true" >
                         <Setter Property="IsVisible" Value="false"/>
@@ -28,7 +28,7 @@
                         <Setter Property="IsVisible" Value="false"/>
                     </DataTrigger>
                     
-                </controls:LoadingImageView.Triggers>
+                </controls:LoadingImageView.Triggers>-->
             </controls:LoadingImageView>
             <ffimage:CachedImage Source="{Binding UriImageSource, Source={x:Reference thisPage}}" 
                                  x:Name="img"
@@ -40,6 +40,9 @@
                                  WidthRequest="{Binding ImageWeight,Source={x:Reference thisPage}}"
                                  CacheDuration= "30"
                                  RetryCount = "5"
+                                 Finish="img_Finish"
+                                   Success="img_Success"
+                                 Error="img_Error"
                                  RetryDelay = "450"/>
 
 

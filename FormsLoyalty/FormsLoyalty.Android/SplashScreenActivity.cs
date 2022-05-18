@@ -42,12 +42,12 @@ namespace FormsLoyalty.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
 
-            var apiCallService = new Runnable(async () =>
-            {
-                await App.CallPCLMethod().ConfigureAwait(false);
+            //var apiCallService = new Runnable(async () =>
+            //{
+            //    await App.CallPCLMethod().ConfigureAwait(false);
 
-            });
-            apiCallService.Run();
+            //});
+            //apiCallService.Run();
 
 
 

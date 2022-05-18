@@ -131,19 +131,22 @@
                             </Grid.RowDefinitions>
 
 
+                            <controls1:CustomImageControl ImageHeight="120" UriImageSource="{Binding Images[0].Location}"
+                                                         Margin="-20,0,-20,0"
+                                                         TranslationY="-20"
+                                                         Grid.Row="0"/>
 
-
-                            <Grid Grid.Row="0">
+                            <!--<Grid Grid.Row="0">
                                 <controls1:LoadingImageView/>
                                 <ffimage:CachedImage   Source="{Binding Images[0].Location}"
                                    DownsampleToViewSize="True"             
                                VerticalOptions="CenterAndExpand"
                               HeightRequest="120"
                                Aspect="Fill"
-                               Margin="-20,0,-20,0"
-                               TranslationY="-20"
+                               
+                               
                                />
-                            </Grid>
+                            </Grid>-->
                            
 
 
@@ -226,11 +229,11 @@
 
             </ToolbarItem.CommandParameter>
         </ToolbarItem>
-        <ToolbarItem 
+        <!--<ToolbarItem 
                      x:Name="viewtoolbar"
                      Order="Primary" Clicked="ToolbarItem_Clicked"/>
         <ToolbarItem IconImageSource="ic_action_qr" Command="{Binding ToolBarCommand}" 
-                     Order="Primary"/>
+                     Order="Primary"/>-->
     </ContentPage.ToolbarItems>
 
 

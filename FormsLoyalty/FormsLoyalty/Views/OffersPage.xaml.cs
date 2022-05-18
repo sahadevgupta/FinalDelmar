@@ -24,37 +24,37 @@ namespace FormsLoyalty.Views
 
         private void ChangeToolbarIcon()
         {
-            try
-            {
-                if (Settings.ShowCard)
-                {
-                    viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-                    _viewModel.count = 2;
-                    offerlist.ItemTemplate = (DataTemplate)Resources["CardView"];
-                }
-                else
-                {
-                    _viewModel.count = 1;
-                    viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
-                    offerlist.ItemTemplate = (DataTemplate)Resources["ListView"];
-                }
-            }
-            catch (System.Exception)
-            {
+            //try
+            //{
+            //    if (Settings.ShowCard)
+            //    {
+            //        viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
+            //        _viewModel.count = 2;
+            //        offerlist.ItemTemplate = (DataTemplate)Resources["CardView"];
+            //    }
+            //    else
+            //    {
+            //        _viewModel.count = 1;
+            //        viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
+            //        offerlist.ItemTemplate = (DataTemplate)Resources["ListView"];
+            //    }
+            //}
+            //catch (System.Exception)
+            //{
 
-                if (Settings.ShowCard)
-                {
-                    viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-                    _viewModel.count = 2;
-                    offerlist.ItemTemplate = (DataTemplate)Resources["CardView"];
-                }
-                else
-                {
-                    _viewModel.count = 1;
-                    viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
-                    offerlist.ItemTemplate = (DataTemplate)Resources["ListView"];
-                }
-            }
+            //    if (Settings.ShowCard)
+            //    {
+            //        viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
+            //        _viewModel.count = 2;
+            //        offerlist.ItemTemplate = (DataTemplate)Resources["CardView"];
+            //    }
+            //    else
+            //    {
+            //        _viewModel.count = 1;
+            //        viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
+            //        offerlist.ItemTemplate = (DataTemplate)Resources["ListView"];
+            //    }
+            //}
            
         }
 
