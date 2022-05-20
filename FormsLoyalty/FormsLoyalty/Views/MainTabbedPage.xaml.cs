@@ -65,8 +65,9 @@ namespace FormsLoyalty.Views
                         Device.BeginInvokeOnMainThread(async () =>
                         {
                             var page = new ExistPopupView();
-                            page.ProceedClicked += (s, e) =>
+                            page.ProceedClicked += async(s, e) =>
                             {
+                                await Task.Delay(500);
                                 DependencyService.Get<IAppSettings>().SwitchToBackground();
                             };
                             await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(page, true);
@@ -78,7 +79,7 @@ namespace FormsLoyalty.Views
                 }
                 else
                 {
-                    Device.BeginInvokeOnMainThread(async () =>
+                    Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async () =>
                     {
                        await App.navigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage");
                     });

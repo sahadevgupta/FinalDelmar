@@ -85,44 +85,17 @@ namespace FormsLoyalty
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
 
-        protected override async void OnInitialized()
+        protected override void OnInitialized()
         {
            // Xamarin.Forms.Device.SetFlags(new string[] { "CarouselView_Experimental", "RadioButton_Experimental", "IndicatorView_Experimental", "Expander_Experimental", "Shapes_Experimental", "SwipeView_Experimental","Brush_Experimental" });
             InitializeComponent();
             navigationService = NavigationService;
             
-            XF.Material.Forms.Material.Init(this);
+            //XF.Material.Forms.Material.Init(this);
             LoadStyles();
-            await Init();
+            Init();
 
-            CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
-            {
-                System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
-                Settings.FCM_Token = p.Token;
-            };
-
-            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
-            {
-
-                System.Diagnostics.Debug.WriteLine("Received");
-                foreach (var data in p.Data)
-                {
-                    System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
-                }
-                if(Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android )
-                  DependencyService.Get<INotify>().ShowLocalNotification("titleforeground", "test");
-
-            };
-            CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>
-            {
-                System.Diagnostics.Debug.WriteLine("Opened");
-                foreach (var data in p.Data)
-                {
-                    System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
-                }
-
-
-            };
+            
         }
 
         private void LoadStyles()
@@ -136,7 +109,7 @@ namespace FormsLoyalty
             }
         }
 
-        private async Task Init()
+        private void Init()
         {
             CultureInfo language;
             if (Settings.RTL)
@@ -183,12 +156,17 @@ namespace FormsLoyalty
             // await NavigationService.NavigateAsync(nameof(WelcomePage));
             if (AppData.Device is UnknownDevice)
             {
-                await NavigationService.NavigateAsync(nameof(WelcomePage));
+                NavigationService.NavigateAsync(nameof(WelcomePage));
             }
             else
             {
+                 Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
+                {
+                    //Current.MainPage = new Page1();
+                    NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage");
+                });
                 // Current.MainPage = new TabbedPage1();
-                await NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage");
+                
             }
         }
 
@@ -203,6 +181,34 @@ namespace FormsLoyalty
                   "android=4e565f82-65bd-4dfa-9a14-4af9f9af03e2;",
                   typeof(Analytics), typeof(Crashes));
 
+            CrossFirebasePushNotification.Current.OnTokenRefresh += (s, p) =>
+            {
+                System.Diagnostics.Debug.WriteLine($"TOKEN : {p.Token}");
+                Settings.FCM_Token = p.Token;
+            };
+
+            CrossFirebasePushNotification.Current.OnNotificationReceived += (s, p) =>
+            {
+
+                System.Diagnostics.Debug.WriteLine("Received");
+                foreach (var data in p.Data)
+                {
+                    System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
+                }
+                if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.Android)
+                    DependencyService.Get<INotify>().ShowLocalNotification("titleforeground", "test");
+
+            };
+            CrossFirebasePushNotification.Current.OnNotificationOpened += (s, p) =>
+            {
+                System.Diagnostics.Debug.WriteLine("Opened");
+                foreach (var data in p.Data)
+                {
+                    System.Diagnostics.Debug.WriteLine($"{data.Key} : {data.Value}");
+                }
+
+
+            };
 
         }
 
@@ -270,7 +276,7 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<LoginOtpView, LoginOtpViewViewModel>();
             containerRegistry.RegisterForNavigation<CameraPage, CameraPageViewModel>();
             containerRegistry.RegisterForNavigation<SocialMediaLogin, SocialMediaLoginViewModel>();
-            
+
         }
     }
 }

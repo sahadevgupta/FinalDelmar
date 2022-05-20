@@ -6,12 +6,10 @@
              x:Class="FormsLoyalty.Views.MainPage"
              xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
-             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
-             xmlns:utilities="clr-namespace:FormsLoyalty.Utils"
              xmlns:resources="clr-namespace:FormsLoyalty"
              BackgroundColor="{StaticResource My_Header_Color}"
              Visual="Material"
@@ -47,25 +45,13 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <RelativeLayout BackgroundColor="#cccccc">
+    <AbsoluteLayout BackgroundColor="#cccccc">
 
 
 
         <Grid RowDefinitions="180,*"  x:Name="mainGrid" BackgroundColor="#F0F0F0"
-               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                       Property=Height,
-                                                                       Factor=1,
-                                                                       Constant=0}"
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                      Property=Width,
-                                                                      Factor=1,
-                                                                      Constant=0}"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                  Property=Height,
-                                                                  Factor=.0,
-                                                                  Constant=0}"
-              
-             >
+               AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All" >
 
 
             <Grid.Triggers>
@@ -1223,123 +1209,90 @@
                                     
                             </Grid>
                         </ScrollView>
-                    
-
-        </Grid>
 
 
-
-        <Frame Visual="Material" CornerRadius="5"
-               BorderColor="LightGray"
-               android:VisualElement.Elevation="15"
-               xct:ShadowEffect.Color="Silver" 
-              xct:ShadowEffect.OffsetY="18"
-                Margin="30,150,60,0"
-                BackgroundColor="White"
-               Padding="2"
-               IsVisible="{Binding IsSuggestionFound}"
-               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                       Property=Height,
-                                                                       Factor=.7,
-                                                                       Constant=0}"
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                      Property=Width,
-                                                                      Factor=1,
-                                                                      Constant=0}"
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView,
-                                                                  ElementName=mainGrid,
-                                                                  Property=X,
-                                                                  Factor=0,
-                                                                  Constant=0}"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
-                                                                  ElementName=mainGrid,
-                                                                  Property=Y,
-                                                                  Factor=0,
-                                                                  Constant=0}">
+           
+                <Frame Visual="Material" CornerRadius="5"
+                       x:Name="itemsuggestionView"
+                       Grid.Row="0"
+                       Grid.RowSpan="2"
+                       BorderColor="LightGray"
+                       android:VisualElement.Elevation="15"
+                       xct:ShadowEffect.Color="Silver" 
+                       xct:ShadowEffect.OffsetY="18"
+                       Margin="30,150,60,150"
+                       BackgroundColor="White"
+                      Padding="2"
+                      IsVisible="{Binding IsSuggestionFound}">
 
 
-            <CollectionView VerticalScrollBarVisibility="Always"
-                x:Name="itemsuggestionListView"
-                           
-                EmptyView="{x:Static resources:AppResources.txtItemNotFound}"
-                
-                ItemsSource="{Binding Items}"
-                
-                
-                SelectionMode="Single"
-                VerticalOptions="FillAndExpand">
+                    <CollectionView VerticalScrollBarVisibility="Always"
+                                    x:Name="itemsuggestionListView"
+                                    EmptyView="{x:Static resources:AppResources.txtItemNotFound}"
+                                    ItemsSource="{Binding Items}"
+                                    SelectionMode="Single"
+                                    VerticalOptions="FillAndExpand">
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <!--<ViewCell>-->
-                        <Frame CornerRadius="0" Padding="0" Visual="Material"  BackgroundColor="WhiteSmoke" >
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="OnAutoSuggestionSelect" CommandParameter="{Binding .}"/>
-                            </Frame.GestureRecognizers>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <!--<ViewCell>-->
+                                <Frame CornerRadius="0" Padding="0" Visual="Material"  BackgroundColor="WhiteSmoke" >
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="OnAutoSuggestionSelect" CommandParameter="{Binding .}"/>
+                                    </Frame.GestureRecognizers>
 
-                            <Grid ColumnDefinitions="50,*" RowDefinitions="Auto,Auto">
+                                    <Grid ColumnDefinitions="50,*" RowDefinitions="Auto,Auto">
 
-                                
-                                
-                                <controls:CustomImageControl ImageHeight="50" ImageWeight="50" UriImageSource="{Binding Images[0].Location}"
+
+
+                                        <controls:CustomImageControl ImageHeight="50" ImageWeight="50" UriImageSource="{Binding Images[0].Location}"
                                                                              />
 
 
 
 
 
-                                <!--<ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
+                                        <!--<ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
                                                    
                                                          VerticalOptions="Center"
                                                           HeightRequest="50" WidthRequest="50"
                                                           Grid.Row="0"   Grid.Column="0"/>-->
 
-                                <Label Text="{Binding Description}" VerticalTextAlignment="Center" MaxLines="2"
+                                        <Label Text="{Binding Description}" VerticalTextAlignment="Center" MaxLines="2"
                                FontSize="Body" TextColor="Black"
                                LineBreakMode="TailTruncation"
                                Grid.Column="1" Grid.Row="0"/>
 
-                                <BoxView HeightRequest="0.7" BackgroundColor="LightGray" Grid.Row="1" Grid.ColumnSpan="2"/>
-                            </Grid>
-                        </Frame>
+                                        <BoxView HeightRequest="0.7" BackgroundColor="LightGray" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                    </Grid>
+                                </Frame>
 
-                        <!--</ViewCell>-->
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-
-
-
-            </CollectionView>
+                                <!--</ViewCell>-->
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
 
 
-        </Frame>
-        
+
+                    </CollectionView>
+
+
+                </Frame>
            
+            
 
 
-        <controls:LoadingView 
-                              
-                               RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                       Property=Height,
-                                                                       Factor=1,
-                                                                       Constant=0}"
-                RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent,
-                                                                      Property=Width,
-                                                                      Factor=1,
-                                                                      Constant=0}"
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView,
-                                                                  ElementName=mainGrid,
-                                                                  Property=X,
-                                                                  Factor=0.5,
-                                                                  Constant=0}"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView,
-                                                                  ElementName=mainGrid,
-                                                                  Property=Y,
-                                                                  Factor=0.5,
-                                                                  Constant=0}"
-                              
-                              
-               IsVisible="False">
+        </Grid>
+
+
+
+       
+
+
+
+
+        <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
+                              AbsoluteLayout.LayoutFlags="All"
+                              IsVisible="False">
             <controls:LoadingView.Triggers>
                 <DataTrigger TargetType="controls:LoadingView"
                              Binding="{Binding IsPageEnabled}"
@@ -1352,6 +1305,6 @@
         </controls:LoadingView>
 
 
-    </RelativeLayout>
+    </AbsoluteLayout>
 
 </ContentPage>

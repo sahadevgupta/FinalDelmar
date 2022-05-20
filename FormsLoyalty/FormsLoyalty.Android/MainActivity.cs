@@ -46,6 +46,7 @@ namespace FormsLoyalty.Droid
         {
             AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
             base.Window.RequestFeature(WindowFeatures.ActionBar);
+            base.SetTheme(Resource.Style.MainTheme);
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -57,13 +58,13 @@ namespace FormsLoyalty.Droid
             context = this;
             // AppCompatDelegate.DefaultNightMode = AppCompatDelegate.ModeNightNo;
             //Rg.Plugins.Popup.Popup.Init(this);
-            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+
+            //Xamarin.Essentials.Platform.Init(this, savedInstanceState);
+            //global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             //Android.Glide.Forms.Init(this);
-            
 
             
+
 
             Xamarin.FormsMaps.Init(this, savedInstanceState);
             global::Xamarin.Forms.FormsMaterial.Init(this, savedInstanceState);

@@ -35,7 +35,8 @@
 
     <AbsoluteLayout>
         <Grid RowDefinitions="*" AbsoluteLayout.LayoutBounds="0,0,1,1"
-                    AbsoluteLayout.LayoutFlags="All">
+              AbsoluteLayout.LayoutFlags="All"
+              BackgroundColor="WhiteSmoke">
             <CollectionView ItemsSource="{Binding transactions, TargetNullValue={StaticResource EmptyArray}}"
                     SelectionMode="Single" Margin="10"
                         VerticalScrollBarVisibility="Never"
