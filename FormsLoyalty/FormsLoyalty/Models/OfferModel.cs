@@ -32,7 +32,7 @@ namespace FormsLoyalty.Models
             try
             {
                 var offers = await service.GetPublishedOffersByCardIdAsync(cardId);
-                if (offers is object)
+                if (offers is object && PrismApplicationBase.Current?.Container is object)
                 {
                     var offerRepo = PrismApplicationBase.Current.Container.Resolve<IGenericDatabaseRepo<PublishedOffer>>();
                     foreach (var offer in offers)

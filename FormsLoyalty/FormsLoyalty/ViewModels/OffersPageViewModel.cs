@@ -50,10 +50,8 @@ namespace FormsLoyalty.ViewModels
         }
 
 
-        public DelegateCommand ToolBarCommand { get; set; }
         public OffersPageViewModel(INavigationService navigationService ): base(navigationService)
         {
-            ToolBarCommand = new DelegateCommand(async () => await OnToolbarItemClicked());
         }
 
         /// <summary>
@@ -68,16 +66,7 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        /// <summary>
-        /// Navigate to QrCode
-        /// </summary>
-        /// <returns></returns>
-        private async Task OnToolbarItemClicked()
-        {
-            IsPageEnabled = true;
-                await NavigationService.NavigateAsync(nameof(QRCodePage));
-            IsPageEnabled = false;
-        }
+        
 
         /// <summary>
         /// Navigates to offer Detail page

@@ -47,6 +47,7 @@ using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using System.Net.Http;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
+[assembly: ExportFont("fa-solid-900.ttf", Alias = "FontAwesome")]
 namespace FormsLoyalty
 {
     public partial class App
@@ -255,7 +256,6 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<ItemPage, ItemPageViewModel>();
             containerRegistry.RegisterForNavigation<ScanSendPage, ScanSendPageViewModel>();
 
-            containerRegistry.RegisterForNavigation<QRCodePage, QRCodePageViewModel>();
             containerRegistry.RegisterForNavigation<AccountProfilePage, AccountProfilePageViewModel>();
             containerRegistry.RegisterForNavigation<CheckoutPage, CheckoutPageViewModel>();
             containerRegistry.RegisterForNavigation<ItemSearchPage, ItemSearchPageViewModel>();

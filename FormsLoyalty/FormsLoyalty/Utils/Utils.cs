@@ -1,14 +1,6 @@
-﻿using FormsLoyalty.Interfaces;
-using LSRetail.Omni.Domain.DataModel.Base.Retail;
-using QRCoder;
-using System;
-using System.Collections.Generic;
+﻿using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using System.Linq;
-using System.Text;
 using Xamarin.Essentials;
-using Xamarin.Forms;
-using ZXing;
-using ZXing.QrCode;
 
 namespace FormsLoyalty.Utils
 {
@@ -668,12 +660,12 @@ namespace FormsLoyalty.Utils
             public static byte[] GenerateQRCode(bool includeCoupons = true)
             {
 
-                QRCodeGenerator qrGenerator = new QRCodeGenerator();
-                QRCodeData qrCodeData = qrGenerator.CreateQrCode(GetQRCodeString(includeCoupons), QRCodeGenerator.ECCLevel.Q);
-                PngByteQRCode qRCode = new PngByteQRCode(qrCodeData);
-                byte[] qrCodeBytes = qRCode.GetGraphic(20);
+                //QRCodeGenerator qrGenerator = new QRCodeGenerator();
+                //QRCodeData qrCodeData = qrGenerator.CreateQrCode(GetQRCodeString(includeCoupons), QRCodeGenerator.ECCLevel.Q);
+                //PngByteQRCode qRCode = new PngByteQRCode(qrCodeData);
+                //byte[] qrCodeBytes = qRCode.GetGraphic(20);
 
-                return qrCodeBytes;
+                return default;
             }
 
             public static string GetQRCodeString(bool includeCoupons = true)
