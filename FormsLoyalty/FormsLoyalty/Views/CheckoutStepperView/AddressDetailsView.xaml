@@ -4,7 +4,7 @@
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
              xmlns:resources="clr-namespace:FormsLoyalty" 
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material" 
-             xmlns:fastEntry="clr-namespace:XamarinFastEntrySample.FastEntry;assembly=XamarinFastEntry.Behaviors" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              x:Class="FormsLoyalty.Views.CheckoutStepperView.AddressDetailsView"
              x:Name="thisPage"
@@ -265,12 +265,12 @@
 
                     <Entry HorizontalOptions="FillAndExpand" Placeholder="{x:Static resources:AppResources.CheckoutViewCardNumber}"
                                Keyboard="Numeric"
+                           MaxLength="19"
                                Text="{Binding CardNumber, Mode=TwoWay}"
                                Visual="Custom">
                         <Entry.Behaviors>
-                            <fastEntry:XamarinFastEntryBehaviour Mask="####-####-####-####" 
-                                                                       MaxLength="19"/>
-                        </Entry.Behaviors>
+                        <xct:MaskedBehavior Mask="XXXX-XXXX-XXXX-XXXX"/>
+                    </Entry.Behaviors>
                     </Entry>
                 </StackLayout>
 
@@ -281,11 +281,12 @@
                                HeightRequest="25"/>
                     <Entry HorizontalOptions="FillAndExpand" Placeholder="{x:Static resources:AppResources.txtExpiryDate}"
                                Keyboard="Numeric" 
+                           MaxLength="4"
                                Text="{Binding CardExpirationDate}"
                                Visual="Custom">
                         <Entry.Behaviors>
-                            <fastEntry:XamarinFastEntryBehaviour Mask="##/##" 
-                                                                   MaxLength="19"/>
+                        <xct:MaskedBehavior Mask="XX/XX"/>
+                        
                         </Entry.Behaviors>
                     </Entry>
 
@@ -294,11 +295,12 @@
                     <Entry HorizontalOptions="FillAndExpand"
                        IsPassword="True" Placeholder="{x:Static resources:AppResources.CheckoutViewCVV}"
                               Keyboard="Numeric"
+                           MaxLength="3"
                               Text="{Binding CardCvv}"
                               Visual="Custom">
                         <Entry.Behaviors>
-                            <fastEntry:XamarinFastEntryBehaviour Mask="###" 
-                                                                   MaxLength="3"/>
+                        <xct:MaskedBehavior Mask="XXX"/>
+                        
                         </Entry.Behaviors>
 
                     </Entry>

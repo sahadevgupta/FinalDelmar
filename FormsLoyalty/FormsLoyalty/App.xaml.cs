@@ -91,7 +91,7 @@ namespace FormsLoyalty
             InitializeComponent();
             navigationService = NavigationService;
             
-            //XF.Material.Forms.Material.Init(this);
+            XF.Material.Forms.Material.Init(this);
             LoadStyles();
             Init();
 

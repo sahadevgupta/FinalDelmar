@@ -43,7 +43,7 @@
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
 
-                            <controls:CircleImage Source="{Binding Images[0].Location}"
+                            <controls:CircleImage Source="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
                                               VerticalOptions="CenterAndExpand"
                                                   BorderThickness="0.4"
                                                       BorderColor="Silver"
@@ -131,7 +131,7 @@
                             </Grid.RowDefinitions>
 
 
-                            <controls1:CustomImageControl ImageHeight="120" UriImageSource="{Binding Images[0].Location}"
+                            <controls1:CustomImageControl ImageHeight="120" UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
                                                          Margin="-20,0,-20,0"
                                                          TranslationY="-20"
                                                          Grid.Row="0"/>

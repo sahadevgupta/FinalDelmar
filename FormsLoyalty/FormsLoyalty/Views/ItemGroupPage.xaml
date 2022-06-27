@@ -221,7 +221,7 @@
 
 
                                     <controls1:CustomImageControl ImageHeight="100"  
-                                                                  UriImageSource="{Binding Images[0].Location}"
+                                                                  UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
                                                                   Grid.Row="0"/>
 
 

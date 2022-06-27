@@ -62,7 +62,7 @@
 
                         <controls1:CustomImageControl ImageHeight="120" 
                                                      WidthRequest="120"
-                                                     UriImageSource="{Binding SelectedCategory.Images[0].Location}"/>
+                                                     UriImageSource="{Binding SelectedCategory.Images[0].Location,FallbackValue=null,TargetNullValue=null}"/>
 
                         
 
@@ -109,7 +109,7 @@
                                 <Grid ColumnDefinitions="60,*" RowDefinitions="Auto" >
 
 
-                                    <controls:CircleImage Source="{Binding Images[0].Location}" Aspect="Fill"
+                                    <controls:CircleImage Source="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}" Aspect="Fill"
                                                           BorderColor="#8C808080" BorderThickness="0.5"
                                                           HeightRequest="60" WidthRequest="60"
                                                           Grid.Column="0"/>

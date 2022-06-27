@@ -23,7 +23,7 @@
          colorControlHighlight and colorSwitchThumbNormal. -->
     <item name="windowActionModeOverlay">true</item>
 	  <item name="android:windowDisablePreview">true</item>
-	  <item name="android:windowIsTranslucent">true</item>
+	  <item name="android:windowIsTranslucent">false</item>
      <item name="android:colorActivatedHighlight">@android:color/transparent</item>
     <item name="android:windowBackground">@android:color/transparent</item>
     <item name="android:datePickerDialogTheme">@style/AppCompatDialogStyle</item>
@@ -41,7 +41,7 @@
   <style name="SplashTheme" parent="SplashTheme.Base">
   </style>
   <style name="SplashTheme.Base" parent="Theme.AppCompat.DayNight.DarkActionBar">
-	<item name="android:windowIsTranslucent">true</item>
+	<item name="android:windowIsTranslucent">false</item>
 	<item name="android:windowBackground">@android:color/transparent</item>
 	<item name="android:windowContentOverlay">@null</item>
     <item name="android:windowNoTitle">true</item>

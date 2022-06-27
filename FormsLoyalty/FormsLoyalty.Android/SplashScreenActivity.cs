@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Timers;
 using Xamarin.Essentials;
 using static Android.Media.MediaPlayer;
 
@@ -81,22 +82,31 @@ namespace FormsLoyalty.Droid
             mVideoView.SetVideoURI(uri);
             mVideoView.RequestFocus();
 
-
+            System.Timers.Timer timer = new System.Timers.Timer(2000);
+            timer.AutoReset = false; // the key is here so it repeats
+            timer.Elapsed += timer_elapsed;
+            timer.Start();
 
 
             // videoHolder.SetVideoPath(videoPath);
             mVideoView.SetOnCompletionListener(this);
             mVideoView.Start();
         }
+
+        private void timer_elapsed(object sender, ElapsedEventArgs e)
+        {
+            var mainActivityIntent = new Intent(this, typeof(MainActivity));
+            mainActivityIntent.AddFlags(ActivityFlags.NoAnimation); //Add this line
+
+            StartActivity(mainActivityIntent);
+        }
+
         public void OnCompletion(MediaPlayer mp)
         {
             if (IsFinishing)
                 return;
            
-            var mainActivityIntent = new Intent(this, typeof(MainActivity));
-            mainActivityIntent.AddFlags(ActivityFlags.NoAnimation); //Add this line
-
-            StartActivity(mainActivityIntent);
+           
            // Finish();
         }
 

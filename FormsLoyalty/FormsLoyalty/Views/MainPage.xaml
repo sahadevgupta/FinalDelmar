@@ -63,65 +63,65 @@
             </Grid.Triggers>
 
 
-           
-
-                        <yummy:PancakeView CornerRadius="0,0,50,50" HeightRequest="180" BackgroundColor="{StaticResource My_Header_Color}">
-
-                            <StackLayout Margin="0,10,0,0">
-
-                                <Grid ColumnDefinitions="*,Auto"   RowDefinitions="Auto" ColumnSpacing="0">
-                                    <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0,0,0">
-
-                                        <StackLayout.Triggers>
-                                            <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
-                                                <Setter Property="Margin" Value="0,0,50,0"/>
-                                            </DataTrigger>
-                                        </StackLayout.Triggers>
 
 
-                                        <Label Text="{x:Static resources:AppResources.app_name}"
+            <yummy:PancakeView CornerRadius="0,0,50,50" HeightRequest="180" BackgroundColor="{StaticResource My_Header_Color}">
+
+                <StackLayout Margin="0,10,0,0">
+
+                    <Grid ColumnDefinitions="*,Auto"   RowDefinitions="Auto" ColumnSpacing="0">
+                        <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Margin="50,0,0,0">
+
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
+                                    <Setter Property="Margin" Value="0,0,50,0"/>
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+
+
+                            <Label Text="{x:Static resources:AppResources.app_name}"
                        TextColor="White" Grid.Column="0" 
                                HorizontalTextAlignment="Center"
                        FontSize="26" FontAttributes="Bold"/>
 
-                                        <Image Source="iconLogo.jpg" Margin="-10,-7,0,0" 
+                            <Image Source="iconLogo.jpg" Margin="-10,-7,0,0" 
                                HorizontalOptions="Center"
                                Grid.Column="1" 
                                IsVisible="false"
                                VerticalOptions="Start" Aspect="AspectFit" HeightRequest="50" WidthRequest="50"/>
-                                    </StackLayout>
+                        </StackLayout>
 
-                                    <Frame Padding="2" Grid.Column="1" HorizontalOptions="End" Margin="10,0,10,10" Visual="Material" BorderColor="White" 
+                        <Frame Padding="2" Grid.Column="1" HorizontalOptions="End" Margin="10,0,10,10" Visual="Material" BorderColor="White" 
                                CornerRadius="{OnPlatform Android=20, iOS=13}"
                                VerticalOptions="Start" >
-                                        <StackLayout Orientation="Horizontal" Spacing="10" WidthRequest="50" IsClippedToBounds="True">
-                                            <Image Source="{helpers:ImageResource Resource=eng.png}" HeightRequest="20" WidthRequest="20" IsVisible="false">
-                                                <Image.Triggers>
-                                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
-                                                        <Setter Property="Source" Value="{helpers:ImageResource Resource=arabic.png}"/>
+                            <StackLayout Orientation="Horizontal" Spacing="10" WidthRequest="50" IsClippedToBounds="True">
+                                <Image Source="{helpers:ImageResource Resource=eng.png}" HeightRequest="20" WidthRequest="20" IsVisible="false">
+                                    <Image.Triggers>
+                                        <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
+                                            <Setter Property="Source" Value="{helpers:ImageResource Resource=arabic.png}"/>
 
-                                                    </DataTrigger>
-                                                </Image.Triggers>
-                                            </Image>
-                                            <Label x:Name="langlbl" Text="ع"  VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" FontSize="Body" 
+                                        </DataTrigger>
+                                    </Image.Triggers>
+                                </Image>
+                                <Label x:Name="langlbl" Text="ع"  VerticalTextAlignment="Center"  HorizontalOptions="CenterAndExpand" FontSize="Body" 
                                        TextColor="Black"
                                        FontAttributes="Bold">
-                                                <Label.Triggers>
-                                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
-                                                        <Setter Property="Text" Value="EN"/>
+                                    <Label.Triggers>
+                                        <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
+                                            <Setter Property="Text" Value="EN"/>
 
-                                                    </DataTrigger>
-                                                </Label.Triggers>
-                                            </Label>
-                                        </StackLayout>
+                                        </DataTrigger>
+                                    </Label.Triggers>
+                                </Label>
+                            </StackLayout>
 
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="OnLanguageSelected" CommandParameter="{Binding Source={x:Reference langlbl},Path=Text}"/>
-                                        </Frame.GestureRecognizers>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="OnLanguageSelected" CommandParameter="{Binding Source={x:Reference langlbl},Path=Text}"/>
+                            </Frame.GestureRecognizers>
 
-                                    </Frame>
+                        </Frame>
 
-                                    <!--<Button Text="EN" Grid.Column="1" HorizontalOptions="End" BackgroundColor="White"  Visual="Material"
+                        <!--<Button Text="EN" Grid.Column="1" HorizontalOptions="End" BackgroundColor="White"  Visual="Material"
                                 Margin="10,0,10,0" FontSize="Body" Padding="0" ContentLayout="Left,0"
                                 ImageSource="{helpers:ImageResource Resource=eng.png}"
                                 CornerRadius="10" BorderColor="Silver"  WidthRequest="60" >
@@ -133,58 +133,58 @@
                             </Button.Triggers>
                         </Button>-->
 
-                                </Grid>
+                    </Grid>
 
 
-                                <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Margin="0,10,0,10">
-                                    <Label  TextColor="White" Text="{Binding Source={x:Static resources:AppResources.MyPoints}}"/>
+                    <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Margin="0,10,0,10">
+                        <Label  TextColor="White" Text="{Binding Source={x:Static resources:AppResources.MyPoints}}"/>
 
-                                    <Frame BackgroundColor="#D03E3E" Padding="0" BorderColor="White" CornerRadius="5" HasShadow="False">
+                        <Frame BackgroundColor="#D03E3E" Padding="0" BorderColor="White" CornerRadius="5" HasShadow="False">
 
-                                        <Frame.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="points_Tapped"/>
-                                        </Frame.GestureRecognizers>
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="points_Tapped"/>
+                            </Frame.GestureRecognizers>
 
-                                        <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
+                            <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
                             BackgroundColor="Transparent"
                            Text="{Binding MyPoints}">
 
 
-                                            <Label.Triggers>
-                                                <DataTrigger TargetType="Label" Binding="{Binding MyPoints,Converter={StaticResource StringToBoolConverter}}"
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding MyPoints,Converter={StaticResource StringToBoolConverter}}"
                                          Value="false">
-                                                    <Setter Property="Text" Value="{x:Static resources:AppResources.LoginToCheckPtTxt}"/>
+                                        <Setter Property="Text" Value="{x:Static resources:AppResources.LoginToCheckPtTxt}"/>
 
-                                                </DataTrigger>
-                                            </Label.Triggers>
+                                    </DataTrigger>
+                                </Label.Triggers>
 
-                                        </Label>
-                                    </Frame>
-                                </StackLayout>
+                            </Label>
+                        </Frame>
+                    </StackLayout>
 
-                                <Grid  ColumnDefinitions="*,Auto" RowDefinitions="60" VerticalOptions="End" Margin="20,0,20,0"
+                    <Grid  ColumnDefinitions="*,Auto" RowDefinitions="60" VerticalOptions="End" Margin="20,0,20,0"
                          HorizontalOptions="FillAndExpand"  >
 
-                                    <Frame HeightRequest="60"   Margin="10" Padding="0" VerticalOptions="End" HorizontalOptions="FillAndExpand" 
+                        <Frame HeightRequest="60"   Margin="10" Padding="0" VerticalOptions="End" HorizontalOptions="FillAndExpand" 
                                  BackgroundColor="#D03E3E" Visual="Material"
                                  IsClippedToBounds="True" CornerRadius="10">
 
-                                        <SearchBar Placeholder="{x:Static resources:AppResources.ActionbarSearch}"
+                            <SearchBar Placeholder="{x:Static resources:AppResources.ActionbarSearch}"
                                        x:Name="autosuggestview" Visual="Material" PlaceholderColor="#B3FFFFFF"
                                        ios:SearchBar.SearchBarStyle="Minimal"
                                        Margin="{OnPlatform iOS='-5,0,-5,0'}"
                                        Text="{Binding SearchKey}"
                                         TextColor="White" HorizontalOptions="FillAndExpand" >
-                                            <SearchBar.Behaviors>
-                                                <xct:UserStoppedTypingBehavior MinimumLengthThreshold="3" 
+                                <SearchBar.Behaviors>
+                                    <xct:UserStoppedTypingBehavior MinimumLengthThreshold="3" 
                                                        Command="{Binding SearchCommand}"
                                                        StoppedTypingTimeThreshold="1000"
                                                        ShouldDismissKeyboardAutomatically="False"/>
-                                            </SearchBar.Behaviors>
+                                </SearchBar.Behaviors>
 
-                                        </SearchBar>
+                            </SearchBar>
 
-                                        <!--<controls:CustomAutoSuggestBox IsVisible="false"
+                            <!--<controls:CustomAutoSuggestBox IsVisible="false"
                                                        Margin="5,0,5,0"
                                                        TextColor="White"
                                                            PlaceholderTextColor="White"
@@ -201,34 +201,34 @@
                             </controls:CustomAutoSuggestBox>-->
 
 
-                                    </Frame>
+                        </Frame>
 
 
-                                    <Grid Margin="-5,10,5,10" HorizontalOptions="End" VerticalOptions="End" Grid.Column="1">
-                                        <Grid.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="CameraImg_Tapped"/>
-                                        </Grid.GestureRecognizers>
-                                        <BoxView HeightRequest="40" WidthRequest="40" CornerRadius="20"
+                        <Grid Margin="-5,10,5,10" HorizontalOptions="End" VerticalOptions="End" Grid.Column="1">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="CameraImg_Tapped"/>
+                            </Grid.GestureRecognizers>
+                            <BoxView HeightRequest="40" WidthRequest="40" CornerRadius="20"
                          BackgroundColor="White"/>
-                                        <Image Source="camera" VerticalOptions="Center" HorizontalOptions="Center" effects:TintImageEffect.TintColor="{StaticResource My_Header_Color}"
+                            <Image Source="camera" VerticalOptions="Center" HorizontalOptions="Center" effects:TintImageEffect.TintColor="{StaticResource My_Header_Color}"
                        HeightRequest="25" WidthRequest="25"/>
-                                    </Grid>
-                                </Grid>
+                        </Grid>
+                    </Grid>
 
 
-                            </StackLayout>
+                </StackLayout>
 
 
-                        </yummy:PancakeView>
+            </yummy:PancakeView>
 
 
-                        <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+            <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
                     AbsoluteLayout.LayoutFlags="All"
                     VerticalScrollBarVisibility="Never"
                     Grid.Row="1"
                         >
 
-                            <Grid RowDefinitions="200,Auto,Auto,Auto" ColumnDefinitions="*">
+                <Grid RowDefinitions="200,Auto,Auto,Auto" ColumnDefinitions="*">
 
 
                     <Grid xct:StateLayout.CurrentState="{Binding AdsCurrentState}">
@@ -318,11 +318,11 @@
                                                 <BoxView WidthRequest="10" HeightRequest="10" CornerRadius="5" BackgroundColor="#cccccc"/>
 
                                             </StackLayout>
-                                            
-                                            
+
+
                                         </Grid>
-                                        
-                                       
+
+
 
                                     </DataTemplate>
                                 </xct:StateView.Template>
@@ -339,10 +339,10 @@
                 PositionShiftValue="65"
                 SlideShowDuration="3500">
 
-                                <cardView:CardsView.ItemTemplate>
-                                    <DataTemplate>
+                                    <cardView:CardsView.ItemTemplate>
+                                        <DataTemplate>
 
-                                        <yummy:PancakeView xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
+                                            <yummy:PancakeView xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
                                                            xct:TouchEffect.PressedBackgroundColor="LightPink"
                                                            xct:TouchEffect.NormalBackgroundColor="Transparent"
                                                            Margin="35,0,44,35"
@@ -354,20 +354,20 @@
                                                            HasShadow="False"
                                                            HeightRequest="200">
 
-                                            <Grid IsClippedToBounds="True">
+                                                <Grid IsClippedToBounds="True">
 
 
-                                                <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding ImageView.Location}"
+                                                    <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding ImageView.Location,FallbackValue=null,TargetNullValue=null}"
                                                                              Grid.Row="0"/>
 
-                                                <!--<controls:LoadingImageView/>
+                                                    <!--<controls:LoadingImageView/>
                                                     <ffimage:CachedImage Source="{Binding ImageView.Image,Converter={StaticResource BytesToImageSource}}"
                                                              Aspect="AspectFill" HeightRequest="200" 
                                                              DownsampleToViewSize="true"/>-->
 
 
                                                     <StackLayout  VerticalOptions="EndAndExpand" BackgroundColor="#8C808080">
-                                                    <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                                                        <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                                Padding="5" 
                                                
                                               VerticalOptions="CenterAndExpand"
@@ -377,37 +377,37 @@
                                                FontAttributes="Bold"
                                                FontSize="Large"
                                                >
-                                                        <Label.Triggers>
-                                                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                                            <Label.Triggers>
+                                                                <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                                                  Value="true">
-                                                                <Setter Property="Text" Value="{Binding ArabicDescription}"/>
-                                                            </DataTrigger>
-                                                        </Label.Triggers>
+                                                                    <Setter Property="Text" Value="{Binding ArabicDescription}"/>
+                                                                </DataTrigger>
+                                                            </Label.Triggers>
 
-                                                    </Label>
+                                                        </Label>
 
 
 
-                                                </StackLayout>
+                                                    </StackLayout>
 
-                                            </Grid>
+                                                </Grid>
 
-                                            <yummy:PancakeView.GestureRecognizers>
-                                                <TapGestureRecognizer Command="{Binding BindingContext.OnAdTappedCommand,Source={x:Reference carousel}}"
+                                                <yummy:PancakeView.GestureRecognizers>
+                                                    <TapGestureRecognizer Command="{Binding BindingContext.OnAdTappedCommand,Source={x:Reference carousel}}"
                                                                   CommandParameter="{Binding .}"/>
 
 
 
-                                            </yummy:PancakeView.GestureRecognizers>
+                                                </yummy:PancakeView.GestureRecognizers>
 
-                                        </yummy:PancakeView>
+                                            </yummy:PancakeView>
 
 
 
-                                    </DataTemplate>
-                                </cardView:CardsView.ItemTemplate>
+                                        </DataTemplate>
+                                    </cardView:CardsView.ItemTemplate>
 
-                                <cardViewControls:IndicatorsControl
+                                    <cardViewControls:IndicatorsControl
                     Margin="0,10,0,0"
                     IsVisible="true"
                     SelectedIndicatorStyle="{StaticResource ActiveIndicatorColor}"
@@ -419,13 +419,13 @@
 
 
                     <StackLayout Grid.Row="1" Margin="0,10,0,10" Padding="10">
-                                    <StackLayout.Triggers>
-                                        <DataTrigger TargetType="StackLayout" Binding="{Binding itemCategories.Count}"
+                        <StackLayout.Triggers>
+                            <DataTrigger TargetType="StackLayout" Binding="{Binding itemCategories.Count}"
                                      Value="0">
-                                            <Setter Property="IsVisible" Value="false"/>
-                                        </DataTrigger>
-                                    </StackLayout.Triggers>
-                                    <Label 
+                                <Setter Property="IsVisible" Value="false"/>
+                            </DataTrigger>
+                        </StackLayout.Triggers>
+                        <Label 
                        TextColor="Black"
                            Text="{x:Static resources:AppResources.txtCategory}"
                            FontSize="Subtitle"
@@ -460,7 +460,7 @@
                                                       EndColor="Gray"
                                                       IsLoading="True"
                                                      HeightRequest="80" Grid.Row="0"/>
-                                                        
+
                                                         <!--<BoxView HorizontalOptions="Fill"
                                                                  HeightRequest="80" Grid.Row="0"
                                                                  BackgroundColor="#cccccc"/>-->
@@ -534,7 +534,7 @@
                                                     <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
                                                         <StackLayout>
 
-                                                            <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Location}"
+                                                            <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
                                                                                          Grid.Row="0"/>
 
 
@@ -572,17 +572,17 @@
                     </StackLayout>
 
 
-                                <!--#region BEST SELLER VIEW-->
-                                <StackLayout Grid.Row="2" Padding="10">
+                    <!--#region BEST SELLER VIEW-->
+                    <StackLayout Grid.Row="2" Padding="10">
 
-                                    <StackLayout.Triggers>
-                                        <DataTrigger TargetType="StackLayout" Binding="{Binding BestSellerItems.Count}"
+                        <StackLayout.Triggers>
+                            <DataTrigger TargetType="StackLayout" Binding="{Binding BestSellerItems.Count}"
                                      Value="0">
-                                            <Setter Property="IsVisible" Value="false"/>
-                                        </DataTrigger>
-                                    </StackLayout.Triggers>
+                                <Setter Property="IsVisible" Value="false"/>
+                            </DataTrigger>
+                        </StackLayout.Triggers>
 
-                                    <Label 
+                        <Label 
                        TextColor="Black" CharacterSpacing="2"
                       
                            Text="{x:Static resources:AppResources.txtbestsellers}"
@@ -684,7 +684,7 @@
                                                         <Grid RowDefinitions="95,Auto,Auto,Auto" IsClippedToBounds="True" >
 
 
-                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Location}"
+                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
                                                                              Grid.Row="0"/>
 
 
@@ -849,11 +849,11 @@
                         </StackLayout>
 
                     </StackLayout>
-                                
-                                <!--#endregion-->
 
-                               <!-- #region MOST VIEWED ITEM VIEW-->
-                                <!--
+                    <!--#endregion-->
+
+                    <!-- #region MOST VIEWED ITEM VIEW-->
+                    <!--
                 <StackLayout Grid.Row="3" Padding="10">
                     <StackLayout.Triggers>
                         <DataTrigger TargetType="StackLayout" Binding="{Binding MostViewedItems.Count}"
@@ -1036,12 +1036,12 @@
 
 
                 </StackLayout>-->
-                                <!--#endregion-->
+                    <!--#endregion-->
 
-                                <!-- #region OFFER VIEW-->
-                                <StackLayout Grid.Row="3" Padding="10">
+                    <!-- #region OFFER VIEW-->
+                    <StackLayout Grid.Row="3" Padding="10">
 
-                                    <Label 
+                        <Label 
                        TextColor="Black"
                      
                            Text="{x:Static resources:AppResources.ActionbarOffers}"
@@ -1049,7 +1049,7 @@
                         CharacterSpacing="2"
                            FontAttributes="Bold" />
 
-                                    <!-- <Label.Triggers>
+                        <!-- <Label.Triggers>
                                 <MultiTrigger TargetType="Label">
                                     <MultiTrigger.Conditions>
                                         <BindingCondition Binding="{Binding MyPoints,Converter={StaticResource StringToBoolConverter}}"
@@ -1185,7 +1185,7 @@
                                                         <Grid RowDefinitions="95,Auto" IsClippedToBounds="True" >
 
                                                             <controls:CustomImageControl ImageHeight="95" ImageWeight="100"  
-                                                                                         UriImageSource="{Binding Images[0].Location}"
+                                                                                         UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
                                                                                          Grid.Row="0"/>
 
 
@@ -1205,14 +1205,14 @@
                         </StackLayout>
                     </StackLayout>
 
-                                    <!--#endregion-->
-                                    
-                            </Grid>
-                        </ScrollView>
+                    <!--#endregion-->
+
+                </Grid>
+            </ScrollView>
 
 
-           
-                <Frame Visual="Material" CornerRadius="5"
+
+            <Frame Visual="Material" CornerRadius="5"
                        x:Name="itemsuggestionView"
                        Grid.Row="0"
                        Grid.RowSpan="2"
@@ -1226,68 +1226,62 @@
                       IsVisible="{Binding IsSuggestionFound}">
 
 
-                    <CollectionView VerticalScrollBarVisibility="Always"
+                <CollectionView VerticalScrollBarVisibility="Always"
                                     x:Name="itemsuggestionListView"
                                     EmptyView="{x:Static resources:AppResources.txtItemNotFound}"
                                     ItemsSource="{Binding Items}"
                                     SelectionMode="Single"
                                     VerticalOptions="FillAndExpand">
 
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <!--<ViewCell>-->
-                                <Frame CornerRadius="0" Padding="0" Visual="Material"  BackgroundColor="WhiteSmoke" >
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnAutoSuggestionSelect" CommandParameter="{Binding .}"/>
-                                    </Frame.GestureRecognizers>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <!--<ViewCell>-->
+                            <Frame CornerRadius="0" Padding="0" Visual="Material"  BackgroundColor="WhiteSmoke" >
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnAutoSuggestionSelect" CommandParameter="{Binding .}"/>
+                                </Frame.GestureRecognizers>
 
-                                    <Grid ColumnDefinitions="50,*" RowDefinitions="Auto,Auto">
+                                <Grid ColumnDefinitions="50,*" RowDefinitions="Auto,Auto">
 
 
 
-                                        <controls:CustomImageControl ImageHeight="50" ImageWeight="50" UriImageSource="{Binding Images[0].Location}"
+                                    <controls:CustomImageControl ImageHeight="50" ImageWeight="50" UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
                                                                              />
 
 
 
 
 
-                                        <!--<ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
+                                    <!--<ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" Aspect="AspectFill"
                                                    
                                                          VerticalOptions="Center"
                                                           HeightRequest="50" WidthRequest="50"
                                                           Grid.Row="0"   Grid.Column="0"/>-->
 
-                                        <Label Text="{Binding Description}" VerticalTextAlignment="Center" MaxLines="2"
+                                    <Label Text="{Binding Description}" VerticalTextAlignment="Center" MaxLines="2"
                                FontSize="Body" TextColor="Black"
                                LineBreakMode="TailTruncation"
                                Grid.Column="1" Grid.Row="0"/>
 
-                                        <BoxView HeightRequest="0.7" BackgroundColor="LightGray" Grid.Row="1" Grid.ColumnSpan="2"/>
-                                    </Grid>
-                                </Frame>
+                                    <BoxView HeightRequest="0.7" BackgroundColor="LightGray" Grid.Row="1" Grid.ColumnSpan="2"/>
+                                </Grid>
+                            </Frame>
 
-                                <!--</ViewCell>-->
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-
-
-
-                    </CollectionView>
+                            <!--</ViewCell>-->
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
 
 
-                </Frame>
-           
-            
+
+                </CollectionView>
+
+
+            </Frame>
+
+
 
 
         </Grid>
-
-
-
-       
-
-
 
 
         <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"

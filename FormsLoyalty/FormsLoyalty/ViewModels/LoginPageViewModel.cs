@@ -1,6 +1,7 @@
 ﻿using FormsLoyalty.Helpers;
 using FormsLoyalty.Interfaces;
 using FormsLoyalty.Models;
+using FormsLoyalty.PopUpView;
 using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Utils;
@@ -77,6 +78,9 @@ namespace FormsLoyalty.ViewModels
 
         public DelegateCommand OnOtpCommand { get; set; }
         public bool FromItemPage { get; private set; }
+
+        private Plugin.FacebookClient.FacebookResponse<bool> facebookLoginResult;
+        private Plugin.FacebookClient.FacebookResponse<string> facebookUserResult;
 
         string[] permisions = new string[] { "email", "public_profile", "user_posts" };
         MemberContactModel memberContactModel;
@@ -194,6 +198,7 @@ namespace FormsLoyalty.ViewModels
             if (obj.Equals("Facebook"))
             {
                 isFbLogin = true;
+                
                 await FBLoginAsync();
             }
             else
@@ -281,32 +286,34 @@ namespace FormsLoyalty.ViewModels
 
             }
 
-            var loginData = await CrossFacebookClient.Current.LoginAsync(new string[] { "email" });
-            if (loginData.Status == FacebookActionStatus.Completed)
+            facebookLoginResult = await CrossFacebookClient.Current.LoginAsync(new string[] { "email" });
+            if (facebookLoginResult.Status == FacebookActionStatus.Completed)
             {
-                var response = await CrossFacebookClient.Current.RequestUserDataAsync(new string[] { "id", "email", "first_name", "last_name", "picture" }, new string[] { "email" });
-                switch (response.Status)
+                facebookUserResult = await CrossFacebookClient.Current.RequestUserDataAsync(
+                                    new string[] { "email", "id", "first_name", "last_name", "name", "age_range", "gender", "birthday" },
+                                    new string[] { "email", "public_profile" }); 
+                switch (facebookUserResult.Status)
                 {
                     case FacebookActionStatus.Completed:
-                        fbProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(response.Data));
+                        fbProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(facebookUserResult.Data));
                         await FacebookLogon();
                         break;
                     case FacebookActionStatus.Canceled:
 
                         break;
                     case FacebookActionStatus.Unauthorized:
-                        await App.Current.MainPage.DisplayAlert("Unauthorized", response.Message, "Ok");
+                        await App.Current.MainPage.DisplayAlert("Unauthorized", facebookUserResult.Message, "Ok");
                         break;
                     case FacebookActionStatus.Error:
-                        await App.Current.MainPage.DisplayAlert("Error", response.Message, "Ok");
+                        await App.Current.MainPage.DisplayAlert("Error", facebookUserResult.Message, "Ok");
                         break;
                 }
             }
             else
             {
-                await MaterialDialog.Instance.SnackbarAsync(message: loginData.Message,
+                await MaterialDialog.Instance.SnackbarAsync(message: facebookLoginResult.Message,
                                            msDuration: MaterialSnackbar.DurationLong);
-                Debug.WriteLine(loginData.Message);
+                Debug.WriteLine(facebookLoginResult.Message);
             }
 
 
