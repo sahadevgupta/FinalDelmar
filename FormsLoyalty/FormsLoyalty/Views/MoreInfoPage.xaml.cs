@@ -21,7 +21,7 @@ namespace FormsLoyalty.Views
         private async void menu_Tapped(object sender, System.EventArgs e)
         {
             var view = (View)sender;
-            view.BackgroundColor = Color.LightPink;
+            view.BackgroundColor = Color.FromHex("#efefef");
             view.Opacity = 0;
             await view.FadeTo(1, 250);
            

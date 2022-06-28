@@ -25,5 +25,10 @@ namespace FormsLoyalty.ConstantValues
         public const int Magazine = 16;
         public const int Reminder = 17;
         public const int Points = 18;
+        public const int ContactUs = 19;
+        public const int RateApp = 20;
+        public const int TermsAndConditions = 21;
+        public const int Settings = 22;
+        public const int Help = 23;
     }
 }

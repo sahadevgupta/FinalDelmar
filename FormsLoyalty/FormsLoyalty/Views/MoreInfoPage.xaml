@@ -7,6 +7,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
              xmlns:utils="clr-namespace:FormsLoyalty.Utils"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
@@ -19,11 +20,15 @@
     <ContentPage.Resources>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
         <converters:BoolToStringConverter x:Key="BoolToString"/>
+        <xct:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
     </ContentPage.Resources>
 
     <AbsoluteLayout>
-        <Grid RowDefinitions="Auto,Auto,Auto" AbsoluteLayout.LayoutBounds="0,0,1,1"
-                    AbsoluteLayout.LayoutFlags="All">
+        <Grid RowDefinitions="Auto,Auto" 
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All"
+              RowSpacing="0"
+              BackgroundColor="#efefef">
 
             <Grid.Triggers>
                 <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
@@ -35,7 +40,7 @@
 
             <Grid RowDefinitions="Auto,Auto" ColumnDefinitions="*,Auto" BackgroundColor="White" Padding="15"
                   xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
-                           xct:TouchEffect.PressedBackgroundColor="LightPink"
+                           xct:TouchEffect.PressedBackgroundColor="#efefef"
                            xct:TouchEffect.NormalBackgroundColor="White">
 
                 <Grid.GestureRecognizers>
@@ -67,12 +72,16 @@
 
 
 
-                <Image Source="right_arrow.png" Aspect="AspectFit"
-                       HeightRequest="20"
-                   Grid.Column="1"
-                  
-                   Grid.RowSpan="2"
-                   HorizontalOptions="End" effects:TintImageEffect.TintColor="Black" Margin="10">
+                <Image Aspect="AspectFit" HeightRequest="20"
+                       Grid.Column="1" Grid.RowSpan="2"
+                       HorizontalOptions="End" >
+
+                    <Image.Source>
+                        <FontImageSource FontFamily="FontAwesome"
+                                                             Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronRight}"
+                                                             Color="Black"/>
+                    </Image.Source>
+
 
                     <Image.Triggers>
                         <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
@@ -88,130 +97,126 @@
             </Grid>
 
 
-            <ScrollView Grid.Row="1">
-                <Grid RowDefinitions="Auto,Auto,Auto">
+            <CollectionView ItemsSource="{Binding MenuItems}"
+                            IsGrouped="True"
+                            BackgroundColor="White"
+                            VerticalScrollBarVisibility="Never"
+                            Grid.Row="1">
 
-                    <Label Text="{x:Static resources:AppResources.txtMenu}" Margin="10,0,10,0" FontSize="Body"  FontAttributes="Bold" Grid.Row="0"/>
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Vertical"
+                                     VerticalItemSpacing="8"/>
+                </CollectionView.ItemsLayout>
 
-                    <StackLayout BindableLayout.ItemsSource="{Binding drawerMenuItems}" 
-                              BackgroundColor="White"
-                                Grid.Row="1" >
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
+                <CollectionView.GroupHeaderTemplate>
+                    <DataTemplate>
 
-                                <Grid Padding="5">
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="menu_Tapped" CommandParameter="{Binding .}"/>
-                                    </Grid.GestureRecognizers>
+                        <Label CharacterSpacing="2"
+                               BackgroundColor="#efefef"
+                               HorizontalOptions="FillAndExpand"
+                               Padding="10,5"
+                               Text="{Binding Name}"
+                               FontSize="Body"
+                               FontAttributes="Bold" />
+                    </DataTemplate>
+                </CollectionView.GroupHeaderTemplate>
 
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="48"/>
-                                        <ColumnDefinition Width="*"/>
-                                        <ColumnDefinition Width="50"/>
-                                        <ColumnDefinition Width="Auto"/>
-                                    </Grid.ColumnDefinitions>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="menu_Tapped" CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
 
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto"/>
-                                        <RowDefinition Height="0.7"/>
-                                    </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
 
-                                    <Image Source="{Binding Image}" 
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="0.7"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{Binding Image}" 
                                        Grid.Row="0" 
                                            Aspect="AspectFit"
                                        Grid.Column="0"
                                       VerticalOptions="CenterAndExpand"
                                        HorizontalOptions="Center"
-                                       effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
-                                       />
+                                       IsVisible="{Binding IsFontImage,Converter={StaticResource InvertedBoolConverter}}"/>
 
-                                    <Image Source="barcode.png"
-                                       IsVisible="false"
-                                         HeightRequest="30"
-                                           
-                                       effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
-                                       Grid.Column="2" HorizontalOptions="End" Margin="0,0,10,0">
+                            <Image Grid.Row="0" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
+                                           IsVisible="{Binding IsFontImage}">
+                                <Image.Source>
+                                    <FontImageSource FontFamily="FontAwesome"
+                                                             Color="{StaticResource My_Button_Color}"
+                                                             Size="Title"
+                                                             Glyph="{Binding Image}"/>
+
+                                </Image.Source>
+                            </Image>
 
 
+                            <Image IsVisible="false"
+                                           HeightRequest="30"
+                                           Grid.Column="2" HorizontalOptions="End" Margin="0,0,10,0">
 
-                                        <Image.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Title}"
+                                <Image.Source>
+                                    <FontImageSource FontFamily="FontAwesome"
+                                                             Color="{StaticResource My_Button_Color}"
+                                                             Glyph="{x:Static fontresources:FontAwesomeIcons.Barcode}"/>
+                                </Image.Source>
+
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Title}"
                                                      Value="{x:Static resources:AppResources.ActionbarItems}">
-                                                <Setter Property="IsVisible" Value="True"/>
-                                            </DataTrigger>
-                                        </Image.Triggers>
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
 
-                                    </Image>
+                            </Image>
 
 
 
-                                    <Label Text="{Binding Title}" Grid.Column="1"
+                            <Label Text="{Binding Title}" Grid.Column="1"
                                        VerticalOptions="Center"
                                        FontSize="{OnPlatform Android=16, Default=14}"
                                        TextColor="Black"
                                          Grid.Row="0"/>
 
-                                    <Grid Grid.Column="2" HorizontalOptions="End" Margin="0,0,10,0">
-                                        <BoxView BackgroundColor="{StaticResource My_Button_Color}" HeightRequest="25" WidthRequest="30" CornerRadius="5" />
-                                        <Label Text="{Binding SubTitle}" 
+                            <Grid Grid.Column="2" HorizontalOptions="End" Margin="0,0,10,0">
+                                <BoxView BackgroundColor="{StaticResource My_Button_Color}" HeightRequest="25" WidthRequest="30" CornerRadius="5" />
+                                <Label Text="{Binding SubTitle}" 
                                        VerticalOptions="Center"
                                            HorizontalOptions="Center"
                                        FontSize="Body"
                                        TextColor="White"
                                         />
 
-                                        <Grid.Triggers>
-                                            <DataTrigger TargetType="Grid"
+                                <Grid.Triggers>
+                                    <DataTrigger TargetType="Grid"
                                                      Binding="{Binding SubTitle,Converter={StaticResource StringToBoolConverter}}"
                                                      Value="false">
-                                                <Setter Property="IsVisible" Value="false"/>
-                                            </DataTrigger>
-                                        </Grid.Triggers>
+                                        <Setter Property="IsVisible" Value="false"/>
+                                    </DataTrigger>
+                                </Grid.Triggers>
 
 
-                                    </Grid>
+                            </Grid>
 
 
-                                    <Image Source="right_arrow.png" HeightRequest="12" Grid.Column="3" effects:TintImageEffect.TintColor="Black"
+                            <Image HeightRequest="12" Grid.Column="3"
                                            Margin="10,10,20,10">
-                                        <Image.Triggers>
-                                            <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
-                                         Value="true">
-                                                <Setter Property="Rotation" Value="180"/>
-                                            </DataTrigger>
-                                        </Image.Triggers>
-                                    </Image>
 
+                                <Image.Source>
+                                    <FontImageSource FontFamily="FontAwesome"
+                                                             Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronRight}"
+                                                             Color="Black"/>
+                                </Image.Source>
 
-                                </Grid>
-
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </StackLayout>
-
-                    <Label Text="{x:Static resources:AppResources.txtSettings}" Margin="10,0,10,0" FontSize="Body" FontAttributes="Bold" Grid.Row="2"/>
-
-                    <Grid Grid.Row="3" BackgroundColor="White" RowDefinitions="Auto,Auto"  Padding="10">
-
-                        <!--#region Contact Us View-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="0" Padding="5"
-                                     xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
-                           
-                           xct:TouchEffect.PressedBackgroundColor="LightPink"
-                           xct:TouchEffect.NormalBackgroundColor="Transparent">
-
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{prism:NavigateTo Name='ContactUsPage', UseModalNavigation=true}"/>
-                            </StackLayout.GestureRecognizers>
-
-                            <Image Source="IconContactUs" Aspect="AspectFit" />
-
-
-                            <Label Text="{x:Static resources:AppResources.ActionbarContactUs}" 
-                           TextColor="Black" FontSize="Body" Margin="10,0,10,0"
-                           VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
-
-                            <Image Source="right_arrow.png" HeightRequest="12" HorizontalOptions="End" effects:TintImageEffect.TintColor="Black" Margin="10">
                                 <Image.Triggers>
                                     <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                          Value="true">
@@ -220,121 +225,13 @@
                                 </Image.Triggers>
                             </Image>
 
-                        </StackLayout>
-                        <!--#endregion-->
 
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
 
-                        <!--#region Rate App-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="1" Padding="5"
-                                     xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
-                           xct:TouchEffect.PressedBackgroundColor="LightPink"
-                           xct:TouchEffect.NormalBackgroundColor="Transparent">
+            </CollectionView>
 
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding RateAppCommand}"/>
-                            </StackLayout.GestureRecognizers>
-
-                            <Image Source="iconRate" Aspect="AspectFit" />
-
-
-                            <Label Text="{x:Static resources:AppResources.txtRateApp}" 
-                           TextColor="Black" FontSize="Body" Margin="10,0,10,0"
-                           VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
-
-                            <Image Source="right_arrow.png" HeightRequest="12" HorizontalOptions="End" effects:TintImageEffect.TintColor="Black" Margin="10">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
-                                         Value="true">
-                                        <Setter Property="Rotation" Value="180"/>
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-
-                        </StackLayout>
-                        <!--#endregion-->
-                        
-                        <!--#region Terms&Condition-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="2" Padding="5">
-
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Settings_Tapped" CommandParameter="Terms"/>
-                            </StackLayout.GestureRecognizers>
-
-                            <Image Source="terms" Aspect="AspectFit" effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"/>
-
-                            <Label Text="{x:Static resources:AppResources.ActionbarTerm}" 
-                           TextColor="Black" FontSize="Body" Margin="10,0,10,0"
-                           VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
-
-                            <Image Source="right_arrow.png" HeightRequest="12" HorizontalOptions="End" effects:TintImageEffect.TintColor="Black" Margin="10">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
-                                         Value="true">
-                                        <Setter Property="Rotation" Value="180"/>
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-
-                        </StackLayout>
-                        <!--#endregion-->
-
-                        <!--App Settings-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="3" Padding="5">
-
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Settings_Tapped" CommandParameter="Settings"/>
-                            </StackLayout.GestureRecognizers>
-
-                            <Image Source="settings" Aspect="AspectFit" effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"/>
-
-
-                            <Label Text="{x:Static resources:AppResources.AppConfigurationappbar}" 
-                           TextColor="Black" FontSize="Body" Margin="10,0,10,0"
-                           VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
-
-                            <Image Source="right_arrow.png" HeightRequest="12" HorizontalOptions="End" effects:TintImageEffect.TintColor="Black" Margin="10">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
-                                         Value="true">
-                                        <Setter Property="Rotation" Value="180"/>
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-
-                        </StackLayout>
-
-                        <!--Help-->
-                        <StackLayout Orientation="Horizontal" Grid.Row="4" Padding="5">
-
-                            <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="Settings_Tapped" CommandParameter="Help"/>
-                            </StackLayout.GestureRecognizers>
-
-                            <Image Source="help" Aspect="AspectFit"  effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"/>
-
-
-                            <Label Text="{x:Static resources:AppResources.MenuViewHelp}"  Grid.Row="1" 
-                           TextColor="Black" FontSize="Body" Margin="10,0,10,0"
-                           VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand"/>
-
-                            <Image Source="right_arrow.png" HeightRequest="12"  HorizontalOptions="End" effects:TintImageEffect.TintColor="Black" Margin="10">
-                                <Image.Triggers>
-                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
-                                         Value="true">
-                                        <Setter Property="Rotation" Value="180"/>
-                                    </DataTrigger>
-                                </Image.Triggers>
-                            </Image>
-
-                        </StackLayout>
-
-
-
-
-                    </Grid>
-
-                </Grid>
-            </ScrollView>
         </Grid>
 
         <controls:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"

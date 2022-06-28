@@ -11,6 +11,7 @@
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              BackgroundColor="{StaticResource My_Header_Color}"
              Visual="Material"
              NavigationPage.HasNavigationBar="False"
@@ -19,6 +20,8 @@
              xmlns:cardView="clr-namespace:PanCardView;assembly=PanCardView"
              xmlns:cardViewControls="clr-namespace:PanCardView.Controls;assembly=PanCardView"
              x:Name="thisPage">
+
+    
 
     <ContentPage.Triggers>
         <DataTrigger TargetType="ContentPage"
@@ -42,6 +45,9 @@
             <Setter Property="BackgroundColor" Value="Transparent" />
             <Setter Property="OutlineColor" Value="#bdbdbd" />
         </Style>
+
+            <xct:IntToBoolConverter x:Key="IntToBoolConverter"/>
+
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -210,8 +216,14 @@
                             </Grid.GestureRecognizers>
                             <BoxView HeightRequest="40" WidthRequest="40" CornerRadius="20"
                          BackgroundColor="White"/>
-                            <Image Source="camera" VerticalOptions="Center" HorizontalOptions="Center" effects:TintImageEffect.TintColor="{StaticResource My_Header_Color}"
-                       HeightRequest="25" WidthRequest="25"/>
+                            <Image VerticalOptions="Center" HorizontalOptions="Center">
+                                <Image.Source>
+                                    <FontImageSource FontFamily="FontAwesome"
+                                                     Size="Large"
+                                                     Color="{StaticResource My_Header_Color}"
+                                                     Glyph="{x:Static fontresources:FontAwesomeIcons.Camera}"/>
+                                </Image.Source>
+                            </Image>
                         </Grid>
                     </Grid>
 
@@ -662,6 +674,7 @@
 
                                     <CollectionView ItemsSource="{Binding BestSellerItems}"
                                      HorizontalScrollBarVisibility="Never"
+                                                    IsVisible="{Binding BestSellerItems.Count,Converter={StaticResource IntToBoolConverter},TargetNullValue=false,FallbackValue=false}"
                                     HeightRequest="200">
                                         <CollectionView.ItemsLayout>
                                             <GridItemsLayout Orientation="Horizontal"
@@ -852,202 +865,16 @@
 
                     <!--#endregion-->
 
-                    <!-- #region MOST VIEWED ITEM VIEW-->
-                    <!--
-                <StackLayout Grid.Row="3" Padding="10">
-                    <StackLayout.Triggers>
-                        <DataTrigger TargetType="StackLayout" Binding="{Binding MostViewedItems.Count}"
-                                     Value="0">
-                            <Setter Property="IsVisible" Value="false"/>
-                        </DataTrigger>
-                    </StackLayout.Triggers>
-                    <Label 
-                       TextColor="Black"
-                      Margin="10,0,10,0"
-                           Text="{x:Static resources:AppResources.txtmostviewed}"
-                           FontSize="Subtitle"
-                        CharacterSpacing="2"
-                           FontAttributes="Bold" />
-
-                    <CollectionView ItemsSource="{Binding MostViewedItems}" HeightRequest="200"
-                                     HorizontalScrollBarVisibility="Never"
-                                    >
-                        <CollectionView.ItemsLayout>
-                                <GridItemsLayout Orientation="Horizontal"
-                                              HorizontalItemSpacing="1"
-                                             VerticalItemSpacing="10"
-                                               />
-                            </CollectionView.ItemsLayout>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-
-
-                                    <Grid RowDefinitions="*">
-                                        <Frame  WidthRequest="150" Padding="5" CornerRadius="10" Visual="Material" Margin="0,0,8,0">
-                                            <Grid RowDefinitions="95,Auto,Auto,Auto" IsClippedToBounds="True" >
-
-                                                <Grid Grid.Row="0" >
-                                                    <controls:LoadingImageView/>
-                                                    <ffimage:CachedImage Source="{Binding Images[0].Image,Converter={StaticResource BytesToImageSource}}" 
-                                                   VerticalOptions="Center"
-                                                                 
-                                                                 DownsampleToViewSize="True"
-                                                              Aspect="AspectFit"
-                                                          HeightRequest="95"
-                                                   WidthRequest="100"
-                                                             />
-
-
-                                                </Grid>
-
-
-                                                <Frame Grid.Row="0" HorizontalOptions="End" VerticalOptions="StartAndExpand" Padding="4" Margin="5"  
-                                   CornerRadius="20" BackgroundColor="Red" >
-                                                    <Label Text="{Binding Discount,StringFormat='{0:N0}% Off'}" VerticalOptions="Center" HorizontalTextAlignment="Center" 
-                                                       TextColor = "White" FontSize ="14" />
-
-                                                    <Frame.Triggers>
-                                                        <DataTrigger TargetType="Frame" Binding="{Binding Discount}" Value="0">
-                                                            <Setter Property="IsVisible" Value="false"/>
-                                                        </DataTrigger>
-                                                    </Frame.Triggers>
-
-                                                </Frame>
-
-
-                                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
-                                                      Grid.Row="1" TextColor="Silver" FontSize="Small" Margin="10,0,10,0"/>
-
-
-
-
-
-                                                <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0">
-
-                                                    <Label.FormattedText>
-                                                        <FormattedString>
-                                                            <Span Text="{Binding NewPrice}" FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                                            <Span Text="  " FontSize="16" FontAttributes="Bold" TextColor="Red"/>
-                                                            <Span Text="{Binding Price}" FontSize="12" TextDecorations="Strikethrough" />
-                                                        </FormattedString>
-                                                    </Label.FormattedText>
-
-                                                    <Label.Triggers>
-                                                        <DataTrigger TargetType="Label" Binding="{Binding Discount}" Value="0">
-                                                            <Setter Property="IsVisible" Value="false"/>
-                                                        </DataTrigger>
-                                                    </Label.Triggers>
-
-                                                </Label>
-
-
-                                                <Label Text="{Binding Price}" IsVisible="false" 
-                                                   Margin="10,0,10,0"
-                                                   Grid.Row="2"
-                                                   FontSize="16" FontAttributes="Bold">
-                                                    <Label.Triggers>
-                                                        <DataTrigger TargetType="Label" Binding="{Binding Discount}" Value="0">
-                                                            <Setter Property="IsVisible" Value="true"/>
-                                                        </DataTrigger>
-                                                    </Label.Triggers>
-                                                </Label>
-
-
-                                                <Grid Grid.Row="3" ColumnDefinitions="*,Auto" RowDefinitions="Auto" Margin="5,0,5,0">
-                                                    <Button BackgroundColor="#e62a2335" TextColor="White" 
-                                                             HorizontalOptions="FillAndExpand"
-                                                            CornerRadius="10" 
-                                                            IsVisible="false"
-                                                            Clicked="AddToCart_Clicked" 
-                                                            Visual="Default" Text="Add to Cart" VerticalOptions="EndAndExpand" >
-                                                        <Button.Triggers>
-                                                            <DataTrigger TargetType="Button" Binding="{Binding Quantity}" Value="0">
-                                                                <Setter Property="IsVisible" Value="true"/>
-                                                            </DataTrigger>
-                                                        </Button.Triggers>
-                                                    </Button>
-
-
-                                                    <Frame Padding ="1"  BorderColor="Purple"
-                                                           HorizontalOptions="Start" Visual="Material"  
-                                                           Grid.Column="0" >
-
-                                                        <Frame.Triggers>
-                                                            <DataTrigger TargetType="Frame" Binding="{Binding Quantity}" Value="0">
-                                                                <Setter Property="IsVisible" Value="false"/>
-                                                            </DataTrigger>
-                                                        </Frame.Triggers>
-
-                                                        <StackLayout Orientation="Horizontal" VerticalOptions="CenterAndExpand" Padding="0" Spacing="1" 
-                                                  BackgroundColor="Purple" >
-
-                                                            <Label HeightRequest="25" Text=" - " BackgroundColor="White"
-                                               VerticalOptions="Center" Padding="10,2,10,2">
-                                                                <Label.GestureRecognizers>
-                                                                    <TapGestureRecognizer Tapped="minus_Tapped"/>
-                                                                </Label.GestureRecognizers>
-                                                            </Label>
-
-                                                            <Label HeightRequest="25" Text="{Binding Quantity,StringFormat='{0:N0}'}" BackgroundColor="White"
-                                               TextColor="Gray"
-                                               VerticalOptions="Center" Padding="12,2,12,2"/>
-
-                                                            <Label HeightRequest="25" Text=" + " BackgroundColor="White"
-                                               VerticalOptions="Center" Padding="10,2,10,2">
-                                                                <Label.GestureRecognizers>
-                                                                    <TapGestureRecognizer Tapped="plus_Tapped"/>
-                                                                </Label.GestureRecognizers>
-                                                            </Label>
-
-                                                        </StackLayout>
-
-                                                    </Frame>
-
-
-                                                    <Image Source="ic_favorite_outline_24dp.png" HorizontalOptions="End" HeightRequest="30" WidthRequest="30"
-                                                           Aspect="AspectFit" Grid.Column="1"
-                                                                 BackgroundColor="Transparent" effects:TintImageEffect.TintColor="#21b6b1">
-                                                        <Image.GestureRecognizers>
-                                                            <TapGestureRecognizer Tapped="WishList_Tapped"/>
-                                                        </Image.GestureRecognizers>
-
-                                                        <Image.Triggers>
-                                                            <DataTrigger TargetType="Image" Binding="{Binding IsWishlisted}" Value="true">
-                                                                <Setter Property="Source" Value="ic_favorite_24dp"/>
-                                                            </DataTrigger>
-                                                        </Image.Triggers>
-
-                                                    </Image>
-
-                                                </Grid>
-
-
-                                            </Grid>
-                                        </Frame>
-                                    </Grid>
-
-
-                                   
-
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
-
-
-
-                </StackLayout>-->
-                    <!--#endregion-->
+                  
 
                     <!-- #region OFFER VIEW-->
                     <StackLayout Grid.Row="3" Padding="10">
 
-                        <Label 
-                       TextColor="Black"
-                     
-                           Text="{x:Static resources:AppResources.ActionbarOffers}"
-                           FontSize="Subtitle"
-                        CharacterSpacing="2"
-                           FontAttributes="Bold" />
+                        <Label TextColor="Black"
+                               Text="{x:Static resources:AppResources.ActionbarOffers}"
+                               FontSize="Subtitle"
+                               CharacterSpacing="2"
+                               FontAttributes="Bold" />
 
                         <!-- <Label.Triggers>
                                 <MultiTrigger TargetType="Label">
@@ -1156,16 +983,17 @@
                                     </xct:StateView.Template>
                                 </xct:StateView>
 
-                                <xct:StateView StateKey="Success">
+                                <xct:StateView StateKey="Success"  
+                                               IsVisible="{Binding offers.Count,Converter={StaticResource IntToBoolConverter},TargetNullValue=false,FallbackValue=false}">
 
                                     <CollectionView ItemsSource="{Binding offers}" HeightRequest="160"
-                                     HorizontalScrollBarVisibility="Never"
-                                    >
-                                        <CollectionView.Triggers>
+                                                    IsVisible="{Binding offers.Count,Converter={StaticResource IntToBoolConverter},TargetNullValue=false,FallbackValue=false}"
+                                                    HorizontalScrollBarVisibility="Never">
+                                        <!--<CollectionView.Triggers>
                                             <DataTrigger TargetType="CollectionView" Binding="{Binding offers.Count}" Value="0">
                                                 <Setter Property="IsVisible" Value="false"/>
                                             </DataTrigger>
-                                        </CollectionView.Triggers>
+                                        </CollectionView.Triggers>-->
                                         <CollectionView.ItemsLayout>
                                             <GridItemsLayout Orientation="Horizontal"
                                               HorizontalItemSpacing="1"

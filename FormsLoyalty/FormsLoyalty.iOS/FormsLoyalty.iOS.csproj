@@ -130,15 +130,6 @@
     <BundleResource Include="Resources\arrow_down%402x.png" />
     <BundleResource Include="Resources\arrow_down%403x.png" />
     <BundleResource Include="Resources\arrow_down.png" />
-    <BundleResource Include="Resources\camera%402x.png" />
-    <BundleResource Include="Resources\camera%403x.png" />
-    <BundleResource Include="Resources\camera.png" />
-    <BundleResource Include="Resources\cart%402x.png" />
-    <BundleResource Include="Resources\cart%403x.png" />
-    <BundleResource Include="Resources\cart.png" />
-    <BundleResource Include="Resources\category%402x.png" />
-    <BundleResource Include="Resources\category%403x.png" />
-    <BundleResource Include="Resources\category.png" />
     <BundleResource Include="Resources\check%402x.png" />
     <BundleResource Include="Resources\Clock%402x.png" />
     <BundleResource Include="Resources\Clock%403x.png" />
@@ -149,15 +140,10 @@
     <BundleResource Include="Resources\facebook.png" />
     <BundleResource Include="Resources\google.png" />
     <BundleResource Include="Resources\hand.png" />
-    <BundleResource Include="Resources\help%403x.png" />
-    <BundleResource Include="Resources\home%402x.png" />
-    <BundleResource Include="Resources\home%403x.png" />
-    <BundleResource Include="Resources\home.png" />
     <BundleResource Include="Resources\iconClose%402x.png" />
     <BundleResource Include="Resources\iconClose%403x.png" />
     <BundleResource Include="Resources\iconClose.png" />
     <BundleResource Include="Resources\iconTimeGray%403x.png" />
-    <BundleResource Include="Resources\icon_camera%403x.png" />
     <BundleResource Include="Resources\ic_aciton_reminder%402x.png" />
     <BundleResource Include="Resources\ic_aciton_reminder%403x.png" />
     <BundleResource Include="Resources\ic_aciton_reminder.png" />
@@ -233,9 +219,6 @@
     <BundleResource Include="Resources\ic_jcb%402x.png" />
     <BundleResource Include="Resources\ic_jcb%403x.png" />
     <BundleResource Include="Resources\ic_jcb.png" />
-    <BundleResource Include="Resources\ic_launcher%402x.png" />
-    <BundleResource Include="Resources\ic_launcher%403x.png" />
-    <BundleResource Include="Resources\ic_launcher.png" />
     <BundleResource Include="Resources\ic_mastercard%402x.png" />
     <BundleResource Include="Resources\ic_mastercard%403x.png" />
     <BundleResource Include="Resources\ic_mastercard.png" />
@@ -276,7 +259,6 @@
     <BundleResource Include="Resources\logodrawer%403x.png" />
     <BundleResource Include="Resources\logodrawer.png" />
     <BundleResource Include="Resources\logout%403x.png" />
-    <BundleResource Include="Resources\magazine%403x.png" />
     <BundleResource Include="Resources\mobile%403x.png" />
     <BundleResource Include="Resources\more%402x.png" />
     <BundleResource Include="Resources\more%403x.png" />
@@ -285,8 +267,6 @@
     <BundleResource Include="Resources\nocards%403x.png" />
     <BundleResource Include="Resources\nocards.png" />
     <BundleResource Include="Resources\noimage.png" />
-    <BundleResource Include="Resources\notification%403x.png" />
-    <BundleResource Include="Resources\offers%403x.png" />
     <BundleResource Include="Resources\order%402x.png" />
     <BundleResource Include="Resources\order%403x.png" />
     <BundleResource Include="Resources\order.png" />
@@ -294,19 +274,9 @@
     <BundleResource Include="Resources\points%402x.png" />
     <BundleResource Include="Resources\points%403x.png" />
     <BundleResource Include="Resources\points.png" />
-    <BundleResource Include="Resources\reminder%403x.png" />
-    <BundleResource Include="Resources\right_arrow%402x.png" />
-    <BundleResource Include="Resources\right_arrow%403x.png" />
-    <BundleResource Include="Resources\right_arrow.png" />
-    <BundleResource Include="Resources\search%403x.png" />
-    <BundleResource Include="Resources\settings%402x.png" />
-    <BundleResource Include="Resources\settings%403x.png" />
-    <BundleResource Include="Resources\settings.png" />
-    <BundleResource Include="Resources\store%403x.png" />
     <BundleResource Include="Resources\terms%402x.png" />
     <BundleResource Include="Resources\terms%403x.png" />
     <BundleResource Include="Resources\terms.png" />
-    <BundleResource Include="Resources\user%403x.png" />
     <BundleResource Include="Resources\welcome.png" />
     <BundleResource Include="Resources\wishlist%403x.png" />
     <BundleResource Include="Resources\xf_checkbox_selected%402x.png" />
@@ -506,9 +476,6 @@
     <BundleResource Include="Resources\Icon-App-83.5x83.5%402x.png" />
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\barcode.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\call.png" />
   </ItemGroup>
   <ItemGroup>
@@ -519,12 +486,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\iconDirection%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\items%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\barcode%403x.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\unchecked.png" />

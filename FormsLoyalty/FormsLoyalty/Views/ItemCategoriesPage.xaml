@@ -62,7 +62,7 @@
 
                         <controls1:CustomImageControl ImageHeight="120" 
                                                      WidthRequest="120"
-                                                     UriImageSource="{Binding SelectedCategory.Images[0].Location,FallbackValue=null,TargetNullValue=null}"/>
+                                                     UriImageSource="{Binding SelectedCategory.Images[0].Location}"/>
 
                         
 

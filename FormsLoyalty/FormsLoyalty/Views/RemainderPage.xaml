@@ -8,6 +8,7 @@
              xmlns:resources="clr-namespace:FormsLoyalty"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
            BackgroundColor="#D9f2f2ef"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              Title="{x:Static resources:AppResources.ActionbarReminders}">
@@ -83,7 +84,14 @@
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                 </CollectionView>
-                    <Image Source="right_arrow" HeightRequest="16" HorizontalOptions="Center" WidthRequest="16" effects:TintImageEffect.TintColor="Black">
+                    <Image HeightRequest="16" HorizontalOptions="Center" WidthRequest="16">
+
+                        <Image.Source>
+                            <FontImageSource FontFamily="FontAwesome"
+                                                             Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronRight}"
+                                                             Color="Black"/>
+                        </Image.Source>
+
                         <Image.Triggers>
                             <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                         Value="true">

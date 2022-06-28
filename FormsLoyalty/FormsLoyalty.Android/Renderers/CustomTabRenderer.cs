@@ -195,7 +195,7 @@ namespace FormsLoyalty.Droid.Renderers
 
             // item.ItemId is the position
            
-                _page.CurrentPage.Navigation.PopToRootAsync();
+                _page.CurrentPage.Navigation.PopToRootAsync(false);
            
            
 

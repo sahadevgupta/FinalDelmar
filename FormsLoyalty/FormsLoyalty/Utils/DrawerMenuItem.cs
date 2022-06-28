@@ -23,7 +23,9 @@ namespace FormsLoyalty.Utils
        
         public bool IsVisible { get; set; }
         public bool IsLoading { get; set; }
-       
+
+        public bool IsFontImage { get; set; }
+
         public int ActivityType { get; set; }
 
     }

@@ -26,7 +26,12 @@ namespace FormsLoyalty.Views
         protected override void OnAppearing()
         {
             base.OnAppearing();
-           
+            hometab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome" , Glyph = FormsLoyalty.Resources.FontAwesomeIcons.Home };
+            categorytab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.ThLarge };
+            carttab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.ShoppingCart };
+            carttabios.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.ShoppingCart };
+            //moretab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.Bars };
+
         }
 
         bool value = true;

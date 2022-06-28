@@ -7,6 +7,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:resources="clr-namespace:FormsLoyalty" 
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects" 
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              Visual="Material"
@@ -210,9 +211,14 @@
                 <Frame Padding="10" BorderColor="Silver" CornerRadius="0" IsVisible="False">
                     <StackLayout Orientation="Horizontal" >
                         <Label Text="Add a new address" TextColor="Black" FontSize="Medium" HorizontalOptions="FillAndExpand"/>
-                        <Image Source="right_arrow" HeightRequest="16" HorizontalOptions="Center" WidthRequest="16"
-                               Margin="5,0,5,0"
-                               effects:TintImageEffect.TintColor="Black"/>
+                        <Image HeightRequest="16" HorizontalOptions="Center" WidthRequest="16"
+                               Margin="5,0,5,0">
+                            <Image.Source>
+                                <FontImageSource FontFamily="FontAwesome"
+                                                             Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronRight}"
+                                                             Color="Black"/>
+                            </Image.Source>
+                        </Image>
                     </StackLayout>
 
                     <Frame.GestureRecognizers>

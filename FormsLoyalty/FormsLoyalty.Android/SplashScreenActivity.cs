@@ -82,7 +82,7 @@ namespace FormsLoyalty.Droid
             mVideoView.SetVideoURI(uri);
             mVideoView.RequestFocus();
 
-            System.Timers.Timer timer = new System.Timers.Timer(2000);
+            System.Timers.Timer timer = new System.Timers.Timer(500);
             timer.AutoReset = false; // the key is here so it repeats
             timer.Elapsed += timer_elapsed;
             timer.Start();

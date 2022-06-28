@@ -510,18 +510,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\camera.png">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\cart.png">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\category.png">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\check.png">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -543,10 +531,6 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\google.png">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\home.png">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
@@ -654,10 +638,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_action_settings.png">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_action_share.png">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -762,10 +742,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
-    <AndroidResource Include="Resources\drawable\ic_stat_loyalty.png">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
     <AndroidResource Include="Resources\drawable\ic_view_list_white_24dp.png">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
@@ -819,14 +795,6 @@
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
     <AndroidResource Include="Resources\drawable\points.png">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\right_arrow.png">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:UpdateGeneratedFiles</Generator>
-    </AndroidResource>
-    <AndroidResource Include="Resources\drawable\scancamera.png">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateGeneratedFiles</Generator>
     </AndroidResource>
@@ -1222,37 +1190,10 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\coupon.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\magazine.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\reminder.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\search.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxxhdpi\settings.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\help.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\logout.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\notification.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\offers.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\terms.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\icon_camera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\store.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\wishlist.png" />
@@ -1273,9 +1214,6 @@
     <AndroidResource Include="Resources\drawable-xxxhdpi\mobile.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\user.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\call.png" />
   </ItemGroup>
   <ItemGroup>
@@ -1286,15 +1224,7 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\arrow_down.png" />
   </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\barcode.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\drawable-ldpi\" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable-xxhdpi\items.png" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\iconDirection.png" />
   </ItemGroup>
@@ -1357,9 +1287,6 @@
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxxhdpi\No_image_available.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\splash_screen.xml" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-xxhdpi\welcome.png" />

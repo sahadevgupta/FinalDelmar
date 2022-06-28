@@ -35,7 +35,10 @@
        
         
         <!--Home Page-->
-        <NavigationPage Title="{x:Static resources:AppResources.ActionbarHome}" IconImageSource="home.png">
+        <NavigationPage Title="{x:Static resources:AppResources.ActionbarHome}" x:Name="hometab">
+            
+            
+            
             <x:Arguments>
                 <views:MainPage />
             </x:Arguments>
@@ -43,7 +46,7 @@
 
 
         <!--Categories Page-->
-        <NavigationPage Title="{x:Static resources:AppResources.txtCategory}" IconImageSource="category.png">
+        <NavigationPage Title="{x:Static resources:AppResources.txtCategory}" x:Name="categorytab">
             <x:Arguments>
                 <views:ItemCategoriesPage />
             </x:Arguments>
@@ -54,7 +57,7 @@
 
         <OnPlatform x:TypeArguments="NavigationPage">
             <OnPlatform.iOS>
-                <NavigationPage Title="{x:Static resources:AppResources.CartTab}" IconImageSource="cart.png">
+                <NavigationPage Title="{x:Static resources:AppResources.CartTab}" x:Name="carttabios">
                     <x:Arguments>
 
 
@@ -72,7 +75,7 @@
             </OnPlatform.iOS>
 
             <OnPlatform.Android>
-                <NavigationPage Title="{x:Static resources:AppResources.CartTab}" IconImageSource="cart.png">
+                <NavigationPage Title="{x:Static resources:AppResources.CartTab}" x:Name="carttab">
                     <x:Arguments>
 
 
@@ -94,7 +97,7 @@
         
 
         <!--Order Page-->
-        <NavigationPage Title="{x:Static resources:AppResources.OrdersTab}" IconImageSource="order.png">
+        <NavigationPage Title="{x:Static resources:AppResources.OrdersTab}" x:Name="ordertab" IconImageSource="order.png">
             <x:Arguments>
                 <views:TransactionPage />
             </x:Arguments>
@@ -102,7 +105,7 @@
 
 
         <!--More Page-->
-        <NavigationPage Title="{x:Static resources:AppResources.MoreTab}" IconImageSource="{OnPlatform iOS=reveal-icon.png,Android=ic_menu_white_24dp.png}">
+        <NavigationPage Title="{x:Static resources:AppResources.MoreTab}" x:Name="moretab" IconImageSource="{OnPlatform iOS=reveal-icon.png,Android=ic_menu_white_24dp.png}">
             <x:Arguments>
                 <views:MoreInfoPage />
             </x:Arguments>
