@@ -239,7 +239,6 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<ResetPasswordPage, ResetPasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<AppSettingsPage, AppSettingsPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
-            containerRegistry.RegisterForNavigation<AccountTierPage, AccountTierPageViewModel>();
             containerRegistry.RegisterForNavigation<OffersPage, OffersPageViewModel>();
             containerRegistry.RegisterForNavigation<OfferDetailsPage, OfferDetailsPageViewModel>();
             containerRegistry.RegisterForNavigation<StoreLocatorPage, StoreLocatorPageViewModel>();
@@ -256,13 +255,11 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<ItemPage, ItemPageViewModel>();
             containerRegistry.RegisterForNavigation<ScanSendPage, ScanSendPageViewModel>();
 
-            containerRegistry.RegisterForNavigation<AccountProfilePage, AccountProfilePageViewModel>();
             containerRegistry.RegisterForNavigation<CheckoutPage, CheckoutPageViewModel>();
             containerRegistry.RegisterForNavigation<ItemSearchPage, ItemSearchPageViewModel>();
             containerRegistry.RegisterForNavigation<CouponsPage, CouponsPageViewModel>();
             containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<MagazinePage, MagazinePageViewModel>();
-            containerRegistry.RegisterForNavigation<MagazineDetail, MagazineDetailViewModel>();
             containerRegistry.RegisterForNavigation<RemainderPage, RemainderPageViewModel>();
             containerRegistry.RegisterForNavigation<AddReminderPage, AddReminderPageViewModel>();
             containerRegistry.RegisterForNavigation<CouponDetailsPage, CouponDetailsPageViewModel>();

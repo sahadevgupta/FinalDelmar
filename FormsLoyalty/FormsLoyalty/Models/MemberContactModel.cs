@@ -296,10 +296,10 @@ namespace FormsLoyalty.Models
             try
             {
                 MemberContact contact = await service.MemberContactByCardIdAsync(repository, cardId);
-                contact.GetBasket(AppData.Device.CardId).CalculateBasket();
+                //contact.GetBasket(AppData.Device.CardId).CalculateBasket();
 
                 AppData.Device.UserLoggedOnToDevice = contact;
-                AppData.Basket = contact.GetBasket(AppData.Device.CardId);
+                //AppData.Basket = contact.GetBasket(AppData.Device.CardId);
                 AppData.Device.SecurityToken = contact.LoggedOnToDevice.SecurityToken;
 
                 // SendBroadcast(Utils.BroadcastUtils.DomainModelUpdated); need to be configured

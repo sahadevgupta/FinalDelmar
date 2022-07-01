@@ -2,6 +2,7 @@
 using FormsLoyalty.Interfaces;
 using FormsLoyalty.Models;
 using FormsLoyalty.Utils;
+using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
 using Prism;
 using Prism.Commands;
@@ -68,11 +69,6 @@ namespace FormsLoyalty.ViewModels
         {
 
             LoadData();
-           
-            
-            
-
-
         }
 
         void LoadData()
@@ -80,16 +76,15 @@ namespace FormsLoyalty.ViewModels
             RTL = Settings.RTL;
 
             RefreshMemberContact();
-
+            CheckCartCount(null);
             MessagingCenter.Subscribe<BasketModel>(this, "CartUpdated", CheckCartCount);
             MessagingCenter.Subscribe<App>((App)Xamarin.Forms.Application.Current, "LoggedIn", ReloadView);
 
 
-            if (_isInitialized) return;
-            _isInitialized = true;
-            DependencyService.Get<INotify>().ChangeTabBarFlowDirection(RTL);
-
             
+            DependencyService.Get<INotify>().ChangeTabBarFlowDirection(RTL);
+            
+
         }
 
         private void ReloadView(App obj)
@@ -97,48 +92,68 @@ namespace FormsLoyalty.ViewModels
             RefreshMemberContact();
         }
 
-        internal void CheckCartCount(BasketModel obj)
+        internal async void CheckCartCount(BasketModel obj)
         {
-            if(AppData.Basket !=null)
-                BadgeCount = AppData.Basket?.Items.Count == 0 ? null : AppData.Basket.Items.Count.ToString();
+            if ((AppData.Basket is null || !AppData.Basket.Items.Any()) &&  AppData.Device is object && !string.IsNullOrEmpty(AppData.Device.CardId))
+            {
+                var items = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
+                if (items is object)
+                {
+                    BadgeCount = items.Items.Count().ToString();
+                }
+                
+            }
+            else
+            {
+                if (AppData.Basket is object)
+                {
+                    BadgeCount = AppData.Basket?.Items.Count == 0 ? null : AppData.Basket.Items.Count.ToString();
+                }
+            }
+                
             
         }
 
         /// <summary>
         /// Get User info 
         /// </summary>
-         void RefreshMemberContact()
+        void RefreshMemberContact()
         {
+
+            if (_isInitialized) return;
+
+            _isInitialized = true;
+
             AppData.IsFirstTimeMemberRefresh = true;
 
-           
 
             if (Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
                 try
                 {
-                    Task.Run(async() =>
+                    Task.Run(async () =>
                     {
 
-                        // var loading = await MaterialDialog.Instance.LoadingDialogAsync(message: AppResources.loading);
 
                         if (AppData.Device?.UserLoggedOnToDevice != null && !AppData.Device.UserLoggedOnToDevice.OneLists.Any())
                         {
                             var memberContactModel = new MemberContactModel();
                             await memberContactModel.UserGetByCardId(AppData.Device.CardId);
-                            CheckCartCount(null);
+
+
 
                             //GetPoints();
                             //NotificationCountChanged();
                             //GetWishlistCount();
                             //CouponsCountChanged();
                         }
-                        else
+                        
+                       
+                        
 
-                            CheckCartCount(null);
-                     // await  loading.DismissAsync();
+                        // await  loading.DismissAsync();
                     }).ConfigureAwait(false);
-                   
+
                 }
                 catch (Exception)
                 {

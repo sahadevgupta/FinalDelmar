@@ -95,11 +95,19 @@ namespace FormsLoyalty.Utils
             }
             set { device = value; }
         }
+
         private static List<ItemCategory> itemCategories;
         public static List<ItemCategory> ItemCategories
         {
             get { return itemCategories; }
             set { itemCategories = value; }
+        }
+
+        private static List<OneListItem> _cartItems;
+        public static List<OneListItem> CartItems
+        {
+            get { return _cartItems; }
+            set { _cartItems = value; }
         }
         private static List<LoyItem> _bestSellers;
         public static List<LoyItem> BestSellers

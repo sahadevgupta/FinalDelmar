@@ -3,6 +3,7 @@ using FormsLoyalty.Models;
 using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -140,15 +141,27 @@ namespace FormsLoyalty.ViewModels
             
         }
 
-        internal void LoadShoppingList()
+        internal async Task LoadShoppingList()
         {
             IsPageEnabled = true;
             this.WishList = new ObservableCollection<OneListItem>();
-            var  wishList = AppData.Device.UserLoggedOnToDevice.GetWishList(AppData.Device.CardId);
+
+            try
+            {
+                var wishList = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device.CardId, ListType.Wish);
+                CalculateWishlistItemPrice(wishList.Items);
+            }
+            catch (Exception ex)
+            {
+
+                Crashes.TrackError(ex);
+            }
+            finally
+            {
+                IsPageEnabled = false;
+            }
             
-            CalculateWishlistItemPrice(wishList.Items);
             
-            IsPageEnabled = false;
         }
 
         private void CalculateWishlistItemPrice(List<OneListItem> oneListItems)

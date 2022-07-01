@@ -369,7 +369,7 @@
                                                 <Grid IsClippedToBounds="True">
 
 
-                                                    <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding ImageView.Location,FallbackValue=null,TargetNullValue=null}"
+                                                    <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding ImageView.Location}"
                                                                              Grid.Row="0"/>
 
                                                     <!--<controls:LoadingImageView/>
@@ -546,7 +546,7 @@
                                                     <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
                                                         <StackLayout>
 
-                                                            <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
+                                                            <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Location}"
                                                                                          Grid.Row="0"/>
 
 
@@ -674,7 +674,7 @@
 
                                     <CollectionView ItemsSource="{Binding BestSellerItems}"
                                      HorizontalScrollBarVisibility="Never"
-                                                    IsVisible="{Binding BestSellerItems.Count,Converter={StaticResource IntToBoolConverter},TargetNullValue=false,FallbackValue=false}"
+                                                    IsVisible="{Binding BestSellerItems.Count,Converter={StaticResource IntToBoolConverter}}"
                                     HeightRequest="200">
                                         <CollectionView.ItemsLayout>
                                             <GridItemsLayout Orientation="Horizontal"
@@ -697,7 +697,7 @@
                                                         <Grid RowDefinitions="95,Auto,Auto,Auto" IsClippedToBounds="True" >
 
 
-                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
+                                                            <controls:CustomImageControl ImageHeight="95" ImageWeight="100" UriImageSource="{Binding Images[0].Location}"
                                                                              Grid.Row="0"/>
 
 
@@ -984,10 +984,10 @@
                                 </xct:StateView>
 
                                 <xct:StateView StateKey="Success"  
-                                               IsVisible="{Binding offers.Count,Converter={StaticResource IntToBoolConverter},TargetNullValue=false,FallbackValue=false}">
+                                               IsVisible="{Binding offers.Count,Converter={StaticResource IntToBoolConverter}}">
 
                                     <CollectionView ItemsSource="{Binding offers}" HeightRequest="160"
-                                                    IsVisible="{Binding offers.Count,Converter={StaticResource IntToBoolConverter},TargetNullValue=false,FallbackValue=false}"
+                                                    IsVisible="{Binding offers.Count,Converter={StaticResource IntToBoolConverter}}"
                                                     HorizontalScrollBarVisibility="Never">
                                         <!--<CollectionView.Triggers>
                                             <DataTrigger TargetType="CollectionView" Binding="{Binding offers.Count}" Value="0">
@@ -1013,7 +1013,7 @@
                                                         <Grid RowDefinitions="95,Auto" IsClippedToBounds="True" >
 
                                                             <controls:CustomImageControl ImageHeight="95" ImageWeight="100"  
-                                                                                         UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
+                                                                                         UriImageSource="{Binding Images[0].Location}"
                                                                                          Grid.Row="0"/>
 
 
@@ -1073,7 +1073,7 @@
 
 
 
-                                    <controls:CustomImageControl ImageHeight="50" ImageWeight="50" UriImageSource="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}"
+                                    <controls:CustomImageControl ImageHeight="50" ImageWeight="50" UriImageSource="{Binding Images[0].Location}"
                                                                              />
 
 

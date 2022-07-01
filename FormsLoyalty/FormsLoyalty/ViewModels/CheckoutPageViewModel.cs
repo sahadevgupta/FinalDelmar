@@ -472,8 +472,9 @@ namespace FormsLoyalty.ViewModels
         {
             Task.Run(() =>
             {
-                LoadBasket();
                 LoadAddressView();
+                LoadBasket();
+                CalculateBasket();
             });
         }
 
@@ -556,7 +557,7 @@ namespace FormsLoyalty.ViewModels
         {
             if (ValidateFields())
             {
-                CalculateBasket();
+                
 
                 if (isCreditCard && string.IsNullOrEmpty(CardNumber))
                   CardDesc = $"{AppResources.ResourceManager.GetString("NotificationViewExpires", AppResources.Culture)} {CardExpirationDate}";
@@ -697,6 +698,12 @@ namespace FormsLoyalty.ViewModels
 
         private void LoadAddressView()
         {
+            Task.Run(async () =>
+            {
+                Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
+                SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
+            });
+
             if (AppData.Device.UserLoggedOnToDevice.Addresses != null)
             {
                 foreach (var item in AppData.Device.UserLoggedOnToDevice.Addresses)
@@ -709,13 +716,6 @@ namespace FormsLoyalty.ViewModels
             addresses.Add(new Address { Address1 = AppResources.txtEnterNewAddress });
 
             selectedAddress = addresses.First();
-            Task.Run(async () =>
-            {
-                Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
-                SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
-            });
-
-
         }
 
 
@@ -776,8 +776,7 @@ namespace FormsLoyalty.ViewModels
             contact = AppData.Device.UserLoggedOnToDevice;
             shippingAddressName = contact.Name;
             shippingAddress = selectedAddress;
-            if(Cities.Any() && Areas.Any())
-               SetSelectedCityArea();
+            SetSelectedCityArea();
             IsNewAddresAdded = false;
         }
 
@@ -792,7 +791,7 @@ namespace FormsLoyalty.ViewModels
             basketItems = new ObservableCollection<OneListItem>();
             try
             {
-                foreach (var basketItem in AppData.Basket.Items)
+                foreach (var basketItem in AppData.CartItems)
                 {
                     //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
                     //{
@@ -824,7 +823,7 @@ namespace FormsLoyalty.ViewModels
                 Task.Run(async () =>
                 {
 
-                    IsPageEnabled = true;
+                    // IsPageEnabled = true;
 
                     var oneListModel = new OneListModel();
                     basketOrder = await oneListModel.OneListCalculate(AppData.Basket);
@@ -839,60 +838,19 @@ namespace FormsLoyalty.ViewModels
                     basketOrder.ContactName = AppData.Device.UserLoggedOnToDevice.Name;
                     basketOrder.PhoneNumber = AppData.Device.UserLoggedOnToDevice.Phone;
 
-
-                    basketOrder.ShipToAddress = shippingAddress;
-                    basketOrder.ContactAddress = billingAddress;
-                    basketOrder.ShippingAgentServiceCode = "ISP";
-                    basketOrder.ClickAndCollectOrder = false;
-
-                    if (isCreditCard && !string.IsNullOrEmpty(CardNumber))
-                    {
-                        basketOrder.OrderPayments.Add(new OrderPayment()
-                        {
-                            Amount = AppData.Basket.TotalAmount,
-                            CardType = "VISA",
-                            CurrencyCode = AppData.Device.UserLoggedOnToDevice.Environment.Currency.Id,
-                            AuthorizationCode = CardCvv,
-                            CardNumber = CardNumber,
-                            LineNumber = 1,
-                            TenderType = ((int)LoyTenderType.Card).ToString(),
-                        });
-                    }
-                    else
-                    {
-                        var payment = new OrderPayment()
-                        {
-                            Amount = AppData.Basket.TotalAmount,
-                            CurrencyCode = AppData.Device.UserLoggedOnToDevice.Environment.Currency.Id,
-                            LineNumber = 1,
-
-                        };
-
-
-                        if (IsVisaOnDelivery)
-                        {
-                            payment.TenderType = ((int)LoyTenderType.Visa_On_Delivery).ToString();
-                        }
-                        else
-                        {
-                            payment.TenderType = ((int)LoyTenderType.Cash).ToString();
-                        }
-                            
-                        basketOrder.OrderPayments.Add(payment);
-                    }
-
+                    AddAddressAndPaymentDetailToOrder();
 
                     Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                     {
-                        
-                       
+
+
                         totalSubtotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalNetAmount + basketOrder.TotalDiscount);
                         totalShipping = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(AppData.Basket.ShippingAmount);
                         totalVAT = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount - basketOrder.TotalNetAmount);
                         totalDiscount = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalDiscount);
                         totalTotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount);
                     });
-                    IsPageEnabled = false;
+                    // IsPageEnabled = false;
                 });
 
             }
@@ -903,6 +861,51 @@ namespace FormsLoyalty.ViewModels
             }
             IsPageEnabled = false;
         }
+
+        private void AddAddressAndPaymentDetailToOrder()
+        {
+            basketOrder.ShipToAddress = shippingAddress;
+            basketOrder.ContactAddress = billingAddress;
+            basketOrder.ShippingAgentServiceCode = "ISP";
+            basketOrder.ClickAndCollectOrder = false;
+
+            if (isCreditCard && !string.IsNullOrEmpty(CardNumber))
+            {
+                basketOrder.OrderPayments.Add(new OrderPayment()
+                {
+                    Amount = AppData.Basket.TotalAmount,
+                    CardType = "VISA",
+                    CurrencyCode = AppData.Device.UserLoggedOnToDevice.Environment.Currency.Id,
+                    AuthorizationCode = CardCvv,
+                    CardNumber = CardNumber,
+                    LineNumber = 1,
+                    TenderType = ((int)LoyTenderType.Card).ToString(),
+                });
+            }
+            else
+            {
+                var payment = new OrderPayment()
+                {
+                    Amount = AppData.Basket.TotalAmount,
+                    CurrencyCode = AppData.Device.UserLoggedOnToDevice.Environment.Currency.Id,
+                    LineNumber = 1,
+
+                };
+
+
+                if (IsVisaOnDelivery)
+                {
+                    payment.TenderType = ((int)LoyTenderType.Visa_On_Delivery).ToString();
+                }
+                else
+                {
+                    payment.TenderType = ((int)LoyTenderType.Cash).ToString();
+                }
+
+                basketOrder.OrderPayments.Add(payment);
+            }
+        }
+
         public async Task RemoveCoupon()
         {
             SelectedCoupon = null;

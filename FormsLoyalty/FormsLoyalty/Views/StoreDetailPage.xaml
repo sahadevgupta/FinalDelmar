@@ -9,6 +9,7 @@
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              x:Name="storeDetailsPage"
              Title="{x:Static resources:AppResources.DetailViewDetails}"
              BackgroundColor="WhiteSmoke">
@@ -22,6 +23,7 @@
 
     <ContentPage.Resources>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+        <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
     </ContentPage.Resources>
 
     <AbsoluteLayout>
@@ -35,7 +37,7 @@
                 </DataTrigger>
             </ScrollView.Triggers>
 
-            <Grid RowDefinitions="200,Auto">
+            <Grid RowDefinitions="200,*">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="Auto"/>
@@ -63,9 +65,15 @@
                 <Grid Margin="10,0,10,0" Grid.Row="0" Grid.Column="1" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"
                   TranslationY="30" >
                     <BoxView HeightRequest="60" WidthRequest="60" CornerRadius="30"
-                         BackgroundColor="WhiteSmoke"/>
-                    <Image  VerticalOptions="Center" HorizontalOptions="Center" Source="iconDirection" 
-                            Aspect="AspectFit"/>
+                         BackgroundColor="#efefef"/>
+                    <Image  HorizontalOptions="Center"
+                            Aspect="AspectFit">
+                        <Image.Source>
+                            <FontImageSource FontFamily="FontAwesome"
+                                             Color="{DynamicResource My_Header_Color}"
+                                             Glyph="{x:Static fontresources:FontAwesomeIcons.Directions}"/>
+                        </Image.Source>
+                    </Image>
 
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="Direction_Tapped"/>
@@ -78,29 +86,45 @@
                   TranslationY="30" Margin="10,0,10,0"/>-->
 
 
-                <StackLayout Grid.Row="1" >
+                <Grid Grid.Row="1" RowSpacing="0" RowDefinitions="Auto,Auto,Auto,Auto,Auto" 
+                      ColumnDefinitions="Auto,*" ColumnSpacing="0">
+                    
                     <Label Margin="10"
+                           Grid.ColumnSpan="2"
                    FontSize="Title"
                    TextColor="{StaticResource My_Header_Color}"
                    Text="{Binding selectedStore.Description}"/>
 
                     <Label Margin="10"
-                   TextColor="Black"
-                   FontSize="Body"
-                       Text="{Binding distanceText}"/>
+                           Grid.Row="1"
+                           Grid.ColumnSpan="2"
+                           TextColor="Black"
+                           FontSize="Body"
+                           Text="{Binding distanceText}"/>
 
-
-
-                    <StackLayout Orientation="Horizontal" Margin="10,0">
-                        <Image Source="ic_action_map" effects:TintImageEffect.TintColor="Black"
-                               VerticalOptions="Center" HeightRequest="30"/>
-                        <Label Margin="10" HorizontalOptions="FillAndExpand"
-                   FontSize="Body" VerticalTextAlignment="Center"
-                   TextColor="Black"
-                   Text="{Binding selectedStore.FormatAddress}"/>
-                    </StackLayout>
+                    
+                        <Image 
+                               Grid.Row="2" Grid.Column="0"
+                               HorizontalOptions="StartAndExpand"
+                               VerticalOptions="Center" 
+                               Margin="10,0"
+                               HeightRequest="30"
+                               TranslationY="-10">
+                            <Image.Source>
+                                <FontImageSource FontFamily="FontAwesome"
+                                                 Color="Black"
+                                                 Glyph="{x:Static fontresources:FontAwesomeIcons.MapMarkedAlt}"/>
+                            </Image.Source>
+                        </Image>
+                        <Label Margin="10" HorizontalOptions="StartAndExpand"
+                               Grid.Row="2" Grid.Column="1"
+                               FontSize="Body" 
+                               TextColor="Black"
+                               Text="{Binding selectedStore.FormatAddress}"/>
+                   
 
                     <StackLayout Orientation="Horizontal" Margin="10,0" 
+                                 Grid.Row="3" Grid.ColumnSpan="2"
                                  xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
                          xct:TouchEffect.PressedBackgroundColor="LightPink"
                          xct:TouchEffect.NormalBackgroundColor="Transparent">
@@ -108,9 +132,14 @@
                         <StackLayout.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding PhoneCommand}"/>
                         </StackLayout.GestureRecognizers>
-                        
-                        <Image Source="call" effects:TintImageEffect.TintColor="Black"
-                                />
+
+                        <Image>
+                            <Image.Source>
+                                <FontImageSource FontFamily="FontAwesome"
+                                                 Color="Black"
+                                                 Glyph="{x:Static fontresources:FontAwesomeIcons.PhoneSquareAlt}"/>
+                            </Image.Source>
+                        </Image>
                         <Label Margin="10" HorizontalOptions="FillAndExpand"
                    FontSize="Body" 
                    TextColor="Black"
@@ -125,16 +154,27 @@
                         </Label>
                     </StackLayout>
 
-                    <StackLayout Orientation="Horizontal" Margin="10,0">
-                        <Image Source="icontimeGray" effects:TintImageEffect.TintColor="Black"
-                                />
-                        <Label Margin="10" HorizontalOptions="FillAndExpand"
-                   FontSize="Body" VerticalTextAlignment="Center"
-                   TextColor="Black"
-                   Text="{Binding opening}"/>
-                    </StackLayout>
 
-                </StackLayout>
+                    <Image 
+                           IsVisible="{Binding opening,Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                                Grid.Row="4" Grid.Column="0"
+                               Margin="10,20">
+                        <Image.Source>
+                            <FontImageSource FontFamily="FontAwesome"
+                                             Color="Black"
+                                             Glyph="{x:Static fontresources:FontAwesomeIcons.Clock}"/>
+                        </Image.Source>
+                    </Image>
+                        
+                        <Label Margin="10" HorizontalOptions="FillAndExpand"
+                               IsVisible="{Binding opening,Converter={StaticResource IsNotNullOrEmptyConverter}}"
+                               Grid.Row="4" Grid.Column="1"
+                               FontSize="Body" VerticalTextAlignment="Center"
+                               TextColor="Black"
+                               Text="{Binding opening}"/>
+                   
+
+                </Grid>
 
 
 

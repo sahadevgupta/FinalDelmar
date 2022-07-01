@@ -78,6 +78,18 @@ namespace FormsLoyalty.ViewModels
             DeleteAllCommand = new DelegateCommand(async () => await DeleteAllItemsFromCart());
         }
 
+       
+
+        private void CartPageViewModel_IsActiveChanged(object sender, EventArgs e)
+        {
+            if (IsActive)
+            {
+                
+                if (AppData.Device.UserLoggedOnToDevice != null)
+                    LoadBasketItems();
+            }
+        }
+
         private async Task DeleteAllItemsFromCart()
         {
             IsPageEnabled = true;
@@ -97,7 +109,7 @@ namespace FormsLoyalty.ViewModels
             catch (Exception)
             {
 
-               
+
             }
             finally
             {
@@ -106,14 +118,6 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        private void CartPageViewModel_IsActiveChanged(object sender, EventArgs e)
-        {
-            if (IsActive)
-            {
-                if (AppData.Device.UserLoggedOnToDevice != null)
-                    LoadBasketItems();
-            }
-        }
         private async Task GoToCheckOutPage()
         {
             if (IsPageEnabled)
@@ -149,10 +153,6 @@ namespace FormsLoyalty.ViewModels
             {
                 IsPageEnabled = false;
             }
-           
-            
-           
-            
         }
 
        
@@ -185,15 +185,17 @@ namespace FormsLoyalty.ViewModels
 
             
         }
-        private void LoadBasketItems()
+        private async void LoadBasketItems()
         {
             try
             {
+                IsPageEnabled = true;
+
                 baskets = new ObservableCollection<Basket>();
 
-                var items = new ObservableCollection<OneListItem>(AppData.Basket.Items);
+                var pnelistitems = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
 
-                foreach (var basketItem in items)
+                foreach (var basketItem in pnelistitems.Items)
                 {
 
                     var item = new Basket();
@@ -248,8 +250,6 @@ namespace FormsLoyalty.ViewModels
 
                 }
 
-                LoadCartItemImage();
-
                 CalculateBasketPrice();
 
             }
@@ -258,14 +258,12 @@ namespace FormsLoyalty.ViewModels
 
                 Crashes.TrackError(ex);
             }
-          
-        }
 
-        private void LoadCartItemImage()
-        {
-            
+            finally
+            {
+                IsPageEnabled = false;
+            }
         }
-
         private void CalculateBasketPrice()
         {
             try

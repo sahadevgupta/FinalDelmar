@@ -12,6 +12,7 @@
              BackgroundColor="WhiteSmoke"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              x:Name="storePage"
              Title="{x:Static resources:AppResources.ActionbarStores}"
              >
@@ -136,7 +137,14 @@
 
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+        <ToolbarItem Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Size="Large"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.Search}"/>
+            </ToolbarItem.IconImageSource>
+            
             <ToolbarItem.CommandParameter>
                 <prism:NavigationParameters>
                     <prism:NavigationParameter Key="page" Value="Store" />
@@ -203,9 +211,15 @@
             <Grid Margin="10,0,20,22" Grid.Row="1" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand">
                 <BoxView HeightRequest="60" WidthRequest="60" CornerRadius="30"
                          BackgroundColor="{StaticResource My_Header_Color}"/>
-                <Image Source="ic_action_map" VerticalOptions="Center" HorizontalOptions="Center"
-                       effects:TintImageEffect.TintColor="White"
-                       HeightRequest="30"/>
+                <Image VerticalOptions="Center" HorizontalOptions="Center"
+                       HeightRequest="30">
+                    <Image.Source>
+                        <FontImageSource FontFamily="FontAwesome"
+                                         Size="Large"
+                                         Color="White"
+                                         Glyph="{x:Static fontresources:FontAwesomeIcons.MapMarkedAlt}"/>
+                    </Image.Source>
+                </Image>
                 <Grid.GestureRecognizers>
                     <TapGestureRecognizer Tapped="Button_Clicked"/>
                 </Grid.GestureRecognizers>

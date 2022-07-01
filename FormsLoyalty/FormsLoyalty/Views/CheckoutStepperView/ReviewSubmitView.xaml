@@ -302,10 +302,10 @@
 
                     <BoxView Grid.Row="5" Grid.ColumnSpan="2" HeightRequest="0.5" BackgroundColor="Silver"/>
 
-                    <Label Text="{Binding Source= {x:Static resources:AppResources.CheckoutViewTotal},StringFormat='Grand {0}'}"
+                    <Label Text="{Binding Source= {x:Static resources:AppResources.CheckoutViewTotal},StringFormat='Grand {0} (EGP)'}"
                        Grid.Row="6" Grid.Column="0"
                        FontSize="Body"/>
-            <Label Text="{Binding totalTotal,StringFormat='EGP {0}'}" 
+            <Label Text="{Binding totalTotal}" 
                        Grid.Row="6" Grid.Column="1"
                        FontSize="Medium"/>
 

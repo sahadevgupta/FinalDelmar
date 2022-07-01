@@ -357,12 +357,7 @@ namespace FormsLoyalty.ViewModels
            
         }
 
-        private async Task NavigateToAccountProfile(string username)
-        {
-            IsPageEnabled = true;
-           await NavigationService.NavigateAsync(nameof(AccountProfilePage), new Prism.Navigation.NavigationParameters { { "contact", memberContact },{"username", username.Replace(" ", string.Empty) },{"edit",editAccount },{ "itemPage", FromItemPage } });
-            IsPageEnabled = false;
-        }
+       
         internal void FetchExistingMemberContact()
         {
             Title = AppResources.MenuViewAccountManagementTitle;

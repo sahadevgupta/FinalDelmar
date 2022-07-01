@@ -18,10 +18,10 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as WishListPageViewModel;
         }
 
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
-            _viewModel.LoadShoppingList();
+            await _viewModel.LoadShoppingList();
         }
 
 

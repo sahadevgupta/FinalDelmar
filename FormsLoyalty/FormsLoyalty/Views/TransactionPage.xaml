@@ -8,6 +8,7 @@
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:enums="clr-namespace:LSRetail.Omni.Domain.DataModel.Loyalty.Setup;assembly=LSRetail.Omni.Domain.DataModel.Loyalty"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              x:Name="thisPage"
              xmlns:controls="clr-namespace:FormsLoyalty.Controls" 
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
@@ -22,7 +23,14 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+        <ToolbarItem Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Size="Large"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.Search}"/>
+            </ToolbarItem.IconImageSource>
+            
             <ToolbarItem.CommandParameter>
                 <prism:NavigationParameters>
                     <prism:NavigationParameter Key="page" Value="Wishlist" />
@@ -91,7 +99,7 @@
 
 
 
-                            <Grid Padding="0" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="3.5*,1.5*">
+                            <Grid Padding="0" RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="3*,1.5*">
 
 
 
@@ -227,7 +235,7 @@
                                 </StackLayout>
 
 
-                                <StackLayout
+                                <StackLayout 
                     Grid.Row="3"
                     Grid.Column="1"
                     HorizontalOptions="FillAndExpand">

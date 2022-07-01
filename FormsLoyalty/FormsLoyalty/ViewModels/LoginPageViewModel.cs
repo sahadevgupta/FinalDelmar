@@ -135,12 +135,12 @@ namespace FormsLoyalty.ViewModels
                 MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
 #endif
 
-                //if (Device.RuntimePlatform == Device.Android)
-                //{
-                //    DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
-                //}
-                //else
-                //  MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
+                }
+                else
+                    MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
 
 
             }

@@ -7,18 +7,20 @@
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              prism:ViewModelLocator.AutowireViewModel="True"
              xmlns:resources="clr-namespace:FormsLoyalty"
-             x:Class="FormsLoyalty.Views.CartPage"
-             Visual="Material"
-             x:Name="cart"
-           BackgroundColor="{StaticResource My_Header_Color}"
-            NavigationPage.HasNavigationBar="False"
-            xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              ios:Page.UseSafeArea="True"
-             >
+             x:Class="FormsLoyalty.Views.CartPage"
+             BackgroundColor="{StaticResource My_Header_Color}"
+             NavigationPage.HasNavigationBar="False"
+             Visual="Material"
+             x:Name="cart">
 
     <ContentPage.Resources>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+        <xct:IntToBoolConverter x:Key="IntToBoolConverter"/>
     </ContentPage.Resources>
 
     <ContentPage.Triggers>
@@ -82,14 +84,23 @@
                 VerticalTextAlignment="Center" />
 
 
-                <ImageButton Source="ic_action_discard"
-                         HeightRequest="30"
+                <ImageButton
+                         
                          Visual="Material"
-                         Margin="10,0,10,0"
+                         Margin="10,0,15,0"
                          x:Name="DeleteBtn"
+                         IsVisible="{Binding baskets.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"
                          Command="{Binding DeleteAllCommand}"
                          HorizontalOptions="End"
-                         BackgroundColor="Transparent"/>
+                         BackgroundColor="Transparent">
+
+                    <ImageButton.Source>
+                        <FontImageSource FontFamily="FontAwesome"
+                                         Size="Large"
+                                         Glyph="{x:Static fontresources:FontAwesomeIcons.Trash}"/>
+                    </ImageButton.Source>
+                    
+                </ImageButton>
 
             </StackLayout>
 

@@ -68,16 +68,22 @@ namespace FormsLoyalty.Models
 
         }
 
-        public async Task GetShoppingListsByCardId(string cardId)
+        public async Task<OneList> GetOneListItemsByCardId(string cardId, ListType listType)
         {
 
             try
             {
-                var list = await OneListGetByCardId(cardId, ListType.Wish, true);
+                var list = await OneListGetByCardId(cardId, listType, true);
+                if (list is object && list.Any())
+                {
+                    AppData.Device.UserLoggedOnToDevice.AddList(AppData.Device.CardId, list.FirstOrDefault(), listType);
 
-                AppData.Device.UserLoggedOnToDevice.AddList(AppData.Device.CardId, list.FirstOrDefault(), ListType.Wish);
+                    AppData.Basket = list.FirstOrDefault();
 
-                //SendBroadcast(Utils.BroadcastUtils.ShoppingListsUpdated);
+                    AppData.CartItems = new List<OneListItem>(list?.FirstOrDefault().Items);
+                }
+                
+                return list.FirstOrDefault();
             }
             catch (Exception ex)
             {
@@ -87,6 +93,7 @@ namespace FormsLoyalty.Models
             {
                // ShowIndicator(false);
             }
+            return null;
         }
 
         public async Task<bool> DeleteWishListLine(string wishListLineId,bool fromItemPage = false)
