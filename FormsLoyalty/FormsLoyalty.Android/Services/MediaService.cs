@@ -82,25 +82,25 @@ namespace FormsLoyalty.Droid.Services
 
                 if (status == PermissionStatus.Granted)
                 {
-                    Toast.MakeText(MainApplication.ActivityContext, $"Select Images", ToastLength.Long).Show();
+                    Toast.MakeText(Xamarin.Essentials.Platform.AppContext, $"Select Images", ToastLength.Long).Show();
                     var imageIntent = new Intent(
                         Intent.ActionPick);
                     imageIntent.SetType("image/*");
                     imageIntent.PutExtra(Intent.ExtraAllowMultiple, true);
                     imageIntent.SetAction(Intent.ActionGetContent);
-                    ((Activity)MainApplication.ActivityContext).StartActivityForResult(
+                    Xamarin.Essentials.Platform.CurrentActivity.StartActivityForResult(
                         Intent.CreateChooser(imageIntent, "Select photo"), MainActivity.OPENGALLERYCODE);
 
                 }
                 else if (status != PermissionStatus.Unknown)
                 {
-                    Toast.MakeText(MainApplication.ActivityContext, "Permission Denied. Can not continue, try again.", ToastLength.Long).Show();
+                    Toast.MakeText(Xamarin.Essentials.Platform.AppContext, "Permission Denied. Can not continue, try again.", ToastLength.Long).Show();
                 }
             }
             catch (Exception ex)
             {
                 System.Console.WriteLine(ex.ToString());
-                Toast.MakeText(MainApplication.ActivityContext, "Error. Can not continue, try again.", ToastLength.Long).Show();
+                Toast.MakeText(Xamarin.Essentials.Platform.AppContext, "Error. Can not continue, try again.", ToastLength.Long).Show();
             }
         }
 

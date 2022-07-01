@@ -101,6 +101,10 @@ namespace FormsLoyalty.ViewModels
                 {
                     BadgeCount = items.Items.Count().ToString();
                 }
+                else
+                {
+                    BadgeCount = null;
+                }
                 
             }
             else
@@ -108,6 +112,10 @@ namespace FormsLoyalty.ViewModels
                 if (AppData.Basket is object)
                 {
                     BadgeCount = AppData.Basket?.Items.Count == 0 ? null : AppData.Basket.Items.Count.ToString();
+                }
+                else
+                {
+                    BadgeCount = null;
                 }
             }
                 

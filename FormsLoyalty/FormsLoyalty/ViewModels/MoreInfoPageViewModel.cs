@@ -304,21 +304,22 @@ namespace FormsLoyalty.ViewModels
 
             if ((EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null) && EnabledItems.HasWishLists)
             {
-                var itemCount = string.Empty;
-                var oneListItem = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device.CardId, LSRetail.Omni.Domain.DataModel.Loyalty.Baskets.ListType.Wish);
-                if (oneListItem?.Items.Count > 0)
-                {
-                    itemCount = oneListItem.Items.Count.ToString();
-                }
+                //var itemCount = string.Empty;
+                //var oneListItem = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device.CardId, LSRetail.Omni.Domain.DataModel.Loyalty.Baskets.ListType.Wish);
+                //if (oneListItem?.Items.Count > 0)
+                //{
+                //    itemCount = oneListItem.Items.Count.ToString();
+                //}
 
                 drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
                 {
                     ActivityType = AppConstValues.ShoppingLists,
                     IsVisible = true,
-                    Image = "wishlist",
+                    Image = FontAwesomeIcons.Bookmark,
+                    IsFontImage = true,
                     IsLoading = false,
-                    Title = AppResources.ResourceManager.GetString("ShoppingListDetailViewWishlist", AppResources.Culture),
-                    SubTitle = itemCount
+                    Title = AppResources.ResourceManager.GetString("ShoppingListDetailViewWishlist", AppResources.Culture)
+                    //SubTitle = itemCount
                 });
             }
             #endregion

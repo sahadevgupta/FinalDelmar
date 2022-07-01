@@ -314,7 +314,7 @@ namespace FormsLoyalty.Droid
             }
             catch (Exception)
             {
-                Toast.MakeText(MainApplication.ActivityContext, "Unable to get path", ToastLength.Long).Show();
+                Toast.MakeText(Xamarin.Essentials.Platform.AppContext, "Unable to get path", ToastLength.Long).Show();
             }
             return null;
         }

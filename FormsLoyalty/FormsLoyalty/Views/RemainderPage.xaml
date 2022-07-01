@@ -160,13 +160,17 @@
                                                              HorizontalOptions="Center"
                                                              Aspect="AspectFit"
                                                              Grid.Column="0"
-                                                             
-                                                              
-                                                         
                                                           xct:TouchEffect.AnimationEasing="{x:Static Easing.CubicInOut}"
-                                                         xct:TouchEffect.PressedBackgroundColor="LightPink"
-                                                         xct:TouchEffect.NormalBackgroundColor="Transparent"
-                                                         Source="ic_action_discard" xct:IconTintColorEffect.TintColor="{StaticResource My_Button_Color}">
+                                                         xct:TouchEffect.PressedBackgroundColor="#efefef"
+                                                         xct:TouchEffect.NormalBackgroundColor="Transparent">
+
+                                                <Image.Source>
+                                                    <FontImageSource FontFamily="FontAwesome"
+                                                                     Size="Medium"
+                                                                     Glyph="{x:Static fontresources:FontAwesomeIcons.Trash}"
+                                                                     Color="{StaticResource My_Button_Color}"/>
+                                                </Image.Source>
+                                                
                                                 <Image.GestureRecognizers>
                                                     <TapGestureRecognizer Tapped="ImageButton_Clicked" CommandParameter="{Binding .}"/>
                                                 </Image.GestureRecognizers>
@@ -185,16 +189,21 @@
                                                 </Label.Text>
                                             </Label>
 
-                                                <ImageButton Grid.RowSpan="2" VerticalOptions="CenterAndExpand"
+                                            <ImageButton Grid.RowSpan="2" VerticalOptions="CenterAndExpand"
                                                              HorizontalOptions="Center"
                                                              Aspect="AspectFit"
                                                              Grid.Column="2"
                                                              Command="{Binding BindingContext.EditCommand,Source={x:Reference reminderlist}}"
                                                                CommandParameter="{Binding .}"
-                                                         BackgroundColor="Transparent"
-                                                         Source="edit" />
+                                                         BackgroundColor="Transparent">
+                                                <ImageButton.Source>
+                                                    <FontImageSource FontFamily="FontAwesome"
+                                                                     Glyph="{x:Static fontresources:FontAwesomeIcons.PencilAlt}"
+                                                                     Size="Medium"/>
+                                                </ImageButton.Source>
+                                            </ImageButton>
 
-                                                <BoxView Grid.Row="2" Grid.ColumnSpan="3" BackgroundColor="Silver" HeightRequest="0.7" />
+                                            <BoxView Grid.Row="2" Grid.ColumnSpan="3" BackgroundColor="Silver" HeightRequest="0.7" />
                                         </Grid>
 
                                        

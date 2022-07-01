@@ -17,7 +17,7 @@ using TabbedPage = Xamarin.Forms.TabbedPage;
 using FormsLoyalty.Helpers;
 using System.ComponentModel;
 
-[assembly: ExportRenderer(typeof(MainTabbedPage), typeof(CustomTabRenderer))]
+//[assembly: ExportRenderer(typeof(MainTabbedPage), typeof(CustomTabRenderer))]
 namespace FormsLoyalty.Droid.Renderers
 {
     public class CustomTabRenderer : TabbedPageRenderer, BottomNavigationView.IOnNavigationItemSelectedListener

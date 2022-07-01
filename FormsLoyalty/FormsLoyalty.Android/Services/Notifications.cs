@@ -96,8 +96,8 @@ namespace FormsLoyalty.Droid.Services
         [Obsolete]
         public void ShowLocalNotification(string title, string body)
         {
-            var intent = new Intent(MainApplication.ActivityContext, typeof(MainActivity));
-            var pendingIntent = PendingIntent.GetActivity(MainApplication.ActivityContext, 0, intent, PendingIntentFlags.OneShot);
+            var intent = new Intent(Xamarin.Essentials.Platform.AppContext, typeof(MainActivity));
+            var pendingIntent = PendingIntent.GetActivity(Xamarin.Essentials.Platform.AppContext, 0, intent, PendingIntentFlags.OneShot);
 
 
             //Android.Net.Uri alarmUri = Android.Net.Uri.Parse($"{ ContentResolver.SchemeAndroidResource}://{MainApplication.ActivityContext.PackageName}/{Resource.Drawable.Whistle}");
@@ -179,7 +179,7 @@ namespace FormsLoyalty.Droid.Services
         }
         public void ShowSnackBar(string description)
         {
-            var activity = MainApplication.ActivityContext as Activity;
+            var activity = Xamarin.Essentials.Platform.CurrentActivity;
             activity.RunOnUiThread(() =>
             {
                 var v = activity.FindViewById(Android.Resource.Id.Content);
@@ -200,7 +200,7 @@ namespace FormsLoyalty.Droid.Services
 
         public void ShowToast(string description)
         {
-            var activity = MainApplication.ActivityContext as Activity;
+            var activity = Xamarin.Essentials.Platform.CurrentActivity;
             activity.RunOnUiThread(() =>
             {
                 var view = activity.FindViewById(Android.Resource.Id.Content);

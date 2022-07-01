@@ -66,14 +66,22 @@ namespace FormsLoyalty.ViewModels
 
             IsActiveChanged += ItemCategoriesPageViewModel_IsActiveChanged;
         }
-
+        bool IsInitialized = false;
         private void ItemCategoriesPageViewModel_IsActiveChanged(object sender, EventArgs e)
         {
             if (!IsNavigated)
             {
                 if (IsActive)
                 {
-                    LoadData();
+                    if (!IsInitialized)
+                    {
+                        IsInitialized = true;
+                        LoadData();
+                    }
+                    else
+                    {
+                        SelectedCategory = itemCategories.FirstOrDefault();
+                    }
                 }
                 else
                 {

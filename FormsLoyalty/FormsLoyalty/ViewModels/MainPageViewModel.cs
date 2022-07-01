@@ -255,14 +255,20 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
-       
+        bool IsInitialized = false;
         private void HandleIsActiveTrue(object sender, EventArgs e)
         {
             if (IsActive)
             {
 
                 LoadPoints();
-                LoadData();
+
+                if (!IsInitialized)
+                {
+                    IsInitialized = true;
+                    LoadData();
+                }
+                
 
 
             }

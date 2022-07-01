@@ -5,12 +5,11 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.ItemCategoriesPage"
              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+              xmlns:ffTrans="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
-             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
-             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin" 
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
-             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:resources="clr-namespace:FormsLoyalty" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Visual="Material"
              x:Name="itemCategory"
              BackgroundColor="WhiteSmoke"
@@ -109,15 +108,49 @@
                                 <Grid ColumnDefinitions="60,*" RowDefinitions="Auto" >
 
 
-                                    <controls:CircleImage Source="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}" Aspect="Fill"
+                                    <!--<Image Aspect="Fill" Grid.Column="0"
+                                           IsVisible="true"
+                                           HeightRequest="60" WidthRequest="60"
+                                           BackgroundColor="#8C808080">
+                                        <Image.Source>
+                                            <UriImageSource Uri="{Binding Images[0].Location}" 
+                                                            CachingEnabled="True"/>
+                                        </Image.Source>
+
+                                        <Image.Clip>
+                                            <EllipseGeometry RadiusX="30" RadiusY="30"
+                                                             Center="30,30"/>
+                                        </Image.Clip>
+                                        
+                                    </Image>-->
+
+                                    <ffimage:CachedImage Source="{Binding Images[0].Location}" 
+                                                         x:Name="img"
+                                                         Grid.Column="0"
+                                                         ErrorPlaceholder="No_image_available.png"
+                                                         VerticalOptions="CenterAndExpand"
+                                                         DownsampleToViewSize="True"
+                                                         Aspect="Fill"
+                                                         HeightRequest="60" WidthRequest="60"
+                                                         CacheDuration= "30"
+                                                         RetryCount = "5"
+                                                         RetryDelay = "450">
+
+                                        <ffimage:CachedImage.Transformations>
+                                            <ffTrans:CircleTransformation BorderSize="3" BorderHexColor="#8C808080"/>
+                                        </ffimage:CachedImage.Transformations>
+
+                                    </ffimage:CachedImage>
+
+
+                                    <!--<controls:CircleImage Source="{Binding Images[0].Location,FallbackValue=null,TargetNullValue=null}" Aspect="Fill"
                                                           BorderColor="#8C808080" BorderThickness="0.5"
                                                           HeightRequest="60" WidthRequest="60"
-                                                          Grid.Column="0"/>
+                                                          Grid.Column="0"/>-->
 
-                                    <Label  Text="{Binding Description}" TextColor="Black" FontAttributes="Bold"
+                                    <Label  Text="{Binding Description}" TextColor="Gray"
                                             VerticalTextAlignment="Center" Grid.Column="1" Margin="10,0"
-                                            MaxLines="2" LineBreakMode="TailTruncation"
-                                            >
+                                            MaxLines="2" LineBreakMode="TailTruncation">
                                         <Label.Triggers>
                                             <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                                                  Value="true">
@@ -127,11 +160,10 @@
                                     </Label>
 
                                 </Grid>
-                                
+
                             </Frame>
-                                
-                               
-                            </DataTemplate>
+
+                        </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </StackLayout>
