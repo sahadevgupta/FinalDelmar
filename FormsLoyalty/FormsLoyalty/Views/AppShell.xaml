@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="FormsLoyalty.Views.AppShell"
+       xmlns:resources="clr-namespace:FormsLoyalty"
+       xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
+       xmlns:views="clr-namespace:FormsLoyalty.Views"
+       >
+    <TabBar>
+        <Tab Title="{x:Static resources:AppResources.ActionbarHome}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.Home}"/>
+            </Tab.Icon>
+
+            <ShellContent ContentTemplate="{DataTemplate views:MainPage}"/>
+        </Tab>
+
+
+        <Tab Title="{x:Static resources:AppResources.txtCategory}">
+            
+            
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.ThLarge}"/>
+            </Tab.Icon>
+
+            <ShellContent ContentTemplate="{DataTemplate views:ItemCategoriesPage}"/>
+        </Tab>
+
+        <Tab Title="{x:Static resources:AppResources.CartTab}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.ShoppingCart}"/>
+            </Tab.Icon>
+
+            <ShellContent ContentTemplate="{DataTemplate views:CartPage}"/>
+        </Tab>
+
+        <Tab Title="{x:Static resources:AppResources.OrdersTab}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.Home}"/>
+            </Tab.Icon>
+
+            <ShellContent ContentTemplate="{DataTemplate views:TransactionPage}"/>
+        </Tab>
+
+        <Tab Title="{x:Static resources:AppResources.MoreTab}">
+            <Tab.Icon>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.Home}"/>
+            </Tab.Icon>
+
+            <ShellContent ContentTemplate="{DataTemplate views:MoreInfoPage}"/>
+        </Tab>
+
+    </TabBar>
+</Shell>
