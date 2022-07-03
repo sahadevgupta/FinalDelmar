@@ -194,8 +194,8 @@
                             x:Name="stores"
                             Grid.Row="1"
                             VerticalScrollBarVisibility="Never"
-                            
-                            Scrolled="stores_Scrolled">
+                            Scrolled="stores_Scrolled"
+                            ItemTemplate="{StaticResource CardView}">
 
         <CollectionView.ItemsLayout>
             <GridItemsLayout Orientation="Vertical" 

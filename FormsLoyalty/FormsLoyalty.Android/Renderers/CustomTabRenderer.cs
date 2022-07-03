@@ -182,20 +182,25 @@ namespace FormsLoyalty.Droid.Renderers
             AddTabBadge(Element.Children.IndexOf(page));
         }
 
-        protected override void Dispose(bool disposing)
-        {
-            Cleanup(Element);
+        //protected override void Dispose(bool disposing)
+        //{
+        //    Cleanup(Element);
 
-            base.Dispose(disposing);
-        }
+        //    base.Dispose(disposing);
+        //}
 
         bool BottomNavigationView.IOnNavigationItemSelectedListener.OnNavigationItemSelected(IMenuItem item)
         {
             base.OnNavigationItemSelected(item);
 
             // item.ItemId is the position
-           
-                _page.CurrentPage.Navigation.PopToRootAsync(false);
+
+            if (_page.CurrentPage is NavigationPage page)
+            {
+                page.PopToRootAsync();
+            }
+            else
+                _page.CurrentPage.Navigation.PopToRootAsync();
            
            
 
