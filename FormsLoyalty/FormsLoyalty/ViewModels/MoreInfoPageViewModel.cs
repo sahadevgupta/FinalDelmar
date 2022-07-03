@@ -20,6 +20,7 @@ using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
 using Unity;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
 using ZXing.Net.Mobile.Forms;
@@ -544,6 +545,25 @@ namespace FormsLoyalty.ViewModels
                         scan.HasTorch = true;
                         scan.Title = "SCAN";
 
+
+                        var status = await Permissions.CheckStatusAsync<Permissions.Camera>();
+                        if (status != PermissionStatus.Granted)
+                        {
+                            status = await Permissions.RequestAsync<Permissions.Camera>();
+                        }
+                        if (status == PermissionStatus.Granted)
+                        {
+                            var storageStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+                            if (storageStatus != PermissionStatus.Granted)
+                            {
+                                storageStatus = await Permissions.RequestAsync<Permissions.Camera>();
+                            }
+                        }
+                        if (status != PermissionStatus.Granted)
+                        {
+                            await App.dialogService.DisplayAlertAsync("Error!!", "Camera Permission not granted, please go to settings to enable it", "OK");
+                            return;
+                        }
 
                         await navigation.PushAsync(scan);
                         //Navigation.PushAsync(scan);
