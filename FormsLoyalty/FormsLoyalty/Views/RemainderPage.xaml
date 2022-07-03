@@ -26,7 +26,12 @@
                        FontSize="20" TextColor="Black"/>
 
             <StackLayout Orientation="Horizontal" Grid.Row="1" >
-                    <Image Source="left_arrow" HeightRequest="16" WidthRequest="16" HorizontalOptions="Center" effects:TintImageEffect.TintColor="Black">
+                    <Image HeightRequest="16" WidthRequest="16" HorizontalOptions="Center" effects:TintImageEffect.TintColor="Black">
+
+                        <Image.Source>
+                            <FontImageSource FontFamily="FontAwesome"
+                                                         Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronLeft}"/>
+                        </Image.Source>
 
                         <Image.Triggers>
                             <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
@@ -133,12 +138,18 @@
                             <xct:Expander.Header>
                                 <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" BackgroundColor="#4f4f4f" Padding="5">
                                     <Label Text="{Binding Key}" HorizontalTextAlignment="Center" HorizontalOptions="CenterAndExpand" TextColor="White" FontSize="20"/>
-                                    <ImageButton Source="left_arrow" BackgroundColor="Transparent" 
+                                    <ImageButton BackgroundColor="Transparent" 
                                                  HeightRequest="16" Aspect="AspectFit"
                                                  WidthRequest="16"
                                                  Margin="10,0,10,0"
                                                  Rotation="270"
                                                  HorizontalOptions="End" VerticalOptions="Center">
+
+                                        <Image.Source>
+                                            <FontImageSource FontFamily="FontAwesome"
+                                                         Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronLeft}"/>
+                                        </Image.Source>
+
                                         <ImageButton.Triggers>
                                             <DataTrigger TargetType="ImageButton" Binding="{Binding Source={x:Reference expander},Path= IsExpanded }"
                                                          Value="true">
@@ -166,7 +177,7 @@
 
                                                 <Image.Source>
                                                     <FontImageSource FontFamily="FontAwesome"
-                                                                     Size="Medium"
+                                                                     Size="Large"
                                                                      Glyph="{x:Static fontresources:FontAwesomeIcons.Trash}"
                                                                      Color="{StaticResource My_Button_Color}"/>
                                                 </Image.Source>
@@ -199,7 +210,8 @@
                                                 <ImageButton.Source>
                                                     <FontImageSource FontFamily="FontAwesome"
                                                                      Glyph="{x:Static fontresources:FontAwesomeIcons.PencilAlt}"
-                                                                     Size="Medium"/>
+                                                                     Color="DimGray"
+                                                                     Size="Large"/>
                                                 </ImageButton.Source>
                                             </ImageButton>
 

@@ -7,6 +7,7 @@
              BackgroundColor="WhiteSmoke"
              xmlns:resources="clr-namespace:FormsLoyalty"
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:enums="clr-namespace:LSRetail.Omni.Domain.DataModel.Loyalty.Setup;assembly=LSRetail.Omni.Domain.DataModel.Loyalty"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
@@ -18,7 +19,14 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+        <ToolbarItem Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.Search}"
+                                 Size="Large"/>
+            </ToolbarItem.IconImageSource>
+
             <ToolbarItem.CommandParameter>
                 <prism:NavigationParameters>
                     <prism:NavigationParameter Key="page" Value="Wishlist" />

@@ -9,6 +9,7 @@
             xmlns:enums="clr-namespace:LSRetail.Omni.Domain.DataModel.Loyalty.Setup;assembly=LSRetail.Omni.Domain.DataModel.Loyalty" 
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
              x:Name="offerPage"
              Padding="10"
@@ -220,7 +221,14 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+        <ToolbarItem Order="Primary" Command="{prism:NavigateTo Name='SearchPage'}">
+
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.Search}"
+                                 Size="Large"/>
+            </ToolbarItem.IconImageSource>
+
             <ToolbarItem.CommandParameter>
                 <prism:NavigationParameters>
                     <prism:NavigationParameter Key="page" Value="Offer" />

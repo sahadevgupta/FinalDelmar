@@ -9,7 +9,9 @@
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
-             xmlns:resources="clr-namespace:FormsLoyalty" xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:resources="clr-namespace:FormsLoyalty" 
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
+             xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Visual="Material"
              x:Name="itemCategory"
              BackgroundColor="WhiteSmoke"
@@ -31,7 +33,13 @@
     </ContentPage.Resources>
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem IconImageSource="ic_search_24dp" Order="Primary" Command="{Binding SearchCommand}"/>
+        <ToolbarItem Order="Primary" Command="{Binding SearchCommand}">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="FontAwesome"
+                                 Glyph="{x:Static fontresources:FontAwesomeIcons.Search}"
+                                 Size="Large"/>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
     </ContentPage.ToolbarItems>
     
 

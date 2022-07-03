@@ -13,7 +13,6 @@ namespace FormsLoyalty.Views
         {
             InitializeComponent();
             _viewModel = BindingContext as StoreLocatorPageViewModel;
-            ChangeToolbarIcon();
         }
         protected override void OnAppearing()
         {
@@ -23,60 +22,10 @@ namespace FormsLoyalty.Views
         protected override void OnDisappearing()
         {
             base.OnDisappearing();
-            viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-        }
-        private void ChangeToolbarIcon()
-        {
-
-            try
-            {
-                if (Settings.ShowCard)
-                {
-                    viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-                    _viewModel.count = 2;
-                    stores.ItemTemplate = (DataTemplate)Resources["CardView"];
-                    stores.Margin = new Thickness(10);
-                }
-                else
-                {
-                    _viewModel.count = 1;
-                    viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
-                    stores.ItemTemplate = (DataTemplate)Resources["ListView"];
-
-                    stores.Margin = new Thickness(0);
-
-                }
-            }
-            catch (System.Exception)
-            {
-
-                if (Settings.ShowCard)
-                {
-                    viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-                    _viewModel.count = 2;
-                    stores.ItemTemplate = (DataTemplate)Resources["CardView"];
-                    stores.Margin = new Thickness(10);
-                }
-                else
-                {
-                    _viewModel.count = 1;
-                    viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
-                    stores.ItemTemplate = (DataTemplate)Resources["ListView"];
-
-                    stores.Margin = new Thickness(0);
-
-                }
-            }
+            
 
         }
-
-        private void ToolbarItem_Clicked(object sender, System.EventArgs e)
-        {
-            Settings.ShowCard = !Settings.ShowCard;
-            ChangeToolbarIcon();
-
-        }
-
+        
         private async void Button_Clicked(object sender, System.EventArgs e)
         {
             var grid = (Grid)sender;

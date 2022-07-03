@@ -153,9 +153,9 @@
 
             </ToolbarItem.CommandParameter>
         </ToolbarItem>
-        <ToolbarItem 
+        <!--<ToolbarItem 
                      x:Name="viewtoolbar"
-                     Order="Primary" Clicked="ToolbarItem_Clicked"/>
+                     Order="Primary" Clicked="ToolbarItem_Clicked"/>-->
     </ContentPage.ToolbarItems>
 
     <AbsoluteLayout>

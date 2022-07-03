@@ -10,6 +10,7 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              BackgroundColor="#33b6b6b6"
              x:Name="thisPage"
@@ -105,13 +106,19 @@
                                 <Switch x:Name="reminderSwitch"  HorizontalOptions="End" IsToggled="{Binding medicineReminder.IsReminder}" OnColor="#f6ced0" 
                              ThumbColor="{StaticResource My_Header_Color}"/>
 
-                                <Image Source="left_arrow" BackgroundColor="Transparent" 
+                                <Image  BackgroundColor="Transparent" 
                                                  HeightRequest="16" Aspect="AspectFit"
                                            effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
                                                  WidthRequest="16"
                                                  Margin="5,0,5,0"
                                                  Rotation="270"
                                                  HorizontalOptions="End" VerticalOptions="Center">
+
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="FontAwesome"
+                                                         Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronLeft}"/>
+                                    </Image.Source>
+
                                     <Image.Triggers>
                                         <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference expander},Path= IsExpanded }"
                                                          Value="true">
@@ -192,13 +199,19 @@
                         <xct:Expander.Header>
                             <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" >
                                 <Label Text="{x:Static resources:AppResources.txtSchedule}" FontSize="Medium" TextColor="{StaticResource My_Header_Color}" HorizontalOptions="FillAndExpand"/>
-                                <Image Source="left_arrow" BackgroundColor="Transparent" 
+                                <Image BackgroundColor="Transparent" 
                                                  HeightRequest="16" Aspect="AspectFit"
                                            effects:TintImageEffect.TintColor="{StaticResource My_Button_Color}"
                                                  WidthRequest="16"
                                                  Margin="5,0,5,0"
                                                  Rotation="270"
                                                  HorizontalOptions="End" VerticalOptions="Center">
+
+                                    <Image.Source>
+                                        <FontImageSource FontFamily="FontAwesome"
+                                                         Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronLeft}"/>
+                                    </Image.Source>
+                                    
                                     <Image.Triggers>
                                         <DataTrigger TargetType="Image" Binding="{Binding Source={x:Reference schexpander},Path= IsExpanded }"
                                                          Value="true">

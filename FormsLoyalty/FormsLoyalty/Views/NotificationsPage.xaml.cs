@@ -24,7 +24,7 @@ namespace FormsLoyalty.Views
         {
             base.OnAppearing();
             _viewModel.LoadNotifications();
-            //ChangeToolbarIcon();
+            ChangeToolbarIcon();
 
         }
 
@@ -34,14 +34,24 @@ namespace FormsLoyalty.Views
             {
                 if (Settings.ShowCard)
                 {
-                    viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
+                    viewtoolbar.IconImageSource = new FontImageSource()
+                    {
+                        FontFamily = "FontAwesome",
+                        Glyph = FormsLoyalty.Resources.FontAwesomeIcons.List,
+                        Size = Xamarin.Forms.Device.GetNamedSize(NamedSize.Large, viewtoolbar)
+                    };
                     _viewModel.count = 2;
                     offerlist.ItemTemplate = (DataTemplate)Resources["CardView"];
                 }
                 else
                 {
                     _viewModel.count = 1;
-                    viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
+                    viewtoolbar.IconImageSource = new FontImageSource()
+                    {
+                        FontFamily = "FontAwesome",
+                        Glyph = FormsLoyalty.Resources.FontAwesomeIcons.Th,
+                        Size = Xamarin.Forms.Device.GetNamedSize(NamedSize.Large, viewtoolbar)
+                    };
                     offerlist.ItemTemplate = (DataTemplate)Resources["ListView"];
                 }
             }
@@ -50,14 +60,24 @@ namespace FormsLoyalty.Views
 
                 if (Settings.ShowCard)
                 {
-                    viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
+                    viewtoolbar.IconImageSource = new FontImageSource()
+                    {
+                        FontFamily = "FontAwesome",
+                        Glyph = FormsLoyalty.Resources.FontAwesomeIcons.List,
+                        Size = Xamarin.Forms.Device.GetNamedSize(NamedSize.Large, viewtoolbar)
+                    };
                     _viewModel.count = 2;
                     offerlist.ItemTemplate = (DataTemplate)Resources["CardView"];
                 }
                 else
                 {
                     _viewModel.count = 1;
-                    viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
+                    viewtoolbar.IconImageSource = new FontImageSource()
+                    {
+                        FontFamily = "FontAwesome",
+                        Glyph = FormsLoyalty.Resources.FontAwesomeIcons.Th,
+                        Size = Xamarin.Forms.Device.GetNamedSize(NamedSize.Large, viewtoolbar)
+                    };
                     offerlist.ItemTemplate = (DataTemplate)Resources["ListView"];
                 }
             }
@@ -78,7 +98,7 @@ namespace FormsLoyalty.Views
         private void ToolbarItem_Clicked(object sender, System.EventArgs e)
         {
             Settings.ShowCard = !Settings.ShowCard;
-            //ChangeToolbarIcon();
+            ChangeToolbarIcon();
 
         }
 
