@@ -23,7 +23,7 @@
         <xct:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
     </ContentPage.Resources>
 
-    <AbsoluteLayout>
+    <AbsoluteLayout BackgroundColor="White">
         <Grid RowDefinitions="Auto,Auto" 
               AbsoluteLayout.LayoutBounds="0,0,1,1"
               AbsoluteLayout.LayoutFlags="All"

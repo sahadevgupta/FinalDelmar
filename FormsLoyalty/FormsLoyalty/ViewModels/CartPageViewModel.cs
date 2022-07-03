@@ -185,8 +185,10 @@ namespace FormsLoyalty.ViewModels
 
             
         }
-        private async void LoadBasketItems()
+        private void LoadBasketItems()
         {
+            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async () =>
+            { 
             try
             {
                 IsPageEnabled = true;
@@ -263,6 +265,8 @@ namespace FormsLoyalty.ViewModels
             {
                 IsPageEnabled = false;
             }
+
+           });
         }
         private void CalculateBasketPrice()
         {

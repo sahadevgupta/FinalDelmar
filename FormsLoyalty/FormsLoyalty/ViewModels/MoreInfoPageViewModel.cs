@@ -78,33 +78,38 @@ namespace FormsLoyalty.ViewModels
                     MobileNumber = AppData.Device.UserLoggedOnToDevice.MobilePhone;
                 }
 
-               LoadData();
+                LoadData();
 
             }
 
         }
 
-        private async void LoadData()
+        private void LoadData()
         {
-            try
+            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async() =>
             {
-                IsPageEnabled = true;
-                var menuoptionItems = await GetMenuDrawerList();
-                var temp = new List<MenuGroup>();
-                temp.Add(new MenuGroup(AppResources.txtMenu, menuoptionItems));
-                temp.Add(new MenuGroup(AppResources.txtSettings, GetSettingsDrawerList()));
+                try
+                {
+                    IsPageEnabled = true;
+                    var menuoptionItems = await GetMenuDrawerList();
+                    var temp = new List<MenuGroup>();
+                    temp.Add(new MenuGroup(AppResources.txtMenu, menuoptionItems));
+                    temp.Add(new MenuGroup(AppResources.txtSettings, GetSettingsDrawerList()));
 
-                MenuItems = new ObservableCollection<MenuGroup>(temp);
-            }
-            catch (Exception ex)
-            {
+                    MenuItems = new ObservableCollection<MenuGroup>(temp);
+                }
+                catch (Exception ex)
+                {
 
-                Crashes.TrackError(ex);
-            }
-            finally
-            {
-                IsPageEnabled = false;
-            }
+                    Crashes.TrackError(ex);
+                }
+                finally
+                {
+                    IsPageEnabled = false;
+                }
+            });
+
+            
             
         }
 
@@ -565,7 +570,7 @@ namespace FormsLoyalty.ViewModels
                             return;
                         }
 
-                        await navigation.PushAsync(scan);
+                        await navigation.PushAsync(scan,false);
                         //Navigation.PushAsync(scan);
                         scan.OnScanResult += (result) =>
                         {
@@ -578,7 +583,7 @@ namespace FormsLoyalty.ViewModels
                             {
                                 //DependencyService.Get<INotify>().ShowToast($"Scan Successful!!, Code : {result.Text}");
                                 //Navigation.PopAsync();
-                                navigation.PopAsync();
+                                navigation.PopAsync(false);
                                 string barcode = result.Text;
                                
                                 GetItemByBarCode(barcode);

@@ -70,15 +70,17 @@ namespace FormsLoyalty.ViewModels
             
         }
 
-        private async void LoadData()
+        private void LoadData()
         {
             IsPageEnabled = true;
-
-            if (AppData.Device.UserLoggedOnToDevice != null)
+            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                await GetOrderAsync();
-                
-            }
+                if (AppData.Device.UserLoggedOnToDevice != null)
+                {
+                    await GetOrderAsync();
+
+                }
+            });
             IsPageEnabled = false;
         }
         public async Task GetOrderAsync()

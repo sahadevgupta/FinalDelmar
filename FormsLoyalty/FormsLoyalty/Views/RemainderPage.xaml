@@ -15,7 +15,7 @@
 
 
 
-    <Grid RowDefinitions="Auto,*,Auto">
+    <Grid RowDefinitions="Auto,*,Auto" BackgroundColor="#B3f2f2ef">
 
         <Frame CornerRadius="0" BackgroundColor="White" Padding="0">
         <Grid Padding="10" ColumnDefinitions="*" RowDefinitions="Auto,60,*" BackgroundColor="White">

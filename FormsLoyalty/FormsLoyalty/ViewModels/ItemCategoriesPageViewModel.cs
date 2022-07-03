@@ -6,6 +6,7 @@ using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Items;
 using LSRetail.Omni.Domain.Services.Loyalty.Items;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.Setup;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Commands;
@@ -100,23 +101,29 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        private async void LoadData()
+        private void LoadData()
         {
-            IsPageEnabled = true;
-            try
+            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async () =>
             {
-                await LoadCategories();
+                IsPageEnabled = true;
+                try
+                {
+                    await LoadCategories();
 
-                SelectedCategory = itemCategories.FirstOrDefault();
-                GetItemProductGroups();
-            }
-            catch (Exception)
-            {
+                    SelectedCategory = itemCategories.FirstOrDefault();
+                    GetItemProductGroups();
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                }
+                finally
+                {
+                    IsPageEnabled = false;
+                }
+            });
 
-                IsPageEnabled = false;
-            }
-
-            IsPageEnabled = false;
+            
            
         }
 
