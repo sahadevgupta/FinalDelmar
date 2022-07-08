@@ -9,7 +9,7 @@
             xmlns:android="clr-namespace:Xamarin.Forms.PlatformConfiguration.AndroidSpecific;assembly=Xamarin.Forms.Core"
             xmlns:plugin="clr-namespace:Plugin.Badge.Abstractions;assembly=Plugin.Badge.Abstractions"
             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
-            xmlns:resources="clr-namespace:FormsLoyalty"
+            xmlns:resources="clr-namespace:FormsLoyalty" xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
             android:TabbedPage.OffscreenPageLimit="5"
             android:TabbedPage.ToolbarPlacement="Bottom"
             android:TabbedPage.IsSwipePagingEnabled="False"
@@ -55,8 +55,23 @@
 
         <!--Cart Page-->
 
+        <NavigationPage Title="{x:Static resources:AppResources.CartTab}" x:Name="carttabios">
+            <x:Arguments>
 
-        <OnPlatform x:TypeArguments="NavigationPage">
+
+                <views:CartPage  
+                                plugin:TabBadge.BadgeText="{Binding BadgeCount}"
+                                 plugin:TabBadge.BadgeColor="{StaticResource SecondaryColor}"
+                                 plugin:TabBadge.BadgeTextColor="White"/>
+
+
+
+
+
+            </x:Arguments>
+        </NavigationPage>
+
+        <!--<OnPlatform x:TypeArguments="NavigationPage">
             <OnPlatform.iOS>
                 <NavigationPage Title="{x:Static resources:AppResources.CartTab}" x:Name="carttabios">
                     <x:Arguments>
@@ -93,7 +108,7 @@
                 </NavigationPage>
             </OnPlatform.Android>
 
-        </OnPlatform>
+        </OnPlatform>-->
         
         
 

@@ -161,13 +161,13 @@ namespace FormsLoyalty
             }
             else
             {
-                 Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
-                {
+                Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
+               {
                     //Current.MainPage = new Page1();
                     NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage");
-                });
-                // Current.MainPage = new TabbedPage1();
-                
+               });
+                //Current.MainPage = new CheckoutPage();
+
             }
         }
 

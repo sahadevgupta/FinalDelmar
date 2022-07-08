@@ -21,7 +21,10 @@ namespace FormsLoyalty.Views.CheckoutStepperView
             _viewModel = viewmodel;
         }
 
-       
+        public AddressDetailsView()
+        {
+
+        }
 
         private void RadioButton_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {

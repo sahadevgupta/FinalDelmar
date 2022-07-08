@@ -6,7 +6,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <Style x:Key="SubTitle3T3" TargetType="Label">
-                <Setter Property="FontSize" Value="Large" />
+                <Setter Property="FontSize" Value="Body" />
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="#333333" />
             </Style>

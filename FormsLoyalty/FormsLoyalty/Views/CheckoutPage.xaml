@@ -9,8 +9,12 @@
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
              xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
-             xmlns:controls1="clr-namespace:FormsLoyalty.Controls" xmlns:controls2="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:customview="clr-namespace:FormsLoyalty.Views.CheckoutStepperView"
+             xmlns:vm="clr-namespace:FormsLoyalty.ViewModels" xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              BackgroundColor="WhiteSmoke"
+             
              Title="{x:Static resources:AppResources.ActionbarCheckout}">
    
     
@@ -23,7 +27,7 @@
 
 
     <AbsoluteLayout>
-        <Grid 
+        <Grid IsVisible="false"
             x:Name="mainGrid"
             HorizontalOptions="FillAndExpand"
           RowDefinitions="80,*"
@@ -63,12 +67,613 @@
         </Grid>
 
 
+        <Grid RowDefinitions="Auto,*"
+              AbsoluteLayout.LayoutBounds="0,0,1,1"
+              AbsoluteLayout.LayoutFlags="All">
+            <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
+                  ColumnSpacing="0" Padding="10,10,20,10"
+                  
+                  RowDefinitions="Auto,Auto"
+                  ColumnDefinitions="Auto,*,Auto"
+                  BackgroundColor="White">
+
+
+                <Grid WidthRequest="20" Grid.Column="0"
+                  x:Name="addresstrackergrid"
+                  HorizontalOptions="CenterAndExpand" VerticalOptions="Start"
+                  Padding="0"
+                  Margin="0,10,0,0" RowSpacing="1" ColumnSpacing="0"
+                  RowDefinitions="Auto"
+                  ColumnDefinitions="Auto">
+
+                    <yummy:PancakeView CornerRadius="{OnPlatform iOS='10', Android='20'}"
+                                      HeightRequest="20" WidthRequest="20"
+                                      
+                                      IsClippedToBounds="True"
+                                      BorderColor="Black"
+                                      BackgroundColor="#127ABF">
+
+                        <Image Aspect="AspectFill" Margin="4" x:Name="addresstrackergridimage"/>
+
+                    </yummy:PancakeView>
+
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="StepTapped_Tapped"/>
+                </Grid.GestureRecognizers>
+
+                </Grid>
+
+                <ProgressBar VerticalOptions="{OnPlatform iOS='CenterAndExpand', Android='FillAndExpand'}"
+                         HorizontalOptions="FillAndExpand"
+                         Margin="0,10,0,0"
+                         x:Name="progress"
+                         IsVisible="{Binding IsNotLast}"
+                         ProgressColor="#127ABF"
+                         Grid.Column="1" Grid.Row="0"
+                         />
+
+                <Grid WidthRequest="20" Grid.Column="2"
+                      HorizontalOptions="CenterAndExpand" VerticalOptions="Start"
+                      Padding="0"
+                      Margin="0,10,0,0" RowSpacing="1" ColumnSpacing="0"
+                      RowDefinitions="Auto"
+                      ColumnDefinitions="Auto">
+
+                    <yummy:PancakeView CornerRadius="{OnPlatform iOS='10', Android='20'}"
+                                      HeightRequest="20" WidthRequest="20"
+                                      x:Name="reviewtrackergrid"
+                                      IsClippedToBounds="True"
+                                      BorderColor="Black"
+                                      BackgroundColor="Silver">
+
+                        <Image Aspect="AspectFill" Margin="4"
+                           Source="{Binding Status,Converter={StaticResource StepImageConverter}}"/>
+
+                    </yummy:PancakeView>
+
+                    <!--<Grid.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="StepTapped_Tapped"/>
+                </Grid.GestureRecognizers>-->
+
+                </Grid>
+
+
+                <Label Text="Address &#10; Details"
+                   
+                   FontSize="Body"
+                   TextColor="#333333"
+                   VerticalOptions="Start"
+                   HorizontalOptions="Start"
+                   LineBreakMode="WordWrap"
+                   Grid.ColumnSpan="2" Grid.Row="2"/>
+
+                <Label Text="Checkout"
+                   
+                   FontSize="Body"
+                   TextColor="#333333"
+                   VerticalOptions="Start"
+                   HorizontalOptions="End"
+                   LineBreakMode="WordWrap"
+                   Grid.Column="1" 
+                   Grid.ColumnSpan="2"
+                   Grid.Row="2"/>
+
+            </Grid>
+
+            <ScrollView Grid.Row="1" >
+                <Grid>
+                    <StackLayout x:Name="addressStackView">
+
+                        <StackLayout.Resources>
+                            <ResourceDictionary>
+                                <Style TargetType="material:MaterialTextField">
+                                    <Setter Property="TintColor" Value="Blue"/>
+
+                                </Style>
+
+
+                            </ResourceDictionary>
+                        </StackLayout.Resources>
+
+                        <controls1:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.CheckoutViewShippingAddress}"
+                                                        Margin="10,0"/>
+
+                        
+
+                        <Frame Padding="5,0,5,0" Margin="5,0,5,0" CornerRadius="5" BackgroundColor="WhiteSmoke" HasShadow="True" Visual="Material"
+                               BorderColor="Silver">
+                            <StackLayout IsClippedToBounds="True">
+                                <Label Text="{x:Static resources:AppResources.txtSelectAddress}" FontSize="Body" Margin="5,0" FontAttributes="Bold"/>
+                                <Picker ItemsSource="{Binding addresses}" SelectedItem="{Binding selectedAddress}"
+                    TextColor="{StaticResource My_Header_Color}" 
+                    BackgroundColor="WhiteSmoke"
+                    ItemDisplayBinding="{Binding Address1}"
+                    TitleColor="Black"
+                    
+                    Title="{x:Static resources:AppResources.txtSelectAddress}"
+                    Visual="Default"/>
+                            </StackLayout>
+                        </Frame>
+
+
+
+
+
+                        <controls1:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.txtAddressDetails}"
+                                       Margin="10,10,0,0"/>
+
+                        
+
+                        <Label Padding="10,0,10,0">
+                            <Label.Triggers>
+                                <DataTrigger TargetType="Label" Binding="{Binding selectedAddress.LineNO}"
+                             Value="0">
+                                    <Setter Property="IsVisible" Value="false"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{x:Static resources:AppResources.txtNote}" TextColor="Red"/>
+
+                                    <Span Text=" "/>
+                                    <Span  Text="{x:Static resources:AppResources.CheckoutAddressNote}"/>
+
+                                </FormattedString>
+                            </Label.FormattedText>
+
+                        </Label>
+
+                        <StackLayout IsEnabled="False" x:Name="addressStack">
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout" Binding="{Binding selectedAddress.LineNO}"
+                             Value="0">
+                                    <Setter Property="IsEnabled" Value="True"/>
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+
+
+                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.CheckoutViewName}" 
+                                        Margin="5,0,5,0"
+                                        x:Name="userName"
+                                       AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                        Text="{Binding shippingAddressName}"
+                                        HasError="{Binding IsNameErrorVisible}"
+                                        HelperTextColor="Red"
+                                        ErrorText="Error Text" 
+                                        InputType="Default" 
+                                    />
+
+
+
+
+                            <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" >
+                                <controls1:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
+                                       SelectedItem="{Binding SelectedCity}" TextColor="Black"
+                                       Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
+                                    TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
+                                   Visual="Default"   />
+                            </Frame>
+
+
+                            <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True">
+                                <controls1:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
+                                       SelectedItem="{Binding SelectedArea}" TextColor="Black"
+                                       Title="{x:Static resources:AppResources.txtArea}" 
+                                    TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
+                                   Visual="Default">
+                                    <controls1:CustomPicker.Triggers>
+                                        <DataTrigger TargetType="controls1:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"
+                                     Value="null">
+                                            <Setter Property="IsEnabled" Value="False"/>
+
+                                        </DataTrigger>
+                                    </controls1:CustomPicker.Triggers>
+
+                                </controls1:CustomPicker>
+                            </Frame>
+
+
+                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtNumber}" 
+                                         AlwaysShowUnderline="True"
+                                         HasError="{Binding IsNumberErrorVisible}"
+                                        Text="{Binding shippingAddress.Number}"
+                                       BackgroundColor="White"
+                                        x:Name="AddressOne"
+                                        Margin="5,0,5,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Chat" />
+
+                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtStreet}" 
+                                        AlwaysShowUnderline="True"
+                                        BackgroundColor="White"
+                                       
+                                        HasError="{Binding IsStreetErrorVisible}"
+                                        Text="{Binding shippingAddress.Street}"
+                                        Margin="5,10,5,0"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Chat" />
+
+                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtFloorNo}" 
+                                        
+                                        HasError="{Binding IsFloorErrorVisible}"
+                                        AlwaysShowUnderline="True"
+                                       BackgroundColor="White"
+                                       Margin="5,10,5,0"
+                                        Text="{Binding shippingAddress.FloorNo}"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Chat" />
+
+
+                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtAprtNo}" 
+                                         HasError="{Binding IsApartmentErrorVisible}"
+                                        
+                                        AlwaysShowUnderline="True"
+                                       BackgroundColor="White"
+                                       Margin="5,10,5,0"
+                                        Text="{Binding shippingAddress.ApartmentNo}"
+                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
+                                        InputType="Chat" />
+
+                        </StackLayout>
+
+                        <controls1:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.CheckoutViewPaymentOptions}"
+                                       Margin="10,10,0,0"/>
+
+
+
+                        <RadioButton TextColor="{StaticResource My_Button_Color}" FlowDirection="LeftToRight"
+                     FontSize="Body" Margin="10,0"
+                     x:Name="cod"
+                     ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                     Content="{x:Static resources:AppResources.CheckoutViewPayOnDelivery}"
+                     IsChecked="True"
+                     GroupName="payment"/>
+
+
+
+                        <RadioButton  FontSize="Body" TextColor="{StaticResource My_Button_Color}" FlowDirection="LeftToRight"
+                      IsChecked="{Binding IsVisaOnDelivery}"
+                      ControlTemplate="{StaticResource ThemeRadioTemplate}"
+                      Content="{x:Static resources:AppResources.CheckoutViewPayCreditOnDelivery}"
+                      x:Name="visadelivery"
+                      Margin="10,0"
+                      GroupName="payment"/>
+
+
+                        <Button Text="{x:Static resources:AppResources.ApplicationNext}"
+                    Margin="10" Visual="Material"
+                    Clicked="NextBtn_Clicked"
+               BackgroundColor="{StaticResource My_Button_Color}"
+           
+           FontSize="Medium"
+            />
+
+                    </StackLayout>
+
+
+                    <StackLayout x:Name="reviewstackview" IsVisible="false" Visual="Material">
+
+                        <StackLayout.Resources>
+                            <converters:BytesToImageSource x:Key="BytesToImageSource"/>
+                            <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+                        </StackLayout.Resources>
+                        <controls1:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.ActionbarItems}"
+                                       Margin="10,0"/>
+
+                       
+
+                        <StackLayout BindableLayout.ItemsSource="{Binding basketItems}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate>
+                                    <Frame Padding="10">
+                                        <Grid >
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto"/>
+                                                <ColumnDefinition Width="*"/>
+                                                <ColumnDefinition Width="Auto"/>
+                                            </Grid.ColumnDefinitions>
+
+
+
+
+                                            <controls:CircleImage Source="{Binding Image.Location}"
+                                                      Aspect="AspectFill"
+                                                      WidthRequest="60"
+                                                      BorderThickness="0.4"
+                                                      BorderColor="Silver"
+                                                      HeightRequest="60"
+                                                      Grid.RowSpan="2"
+                                                      Grid.Column="0"/>
+
+                                            <StackLayout Grid.Row="0" Grid.Column="1">
+
+
+                                                <Label Text="{Binding ItemDescription}"
+                                       TextColor="Black" FontSize="Body" MaxLines="2" LineBreakMode="TailTruncation"
+                                       Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2"/>
+
+                                                <Label Text="{Binding DiscountAmount,StringFormat='Discount: {0:F2}'}" TextColor="Red">
+                                                    <Label.Triggers>
+                                                        <DataTrigger TargetType="Label" Binding="{Binding DiscountAmount}" Value="0">
+                                                            <Setter Property="IsVisible" Value="false"/>
+                                                        </DataTrigger>
+                                                    </Label.Triggers>
+                                                </Label>
+
+                                            </StackLayout>
+
+                                            <Label Text="{Binding Quantity,StringFormat={x:Static resources:AppResources.ApplicationQtyN,'{0:N0}'}}"
+                                      
+                                       FontSize="Small" Grid.Row="1" Grid.Column="1"/>
+
+                                            <Label Text="{Binding Amount,StringFormat='EGP {0:F2}'}" HorizontalOptions="End"
+                                       TextColor="Black"
+                                       FontSize="Small" Grid.Row="1" Grid.Column="2"/>
+
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </StackLayout>
+
+
+
+
+                        <StackLayout x:Name="emailStack" IsVisible="False">
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout"
+                                     Binding="{Binding shippingMedhod}"
+                                     Value="ClickCollect">
+                                    <Setter Property="IsVisible" Value="True"/>
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+
+                            <Label Text="{x:Static resources:AppResources.AccountInformationViewEmail}"
+            TextColor="Black"
+           Padding="10"
+               BackgroundColor="#dedede"
+           FontSize="Body"
+            />
+                            <Label Text="{x:Static resources:AppResources.CheckoutViewEmailToSendReceipt}" Margin="10,0"/>
+                            <Entry Text="{Binding email}"/>
+
+                        </StackLayout>
+
+
+                        <StackLayout Margin="0,10,0,0">
+
+                            <StackLayout.Triggers>
+                                <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Reference emailStack}, Path= IsVisible}"
+                                     Value="true">
+                                    <Setter Property="IsVisible" Value="False"/>
+                                </DataTrigger>
+                            </StackLayout.Triggers>
+
+
+                            <Label Text="{x:Static resources:AppResources.CheckoutViewHomeDelivery}"
+            TextColor="Black"
+           Padding="10"
+               BackgroundColor="#dedede"
+           FontSize="Body"
+            />
+
+                            <Label Text="{Binding shippingAddressName}" TextColor="Black" Margin="10,0"/>
+                            <Label Text="{Binding ShippingAddressDesc}" Margin="10,0"/>
+
+                            <StackLayout >
+
+                                <StackLayout.Triggers>
+                                    <DataTrigger TargetType="StackLayout" Binding="{Binding CardNumber,Converter={StaticResource StringToBoolConverter}}"
+                                     Value="false">
+                                        <Setter Property="IsVisible" Value="False"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+
+                                <Label Text="{x:Static resources:AppResources.CheckoutViewPayCreditCard}"
+            TextColor="Black"
+           Padding="10"
+                           Margin="0,10,0,0"
+               BackgroundColor="#dedede"
+           FontSize="Body"
+            />
+
+                                <Label Text="{Binding CardNumber}" TextColor="Black" Margin="10,0"/>
+                                <Label Text="{Binding CardDesc}" Margin="10,0"/>
+
+                                <Label Text="{x:Static resources:AppResources.CheckoutViewBillingAddress}"
+                           Margin="0,10,0,0"
+            TextColor="Black"
+           Padding="10"
+               BackgroundColor="#dedede"
+           FontSize="Body"
+            />
+
+                                <Label Text="{Binding billingAddressName}" TextColor="Black" Margin="10,0"/>
+                                <Label Text="{Binding BillingingAddressDesc}" Margin="10,0"/>
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+
+                        <StackLayout>
+
+                            <Label Text="{x:Static resources:AppResources.ActionbarCoupon}"
+            TextColor="Black"
+           Padding="10"
+               BackgroundColor="#dedede"
+           FontSize="Body"
+            />
+
+                            <StackLayout Orientation="Horizontal" Margin="10,0,10,0" IsVisible="false">
+
+                                <StackLayout.Triggers>
+                                    <DataTrigger    TargetType="StackLayout" Binding="{Binding SelectedCoupon,TargetNullValue=null}"
+                                            Value="null">
+                                        <Setter Property="IsVisible" Value="true"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+
+                                <Label Text="{x:Static resources:AppResources.txtSelectCode}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
+
+                                <Button HorizontalOptions="End" Text="{x:Static resources:AppResources.txtViewCoupons}" x:Name="viewOfferBtn" Clicked="viewOfferBtn_Clicked"
+                            CornerRadius="20"  Padding="0" BackgroundColor="#06A9B1"/>
+
+
+                            </StackLayout>
+
+
+                            <StackLayout Orientation="Horizontal" Margin="10,0,10,0" IsVisible="true">
+                                <StackLayout.Triggers>
+                                    <DataTrigger    TargetType="StackLayout" Binding="{Binding SelectedCoupon,TargetNullValue=null}"
+                                            Value="null">
+                                        <Setter Property="IsVisible" Value="false"/>
+                                    </DataTrigger>
+                                </StackLayout.Triggers>
+
+                                <Label HorizontalOptions="FillAndExpand">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="Code "/>
+                                            <Span Text="{Binding SelectedCoupon.CouponID}" FontSize="Body" FontAttributes="Bold"/>
+                                            <Span Text=" "/>
+                                            <Span Text="{x:Static resources:AppResources.txtApplied}"/>
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+
+                                <StackLayout HorizontalOptions="End">
+                                    <Label Text="{Binding SelectedCoupon.CouponValue,StringFormat='-{0:0.00}'}"/>
+                                    <Label Text="{x:Static resources:AppResources.RemoveTxt}" TextColor="OrangeRed" x:Name="removeOfferBtn">
+                                        <Label.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="removeOfferBtn_Tapped"/>
+                                        </Label.GestureRecognizers>
+                                    </Label>
+                                </StackLayout>
+
+
+                            </StackLayout>
+
+                        </StackLayout>
+
+                        <Label Text="{x:Static resources:AppResources.CheckoutViewTotalHeader}"
+            TextColor="Black"
+           Padding="10"
+               BackgroundColor="#dedede"
+           FontSize="Body"
+            />
+
+                        <Grid  Margin="10,10,20,10" ColumnDefinitions="7*,3*" RowDefinitions="Auto,Auto,Auto,Auto,Auto,0.7,Auto">
+
+
+                            <Grid.Resources>
+                                <Style TargetType="Label">
+                                    <Setter Property="LineHeight" Value="1.8"/>
+                                    <Setter Property="TextColor" Value="Black"/>
+                                    <Setter Property="HorizontalOptions" Value="End"/>
+
+                                </Style>
+                            </Grid.Resources>
+
+                            <Label Text="{x:Static resources:AppResources.CheckoutViewSubtotal}"
+                       Grid.Row="0" Grid.Column="0"
+                       
+                       FontSize="Body"/>
+                            <Label Text="{Binding totalSubtotal}"
+                       Grid.Row="0" Grid.Column="1"
+                       FontSize="Body"/>
+                            <Label Text="{x:Static resources:AppResources.CheckoutViewShipping}"
+                       Grid.Row="1" Grid.Column="0"
+                       FontSize="Body"/>
+                            <Label Text="{Binding totalShipping}"
+                       Grid.Row="1" Grid.Column="1"
+                       FontSize="Body"/>
+                            <Label Text="{x:Static resources:AppResources.CheckoutViewVAT}"
+                       Grid.Row="2" Grid.Column="0"
+                       FontSize="Body"/>
+                            <Label Text="{Binding totalVAT}"
+                       Grid.Row="2" Grid.Column="1"
+                       FontSize="Body"/>
+                            <Label Text="{x:Static resources:AppResources.CheckoutViewDiscount}"
+                       Grid.Row="3" Grid.Column="0"
+                       FontSize="Body"/>
+                            <Label Text="{Binding totalDiscount}"
+                       Grid.Row="3" Grid.Column="1"
+                       FontSize="Body"/>
+
+                            <Label TextColor="{DynamicResource My_Button_Color}"
+                       Grid.Row="4" Grid.Column="0"
+                       FontSize="Medium">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="Promo - "/>
+                                        <Span Text="{Binding SelectedCoupon.CouponID}"/>
+                                    </FormattedString>
+                                </Label.FormattedText>
+
+                                <Label.Triggers>
+                                    <DataTrigger    TargetType="Label" Binding="{Binding SelectedCoupon,TargetNullValue=null}"
+                                            Value="null">
+                                        <Setter Property="IsVisible" Value="false"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+
+                            </Label>
+
+                            <Label Text="{Binding SelectedCoupon.CouponValue,StringFormat='{0:0.00}'}"
+                       Grid.Row="4" Grid.Column="1"
+                       FontSize="Body" TextColor="{DynamicResource My_Button_Color}">
+                                <Label.Triggers>
+                                    <DataTrigger    TargetType="Label" Binding="{Binding SelectedCoupon,TargetNullValue=null}"
+                                            Value="null">
+                                        <Setter Property="IsVisible" Value="false"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+
+                            </Label>
+
+                            <BoxView Grid.Row="5" Grid.ColumnSpan="2" HeightRequest="0.5" BackgroundColor="Silver"/>
+
+                            <Label Text="{Binding Source= {x:Static resources:AppResources.CheckoutViewTotal},StringFormat='Grand {0} (EGP)'}"
+                       Grid.Row="6" Grid.Column="0"
+                       FontSize="Body"/>
+                            <Label Text="{Binding totalTotal}" 
+                       Grid.Row="6" Grid.Column="1"
+                       FontSize="Medium"/>
+
+
+                        </Grid>
+
+                        <Button BackgroundColor="{StaticResource My_Button_Color}"
+                    Margin="10" 
+                    x:Name="placeOrderbtn"
+                    Clicked="placeOrderbtn_Clicked"
+                    Text="{x:Static resources:AppResources.CheckoutViewOrder}"
+                    FontSize="Medium"/>
+
+
+                    </StackLayout>
+
+
+                </Grid>
+               
+
+            </ScrollView>
+
+        </Grid>
        
 
-        
 
 
-        
+
+
 
         <controls1:LoadingView AbsoluteLayout.LayoutBounds="0.5,0.5,1,1"
                AbsoluteLayout.LayoutFlags="All" IsVisible="False">

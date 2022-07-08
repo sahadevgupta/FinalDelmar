@@ -21,7 +21,10 @@ namespace FormsLoyalty.Views.CheckoutStepperView
             BindingContext = _viewModel;
 
         }
+        public ReviewSubmitView()
+        {
 
+        }
         private async void viewOfferBtn_Clicked(object sender, EventArgs e)
         {
            await _viewModel.ShowCouponsPopUpView();

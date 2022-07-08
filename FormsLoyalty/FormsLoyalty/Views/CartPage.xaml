@@ -17,6 +17,21 @@
              Visual="Material"
              x:Name="cart">
 
+    <NavigationPage.TitleView>
+        <StackLayout Orientation="Horizontal">
+            <xct:BadgeView
+            BackgroundColor="Red"
+            FontAttributes="Bold"
+            FontSize="Medium"
+            TextColor="White"
+            Text="10">
+                <Label Text="{x:Static resources:AppResources.CartTab}"/>
+            </xct:BadgeView>
+
+
+        </StackLayout>
+    </NavigationPage.TitleView>
+
     <ContentPage.Resources>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>

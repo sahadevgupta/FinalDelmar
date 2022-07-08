@@ -72,7 +72,7 @@ namespace FormsLoyalty.ViewModels
 
         private void LoadData()
         {
-            IsPageEnabled = true;
+           
             Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async () =>
             {
                 if (AppData.Device.UserLoggedOnToDevice != null)
@@ -81,12 +81,13 @@ namespace FormsLoyalty.ViewModels
 
                 }
             });
-            IsPageEnabled = false;
+            
         }
         public async Task GetOrderAsync()
         {
             try
             {
+                IsPageEnabled = true;
                 var service = new TransactionService(new TransactionRepository());
 
                 var loadedTransactions = await service.GetSalesEntriesAsync(AppData.Device.CardId, Int32.MaxValue);
@@ -102,6 +103,10 @@ namespace FormsLoyalty.ViewModels
             catch (Exception ex)
             {
                 LoadCacheOrder();
+                
+            }
+            finally
+            {
                 IsPageEnabled = false;
             }
           

@@ -553,47 +553,23 @@ namespace FormsLoyalty.ViewModels
         }
 
 
-        public void NavigateToNextStep()
+        public bool NavigateToNextStep()
         {
             if (ValidateFields())
             {
-                
+
 
                 if (isCreditCard && string.IsNullOrEmpty(CardNumber))
-                  CardDesc = $"{AppResources.ResourceManager.GetString("NotificationViewExpires", AppResources.Culture)} {CardExpirationDate}";
+                    CardDesc = $"{AppResources.ResourceManager.GetString("NotificationViewExpires", AppResources.Culture)} {CardExpirationDate}";
 
                 ShippingAddressDesc = shippingAddress.FormatAddress;
                 BillingingAddressDesc = billingAddress?.FormatAddress;
 
                 AddNewAddressToServer();
 
-                int index = Steps.IndexOf(Steps.LastOrDefault(x => x.IsCurrentContent));
-                    if (index < Steps.Count)
-                    {
-                        StepBarModel step = Steps.ElementAt(index);
-                        step.Status = StepBarStatus.Completed;
-                        step.IsCurrentContent = false;
-                        Steps[index] = step;
-                        if ((index + 1) < Steps.Count)
-                        {
-                            StepBarModel stepnext = Steps.ElementAt(index + 1);
-                            if (stepnext.Status == StepBarStatus.Pending)
-                            {
-                                stepnext.Status = StepBarStatus.InProgress;
-                            }
-                            stepnext.IsCurrentContent = true;
-                            Steps[index + 1] = stepnext;
-                        }
-
-                        StepBarComponent stepbar = new StepBarComponent(this);
-                        int indexforstepper = MainGrid.Children.IndexOf(MainGrid.Children.FirstOrDefault(x => x.GetType() == typeof(StepBarComponent)));
-                    MainGrid.Children.RemoveAt(indexforstepper);
-                        
-                    MainGrid.Children.Add(stepbar, 0, 0);
-                    }
-                    AddContentForSelectedStep();
-                }
-            
+                return true;
+            }
+            return false;
         }
 
         private void AddNewAddressToServer()
