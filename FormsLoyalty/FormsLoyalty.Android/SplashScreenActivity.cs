@@ -21,9 +21,7 @@ namespace FormsLoyalty.Droid
     [Activity(ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation,
         MainLauncher = true,
         Theme = "@style/SplashTheme",
-    NoHistory = true,
-    ScreenOrientation = ScreenOrientation.Portrait,
-    LaunchMode = LaunchMode.SingleTop)]
+    NoHistory = true)]
     public class SplashScreenActivity : Activity, IOnCompletionListener
     {
         protected override void OnCreate(Bundle savedInstanceState)

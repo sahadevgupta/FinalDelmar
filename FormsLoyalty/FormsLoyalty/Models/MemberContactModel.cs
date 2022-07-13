@@ -21,6 +21,8 @@ using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using Microsoft.AppCenter.Crashes;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using Infrastructure.Data.SQLite.MemberContacts;
+using Device = LSRetail.Omni.Domain.DataModel.Loyalty.Setup.Device;
+using System.Linq;
 
 namespace FormsLoyalty.Models
 {
@@ -68,6 +70,7 @@ namespace FormsLoyalty.Models
             if (isSuccess)
             {
                 AppData.IsLoggedIn = false;
+                Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
                 AppData.Basket.Clear();
                 AppData.Device.UserLoggedOnToDevice = null;
                 AppData.Device.CardId = string.Empty;
@@ -86,6 +89,8 @@ namespace FormsLoyalty.Models
             try
             {
                 await service.LogoutAsync(repository, device.UserLoggedOnToDevice.UserName, device.Id);
+                var contactRepo = new MemberContactRepository();
+                contactRepo.DeleteMemberContact();
                 return true;
             }
             catch (Exception)
@@ -302,17 +307,17 @@ namespace FormsLoyalty.Models
                 //AppData.Basket = contact.GetBasket(AppData.Device.CardId);
                 AppData.Device.SecurityToken = contact.LoggedOnToDevice.SecurityToken;
 
-                // SendBroadcast(Utils.BroadcastUtils.DomainModelUpdated); need to be configured
-                try
-                {
-                    deviceRepo.SaveDevice(AppData.Device);
-                }
-                catch (Exception)
-                {
+                if (contact.Cards.Any())
+                    AppData.Device.CardId = contact.Cards[0].Id;
 
-                    
-                }
-                
+                //AppData.Device.CardId = 
+                var uuid = Xamarin.Forms.DependencyService.Get<INotify>().getDeviceUuid();
+                Device device = new Device();
+                device.Id = uuid;
+                device.CardId = AppData.Device.CardId;
+                FormsLoyalty.Utils.Utils.FillDeviceInfo(device);
+                contact.LoggedOnToDevice = device;
+
 
                 SaveLocalMemberContact(contact);
 
@@ -350,6 +355,16 @@ namespace FormsLoyalty.Models
                 contact.LoggedOnToDevice.UserLoggedOnToDevice = contact;
                 AppData.Device = contact.LoggedOnToDevice;
 
+                if (contact.Cards.Any())
+                    AppData.Device.CardId = contact.Cards[0].Id;
+
+                //AppData.Device.CardId = 
+                var uuid = Xamarin.Forms.DependencyService.Get<INotify>().getDeviceUuid();
+                Device device = new Device();
+                device.Id = uuid;
+                device.CardId = AppData.Device.CardId;
+                FormsLoyalty.Utils.Utils.FillDeviceInfo(device);
+                contact.LoggedOnToDevice = device;
                 SaveLocalMemberContact(contact);
 
                // await PushNotificationSave();

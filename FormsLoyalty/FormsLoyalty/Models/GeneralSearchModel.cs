@@ -19,22 +19,19 @@ namespace FormsLoyalty.Models
     {
         private SearchService service;
         private SharedService sharedService;
-        private string lastSearchKey = string.Empty;
+        
 
         
         public void ResetSearch()
         {
-            lastSearchKey = string.Empty;
+           
         }
 
         public async Task<SearchRs> Search(string searchKey, SearchType searchType)
         {
             SearchRs searchRs = null;
 
-            if (searchKey == lastSearchKey)
-                return null;
-
-            lastSearchKey = searchKey;
+           
 
             BeginWsCall();
 
@@ -49,8 +46,7 @@ namespace FormsLoyalty.Models
             {
                 searchRs = await service.SearchAsync(userId, searchKey, 15, searchType);
 
-                if (lastSearchKey != searchKey)
-                    return null;
+                
             }
             catch (Exception ex)
             {

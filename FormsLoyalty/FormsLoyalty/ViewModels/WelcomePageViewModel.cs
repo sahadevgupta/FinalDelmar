@@ -36,7 +36,8 @@ namespace FormsLoyalty.ViewModels
         {
             var uuid = Xamarin.Forms.DependencyService.Get<INotify>().getDeviceUuid();
             var deviceRepo =  PrismApplicationBase.Current.Container.Resolve<IDeviceLocalRepository>();
-            Device device = new Device(uuid);
+            Device device = new Device();
+            device.Id = uuid;
             FormsLoyalty.Utils.Utils.FillDeviceInfo(device);
 
             deviceRepo.SaveDevice(device);

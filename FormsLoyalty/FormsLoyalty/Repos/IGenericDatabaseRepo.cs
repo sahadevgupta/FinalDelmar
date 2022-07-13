@@ -6,11 +6,11 @@ namespace FormsLoyalty.Repos
 {
     public interface IGenericDatabaseRepo<T>
     {
-        Task Delete(string id);
-        Task Insert(T a);
-        Task InsertAll(IEnumerable<T> a);
-        Task InsertOrReplace(T a);
-        Task<List<T>> GetItemsAsync();
-        Task Update(T a);
+        void Delete(string id);
+        void Insert(T a);
+        void InsertAll(IEnumerable<T> a);
+        void InsertOrReplace(T a);
+        List<T> GetItemsAsync();
+        void Update(T a);
     }
 }

@@ -2,4 +2,7 @@
   <color name="window_background">#ffffff</color>
   <color name="splash_background">#FFFFFF</color>
   <color name="splashVideo_background">#000000</color>
+	<color name="colorPrimary">#b72227</color>
+	<color name="colorPrimaryDark">#b72227</color>
+	<color name="colorAccent">#b72227</color>
 </resources>

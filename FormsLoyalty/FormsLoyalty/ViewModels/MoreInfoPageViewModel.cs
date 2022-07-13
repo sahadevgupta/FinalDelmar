@@ -86,12 +86,12 @@ namespace FormsLoyalty.ViewModels
 
         private void LoadData()
         {
-            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async() =>
+            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
             {
                 try
                 {
                     IsPageEnabled = true;
-                    var menuoptionItems = await GetMenuDrawerList();
+                    var menuoptionItems = GetMenuDrawerList();
                     var temp = new List<MenuGroup>();
                     temp.Add(new MenuGroup(AppResources.txtMenu, menuoptionItems));
                     temp.Add(new MenuGroup(AppResources.txtSettings, GetSettingsDrawerList()));
@@ -100,7 +100,6 @@ namespace FormsLoyalty.ViewModels
                 }
                 catch (Exception ex)
                 {
-
                     Crashes.TrackError(ex);
                 }
                 finally
@@ -108,8 +107,6 @@ namespace FormsLoyalty.ViewModels
                     IsPageEnabled = false;
                 }
             });
-
-            
             
         }
 
@@ -171,7 +168,7 @@ namespace FormsLoyalty.ViewModels
         /// <summary>
         /// This method used to fill the drawer with title and respective icon
         /// </summary>
-        internal async Task<List<DrawerMenuItem>> GetMenuDrawerList()
+        internal List<DrawerMenuItem> GetMenuDrawerList()
         {
             var drawerMenuItems = new List<DrawerMenuItem>();
 
@@ -242,13 +239,16 @@ namespace FormsLoyalty.ViewModels
 
             if (AppData.PublishedOffers is object)
             {
-                var data = await _offerRepo.GetItemsAsync();
+                var data = _offerRepo.GetItemsAsync();
                 
                 if (data.Count(x => x.Code != OfferDiscountType.Coupon) > 0)
                 {
-                    offerCount = data.Count(x => x.Code != OfferDiscountType.Coupon && !x.IsViewed).ToString();
+                    var count = data.Count(x => x.Code != OfferDiscountType.Coupon && !x.IsViewed);
+                    offerCount = count > 0 ? count.ToString() : string.Empty;
                 }  
             }
+
+
 
             drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
             {
@@ -310,11 +310,15 @@ namespace FormsLoyalty.ViewModels
 
             if ((EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null) && EnabledItems.HasWishLists)
             {
+
+                //As Discussed 12/07/22 with Michael commenting the wishist count logic
+
                 //var itemCount = string.Empty;
                 //var oneListItem = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device.CardId, LSRetail.Omni.Domain.DataModel.Loyalty.Baskets.ListType.Wish);
                 //if (oneListItem?.Items.Count > 0)
                 //{
-                //    itemCount = oneListItem.Items.Count.ToString();
+                //    var count = oneListItem.Items.Count;
+                //    itemCount = count > 0 ? count.ToString() : string.Empty;
                 //}
 
                 drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()

@@ -62,25 +62,20 @@ namespace FormsLoyalty.Utils
                         _deviceLocalRepository = new DeviceRepository();
                         device = _deviceLocalRepository.GetDevice();
 
-                        if (device.UserLoggedOnToDevice == null)
-                            device.CardId = string.Empty;
-
-                        if (!(device is UnknownDevice))
+                        if (!(device is UnknownDevice) && AppData.IsLoggedIn)
                         {
-                            if (device.UserLoggedOnToDevice != null)
+                            _memberContactRepo = new MemberContactRepository();
+                            var contact = _memberContactRepo.GetLocalMemberContact();
+
+                            if (contact != null)
                             {
-                                _memberContactRepo = new MemberContactRepository();
-                                var contact = _memberContactRepo.GetLocalMemberContact();
+                                contact.LoggedOnToDevice = device;
 
-                                if (contact != null)
-                                {
-                                    contact.LoggedOnToDevice = device;
-
-                                    device.CardId = contact.LoggedOnToDevice.CardId;
-                                    device.SecurityToken = contact.LoggedOnToDevice.SecurityToken;
-                                    device.UserLoggedOnToDevice = contact;
-                                }
+                                device.CardId = contact.LoggedOnToDevice.CardId;
+                                device.SecurityToken = contact.LoggedOnToDevice.SecurityToken;
+                                device.UserLoggedOnToDevice = contact;
                             }
+
                         }
                     }
                     catch (Exception ex)
@@ -156,7 +151,7 @@ namespace FormsLoyalty.Utils
         public static List<Advertisement> Advertisements { get; set; }
         public static bool IsDualScreen = false;
         public static string magazineURL = "https://magento.linkedgates.com/";
-        public static bool IsLoggedIn = false;
+        public static bool IsLoggedIn { get; set; }
         public static bool IsInsideApp = false;
         public static bool IsViewStock = false;
         public static bool IsLanguageChanged = false;

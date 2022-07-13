@@ -51,7 +51,7 @@
                        Keyboard="Default"
                            Visual="Material"
            FontSize="Medium"
-           >
+           SearchCommand="{Binding SearchCommand}">
                     <SearchBar.Behaviors>
                         <xct:UserStoppedTypingBehavior MinimumLengthThreshold="3" 
                                                        Command="{Binding SearchCommand}"

@@ -141,11 +141,12 @@ namespace FormsLoyalty
             var deviceId = DependencyService.Get<INotify>().getDeviceUuid();
 
              LSRetail.Omni.Infrastructure.Data.Omniservice.Utils.Utils.InitWebService( deviceId, AppType.Loyalty, DefaultUrlLoyalty, AppResources.Culture.TwoLetterISOLanguageName);
-
+            AppData.IsLoggedIn = Xamarin.Essentials.Preferences.Get("IsLoggedIn", default(bool));
             if (string.IsNullOrEmpty(AppData.Device.Id) && !(AppData.Device is UnknownDevice))
             {
                 var deviceRepo = PrismApplicationBase.Current.Container.Resolve<IDeviceLocalRepository>();
-                LSRetail.Omni.Domain.DataModel.Loyalty.Setup.Device deviceData = new LSRetail.Omni.Domain.DataModel.Loyalty.Setup.Device(deviceId);
+                LSRetail.Omni.Domain.DataModel.Loyalty.Setup.Device deviceData = new LSRetail.Omni.Domain.DataModel.Loyalty.Setup.Device();
+                deviceData.Id = deviceId;
                 FormsLoyalty.Utils.Utils.FillDeviceInfo(deviceData);
 
                 deviceRepo.SaveDevice(deviceData);
@@ -153,7 +154,7 @@ namespace FormsLoyalty
                 AppData.Device = deviceData;
             }
 
-            
+           
             // await NavigationService.NavigateAsync(nameof(WelcomePage));
             if (AppData.Device is UnknownDevice)
             {
@@ -163,7 +164,7 @@ namespace FormsLoyalty
             {
                 Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
                {
-                    //Current.MainPage = new Page1();
+                    
                     NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage");
                });
                 //Current.MainPage = new CheckoutPage();

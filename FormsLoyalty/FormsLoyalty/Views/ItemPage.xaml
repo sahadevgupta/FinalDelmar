@@ -1,12 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:prism="http://prismlibrary.com" xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:prism="http://prismlibrary.com" 
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.ItemPage"
              xmlns:resource="clr-namespace:FormsLoyalty"
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              xmlns:resources="clr-namespace:FormsLoyalty" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Name="itemPage"
              xmlns:ffimage="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              Title="{x:Static resources:AppResources.DetailViewDetails}"
@@ -23,6 +25,7 @@
     <ContentPage.Resources>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+        <xct:IntToBoolConverter x:Key="IntToBoolConverter"/>
     </ContentPage.Resources>
 
     <!--<ContentPage.ToolbarItems>
@@ -235,46 +238,33 @@
 
 
                     <Label Margin="10"
-                   TextColor="Black"
-                   FontSize="Medium"
-                       Text="{x:Static resource:AppResources.DetailViewDetails}"/>
+                           TextColor="Black"
+                           FontSize="Medium"
+                           Text="{x:Static resource:AppResources.DetailViewDetails}"/>
 
                     <Label Margin="10"
-                   TextColor="Black"
-                   FontSize="Body"
-                       Text="{Binding Item.Details}"/>
+                           TextColor="Black"
+                           FontSize="Body"
+                           Text="{Binding Item.Details}"/>
 
 
                     <Label Margin="10,20,10,0"
-                       TextColor="Black"
-                       CharacterSpacing="2"
+                           TextColor="Black"
+                           CharacterSpacing="2"
                            Text="{x:Static resources:AppResources.OfferRelatedItems}"
                            FontSize="Medium"
-                   FontAttributes="Bold"
-                            >
-                        <Label.Triggers>
-                            <DataTrigger TargetType="Label"
-                                     Binding="{Binding relatedPublishedOffers.Count}"
-                                     Value="0">
-                                <Setter Property="IsVisible" Value="False"/>
-                            </DataTrigger>
+                           FontAttributes="Bold"
+                           IsVisible="{Binding relatedPublishedOffers.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"/>
 
-                        </Label.Triggers>
-                    </Label>
+
 
                     <CollectionView ItemsSource="{Binding relatedPublishedOffers}"
+                                    IsVisible="{Binding relatedPublishedOffers.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"
                                 HorizontalScrollBarVisibility="Never"
                                 HeightRequest="250"
                             Margin="10,0">
 
-                        <CollectionView.Triggers>
-                            <DataTrigger TargetType="CollectionView"
-                                     Binding="{Binding relatedPublishedOffers.Count}"
-                                     Value="0">
-                                <Setter Property="IsVisible" Value="False"/>
-                            </DataTrigger>
-
-                        </CollectionView.Triggers>
+                       
 
 
                         <CollectionView.ItemsLayout>
@@ -290,7 +280,7 @@
 
                                     <Frame Padding="0" CornerRadius="5" BorderColor="LightGray" Visual="Material">
                                         <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding Images[0].Location}"
-                                                                                         Grid.Row="0"/>
+                                                                     Grid.Row="0"/>
                                         
                                    
                                     </Frame>

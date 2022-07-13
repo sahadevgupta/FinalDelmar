@@ -47,7 +47,7 @@ namespace FormsLoyalty.Views
 
         private async void TapGestureRecognizer_Tapped(object sender, EventArgs e)
         {
-            var frame = (Frame)sender;
+            var frame = (View)sender;
             await frame.ScaleTo(1.5, 100);
             await frame.ScaleTo(1, 100);
 
@@ -64,7 +64,7 @@ namespace FormsLoyalty.Views
         /// <param name="e"></param>
         private async void CameraImg_Tapped(object sender, EventArgs e)
         {
-            var view = (Grid)sender;
+            var view = (View)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
 
@@ -83,7 +83,7 @@ namespace FormsLoyalty.Views
         /// <param name="e"></param>
         private async void Category_Tapped(object sender, EventArgs e)
         {
-            var stack = (StackLayout)sender;
+            var stack = (View)sender;
             stack.Opacity = 0;
             await stack.FadeTo(1, 250);
 
@@ -99,7 +99,7 @@ namespace FormsLoyalty.Views
         /// It Navigates to Item Page
         private async void Item_Tapped(object sender, EventArgs e)
         {
-            var stack = (Grid)sender;
+            var stack = (View)sender;
             stack.Opacity = 0;
             await stack.FadeTo(1, 250);
 
@@ -115,7 +115,7 @@ namespace FormsLoyalty.Views
         /// It Navigates to Offer detail Page
         private async void Offer_Tapped(object sender, EventArgs e)
         {
-            var stack = (Grid)sender;
+            var stack = (View)sender;
             stack.Opacity = 0;
             await stack.FadeTo(1, 250);
 
@@ -163,7 +163,7 @@ namespace FormsLoyalty.Views
         }
         private async void minus_Tapped(object sender, EventArgs e)
         {
-            var view = (Label)sender;
+            var view = (View)sender;
 
             view.Opacity = 0;
             await view.FadeTo(1, 250);
@@ -181,7 +181,7 @@ namespace FormsLoyalty.Views
         }
         private async void plus_Tapped(object sender, EventArgs e)
         {
-            var view = (Label)sender;
+            var view = (View)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
             var selectedItem = view.BindingContext as LoyItem;
@@ -200,7 +200,7 @@ namespace FormsLoyalty.Views
 
         private async void WishList_Tapped(object sender, EventArgs e)
         {
-            var view = (Image)sender;
+            var view = (View)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
             var selectedItem = view.BindingContext as LoyItem;
@@ -219,7 +219,7 @@ namespace FormsLoyalty.Views
 
         private async void points_Tapped(object sender, EventArgs e)
         {
-            var view = (Frame)sender;
+            var view = (View)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
             await _viewModel.NavigateToAccountTier();
@@ -253,7 +253,7 @@ namespace FormsLoyalty.Views
         private async void OnLanguageSelected(object sender, EventArgs e)
         {
 
-            var view = (Frame)sender;
+            var view = (View)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
              _viewModel.ChangeLanguage((e as TappedEventArgs).Parameter.ToString());

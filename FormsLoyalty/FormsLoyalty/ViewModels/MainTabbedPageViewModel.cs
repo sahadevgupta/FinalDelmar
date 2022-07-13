@@ -142,22 +142,11 @@ namespace FormsLoyalty.ViewModels
                     Task.Run(async () =>
                     {
 
-
-                        if (AppData.Device?.UserLoggedOnToDevice != null && !AppData.Device.UserLoggedOnToDevice.OneLists.Any())
+                        if (AppData.IsLoggedIn)
                         {
                             var memberContactModel = new MemberContactModel();
                             await memberContactModel.UserGetByCardId(AppData.Device.CardId);
-
-
-
-                            //GetPoints();
-                            //NotificationCountChanged();
-                            //GetWishlistCount();
-                            //CouponsCountChanged();
                         }
-                        
-                       
-                        
 
                         // await  loading.DismissAsync();
                     }).ConfigureAwait(false);

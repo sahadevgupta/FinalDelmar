@@ -8,6 +8,7 @@ using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Items;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -87,11 +88,11 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
             if (data is LoyItem item)
             {
-                await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "item", item } });
+                await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "item", item } },animated:false);
             }
             else if (data is Store store)
             {
-                await NavigationService.NavigateAsync(nameof(StoreDetailPage), new NavigationParameters { { "store", store } });
+                await NavigationService.NavigateAsync(nameof(StoreDetailPage), new NavigationParameters { { "store", store } }, animated: false);
             }
             IsPageEnabled = false;
         }
@@ -150,32 +151,37 @@ namespace FormsLoyalty.ViewModels
            
             if (SearchKey.Length > 2)
             {
-                if (SearchKey.Length > lastSearchLength)
-                   await Search(false).ConfigureAwait(false);
-                else
-                    searchModel.ResetSearch();
+               await SearchAsync().ConfigureAwait(false);
+               
             }
-
-            lastSearchLength = SearchKey.Length;
-
-            
+ 
         }
 
-        private async Task Search(bool resetSearch)
+        private async Task SearchAsync()
         {
             IsPageEnabled = true;
-            if (resetSearch)
-                searchModel.ResetSearch();
 
-            SearchType searchType = availableTypes.Where((t, i) => selectedTypes[i]).Aggregate<SearchType, SearchType>(0, (current, t) => current | t);
-
-            var results = await searchModel.Search(SearchKey, searchType).ConfigureAwait(false);
-
-            if (results != null)
+            try
             {
-               LoadResults(results);
+                SearchType searchType = availableTypes.Where((t, i) => selectedTypes[i]).Aggregate<SearchType, SearchType>(0, (current, t) => current | t);
+
+                var results = await searchModel.Search(SearchKey, searchType).ConfigureAwait(false);
+
+                if (results != null)
+                {
+                    LoadResults(results);
+                }
             }
-            IsPageEnabled = false;
+            catch (Exception ex) 
+            {
+
+                Crashes.TrackError(ex) ;
+            }
+            finally
+            {
+                IsPageEnabled = false;
+            }
+           
         }
 
         private void LoadResults(SearchRs results)

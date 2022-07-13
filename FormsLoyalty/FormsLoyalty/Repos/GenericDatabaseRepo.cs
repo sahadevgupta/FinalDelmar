@@ -9,43 +9,43 @@ namespace FormsLoyalty.Repos
 {
     public class GenericDatabaseRepo<T> : IGenericDatabaseRepo<T> where T : new()
     {
-        SQLiteAsyncConnection _sQLite;
+        SQLiteConnection _sQLite;
         public GenericDatabaseRepo()
         {
-            _sQLite = new SQLiteAsyncConnection(DbHelper.DatabasePath, DbHelper.Flags);
+            _sQLite = new SQLiteConnection(DbHelper.DatabasePath, DbHelper.Flags);
         }
-        public async Task Insert(T a)
+        public void Insert(T a)
         {
-           await _sQLite.InsertAsync(a);
-        }
-
-        public async Task InsertOrReplace(T a)
-        {
-           await _sQLite.InsertOrReplaceAsync(a);
-        }
-        public async Task InsertAll(IEnumerable<T> a)
-        {
-           await _sQLite.InsertAllAsync(a);
-        }
-        public async Task Update(T a)
-        {
-           await _sQLite.UpdateAsync(a);
+           _sQLite.Insert(a);
         }
 
-        public async Task UpdateAll(IEnumerable<T> a)
+        public void InsertOrReplace(T a)
         {
-            await _sQLite.UpdateAllAsync(a);
+            _sQLite.InsertOrReplace(a);
+        }
+        public void InsertAll(IEnumerable<T> a)
+        {
+            _sQLite.InsertAll(a);
+        }
+        public void Update(T a)
+        {
+            _sQLite.Update(a);
         }
 
-        public async Task<List<T>> GetItemsAsync()
+        public void UpdateAll(IEnumerable<T> a)
         {
-            var data = await _sQLite.Table<T>().ToListAsync();
+             _sQLite.UpdateAll(a);
+        }
+
+        public List<T> GetItemsAsync()
+        {
+            var data =  _sQLite.Table<T>().ToList();
             return data;
         }
 
-        public async Task Delete(string id)
+        public void Delete(string id)
         {
-           await _sQLite.DeleteAsync<T>(id);
+            _sQLite.Delete<T>(id);
         }
 
     }

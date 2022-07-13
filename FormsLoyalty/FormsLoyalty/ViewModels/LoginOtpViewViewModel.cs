@@ -267,6 +267,7 @@ namespace FormsLoyalty.ViewModels
         private async void GoToMainScreen()
         {
             AppData.IsLoggedIn = true;
+            Xamarin.Essentials.Preferences.Set("IsLoggedIn", true);
             IsPageEnabled = true;
             SendFCMTokenToServer();
             if (FromItemPage)
@@ -276,7 +277,15 @@ namespace FormsLoyalty.ViewModels
                 await NavigationService.NavigateAsync("../../");
             }
             else
-                await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
+            {
+
+                MessagingCenter.Send(new BasketModel(), "CartUpdated");
+                await NavigationService.NavigateAsync("../../");
+                
+                //App.Current.MainPage = new NavigationPage(new MainTabbedPage());
+            }
+                //await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
+
             IsPageEnabled = false;
         }
 

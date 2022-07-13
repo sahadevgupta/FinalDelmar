@@ -12,7 +12,7 @@
     <RootNamespace>FormsLoyalty.Droid</RootNamespace>
     <AssemblyName>FormsLoyalty.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v11.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidUseIntermediateDesignerFile>true</AndroidUseIntermediateDesignerFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
@@ -373,7 +373,9 @@
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\arrow_down.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\welcome.png" />
+  </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable-mdpi\iconCameraButton.png" />
   </ItemGroup>

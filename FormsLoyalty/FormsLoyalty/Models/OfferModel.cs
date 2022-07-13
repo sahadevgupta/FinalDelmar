@@ -25,8 +25,6 @@ namespace FormsLoyalty.Models
 
         public async Task GetOffersByCardId(string cardId)
         {
-            
-
             BeginWsCall();
 
             try
@@ -37,10 +35,10 @@ namespace FormsLoyalty.Models
                     var offerRepo = PrismApplicationBase.Current.Container.Resolve<IGenericDatabaseRepo<PublishedOffer>>();
                     foreach (var offer in offers)
                     {
-                       var queryTable =  await offerRepo.GetItemsAsync().ConfigureAwait(false);
+                       var queryTable =  offerRepo.GetItemsAsync();
                         if (!queryTable.Any(x => x.Id == offer.Id))
                         {
-                            await offerRepo.Insert(offer);
+                             offerRepo.Insert(offer);
                         }
                          
                     }
@@ -51,10 +49,7 @@ namespace FormsLoyalty.Models
                 if(AppData.Device?.UserLoggedOnToDevice !=null)
                      AppData.Device.UserLoggedOnToDevice.PublishedOffers = offers;
 
-                //SendBroadcast(Utils.BroadcastUtils.CouponsUpdated);
-                //SendBroadcast(Utils.BroadcastUtils.OffersUpdated);
-
-                SaveLocalOffers(offers);
+               //SaveLocalOffers(offers);
             }
             catch (Exception ex)
             {

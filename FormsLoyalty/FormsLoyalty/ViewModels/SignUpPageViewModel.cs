@@ -236,9 +236,11 @@ namespace FormsLoyalty.ViewModels
 
                     if (success)
                     {
+                        Xamarin.Essentials.Preferences.Set("IsLoggedIn", true);
                         if (FromItemPage)
                         {
                             AppData.IsLoggedIn = true;
+                            
 
                             MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "LoggedIn");
                             Device.BeginInvokeOnMainThread(async () =>
@@ -249,11 +251,15 @@ namespace FormsLoyalty.ViewModels
                         }
                         else
                         {
-                            Device.BeginInvokeOnMainThread(async () =>
-                            {
-                                await NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage?selectedTab=MainPage");
+                            MessagingCenter.Send(new BasketModel(), "CartUpdated");
+                            await NavigationService.NavigateAsync("../../");
+                            //Device.BeginInvokeOnMainThread(async () =>
+                            //{
+                            //    await NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage?selectedTab=MainPage");
 
-                            });
+                            //});
+
+                            //App.Current.MainPage = new NavigationPage(new MainTabbedPage());
                            
                         }
                     }
@@ -328,7 +334,12 @@ namespace FormsLoyalty.ViewModels
 
 
         }
-
+        /// <summary>
+        /// Assign data to Member contact
+        /// As agreed Setting password and email value has static after new login business logic changed (OTP )
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
         internal async Task AssignToMemberContact(string username)
         {
 

@@ -1,9 +1,11 @@
-﻿using FormsLoyalty.Utils;
+﻿using FormsLoyalty.Interfaces;
+using FormsLoyalty.Utils;
 using Infrastructure.Data.SQLite.Devices;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Address;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Coupons;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Magazine;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Members;
+using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using LSRetail.Omni.Domain.Services.Loyalty.Devices;
 using LSRetail.Omni.Domain.Services.Loyalty.MemberContacts;
 using LSRetail.Omni.Domain.Services.Loyalty.VeifyPhone;
@@ -61,9 +63,15 @@ namespace FormsLoyalty.Models
 
                 AppData.Basket = contact.GetBasket(AppData.Device.CardId);
 
+                var uuid = Xamarin.Forms.DependencyService.Get<INotify>().getDeviceUuid();
+                Device device = new Device();
+                device.Id = uuid;
+                device.CardId = AppData.Device.CardId;
+                FormsLoyalty.Utils.Utils.FillDeviceInfo(device);
+                contact.LoggedOnToDevice = device;
                 SaveLocalMemberContact(contact);
 
-                deviceRepo.SaveDevice(AppData.Device);
+                //deviceRepo.SaveDevice(AppData.Device);
 
                 if (string.IsNullOrEmpty(contact.LoggedOnToDevice?.Manufacturer) || string.IsNullOrEmpty(contact.LoggedOnToDevice?.Platform) || string.IsNullOrEmpty(contact.LoggedOnToDevice?.OsVersion) || string.IsNullOrEmpty(contact.LoggedOnToDevice?.Model))
                 {

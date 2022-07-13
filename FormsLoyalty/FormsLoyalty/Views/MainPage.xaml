@@ -37,6 +37,8 @@
         <ResourceDictionary>
         <converters:BytesToImageSource x:Key="BytesToImageSource"/>
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
+            <xct:IsNullOrEmptyConverter x:Key="IsNullOrEmptyConverter"/>
 
             <Style x:Key="ActiveIndicatorColor" TargetType="cardViewControls:IndicatorsControl">
                 <Setter Property="BackgroundColor" Value="{DynamicResource My_Button_Color}" />
@@ -151,20 +153,19 @@
                                 <TapGestureRecognizer Tapped="points_Tapped"/>
                             </Frame.GestureRecognizers>
 
-                            <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
-                            BackgroundColor="Transparent"
-                           Text="{Binding MyPoints}">
+                            <StackLayout HorizontalOptions="FillAndExpand">
+                                <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
+                                       BackgroundColor="Transparent"
+                                       Text="{Binding MyPoints,Mode=TwoWay}"
+                                       IsVisible="{Binding MyPoints,Converter={StaticResource IsNotNullOrEmptyConverter}}"/>
 
+                                <Label TextColor="White" VerticalTextAlignment="Center" Margin="10,0,10,0"
+                                       BackgroundColor="Transparent"
+                                       Text="{x:Static resources:AppResources.LoginToCheckPtTxt}"
+                                       IsVisible="{Binding MyPoints,Converter={StaticResource IsNullOrEmptyConverter}}"/>
+                            </StackLayout>
+                            
 
-                                <Label.Triggers>
-                                    <DataTrigger TargetType="Label" Binding="{Binding MyPoints,Converter={StaticResource StringToBoolConverter}}"
-                                         Value="false">
-                                        <Setter Property="Text" Value="{x:Static resources:AppResources.LoginToCheckPtTxt}"/>
-
-                                    </DataTrigger>
-                                </Label.Triggers>
-
-                            </Label>
                         </Frame>
                     </StackLayout>
 
@@ -528,22 +529,22 @@
                                 <xct:StateView StateKey="Success">
 
                                     <CollectionView ItemsSource="{Binding itemCategories}" HeightRequest="120"
-                                     HorizontalScrollBarVisibility="Never"
-                                    ItemsUpdatingScrollMode="KeepItemsInView"
-                                     RemainingItemsThreshold="5">
+                                                    HorizontalScrollBarVisibility="Never">
                                         <CollectionView.ItemsLayout>
                                             <GridItemsLayout Orientation="Horizontal"
-                                                             HorizontalItemSpacing="10"
-                                             />
+                                                             HorizontalItemSpacing="1"
+                                                             VerticalItemSpacing="10"/>
                                         </CollectionView.ItemsLayout>
                                         <CollectionView.ItemTemplate>
                                             <DataTemplate>
 
-                                                <StackLayout HeightRequest="100" >
-                                                    <StackLayout.GestureRecognizers>
+                                                <Grid RowDefinitions="*">
+                                                    <Grid.GestureRecognizers>
                                                         <TapGestureRecognizer Tapped="Category_Tapped" CommandParameter="{Binding .}"/>
-                                                    </StackLayout.GestureRecognizers>
-                                                    <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
+                                                    </Grid.GestureRecognizers>
+                                                    <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" 
+                                                           Margin="0,0,8,0"
+                                                           HeightRequest="130" WidthRequest="150" IsClippedToBounds="True">
                                                         <StackLayout>
 
                                                             <controls:CustomImageControl ImageHeight="80"  UriImageSource="{Binding Images[0].Location}"
@@ -569,7 +570,7 @@
                                                             </Label>
                                                         </StackLayout>
                                                     </Frame>
-                                                </StackLayout>
+                                                </Grid>
 
                                             </DataTemplate>
                                         </CollectionView.ItemTemplate>

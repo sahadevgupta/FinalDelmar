@@ -250,7 +250,8 @@ namespace FormsLoyalty.ViewModels
             {
                 if (AppData.Device.UserLoggedOnToDevice?.Account != null)
                 {
-                    MyPoints = $"{AppData.Device.UserLoggedOnToDevice.Account.PointBalance.ToString("N0")} {AppResources.txtpoints}";
+                    var str = $"{AppData.Device.UserLoggedOnToDevice.Account.PointBalance.ToString("N0")} {AppResources.txtpoints}";
+                    MyPoints = str;
                 }
             }
         }
@@ -1202,7 +1203,7 @@ namespace FormsLoyalty.ViewModels
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-
+            LoadPoints();
         }
     }
 }
