@@ -63,7 +63,7 @@ namespace FormsLoyalty
         public static List<string> choices = new List<string> { AppResources.txtSunday, AppResources.txtMonday, AppResources.txtTuesday, AppResources.txtWednesday, AppResources.txtThrusday,
                                                                 AppResources.txtFriday, AppResources.txtSaturday };
 
-        public static async Task CallPCLMethod()
+        public static async void CallPCLMethod()
         {
             DbHelper.InitializeDatabase();
             var serverTasks = new List<Task>();

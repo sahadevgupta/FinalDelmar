@@ -52,4 +52,12 @@
 	<item name="android:windowDisablePreview">true</item>
   </style>
 
+	<style name="MyTheme.Splash" parent ="Theme.AppCompat.Light.NoActionBar">
+		<item name="android:windowBackground">@drawable/welcome</item>
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowContentOverlay">@null</item>
+		<item name="android:windowActionBar">true</item>
+	</style>
+
 </resources>
