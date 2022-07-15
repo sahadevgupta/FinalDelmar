@@ -67,19 +67,19 @@ namespace FormsLoyalty.ViewModels
             {
                  new TourCarouselContent
                  {
-                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide2.png"),
+                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide2.jpg"),
                      SkipButtonIsVisible = true,
                      MainText=AppResources.txtDemo1
                  },
                  new TourCarouselContent
                  {
-                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide1.png"),
+                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide1.jpg"),
                      SkipButtonIsVisible = true,
                      MainText=AppResources.txtDemo2
                  },
                  new TourCarouselContent
                  {
-                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide3.png"),
+                     ImageSource = MobileAppImageResourceHelper.GetImageSource("Demo-Slide3.jpg"),
                      SkipButtonIsVisible = false,
                      MainText=AppResources.txtDemo3
                  },

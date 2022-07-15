@@ -17,9 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="Resources\Demo-Slide1.png" />
-    <None Remove="Resources\Demo-Slide2.png" />
-    <None Remove="Resources\Demo-Slide3.png" />
+    <None Remove="Resources\Demo-Slide1.jpg" />
+    <None Remove="Resources\Demo-Slide2.jpg" />
+    <None Remove="Resources\Demo-Slide3.jpg" />
     <None Remove="Resources\ecommerce.gif" />
     <None Remove="Resources\Ecommerce.png" />
     <None Remove="Resources\ecommerce.webp" />
@@ -27,9 +27,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Demo-Slide1.png" />
-    <EmbeddedResource Include="Resources\Demo-Slide2.png" />
-    <EmbeddedResource Include="Resources\Demo-Slide3.png" />
+    <EmbeddedResource Include="Resources\Demo-Slide1.jpg" />
+    <EmbeddedResource Include="Resources\Demo-Slide2.jpg" />
+    <EmbeddedResource Include="Resources\Demo-Slide3.jpg" />
     <EmbeddedResource Include="Resources\Fonts\fa-solid-900.ttf" />
   </ItemGroup>
 
