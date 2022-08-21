@@ -76,7 +76,8 @@ namespace FormsLoyalty.Models
                 var list = await OneListGetByCardId(cardId, listType, true);
                 if (list is object && list.Any())
                 {
-                    AppData.Device.UserLoggedOnToDevice.AddList(AppData.Device.CardId, list.FirstOrDefault(), listType);
+                    if(AppData.Device.UserLoggedOnToDevice is object)
+                        AppData.Device.UserLoggedOnToDevice.AddList(cardId, list.FirstOrDefault(), listType);
 
                     AppData.Basket = list.FirstOrDefault();
 

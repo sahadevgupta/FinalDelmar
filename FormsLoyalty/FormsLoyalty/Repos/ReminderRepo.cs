@@ -38,7 +38,7 @@ namespace FormsLoyalty.Repos
 
         public void AddReminder(MedicineReminder medicineReminder, List<FrequencyTime> frequencies)
         {
-            lock (locker)
+            //lock (locker)
             {
                
 
@@ -118,7 +118,7 @@ namespace FormsLoyalty.Repos
 
         public void UpdateReminder(MedicineReminder medicineReminder, List<FrequencyTime> frequencies)
         {
-            lock (locker)
+            //lock (locker)
             {
                 DBHelper.DBConnection.Update(medicineReminder);
                 DBHelper.DBConnection.InsertAll(frequencies);
@@ -136,7 +136,7 @@ namespace FormsLoyalty.Repos
 
         public void DeleteReminder(MedicineReminder medicineReminder, List<FrequencyTime> frequencies)
         {
-            lock (locker)
+            //lock (locker)
             {
                 DBHelper.DBConnection.Delete<MedicineReminder>(medicineReminder.ID);
                 DeleteAllNotification(new ObservableCollection<FrequencyTime>(frequencies));
@@ -147,7 +147,7 @@ namespace FormsLoyalty.Repos
         }
         public void DeleteReminderFrequency(MedicineReminder medicineReminder, FrequencyTime frequency)
         {
-            lock (locker)
+            //lock (locker)
             {
                 if (frequency.MedicineReminderId.Equals(medicineReminder.ID))
                 {

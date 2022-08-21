@@ -9,5 +9,7 @@ namespace FormsLoyalty.Interfaces
         void SwitchToBackground();
 
         bool CheckIfAppInstalledOrNot(string packageName);
+        void ClearAllCookies();
+        string GetOSVersion();
     }
 }

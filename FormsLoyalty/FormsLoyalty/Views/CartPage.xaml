@@ -111,6 +111,7 @@
 
                     <ImageButton.Source>
                         <FontImageSource FontFamily="FontAwesome"
+                                         Color="White"
                                          Size="Large"
                                          Glyph="{x:Static fontresources:FontAwesomeIcons.Trash}"/>
                     </ImageButton.Source>
@@ -280,6 +281,7 @@
                 <Label FontSize="Small" 
                        Padding="10,0,10,0"
                        TextColor="Red"
+                       IsVisible="false"
                        Grid.Row="4" Grid.ColumnSpan="2">
                     <Label.FormattedText>
                         <FormattedString>

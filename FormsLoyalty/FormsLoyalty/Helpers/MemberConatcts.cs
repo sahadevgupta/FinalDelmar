@@ -64,7 +64,7 @@ namespace FormsLoyalty.Helpers
                 }
                 catch (Exception ex)
                 {
-                    DependencyService.Get<INotify>().ShowToast(ex.Message);
+                    //DependencyService.Get<INotify>().ShowToast(ex.Message);
                 }
 
             }
@@ -81,7 +81,7 @@ namespace FormsLoyalty.Helpers
                 }
                 catch (Exception ex)
                 {
-                    DependencyService.Get<INotify>().ShowToast(ex.Message);
+                    //DependencyService.Get<INotify>().ShowToast(ex.Message);
                 }
 
             }
@@ -110,7 +110,7 @@ namespace FormsLoyalty.Helpers
                             Crashes.TrackError(ex);
                             if (retryCounter == 0)
                             {
-                                DependencyService.Get<INotify>().ShowToast(ex.Message);
+                                //DependencyService.Get<INotify>().ShowToast(ex.Message);
 
                             }
                             else
@@ -147,7 +147,7 @@ namespace FormsLoyalty.Helpers
                             Crashes.TrackError(ex);
                             if (retryCounter == 0)
                             {
-                                DependencyService.Get<INotify>().ShowToast(ex.Message);
+                                //DependencyService.Get<INotify>().ShowToast(ex.Message);
                             }
                             else
                             {

@@ -26,6 +26,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Microsoft.AppCenter.Crashes;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -470,18 +471,11 @@ namespace FormsLoyalty.ViewModels
 
         void LoadData()
         {
-            Task.Run(() =>
-            {
-                LoadAddressView();
-                LoadBasket();
-                CalculateBasket();
-            });
+            LoadAddressView();
+            LoadBasket();
+            CalculateBasket();
+
         }
-
-       
-
-      
-
 
         #region Stepper Module
 
@@ -699,8 +693,20 @@ namespace FormsLoyalty.ViewModels
         {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync(SelectedCity.City));
-                SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
+                try
+                {
+                    if(SelectedCity is object)
+                    {
+                        Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync(SelectedCity.City));
+                        SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
+                    }
+                    
+                }
+                catch (Exception ex)
+                {
+                    Crashes.TrackError(ex);
+                }
+                
             });
         }
 

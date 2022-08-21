@@ -31,7 +31,7 @@ namespace Infrastructure.Data.SQLite.Addresses
 
             OfferData n = new OfferData();
             List<Address> result = new List<Address>();
-            lock (locker)
+            //lock (locker)
             {
                 //get device only has one row, no need  to narrow down the search criteria
                 AddressFactory factory = new AddressFactory();
@@ -54,7 +54,7 @@ namespace Infrastructure.Data.SQLite.Addresses
 
         public void SaveAddress(Address Address, string ContactID)
         {
-            lock (locker)
+            //lock (locker)
             {
 
                 AddressessData Addressdata = new AddressessData();
@@ -78,7 +78,7 @@ namespace Infrastructure.Data.SQLite.Addresses
 
         public void SaveAddresses(List <Address> Addresses, string ContactID)
         {
-            lock (locker)
+            //lock (locker)
             {
                 foreach (var Address in Addresses)
                 {

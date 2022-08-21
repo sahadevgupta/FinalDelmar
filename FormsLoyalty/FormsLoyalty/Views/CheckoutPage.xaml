@@ -7,7 +7,6 @@
              xmlns:resources="clr-namespace:FormsLoyalty"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects"
              xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             xmlns:progressBar="clr-namespace:Syncfusion.XForms.ProgressBar;assembly=Syncfusion.SfProgressBar.XForms"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls" 
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
@@ -27,47 +26,9 @@
 
 
     <AbsoluteLayout>
-        <Grid IsVisible="false"
-            x:Name="mainGrid"
-            HorizontalOptions="FillAndExpand"
-          RowDefinitions="80,*"
-            VerticalOptions="FillAndExpand" 
-            AbsoluteLayout.LayoutBounds="0,0,1,1"
-                    AbsoluteLayout.LayoutFlags="All"
-            >
+        
 
-            
-
-            <Grid.Triggers>
-                <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
-                             Value="true">
-                    <Setter Property="Opacity" Value="0.5"/>
-                    <Setter Property="IsEnabled" Value="False"/>
-                </DataTrigger>
-            </Grid.Triggers>
-
-           
-
-            <ScrollView Grid.Row="1"
-               
-                HorizontalOptions="FillAndExpand"
-                VerticalOptions="FillAndExpand">
-
-
-
-                <Grid
-                    x:Name="subGrid"
-                    HorizontalOptions="FillAndExpand"
-                    VerticalOptions="FillAndExpand">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*" />
-                    </Grid.RowDefinitions>
-                </Grid>
-            </ScrollView>
-        </Grid>
-
-
-        <Grid RowDefinitions="Auto,*"
+        <Grid RowDefinitions="100,*"
               AbsoluteLayout.LayoutBounds="0,0,1,1"
               AbsoluteLayout.LayoutFlags="All">
             <Grid HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand"
@@ -138,13 +99,12 @@
                 </Grid>
 
 
-                <Label Text="Address &#10; Details"
+                <Label Text="Address Details"
                    
                    FontSize="Body"
                    TextColor="#333333"
                    VerticalOptions="Start"
                    HorizontalOptions="Start"
-                   LineBreakMode="WordWrap"
                    Grid.ColumnSpan="2" Grid.Row="2"/>
 
                 <Label Text="Checkout"
@@ -180,13 +140,12 @@
 
                         
 
-                        <Frame Padding="5,0,5,0" Margin="5,0,5,0" CornerRadius="5" BackgroundColor="WhiteSmoke" HasShadow="True" Visual="Material"
-                               BorderColor="Silver">
-                            <StackLayout IsClippedToBounds="True">
+                        <Frame Padding="8" Margin="5,0,5,0" CornerRadius="5"  HasShadow="True" Visual="Material"
+                               BorderColor="#E1E1EA" >
+                            <StackLayout IsClippedToBounds="True" BackgroundColor="White">
                                 <Label Text="{x:Static resources:AppResources.txtSelectAddress}" FontSize="Body" Margin="5,0" FontAttributes="Bold"/>
                                 <Picker ItemsSource="{Binding addresses}" SelectedItem="{Binding selectedAddress}"
-                    TextColor="{StaticResource My_Header_Color}" 
-                    BackgroundColor="WhiteSmoke"
+                    TextColor="{StaticResource My_Header_Color}"
                     ItemDisplayBinding="{Binding Address1}"
                     TitleColor="Black"
                     
@@ -248,7 +207,8 @@
 
 
 
-                            <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" >
+                            <Frame Padding="10,0,10,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="False"
+                                   BorderColor="#E1E1EA">
                                 <controls1:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
                                        SelectedItem="{Binding SelectedCity}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
@@ -257,7 +217,7 @@
                             </Frame>
 
 
-                            <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True">
+                            <Frame Padding="10,0,10,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="false" BorderColor="#E1E1EA">
                                 <controls1:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
                                        SelectedItem="{Binding SelectedArea}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.txtArea}" 

@@ -12,5 +12,6 @@ namespace FormsLoyalty.Repos
         void InsertOrReplace(T a);
         List<T> GetItemsAsync();
         void Update(T a);
+        void UpdateAll(IEnumerable<T> a);
     }
 }

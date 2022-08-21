@@ -13,15 +13,7 @@ namespace FormsLoyalty.Views
         {
             InitializeComponent();
             _viewModel = BindingContext as CheckoutPageViewModel;
-            _viewModel.SubGrid = subGrid;
-
-            StepBarComponent stepbar = new StepBarComponent(_viewModel);
-
-            _viewModel.MainGrid = mainGrid;
-            stepbar.HorizontalOptions = LayoutOptions.FillAndExpand;
-            stepbar.VerticalOptions = LayoutOptions.StartAndExpand;
-            _viewModel.MainGrid.Children.Add(stepbar, 0, 0);
-            _viewModel.AddContentForSelectedStep();
+            
 
         }
         protected override void OnAppearing()

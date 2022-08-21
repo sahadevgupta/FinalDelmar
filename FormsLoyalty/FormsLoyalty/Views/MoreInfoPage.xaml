@@ -12,7 +12,8 @@
              xmlns:utils="clr-namespace:FormsLoyalty.Utils"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              NavigationPage.HasNavigationBar="False"
-             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers" xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              BackgroundColor="#B3f2f2ef"
              ios:Page.UseSafeArea="True"
              x:Name="thisPage">

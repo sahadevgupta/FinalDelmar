@@ -1,6 +1,7 @@
 ﻿using FormsLoyalty.Helpers;
 using FormsLoyalty.Interfaces;
 using FormsLoyalty.Models;
+using FormsLoyalty.Repos;
 using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
@@ -49,9 +50,11 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _VerticalSpac, value); }
         }
 
+        IGenericDatabaseRepo<PublishedOffer> _offerRepo;
 
-        public OffersPageViewModel(INavigationService navigationService ): base(navigationService)
+        public OffersPageViewModel(INavigationService navigationService, IGenericDatabaseRepo<PublishedOffer> offerRepo ): base(navigationService)
         {
+            _offerRepo = offerRepo;
         }
 
         /// <summary>
@@ -151,15 +154,24 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        
+        private void UpdateOfferRead()
+        {
+            var items = _offerRepo.GetItemsAsync();
+            items.ForEach(x => x.IsViewed = true);
+
+            _offerRepo.UpdateAll(items);
+        }
+
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
+
         }
 
         public  override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
+            UpdateOfferRead();
         }
 
        

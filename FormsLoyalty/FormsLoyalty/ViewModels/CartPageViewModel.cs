@@ -187,86 +187,86 @@ namespace FormsLoyalty.ViewModels
         }
         private void LoadBasketItems()
         {
-            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(async () =>
-            { 
-            try
+            Task.Run(async () =>
             {
-                IsPageEnabled = true;
-
-                baskets = new ObservableCollection<Basket>();
-
-                var pnelistitems = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
-
-                foreach (var basketItem in pnelistitems.Items)
+                try
                 {
+                    IsPageEnabled = true;
 
-                    var item = new Basket();
+                    baskets = new ObservableCollection<Basket>();
 
-                    item.Id = basketItem.Id;
-                    item.ItemDescription = basketItem.ItemDescription;
-                    //item.DiscountAmount = basketItem.DiscountAmount;
+                    var pnelistitems = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
 
-
-                    item.VariantDescription = basketItem.VariantDescription;
-                    item.PriceWithoutDiscount = ((basketItem.NetPrice > 0 ? basketItem.NetPrice : basketItem.Amount) * basketItem.Quantity);
-                    item.ItemId = basketItem.ItemId;
-                    item.Quantity = basketItem.Quantity;
-                    item.Price = basketItem.Price;
-
-                    if (basketItem.DiscountAmount != 0 && basketItem.DiscountPercent == 0)
+                    foreach (var basketItem in pnelistitems?.Items)
                     {
-                        item.DiscountPercent = (basketItem.DiscountAmount / item.PriceWithoutDiscount) * 100;
-                    }
-                    else
-                    {
-                        item.DiscountPercent = basketItem.DiscountPercent;
+
+                        var item = new Basket();
+
+                        item.Id = basketItem.Id;
+                        item.ItemDescription = basketItem.ItemDescription;
+                        //item.DiscountAmount = basketItem.DiscountAmount;
+
+
+                        item.VariantDescription = basketItem.VariantDescription;
+                        item.PriceWithoutDiscount = ((basketItem.NetPrice > 0 ? basketItem.NetPrice : basketItem.Amount) * basketItem.Quantity);
+                        item.ItemId = basketItem.ItemId;
+                        item.Quantity = basketItem.Quantity;
+                        item.Price = basketItem.Price;
+
+                        if (basketItem.DiscountAmount != 0 && basketItem.DiscountPercent == 0)
+                        {
+                            item.DiscountPercent = (basketItem.DiscountAmount / item.PriceWithoutDiscount) * 100;
+                        }
+                        else
+                        {
+                            item.DiscountPercent = basketItem.DiscountPercent;
+                        }
+
+                        if (item.DiscountPercent > 0)
+                        {
+                            var discountedPrice = (item.DiscountPercent / 100) * Convert.ToDecimal(basketItem.Price);
+                            item.NewPrice = ((Convert.ToDecimal(item.Price) - discountedPrice) * item.Quantity).ToString("F", CultureInfo.InvariantCulture);
+
+                            item.DiscountAmount = item.PriceWithoutDiscount - Convert.ToDecimal(item.NewPrice);
+                        }
+
+                        if (item.DiscountAmount != 0)
+                        {
+                            item.PriceWithDiscount = item.PriceWithoutDiscount - item.DiscountAmount;
+                        }
+
+                        item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
+                        item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
+                        item.VariantId = basketItem.VariantId;
+                        if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
+                        {
+                            item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
+                        }
+                        else
+                        {
+                            item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
+                        }
+                        item.Image = basketItem.Image;
+                        baskets.Add(item);
+
+
                     }
 
-                    if (item.DiscountPercent > 0)
-                    {
-                        var discountedPrice = (item.DiscountPercent / 100) * Convert.ToDecimal(basketItem.Price);
-                        item.NewPrice = ((Convert.ToDecimal(item.Price) - discountedPrice) * item.Quantity).ToString("F", CultureInfo.InvariantCulture);
-
-                        item.DiscountAmount = item.PriceWithoutDiscount - Convert.ToDecimal(item.NewPrice);
-                    }
-
-                    if (item.DiscountAmount != 0)
-                    {
-                        item.PriceWithDiscount = item.PriceWithoutDiscount - item.DiscountAmount;
-                    }
-
-                    item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
-                    item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
-                    item.VariantId = basketItem.VariantId;
-                    if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
-                    {
-                        item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
-                    }
-                    else
-                    {
-                        item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
-                    }
-                    item.Image = basketItem.Image;
-                    baskets.Add(item);
-
+                    CalculateBasketPrice();
 
                 }
+                catch (Exception ex)
+                {
 
-                CalculateBasketPrice();
+                    Crashes.TrackError(ex);
+                }
 
-            }
-            catch (Exception ex)
-            {
+                finally
+                {
+                    IsPageEnabled = false;
+                }
 
-                Crashes.TrackError(ex);
-            }
-
-            finally
-            {
-                IsPageEnabled = false;
-            }
-
-           });
+            });
         }
         private void CalculateBasketPrice()
         {
@@ -300,9 +300,9 @@ namespace FormsLoyalty.ViewModels
             catch (Exception ex)
             {
 
-                Crashes.TrackError(ex) ;
+                Crashes.TrackError(ex);
             }
-            
+
         }
  
     }

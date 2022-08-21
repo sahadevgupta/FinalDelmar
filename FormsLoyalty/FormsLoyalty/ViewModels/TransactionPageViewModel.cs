@@ -94,7 +94,7 @@ namespace FormsLoyalty.ViewModels
                
                 if (loadedTransactions != null)
                 {
-                    SaveLocalTransactions(loadedTransactions);
+                    //SaveLocalTransactions(loadedTransactions);
 
                     AppData.Device.UserLoggedOnToDevice.SalesEntries = loadedTransactions;
                     LoadOrders(loadedTransactions);

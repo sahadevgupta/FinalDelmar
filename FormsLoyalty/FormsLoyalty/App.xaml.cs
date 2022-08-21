@@ -131,10 +131,10 @@ namespace FormsLoyalty
                 (httpRequestMessage, cert, cetChain, policyErrors) => true;
 
             var client = new HttpClient(handler);
-            FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
-            {
-                HttpClient = client
-            });
+            //FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
+            //{
+            //    HttpClient = client
+            //});
 
             #endregion
 

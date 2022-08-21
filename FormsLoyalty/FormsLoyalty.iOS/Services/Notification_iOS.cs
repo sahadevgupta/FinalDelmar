@@ -158,28 +158,36 @@ namespace FormsLoyalty.iOS.Services
 
         public void ShowSnackBar(string description)
         {
-            // create the notification
-            var notification = new UILocalNotification();
 
-            // set the fire date (the date time in which it will fire)
-            //notification.FireDate = NSDate.FromTimeIntervalSinceNow(60);
+            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
+            {
+                // create the notification
+                var notification = new UILocalNotification();
 
-            // configure the alert
-            notification.AlertAction = "View Alert";
-            notification.AlertBody = "Your one minute alert has fired!";
+                // set the fire date (the date time in which it will fire)
+                //notification.FireDate = NSDate.FromTimeIntervalSinceNow(60);
 
-            // modify the badge
-            notification.ApplicationIconBadgeNumber = 1;
+                // configure the alert
+                notification.AlertAction = "View Alert";
+                notification.AlertBody = "Your one minute alert has fired!";
 
-            // set the sound to be the default sound
-            notification.SoundName = UILocalNotification.DefaultSoundName;
+                // modify the badge
+                notification.ApplicationIconBadgeNumber = 1;
 
-            // schedule it
-            UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+                // set the sound to be the default sound
+                notification.SoundName = UILocalNotification.DefaultSoundName;
+
+                // schedule it
+                UIApplication.SharedApplication.ScheduleLocalNotification(notification);
+            });
+
+           
         }
 
-       
+
         public void ShowToast(string descripition)
+        {
+            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
             {
                 alertDelay = NSTimer.CreateScheduledTimer(1, (obj) =>
                 {
@@ -187,8 +195,12 @@ namespace FormsLoyalty.iOS.Services
                 });
                 alert = UIAlertController.Create(null, descripition, UIAlertControllerStyle.Alert);
                 UIApplication.SharedApplication.KeyWindow.RootViewController.PresentViewController(alert, true, null);
-            }
+            });
+           
+        }
         private void dismissMessage()
+        {
+            Xamarin.Essentials.MainThread.InvokeOnMainThreadAsync(() =>
             {
                 if (alert != null)
                 {
@@ -198,7 +210,8 @@ namespace FormsLoyalty.iOS.Services
                 {
                     alertDelay.Dispose();
                 }
-            }
+            });
+        }
 
         public void ChangeTabBarFlowDirection(bool rtl)
         {

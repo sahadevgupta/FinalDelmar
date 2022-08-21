@@ -49,9 +49,10 @@ namespace FormsLoyalty.Controls
 
         private void img_Finish(object sender, CachedImageEvents.FinishEventArgs e)
         {
-            
-			loadingView.IsVisible = false;
-
+			Device.BeginInvokeOnMainThread(() =>
+			{
+                loadingView.IsVisible = false;
+            });
 		}
 
         private void img_Success(object sender, CachedImageEvents.SuccessEventArgs e)

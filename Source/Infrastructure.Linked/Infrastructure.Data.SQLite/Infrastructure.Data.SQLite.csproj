@@ -56,7 +56,7 @@
     <Reference Include="SQLite-net, Version=1.7.335.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\sqlite-net-pcl.1.7.335\lib\netstandard2.0\SQLite-net.dll</HintPath>
     </Reference>
-    <Reference Include="SQLitePCL.batteries, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <!--<Reference Include="SQLitePCL.batteries, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\SQLitePCL.bundle_green.0.9.2\lib\MonoAndroid\SQLitePCL.batteries.dll</HintPath>
     </Reference>
     <Reference Include="SQLitePCL.raw, Version=0.9.0.0, Culture=neutral, processorArchitecture=MSIL">
@@ -76,7 +76,7 @@
     </Reference>
     <Reference Include="SQLitePCLRaw.provider.e_sqlite3, Version=2.0.3.851, Culture=neutral, PublicKeyToken=9c301db686d0bd12, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\SQLitePCLRaw.provider.e_sqlite3.2.0.3\lib\netstandard2.0\SQLitePCLRaw.provider.e_sqlite3.dll</HintPath>
-    </Reference>
+    </Reference>-->
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>

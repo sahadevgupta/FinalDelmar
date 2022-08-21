@@ -20,7 +20,8 @@ namespace FormsLoyalty.Helpers
             // create the database if it doesn't exist
             SQLite.SQLiteOpenFlags.Create |
             // enable multi-threaded database access
-            SQLite.SQLiteOpenFlags.SharedCache;
+            SQLite.SQLiteOpenFlags.SharedCache|
+            SQLiteOpenFlags.FullMutex;
 
         public static string DatabasePath
         {

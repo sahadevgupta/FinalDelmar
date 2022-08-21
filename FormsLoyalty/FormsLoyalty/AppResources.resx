@@ -1353,7 +1353,7 @@ Please continue to check.</value>
     <value>Advanced Search</value>
   </data>
   <data name="txtAmpules" xml:space="preserve">
-    <value>Ampule(s)</value>
+    <value>Ampoule(s)</value>
   </data>
   <data name="txtAppExist" xml:space="preserve">
     <value>Press Exit again to Close the app</value>

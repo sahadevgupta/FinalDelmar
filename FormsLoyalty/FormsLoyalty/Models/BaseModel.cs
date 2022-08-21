@@ -124,19 +124,19 @@ namespace FormsLoyalty.Models
                 }
             }
             // 
-            if (displayAlert)
-            {
-                if (showAsToast)
-                {
-                   // if (msg != AppResources.ResourceManager.GetString("ModelGenericException", AppResources.Culture))
-                        DependencyService.Get<INotify>().ShowToast(msg);
-                }
-                else
-                {
-                    DependencyService.Get<INotify>().ShowToast(msg);
+            //if (displayAlert)
+            //{
+            //    if (showAsToast)
+            //    {
+            //       // if (msg != AppResources.ResourceManager.GetString("ModelGenericException", AppResources.Culture))
+            //            DependencyService.Get<INotify>().ShowToast(msg);
+            //    }
+            //    else
+            //    {
+            //        DependencyService.Get<INotify>().ShowToast(msg);
 
-                }
-            }
+            //    }
+            //}
 
             AppData.Msg = msg;
             return msg;

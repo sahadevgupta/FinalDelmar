@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using Xamarin.CommunityToolkit.Behaviors;
@@ -65,17 +66,17 @@ namespace FormsLoyalty.Controls
            
         }
 
-        private void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        private void Entry_TextChanged(object sender, TextChangedEventArgs args)
         {
 
-            if (!string.IsNullOrEmpty(e.NewTextValue))
+            if (!string.IsNullOrWhiteSpace(args.NewTextValue))
             {
-                var val = e.NewTextValue;
-                ((Entry)sender).Text = val.Replace(".", "");
+                bool isvalid = args.NewTextValue.ToCharArray().All(x => char.IsDigit(x));
+                ((Entry)sender).Text = isvalid ? args.NewTextValue : args.NewTextValue.Remove(args.NewTextValue.Length - 1);
             }
 
 
-            ValueChanged?.Invoke(this, e);
+            ValueChanged?.Invoke(this, args);
         }
 
 

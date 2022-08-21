@@ -74,14 +74,12 @@
     <EnableLLVM>false</EnableLLVM>
     <AndroidEnableProfiledAot>true</AndroidEnableProfiledAot>
     <BundleAssemblies>false</BundleAssemblies>
-    <AndroidStoreUncompressedFileExtensions>
-    </AndroidStoreUncompressedFileExtensions>
     <AndroidCreatePackagePerAbi>false</AndroidCreatePackagePerAbi>
     <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <AndroidExplicitCrunch>true</AndroidExplicitCrunch>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <AndroidTlsProvider>btls</AndroidTlsProvider>
-    <AndroidPackageFormat>apk</AndroidPackageFormat>
+    <AndroidPackageFormat>aab</AndroidPackageFormat>
     <AndroidSupportedAbis>
     </AndroidSupportedAbis>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
@@ -290,7 +288,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FormsLoyalty\FormsLoyalty.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{A1AD8F6A-45F0-428E-80FA-C0E39103E672}</Project>
       <Name>FormsLoyalty</Name>
     </ProjectReference>
   </ItemGroup>

@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using FormsLoyalty.Droid.Services;
 using Android.Content.PM;
+using Android.Webkit;
 
 [assembly:Dependency(typeof(AppSettingsService))]
 namespace FormsLoyalty.Droid.Services
@@ -43,6 +44,17 @@ namespace FormsLoyalty.Droid.Services
             {
                 return false;
             }
+        }
+
+        public void ClearAllCookies()
+        {
+            var cookieManager = CookieManager.Instance;
+            cookieManager.RemoveAllCookie();
+        }
+
+        public string GetOSVersion()
+        {
+            return Android.OS.Build.VERSION.SdkInt.ToString();
         }
 
         public void SwitchToBackground()

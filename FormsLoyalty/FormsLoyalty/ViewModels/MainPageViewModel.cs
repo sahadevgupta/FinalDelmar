@@ -166,7 +166,7 @@ namespace FormsLoyalty.ViewModels
             AdsCurrentState = CategoryCurrentState = BestSellerCurrentState = OfferCurrentState = LayoutState.Loading;
             Height = DeviceDisplay.MainDisplayInfo.Height;
             Title = AppResources.ResourceManager.GetString("ApplicationTitle",AppResources.Culture);
-            AppData.IsLoggedIn = AppData.Device.UserLoggedOnToDevice == null ? false : true;
+            //AppData.IsLoggedIn = AppData.Device.UserLoggedOnToDevice == null ? false : true;
 
             App.dialogService = pageDialogService;
             searchModel = new GeneralSearchModel();
@@ -253,6 +253,10 @@ namespace FormsLoyalty.ViewModels
                     var str = $"{AppData.Device.UserLoggedOnToDevice.Account.PointBalance.ToString("N0")} {AppResources.txtpoints}";
                     MyPoints = str;
                 }
+                else
+                {
+                    MyPoints = "0 Points";
+                }
             }
         }
 
@@ -294,39 +298,8 @@ namespace FormsLoyalty.ViewModels
             {
 
                 await NavigationService.NavigateAsync(nameof(ScanSendPage));
+                IsPageEnabled = false;
 
-                //try
-                //{
-                //    var request = await App.dialogService.DisplayActionSheetAsync(AppResources.txtUploadPhoto, AppResources.ApplicationCancel, null, AppResources.txtCamera, AppResources.txtGallery);
-                //    if (string.IsNullOrEmpty(request) || request.Equals(AppResources.ApplicationCancel) )
-                //    {
-                //        return;
-                //    }
-                //    if (request.Equals(AppResources.txtGallery))
-                //    {
-                //        IsUploadBtnClicked = true;
-                //        await ImageHelper.PickFromGallery(5);
-                //    }
-                //    else
-                //    {
-                //        if (Device.RuntimePlatform == Device.Android)
-                //        {
-                //            await NavigationService.NavigateAsync(nameof(CameraPage),null,true,false);
-                //        }
-                //        else
-                //            await TakePickure();
-                //    }
-                       
-                //}
-                //catch (Exception)
-                //{
-
-
-                //}
-                //finally
-                //{
-                //    IsPageEnabled = false;
-                //}
             }
             else
             {

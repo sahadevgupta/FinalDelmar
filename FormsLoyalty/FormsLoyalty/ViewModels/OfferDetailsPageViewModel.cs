@@ -104,7 +104,7 @@ namespace FormsLoyalty.ViewModels
 
             selectedOffer = parameters.GetValue<PublishedOffer>("offer");
             selectedOffer.IsViewed = true;
-            UpdateOfferRead();
+            //UpdateOfferRead();
             
             LoadRelatedItems();
         }

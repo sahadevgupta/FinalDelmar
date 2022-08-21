@@ -144,14 +144,21 @@ namespace FormsLoyalty.Utils
                 if (Device == null)
                     return;
 
-                Device.UserLoggedOnToDevice.AddList(Device.CardId, value, ListType.Basket);
+                if(Device.UserLoggedOnToDevice is object)
+                   Device.UserLoggedOnToDevice.AddList(Device.CardId, value, ListType.Basket);
             }
         }
 
         public static List<Advertisement> Advertisements { get; set; }
         public static bool IsDualScreen = false;
         public static string magazineURL = "https://magento.linkedgates.com/";
-        public static bool IsLoggedIn { get; set; }
+
+        private static bool _isLoggedIn;
+        public static bool IsLoggedIn
+        {
+            get { return _isLoggedIn; }
+            set { _isLoggedIn = value; }
+        }
         public static bool IsInsideApp = false;
         public static bool IsViewStock = false;
         public static bool IsLanguageChanged = false;

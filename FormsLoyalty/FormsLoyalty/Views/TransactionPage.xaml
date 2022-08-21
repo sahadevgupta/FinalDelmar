@@ -128,7 +128,7 @@
                     Grid.Row="0" BackgroundColor="White"
                                 VerticalOptions="StartAndExpand"
                     Grid.Column="1"
-                    CornerRadius="45,0,45,0"
+                    CornerRadius="20,0,20,0"
                     HeightRequest="40">
 
                                     <Button WidthRequest="100" HeightRequest="30" TextColor="White"

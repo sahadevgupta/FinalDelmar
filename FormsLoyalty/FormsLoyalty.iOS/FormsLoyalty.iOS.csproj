@@ -28,8 +28,8 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision>VS: WildCard Development</CodesignProvision>
+    <CodesignKey>Apple Development: Prasad Babu KN (GPPM2WTSD8)</CodesignKey>
+    <CodesignProvision>NowPak Dev - Prasad</CodesignProvision>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchFastDev>true</MtouchFastDev>
@@ -61,7 +61,6 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Distribution: SODEXO SERVICES ASIA PTE LTD</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
@@ -89,6 +88,7 @@
     <MtouchUseLlvm>true</MtouchUseLlvm>
     <CodesignProvision>Delmar_Distribution</CodesignProvision>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -103,6 +103,7 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'AppStore|iPhone' ">
     <DebugType>none</DebugType>
@@ -116,6 +117,7 @@
     <CodesignKey>iPhone Distribution</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
+    <MtouchLink>SdkOnly</MtouchLink>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(RunConfiguration)' == 'Default' ">
     <AppExtensionDebugBundleId />
@@ -271,6 +273,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
+    <Compile Include="Services\AppSettingsServices.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -327,9 +330,6 @@
     <PackageReference Include="Xamarin.FFImageLoading.Transformations">
       <Version>2.4.11.982</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Firebase.iOS.Analytics">
-      <Version>6.9.0</Version>
-    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2401" />
     <PackageReference Include="Xamarin.Essentials.Interfaces" Version="1.6.1" />
     <PackageReference Include="Prism.Unity.Forms" Version="7.2.0.1422" />
@@ -354,7 +354,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FormsLoyalty\FormsLoyalty.csproj">
-      <Project>{A682884C-CB44-4A89-B752-27BB634E0ABE}</Project>
+      <Project>{A1AD8F6A-45F0-428E-80FA-C0E39103E672}</Project>
       <Name>FormsLoyalty</Name>
     </ProjectReference>
   </ItemGroup>
@@ -488,9 +488,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\iconRate%403x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\No_image_available%403x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ProjectExtensions>

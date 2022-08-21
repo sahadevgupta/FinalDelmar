@@ -68,6 +68,20 @@ namespace FormsLoyalty.ViewModels
             get { return _isSocialMediaLoginVisible; }
             set { SetProperty(ref _isSocialMediaLoginVisible, value); }
         }
+        private bool _isFacebookSignInAvailable;
+        public bool IsFacebookSignInAvailable
+        {
+            get {
+                if (Device.RuntimePlatform == Device.Android)
+                {
+                    var environment = DependencyService.Get <IAppSettings> ();
+                    if (environment.GetOSVersion() == "S" || environment.GetOSVersion() == "32") //32 is Android 12.1
+                        return false;
+                }
+                return true;
+            }
+            set { SetProperty(ref _isFacebookSignInAvailable, value); }
+        }
         public FacebookProfile fbProfile { get; set; }
         public GoogleProfile GoogleProfile { get; set; }
 
@@ -128,21 +142,6 @@ namespace FormsLoyalty.ViewModels
                 var Otp = await new CommonModel().GenerateOTPAsync(MobileNumber);
                 await NavigationService.NavigateAsync(nameof(LoginOtpView), new NavigationParameters { { "number", MobileNumber },{"otp", Otp },{ "itemPage", FromItemPage } }, false, true);
 
-                if (!AppData.GetSocialMediaStatusResult && Device.RuntimePlatform == Device.iOS)
-                    MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
-
-#if DEBUG
-                MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
-#endif
-
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
-                }
-                else
-                    MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
-
-
             }
             catch (Exception ex)
             {
@@ -195,6 +194,9 @@ namespace FormsLoyalty.ViewModels
         private async Task SocialMediaLogin(string obj)
         {
             IsPageEnabled = true;
+
+            DependencyService.Get<IAppSettings>().ClearAllCookies();
+
             if (obj.Equals("Facebook"))
             {
                 isFbLogin = true;

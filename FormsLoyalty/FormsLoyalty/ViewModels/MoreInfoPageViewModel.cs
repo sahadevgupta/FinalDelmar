@@ -295,15 +295,15 @@ namespace FormsLoyalty.ViewModels
             #endregion
 
             #region Reminder Tab
-            drawerMenuItems.Add(new DrawerMenuItem()
-            {
-                ActivityType = AppConstValues.Reminder,
-                IsVisible = true,
-                Image = FontAwesomeIcons.Clock,
-                IsFontImage = true,
-                IsLoading = false,
-                Title = AppResources.ResourceManager.GetString("ActionbarReminders", AppResources.Culture),
-            });
+            //drawerMenuItems.Add(new DrawerMenuItem()
+            //{
+            //    ActivityType = AppConstValues.Reminder,
+            //    IsVisible = false,
+            //    Image = FontAwesomeIcons.Clock,
+            //    IsFontImage = true,
+            //    IsLoading = false,
+            //    Title = AppResources.ResourceManager.GetString("ActionbarReminders", AppResources.Culture),
+            //});
             #endregion
 
             #region Wishlist Tab
@@ -693,6 +693,7 @@ namespace FormsLoyalty.ViewModels
                     var isSuccess = await membercontact.Logout();
                     if (isSuccess)
                     {
+                        DependencyService.Get<IAppSettings>().ClearAllCookies();
                         await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
                     }
 

@@ -8,7 +8,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(CollectionView), typeof(NoBounceRenderer))]
+//[assembly: ExportRenderer(typeof(CollectionView), typeof(NoBounceRenderer))]
 namespace FormsLoyalty.iOS.Renderers
 {
     public class NoBounceRenderer : CollectionViewRenderer

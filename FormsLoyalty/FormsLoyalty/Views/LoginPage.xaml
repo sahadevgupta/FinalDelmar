@@ -120,7 +120,7 @@
 
 
                 <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center" Grid.Row="3"  IsVisible="{Binding IsSocialMediaLoginVisible}">
-                    <Grid HeightRequest="40" WidthRequest="40">
+                    <Grid HeightRequest="40" WidthRequest="40" IsVisible="{Binding IsFacebookSignInAvailable}">
                         <Grid.GestureRecognizers>
                             <TapGestureRecognizer Command="{Binding OnSocialLoginCommand}"
                     CommandParameter="Facebook"/>

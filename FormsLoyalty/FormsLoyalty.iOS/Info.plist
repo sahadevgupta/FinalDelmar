@@ -140,7 +140,7 @@
 		<string>remote-notification</string>
 	</array>
 	<key>CFBundleIdentifier</key>
-	<string>com.LinkedGates.DelmarAttalla</string>
+	<string>de.merck.nowpakdev</string>
 	<key>CFBundleDisplayName</key>
 	<string>Delmar &amp; Attallah</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>

@@ -3762,7 +3762,7 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Ampule(s).
+        ///   Looks up a localized string similar to Ampoule(s).
         /// </summary>
         public static string txtAmpules {
             get {
