@@ -8,6 +8,7 @@ using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Loyalty.ScanSend;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using LSRetail.Omni.Domain.Services.Loyalty.MemberContacts;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Prism;
 using Prism.Commands;
@@ -54,7 +55,7 @@ namespace FormsLoyalty.ViewModels
         public DelegateCommand PrescriptionCommand { get; set; }
         public bool CanNavigate { get;  set; }
 
-        IScanSendManager _scanSendManager;
+       readonly IScanSendManager _scanSendManager;
 
         public ScanSendPageViewModel(INavigationService navigationService,IScanSendManager scanSendManager) : base(navigationService)
         {
@@ -69,7 +70,7 @@ namespace FormsLoyalty.ViewModels
             IsPrescriptionViewVisible = true;
         }
 
-        internal async void NavigateToCameraView()
+        internal async Task NavigateToCameraView()
         {
             await NavigationService.NavigateAsync(nameof(CameraPage), null, true, false);
 
@@ -96,10 +97,10 @@ namespace FormsLoyalty.ViewModels
                
                
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                
+                Crashes.TrackError(ex);
             }
 
             IsPageEnabled = false;
@@ -128,12 +129,6 @@ namespace FormsLoyalty.ViewModels
             if (file != null)
             {
 
-                //if (file.GetStream().ToByteArray().Length > 2097152)
-                //{
-                //    await MaterialDialog.Instance.AlertAsync(AppResources.txtImageSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
-                //    return;
-                //}
-
                 var extension = Path.GetExtension(file.Path);
                 var scansend = new ScanSend
                 {
@@ -149,17 +144,12 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        bool IsSizeExceeds;
-        private int AddImage(List<Tuple<byte[], string>> imgInfo, int i)
+        private void AddImage(List<Tuple<byte[], string>> imgInfo, int i)
         {
           
             foreach (var item in imgInfo)
             {
-                //if(item.Item1.Length > 2097152)
-                //{
-                //    IsSizeExceeds = true;
-                //    continue;
-                //}
+                
                 var scansend = new ScanSend();
                 scansend.ImagedBase64 = Convert.ToBase64String(item.Item1);
                 scansend.id = i + 1;
@@ -168,10 +158,7 @@ namespace FormsLoyalty.ViewModels
                 ImageList.Add(scansend);
                 i++;
             }
-            //if(IsSizeExceeds)
-            //  MaterialDialog.Instance.AlertAsync(AppResources.txtImgListSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
 
-            return i;
         }
         public override void Initialize(INavigationParameters parameters)
         {
@@ -180,7 +167,7 @@ namespace FormsLoyalty.ViewModels
             {
                 var imgData = parameters.GetValue<List<Tuple<byte[], string>>>("images");
                 int i = 0;
-                i = AddImage(imgData, i);
+                AddImage(imgData, i);
             }
         }
         public override void OnNavigatedTo(INavigationParameters parameters)

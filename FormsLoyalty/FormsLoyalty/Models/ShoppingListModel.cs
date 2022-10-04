@@ -59,7 +59,6 @@ namespace FormsLoyalty.Models
 
                 AppData.Device.UserLoggedOnToDevice.AddList(AppData.Device.CardId, list, ListType.Wish);
 
-              //  SendBroadcast(Utils.BroadcastUtils.ShoppingListUpdated);
             }
             catch (Exception ex)
             {
@@ -90,10 +89,6 @@ namespace FormsLoyalty.Models
             {
                 await HandleUIExceptionAsync(ex);
             }
-            finally
-            {
-               // ShowIndicator(false);
-            }
             return null;
         }
 
@@ -102,8 +97,6 @@ namespace FormsLoyalty.Models
 
             var newList = AppData.Device.UserLoggedOnToDevice.GetWishList(AppData.Device.CardId).Clone();
 
-            var deletedItem = newList.Items.FirstOrDefault(x => x.Id == wishListLineId);
-            var deletedItemIndex = newList.Items.IndexOf(deletedItem);
 
             newList.Items.RemoveAll(x => x.Id == wishListLineId);
 
@@ -118,7 +111,6 @@ namespace FormsLoyalty.Models
                 else
                     return false;
 
-               // SendBroadcast(Utils.BroadcastUtils.ShoppingListUpdated);
 
             }
             catch (Exception ex)
@@ -126,25 +118,10 @@ namespace FormsLoyalty.Models
                 await HandleUIExceptionAsync(ex);
                 return false;
             }
-            finally
-            {
-               // ShowIndicator(false);
-            }
+            
         }
 
-        public void ClearWishListWithConfirmation()
-        {
-            var message =AppResources.ResourceManager.GetString("ShoppingListViewClearConfirmation",AppResources.Culture);
-              throw new FileNotFoundException();
-            //var dialog = new WarningDialog(Context, Context.GetString(Resource.String.ShoppingListDetailViewWishlist))
-            //                    .SetPositiveButton(Context.GetString(Resource.String.ApplicationYes),
-            //                                        () => DeleteWishList());
-            //dialog.Message = message;
-            //dialog.SetNegativeButton(Context.GetString(Resource.String.ApplicationNo), delegate () { });
-            //dialog.Show();
-        }
-
-        public async void DeleteWishList()
+        public async Task DeleteWishList()
         {
             if (string.IsNullOrEmpty(AppData.Device.UserLoggedOnToDevice.GetWishList(AppData.Device.CardId).Id))
             {
@@ -156,12 +133,8 @@ namespace FormsLoyalty.Models
 
             try
             {
-                var success = await this.OneListDeleteById(AppData.Device.UserLoggedOnToDevice.GetWishList(AppData.Device.CardId).Id);
+                await this.OneListDeleteById(AppData.Device.UserLoggedOnToDevice.GetWishList(AppData.Device.CardId).Id);
 
-                if (success)
-                {
-                   // SendBroadcast(Utils.BroadcastUtils.ShoppingListUpdated);
-                }
             }
             catch (Exception ex)
             {

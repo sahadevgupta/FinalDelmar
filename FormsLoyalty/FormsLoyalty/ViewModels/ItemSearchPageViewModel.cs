@@ -38,8 +38,8 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _Items, value); }
         }
 
-        private int pageSize = 7;
-        private int pageNumber = 1;
+        private readonly int pageSize = 7;
+        private readonly int pageNumber = 1;
         private int lastSearchLength;
 
         public DelegateCommand<LoyItem> SelectedCommand { get; set; }
@@ -58,9 +58,9 @@ namespace FormsLoyalty.ViewModels
         public async void OnSearchQuery()
         {
             IsPageEnabled = true;
-            if (SearchKey.Length > 2)
+            if (SearchKey.Length > 2 && SearchKey.Length > lastSearchLength)
             {
-                if (SearchKey.Length > lastSearchLength)
+               
                   await  LoadSearch();
             }
 
@@ -77,7 +77,6 @@ namespace FormsLoyalty.ViewModels
                 var items = await model.GetItemsByPage(pageSize, pageNumber, string.Empty, string.Empty, SearchKey,false,string.Empty);
                 Items = new ObservableCollection<LoyItem>(items);
 
-                //LoadImages();
             }
             catch (Exception)
             {
@@ -86,31 +85,7 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
-        private void LoadImages()
-        {
-            try
-            {
-                Task.Run(async() =>
-                {
-                    foreach (var item in Items)
-                    {
-                        if (item.Images.Count > 0)
-                        {
-                            var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(110, 110));
-                            item.Images[0].Image = imgView.Image;
-                        }
-                        else
-                            item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-
-                       
-                    }
-                });
-            }
-            catch (Exception)
-            {
-
-                
-            }
-        }
+        
+        
     }
 }

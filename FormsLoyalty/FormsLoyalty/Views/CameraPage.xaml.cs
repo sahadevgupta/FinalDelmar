@@ -29,7 +29,6 @@ namespace FormsLoyalty.Views
 
             _viewModel = BindingContext as CameraPageViewModel;
 
-            // zoomLabel.Text = string.Format("Zoom: {0}", zoomSlider.Value);
             CameraOptions = CameraOptions.Front;
             FlashMode = CameraFlashMode.Off;
         }
@@ -39,11 +38,6 @@ namespace FormsLoyalty.Views
             cameraView.FlashMode = FlashMode;
         }
 
-        void ZoomSlider_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-            //cameraView.Zoom = (float)zoomSlider.Value;
-           // zoomLabel.Text = string.Format("Zoom: {0}", Math.Round(zoomSlider.Value));
-        }
         // You can also set it to Default and External
         void FrontCameraSwitch_Toggled(object sender, EventArgs e)
         {
@@ -85,31 +79,12 @@ namespace FormsLoyalty.Views
         void DoCameraThings_Clicked(object sender, EventArgs e)
         {
             cameraView.Shutter();
-            //doCameraThings.Text = cameraView.CaptureMode == CameraCaptureMode.Video
-            //             ? "Stop Recording"
-            //             : "Snap Picture";
-        }
-        void CameraView_OnAvailable(object sender, bool e)
-        {
-            //if (e)
-            //{
-            //    zoomSlider.Value = cameraView.Zoom;
-            //    var max = cameraView.MaxZoom;
-            //    if (max > zoomSlider.Minimum && max > zoomSlider.Value)
-            //        zoomSlider.Maximum = max;
-            //    else
-            //        zoomSlider.Maximum = zoomSlider.Minimum + 1; // if max == min throws exception
-            //}
-
-            //doCameraThings.IsEnabled = e;
-            //zoomSlider.IsEnabled = e;
         }
 
         void CameraView_MediaCaptured(object sender, MediaCapturedEventArgs e)
         {
             switch (cameraView.CaptureMode)
             {
-                default:
                 case CameraCaptureMode.Default:
                 case CameraCaptureMode.Photo:
 
@@ -120,27 +95,8 @@ namespace FormsLoyalty.Views
                    
 
                     break;
-                case CameraCaptureMode.Video:
-                   // previewPicture.IsVisible = false;
-                    break;
             }
         }
 
-       
-        private void cameraView_MediaCaptureFailed(object sender, string e)
-        {
-
-        }
-
-        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
-        {
-
-        }
-
-        //private void retakeBtn_Clicked(object sender, EventArgs e)
-        //{
-        //    previewPicture.IsVisible = false;
-        //    _viewModel.CapturedImage = null;
-        //}
     }
 }

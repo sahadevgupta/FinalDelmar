@@ -1,6 +1,7 @@
 ﻿using FormsLoyalty.Helpers;
 using FormsLoyalty.Models;
 using FormsLoyalty.ViewModels;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 
 namespace FormsLoyalty.Views
@@ -15,13 +16,6 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as ScanSendPageViewModel;
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-           
-        }
-
-       
         private async void UploadImg_Tapped(object sender, System.EventArgs e)
         {
             try
@@ -37,19 +31,14 @@ namespace FormsLoyalty.Views
                 }
                 else
                 {
-                    //if (Device.RuntimePlatform == Device.Android)
-                    //{
-                    //    _viewModel.NavigateToCameraView();
-                    //}
-                    //else
-                        await _viewModel.TakePickure();
+                   await _viewModel.TakePickure();
                 }
                     
 
             }
             catch (System.Exception ex)
             {
-
+                Crashes.TrackError(ex);
             }
             finally
             {

@@ -29,10 +29,8 @@ namespace FormsLoyalty.ViewModels
             await NavigationService.GoBackAsync(new NavigationParameters { {"image",true } });
         }
 
-        internal async void NavigateToScanSendPage(byte[] bytes)
+        internal async Task NavigateToScanSendPage(byte[] bytes)
         {
-           // var dateTimeNow = DateTime.Now;
-            //var FileName = $"NewImage_{dateTimeNow:yyyyMMdd_HHmmss}";
             var imgData = new List<Tuple<byte[], string>>();
             imgData.Add(new Tuple<byte[], string>(bytes, "jpg"));
            await NavigationService.GoBackAsync(new NavigationParameters { { "images", imgData } });

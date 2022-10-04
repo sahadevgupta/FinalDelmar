@@ -17,22 +17,13 @@ namespace FormsLoyalty.Views
            
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
-        protected override bool OnBackButtonPressed()
-        {
-            return base.OnBackButtonPressed();
-        }
         private async void Product_Tapped(object sender, System.EventArgs e)
         {
             var view = (Frame)sender;
             await view.ScaleTo(1.5, 100);
             await view.ScaleTo(1, 100);
 
-            _viewModel.NavigateToItemPage((e as TappedEventArgs).Parameter as ProductGroup);
+           await _viewModel.NavigateToItemPage((e as TappedEventArgs).Parameter as ProductGroup);
         }
 
        

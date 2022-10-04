@@ -96,12 +96,9 @@ namespace FormsLoyalty.ViewModels
         private Plugin.FacebookClient.FacebookResponse<bool> facebookLoginResult;
         private Plugin.FacebookClient.FacebookResponse<string> facebookUserResult;
 
-        string[] permisions = new string[] { "email", "public_profile", "user_posts" };
-        MemberContactModel memberContactModel;
-
-       
-        IGoogleClientManager _googleService = CrossGoogleClient.Current;
-        IFacebookClient _facebookService = CrossFacebookClient.Current;
+        readonly MemberContactModel memberContactModel;
+        readonly IGoogleClientManager _googleService = CrossGoogleClient.Current;
+        readonly IFacebookClient _facebookService = CrossFacebookClient.Current;
         public LoginPageViewModel(INavigationService navigationService):base(navigationService)
         {
             OnSocialLoginCommand = new DelegateCommand<string>(async (data) => await SocialMediaLogin(data));
@@ -130,8 +127,6 @@ namespace FormsLoyalty.ViewModels
                 {
                     await App.dialogService.DisplayAlertAsync("Error!!", "Mobile Number not in correct format.First 3 digit should be 010,011,015 or 012", AppResources.ResourceManager.GetString("ApplicationOk", AppResources.Culture));
 
-                  //  ErrorText = "Mobile Number not in correct format.First 3 digit should be 010,011,015 or 012";
-                   // IsError = true;
                     IsPageEnabled = false;
                     return;
                 }
@@ -145,14 +140,8 @@ namespace FormsLoyalty.ViewModels
             }
             catch (Exception ex)
             {
-                if (Device.RuntimePlatform == Device.Android)
-                {
-                    DependencyService.Get<INotify>().ShowSnackBar(ex.Message);
-                }
-                else
-                {
-                    MaterialDialog.Instance.SnackbarAsync(ex.Message, 5000);
-                }
+                  await  MaterialDialog.Instance.SnackbarAsync(ex.Message, 5000);
+                
                 
             }
             finally
@@ -177,7 +166,7 @@ namespace FormsLoyalty.ViewModels
                 var success = await memberContactModel.Login(userName, password, (s) => {  });
                 if (success)
                 { 
-                    GoToMainScreen();
+                    await GoToMainScreen();
                 }
                 else
                   await  App.dialogService.DisplayAlertAsync("Error!!", AppData.Msg, "OK");
@@ -229,14 +218,6 @@ namespace FormsLoyalty.ViewModels
                     switch (e.Status)
                     {
                         case GoogleActionStatus.Completed:
-#if DEBUG
-                            var googleUserString = JsonConvert.SerializeObject(e.Data);
-                            Debug.WriteLine($"Google Logged in succesfully: {googleUserString}");
-#endif
-
-                            var id = e.Data.Id;
-                            var picture = e.Data.Picture.AbsoluteUri;
-                            var name = e.Data.Name;
 
                             GoogleProfile = new GoogleProfile
                             {
@@ -247,7 +228,6 @@ namespace FormsLoyalty.ViewModels
                             };
 
                             await GoogleLogon();
-                            //await App.Current.MainPage.Navigation.PushModalAsync(new HomePage(socialLoginData));
                             break;
                         case GoogleActionStatus.Canceled:
                             await App.Current.MainPage.DisplayAlert("Google Auth", "Canceled", "Ok");
@@ -270,8 +250,6 @@ namespace FormsLoyalty.ViewModels
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
-                //await MaterialDialog.Instance.SnackbarAsync(message: ex.ToString(),
-                //                           msDuration: MaterialSnackbar.DurationLong);
                 Debug.WriteLine(ex.ToString());
             }
         }
@@ -282,7 +260,6 @@ namespace FormsLoyalty.ViewModels
 
             if (_facebookService.IsLoggedIn)
             {
-                //DependencyService.Get<IFacebookServices>().LogOut();
                 _facebookService.Logout();
                 CrossFacebookClient.Current.Logout();
 
@@ -319,7 +296,6 @@ namespace FormsLoyalty.ViewModels
             }
 
 
-            //FacebookResponse<string> response = await CrossFacebookClient.Current.RequestUserDataAsync(new string[] { "email", "first_name", "gender", "last_name", "birthday" }, new string[] { "email", "user_birthday" });
             
 
             
@@ -334,12 +310,12 @@ namespace FormsLoyalty.ViewModels
 
                 if (success)
                 {
-                    GoToMainScreen();
+                   await GoToMainScreen();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                
+                Crashes.TrackError(ex);
             }
         }
         private async Task GoogleLogon()
@@ -351,17 +327,17 @@ namespace FormsLoyalty.ViewModels
 
                 if (success)
                 {
-                    GoToMainScreen();
+                   await GoToMainScreen();
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
             }
 
         }
 
-        private async void GoToMainScreen()
+        private async Task GoToMainScreen()
         {
             IsPageEnabled = true;
             SendFCMTokenToServer();

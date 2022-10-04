@@ -15,7 +15,7 @@ using Xamarin.Forms;
 
 namespace FormsLoyalty.Helpers
 {
-    public class MemberConatcts
+    public static class MemberConatcts
     {
        public static async Task RefreshMemberContactAsync()
         {
@@ -31,19 +31,14 @@ namespace FormsLoyalty.Helpers
                             var memberContactModel = new MemberContactModel();
                             await memberContactModel.UserGetByCardId(AppData.Device.CardId).ConfigureAwait(false);
                             AppData.IsFirstTimeMemberRefresh = true;
-                            //CheckCartCount(null);
-
-                            //GetPoints();
-                            //NotificationCountChanged();
-                            //GetWishlistCount();
-                            //CouponsCountChanged();
+                            
                         }
                     }).ConfigureAwait(false);
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    Crashes.TrackError(ex);
 
                 }
             }
@@ -64,7 +59,7 @@ namespace FormsLoyalty.Helpers
                 }
                 catch (Exception ex)
                 {
-                    //DependencyService.Get<INotify>().ShowToast(ex.Message);
+                    Crashes.TrackError(ex);
                 }
 
             }
@@ -81,7 +76,7 @@ namespace FormsLoyalty.Helpers
                 }
                 catch (Exception ex)
                 {
-                    //DependencyService.Get<INotify>().ShowToast(ex.Message);
+                    Crashes.TrackError(ex);
                 }
 
             }
@@ -108,13 +103,13 @@ namespace FormsLoyalty.Helpers
                         catch (Exception ex)
                         {
                             Crashes.TrackError(ex);
-                            if (retryCounter == 0)
+                            if (retryCounter != 0)
                             {
-                                //DependencyService.Get<INotify>().ShowToast(ex.Message);
+                                await LoadCategories(--retryCounter);
 
                             }
-                            else
-                                await LoadCategories(--retryCounter);
+                            
+                               
 
                         }
                     }
@@ -145,14 +140,11 @@ namespace FormsLoyalty.Helpers
                         catch (Exception ex)
                         {
                             Crashes.TrackError(ex);
-                            if (retryCounter == 0)
-                            {
-                                //DependencyService.Get<INotify>().ShowToast(ex.Message);
-                            }
-                            else
+                            if (retryCounter != 0)
                             {
                                 await LoadBestSellerItems(--retryCounter);
                             }
+                            
                         }
                     }).ConfigureAwait(false);
                 }

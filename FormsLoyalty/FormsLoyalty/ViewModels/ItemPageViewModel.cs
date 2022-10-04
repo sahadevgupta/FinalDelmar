@@ -9,6 +9,7 @@ using LSRetail.Omni.Domain.DataModel.Loyalty.Items;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
 using LSRetail.Omni.Domain.Services.Base.Loyalty;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Shared;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -81,8 +82,8 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _selectVariant, value); }
         }
 
-        ShoppingListModel shoppingListModel;
-        ItemModel itemModel;
+        readonly ShoppingListModel shoppingListModel;
+        readonly ItemModel itemModel;
 
         #region Command
         public DelegateCommand BasketCommand { get; set; }
@@ -129,13 +130,30 @@ namespace FormsLoyalty.ViewModels
 
                 await Share.RequestAsync(shareContent);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                
+                Crashes.TrackError(ex);
             }
-            
+
         }
+
+        /// <summary>
+        /// Change selected Item based on related item selection
+        /// </summary>
+        /// <param name="selectedItem"></param>
+        internal async Task ExecuteChangeSelectedItem(LoyItem selectedItem)
+        {
+            if (IsPageEnabled)
+                return;
+
+            IsPageEnabled = true;
+            Item = selectedItem;
+
+            await LoadRelatedItems();
+
+            IsPageEnabled = false;
+        }
+
 
         /// <summary>
         /// Navigates to offer Detail page
@@ -214,7 +232,6 @@ namespace FormsLoyalty.ViewModels
                 await MaterialDialog.Instance.SnackbarAsync(message: AppResources.ResourceManager.GetString("ItemViewPickVariant", AppResources.Culture),
                                            msDuration: MaterialSnackbar.DurationLong);
                 throw new FileNotFoundException();
-                //SelectVariant();
             }
             else
             {
@@ -225,7 +242,6 @@ namespace FormsLoyalty.ViewModels
                     if (isSuccess)
                     {
                         BasketBtn = AppResources.ResourceManager.GetString("ApplicationAddedToBasket", AppResources.Culture);
-                       // DependencyService.Get<INotify>().ShowSnackBar($"{basketItem.ItemDescription} has been added to basket!!");
                     }
                     
                    
@@ -292,13 +308,8 @@ namespace FormsLoyalty.ViewModels
                         selectVariant = Item.SelectedVariant.ToString();
                     }
                 }
-                else
-                {
 
-                }
-
-               // if (Item.Prices.Count > 0)
-                    itemPrice = Item.PriceFromVariantsAndUOM(Item.SelectedVariant?.Id, Item.SelectedUnitOfMeasure?.Id);
+                itemPrice = Item.PriceFromVariantsAndUOM(Item.SelectedVariant?.Id, Item.SelectedUnitOfMeasure?.Id);
                 if (string.IsNullOrEmpty(itemPrice))
                 {
                     itemPrice = Item.ItemPrice.ToString();
@@ -324,10 +335,9 @@ namespace FormsLoyalty.ViewModels
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                
+                Crashes.TrackError(ex);
             }
 
         }
@@ -346,12 +356,11 @@ namespace FormsLoyalty.ViewModels
                
                 imgview = await ImageHelper.GetImageById(id, new ImageSize(396, 396));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-                
+                Crashes.TrackError(ex);
             }
-          
+
 
             return imgview == null ? null : imgview.Image;
         }
@@ -360,22 +369,22 @@ namespace FormsLoyalty.ViewModels
         /// <summary>
         /// Generate's items related offer
         /// </summary>
-        private async void LoadRelatedPublishedOffers()
+        private async Task LoadRelatedItems()
         {
             try
             {
-               
+                var relatedItem = await itemModel.ItemsGetByRelatedItemIdAsync(Item.Id, 10);
+                if (relatedItem.Any(x => x.Id == Item.Id))
+                {
+                    var index = relatedItem.IndexOf(relatedItem.FirstOrDefault(x => x.Id == Item.Id));
+                    relatedItem.RemoveAt(index);
+                }
+                RelatedItems = new ObservableCollection<LoyItem>(relatedItem);
 
-                RelatedItems = new ObservableCollection<LoyItem>( await itemModel.ItemsGetByRelatedItemIdAsync(Item.Id, 10));
-
-                //var service = new SharedService(new SharedRepository());
-                //RelatedItems = new ObservableCollection<PublishedOffer>(await GetRelatedItemOfferAsync(service));
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
-               // await MaterialDialog.Instance.SnackbarAsync(message: "Unable to load related offers",
-               //                              msDuration: MaterialSnackbar.DurationShort);
+                Crashes.TrackError(ex);
             }
 
         }
@@ -472,7 +481,7 @@ namespace FormsLoyalty.ViewModels
         /// Get item using barcode
         /// </summary>
         /// <param name="barcode"></param>
-        private async void GetItemByBarCode(string barcode)
+        private async Task GetItemByBarCode(string barcode)
         {
             IsPageEnabled = true;
             try
@@ -481,13 +490,12 @@ namespace FormsLoyalty.ViewModels
                 var item = await itemModel.GetItemByBarcode(barcode);
                 if (item == null)
                 {
-                    NavigationService.GoBackAsync();
-                  // await MaterialDialog.Instance.SnackbarAsync(AppResources.ItemModelItemNotFound);
+                   await NavigationService.GoBackAsync();
                     return;
                 }
                 Item = item;
                 LoadItem();
-                LoadRelatedPublishedOffers();
+               await LoadRelatedItems();
             }
             catch (Exception)
             {
@@ -502,14 +510,14 @@ namespace FormsLoyalty.ViewModels
         /// </summary>
         /// <param name="Id"></param>
         /// return's Item
-        private async void GetItemById(string Id)
+        private async Task GetItemById(string Id)
         {
             IsPageEnabled = true;
             try
             {
                 Item = await itemModel.GetItemById(Id);
                 LoadItem();
-                LoadRelatedPublishedOffers();
+               await LoadRelatedItems();
             }
             catch (Exception)
             {
@@ -521,24 +529,24 @@ namespace FormsLoyalty.ViewModels
         }
 
 
-        public override void Initialize(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
 
             if (parameters.TryGetValue("barcode", out string barcode))
             {
-                GetItemByBarCode(barcode);
+               await GetItemByBarCode(barcode);
 
             }
             else if (parameters.TryGetValue("itemId", out string Id))
             {
-                GetItemById(Id);
+               await GetItemById(Id);
             }
             else if (parameters.TryGetValue("item", out LoyItem item))
             {
                 Item = item;
                 LoadItem();
-                LoadRelatedPublishedOffers();
+               await LoadRelatedItems();
             }
            
            

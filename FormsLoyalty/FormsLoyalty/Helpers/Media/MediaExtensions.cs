@@ -23,17 +23,12 @@ namespace FormsLoyalty.Helpers.Media
             {
                 throw new ArgumentNullException("self");
             }
-            //if (!Enum.IsDefined (typeof(MediaFileStoreLocation), options.Location))
-            //    throw new ArgumentException ("options.Location is not a member of MediaFileStoreLocation");
-            //if (options.Location == MediaFileStoreLocation.Local)
-            //{
-            //if (String.IsNullOrWhiteSpace (options.Directory))
-            //	throw new ArgumentNullException ("options", "For local storage, options.Directory must be set");
+            
             if (Path.IsPathRooted(self.Directory))
             {
                 throw new ArgumentException("options.Directory must be a relative folder", "self");
             }
-            //}
+            
         }
 
         /// <summary>

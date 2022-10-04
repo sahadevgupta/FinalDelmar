@@ -70,6 +70,9 @@ namespace FormsLoyalty.ViewModels
 
         public async Task AddItemToBasket(OneListItem wishListItem)
         {
+            if (IsPageEnabled)
+                return;
+
             IsPageEnabled = true;
             // Get the last data for the selected item, including its price
             try
@@ -82,10 +85,10 @@ namespace FormsLoyalty.ViewModels
                     await new BasketModel().AddItemToBasket(wishListItem);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-               
+                Crashes.TrackError(ex);
             }
             finally
             {
@@ -136,11 +139,7 @@ namespace FormsLoyalty.ViewModels
             }
             IsPageEnabled = false;
         }
-        private void navigation(object obj)
-        {
-            
-        }
-
+        
         internal async Task LoadShoppingList()
         {
             IsPageEnabled = true;
@@ -178,11 +177,5 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
-
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-            
-        }
     }
 }

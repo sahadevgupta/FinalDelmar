@@ -60,13 +60,11 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        internal async void NavigateToDetail(MagazineModel magazine)
+        internal async Task NavigateToDetail(MagazineModel magazine)
         {
-           // var url = $"{FormsLoyalty.Utils.AppData.magazineURL}/media/{magazine.Url}";
 
-            var result = await Launcher.TryOpenAsync(new Uri(magazine.URL));
+            await Launcher.TryOpenAsync(new Uri(magazine.URL));
 
-            //await NavigationService.NavigateAsync(nameof(MagazineDetail), new NavigationParameters { { "magazine", magazine } });
         }
     }
 }

@@ -138,10 +138,9 @@ namespace FormsLoyalty.ViewModels
             Device.BeginInvokeOnMainThread(async () =>
             {
                 Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync(SelectedCity.City));
-                if (editAccount)
+                if (editAccount && memberContact.Addresses.Any())
                 {
-                    if(memberContact.Addresses.Any())
-                        SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(memberContact.Addresses[0].Area, StringComparison.OrdinalIgnoreCase));
+                   SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(memberContact.Addresses[0].Area, StringComparison.OrdinalIgnoreCase));
 
                 }
 
@@ -152,7 +151,7 @@ namespace FormsLoyalty.ViewModels
 
         public bool FromItemPage { get; private set; }
 
-        MemberContactModel model;
+        readonly MemberContactModel model;
         public SignUpPageViewModel(INavigationService navigationService) : base(navigationService)
         {
             model = new MemberContactModel();
@@ -220,7 +219,7 @@ namespace FormsLoyalty.ViewModels
                 catch (Exception ex)
                 {
                     Crashes.TrackError(ex);
-                    UpdateMemberContactError(ex);
+                    await UpdateMemberContactError(ex);
                 }
             }
             else
@@ -253,13 +252,7 @@ namespace FormsLoyalty.ViewModels
                         {
                             MessagingCenter.Send(new BasketModel(), "CartUpdated");
                             await NavigationService.NavigateAsync("../../");
-                            //Device.BeginInvokeOnMainThread(async () =>
-                            //{
-                            //    await NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage?selectedTab=MainPage");
-
-                            //});
-
-                            //App.Current.MainPage = new NavigationPage(new MainTabbedPage());
+                            
                            
                         }
                     }
@@ -275,7 +268,7 @@ namespace FormsLoyalty.ViewModels
                 {
                     Crashes.TrackError(ex);
                     IsPageEnabled = false;
-                    CreateMemberContactError(ex);
+                    await CreateMemberContactError(ex);
                 }
             }
             IsPageEnabled = false;
@@ -301,7 +294,7 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        private async void UpdateMemberContactError(Exception ex)
+        private async Task UpdateMemberContactError(Exception ex)
         {
 
             if (ex is LSOmniException && ((LSOmniException)ex).StatusCode == StatusCode.EmailInvalid)
@@ -316,7 +309,7 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        private async void CreateMemberContactError(Exception ex)
+        private async Task CreateMemberContactError(Exception ex)
         {
 
             if (ex is LSOmniException && ((LSOmniException)ex).StatusCode == StatusCode.UserNameInvalid || ex is LSOmniException && ((LSOmniException)ex).StatusCode == StatusCode.UserNameExists)
@@ -394,7 +387,6 @@ namespace FormsLoyalty.ViewModels
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
-            memberContact.PropertyChanged += MemberContact_PropertyChanged;
             if (parameters.TryGetValue<FacebookProfile>("fb",out FacebookProfile fbProfile) )
             {
                 memberContact.Name = $"{fbProfile.FirstName} {fbProfile.LastName}";
@@ -417,17 +409,6 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        
-
-        private void MemberContact_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            
-        }
-        public override void OnNavigatedFrom(INavigationParameters parameters)
-        {
-            base.OnNavigatedFrom(parameters);
-        }
-       
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);

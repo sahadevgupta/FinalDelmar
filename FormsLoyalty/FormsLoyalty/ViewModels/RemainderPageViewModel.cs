@@ -24,7 +24,6 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _reminders, value); }
         }
 
-        public List<ReminderDate> templist;
         private ReminderDate _selectedReminder;
         public ReminderDate SelectedDate
         {
@@ -41,7 +40,7 @@ namespace FormsLoyalty.ViewModels
 
       
 
-        IReminderRepo _reminderRepo;
+        readonly IReminderRepo _reminderRepo;
 
         public DelegateCommand<object> DeleteCommand { get; set; }
         public DelegateCommand<object> EditCommand { get; set; }
@@ -49,7 +48,6 @@ namespace FormsLoyalty.ViewModels
         {
             _reminderRepo = reminderRepo;
             EditCommand = new DelegateCommand<object>(async(data) => await EditReminder(data));
-            //DeleteCommand = new DelegateCommand<object>( (data) =>  DeleteReminder(data));
 
             LoadData();
         }
@@ -77,7 +75,7 @@ namespace FormsLoyalty.ViewModels
 
                 var time = new TimeSpan(hours, minutes, 0);
 
-                var record = reminder.FrequencyTimes.Where(x => x.Time == time).FirstOrDefault();
+                var record = reminder.FrequencyTimes.FirstOrDefault(x => x.Time == time);
                 _reminderRepo.DeleteReminderFrequency(reminder, record);
             }
             else
@@ -89,14 +87,12 @@ namespace FormsLoyalty.ViewModels
         private async Task EditReminder(object data)
         {
            await NavigationService.NavigateAsync(nameof(AddReminderPage), new NavigationParameters { { "reminder", data as MedicineReminder } });
-            //throw new NotImplementedException();
         }
 
         private void LoadData()
         {
             dates = new ObservableCollection<ReminderDate>();
 
-            templist = new List<ReminderDate>();
 
             var datetimes = GetDates(DateTime.Now.Year, DateTime.Now.Month);
             foreach (var item in datetimes)
@@ -113,12 +109,8 @@ namespace FormsLoyalty.ViewModels
                 dates.Add(reminder);
 
             }
-            // var index =  templist.IndexOf(templist.Where(x => x.IsSelected).First());
-
-            //Reminders = new ObservableCollection<Reminder>(templist.Take(7));
-
-
-            SelectedDate = dates.Where(x => x.IsSelected).First();
+            
+            SelectedDate = dates.First(x => x.IsSelected);
 
             GetReminder();
         }

@@ -82,11 +82,9 @@ namespace FormsLoyalty.ViewModels
 
         private void CartPageViewModel_IsActiveChanged(object sender, EventArgs e)
         {
-            if (IsActive)
+            if (IsActive && AppData.IsLoggedIn)
             {
-                
-                if (AppData.Device.UserLoggedOnToDevice != null)
-                    LoadBasketItems();
+                LoadBasketItems();
             }
         }
 
@@ -106,10 +104,10 @@ namespace FormsLoyalty.ViewModels
                     }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-
+                Crashes.TrackError(ex);
             }
             finally
             {
@@ -150,7 +148,6 @@ namespace FormsLoyalty.ViewModels
 
                             item.Id = basketItem.Id;
                             item.ItemDescription = basketItem.ItemDescription;
-                            //item.DiscountAmount = basketItem.DiscountAmount;
 
 
                             item.VariantDescription = basketItem.VariantDescription;
@@ -184,14 +181,7 @@ namespace FormsLoyalty.ViewModels
                             item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
                             item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
                             item.VariantId = basketItem.VariantId;
-                            //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
-                            //{
-                            //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
-                            //}
-                            //else
-                            //{
-                            //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
-                            //}
+                            
                             item.Image = basketItem.Image;
                             temp.Add(item);
 
@@ -252,7 +242,7 @@ namespace FormsLoyalty.ViewModels
         }
         private void LoadBasketItems()
         {
-            Task.Run(async () =>
+            Task.Run((Func<Task>)(async () =>
             {
                 try
                 {
@@ -271,7 +261,6 @@ namespace FormsLoyalty.ViewModels
 
                             item.Id = basketItem.Id;
                             item.ItemDescription = basketItem.ItemDescription;
-                            //item.DiscountAmount = basketItem.DiscountAmount;
 
 
                             item.VariantDescription = basketItem.VariantDescription;
@@ -292,7 +281,7 @@ namespace FormsLoyalty.ViewModels
                             if (item.DiscountPercent > 0)
                             {
                                 var discountedPrice = (item.DiscountPercent / 100) * Convert.ToDecimal(basketItem.Price);
-                                item.NewPrice = ((Convert.ToDecimal(item.Price) - discountedPrice) * item.Quantity).ToString("F", CultureInfo.InvariantCulture);
+                                item.NewPrice = ((Convert.ToDecimal(item.Price) - discountedPrice) * item.Quantity).ToString("F", (IFormatProvider)CultureInfo.InvariantCulture);
 
                                 item.DiscountAmount = item.PriceWithoutDiscount - Convert.ToDecimal(item.NewPrice);
                             }
@@ -305,14 +294,7 @@ namespace FormsLoyalty.ViewModels
                             item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
                             item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
                             item.VariantId = basketItem.VariantId;
-                            //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
-                            //{
-                            //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
-                            //}
-                            //else
-                            //{
-                            //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
-                            //}
+                            
                             item.Image = basketItem.Image;
                             temp.Add(item);
 
@@ -335,7 +317,7 @@ namespace FormsLoyalty.ViewModels
                     IsPageEnabled = false;
                 }
 
-            });
+            }));
         }
         private void CalculateBasketPrice()
         {

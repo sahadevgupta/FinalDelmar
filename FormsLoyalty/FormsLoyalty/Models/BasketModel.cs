@@ -23,10 +23,7 @@ namespace FormsLoyalty.Models
         public async Task<bool> AddItemToBasket(OneListItem item, bool openBasket = false, bool ShowIndicatorOption = true, int index = 0)
         {
             AppData.Device.UserLoggedOnToDevice.GetBasket(AppData.Device.CardId).State = BasketState.Updating;
-            //SendBroadcast(Utils.BroadcastUtils.BasketStateUpdated);
-
-           // if (openBasket)
-           //     SendBroadcast(Utils.BroadcastUtils.OpenBasket);
+            
 
             OneList newList = AppData.Device.UserLoggedOnToDevice.GetBasket(AppData.Device.CardId);
             newList.CardId = AppData.Device.CardId;
@@ -55,7 +52,7 @@ namespace FormsLoyalty.Models
                     }
                     else
                     {
-                        MaterialDialog.Instance.SnackbarAsync(msg, 5000);
+                       await MaterialDialog.Instance.SnackbarAsync(msg, 5000);
                     }
                     newList.Id = list.Id;
 
@@ -64,7 +61,6 @@ namespace FormsLoyalty.Models
                     return true;
                 }
                 
-               // SendBroadcast(Utils.BroadcastUtils.BasketStateUpdated);
             }
             catch (Exception ex)
             {
@@ -89,7 +85,6 @@ namespace FormsLoyalty.Models
                     basketList.CalculateBasket();
                     AppData.Device.UserLoggedOnToDevice.AddList(AppData.Device.CardId, basketList, ListType.Basket);
                 }
-               // SendBroadcast(Utils.BroadcastUtils.BasketStateUpdated);
             }
             catch (Exception ex)
             {
@@ -133,28 +128,27 @@ namespace FormsLoyalty.Models
             var existingItem = newList.Items.FirstOrDefault(x => x.Id == basketItemId);
             if (existingItem == null)
                 IsSuccess = false;
-
-            existingItem.Quantity = newQty;
-            if (newVariant != null)
-                existingItem.VariantId = newVariant.Id;
-
-
-            try
+            else
             {
-                var list = await OneListSave(newList, true);
-                AppData.Device.UserLoggedOnToDevice.AddList(AppData.Device.CardId, list, ListType.Basket);
-                // SendBroadcast(Utils.BroadcastUtils.BasketStateUpdated);
-                IsSuccess = true;
+                existingItem.Quantity = newQty;
+                if (newVariant != null)
+                    existingItem.VariantId = newVariant.Id;
+
+
+                try
+                {
+                    var list = await OneListSave(newList, true);
+                    AppData.Device.UserLoggedOnToDevice.AddList(AppData.Device.CardId, list, ListType.Basket);
+                    IsSuccess = true;
+                }
+                catch (Exception ex)
+                {
+                    IsSuccess = false;
+                    Crashes.TrackError(ex);
+                    await HandleUIExceptionAsync(ex);
+                }
             }
-            catch (Exception ex)
-            {
-                IsSuccess = false;
-                Crashes.TrackError(ex);
-                await HandleUIExceptionAsync(ex);
-            }
-           
              return IsSuccess;
-            
         }
 
         public async Task DeleteItem(string basketItemId)
@@ -170,9 +164,7 @@ namespace FormsLoyalty.Models
             if (existingItem == null)
                 return false;
 
-            var existinItemIndex = newList.Items.IndexOf(existingItem);
             newList.Items.Remove(existingItem);
-            //MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "CartUpdated");
 
             try
             {
@@ -185,10 +177,6 @@ namespace FormsLoyalty.Models
                 }
                else
                     return false;
-                //SendBroadcast(Utils.BroadcastUtils.BasketStateUpdated);
-
-
-
 
             }
             catch (Exception ex)

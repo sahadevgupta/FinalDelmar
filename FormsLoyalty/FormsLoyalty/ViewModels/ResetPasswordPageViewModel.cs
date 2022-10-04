@@ -49,7 +49,7 @@ namespace FormsLoyalty.ViewModels
         {
             ResetCommand = new DelegateCommand(async() => await ResetPassword());
         }
-        internal async void GoBack()
+        internal async Task GoBack()
         {
             DependencyService.Get<INotify>().ShowToast("Password changed successfully!!");
             await NavigationService.NavigateAsync("../../");
@@ -64,7 +64,7 @@ namespace FormsLoyalty.ViewModels
 
                 if (success)
                 {
-                    GoBack();
+                   await GoBack();
                 }
             }
               IsPageEnabled = true;

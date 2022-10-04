@@ -131,13 +131,11 @@ namespace FormsLoyalty.ViewModels
                                 await MaterialDialog.Instance.SnackbarAsync(message: AppResources.ResourceManager.GetString("ItemViewPickVariant", AppResources.Culture),
                                                        msDuration: MaterialSnackbar.DurationLong);
                             });
-                            // SelectVariant();
                         }
                         else
                         {
                             await new BasketModel().AddItemToBasket(basketItem, openBasket: true, ShowIndicatorOption: false);
-                            //await MaterialDialog.Instance.SnackbarAsync(message: "Items has been added to basket!!",
-                            //                           msDuration: MaterialSnackbar.DurationLong);
+                           
                             IsReOrderBtnVisible = false;
 
                         }
@@ -172,14 +170,16 @@ namespace FormsLoyalty.ViewModels
                     await NavigationService.GoBackAsync();
                 }
                 else
+                {
                     transaction = loadedTransaction;
 
-               
                     TotalSubtotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(transaction.TotalNetAmount + transaction.TotalDiscount);
                     TotalShipping = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(AppData.Basket.ShippingAmount);
                     TotalVat = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(transaction.TotalAmount - transaction.TotalNetAmount);
                     TotalDiscount = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(transaction.TotalDiscount);
                     Total = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(transaction.TotalAmount);
+                }
+                    
                 
             }
             catch (Exception)
@@ -191,17 +191,13 @@ namespace FormsLoyalty.ViewModels
         }
         internal async Task NavigateToItemPage(SalesEntryLine salesEntryLine)
         {
-            IsPageEnabled = true;
-            try
-            {
-               
-                await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "itemId", salesEntryLine.ItemId } });
-            }
-            catch (Exception)
-            {
+            if (IsPageEnabled)
+                return;
 
-                
-            }
+            IsPageEnabled = true;
+            
+            await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "itemId", salesEntryLine.ItemId } });
+           
             IsPageEnabled = false;
         }
         public async override void Initialize(INavigationParameters parameters)

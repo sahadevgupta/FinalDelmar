@@ -137,9 +137,8 @@ namespace FormsLoyalty.ViewModels
 
 
         private int pageSize = 7;
-        private int pageNumber = 1;
 
-        ItemModel itemModel;
+        readonly ItemModel itemModel;
         private List<LoyItem> LoyItems;
 
         public DelegateCommand SearchCommand { get; set; }
@@ -206,7 +205,6 @@ namespace FormsLoyalty.ViewModels
                                 Items.Add(loyItem);
 
                             }
-                            //TempList.ToList().AddRange(items);
                             UpdateItemQuantityAndWishlist();
                         }
 
@@ -269,10 +267,10 @@ namespace FormsLoyalty.ViewModels
                 });
 
             }
-            catch (Exception)
+            catch (Exception ex) 
             {
 
-
+                Crashes.TrackError(ex);
             }
         }
 
@@ -293,7 +291,7 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
             bool IsSuccess = false;
 
-            var selectedBasket = AppData.Basket.Items.Where(x => x.ItemId == loyItem.Id).FirstOrDefault();
+            var selectedBasket = AppData.Basket.Items.FirstOrDefault(x => x.ItemId == loyItem.Id);
             if (selectedBasket != null)
             {
                 try
@@ -500,10 +498,10 @@ namespace FormsLoyalty.ViewModels
              
                 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-               
 
+                Crashes.TrackError(ex);
             }
             finally
             {
@@ -516,15 +514,7 @@ namespace FormsLoyalty.ViewModels
         {
             foreach (var loyItem in loyItems)
             {
-                //if (loyItem.Prices.Count > 0)
-                //{
-                //    loyItem.Price = loyItem.PriceFromVariantsAndUOM(loyItem.SelectedVariant?.Id, loyItem.SelectedUnitOfMeasure?.Id);
-                //    if (loyItem.Discount > 0)
-                //    {
-                //        var discountedPrice = (loyItem.Discount / 100) * Convert.ToDecimal( loyItem.Price);
-                //        loyItem.NewPrice = (Convert.ToDecimal(loyItem.Price) - discountedPrice).ToString("F",CultureInfo.InvariantCulture);
-                //    }
-                //}
+                
 
                 if (loyItem.Discount > 0)
                 {
@@ -550,7 +540,7 @@ namespace FormsLoyalty.ViewModels
                     return;
                 }
 
-                pageNumber = Convert.ToInt32(num);
+               int pageNumber = Convert.ToInt32(num);
 
                 var items = await itemModel.GetItemsByPage(pageSize, pageNumber, ItemCategoryId, productGroupId, SearchText,IsSortedDesc,SelectedSortOption);
                 if (items!=null && items.Any())

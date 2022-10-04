@@ -90,7 +90,7 @@ namespace FormsLoyalty.ViewModels
             return IsError;
         }
 
-        private async void LoadAppsettings()
+        private async Task LoadAppsettings()
         {
             var results = await new GeneralSearchModel().AppSettings(ConfigKey.Password_Policy);
 
@@ -101,10 +101,10 @@ namespace FormsLoyalty.ViewModels
             base.OnNavigatedFrom(parameters);
             parameters.Add("edit", true);
         }
-        public override void Initialize(INavigationParameters parameters)
+        public override async void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-            LoadAppsettings();
+           await LoadAppsettings();
         }
     }
 }

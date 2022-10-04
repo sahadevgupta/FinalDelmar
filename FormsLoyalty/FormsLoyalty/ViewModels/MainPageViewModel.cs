@@ -131,10 +131,7 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _myPoints, value); }
         }
 
-       
-
-        GeneralSearchModel searchModel;
-        ItemModel itemModel;
+        readonly ItemModel itemModel;
         #endregion
 
         #region Offer
@@ -154,8 +151,8 @@ namespace FormsLoyalty.ViewModels
 
         #endregion
 
-        public bool CanNavigate;
-        public bool IsUploadBtnClicked;
+        internal bool CanNavigate;
+        internal bool IsUploadBtnClicked;
 
         #region Commands
         public DelegateCommand<Advertisement> OnAdTappedCommand { get; set; }
@@ -167,10 +164,8 @@ namespace FormsLoyalty.ViewModels
             AdsCurrentState = CategoryCurrentState = BestSellerCurrentState = OfferCurrentState = LayoutState.Loading;
             Height = DeviceDisplay.MainDisplayInfo.Height;
             Title = AppResources.ResourceManager.GetString("ApplicationTitle",AppResources.Culture);
-            //AppData.IsLoggedIn = AppData.Device.UserLoggedOnToDevice == null ? false : true;
 
             App.dialogService = pageDialogService;
-            searchModel = new GeneralSearchModel();
             itemModel = new ItemModel();
 
             LoadPoints();
@@ -189,7 +184,11 @@ namespace FormsLoyalty.ViewModels
         private void UpdateWishlist(LoyItem obj)
         {
             var loyitem = BestSellerItems.FirstOrDefault(x => x.Id == obj.Id);
-            loyitem.IsWishlisted = obj.IsWishlisted;
+            if (loyitem is object)
+            {
+                loyitem.IsWishlisted = obj.IsWishlisted;
+            }
+            
         }
 
         private async Task OnAdSelected(Advertisement data)
@@ -299,7 +298,7 @@ namespace FormsLoyalty.ViewModels
         }
 
 
-        internal async void ScanSend()
+        internal async Task ScanSend()
         {
             IsPageEnabled = true;
             if (await CheckLogin())
@@ -321,7 +320,7 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
             bool IsSuccess = false;
 
-            var selectedBasket = AppData.Basket.Items.Where(x => x.ItemId == loyItem.Id).FirstOrDefault();
+            var selectedBasket = AppData.Basket.Items.FirstOrDefault(x => x.ItemId == loyItem.Id);
             if (selectedBasket!=null)
             {
                 try
@@ -431,13 +430,13 @@ namespace FormsLoyalty.ViewModels
                 CultureInfo language;
                 if (param.Equals("en", StringComparison.OrdinalIgnoreCase))
                 {
-                    language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("English"));
+                    language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).AsEnumerable().First(element => element.EnglishName.Contains("English"));
                     Settings.RTL = false;
                     
                 }
                 else
                 {
-                    language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("Arabic"));
+                    language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).AsEnumerable().First(element => element.EnglishName.Contains("Arabic"));
                     Settings.RTL = true;
                 }
 
@@ -467,7 +466,6 @@ namespace FormsLoyalty.ViewModels
                     if (isSuccess)
                     {
                         loyItem.Quantity = 1;
-                        //DependencyService.Get<INotify>().ShowSnackBar($"{basketItem.ItemDescription} has been added to basket!!");
                         IsPageEnabled = false;
                         return true;
                     }
@@ -509,7 +507,7 @@ namespace FormsLoyalty.ViewModels
                     imgData.Add(new Tuple<byte[], string>(bytes, extension.Replace(".", "")));
                    
                 }
-                NavigateToScanPage(imgData);
+               await NavigateToScanPage(imgData);
             }
 
 
@@ -543,7 +541,10 @@ namespace FormsLoyalty.ViewModels
                 await LoadSearch(SearchKey).ConfigureAwait(false);
             }
             else
-            IsSuggestionFound = false;
+            {
+                IsSuggestionFound = false;
+            }
+            
 
             lastSearchLength = SearchKey.Length;
 
@@ -558,7 +559,6 @@ namespace FormsLoyalty.ViewModels
                 var items = await model.GetItemsByPage(10, 1, string.Empty, string.Empty, SearchKey, false, string.Empty).ConfigureAwait(false);
                 Items = new ObservableCollection<LoyItem>(items);
 
-                //LoadImages();
             }
             catch (Exception)
             {
@@ -567,31 +567,7 @@ namespace FormsLoyalty.ViewModels
             }
         }
 
-        private void LoadImages()
-        {
-            try
-            {
-                Task.Run(async () =>
-                {
-                    foreach (var item in Items)
-                    {
-                        if (item.Images.Any())
-                        {
-                            var imgView = await ImageHelper.GetImageById(item.Images[0].Id, new LSRetail.Omni.Domain.DataModel.Base.Retail.ImageSize(110, 110));
-                            item.Images[0].Image = imgView.Image;
-                        }
-                        else
-                            item.Images = new List<ImageView> { new ImageView { Image = "noimage.png" } };
-                    }
-                });
-            }
-            catch (Exception)
-            {
-
-
-            }
-        }
-
+        
 
         #endregion
 
@@ -618,7 +594,7 @@ namespace FormsLoyalty.ViewModels
         /// It navigates to scan page to preview the image.
         /// </summary>
         /// <param name="imgData">It takes bytes and extension</param>
-        internal async void NavigateToScanPage(List<Tuple<byte[], string>> imgData)
+        internal async Task NavigateToScanPage(List<Tuple<byte[], string>> imgData)
         {
             IsPageEnabled = true;
             await NavigationService.NavigateAsync(nameof(ScanSendPage), new NavigationParameters { { "images", imgData } });
@@ -709,63 +685,30 @@ namespace FormsLoyalty.ViewModels
                 });
                 #endregion
 
+                if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
+                {
+                    GetSocialMediaStatusForIos();
 
-                //var serverTasks = new List<Task>();
-                //if (AppData.Advertisements != null && AppData.Advertisements.Count > 0)
-                //{
-                //    LoadAdvertisements();
+                }
 
-                //}
-                //else
-                //{
-                //    var adsTask = LoadAdvertisementsFromServer();
-                //    //await LoadAdvertisementsFromServer().ConfigureAwait(false);
-                //    serverTasks.Add(adsTask);
-
-                //}
-
-                //if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
-                //{
-                //    var socialMediaTask = GetSocialMediaStatusForIos();
-                //    serverTasks.Add(socialMediaTask);
-
-                //}
-
-                //var categoriesTask = LoadCategoriesAsync();
-                //serverTasks.Add(categoriesTask);
-
-                //var bestSellerTask = LoadBestSellerItems();
-                //serverTasks.Add(bestSellerTask);
-
-                //var offersTask = LoadOffersAsync();
-                //serverTasks.Add(offersTask);
-
-                ////await LoadCategories().ConfigureAwait(false);
-                ////await LoadBestSellerItems().ConfigureAwait(false);
-                ////await LoadOffersAsync().ConfigureAwait(false);
-
-
-                //if (!(advertisements is object && advertisements.Any() && itemCategories is object && itemCategories.Any()
-                //    && offers is object && offers.Any()))
-                //{
-                //    await Task.WhenAll(serverTasks).ConfigureAwait(false);
-                //}
 
             }
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
                 IsPageEnabled = false;
-                //await loading.DismissAsync();
             }
-            //CurrentState = LayoutState.None;
         }
 
-        private async Task GetSocialMediaStatusForIos()
+        private void GetSocialMediaStatusForIos()
         {
             try
             {
-                 AppData.GetSocialMediaStatusResult = await new CommonModel().GetSocialMediaDisplayStatusAsync();
+                Task.Run(async() =>
+                {
+                    AppData.GetSocialMediaStatusResult = await new CommonModel().GetSocialMediaDisplayStatusAsync();
+                });
+                 
             }
             catch (Exception ex)
             {
@@ -782,7 +725,6 @@ namespace FormsLoyalty.ViewModels
             }
            
             offers = new ObservableCollection<PublishedOffer>(AppData.PublishedOffers.Where(x => x.Code != OfferDiscountType.Coupon).Take(10));
-            //LoadOfferImage();  
         }
 
         private void LoadOfferImage()
@@ -834,7 +776,6 @@ namespace FormsLoyalty.ViewModels
                         MostViewedItems = new ObservableCollection<LoyItem>(LoadItemWithPrice(mostViewedItems));
                         if (MostViewedItems.Any())
                         {
-                            //LoadItemImage(MostViewedItems);
                             retryCounter = 0;
                         }
                     }
@@ -856,7 +797,6 @@ namespace FormsLoyalty.ViewModels
             else
             {
                 MostViewedItems = new ObservableCollection<LoyItem>(LoadItemWithPrice( AppData.MostViewed));
-                //LoadItemImage(MostViewedItems);
             }
         }
 
@@ -874,7 +814,6 @@ namespace FormsLoyalty.ViewModels
                             BestSellerItems = new ObservableCollection<LoyItem>(LoadItemWithPrice(bestSellerItems));
                             if (BestSellerItems.Any())
                             {
-                                //LoadItemImage(BestSellerItems);
                                 retryCounter = 0;
                             }
 
@@ -897,7 +836,6 @@ namespace FormsLoyalty.ViewModels
             else
             {
                 BestSellerItems = new ObservableCollection<LoyItem>(LoadItemWithPrice(AppData.BestSellers));
-                //LoadItemImage(BestSellerItems);
             }
 
 
@@ -997,7 +935,6 @@ namespace FormsLoyalty.ViewModels
                             if (cat?.Count > 0)
                             {
                                 itemCategories = new ObservableCollection<ItemCategory>(cat);
-                                //loadCatWithImage(itemCategories);
 
                                 retryCounter = 0;
                             }
@@ -1023,12 +960,11 @@ namespace FormsLoyalty.ViewModels
             else
             {
                 itemCategories = new ObservableCollection<ItemCategory>(AppData.ItemCategories);
-                //loadCatWithImage(itemCategories);
             }
                 
         }
 
-        internal async void NavigateToItemCategory(ItemCategory itemCategory)
+        internal async Task NavigateToItemCategory(ItemCategory itemCategory)
         {
             IsPageEnabled = true;
             await NavigationService.NavigateAsync(nameof(ItemCategoriesPage), new NavigationParameters { { "item", itemCategory }, { "fromPage", true } });
@@ -1077,7 +1013,6 @@ namespace FormsLoyalty.ViewModels
         public void LoadAdvertisements()
         {
             advertisements = new ObservableCollection<Advertisement>(AppData.Advertisements);
-            //LoadAdsImage();
         }
 
         private async Task LoadAdvertisementsFromServer()
@@ -1091,7 +1026,6 @@ namespace FormsLoyalty.ViewModels
 
                     advertisements = new ObservableCollection<Advertisement>(ads);
                     
-                    //LoadAdsImage();
 
                     AppData.Advertisements = advertisements.ToList();
 
@@ -1162,7 +1096,7 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
 
@@ -1172,11 +1106,11 @@ namespace FormsLoyalty.ViewModels
             {
                 case NavigationMode.Back:
                     var imgData = parameters.GetValue<List<Tuple<byte[], string>>>("images");
-                    if(imgData !=null)
-                    NavigateToScanPage(imgData);
-
+                    if(imgData != null)
+                    {
+                       await NavigateToScanPage(imgData);
+                    }
                     break;
-                    //IsBackNavigation = true;
             }
         }
         public override void Initialize(INavigationParameters parameters)

@@ -14,9 +14,9 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as MagazinePageViewModel;
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
+        private async void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
         {
-            _viewModel.NavigateToDetail((sender as Button).CommandParameter as MagazineModel);
+           await _viewModel.NavigateToDetail((sender as Button).CommandParameter as MagazineModel);
         }
     }
 }

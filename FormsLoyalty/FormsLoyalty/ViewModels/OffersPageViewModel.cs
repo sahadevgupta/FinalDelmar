@@ -6,6 +6,7 @@ using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -50,7 +51,7 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _VerticalSpac, value); }
         }
 
-        IGenericDatabaseRepo<PublishedOffer> _offerRepo;
+       readonly IGenericDatabaseRepo<PublishedOffer> _offerRepo;
 
         public OffersPageViewModel(INavigationService navigationService, IGenericDatabaseRepo<PublishedOffer> offerRepo ): base(navigationService)
         {
@@ -92,15 +93,7 @@ namespace FormsLoyalty.ViewModels
 
             try
             {
-                //if (AppData.Device.UserLoggedOnToDevice == null)
-                //{
-                //    Task.Run(async () =>
-                //    {
-                //        await NavigationService.NavigateAsync("NavigationPage/LoginPage");
-                //    });
-
-                //    return;
-                //}
+               
 
                 var publishedOffers = AppData.PublishedOffers.Where(x => x.Code != OfferDiscountType.Coupon);
 
@@ -144,7 +137,7 @@ namespace FormsLoyalty.ViewModels
             catch (Exception ex)
             {
 
-
+                Crashes.TrackError(ex);
             }
 
             finally
@@ -160,12 +153,6 @@ namespace FormsLoyalty.ViewModels
             items.ForEach(x => x.IsViewed = true);
 
             _offerRepo.UpdateAll(items);
-        }
-
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-
         }
 
         public  override void Initialize(INavigationParameters parameters)

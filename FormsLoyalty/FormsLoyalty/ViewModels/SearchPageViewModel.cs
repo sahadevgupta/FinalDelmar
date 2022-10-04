@@ -64,7 +64,7 @@ namespace FormsLoyalty.ViewModels
 
         public DelegateCommand FilterCommand { get; set; }
 
-        GeneralSearchModel searchModel;
+        readonly GeneralSearchModel searchModel;
         private bool[] selectedTypes;
 
 
@@ -322,7 +322,6 @@ namespace FormsLoyalty.ViewModels
                 {
                     if (availableTypes[i] == SearchType.Item)
                     {
-                        //typeNames[i] = AppResources.ResourceManager.GetString("GeneralSearchViewItem",AppResources.Culture);
                         typeNames[i] = AppResources.ItemDescriptionAndActiveIngredient;
                     }
                     else if (availableTypes[i] == SearchType.Offer)

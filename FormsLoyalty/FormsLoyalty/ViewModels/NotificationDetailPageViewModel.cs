@@ -59,11 +59,7 @@ namespace FormsLoyalty.ViewModels
             });
             
         }
-        public override void OnNavigatedFrom(INavigationParameters parameters)
-        {
-            base.OnNavigatedFrom(parameters);
 
-        }
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);

@@ -43,7 +43,6 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _isNotConnected, value); }
         }
 
-        private readonly IFirebaseAnalytics eventTracker;
 
         public ViewModelBase(INavigationService navigationService)
         {
@@ -52,10 +51,10 @@ namespace FormsLoyalty.ViewModels
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             IsNotConnected = Connectivity.NetworkAccess != NetworkAccess.Internet;
 
-            eventTracker = DependencyService.Get<IFirebaseAnalytics>();
+            IFirebaseAnalytics _eventTracker = DependencyService.Get<IFirebaseAnalytics>();
             var page = this;
            
-            eventTracker?.SendEvent("Page Opened", new Dictionary<string, string>() { { "Page", page.ToString() } });
+            _eventTracker?.SendEvent("Page Opened", new Dictionary<string, string>() { { "Page", page.ToString() } });
             
             
 

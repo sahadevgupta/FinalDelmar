@@ -57,10 +57,10 @@ namespace FormsLoyalty.ViewModels
             get { return _mobileNo; }
             set { SetProperty(ref _mobileNo, value); }
         }
-        public INavigation navigation;
+        internal INavigation navigation;
         public DelegateCommand RateAppCommand { get; set; }
 
-        IGenericDatabaseRepo<PublishedOffer> _offerRepo;
+        readonly IGenericDatabaseRepo<PublishedOffer> _offerRepo;
         public MoreInfoPageViewModel(INavigationService navigationService, IGenericDatabaseRepo<PublishedOffer> offerRepo) : base(navigationService)
         {
             _offerRepo = offerRepo;
@@ -107,7 +107,7 @@ namespace FormsLoyalty.ViewModels
                     IsPageEnabled = false;
                 }
             });
-            
+
         }
 
         private void RateApp()
@@ -115,10 +115,9 @@ namespace FormsLoyalty.ViewModels
             try
             {
 
-                Xamarin.Forms.Device.BeginInvokeOnMainThread( () =>
+                Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
                 {
-                     DependencyService.Get<IAppRating>().RateAppFromStore();
-                    //await CrossStoreReview.Current.RequestReview(true);
+                    DependencyService.Get<IAppRating>().RateAppFromStore();
                 });
 
 
@@ -140,29 +139,29 @@ namespace FormsLoyalty.ViewModels
             }
             else
             {
-               var response =  await App.dialogService.DisplayAlertAsync(null, AppResources.txtLoginFirst, AppResources.ActionbarLogin, AppResources.ApplicationCancel);
+                var response = await App.dialogService.DisplayAlertAsync(null, AppResources.txtLoginFirst, AppResources.ActionbarLogin, AppResources.ApplicationCancel);
                 if (response)
                 {
                     await NavigationService.NavigateAsync(nameof(LoginPage));
                 }
             }
-                 
+
 
             IsPageEnabled = false;
         }
 
-        
+
 
         internal async Task OnSettingSelected(string obj)
         {
             if (obj.ToLower().Contains("Help".ToLower()))
             {
-               await NavigationService.NavigateAsync(nameof(DemonstrationPage),new NavigationParameters { {"FromHelp",true } });
+                await NavigationService.NavigateAsync(nameof(DemonstrationPage), new NavigationParameters { { "FromHelp", true } });
             }
-            else if(obj.ToLower().Contains("Terms".ToLower()))
+            else if (obj.ToLower().Contains("Terms".ToLower()))
                 await NavigationService.NavigateAsync(nameof(TermsConditionPage));
             else
-               await NavigationService.NavigateAsync(nameof(AppSettingsPage));
+                await NavigationService.NavigateAsync(nameof(AppSettingsPage));
         }
 
         /// <summary>
@@ -170,11 +169,11 @@ namespace FormsLoyalty.ViewModels
         /// </summary>
         internal List<DrawerMenuItem> GetMenuDrawerList()
         {
-            var drawerMenuItems = new List<DrawerMenuItem>();
+            var drawerMenus = new List<DrawerMenuItem>();
 
             if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
             {
-                drawerMenuItems.Add(new DrawerMenuItem()
+                drawerMenus.Add(new DrawerMenuItem()
                 {
                     ActivityType = AppConstValues.Login,
                     IsVisible = true,
@@ -185,32 +184,19 @@ namespace FormsLoyalty.ViewModels
 
                 });
             }
-            
 
-            #region Item Tab
 
-            //drawerMenuItems.Add(new DrawerMenuItem()
-            //{
-            //    ActivityType = AppConstValues.Items,
-            //    IsVisible = false,
-            //    Image = FontAwesomeIcons.ShoppingBag,
-            //    IsFontImage = true,
-            //    IsLoading = false,
-            //    Title = AppResources.ResourceManager.GetString("ActionbarItems", AppResources.Culture),
-            //});
-
-            #endregion
 
             #region Search tab
-            drawerMenuItems.Add(new DrawerMenuItem()
-                {
-                    ActivityType = AppConstValues.Search,
-                    IsVisible = true,
-                    Image = FontAwesomeIcons.Search,
-                    IsFontImage = true,
-                    IsLoading = false,
-                    Title = AppResources.txtAdvancedSearch,
-                });
+            drawerMenus.Add(new DrawerMenuItem()
+            {
+                ActivityType = AppConstValues.Search,
+                IsVisible = true,
+                Image = FontAwesomeIcons.Search,
+                IsFontImage = true,
+                IsLoading = false,
+                Title = AppResources.txtAdvancedSearch,
+            });
             #endregion
 
             #region Notification Tab
@@ -219,7 +205,7 @@ namespace FormsLoyalty.ViewModels
             {
                 string notificationCount = GetNotificationCount();
 
-                drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
+                drawerMenus.Add(new SecondaryTextDrawerMenuItem()
                 {
                     ActivityType = AppConstValues.Notifications,
                     IsVisible = true,
@@ -235,22 +221,22 @@ namespace FormsLoyalty.ViewModels
 
             #region Offer Tab
 
-             var offerCount = string.Empty;
+            var offerCount = string.Empty;
 
             if (AppData.PublishedOffers is object)
             {
                 var data = _offerRepo.GetItemsAsync();
-                
-                if (data.Count(x => x.Code != OfferDiscountType.Coupon) > 0)
+
+                if (data.Any(x => x.Code != OfferDiscountType.Coupon))
                 {
                     var count = data.Count(x => x.Code != OfferDiscountType.Coupon && !x.IsViewed);
                     offerCount = count > 0 ? count.ToString() : string.Empty;
-                }  
+                }
             }
 
 
 
-            drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
+            drawerMenus.Add(new SecondaryTextDrawerMenuItem()
             {
                 ActivityType = AppConstValues.Offer,
                 IsVisible = true,
@@ -269,7 +255,7 @@ namespace FormsLoyalty.ViewModels
             {
                 string couponCount = GetCouponsCount();
 
-                drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
+                drawerMenus.Add(new SecondaryTextDrawerMenuItem()
                 {
                     ActivityType = AppConstValues.Coupons,
                     IsVisible = true,
@@ -283,7 +269,7 @@ namespace FormsLoyalty.ViewModels
             #endregion
 
             #region Magazine Tab
-            drawerMenuItems.Add(new DrawerMenuItem()
+            drawerMenus.Add(new DrawerMenuItem()
             {
                 ActivityType = AppConstValues.Magazine,
                 IsVisible = true,
@@ -294,34 +280,14 @@ namespace FormsLoyalty.ViewModels
             });
             #endregion
 
-            #region Reminder Tab
-            //drawerMenuItems.Add(new DrawerMenuItem()
-            //{
-            //    ActivityType = AppConstValues.Reminder,
-            //    IsVisible = false,
-            //    Image = FontAwesomeIcons.Clock,
-            //    IsFontImage = true,
-            //    IsLoading = false,
-            //    Title = AppResources.ResourceManager.GetString("ActionbarReminders", AppResources.Culture),
-            //});
-            #endregion
+           
 
             #region Wishlist Tab
 
-            if ((EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null) && EnabledItems.HasWishLists)
+            if (AppData.IsLoggedIn)
             {
 
-                //As Discussed 12/07/22 with Michael commenting the wishist count logic
-
-                //var itemCount = string.Empty;
-                //var oneListItem = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device.CardId, LSRetail.Omni.Domain.DataModel.Loyalty.Baskets.ListType.Wish);
-                //if (oneListItem?.Items.Count > 0)
-                //{
-                //    var count = oneListItem.Items.Count;
-                //    itemCount = count > 0 ? count.ToString() : string.Empty;
-                //}
-
-                drawerMenuItems.Add(new SecondaryTextDrawerMenuItem()
+                drawerMenus.Add(new SecondaryTextDrawerMenuItem()
                 {
                     ActivityType = AppConstValues.ShoppingLists,
                     IsVisible = true,
@@ -336,24 +302,24 @@ namespace FormsLoyalty.ViewModels
 
 
             #region Store Tab
-            drawerMenuItems.Add(new DrawerMenuItem()
-                {
-                    ActivityType = AppConstValues.Locations,
-                    IsVisible = true,
-                    Image = FontAwesomeIcons.Store,
-                    IsFontImage = true,
-                    IsLoading = false,
-                    Title = AppResources.ResourceManager.GetString("ActionbarStores", AppResources.Culture),
-                });
+            drawerMenus.Add(new DrawerMenuItem()
+            {
+                ActivityType = AppConstValues.Locations,
+                IsVisible = true,
+                Image = FontAwesomeIcons.Store,
+                IsFontImage = true,
+                IsLoading = false,
+                Title = AppResources.ResourceManager.GetString("ActionbarStores", AppResources.Culture),
+            });
             #endregion
 
-            
+
 
             #region ScanSend Tab
             // Scan & Send Option
             if ((EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null))
             {
-                drawerMenuItems.Add(new DrawerMenuItem()
+                drawerMenus.Add(new DrawerMenuItem()
                 {
                     ActivityType = AppConstValues.ScanSend,
                     IsVisible = true,
@@ -366,13 +332,13 @@ namespace FormsLoyalty.ViewModels
 
             #endregion
 
-            
+
 
             #region LogOut Tab
 
             if (EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null)
             {
-                drawerMenuItems.Add(new DrawerMenuItem()
+                drawerMenus.Add(new DrawerMenuItem()
                 {
                     ActivityType = AppConstValues.Logout,
                     IsVisible = true,
@@ -385,13 +351,13 @@ namespace FormsLoyalty.ViewModels
             }
             #endregion
 
-            return drawerMenuItems;
+            return drawerMenus;
         }
 
         private List<DrawerMenuItem> GetSettingsDrawerList()
         {
-            var drawerMenuItems = new List<DrawerMenuItem>();
-            drawerMenuItems.Add(new DrawerMenuItem()
+            var drawerMenus = new List<DrawerMenuItem>();
+            drawerMenus.Add(new DrawerMenuItem()
             {
                 ActivityType = AppConstValues.ContactUs,
                 IsVisible = true,
@@ -400,7 +366,7 @@ namespace FormsLoyalty.ViewModels
                 Title = AppResources.ActionbarContactUs
             });
 
-            drawerMenuItems.Add(new DrawerMenuItem()
+            drawerMenus.Add(new DrawerMenuItem()
             {
                 ActivityType = AppConstValues.RateApp,
                 IsVisible = true,
@@ -409,7 +375,7 @@ namespace FormsLoyalty.ViewModels
                 Title = AppResources.txtRateApp
             });
 
-            drawerMenuItems.Add(new DrawerMenuItem()
+            drawerMenus.Add(new DrawerMenuItem()
             {
                 ActivityType = AppConstValues.TermsAndConditions,
                 IsVisible = true,
@@ -419,7 +385,7 @@ namespace FormsLoyalty.ViewModels
                 Title = AppResources.ActionbarTerm
             });
 
-            drawerMenuItems.Add(new DrawerMenuItem()
+            drawerMenus.Add(new DrawerMenuItem()
             {
                 ActivityType = AppConstValues.Settings,
                 IsVisible = true,
@@ -429,7 +395,7 @@ namespace FormsLoyalty.ViewModels
                 Title = AppResources.AppConfigurationappbar
             });
 
-            drawerMenuItems.Add(new DrawerMenuItem()
+            drawerMenus.Add(new DrawerMenuItem()
             {
                 ActivityType = AppConstValues.Help,
                 IsVisible = true,
@@ -438,7 +404,7 @@ namespace FormsLoyalty.ViewModels
                 IsLoading = false,
                 Title = AppResources.MenuViewHelp
             });
-            return drawerMenuItems;
+            return drawerMenus;
         }
 
         /// <summary>
@@ -449,12 +415,10 @@ namespace FormsLoyalty.ViewModels
         {
             var couponCount = string.Empty;
 
-            if (EnabledItems.ForceLogin || AppData.Device.UserLoggedOnToDevice != null)
+            if (AppData.IsLoggedIn && AppData.Device.UserLoggedOnToDevice.PublishedOffers.Any(x => x.Code == OfferDiscountType.Coupon))
             {
-                if (AppData.Device.UserLoggedOnToDevice.PublishedOffers.Count(x => x.Code == OfferDiscountType.Coupon) > 0)
-                {
-                    couponCount = AppData.Device.UserLoggedOnToDevice.PublishedOffers.Count(x => x.Code == OfferDiscountType.Coupon).ToString();
-                }
+               couponCount = AppData.Device.UserLoggedOnToDevice.PublishedOffers.Count(x => x.Code == OfferDiscountType.Coupon).ToString();
+                
             }
 
             return couponCount;
@@ -465,7 +429,7 @@ namespace FormsLoyalty.ViewModels
         /// Navigates to item page with barcode string as parameter. 
         /// </summary>
         /// <param name="barcode"></param>
-        internal async void NavigateToItemPage(string barcode)
+        internal async Task NavigateToItemPage(string barcode)
         {
 
             await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "barcode", barcode } });
@@ -495,7 +459,7 @@ namespace FormsLoyalty.ViewModels
         /// Get item using barcode
         /// </summary>
         /// <param name="barcode"></param>
-        private async void GetItemByBarCode(string barcode)
+        private async Task GetItemByBarCode(string barcode)
         {
             IsPageEnabled = true;
             try
@@ -505,7 +469,7 @@ namespace FormsLoyalty.ViewModels
                 if (item != null)
                 {
                     await NavigationService.NavigateAsync(nameof(ItemPage), new NavigationParameters { { "item", item } });
-                }  
+                }
                 else
                 {
                     DependencyService.Get<INotify>().ShowToast($"{AppResources.ResourceManager.GetString("ItemModelItemNotFound", AppResources.Culture)} with barcode {barcode}");
@@ -519,7 +483,7 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        internal async void DrawerSelected(DrawerMenuItem obj)
+        internal async Task DrawerSelected(DrawerMenuItem obj)
         {
             switch (obj.ActivityType)
             {
@@ -528,7 +492,7 @@ namespace FormsLoyalty.ViewModels
                     break;
 
                 case AppConstValues.Items:
-                    
+
                     try
                     {
                         IsPageEnabled = true;
@@ -561,10 +525,10 @@ namespace FormsLoyalty.ViewModels
                         }
                         if (status == PermissionStatus.Granted)
                         {
-                            var storageStatus = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
-                            if (storageStatus != PermissionStatus.Granted)
+                            status = await Permissions.CheckStatusAsync<Permissions.StorageWrite>();
+                            if (status != PermissionStatus.Granted)
                             {
-                                storageStatus = await Permissions.RequestAsync<Permissions.Camera>();
+                                status = await Permissions.RequestAsync<Permissions.Camera>();
                             }
                         }
                         if (status != PermissionStatus.Granted)
@@ -573,32 +537,26 @@ namespace FormsLoyalty.ViewModels
                             return;
                         }
 
-                        await navigation.PushAsync(scan,false);
-                        //Navigation.PushAsync(scan);
+                        await navigation.PushAsync(scan, false);
                         scan.OnScanResult += (result) =>
                         {
                             scan.IsScanning = false;
-                            ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
-                            string type = barcodeFormat.ToString();
 
+                            Xamarin.Forms.Device.BeginInvokeOnMainThread(async () =>
+                             {
+                                await navigation.PopAsync(false);
+                                 string barcode = result.Text;
 
-                           Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
-                            {
-                                //DependencyService.Get<INotify>().ShowToast($"Scan Successful!!, Code : {result.Text}");
-                                //Navigation.PopAsync();
-                                navigation.PopAsync(false);
-                                string barcode = result.Text;
-                               
-                                GetItemByBarCode(barcode);
-                            });
+                                await GetItemByBarCode(barcode);
+                             });
                         };
 
-                        
+
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
 
-                        
+                        Crashes.TrackError(ex);
                     }
                     finally
                     {
@@ -615,9 +573,9 @@ namespace FormsLoyalty.ViewModels
 
                 case AppConstValues.Offer:
 
-                  
-                        await NavigationService.NavigateAsync(nameof(OffersPage));
-                   
+
+                    await NavigationService.NavigateAsync(nameof(OffersPage));
+
 
                     break;
                 case AppConstValues.Coupons:
@@ -642,31 +600,24 @@ namespace FormsLoyalty.ViewModels
                     await NavigationService.NavigateAsync(nameof(StoreLocatorPage));
                     break;
 
-                //case AppConstValues.Transactions:
-                //    await Detail.Navigation.PushAsync(new TransactionPage());
-                //    break;
-
                 case AppConstValues.ScanSend:
                     await NavigationService.NavigateAsync(nameof(ScanSendPage));
                     break;
-                //case AppConstValues.AppConfiguration:
-                //    await Detail.Navigation.PushAsync(new AppSettingsPage());
-                //    break;
 
                 case AppConstValues.ContactUs:
-                    await NavigationService.NavigateAsync(nameof(ContactUsPage), useModalNavigation: true, animated:false);
+                    await NavigationService.NavigateAsync(nameof(ContactUsPage), useModalNavigation: true, animated: false);
                     break;
                 case AppConstValues.RateApp:
-                      RateApp();
+                    RateApp();
                     break;
                 case AppConstValues.TermsAndConditions:
-                    await NavigationService.NavigateAsync(nameof(TermsConditionPage),animated:false);
+                    await NavigationService.NavigateAsync(nameof(TermsConditionPage), animated: false);
                     break;
                 case AppConstValues.Settings:
                     await NavigationService.NavigateAsync(nameof(AppSettingsPage), animated: false);
                     break;
                 case AppConstValues.Help:
-                    await NavigationService.NavigateAsync(nameof(DemonstrationPage), new NavigationParameters { { "FromHelp", true } },animated:false);
+                    await NavigationService.NavigateAsync(nameof(DemonstrationPage), new NavigationParameters { { "FromHelp", true } }, animated: false);
                     break;
 
                 case AppConstValues.Logout:
@@ -703,7 +654,7 @@ namespace FormsLoyalty.ViewModels
                 await App.dialogService.DisplayAlertAsync(AppResources.ActionbarLogout, "Unable to Logout", AppResources.ApplicationOk);
             }
             IsPageEnabled = false;
-            
+
         }
     }
 

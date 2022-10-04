@@ -51,12 +51,12 @@ namespace FormsLoyalty.ViewModels
             CultureInfo language;
             if (IsEnLan)
             {
-                 language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("English"));
+                 language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).AsEnumerable().First(element => element.EnglishName.Contains("English"));
                 Settings.RTL = false;
             }
             else
             {
-                language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("Arabic"));
+                language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).AsEnumerable().First(element => element.EnglishName.Contains("Arabic"));
                 Settings.RTL = true;
             }
            
@@ -67,12 +67,6 @@ namespace FormsLoyalty.ViewModels
 
             IsPageEnabled = false;
 
-        }
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-
-           
         }
     }
 }

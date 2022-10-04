@@ -58,7 +58,6 @@ namespace FormsLoyalty.ViewModels
 
         public ItemCategoriesPageViewModel(INavigationService navigationService) : base(navigationService)
         {
-            //SetImageSize(context);
             imageModel = new ImageModel();
            
 
@@ -135,7 +134,6 @@ namespace FormsLoyalty.ViewModels
                 var service = new ItemService(new LoyItemRepository());
                 var cat = await service.GetItemCategoriesAsync();
                 itemCategories = new ObservableCollection<ItemCategory>(cat);
-                //loadDataWithImage(itemCategories);
 
                 AppData.ItemCategories = new List<ItemCategory>(itemCategories);
             }
@@ -146,7 +144,7 @@ namespace FormsLoyalty.ViewModels
 
 
 
-        internal async void NavigateToItemPage(ProductGroup obj)
+        internal async Task NavigateToItemPage(ProductGroup obj)
         {
             IsPageEnabled = true;
             await NavigationService.NavigateAsync(nameof(ItemGroupPage), new NavigationParameters { { "prodGroup", obj } });

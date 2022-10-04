@@ -75,9 +75,8 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _doseFrequencies, value); }
         }
 
-        public List<int> selectedDays = new List<int>();
-
-        IReminderRepo _reminderRepo;
+        internal List<int> selectedDays = new List<int>();
+        readonly IReminderRepo _reminderRepo;
 
         public AddReminderPageViewModel(INavigationService navigationService,IReminderRepo reminderRepo) : base(navigationService)
         {
@@ -103,7 +102,6 @@ namespace FormsLoyalty.ViewModels
         /// <summary>   
         /// Add the time, to receive reminder
         /// </summary>
-        bool PageInitialization = true;
         private void AddFrequencytime(int value)
         {
             if (value == 0)
@@ -139,7 +137,6 @@ namespace FormsLoyalty.ViewModels
                 {
                     _reminderRepo.DeleteAllNotification(medicineReminder.FrequencyTimes);
                     frequencies.ToList().ForEach(x => x.MedicineReminderId = medicineReminder.ID);
-                    //medicineReminder.FrequencyTimes = new List<FrequencyTime>(frequencies);
                     _reminderRepo.UpdateReminder(medicineReminder, frequencies.ToList());
                 }
                 else
@@ -184,7 +181,6 @@ namespace FormsLoyalty.ViewModels
         {
             SelectedUnit = Units.First();
 
-            //frequencies = new ObservableCollection<FrequencyTime> { new FrequencyTime { Id = Guid.NewGuid().ToString() } };
             
             SelectedFreqIndex = DoseFrequencies.Count;
         }

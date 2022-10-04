@@ -4,6 +4,7 @@ using FormsLoyalty.Models;
 using FormsLoyalty.Utils;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
+using Microsoft.AppCenter.Crashes;
 using Prism;
 using Prism.Commands;
 using Prism.Mvvm;
@@ -44,7 +45,6 @@ namespace FormsLoyalty.ViewModels
             set
             {
                 SetProperty(ref _selectedTab, value);
-               // Title = $"My Tabbed Page - Tab [{SelectedTab + 1}]";
             }
         }
 
@@ -62,8 +62,7 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _badgeCount, value); }
         }
 
-        public static bool _isInitialized = false;
-        public Page currentTab;
+        static bool _isInitialized = false;
        
         public MainTabbedPageViewModel(INavigationService navigationService) : base(navigationService)
         {
@@ -99,7 +98,7 @@ namespace FormsLoyalty.ViewModels
                 var items = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
                 if (items is object)
                 {
-                    BadgeCount = items.Items.Count().ToString();
+                    BadgeCount = items.Items.Any().ToString();
                 }
                 else
                 {
@@ -148,42 +147,18 @@ namespace FormsLoyalty.ViewModels
                             await memberContactModel.UserGetByCardId(AppData.Device.CardId);
                         }
 
-                        // await  loading.DismissAsync();
                     }).ConfigureAwait(false);
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-
+                    Crashes.TrackError(ex);
 
                 }
             }
 
         }
 
-        internal async void SetTab(int selectedTabIndex)
-        {
-            switch (selectedTabIndex)
-            {
-                case 0:
-                    await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
-                    break;
-                case 1:
-                    await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=ItemCategoriesPage");
-                    break;
-                case 2:
-                    await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=CartPage");
-                    break;
-                case 3:
-                    await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=TransactionPage");
-                    break;
-                case 4:
-                    await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MoreInfoPage");
-                    break;
-                default:
-                    break;
-            }
-        }
 
         protected virtual void RaiseIsActiveChanged()
         {
@@ -195,17 +170,5 @@ namespace FormsLoyalty.ViewModels
             SelectedTab = tabIndex;
         }
 
-        public override void OnNavigatedFrom(INavigationParameters parameters)
-        {
-            base.OnNavigatedFrom(parameters);
-        }
-        public override void OnNavigatedTo(INavigationParameters parameters)
-        {
-            base.OnNavigatedTo(parameters);
-        }
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-        }
     }
 }

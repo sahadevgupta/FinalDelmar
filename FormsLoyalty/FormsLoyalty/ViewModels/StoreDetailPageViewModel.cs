@@ -2,6 +2,7 @@
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Base.Setup;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -66,14 +67,14 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = false;
         }
 
-        private async void LoadData(Store Store)
+        private async Task LoadData(Store Store)
         {
             IsPageEnabled = true;
 
             var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
             if (status != PermissionStatus.Granted)
             {
-                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+               await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
             }
 
 
@@ -86,7 +87,7 @@ namespace FormsLoyalty.ViewModels
 
                 foreach (var storeHour in Store.StoreHours)
                 {
-                    opening += string.Format(AppResources.ResourceManager.GetString("StorelocatorDetailViewOpeningHourDay", AppResources.Culture), storeHour.OpenFrom.ToString("t"), storeHour.OpenTo.ToString("t"), GetStoreHourDayName(storeHour.DayOfWeek)) + System.Environment.NewLine;
+                    opening += string.Format(AppResources.StorelocatorDetailViewOpeningHourDay, storeHour.OpenFrom.ToString("t"), storeHour.OpenTo.ToString("t"), GetStoreHourDayName(storeHour.DayOfWeek)) + System.Environment.NewLine;
                 }
                 opening = opening.TrimEnd(System.Environment.NewLine.ToCharArray());
             }
@@ -122,9 +123,9 @@ namespace FormsLoyalty.ViewModels
 
                 PhoneDialer.Open(selectedStore.Phone);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
                
             }
         });

@@ -1,28 +1,21 @@
-﻿using Infrastructure.Data.SQLite.Devices;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
+using FormsLoyalty.Interfaces;
+using FormsLoyalty.Utils;
+using Infrastructure.Data.SQLite.Devices;
+using Infrastructure.Data.SQLite.MemberContacts;
+using LSRetail.Omni.Domain.DataModel.Base.Retail;
+using LSRetail.Omni.Domain.DataModel.Loyalty.Members;
 using LSRetail.Omni.Domain.Services.Base.Loyalty;
 using LSRetail.Omni.Domain.Services.Loyalty.Devices;
 using LSRetail.Omni.Domain.Services.Loyalty.MemberContacts;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.Members;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Shared;
-using Prism;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Prism.Ioc;
-using System.Threading.Tasks;
-using FormsLoyalty.Utils;
-using LSRetail.Omni.Domain.DataModel.Loyalty.Members;
-using LSRetail.Omni.Domain.DataModel.Base.Utils;
-using LSRetail.Omni.Domain.DataModel.Base;
-using Xamarin.Forms;
-using FormsLoyalty.Interfaces;
-using XF.Material.Forms.UI.Dialogs;
-using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using Microsoft.AppCenter.Crashes;
-using LSRetail.Omni.Domain.DataModel.Base.Retail;
-using Infrastructure.Data.SQLite.MemberContacts;
+using Xamarin.Forms;
+using XF.Material.Forms.UI.Dialogs;
 using Device = LSRetail.Omni.Domain.DataModel.Loyalty.Setup.Device;
-using System.Linq;
 
 namespace FormsLoyalty.Models
 {
@@ -31,16 +24,11 @@ namespace FormsLoyalty.Models
         private MemberContactService service;
         private IDeviceLocalRepository deviceRepo;
         private MemberRepository repository;
-        private MemberContactLocalService memberContactLocalService;
-        private SharedService sharedService;
 
         public async Task RegisterDevice()
         {
 
             BeginWsCall();
-            //ProgressDialog.Title = Context.GetString(Resource.String.MemberContactModelRegisterDevice);
-            //ProgressDialog.Message = Context.GetString(Resource.String.MemberContactModelRegisteringDevice);
-            //ProgressDialog.Show();
 
             var device = AppData.Device;
             if (string.IsNullOrEmpty(device.Manufacturer) || string.IsNullOrEmpty(device.Platform) || string.IsNullOrEmpty(device.OsVersion) || string.IsNullOrEmpty(device.Model))
@@ -109,10 +97,6 @@ namespace FormsLoyalty.Models
             var loading = await MaterialDialog.Instance.LoadingDialogAsync(message: string.Format(AppResources.ResourceManager.GetString("MemberContactModelLoggingInUser", AppResources.Culture), username));
 
 
-            //ProgressDialog.Title = Context.GetString(Resource.String.MemberContactModelLogin);
-            //ProgressDialog.Message = string.Format(Context.GetString(Resource.String.MemberContactModelLoggingInUser), username);
-            //ProgressDialog.Show();
-
             try
             {
                 var contact = await service.MemberContactLogonAsync(repository, username, password, AppData.Device.Id);
@@ -163,9 +147,6 @@ namespace FormsLoyalty.Models
 
             var loading = await MaterialDialog.Instance.LoadingDialogAsync(message: string.Format(AppResources.ResourceManager.GetString("MemberContactModelLoggingInUser", AppResources.Culture), FacebookEmail));
 
-            ////ProgressDialog.Title = Context.GetString(Resource.String.MemberContactModelLogin);
-            ////ProgressDialog.Message = string.Format(Context.GetString(Resource.String.MemberContactModelLoggingInUser), FacebookEmail);
-            ////ProgressDialog.Show();
 
             try
             {
@@ -185,7 +166,6 @@ namespace FormsLoyalty.Models
 
                 deviceRepo.SaveDevice(AppData.Device);
 
-               // await PushNotificationSave();
 
                 if (string.IsNullOrEmpty(contact.LoggedOnToDevice.Manufacturer) || string.IsNullOrEmpty(contact.LoggedOnToDevice.Platform) || string.IsNullOrEmpty(contact.LoggedOnToDevice.OsVersion) || string.IsNullOrEmpty(contact.LoggedOnToDevice.Model))
                 {
@@ -233,7 +213,6 @@ namespace FormsLoyalty.Models
 
                 deviceRepo.SaveDevice(AppData.Device);
 
-                //await PushNotificationSave();
 
                 if (string.IsNullOrEmpty(contact.LoggedOnToDevice.Manufacturer) || string.IsNullOrEmpty(contact.LoggedOnToDevice.Platform) || string.IsNullOrEmpty(contact.LoggedOnToDevice.OsVersion) || string.IsNullOrEmpty(contact.LoggedOnToDevice.Model))
                 {
@@ -249,7 +228,6 @@ namespace FormsLoyalty.Models
                 onError(errorMessage);
             }
 
-           // ProgressDialog.Dismiss();
 
             return success;
         }
@@ -301,16 +279,13 @@ namespace FormsLoyalty.Models
             try
             {
                 MemberContact contact = await service.MemberContactByCardIdAsync(repository, cardId);
-                //contact.GetBasket(AppData.Device.CardId).CalculateBasket();
 
                 AppData.Device.UserLoggedOnToDevice = contact;
-                //AppData.Basket = contact.GetBasket(AppData.Device.CardId);
                 AppData.Device.SecurityToken = contact.LoggedOnToDevice.SecurityToken;
 
                 if (contact.Cards.Any())
                     AppData.Device.CardId = contact.Cards[0].Id;
 
-                //AppData.Device.CardId = 
                 var uuid = Xamarin.Forms.DependencyService.Get<INotify>().getDeviceUuid();
                 Device device = new Device();
                 device.Id = uuid;
@@ -340,10 +315,6 @@ namespace FormsLoyalty.Models
         {
             BeginWsCall();
 
-            //ProgressDialog.Title = Context.GetString(Resource.String.AccountViewCreateAccount);
-            //ProgressDialog.Message = Context.GetString(Resource.String.AccountViewCreatingNewAccount);
-            //ProgressDialog.Show();
-
             try
             {
                 
@@ -358,7 +329,6 @@ namespace FormsLoyalty.Models
                 if (contact.Cards.Any())
                     AppData.Device.CardId = contact.Cards[0].Id;
 
-                //AppData.Device.CardId = 
                 var uuid = Xamarin.Forms.DependencyService.Get<INotify>().getDeviceUuid();
                 Device device = new Device();
                 device.Id = uuid;
@@ -367,7 +337,6 @@ namespace FormsLoyalty.Models
                 contact.LoggedOnToDevice = device;
                 SaveLocalMemberContact(contact);
 
-               // await PushNotificationSave();
             }
             catch(Exception ex)
             {
@@ -375,20 +344,13 @@ namespace FormsLoyalty.Models
                 return false;
                 
             }
-            finally
-            {
-               // ProgressDialog.Dismiss();
-            }
+            
             return true;
         }
 
         public async Task<bool> UpdateMemberContact(MemberContact updateContact)
         {
             BeginWsCall();
-
-            //ProgressDialog.Title = Context.GetString(Resource.String.AccountViewUpdateAccount);
-            //ProgressDialog.Message = Context.GetString(Resource.String.AccountViewUpdatingExistingAccount);
-            //ProgressDialog.Show();
 
             try
             {
@@ -409,18 +371,12 @@ namespace FormsLoyalty.Models
                     DependencyService.Get<INotify>().ShowToast(AppResources.ResourceManager.GetString("AccountViewUpdateSuccess", AppResources.Culture));
                     return true;
                 }
-                //MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "MemberContactUpdated");
-                
             }
             catch (Exception ex)
             {
                 await HandleUIExceptionAsync(ex);
             }
-            finally
-            {
-              //  ProgressDialog.Dismiss();
-            }
-
+            
             return false;
         }
 
@@ -434,7 +390,6 @@ namespace FormsLoyalty.Models
 
                 AppData.Device.UserLoggedOnToDevice.Account.PointBalance = points;
 
-               // SendBroadcast(Utils.BroadcastUtils.PointsUpdated);
 
                 SaveLocalMemberContact(AppData.Device.UserLoggedOnToDevice);
             }
@@ -450,9 +405,6 @@ namespace FormsLoyalty.Models
 
             BeginWsCall();
 
-            //ProgressDialog.Title = Context.GetString(Resource.String.ChangePasswordChangePassword);
-            //ProgressDialog.Message = Context.GetString(Resource.String.ChangePasswordChangingPassword);
-            //ProgressDialog.Show();
 
             try
             {
@@ -467,82 +419,10 @@ namespace FormsLoyalty.Models
                 await HandleUIExceptionAsync(ex);
             }
 
-            //ProgressDialog.Dismiss();
 
             return success;
         }
 
-        public void PushNotificationSave(string gcmId, PushStatus status = PushStatus.Enabled)
-        {
-            //called from background context
-
-            BeginWsCall();
-
-            //var looper = Context.MainLooper;
-            //var handler = new Handler(looper);
-            //handler.Post(
-            //    async () =>
-            //    {
-            //        var success = await sharedService.PushNotificationSaveAsync(
-            //            new PushNotificationRequest()
-            //            {
-            //                Application = PushApplication.Loyalty,
-            //                DeviceId = new DeviceUuidFactory(Context).getDeviceUuid(),
-            //                Id = gcmId,
-            //                Platform = PushPlatform.Android,
-            //                Status = status
-            //            });
-
-            //        if (success)
-            //        {
-            //            if (status == PushStatus.Enabled)
-            //            {
-            //                var versionCode = Context.PackageManager.GetPackageInfo(Context.PackageName, 0).VersionCode;
-
-            //                Utils.PreferenceUtils.SetInt(Context, Utils.PreferenceUtils.VersionCode, versionCode);
-            //                Utils.PreferenceUtils.SetString(Context, Utils.PreferenceUtils.FcmRegistrationId, gcmId);
-            //            }
-            //        }
-            //    });
-        }
-        //public async Task PushNotificationSave(PushStatus status = PushStatus.Enabled)
-        //{
-        //    var token = Utils.PreferenceUtils.GetString(Context, Utils.PreferenceUtils.FcmRegistrationId);
-        //    if (string.IsNullOrEmpty(token))
-        //        return;
-
-        //    BeginWsCall();
-
-        //    try
-        //    {
-        //        await sharedService.PushNotificationSaveAsync(
-        //            new PushNotificationRequest()
-        //            {
-        //                Application = PushApplication.Loyalty,
-        //                DeviceId = new DeviceUuidFactory(Context).getDeviceUuid(),
-        //                Id = token,
-        //                Platform = PushPlatform.Android,
-        //                Status = status
-        //            });
-        //    }
-        //    catch (Exception)
-        //    {
-        //        //supress
-        //    }
-        //}
-
-
-       
-
-        private Exception GetInnerException(Exception exception)
-        {
-            if (exception is AggregateException)
-            {
-                return exception.InnerException;
-            }
-
-            return exception;
-        }
         public void SaveLocalMemberContact(MemberContact contact)
         {
            var contactRepo =  new MemberContactRepository();
@@ -568,7 +448,6 @@ namespace FormsLoyalty.Models
             service = new MemberContactService();
             repository = new MemberRepository();
             deviceRepo = new DeviceRepository();
-            sharedService = new SharedService(new SharedRepository());
         }
     }
 }

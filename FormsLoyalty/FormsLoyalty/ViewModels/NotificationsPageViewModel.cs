@@ -5,6 +5,7 @@ using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -102,10 +103,10 @@ namespace FormsLoyalty.ViewModels
                     await UpdateNotificationStatus(notification, NotificationStatus.New);
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-
+                Crashes.TrackError(ex);
             }
             finally
             {
@@ -187,10 +188,10 @@ namespace FormsLoyalty.ViewModels
             }
             notifications = new ObservableCollection<NotificationGroup>(temp);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-
+                Crashes.TrackError(ex);
             }
             finally
             {
@@ -200,12 +201,6 @@ namespace FormsLoyalty.ViewModels
         }
 
         
-
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-           
-        }
         public override void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);

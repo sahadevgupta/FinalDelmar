@@ -12,10 +12,10 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as DemonstrationPageViewModel;
         }
 
-        private void Button_Clicked(object sender, System.EventArgs e)
+        private async void Button_Clicked(object sender, System.EventArgs e)
         {
             var view = (Button)sender;
-            _viewModel.SlideToNextPage(view.Text);
+           await _viewModel.SlideToNextPage(view.Text);
         }
     }
 }

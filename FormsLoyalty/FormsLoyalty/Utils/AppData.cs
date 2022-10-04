@@ -18,6 +18,7 @@ using Xamarin.Essentials;
 using Infrastructure.Data.SQLite.Devices;
 using System;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
+using Microsoft.AppCenter.Crashes;
 
 namespace FormsLoyalty.Utils
 {
@@ -80,7 +81,7 @@ namespace FormsLoyalty.Utils
                     }
                     catch (Exception ex)
                     {
-
+                        Crashes.TrackError(ex);
                         
                     }
                     

@@ -64,7 +64,6 @@ namespace FormsLoyalty.ViewModels
                 {
                     IsResendEnabled = true;
                     otpComp.OtpTimer = string.Empty;
-                    //Otp = string.Empty;
                 }
                    
 
@@ -81,7 +80,7 @@ namespace FormsLoyalty.ViewModels
         public DelegateCommand OnVerifyCommand { get; set; }
         public DelegateCommand ResendOtpCommand { get; set; }
 
-        CommonModel _commonModel;
+        readonly CommonModel _commonModel;
         private System.Timers.Timer _timer;
         public LoginOtpViewViewModel(INavigationService navigationService):base(navigationService)
         {
@@ -101,9 +100,6 @@ namespace FormsLoyalty.ViewModels
                 IsResendEnabled = false;
                 StartTimer();
             }
-              
-            if(!AppData.GetSocialMediaStatusResult && Device.RuntimePlatform == Device.iOS)
-                MaterialDialog.Instance.SnackbarAsync($"Your OTP : {Otp}", 5000);
 
             IsPageEnabled = false;
         }
@@ -121,19 +117,6 @@ namespace FormsLoyalty.ViewModels
 
             _timer.Enabled = true;
 
-
-            //Device.StartTimer(TimeSpan.FromMinutes(1), () =>
-            //{
-            //    if (TimerCount == 0)
-            //    {
-            //        return false;
-            //    }
-            //    else
-            //    {
-            //        TimerCount -= 1;
-            //        return true;
-            //    }
-            //});
         }
 
         private void OnTimedEvent(object sender, System.Timers.ElapsedEventArgs e)
@@ -198,7 +181,6 @@ namespace FormsLoyalty.ViewModels
                                         response.FirstName = string.IsNullOrEmpty(response.FirstName) ? fbProfile.FirstName : response.FirstName;
                                         response.LastName = string.IsNullOrEmpty(response.LastName) ? fbProfile.LastName : response.LastName ;
                                         response.Email = string.IsNullOrEmpty(response.Email) ? fbProfile.Email : response.Email ;
-                                        //AppData.Device.UserLoggedOnToDevice = response;
                                         try
                                         {
                                             await new MemberContactModel().UpdateMemberContact(response);
@@ -223,7 +205,6 @@ namespace FormsLoyalty.ViewModels
                                         response.FirstName = string.IsNullOrEmpty(response.FirstName) ? googleProfile.FirstName : response.FirstName;
                                         response.LastName = string.IsNullOrEmpty(response.LastName) ? googleProfile.LastName : response.LastName;
                                         response.Email = string.IsNullOrEmpty(response.Email) ? googleProfile.Email : response.Email;
-                                        //AppData.Device.UserLoggedOnToDevice = response;
                                         try
                                         {
                                             await new MemberContactModel().UpdateMemberContact(response);
@@ -236,7 +217,7 @@ namespace FormsLoyalty.ViewModels
                                     });
                                 }
 
-                                GoToMainScreen();
+                               await GoToMainScreen();
                             }
                             else
                                 await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}", new NavigationParameters { { "edit", true } });
@@ -253,7 +234,6 @@ namespace FormsLoyalty.ViewModels
                 else
                 {
                      Otp = await _commonModel.GenerateOTPAsync(MobileNumber);
-                    //DependencyService.Get<INotify>().ShowSnackBar($"Your OTP : {Otp}");
                 }
             }
             catch (Exception)
@@ -264,7 +244,7 @@ namespace FormsLoyalty.ViewModels
 
             IsPageEnabled = false;
         }
-        private async void GoToMainScreen()
+        private async Task GoToMainScreen()
         {
             AppData.IsLoggedIn = true;
             Xamarin.Essentials.Preferences.Set("IsLoggedIn", true);
@@ -282,9 +262,7 @@ namespace FormsLoyalty.ViewModels
                 MessagingCenter.Send(new BasketModel(), "CartUpdated");
                 await NavigationService.NavigateAsync("../../");
                 
-                //App.Current.MainPage = new NavigationPage(new MainTabbedPage());
             }
-                //await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
 
             IsPageEnabled = false;
         }

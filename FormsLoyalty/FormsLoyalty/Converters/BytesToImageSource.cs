@@ -13,7 +13,6 @@ namespace FormsLoyalty.Converters
         {
             ImageSource imgSource = null;
           
-            //var context = (type as ImageSource).BindingContext;
             if (value == null)
             {
                 return null;
@@ -42,7 +41,7 @@ namespace FormsLoyalty.Converters
                        
 
                     }
-                    catch (Exception ex)
+                    catch (Exception)
                     {
 
                         imgSource = ImageSource.FromFile("No_image_available.png");
@@ -61,8 +60,6 @@ namespace FormsLoyalty.Converters
             if (FileName != null)
             {
                
-
-               // var stream1 = new MemoryStream(FileName);
                 imgSource = ImageSource.FromStream(() => new MemoryStream(FileName));
                 return imgSource;
             }

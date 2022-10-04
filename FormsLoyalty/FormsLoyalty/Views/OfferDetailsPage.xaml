@@ -38,7 +38,20 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-                <Image Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0"
+
+             <controls:CustomImageControl ImageHeight="250"
+                                          UriImageSource="{Binding selectedOffer.Images[0].Location}"
+                                          Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
+
+                    <controls:CustomImageControl.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding BindingContext.ShowPreviewCommand,Source={x:Reference offerDetailsPage}}"
+                                                              />
+                    </controls:CustomImageControl.GestureRecognizers>
+
+                    </controls:CustomImageControl>
+
+
+                <!--<Image Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0"
                    Aspect="AspectFill"
                 HeightRequest="250"
                    HorizontalOptions="FillAndExpand"
@@ -47,7 +60,7 @@
                         <TapGestureRecognizer Command="{Binding BindingContext.ShowPreviewCommand,Source={x:Reference offerDetailsPage}}"
                                                               />
                     </Image.GestureRecognizers>
-                </Image>
+                </Image>-->
 
 
 
@@ -146,11 +159,10 @@
                                 <StackLayout.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
                                 </StackLayout.GestureRecognizers>
-                                
-                                <Image Source="{Binding Images[0].Location}"
-                                   HeightRequest="200"
-                                   Aspect="AspectFill"
-                                   />
+
+                                    <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding Images[0].Location}"/>
+
+
                                 <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                    VerticalTextAlignment="Center"/>
                             </StackLayout>

@@ -28,19 +28,11 @@ namespace FormsLoyalty.Views
             base.OnAppearing();
             hometab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome" , Glyph = FormsLoyalty.Resources.FontAwesomeIcons.Home,Size=24 };
             categorytab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.ThLarge, Size = 24 };
-            //carttab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.ShoppingCart };
             carttabios.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.ShoppingCart, Size = 24 };
-            //moretab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.Bars };
 
 
-            
-
-            //maintab.Children.Insert(2, new NavigationPage(new CartPage()));
-
-            //carttab.
         }
 
-        bool value = true;
         protected  override bool OnBackButtonPressed()
         {
             var selectedTabIndex = this.Children.IndexOf(this.CurrentPage);
@@ -72,7 +64,6 @@ namespace FormsLoyalty.Views
                 if (selectedTabIndex == 0)
                 {
                    
-                        var pageSatatus = true;
                         Device.BeginInvokeOnMainThread(async () =>
                         {
                             var page = new ExistPopupView();
@@ -83,9 +74,7 @@ namespace FormsLoyalty.Views
                             };
                             await Rg.Plugins.Popup.Services.PopupNavigation.Instance.PushAsync(page, true);
                         });
-                        //DependencyService.Get<INotify>().ShowToast(AppResources.txtAppExist);
-                        //value = false;
-                        //Task.Delay(2000).ContinueWith((s, e) => { value = true; }, null);
+                        
                       
                 }
                 else

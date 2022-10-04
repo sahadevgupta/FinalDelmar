@@ -21,7 +21,6 @@
                             HorizontalOptions="FillAndExpand"
                             VerticalOptions="FillAndExpand"
                             MediaCaptured="CameraView_MediaCaptured"
-                            OnAvailable="CameraView_OnAvailable"
                            Grid.Row="0"
                             FlashMode="Auto">
 

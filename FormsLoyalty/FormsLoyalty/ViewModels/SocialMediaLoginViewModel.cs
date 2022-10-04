@@ -90,7 +90,7 @@ namespace FormsLoyalty.ViewModels
                 }
                 else
                 {
-                    MaterialDialog.Instance.SnackbarAsync(ex.Message, 5000);
+                   await MaterialDialog.Instance.SnackbarAsync(ex.Message, 5000);
                 }
                
             }
@@ -103,13 +103,13 @@ namespace FormsLoyalty.ViewModels
         public override void Initialize(INavigationParameters parameters)
         {
             base.Initialize(parameters);
-            if (parameters.TryGetValue<FacebookProfile>("fb", out FacebookProfile fbProfile))
+            if (parameters.TryGetValue<FacebookProfile>("fb", out FacebookProfile fb))
             {
-                this.fbProfile = fbProfile;
+                this.fbProfile = fb;
             }
-            else if (parameters.TryGetValue("google", out GoogleProfile googleProfile))
+            else if (parameters.TryGetValue("google", out GoogleProfile gogle))
             {
-                this.googleProfile = googleProfile;
+                this.googleProfile = gogle;
             }
         }
     }

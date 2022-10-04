@@ -40,7 +40,7 @@ namespace FormsLoyalty.ViewModels
            PopulateCarousel();
             SkipCommand = new DelegateCommand(async () => await GotoMainPage());
         }
-        internal async void SlideToNextPage(string text)
+        internal async Task SlideToNextPage(string text)
         {
             if (text.ToLower().Contains("Next".ToLower()))
             {
@@ -58,7 +58,10 @@ namespace FormsLoyalty.ViewModels
                 await NavigationService.GoBackAsync();
             }
             else
-            await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
+            {
+                await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
+
+            }
         }
 
         private void PopulateCarousel()
@@ -83,12 +86,7 @@ namespace FormsLoyalty.ViewModels
                      SkipButtonIsVisible = false,
                      MainText=AppResources.txtDemo3
                  },
-                 //new TourCarouselContent
-                 //{
-                 //    ImageSource = MobileAppImageResourceHelper.GetImageSource("Ecommerce.png"),
-                 //    SkipButtonIsVisible = false,
-                 //    //MainText="Here, You can manage your shopping cart"
-                 //}
+                
             };
         }
 

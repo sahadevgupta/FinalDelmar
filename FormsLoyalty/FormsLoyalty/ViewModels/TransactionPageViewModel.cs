@@ -94,13 +94,12 @@ namespace FormsLoyalty.ViewModels
                
                 if (loadedTransactions != null)
                 {
-                    //SaveLocalTransactions(loadedTransactions);
 
                     AppData.Device.UserLoggedOnToDevice.SalesEntries = loadedTransactions;
                     LoadOrders(loadedTransactions);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 LoadCacheOrder();
                 
@@ -121,23 +120,5 @@ namespace FormsLoyalty.ViewModels
 
             }
         }
-
-        private void SaveLocalTransactions(List<SalesEntry> transactions)
-        {
-           // var service = new TransactionLocalService(new Infrastructure.Data.SQLite.Transactions.TransactionRepository());
-            var localService = PrismApplicationBase.Current.Container.Resolve<ITransactionLocalRepository>();
-            localService.SaveTransactions(transactions);
-        }
-
-       
-
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-
-            
-        }
-
-        
     }
 }

@@ -35,7 +35,6 @@ namespace FormsLoyalty.ViewModels
             get { return _relatedItems; }
             set { SetProperty(ref _relatedItems, value); }
         }
-        IGenericDatabaseRepo<PublishedOffer> _offerRepo;
         #region Command
         public DelegateCommand ShowPreviewCommand => new DelegateCommand(async () =>
         {
@@ -45,9 +44,8 @@ namespace FormsLoyalty.ViewModels
             await NavigationService.NavigateAsync(nameof(ImagePreviewPage), new NavigationParameters { { "previewImage", selectedOffer.Images[0].Image }, { "images", selectedOffer.Images } });
         });
         #endregion
-        public OfferDetailsPageViewModel(INavigationService navigationService, IGenericDatabaseRepo<PublishedOffer> offerRepo) :base(navigationService)
+        public OfferDetailsPageViewModel(INavigationService navigationService) :base(navigationService)
         {
-            _offerRepo = offerRepo;
         }
 
         /// <summary>
@@ -104,16 +102,11 @@ namespace FormsLoyalty.ViewModels
 
             selectedOffer = parameters.GetValue<PublishedOffer>("offer");
             selectedOffer.IsViewed = true;
-            //UpdateOfferRead();
             
             LoadRelatedItems();
         }
 
-        private void UpdateOfferRead()
-        {
-            _offerRepo.Update(selectedOffer);
-        }
-
+        
        
     }
 }

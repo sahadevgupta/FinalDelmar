@@ -8,6 +8,7 @@
     <Compile Remove="SQLite\**" />
     <EmbeddedResource Remove="SQLite\**" />
     <None Remove="SQLite\**" />
+    <None Remove="SonarAnalyzer.CSharp" />
   </ItemGroup>
 
   <ItemGroup>
@@ -60,6 +61,10 @@
     <PackageReference Include="XF.Material" Version="1.7.8" />
     <PackageReference Include="ZXing.Net.Mobile" Version="2.4.1" />
     <PackageReference Include="ZXing.Net.Mobile.Forms" Version="2.4.1" />
+    <PackageReference Include="SonarAnalyzer.CSharp" Version="8.46.0.54807">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>

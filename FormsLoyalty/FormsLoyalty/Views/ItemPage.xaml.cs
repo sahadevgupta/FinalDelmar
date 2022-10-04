@@ -1,6 +1,7 @@
 ﻿using FormsLoyalty.PopUpView;
 using FormsLoyalty.ViewModels;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
+using LSRetail.Omni.Domain.DataModel.Loyalty.Items;
 using Rg.Plugins.Popup.Extensions;
 using Rg.Plugins.Popup.Services;
 using System;
@@ -27,13 +28,13 @@ namespace FormsLoyalty.Views
             base.OnDisappearing();
         }
         
-        private async void Offer_Tapped(object sender, System.EventArgs e)
+        private async void OnRelatedItemTapped(object sender, System.EventArgs e)
         {
             var view = (StackLayout)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
 
-            await _viewModel.NavigateToOfferDetail((e as TappedEventArgs).Parameter as PublishedOffer);
+            _viewModel.ExecuteChangeSelectedItem((e as TappedEventArgs).Parameter as LoyItem);
 
             view.Opacity = 1;
         }

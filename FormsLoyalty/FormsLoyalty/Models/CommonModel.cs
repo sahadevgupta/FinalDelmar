@@ -21,14 +21,12 @@ namespace FormsLoyalty.Models
 {
     public class CommonModel : BaseModel
     {
-        private CommonModelRepository _repository;
-        private CommonModelService _service;
-        private DeviceRepository deviceRepo;
+        private readonly CommonModelRepository _repository;
+        private readonly CommonModelService _service;
         public CommonModel()
         {
             _service = new CommonModelService();
             _repository = new CommonModelRepository();
-            deviceRepo = new DeviceRepository();
         }
 
         #region Phone Verification
@@ -71,7 +69,6 @@ namespace FormsLoyalty.Models
                 contact.LoggedOnToDevice = device;
                 SaveLocalMemberContact(contact);
 
-                //deviceRepo.SaveDevice(AppData.Device);
 
                 if (string.IsNullOrEmpty(contact.LoggedOnToDevice?.Manufacturer) || string.IsNullOrEmpty(contact.LoggedOnToDevice?.Platform) || string.IsNullOrEmpty(contact.LoggedOnToDevice?.OsVersion) || string.IsNullOrEmpty(contact.LoggedOnToDevice?.Model))
                 {

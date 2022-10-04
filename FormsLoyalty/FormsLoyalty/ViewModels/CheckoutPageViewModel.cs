@@ -422,9 +422,9 @@ namespace FormsLoyalty.ViewModels
         #endregion
 
 
-       
-        BasketModel basketModel;
-        MemberContactModel memberContactModel;
+
+        readonly BasketModel basketModel;
+        readonly MemberContactModel memberContactModel;
 
        
         public bool IsNewAddresAdded { get; private set; }
@@ -483,7 +483,7 @@ namespace FormsLoyalty.ViewModels
         {
             if (Steps.FirstOrDefault(x => x.IsCurrentContent) != null)
             {
-                ContentView content = Steps.FirstOrDefault(x => x.IsCurrentContent).MainContent;
+                ContentView content = Steps.FirstOrDefault(x => x.IsCurrentContent)?.MainContent;
                 bool isNotLast = Steps.FirstOrDefault(x => x.IsCurrentContent).IsNotLast;
                 if (content != null)
                 {
@@ -586,10 +586,10 @@ namespace FormsLoyalty.ViewModels
                         }
 
                     }
-                    catch (Exception)
+                    catch (Exception ex)
                     {
 
-
+                        Crashes.TrackError(ex);
                     }
                 });
             }
@@ -671,7 +671,6 @@ namespace FormsLoyalty.ViewModels
             Task.Run(async () =>
             {
                 Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
-                //SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
             });
 
             if (AppData.Device.UserLoggedOnToDevice.Addresses != null)
@@ -717,16 +716,13 @@ namespace FormsLoyalty.ViewModels
                 Task.Run(async () =>
                 {
                     Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
-                    //Areas = new ObservableCollection<AreaModel>(await new CommonModel().GetAreasAsync("cairo"));
 
                     SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
-                    //SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
                 });
             }
              else
             {
                 SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
-                //SelectedArea = Areas.FirstOrDefault(x => x.Area.Equals(selectedAddress.Area));
             }
             
 
@@ -775,14 +771,6 @@ namespace FormsLoyalty.ViewModels
             {
                 foreach (var basketItem in AppData.CartItems)
                 {
-                    //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
-                    //{
-                    //    basketItem.= string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
-                    //}
-                    //else
-                    //{
-                    //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
-                    //}
 
                     basketItem.DiscountAmount = basketItem.DiscountAmount * basketItem.Quantity;
 
@@ -790,9 +778,9 @@ namespace FormsLoyalty.ViewModels
                 }
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
                 
             }
 
@@ -805,7 +793,6 @@ namespace FormsLoyalty.ViewModels
                 Task.Run(async () =>
                 {
 
-                    // IsPageEnabled = true;
 
                     var oneListModel = new OneListModel();
                     basketOrder = await oneListModel.OneListCalculate(AppData.Basket);
@@ -832,7 +819,6 @@ namespace FormsLoyalty.ViewModels
                         totalDiscount = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalDiscount);
                         totalTotal = AppData.Device.UserLoggedOnToDevice.Environment.Currency.FormatDecimal(basketOrder.TotalAmount);
                     });
-                    // IsPageEnabled = false;
                 });
 
             }
@@ -923,9 +909,9 @@ namespace FormsLoyalty.ViewModels
                     await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
 
             }
             finally
@@ -936,14 +922,6 @@ namespace FormsLoyalty.ViewModels
 
 
         #endregion
-
-
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-
-           
-        }
 
         
     }

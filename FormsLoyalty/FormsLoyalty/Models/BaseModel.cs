@@ -113,30 +113,10 @@ namespace FormsLoyalty.Models
                 {
                     msg = AppResources.ResourceManager.GetString("ModelSecurityToken", AppResources.Culture);
 
-                    if (checkSecurityTokenException)
-                    {
-                        //displayAlert = false;
-                        //var intent = new Intent();
-                        //intent.SetClass(Context, typeof(LoginActivity));
-                        //intent.PutExtra(BundleConstants.IsInsideApp, true);
-                        //Context.StartActivity(intent);
-                    }
+                    
                 }
             }
-            // 
-            //if (displayAlert)
-            //{
-            //    if (showAsToast)
-            //    {
-            //       // if (msg != AppResources.ResourceManager.GetString("ModelGenericException", AppResources.Culture))
-            //            DependencyService.Get<INotify>().ShowToast(msg);
-            //    }
-            //    else
-            //    {
-            //        DependencyService.Get<INotify>().ShowToast(msg);
-
-            //    }
-            //}
+            
 
             AppData.Msg = msg;
             return msg;
@@ -158,7 +138,7 @@ namespace FormsLoyalty.Models
             DependencyService.Get<INotify>().ShowToast(description);
         }
 
-        protected async void ShowSnackBar(string description)
+        protected async Task ShowSnackBar(string description)
         {
             await MaterialDialog.Instance.SnackbarAsync(message: description,
                                             msDuration: MaterialSnackbar.DurationLong);

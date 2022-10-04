@@ -2,6 +2,7 @@
 using FormsLoyalty.Utils;
 using FormsLoyalty.ViewModels;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using XF.Material.Forms.Dialogs;
 using ZXing.Net.Mobile.Forms;
@@ -25,7 +26,7 @@ namespace FormsLoyalty.Views
             view.Opacity = 0;
             await view.FadeTo(1, 250);
            
-            _viewModel.DrawerSelected((e as TappedEventArgs).Parameter as DrawerMenuItem);
+            await _viewModel.DrawerSelected((e as TappedEventArgs).Parameter as DrawerMenuItem);
             view.BackgroundColor = Color.Transparent;
             view.Opacity = 1;
         }
@@ -38,7 +39,7 @@ namespace FormsLoyalty.Views
             view.Opacity = 0;
             await view.FadeTo(1, 250);
 
-            ScanImage();
+            await ScanImage();
             view.BackgroundColor = Color.Transparent;
             view.Opacity = 1;
 
@@ -46,42 +47,13 @@ namespace FormsLoyalty.Views
 
            
         }
-        private async void ScanImage()
+        private async Task ScanImage()
         {
             _viewModel.IsPageEnabled = true;
-            //var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
-            // options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
-            //ZXingScannerView scan = new ZXingScannerView()
-            //{
-
-            //   IsScanning  = true,
-            //   IsTorchOn = true
-            //};
-
-            //// await Navigation.PushAsync(scan);
-            //Navigation.PushAsync(scan);
-            //scan.OnScanResult += (result) =>
-            //{
-            //    scan.IsScanning = false;
-            //    ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
-            //    string type = barcodeFormat.ToString();
-            //    Device.BeginInvokeOnMainThread(async () =>
-            //    {
-            //        //Navigation.PopAsync();
-            //        await Navigation.PopAsync();
-            //        string barcode = result.Text;
-            //        _viewModel.NavigateToItemPage(barcode);
-            //    });
-            //};
-            //var scanner = new ZXing.Mobile.MobileBarcodeScanner();
-
-            //scanner.TopText = AppResources.ScannerViewScannerTopText;
-            //scanner.BottomText = AppResources.ScannerViewScannerBottomText;
 
             var options = new ZXing.Mobile.MobileBarcodeScanningOptions();
             options.PossibleFormats = new List<ZXing.BarcodeFormat>() { ZXing.BarcodeFormat.EAN_13, ZXing.BarcodeFormat.EAN_8 };
 
-            //var result = await scanner.Scan(options);
 
 
             var overlay = new ZXingDefaultOverlay
@@ -104,22 +76,17 @@ namespace FormsLoyalty.Views
             
 
             await Navigation.PushAsync(scan);
-            //Navigation.PushAsync(scan);
             scan.OnScanResult += (result) =>
             {
                 scan.IsScanning = false;
-                ZXing.BarcodeFormat barcodeFormat = result.BarcodeFormat;
-                string type = barcodeFormat.ToString();
                 
 
                 Device.BeginInvokeOnMainThread(async () =>
                 {
                     DependencyService.Get<INotify>().ShowToast($"Scan Successful!!, Code : {result.Text}");
-                    //Navigation.PopAsync();
                     await Navigation.PopAsync();
                     string barcode = result.Text;
-                    ;
-                    _viewModel.NavigateToItemPage(barcode);
+                   await _viewModel.NavigateToItemPage(barcode);
                 });
             };
 

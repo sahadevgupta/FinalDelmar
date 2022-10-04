@@ -71,7 +71,6 @@ namespace FormsLoyalty.ViewModels
            
 
             var coupons = await new CommonModel().GetDelmarCouponAsync(AppData.Device.UserLoggedOnToDevice.Account.Id);
-           // coupons.Add(new DelmarCoupons { CouponID = "SAMPLE", ExpirationDate = DateTime.Now.Date });
             DelmarCoupons = new ObservableCollection<DelmarCoupons>(coupons);
 
             IsPageEnabled = false;

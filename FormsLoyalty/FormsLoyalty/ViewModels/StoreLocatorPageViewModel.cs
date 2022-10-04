@@ -9,6 +9,7 @@ using LSRetail.Omni.Domain.DataModel.Loyalty.Items;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Setup;
 using LSRetail.Omni.Domain.Services.Loyalty.Stores;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.Setup;
+using Microsoft.AppCenter.Crashes;
 using Newtonsoft.Json;
 using Plugin.Settings;
 using Prism.Commands;
@@ -145,7 +146,7 @@ namespace FormsLoyalty.ViewModels
         }
 
         
-        private async void LoadStoresInStock(LoyItem item)
+        private async Task LoadStoresInStock(LoyItem item)
         {
             IsPageEnabled = true;
             AppData.IsViewStock = false;
@@ -156,18 +157,18 @@ namespace FormsLoyalty.ViewModels
 
                 if (storesInStock != null)
                 {
-                    LoadStores(storesInStock, item);
+                   await LoadStores(storesInStock, item);
                 }
             }
 
-            catch (Exception ex)
+            catch (Exception)
             {
                 IsPageEnabled = false;
             }
             IsPageEnabled = false;
         }
 
-        private async void LoadStores(List<Store> storesInStock,LoyItem item)
+        private async Task LoadStores(List<Store> storesInStock,LoyItem item)
         {
             try
             {
@@ -191,25 +192,20 @@ namespace FormsLoyalty.ViewModels
             }
             catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
             }
         }
 
-        public override void OnNavigatedTo(INavigationParameters parameters)
+        public override async void OnNavigatedTo(INavigationParameters parameters)
         {
             base.OnNavigatedTo(parameters);
             var item = parameters.GetValue<LoyItem>("viewStock");
             if (item!=null)
             {
-                LoadStoresInStock(item);
+               await LoadStoresInStock(item);
 
             }
 
-        }
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-          
         }
 
         

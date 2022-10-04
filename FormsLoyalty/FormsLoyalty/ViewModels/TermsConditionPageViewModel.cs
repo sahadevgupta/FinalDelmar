@@ -1,5 +1,6 @@
 ﻿using FormsLoyalty.Helpers;
 using FormsLoyalty.Repos;
+using Microsoft.AppCenter.Crashes;
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
@@ -27,7 +28,7 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _source, value); }
         }
 
-        IScanSendRepo _termsRepo;
+        readonly IScanSendRepo _termsRepo;
         public TermsConditionPageViewModel(INavigationService navigationService, IScanSendRepo termRepo ) :base(navigationService)
         {
             _termsRepo = termRepo;
@@ -55,10 +56,10 @@ namespace FormsLoyalty.ViewModels
 
 
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
 
-
+                    Crashes.TrackError(ex);
                 }
                 finally
                 {

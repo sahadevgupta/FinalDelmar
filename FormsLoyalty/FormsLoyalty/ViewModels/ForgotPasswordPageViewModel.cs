@@ -32,7 +32,7 @@ namespace FormsLoyalty.ViewModels
                 if (Validate())
                 {
                     var success = await new MemberContactModel().ForgotPasswordForDeviceAsync(Username);
-                    if (string.IsNullOrEmpty(success) == false)
+                    if (!string.IsNullOrEmpty(success))
                     {
                         await NavigationService.NavigateAsync(nameof(ResetPasswordPage), new NavigationParameters { { "username", Username },{"code", success } });
 

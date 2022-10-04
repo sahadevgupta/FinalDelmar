@@ -74,9 +74,12 @@
                                     </StackLayout.GestureRecognizers>
                                     
                                     <Frame Visual="Material" Padding="1">
-                                        <ffimage:CachedImage Source="{Binding Location}"
+
+                                        <controls:CustomImageControl ImageHeight="300"  UriImageSource="{Binding Location}"/>
+
+                                        <!--<ffimage:CachedImage Source="{Binding Location}"
                                                HeightRequest="300" DownsampleToViewSize="True"
-                               Aspect="AspectFill"/>
+                               Aspect="AspectFill"/>-->
 
                                     </Frame>
 
@@ -275,7 +278,7 @@
                             <DataTemplate>
                                 <StackLayout WidthRequest="150" Padding="5" >
                                     <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="Offer_Tapped" CommandParameter="{Binding .}"/>
+                                        <TapGestureRecognizer Tapped="OnRelatedItemTapped" CommandParameter="{Binding .}"/>
                                     </StackLayout.GestureRecognizers>
 
                                     <Frame Padding="0" CornerRadius="5" BorderColor="LightGray" Visual="Material">
@@ -284,7 +287,8 @@
                                         
                                    
                                     </Frame>
-                                    <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                                    <Label Text="{Binding Description}" LineBreakMode="WordWrap"
+                                           MaxLines="3"
                                    HorizontalTextAlignment="Center"/>
                                 </StackLayout>
                             </DataTemplate>
