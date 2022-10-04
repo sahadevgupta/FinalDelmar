@@ -671,7 +671,7 @@ namespace FormsLoyalty.ViewModels
             Task.Run(async () =>
             {
                 Cities = new ObservableCollection<CitiesModel>(await new CommonModel().GetCitiessync());
-                SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
+                //SelectedCity = Cities.FirstOrDefault(x => x.City.Equals(selectedAddress.City));
             });
 
             if (AppData.Device.UserLoggedOnToDevice.Addresses != null)

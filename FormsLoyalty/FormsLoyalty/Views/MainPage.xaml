@@ -129,17 +129,7 @@
 
                         </Frame>
 
-                        <!--<Button Text="EN" Grid.Column="1" HorizontalOptions="End" BackgroundColor="White"  Visual="Material"
-                                Margin="10,0,10,0" FontSize="Body" Padding="0" ContentLayout="Left,0"
-                                ImageSource="{helpers:ImageResource Resource=eng.png}"
-                                CornerRadius="10" BorderColor="Silver"  WidthRequest="60" >
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" Value="True">
-                                    <Setter Property="Text" Value="AR"/>
-                                    <Setter Property="ImageSource" Value="{helpers:ImageResource Resource=arabic.png}"/>
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>-->
+                       
 
                     </Grid>
 
@@ -191,21 +181,7 @@
 
                             </SearchBar>
 
-                            <!--<controls:CustomAutoSuggestBox IsVisible="false"
-                                                       Margin="5,0,5,0"
-                                                       TextColor="White"
-                                                           PlaceholderTextColor="White"
-                                                       BackgroundColor="#D03E3E"
-                                                       DisplayMemberPath="Description"
-                                                x:Name="autosuggestview"
-                                                HorizontalOptions="FillAndExpand"
-                                               ItemsSource="{Binding Items}"
-                                                        UpdateTextOnSelect="False"
-                                                       SuggestionChosen="autosuggestview_SuggestionChosen"
-                                                     TextChanged="AutoSuggestBox_TextChanged"
-                                               >
-
-                            </controls:CustomAutoSuggestBox>-->
+                           
 
 
                         </Frame>
@@ -251,13 +227,7 @@
                             <xct:StateView StateKey="Loading" Margin="5,10">
                                 <xct:StateView.Template>
                                     <DataTemplate>
-                                        <!--<Grid>
-                                            <controls:SkeletonView StartColor="LightGray"
-                                                      EndColor="Gray"
-                                                      IsLoading="True"
-                                                      Margin="10,7"
-                                                      HeightRequest="{Binding BindingContext.Height,Source={x:Reference thisPage}}"/>
-                                        </Grid>-->
+                                        
 
                                         <Grid ColumnDefinitions="1*,7*,1*" HeightRequest="200" HorizontalOptions="FillAndExpand" Margin="5,0,5,0" ColumnSpacing="10">
                                             <yummy:PancakeView Grid.Column="0" Grid.Row="0"

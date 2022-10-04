@@ -1,0 +1,97 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Grid
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+    x:Class="FormsLoyalty.Controls.ExtendedDropdown"
+    xmlns:custom="clr-namespace:FormsLoyalty.Controls"
+    RowDefinitions="Auto,Auto,Auto"
+    x:Name="dropdownview">
+
+ <Grid.Resources>
+        <ResourceDictionary>
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
+        </ResourceDictionary>
+    </Grid.Resources>
+
+    <!--Title Label-->
+    <Label HorizontalOptions="FillAndExpand"
+           x:Name="titlelbl"
+           IsVisible="{Binding Title,Source={x:Reference dropdownview},Converter={StaticResource IsNotNullOrEmptyConverter}}"
+           VerticalTextAlignment="Center"
+           Text="{Binding Title,Source={x:Reference dropdownview}}"
+           Style="{Binding TitleStyle,Source={x:Reference dropdownview}}"
+           FontSize="Body"/>
+
+    <!--Dropdown with Frame-->
+    <Frame x:Name="frameDropdown"
+           
+           Grid.Row="1"
+           Margin="0,5,0,0"
+           Padding="{OnPlatform Android=0,iOS='0,5,0,5'}"
+           HasShadow="False"
+           Style="{Binding FrameStyle,Source={x:Reference dropdownview}}">
+
+        <Grid ColumnDefinitions="*,Auto"
+              IsClippedToBounds="True">
+
+            <!--Custom Dropdown-->
+            <custom:DropdownView x:Name="dropdown" Grid.ColumnSpan="2"
+                                   Margin="5,0"
+                                   CanEdit="{Binding CanEdit,Source={x:Reference dropdownview}}"
+                                   ItemSource="{Binding ItemSource,Source={x:Reference dropdownview}}"
+                                   PlaceholderText="{Binding PlaceholderText,Source={x:Reference dropdownview}}"
+                                   InputViewStyle="{Binding InputViewStyle,Source={x:Reference dropdownview}}"
+                                   SelectedItem="{Binding SelectedItem,Source={x:Reference dropdownview}}"
+                                   DisplayMemberPath="{Binding DisplayMemberPath,Source={x:Reference dropdownview}}"
+                                   TextChanged="dropdown_TextChanged"
+                                   VerticalOptions="Center">
+
+              
+
+            </custom:DropdownView>
+
+
+
+            <!--Image with FonImageSource-->
+            <Image Grid.Column="1"
+                   Margin="0,0,15,0"
+                       IsVisible="{Binding IsFontImage,Source={x:Reference dropdownview}}">
+                <Image.Source>
+                    <FontImageSource FontFamily="FontAwesome"
+                                     Size="Small"
+                                     Color="Black"
+                                     Glyph="{Binding Icon,Source={x:Reference dropdownview}}"/>
+                </Image.Source>
+
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped"/>
+
+                </Image.GestureRecognizers>
+
+            </Image>
+
+            
+
+        </Grid>
+
+        <Frame.Triggers>
+            <DataTrigger Binding="{Binding Source={x:Reference errorlbl},Path=IsVisible}"
+                             TargetType="Frame"
+                             Value="true">
+                <Setter Property="BorderColor" Value="Red"/>
+            </DataTrigger>
+        </Frame.Triggers>
+
+    </Frame>
+
+    <!-- Error Label-->
+    <Label x:Name="errorlbl"
+           Grid.Row="2"
+           Text="{Binding ErrorText,Source={x:Reference dropdownview}}"
+           IsVisible="{Binding IsError,Source={x:Reference dropdownview}}"
+           TextColor="Red"
+           VerticalTextAlignment="Center"/>
+
+</Grid>
+

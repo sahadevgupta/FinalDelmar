@@ -59,11 +59,11 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _quantity, value); }
         }
 
-        private ObservableCollection<PublishedOffer> _relatedPublishedOffers;
-        public ObservableCollection<PublishedOffer> relatedPublishedOffers
+        private ObservableCollection<LoyItem> _relatedItems;
+        public ObservableCollection<LoyItem> RelatedItems
         {
-            get { return _relatedPublishedOffers; }
-            set { SetProperty(ref _relatedPublishedOffers, value); }
+            get { return _relatedItems; }
+            set { SetProperty(ref _relatedItems, value); }
         }
 
         private string _bastetBtn = AppResources.ResourceManager.GetString("ApplicationAddToBasket", AppResources.Culture);
@@ -192,15 +192,14 @@ namespace FormsLoyalty.ViewModels
         {
             IsPageEnabled = true;
 
-            if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
+            if (!AppData.IsLoggedIn)
             {
-                AppData.IsLoggedIn = false;
-               await NavigationService.NavigateAsync(nameof(LoginPage),new NavigationParameters { { "itemPage",true } });
+                await NavigationService.NavigateAsync(nameof(LoginPage), new NavigationParameters { { "itemPage", true } });
                 IsPageEnabled = false;
                 return;
             }
 
-
+            
             if (BasketBtn == AppResources.ResourceManager.GetString("ApplicationAddedToBasket", AppResources.Culture))
             {
                 BasketBtn = AppResources.ResourceManager.GetString("ApplicationAddToBasket", AppResources.Culture);
@@ -365,15 +364,12 @@ namespace FormsLoyalty.ViewModels
         {
             try
             {
-                if (AppData.Device.UserLoggedOnToDevice == null)
-                {
-                    //ShowIndicator(false);
-                    return;
-                }
-                var service = new SharedService(new SharedRepository());
-                relatedPublishedOffers = new ObservableCollection<PublishedOffer>(await GetPublishedOffer(service));
+               
 
-                
+                RelatedItems = new ObservableCollection<LoyItem>( await itemModel.ItemsGetByRelatedItemIdAsync(Item.Id, 10));
+
+                //var service = new SharedService(new SharedRepository());
+                //RelatedItems = new ObservableCollection<PublishedOffer>(await GetRelatedItemOfferAsync(service));
             }
             catch (Exception)
             {
@@ -384,21 +380,6 @@ namespace FormsLoyalty.ViewModels
 
         }
 
-
-        private async Task<List<PublishedOffer>> GetPublishedOffer(SharedService service)
-        {
-            try
-            {
-                return await service.GetPublishedOffersByItemIdAsync(Item.Id, AppData.Device.CardId);
-            }
-            catch (Exception)
-            {
-
-                return null;
-            }
-           
-        }
-
         /// <summary>
         /// Add or Remove item from wishlist.
         /// </summary>
@@ -406,9 +387,9 @@ namespace FormsLoyalty.ViewModels
         internal async Task AddRemoveWishList()
         {
             IsPageEnabled = true;
-            if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
+
+            if(!AppData.IsLoggedIn)
             {
-                AppData.IsLoggedIn = false;
                 await NavigationService.NavigateAsync(nameof(LoginPage));
                 
             }
@@ -419,11 +400,13 @@ namespace FormsLoyalty.ViewModels
                 {
                     await shoppingListModel.DeleteWishListLine(existingItem.Id, true);
                     WishListIcon = "ic_favorite_outline_24dp";
+                    Item.IsWishlisted = false;
                 }
                 else
                 {
                     if (await AddToWishList())
                     {
+                        Item.IsWishlisted = true;
                         WishListIcon = "ic_favorite_24dp";
                         MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "Wishlistadded");
 
@@ -431,6 +414,7 @@ namespace FormsLoyalty.ViewModels
 
 
                 }
+                MessagingCenter.Send(Item, "WhistlistChange");
             }
 
            
@@ -447,10 +431,9 @@ namespace FormsLoyalty.ViewModels
         private async Task<bool> AddToWishList()
         {
            
-            if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
+            if (!AppData.IsLoggedIn)
             {
 
-                AppData.IsLoggedIn = false;
                 await NavigationService.NavigateAsync(nameof(LoginPage));
 
                 return false;

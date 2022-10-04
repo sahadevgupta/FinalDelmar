@@ -1711,4 +1711,9 @@
   <data name="WishListViewNoItemsInWishList" xml:space="preserve">
     <value>لا توجد عناصر في قائمة الرغبات</value>
   </data>
+
+  <data name="ItemDescriptionAndActiveIngredient" xml:space="preserve">
+    <value>"منتجات (بالاسم او بالمادة الفعالة)"</value>
+  </data>
+
 </root>

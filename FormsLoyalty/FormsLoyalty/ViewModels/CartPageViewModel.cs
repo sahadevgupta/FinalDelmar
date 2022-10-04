@@ -137,8 +137,73 @@ namespace FormsLoyalty.ViewModels
                var response = await new BasketModel().EditItem(basket.Id, Qty, null);
                 if (response)
                 {
-                    LoadBasketItems();
-                    
+                   
+
+                    var onelistitems = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
+                    if (onelistitems is object)
+                    {
+                        var temp = new ObservableCollection<Basket>();
+                        foreach (var basketItem in onelistitems?.Items)
+                        {
+
+                            var item = new Basket();
+
+                            item.Id = basketItem.Id;
+                            item.ItemDescription = basketItem.ItemDescription;
+                            //item.DiscountAmount = basketItem.DiscountAmount;
+
+
+                            item.VariantDescription = basketItem.VariantDescription;
+                            item.PriceWithoutDiscount = ((basketItem.NetPrice > 0 ? basketItem.NetPrice : basketItem.Amount) * basketItem.Quantity);
+                            item.ItemId = basketItem.ItemId;
+                            item.Quantity = basketItem.Quantity;
+                            item.Price = basketItem.Price;
+
+                            if (basketItem.DiscountAmount != 0 && basketItem.DiscountPercent == 0)
+                            {
+                                item.DiscountPercent = (basketItem.DiscountAmount / item.PriceWithoutDiscount) * 100;
+                            }
+                            else
+                            {
+                                item.DiscountPercent = basketItem.DiscountPercent;
+                            }
+
+                            if (item.DiscountPercent > 0)
+                            {
+                                var discountedPrice = (item.DiscountPercent / 100) * Convert.ToDecimal(basketItem.Price);
+                                item.NewPrice = ((Convert.ToDecimal(item.Price) - discountedPrice) * item.Quantity).ToString("F", CultureInfo.InvariantCulture);
+
+                                item.DiscountAmount = item.PriceWithoutDiscount - Convert.ToDecimal(item.NewPrice);
+                            }
+
+                            if (item.DiscountAmount != 0)
+                            {
+                                item.PriceWithDiscount = item.PriceWithoutDiscount - item.DiscountAmount;
+                            }
+
+                            item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
+                            item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
+                            item.VariantId = basketItem.VariantId;
+                            //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
+                            //{
+                            //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
+                            //}
+                            //else
+                            //{
+                            //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
+                            //}
+                            item.Image = basketItem.Image;
+                            temp.Add(item);
+
+
+                        }
+
+                        baskets = new ObservableCollection<Basket>(temp);
+
+                        
+                    }
+                    CalculateBasketPrice();
+
                     return existinItemIndex;
                 }
                 else
@@ -195,63 +260,67 @@ namespace FormsLoyalty.ViewModels
 
                     baskets = new ObservableCollection<Basket>();
 
-                    var pnelistitems = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
-
-                    foreach (var basketItem in pnelistitems?.Items)
+                    var onelistitems = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
+                    if (onelistitems is object)
                     {
-
-                        var item = new Basket();
-
-                        item.Id = basketItem.Id;
-                        item.ItemDescription = basketItem.ItemDescription;
-                        //item.DiscountAmount = basketItem.DiscountAmount;
-
-
-                        item.VariantDescription = basketItem.VariantDescription;
-                        item.PriceWithoutDiscount = ((basketItem.NetPrice > 0 ? basketItem.NetPrice : basketItem.Amount) * basketItem.Quantity);
-                        item.ItemId = basketItem.ItemId;
-                        item.Quantity = basketItem.Quantity;
-                        item.Price = basketItem.Price;
-
-                        if (basketItem.DiscountAmount != 0 && basketItem.DiscountPercent == 0)
+                        var temp = new ObservableCollection<Basket>();
+                        foreach (var basketItem in onelistitems?.Items)
                         {
-                            item.DiscountPercent = (basketItem.DiscountAmount / item.PriceWithoutDiscount) * 100;
-                        }
-                        else
-                        {
-                            item.DiscountPercent = basketItem.DiscountPercent;
-                        }
 
-                        if (item.DiscountPercent > 0)
-                        {
-                            var discountedPrice = (item.DiscountPercent / 100) * Convert.ToDecimal(basketItem.Price);
-                            item.NewPrice = ((Convert.ToDecimal(item.Price) - discountedPrice) * item.Quantity).ToString("F", CultureInfo.InvariantCulture);
+                            var item = new Basket();
 
-                            item.DiscountAmount = item.PriceWithoutDiscount - Convert.ToDecimal(item.NewPrice);
-                        }
-
-                        if (item.DiscountAmount != 0)
-                        {
-                            item.PriceWithDiscount = item.PriceWithoutDiscount - item.DiscountAmount;
-                        }
-
-                        item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
-                        item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
-                        item.VariantId = basketItem.VariantId;
-                        if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
-                        {
-                            item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
-                        }
-                        else
-                        {
-                            item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
-                        }
-                        item.Image = basketItem.Image;
-                        baskets.Add(item);
+                            item.Id = basketItem.Id;
+                            item.ItemDescription = basketItem.ItemDescription;
+                            //item.DiscountAmount = basketItem.DiscountAmount;
 
 
+                            item.VariantDescription = basketItem.VariantDescription;
+                            item.PriceWithoutDiscount = ((basketItem.NetPrice > 0 ? basketItem.NetPrice : basketItem.Amount) * basketItem.Quantity);
+                            item.ItemId = basketItem.ItemId;
+                            item.Quantity = basketItem.Quantity;
+                            item.Price = basketItem.Price;
+
+                            if (basketItem.DiscountAmount != 0 && basketItem.DiscountPercent == 0)
+                            {
+                                item.DiscountPercent = (basketItem.DiscountAmount / item.PriceWithoutDiscount) * 100;
+                            }
+                            else
+                            {
+                                item.DiscountPercent = basketItem.DiscountPercent;
+                            }
+
+                            if (item.DiscountPercent > 0)
+                            {
+                                var discountedPrice = (item.DiscountPercent / 100) * Convert.ToDecimal(basketItem.Price);
+                                item.NewPrice = ((Convert.ToDecimal(item.Price) - discountedPrice) * item.Quantity).ToString("F", CultureInfo.InvariantCulture);
+
+                                item.DiscountAmount = item.PriceWithoutDiscount - Convert.ToDecimal(item.NewPrice);
+                            }
+
+                            if (item.DiscountAmount != 0)
+                            {
+                                item.PriceWithDiscount = item.PriceWithoutDiscount - item.DiscountAmount;
+                            }
+
+                            item.UnitOfMeasureDescription = basketItem.UnitOfMeasureDescription;
+                            item.UnitOfMeasureId = basketItem.UnitOfMeasureId;
+                            item.VariantId = basketItem.VariantId;
+                            //if (string.IsNullOrEmpty(basketItem.UnitOfMeasureId) == false)
+                            //{
+                            //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString() + " " + basketItem.UnitOfMeasureId);
+                            //}
+                            //else
+                            //{
+                            //    item.Qty = string.Format(AppResources.ResourceManager.GetString("ApplicationQtyN", AppResources.Culture), basketItem.Quantity.ToString("N0"));
+                            //}
+                            item.Image = basketItem.Image;
+                            temp.Add(item);
+
+
+                        }
+                        baskets = new ObservableCollection<Basket>(temp);
+                        
                     }
-
                     CalculateBasketPrice();
 
                 }

@@ -28,8 +28,8 @@
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
-    <CodesignKey>Apple Development: Prasad Babu KN (GPPM2WTSD8)</CodesignKey>
-    <CodesignProvision>NowPak Dev - Prasad</CodesignProvision>
+    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignProvision></CodesignProvision>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchFastDev>true</MtouchFastDev>
@@ -64,16 +64,16 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
-    <MtouchInterpreter>-all</MtouchInterpreter>
-    <CodesignProvision>
-    </CodesignProvision>
+    <CodesignProvision>NowPak Dev - Prasad</CodesignProvision>
     <MtouchLink>None</MtouchLink>
     <DeviceSpecificBuild>true</DeviceSpecificBuild>
     <MtouchFastDev>true</MtouchFastDev>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <OptimizePNGs>true</OptimizePNGs>
+    <CodesignKey>Apple Development: Prasad Babu KN (GPPM2WTSD8)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
+    <DefineConstants>__IOS__;__MOBILE__;__UNIFIED__;</DefineConstants>
     <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\iPhone\Release</OutputPath>
@@ -81,14 +81,14 @@
     <WarningLevel>4</WarningLevel>
     <MtouchArch>ARM64</MtouchArch>
     <ConsolePause>false</ConsolePause>
-    <CodesignKey>iPhone Distribution: Michael Bneyamine (N8NGKDY9BU)</CodesignKey>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
     <OptimizePNGs>true</OptimizePNGs>
     <MtouchUseLlvm>true</MtouchUseLlvm>
-    <CodesignProvision>Delmar_Distribution</CodesignProvision>
     <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
     <MtouchLink>SdkOnly</MtouchLink>
+    <CodesignProvision>Delmar_Distribution</CodesignProvision>
+    <CodesignKey>Apple Distribution: Michael Bneyamine (N8NGKDY9BU)</CodesignKey>
+    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Ad-Hoc|iPhone' ">
     <DebugType>none</DebugType>
@@ -274,6 +274,9 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork%402x" />
     <Compile Include="Services\AppSettingsServices.cs" />
+    <BundleResource Include="Resources\No_image_available%403x.png" />
+    <Compile Include="Renderers\ExtendedDropdownRenderer.cs" />
+    <Compile Include="Renderers\IosDropDownBox.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />

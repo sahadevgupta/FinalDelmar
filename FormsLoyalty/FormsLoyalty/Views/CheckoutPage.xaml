@@ -11,7 +11,9 @@
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls" 
              xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
              xmlns:customview="clr-namespace:FormsLoyalty.Views.CheckoutStepperView"
-             xmlns:vm="clr-namespace:FormsLoyalty.ViewModels" xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
+             xmlns:vm="clr-namespace:FormsLoyalty.ViewModels"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              BackgroundColor="WhiteSmoke"
              
              Title="{x:Static resources:AppResources.ActionbarCheckout}">
@@ -22,6 +24,7 @@
         <converters:StringToBoolConverter x:Key="StringToBoolConverter"/>
         <converters:StepColorConverter x:Key="StepColorConverter"/>
         <converters:StepImageConverter x:Key="StepImageConverter"/>
+        <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
     </ContentPage.Resources>
 
 
@@ -120,7 +123,7 @@
 
             </Grid>
 
-            <ScrollView Grid.Row="1" >
+            <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
                 <Grid>
                     <StackLayout x:Name="addressStackView">
 
@@ -140,7 +143,16 @@
 
                         
 
-                        <Frame Padding="8" Margin="5,0,5,0" CornerRadius="5"  HasShadow="True" Visual="Material"
+                        <controls1:ExtendedDropdown ItemSource="{Binding addresses}"
+                                           Margin="5,0,5,0"
+                                           DisplayMemberPath="Address1"
+                                           SelectedItem="{Binding selectedAddress}"
+                                           PlaceholderText="{x:Static resources:AppResources.txtSelectAddress}"
+                                           Title="{x:Static resources:AppResources.txtSelectAddress}"/>
+
+
+
+                        <!--<Frame Padding="8" Margin="5,0,5,0" CornerRadius="5"  HasShadow="True" Visual="Material"
                                BorderColor="#E1E1EA" >
                             <StackLayout IsClippedToBounds="True" BackgroundColor="White">
                                 <Label Text="{x:Static resources:AppResources.txtSelectAddress}" FontSize="Body" Margin="5,0" FontAttributes="Bold"/>
@@ -152,7 +164,7 @@
                     Title="{x:Static resources:AppResources.txtSelectAddress}"
                     Visual="Default"/>
                             </StackLayout>
-                        </Frame>
+                        </Frame>-->
 
 
 
@@ -205,19 +217,40 @@
                                     />
 
 
+                            <controls1:ExtendedDropdown ItemSource="{Binding Cities}"
+                                           Margin="5,0,5,0"
+                                           DisplayMemberPath="City"
+                                           SelectedItem="{Binding SelectedCity}"
+                                           PlaceholderText="{x:Static resources:AppResources.AccountInformationViewCity}"
+                                           Title="{x:Static resources:AppResources.AccountInformationViewCity}"/>
 
+                            <controls1:ExtendedDropdown ItemSource="{Binding Areas}"
+                                           Margin="5,0,5,0"
+                                           DisplayMemberPath="Area"
+                                           Opacity="1"
+                                           SelectedItem="{Binding SelectedArea}"
+                                           PlaceholderText="{x:Static resources:AppResources.txtArea}"
+                                           Title="{x:Static resources:AppResources.txtArea}">
+                                 <controls1:ExtendedDropdown.Triggers>
+                                         <DataTrigger TargetType="controls1:ExtendedDropdown" Binding="{Binding SelectedCity,Converter={StaticResource IsNotNullOrEmptyConverter},TargetNullValue=false,FallbackValue=false}"
+                                                  Value="false">
+                                             <Setter Property="IsEnabled" Value="False"/>
+                                             <Setter Property="Opacity" Value="0.5"/>
+                                         </DataTrigger>
+                        </controls1:ExtendedDropdown.Triggers>
+                    </controls1:ExtendedDropdown>
 
-                            <Frame Padding="10,0,10,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="False"
+                            <!--<Frame Padding="10,0,10,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="False"
                                    BorderColor="#E1E1EA">
                                 <controls1:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
                                        SelectedItem="{Binding SelectedCity}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
                                     TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
                                    Visual="Default"   />
-                            </Frame>
+                            </Frame>-->
 
 
-                            <Frame Padding="10,0,10,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="false" BorderColor="#E1E1EA">
+                            <!--<Frame Padding="10,0,10,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="false" BorderColor="#E1E1EA">
                                 <controls1:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
                                        SelectedItem="{Binding SelectedArea}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.txtArea}" 
@@ -232,7 +265,7 @@
                                     </controls1:CustomPicker.Triggers>
 
                                 </controls1:CustomPicker>
-                            </Frame>
+                            </Frame>-->
 
 
                             <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtNumber}" 

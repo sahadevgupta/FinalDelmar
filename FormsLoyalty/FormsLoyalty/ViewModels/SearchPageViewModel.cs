@@ -323,7 +323,7 @@ namespace FormsLoyalty.ViewModels
                     if (availableTypes[i] == SearchType.Item)
                     {
                         //typeNames[i] = AppResources.ResourceManager.GetString("GeneralSearchViewItem",AppResources.Culture);
-                        typeNames[i] = "Item(Description & Active Ingredient)";
+                        typeNames[i] = AppResources.ItemDescriptionAndActiveIngredient;
                     }
                     else if (availableTypes[i] == SearchType.Offer)
                     {

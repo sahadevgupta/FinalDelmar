@@ -26,6 +26,7 @@ using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
+using static System.Net.WebRequestMethods;
 using DependencyService = Xamarin.Forms.DependencyService;
 using NavigationMode = Prism.Navigation.NavigationMode;
 using Timer = System.Timers.Timer;
@@ -180,9 +181,16 @@ namespace FormsLoyalty.ViewModels
 
             OnAdTappedCommand = new DelegateCommand<Advertisement>(async(data) => await OnAdSelected(data));
             SearchCommand = new DelegateCommand(async() => await ExecuteSearchCommandAsync());
+
+            MessagingCenter.Subscribe<LoyItem>(this, "WhistlistChange",UpdateWishlist);
+
         }
 
-       
+        private void UpdateWishlist(LoyItem obj)
+        {
+            var loyitem = BestSellerItems.FirstOrDefault(x => x.Id == obj.Id);
+            loyitem.IsWishlisted = obj.IsWishlisted;
+        }
 
         private async Task OnAdSelected(Advertisement data)
         {
@@ -358,6 +366,11 @@ namespace FormsLoyalty.ViewModels
                     }
                     else
                     {
+                        loyItem.IsWishlisted = false;
+                        Xamarin.Forms.Device.BeginInvokeOnMainThread(() =>
+                        {
+                            MaterialDialog.Instance.SnackbarAsync($"Unable to add item to wishlist {loyItem.Description}");
+                        });
                         IsPageEnabled = false;
                         return false;
                     }
@@ -491,12 +504,6 @@ namespace FormsLoyalty.ViewModels
 
                var bytes =  DependencyService.Get<IMediaService>().CompressImage(imgBytes);
 
-
-                //if(imgBytes.Length > 2097152)
-                //{
-                //    await MaterialDialog.Instance.AlertAsync(AppResources.txtImageSizeExceed, AppResources.txtImageSizeError, AppResources.ApplicationOk);
-                //    return;
-                //}
                 if (bytes != null)
                 {
                     imgData.Add(new Tuple<byte[], string>(bytes, extension.Replace(".", "")));
@@ -598,9 +605,8 @@ namespace FormsLoyalty.ViewModels
         async Task<bool> CheckLogin()
         {
             
-            if (AppData.Device.UserLoggedOnToDevice == null)
+            if (!AppData.IsLoggedIn)
             {
-                AppData.IsLoggedIn = false;
                 await NavigationService.NavigateAsync(nameof(LoginPage));
 
             }

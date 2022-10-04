@@ -10,6 +10,22 @@
     <Color x:Key="My_Header_Color">#b72228</Color>
     <Color x:Key="My_Button_Color">#b72228</Color>
     <Color x:Key="SecondaryColor">#a61f23</Color>
+    <Color x:Key="CyanAccent">#2DBECD</Color>
+    <Color x:Key="VibrantCyan050">#DDFCFF</Color>
+    <Color x:Key="VibrantCyan200">#7DE1EC</Color>
+    <Color x:Key="VibrantCyan900">#001F23</Color>
+    <Color x:Key="VibrantCyan800">#014248</Color>
+    <Color x:Key="VibrantCyan700">#00636C</Color>
+    <Color x:Key="VibrantCyan600">#008490</Color>
+    <Color x:Key="VibrantCyan500">#08A3B0</Color>
+    <Color x:Key="VibrantCyan30Opacity">#4D2DBECD</Color>
+    <Color x:Key="Neutral600">#5E5E72</Color>
+    <Color x:Key="Neutral800">#2B2B3B</Color>
+    <Color x:Key="Neutral900">#0F1A2E</Color>
+    <Color x:Key="Neutral100">#E1E1EA</Color>
+    <Color x:Key="Neutal010">#F8F8FC</Color>
+    <Color x:Key="RichGreen">#01884C</Color>
+    <Color x:Key="RichBlack">#1B1B25</Color>
   
 
     <Style TargetType="NavigationPage">
@@ -25,6 +41,31 @@
     <Setter Property="ios:SearchBar.SearchBarStyle" Value="Minimal"/>
     </Style>
 
+    <Style x:Key="FrameStyle" TargetType="Frame">
+        <Setter Property="BorderColor" Value="{DynamicResource Neutral100}"/>
+        <Setter Property="BackgroundColor" Value="White"/>
+
+
+        <Setter Property="CornerRadius" Value="4"/>
+    </Style>
+
+    <Style TargetType="Label" x:Key="TitleStyle">
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double" Phone="14" Tablet="19"/>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextColor" Value="{DynamicResource Neutral800}" />
+    </Style>
+
+    <Style x:Key="ExtendedDropDownInputViewStyle" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Neutral900}"/>
+        <Setter Property="FontSize">
+            <Setter.Value>
+                <OnIdiom x:TypeArguments="x:Double" Phone="16" Tablet="24"/>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
     <x:Array x:Key="EmptyArray" Type="{x:Type x:String}" />
 

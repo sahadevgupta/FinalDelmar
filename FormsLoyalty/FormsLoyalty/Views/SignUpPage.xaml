@@ -8,12 +8,13 @@
              xmlns:resources="clr-namespace:FormsLoyalty" 
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
-             xmlns:effects="clr-namespace:FormsLoyalty.Effects" 
+             xmlns:effects="clr-namespace:FormsLoyalty.Effects"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              Visual="Material"
              ios:Page.UseSafeArea="True"
              Title="{Binding Title}"
-             BackgroundColor="WhiteSmoke">
+             BackgroundColor="{OnPlatform Android='WhiteSmoke',iOS='#dcdcdc'}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -21,59 +22,17 @@
                 <Setter Property="TintColor" Value="Blue"/>
                 
             </Style>
+
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
         </ResourceDictionary>
     </ContentPage.Resources>
     
     <AbsoluteLayout>
 
-        <!--<Grid RowDefinitions="55,*" 
-              AbsoluteLayout.LayoutBounds="0,0,1,1"
-              AbsoluteLayout.LayoutFlags="All">
-            
-
-            <Grid.Triggers>
-                <DataTrigger TargetType="Grid" Binding="{Binding IsPageEnabled}"
-                             Value="true">
-                    <Setter Property="Opacity" Value="0.5"/>
-                    <Setter Property="IsEnabled" Value="False"/>
-                </DataTrigger>
-            </Grid.Triggers>-->
-
-            <!--<StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand"
-            x:Name="toolbarStack"
-            BackgroundColor="{StaticResource My_Header_Color}"
-            HeightRequest="55"
-            Spacing="0"
-            VerticalOptions="Start">
-
-                <ImageButton
-            Margin="10,17,0,0"
-            BackgroundColor="Transparent"
-            HeightRequest="22"
-                       Clicked="BackButton_Clicked"
-            HorizontalOptions="Start"
-            Source="BackWhite.png"
-            VerticalOptions="Start"
-            WidthRequest="22" />
-
-                <Label
-                x:Name="headerLbl"
-                Margin="40,0,0,0"
-                FontSize="16"
-                Text="{Binding Title}"
-                TextColor="White"
-                VerticalOptions="CenterAndExpand"
-                VerticalTextAlignment="Center" />
-
-
-
-
-
-            </StackLayout>-->
 
 
             <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
-              AbsoluteLayout.LayoutFlags="All" >
+              AbsoluteLayout.LayoutFlags="All" VerticalScrollBarVisibility="Never">
 
                 <ScrollView.Triggers>
                     <DataTrigger TargetType="ScrollView" Binding="{Binding IsPageEnabled}"
@@ -190,18 +149,6 @@
 
                 <!--#endregion Account Information Section -->
 
-                <!--#region Start Personal Information Section-->
-
-                <!--<Button Text="{x:Static resources:AppResources.AccountInformationPersonalInformation}"
-            TextColor="Black"
-           Padding="5"
-            
-           IsEnabled="False"
-        
-            HeightRequest="50"
-           
-                    FontSize="Medium"
-            />-->
 
                 <controls:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.AccountInformationPersonalInformation}"
                                        Margin="10,10,0,0"/>
@@ -298,8 +245,32 @@
                                        Margin="10,10,0,0"/>
 
 
+                <controls:ExtendedDropdown ItemSource="{Binding Cities}"
+                                           Margin="5,0,5,0"
+                                           DisplayMemberPath="City"
+                                           SelectedItem="{Binding SelectedCity}"
+                                           PlaceholderText="{x:Static resources:AppResources.AccountInformationViewCity}"
+                                           Title="{x:Static resources:AppResources.AccountInformationViewCity}"/>
 
-                <Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" BorderColor="#1A000000">
+                <controls:ExtendedDropdown ItemSource="{Binding Areas}"
+                                           Margin="5,0,5,0"
+                                           DisplayMemberPath="Area"
+                                           Opacity="1"
+                                           SelectedItem="{Binding SelectedArea}"
+                                           Title="{x:Static resources:AppResources.txtArea}"
+                                           PlaceholderText="{x:Static resources:AppResources.txtArea}">
+                     <controls:ExtendedDropdown.Triggers>
+                            <DataTrigger TargetType="controls:ExtendedDropdown" Binding="{Binding SelectedCity,Converter={StaticResource IsNotNullOrEmptyConverter},TargetNullValue=false,FallbackValue=false}"
+                                     Value="false">
+                                <Setter Property="IsEnabled" Value="False"/>
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </DataTrigger>
+                        </controls:ExtendedDropdown.Triggers>
+                    </controls:ExtendedDropdown>
+
+
+
+                <!--<Frame Padding="5,0,5,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="True" BorderColor="#1A000000">
                     <controls:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
                                        SelectedItem="{Binding SelectedCity}" TextColor="Black"
                                        Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
@@ -322,7 +293,7 @@
                             </DataTrigger>
                         </controls:CustomPicker.Triggers>
                     </controls:CustomPicker>
-                </Frame>
+                </Frame>-->
 
 
                

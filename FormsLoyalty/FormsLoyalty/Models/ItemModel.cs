@@ -152,6 +152,28 @@ namespace FormsLoyalty.Models
             return items;
         }
 
+        public async Task<List<LoyItem>> ItemsGetByRelatedItemIdAsync(string itemId,int numberOfItems)
+        {
+            List<LoyItem> items = null;
+
+
+            BeginWsCall();
+
+            try
+            {
+                items = await service.GetItemsByRelatedItemIdAsync(itemId, numberOfItems);
+            }
+            catch (Exception ex)
+            {
+                Crashes.TrackError(ex);
+                await HandleUIExceptionAsync(ex);
+            }
+
+
+            return items;
+        }
+
+
         public async Task<LoyItem> GetItemById(string itemId, bool ShowRefreshableIndicatorOption = true)
         {
             LoyItem item = null;

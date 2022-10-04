@@ -97,12 +97,150 @@
 
             </Grid>
 
+            <ListView
+                ItemsSource="{Binding MenuItems}"
+                Grid.Row="1"
+                IsGroupingEnabled="true"
+                VerticalScrollBarVisibility="Never"
+                IsVisible="{OnPlatform iOS=true,Default=false}">
+
+                <ListView.GroupHeaderTemplate>
+                          <DataTemplate>
+                              <ViewCell>
+                                  <Label CharacterSpacing="2"
+                                         Margin="0,10"
+                               BackgroundColor="#efefef"
+                               HorizontalOptions="FillAndExpand"
+                               Padding="10,5"
+                               Text="{Binding Name}"
+                               FontSize="Body"
+                               FontAttributes="Bold" />
+                              </ViewCell>
+                          </DataTemplate>
+                 </ListView.GroupHeaderTemplate>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid VerticalOptions="CenterAndExpand">
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="menu_Tapped" CommandParameter="{Binding .}"/>
+                            </Grid.GestureRecognizers>
+
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="50"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="0.7"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{Binding Image}" 
+                                       Grid.Row="0" 
+                                           Aspect="AspectFit"
+                                       Grid.Column="0"
+                                      VerticalOptions="CenterAndExpand"
+                                       HorizontalOptions="Center"
+                                       IsVisible="{Binding IsFontImage,Converter={StaticResource InvertedBoolConverter}}"/>
+
+                            <Image Grid.Row="0" Grid.Column="0" VerticalOptions="CenterAndExpand" HorizontalOptions="Center"
+                                           IsVisible="{Binding IsFontImage}">
+                                <Image.Source>
+                                    <FontImageSource FontFamily="FontAwesome"
+                                                             Color="{StaticResource My_Button_Color}"
+                                                             Size="20"
+                                                             Glyph="{Binding Image}"/>
+
+                                </Image.Source>
+                            </Image>
+
+
+                            <Image IsVisible="false"
+                                           HeightRequest="30"
+                                           Grid.Column="2" HorizontalOptions="End" Margin="0,0,10,0">
+
+                                <Image.Source>
+                                    <FontImageSource FontFamily="FontAwesome"
+                                                             Color="{StaticResource My_Button_Color}"
+                                                             Glyph="{x:Static fontresources:FontAwesomeIcons.Barcode}"/>
+                                </Image.Source>
+
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Title}"
+                                                     Value="{x:Static resources:AppResources.ActionbarItems}">
+                                        <Setter Property="IsVisible" Value="True"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+
+                            </Image>
+
+
+
+                            <Label Text="{Binding Title}" Grid.Column="1"
+                                       VerticalOptions="Center"
+                                       FontSize="{OnPlatform Android=16, Default=14}"
+                                       TextColor="Black"
+                                         Grid.Row="0"/>
+
+                            <Grid Grid.Column="2" HorizontalOptions="End" Margin="0,0,10,0">
+                                <BoxView BackgroundColor="{StaticResource My_Button_Color}" HeightRequest="25" WidthRequest="30" CornerRadius="5" />
+                                <Label Text="{Binding SubTitle}" 
+                                       VerticalOptions="Center"
+                                           HorizontalOptions="Center"
+                                       FontSize="Body"
+                                       TextColor="White"
+                                        />
+
+                                <Grid.Triggers>
+                                    <DataTrigger TargetType="Grid"
+                                                     Binding="{Binding SubTitle,Converter={StaticResource StringToBoolConverter}}"
+                                                     Value="false">
+                                        <Setter Property="IsVisible" Value="false"/>
+                                    </DataTrigger>
+                                </Grid.Triggers>
+
+
+                            </Grid>
+
+
+                            <Image HeightRequest="12" Grid.Column="3"
+                                           Margin="10,10,20,10">
+
+                                <Image.Source>
+                                    <FontImageSource FontFamily="FontAwesome"
+                                                             Glyph="{x:Static fontresources:FontAwesomeIcons.ChevronRight}"
+                                                             Color="Black"/>
+                                </Image.Source>
+
+                                <Image.Triggers>
+                                    <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
+                                         Value="true">
+                                        <Setter Property="Rotation" Value="180"/>
+                                    </DataTrigger>
+                                </Image.Triggers>
+                            </Image>
+
+
+                        </Grid>
+
+                        </ViewCell>
+
+                    </DataTemplate>
+
+                </ListView.ItemTemplate>
+
+            </ListView>
+
 
             <CollectionView ItemsSource="{Binding MenuItems}"
                             IsGrouped="True"
                             BackgroundColor="White"
                             VerticalScrollBarVisibility="Never"
-                            Grid.Row="1">
+                            Grid.Row="1" IsVisible="{OnPlatform Android=true,Default=false}">
 
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"

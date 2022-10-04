@@ -23,6 +23,7 @@ using Plugin.Badge.Droid;
 [assembly: ExportRenderer(typeof(MainTabbedPage), typeof(CustomTabRenderer))]
 namespace FormsLoyalty.Droid.Renderers
 {
+    [Obsolete]
     public class CustomTabRenderer : BadgedTabbedPageRenderer, BottomNavigationView.IOnNavigationItemSelectedListener
     {
         private MainTabbedPage _page;
@@ -203,23 +204,23 @@ namespace FormsLoyalty.Droid.Renderers
         ////    base.Dispose(disposing);
         ////}
 
-        bool BottomNavigationView.IOnNavigationItemSelectedListener.OnNavigationItemSelected(IMenuItem item)
-        {
-            base.OnNavigationItemSelected(item);
+        //bool BottomNavigationView.IOnNavigationItemSelectedListener.OnNavigationItemSelected(IMenuItem item)
+        //{
+        //    base.OnNavigationItemSelected(item);
 
-            // item.ItemId is the position
+        //    // item.ItemId is the position
 
-            if (_page.CurrentPage is NavigationPage page)
-            {
-                page.PopToRootAsync();
-            }
-            else
-                _page.CurrentPage.Navigation.PopToRootAsync();
+        //    if (_page.CurrentPage is NavigationPage page)
+        //    {
+        //        page.PopToRootAsync();
+        //    }
+        //    else
+        //        _page.CurrentPage.Navigation.PopToRootAsync();
            
            
 
-            return true;
-        }
+        //    return true;
+        //}
 
         
     }

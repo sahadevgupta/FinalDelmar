@@ -258,8 +258,8 @@
 
 
 
-                    <CollectionView ItemsSource="{Binding relatedPublishedOffers}"
-                                    IsVisible="{Binding relatedPublishedOffers.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"
+                    <CollectionView ItemsSource="{Binding RelatedItems}"
+                                    IsVisible="{Binding RelatedItems.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"
                                 HorizontalScrollBarVisibility="Never"
                                 HeightRequest="250"
                             Margin="10,0">

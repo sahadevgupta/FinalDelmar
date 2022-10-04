@@ -315,9 +315,8 @@ namespace FormsLoyalty.ViewModels
         internal async Task AddRemoveWishList(LoyItem loyItem)
         {
             IsPageEnabled = true;
-            if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
+            if (!AppData.IsLoggedIn)
             {
-                AppData.IsLoggedIn = false;
                 await NavigationService.NavigateAsync(nameof(LoginPage));
 
             }
@@ -349,10 +348,9 @@ namespace FormsLoyalty.ViewModels
 
         internal async Task<bool> AddToWishList(LoyItem loyItem)
         {
-            if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
+            if (!AppData.IsLoggedIn)
             {
 
-                AppData.IsLoggedIn = false;
                 await NavigationService.NavigateAsync(nameof(LoginPage));
 
                 return false;
@@ -391,9 +389,8 @@ namespace FormsLoyalty.ViewModels
         {
             IsPageEnabled = true;
 
-            if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
+            if (!AppData.IsLoggedIn)
             {
-                AppData.IsLoggedIn = false;
                 await NavigationService.NavigateAsync(nameof(LoginPage));
                 IsPageEnabled = false;
                 return false;

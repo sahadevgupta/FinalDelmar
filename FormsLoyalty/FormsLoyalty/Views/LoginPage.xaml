@@ -56,50 +56,6 @@
                         </DataTrigger>
                     </Label.Triggers>
                 </Label>
-                
-                <!--<Image Source="imgmPIN" Grid.Row="1"/>
-
-                
-                <Label Text="Enter your Phone Number" HorizontalTextAlignment="Center" FontAttributes="Bold" FontSize="Medium" Grid.Row="2" 
-                       Margin="0,10,0,0"/>
-
-                <Label HorizontalTextAlignment="Center" FontSize="Body" Grid.Row="3">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="We will share you the "/>
-                            <Span Text="6 digit" FontAttributes="Bold" FontSize="Body"/>
-                            <Span Text=" verification code"/>
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
-
-
-
-                <Frame Margin="0,10,0,0" Padding="0" Visual="Material" Grid.Row="4" BorderColor="LightGray">
-
-                    <material:MaterialTextField Placeholder="Mobile" 
-                                                             LeadingIcon="mobile"
-                                                            Padding="3,0,3,0"
-                                                            BackgroundColor="White"
-                                                            LeadingIconTintColor="Black"
-                                       HorizontalOptions="FillAndExpand"
-                                            Text="{Binding MobileNumber}"
-                                      AlwaysShowUnderline="True"
-                                        FloatingPlaceholderColor="Silver"
-                                        ErrorText="{Binding ErrorText}" 
-                                        InputType="Telephone" 
-                                                TextChanged="MaterialTextField_TextChanged"
-                                                HasError="{Binding IsError}"/>
-
-
-
-
-
-                </Frame>
-
-                <Button Text="Generate OTP" BackgroundColor="{StaticResource My_Button_Color}" Grid.Row="5"
-                        Command="{Binding OnOtpCommand}"
-                        Margin="0,50,0,0" HeightRequest="40"/>-->
 
 
                 <controls:LoginView x:Name="loginView" Grid.Row="1"/>

@@ -85,9 +85,8 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
             try
             {
-                if (!EnabledItems.ForceLogin && AppData.Device.UserLoggedOnToDevice == null)
+                if (!AppData.IsLoggedIn)
                 {
-                    AppData.IsLoggedIn = false;
                    await NavigationService.NavigateAsync(nameof(LoginPage));
                     IsPageEnabled = false;
                     return;

@@ -64,10 +64,16 @@
                    VerticalOptions="FillAndExpand"
                 Aspect="AspectFit" IsVisible="false">
                 <Image.Triggers>
-                    <DataTrigger TargetType="Image" Binding="{Binding baskets.Count}"
-                             Value="0">
+
+                    <MultiTrigger TargetType="Image">
+                        <MultiTrigger.Conditions>
+                            <BindingCondition Binding="{Binding baskets.Count,Converter={StaticResource IntToBoolConverter}}" Value="false"/>
+                            <BindingCondition Binding="{Binding IsPageEnabled}" Value="false"/>
+                        </MultiTrigger.Conditions>
                         <Setter Property="IsVisible" Value="true"/>
-                    </DataTrigger>
+                    </MultiTrigger>
+
+                    
                     
                     <DataTrigger TargetType="Image" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
                                          Value="true">

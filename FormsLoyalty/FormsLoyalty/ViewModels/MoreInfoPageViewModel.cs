@@ -189,15 +189,15 @@ namespace FormsLoyalty.ViewModels
 
             #region Item Tab
 
-            drawerMenuItems.Add(new DrawerMenuItem()
-            {
-                ActivityType = AppConstValues.Items,
-                IsVisible = true,
-                Image = FontAwesomeIcons.ShoppingBag,
-                IsFontImage = true,
-                IsLoading = false,
-                Title = AppResources.ResourceManager.GetString("ActionbarItems", AppResources.Culture),
-            });
+            //drawerMenuItems.Add(new DrawerMenuItem()
+            //{
+            //    ActivityType = AppConstValues.Items,
+            //    IsVisible = false,
+            //    Image = FontAwesomeIcons.ShoppingBag,
+            //    IsFontImage = true,
+            //    IsLoading = false,
+            //    Title = AppResources.ResourceManager.GetString("ActionbarItems", AppResources.Culture),
+            //});
 
             #endregion
 
@@ -524,7 +524,6 @@ namespace FormsLoyalty.ViewModels
             switch (obj.ActivityType)
             {
                 case AppConstValues.Login:
-                    AppData.IsLoggedIn = true;
                     await NavigationService.NavigateAsync(nameof(LoginPage));
                     break;
 
@@ -622,7 +621,6 @@ namespace FormsLoyalty.ViewModels
 
                     break;
                 case AppConstValues.Coupons:
-                    AppData.IsLoggedIn = AppData.Device.UserLoggedOnToDevice == null ? false : true;
                     if (AppData.IsLoggedIn)
                     {
                         await NavigationService.NavigateAsync(nameof(CouponsPage));

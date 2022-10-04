@@ -394,7 +394,7 @@
     <value>Stores</value>
   </data>
   <data name="ActionbarTerm" xml:space="preserve">
-    <value>TermsAndConditions</value>
+    <value>Terms &amp; Conditions</value>
   </data>
   <data name="ActionbarTransactions" xml:space="preserve">
     <value>History</value>
@@ -1122,7 +1122,7 @@ Please continue to check.</value>
     <value>Wait for the barcode to automatically scan!</value>
   </data>
   <data name="ScannerViewScannerTopText" xml:space="preserve">
-    <value>Hold the camera up to the barcode\nAbout 15 centimeters away</value>
+    <value>Hold the camera up to the barcode. About 15 centimeters away</value>
   </data>
   <data name="server_client_id" xml:space="preserve">
     <value>641451297819-nqqn78s0og5okkoqcak63490k1tfae13.apps.googleusercontent.com</value>
@@ -1712,4 +1712,8 @@ Please continue to check.</value>
   <data name="WishListViewNoItemsInWishList" xml:space="preserve">
     <value>No items in wish list</value>
   </data>
+  <data name="ItemDescriptionAndActiveIngredient" xml:space="preserve">
+    <value>"Item(Description &amp; Active Ingredient)"</value>
+  </data>
+
 </root>
