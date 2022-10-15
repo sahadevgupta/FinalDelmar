@@ -68,7 +68,6 @@ namespace FormsLoyalty.Models
 
             try
             {
-                //success = await service.OrderCreateAsync(service.CreateOrderForCAC(basket, contactId, cardId, storeId, email));
                 Order result = await service.OrderCreateAsync(basket);
                 if (result != null)
                 {

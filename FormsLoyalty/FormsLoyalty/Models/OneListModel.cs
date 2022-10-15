@@ -3,6 +3,7 @@ using LSRetail.Omni.Domain.DataModel.Loyalty.Baskets;
 using LSRetail.Omni.Domain.DataModel.Loyalty.Orders;
 using LSRetail.Omni.Domain.Services.Loyalty.OneLists;
 using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.OneLists;
+using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -54,9 +55,9 @@ namespace FormsLoyalty.Models
             {
                 order = await oneListService.OneListCalculateAsync(oneList);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-
+                Crashes.TrackError(ex);
                
             }
             
@@ -64,7 +65,6 @@ namespace FormsLoyalty.Models
             if (AppData.Basket.State == BasketState.Calculating)
             {
                 AppData.Basket.State = BasketState.Normal;
-                //SendBroadcast(Utils.BroadcastUtils.BasketStateUpdated); need to configure
             }
 
             return order;

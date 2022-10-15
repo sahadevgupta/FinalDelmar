@@ -11,7 +11,7 @@
 
 
     <Grid>
-        <WebView Source="{Binding HtmlSource}"  Navigating="WebView_Navigating" Navigated="WebView_Navigated"/>
+        <WebView Source="{Binding HtmlSource}" />
 
         <controls:LoadingView IsVisible="False" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
             <controls:LoadingView.Triggers>

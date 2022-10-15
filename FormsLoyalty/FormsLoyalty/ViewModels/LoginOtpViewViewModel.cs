@@ -247,7 +247,6 @@ namespace FormsLoyalty.ViewModels
         private async Task GoToMainScreen()
         {
             AppData.IsLoggedIn = true;
-            Xamarin.Essentials.Preferences.Set("IsLoggedIn", true);
             IsPageEnabled = true;
             SendFCMTokenToServer();
             if (FromItemPage)
@@ -255,6 +254,11 @@ namespace FormsLoyalty.ViewModels
                 MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "LoggedIn");
 
                 await NavigationService.NavigateAsync("../../");
+            }
+            else if(fbProfile is object || googleProfile is object)
+            {
+                MessagingCenter.Send(new BasketModel(), "CartUpdated");
+                await NavigationService.NavigateAsync("../../../");
             }
             else
             {

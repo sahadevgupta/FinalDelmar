@@ -19,7 +19,7 @@ namespace FormsLoyalty.PopUpView
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CouponsViewPopUp : PopupPage
     {
-        public DelmarCoupons coupon;
+        internal DelmarCoupons coupon;
 
         private ObservableCollection<DelmarCoupons> _coupons;
 
@@ -44,11 +44,11 @@ namespace FormsLoyalty.PopUpView
         {
             var coupons = await new CommonModel().GetDelmarCouponAsync(AppData.Device.UserLoggedOnToDevice.Account.Id);
             Coupons = new ObservableCollection<DelmarCoupons>();
-            foreach (var coupon in coupons)
+            foreach (var delmarCoupon in coupons)
             {
-                if (!coupon.Blocked && coupon.RedeemedAmount== 0 && string.IsNullOrEmpty(coupon.CustomerOrderNo))
+                if (!delmarCoupon.Blocked && delmarCoupon.RedeemedAmount== 0 && string.IsNullOrEmpty(delmarCoupon.CustomerOrderNo))
                 {
-                    Coupons.Add(coupon);
+                    Coupons.Add(delmarCoupon);
                 }
             }
 
@@ -58,16 +58,11 @@ namespace FormsLoyalty.PopUpView
             }
             else
                 noitemlbl.IsVisible = true;
-            //coupons.Add(new DelmarCoupons { CouponID = "SAMPLE", CouponValue = 50, ExpirationDate = DateTime.Now.Date });
 
 
 
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            var a = BindingContext;
-        }
+        
         private async void OnCouponSelected(object sender, EventArgs e)
         {
             var selectedCoupom = ((e as TappedEventArgs).Parameter as DelmarCoupons);

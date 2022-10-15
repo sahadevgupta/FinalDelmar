@@ -13,52 +13,12 @@ namespace FormsLoyalty.Views
             InitializeComponent();
             _viewModel = BindingContext as CouponsPageViewModel;
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            //ChangeToolbarIcon();
-        }
 
-        private void ChangeToolbarIcon()
-        {
-            //try
-            //{
-            //    if (Settings.ShowCard)
-            //    {
-            //        viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-            //        _viewModel.SpanCount = 2;
-            //        couponlist.ItemTemplate = (DataTemplate)Resources["CardView"];
-            //    }
-            //    else
-            //    {
-            //        _viewModel.SpanCount = 1;
-            //        viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
-            //        couponlist.ItemTemplate = (DataTemplate)Resources["ListView"];
-            //    }
-            //}
-            //catch (System.Exception)
-            //{
-
-            //    if (Settings.ShowCard)
-            //    {
-            //        viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-            //        _viewModel.SpanCount = 2;
-            //        couponlist.ItemTemplate = (DataTemplate)Resources["CardView"];
-            //    }
-            //    else
-            //    {
-            //        _viewModel.SpanCount = 1;
-            //        viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
-            //        couponlist.ItemTemplate = (DataTemplate)Resources["ListView"];
-            //    }
-            //}
-
-        }
+        
 
         private void ToolbarItem_Clicked(object sender, System.EventArgs e)
         {
             Settings.ShowCard = !Settings.ShowCard;
-            ChangeToolbarIcon();
         }
         private async void Coupon_Tapped(object sender, System.EventArgs e)
         {
@@ -79,14 +39,7 @@ namespace FormsLoyalty.Views
                 var offer = button.BindingContext as PublishedOffer;
                 _viewModel.AddRemoveCouponFromQrCode(offer);
 
-                //if (offer.Selected)
-                //{
-                //    button.ImageSource = "ic_action_remove";
-                //}
-                //else
-                //{
-                //    button.ImageSource = "ic_action_new";
-                //}
+                
             }
             else
             {
@@ -97,16 +50,7 @@ namespace FormsLoyalty.Views
 
                 _viewModel.AddRemoveCouponFromQrCode(offer);
 
-                //if (offer.Selected)
-                //{
-                //    var img = ((Grid)sender).Children[0] as Image;
-                //    img.Source = "ic_action_remove";
-                //}
-                //else
-                //{
-                //    var img = ((Grid)sender).Children[0] as Image;
-                //    img.Source = "ic_action_new";
-                //}
+                
                 view.Opacity = 1;
             }
 

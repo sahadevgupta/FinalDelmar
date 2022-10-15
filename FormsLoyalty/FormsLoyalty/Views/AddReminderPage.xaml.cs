@@ -1,14 +1,12 @@
-﻿using FormsLoyalty.Models;
-using FormsLoyalty.PopUpView;
-using FormsLoyalty.Utils;
-using FormsLoyalty.ViewModels;
-using Rg.Plugins.Popup.Extensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FormsLoyalty.Models;
+using FormsLoyalty.PopUpView;
+using FormsLoyalty.ViewModels;
+using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
-using XF.Material.Forms.Resources;
 using XF.Material.Forms.UI.Dialogs;
 using XF.Material.Forms.UI.Dialogs.Configurations;
 
@@ -73,14 +71,17 @@ namespace FormsLoyalty.Views
                 _viewModel.selectedDays = sortedList;
 
 
-                for (int i = 0; i < sortedList.Count(); i++)
+                for (int i = 0; i < sortedList.Count; i++)
                 {
                     if (i == 0)
                     {
                         dayslbl.Text = App.choices[sortedList[i]];
                     }
                     else
+                    {
                         dayslbl.Text += $",{App.choices[sortedList[i]]}";
+                    }
+                        
                 }
 
 
@@ -97,27 +98,25 @@ namespace FormsLoyalty.Views
                 
         }
 
-        private void duration_CheckedChanged(object sender, CheckedChangedEventArgs e)
+        private async void duration_CheckedChanged(object sender, CheckedChangedEventArgs e)
         {
             var radioBtn = ((RadioButton)sender);
             if (radioBtn.Content.ToString().Equals(AppResources.txtNumbersofdays) && radioBtn.IsChecked)
             {
-                InvokePopUp(AppResources.txtSetNumberOfDays,"duration");
+               await InvokePopUp(AppResources.txtSetNumberOfDays,"duration");
 
             }
-            else if (radioBtn.IsChecked)
+            else if (radioBtn.IsChecked && _viewModel != null)
             {
-                if (_viewModel != null)
-                {
+               
                     _viewModel.medicineReminder.NoOfDays = 0;
-                }
 
 
             }
 
         }
 
-        private async void InvokePopUp(string title,string  fromPage,object bindingContext =null)
+        private async Task InvokePopUp(string title,string  fromPage,object bindingContext =null)
         {
             FrequencyTime freqTime = new FrequencyTime();
             if (fromPage.ToLower().Contains("dose".ToLower()))
@@ -139,9 +138,8 @@ namespace FormsLoyalty.Views
 
             popup.cancelTapped += (s, e) =>
             {
-                if (fromPage.ToLower().Contains("duration".ToLower()))
+                if (fromPage.ToLower().Contains("duration".ToLower()) && _viewModel.medicineReminder.NoOfDays == 0)
                 {
-                    if(_viewModel.medicineReminder.NoOfDays == 0)
                       ongoingSwitch.IsChecked = true;
                 }
             };
@@ -155,7 +153,7 @@ namespace FormsLoyalty.Views
             stack.Opacity = 0;
 
             await stack.FadeTo(1, 250);
-            InvokePopUp(AppResources.txtHowMuchTake,"dose",stack.BindingContext);
+            await InvokePopUp(AppResources.txtHowMuchTake,"dose",stack.BindingContext);
             stack.Opacity = 1;
         }
 
@@ -179,7 +177,7 @@ namespace FormsLoyalty.Views
             var view = (Label)sender;
             view.Opacity = 0;
             await view.FadeTo(1, 250);
-            InvokePopUp(AppResources.txtSetNumberOfDays, "duration");
+            await InvokePopUp(AppResources.txtSetNumberOfDays, "duration");
             view.Opacity = 1;
         }
     }

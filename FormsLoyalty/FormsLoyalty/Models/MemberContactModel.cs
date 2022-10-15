@@ -58,7 +58,6 @@ namespace FormsLoyalty.Models
             if (isSuccess)
             {
                 AppData.IsLoggedIn = false;
-                Xamarin.Essentials.Preferences.Set("IsLoggedIn", false);
                 AppData.Basket.Clear();
                 AppData.Device.UserLoggedOnToDevice = null;
                 AppData.Device.CardId = string.Empty;

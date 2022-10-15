@@ -235,12 +235,9 @@ namespace FormsLoyalty.ViewModels
 
                     if (success)
                     {
-                        Xamarin.Essentials.Preferences.Set("IsLoggedIn", true);
+                        AppData.IsLoggedIn = true;
                         if (FromItemPage)
                         {
-                            AppData.IsLoggedIn = true;
-                            
-
                             MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "LoggedIn");
                             Device.BeginInvokeOnMainThread(async () =>
                             {

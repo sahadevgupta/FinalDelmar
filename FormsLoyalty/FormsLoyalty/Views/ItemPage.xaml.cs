@@ -19,14 +19,7 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as ItemPageViewModel;
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-        }
+        
         
         private async void OnRelatedItemTapped(object sender, System.EventArgs e)
         {
@@ -34,7 +27,7 @@ namespace FormsLoyalty.Views
             view.Opacity = 0;
             await view.FadeTo(1, 250);
 
-            _viewModel.ExecuteChangeSelectedItem((e as TappedEventArgs).Parameter as LoyItem);
+           await _viewModel.ExecuteChangeSelectedItem((e as TappedEventArgs).Parameter as LoyItem);
 
             view.Opacity = 1;
         }

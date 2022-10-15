@@ -98,7 +98,7 @@ namespace FormsLoyalty.ViewModels
                 var items = await new ShoppingListModel().GetOneListItemsByCardId(AppData.Device?.CardId, ListType.Basket);
                 if (items is object)
                 {
-                    BadgeCount = items.Items.Any().ToString();
+                    BadgeCount = items.Items!= null ? items.Items.Count.ToString() : null;
                 }
                 else
                 {

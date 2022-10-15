@@ -43,7 +43,6 @@ namespace FormsLoyalty.Views
 
 
             var mainView = ((View)((View)sender).Parent.Parent);
-            //var SelectedView = (View)sender;
             var topMargin = index > 0 ? index * mainView.Height : mainView.Height;
             var popup = new MoreOptionsView(new System.Collections.Generic.List<MoreOptionModel> 
             { 

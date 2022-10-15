@@ -647,13 +647,12 @@ namespace FormsLoyalty.ViewModels
                     IsSucess = false;
                 }
 
-                if (!isSameAddress)
+                if (!isSameAddress && (string.IsNullOrEmpty(billingAddressName) || string.IsNullOrEmpty(billingAddress.Address1)))
                 {
-                    if (string.IsNullOrEmpty(billingAddressName) || string.IsNullOrEmpty(billingAddress.Address1))
-                    {
+                    
                         DependencyService.Get<INotify>().ShowToast(AppResources.ResourceManager.GetString("CheckoutViewAllRequiredFieldsMustBeFilled", AppResources.Culture));
                         IsSucess = false;
-                    }
+                    
                 }
             }
 

@@ -7,7 +7,7 @@ namespace FormsLoyalty.Helpers
 {
     public static class TabBadge
     {
-        public static BindableProperty BadgeTextProperty = BindableProperty.CreateAttached("BadgeText", typeof(string), typeof(TabBadge), default(string), BindingMode.TwoWay,propertyChanged: OnTextChanged);
+        public static readonly BindableProperty BadgeTextProperty = BindableProperty.CreateAttached("BadgeText", typeof(string), typeof(TabBadge), default(string), BindingMode.TwoWay,propertyChanged: OnTextChanged);
 
         private static void OnTextChanged(BindableObject view, object oldValue, object newValue)
         {
@@ -24,7 +24,7 @@ namespace FormsLoyalty.Helpers
             view.SetValue(BadgeTextProperty, value);
         }
 
-        public static BindableProperty BadgeColorProperty = BindableProperty.CreateAttached("BadgeColor", typeof(Color), typeof(TabBadge), Color.Default, BindingMode.OneWay);
+        public static readonly BindableProperty BadgeColorProperty = BindableProperty.CreateAttached("BadgeColor", typeof(Color), typeof(TabBadge), Color.Default, BindingMode.OneWay);
 
         public static Color GetBadgeColor(BindableObject view)
         {
@@ -36,7 +36,7 @@ namespace FormsLoyalty.Helpers
             view.SetValue(BadgeColorProperty, value);
         }
 
-        public static BindableProperty BadgeTextColorProperty = BindableProperty.CreateAttached("BadgeTextColor", typeof(Color), typeof(TabBadge), Color.Default, BindingMode.OneWay);
+        public static readonly BindableProperty BadgeTextColorProperty = BindableProperty.CreateAttached("BadgeTextColor", typeof(Color), typeof(TabBadge), Color.Default, BindingMode.OneWay);
 
         public static Color GetBadgeTextColor(BindableObject view)
         {
@@ -48,7 +48,7 @@ namespace FormsLoyalty.Helpers
             view.SetValue(BadgeTextColorProperty, value);
         }
 
-        public static BindableProperty BadgeFontProperty = BindableProperty.CreateAttached("BadgeFont", typeof(Font), typeof(TabBadge), Font.Default, BindingMode.OneWay);
+        public static readonly BindableProperty BadgeFontProperty = BindableProperty.CreateAttached("BadgeFont", typeof(Font), typeof(TabBadge), Font.Default, BindingMode.OneWay);
 
         public static Font GetBadgeFont(BindableObject view)
         {
@@ -62,7 +62,7 @@ namespace FormsLoyalty.Helpers
 
         
 
-        public static BindableProperty BadgeMarginProperty = BindableProperty.CreateAttached("BadgeMargin", typeof(Thickness), typeof(TabBadge), DefaultMargins, BindingMode.OneWay);
+        public static readonly BindableProperty BadgeMarginProperty = BindableProperty.CreateAttached("BadgeMargin", typeof(Thickness), typeof(TabBadge), DefaultMargins, BindingMode.OneWay);
 
         public static Thickness GetBadgeMargin(BindableObject view)
         {

@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading.Tasks;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.PancakeView;
@@ -22,12 +23,6 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as ItemGroupPageViewModel;
             
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
-       
 
         private async void Item_Tapped(object sender, System.EventArgs e)
         {
@@ -45,7 +40,6 @@ namespace FormsLoyalty.Views
         bool _firstInstance = false;
         private async void collectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
         {
-            var view = (CollectionView)sender;
             Debug.WriteLine("HorizontalDelta: " + e.HorizontalDelta);
             Debug.WriteLine("VerticalDelta: " + e.VerticalDelta);
             Debug.WriteLine("HorizontalOffset: " + e.HorizontalOffset);
@@ -73,7 +67,7 @@ namespace FormsLoyalty.Views
 
        
 
-        private void SelectSortingOption(object sender, EventArgs e)
+        private async void SelectSortingOption(object sender, EventArgs e)
         {
             var view = sender as View;
             var parent = view.Parent as StackLayout;
@@ -81,14 +75,13 @@ namespace FormsLoyalty.Views
             foreach (var child in parent.Children)
             {
                 VisualStateManager.GoToState(child, "Normal");
-                ChangeTextColor(child, "#707070", false);
+              await  ChangeTextColor(child, "#707070", false);
             }
 
             VisualStateManager.GoToState(view, "Selected");
-            var panckake = view as PancakeView;
-            ChangeTextColor(view, "#FFFFFF", true);
+           await ChangeTextColor(view, "#FFFFFF", true);
         }
-        private async void ChangeTextColor(View child, string hexColor, bool isTheSelectedSortOption)
+        private async Task ChangeTextColor(View child, string hexColor, bool isTheSelectedSortOption)
         {
             var txtCtrl = child.FindByName<Label>("sortingOption");
             if (isTheSelectedSortOption)

@@ -14,17 +14,7 @@ namespace FormsLoyalty.Views
             InitializeComponent();
             _viewModel = BindingContext as StoreLocatorPageViewModel;
         }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-           
-        }
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-            
-
-        }
+        
         
         private async void Button_Clicked(object sender, System.EventArgs e)
         {

@@ -1,7 +1,5 @@
-﻿using FormsLoyalty.Controls.Stepper;
+﻿using System;
 using FormsLoyalty.ViewModels;
-using System;
-using System.Linq;
 using Xamarin.Forms;
 
 namespace FormsLoyalty.Views
@@ -15,21 +13,6 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as CheckoutPageViewModel;
             
 
-        }
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-           // (this.Parent.Parent as HomeMasterDetailPage).ToolbarItems
-          
-        }
-        protected override void OnDisappearing()
-        {
-            base.OnDisappearing();
-        }
-        protected override void OnBindingContextChanged()
-        {
-            base.OnBindingContextChanged();
-            
         }
 
         protected override bool OnBackButtonPressed()

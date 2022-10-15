@@ -14,15 +14,6 @@ namespace FormsLoyalty.Views
             _viewModel = BindingContext as CartPageViewModel;
         }
 
-        private void Stepper_ValueChanged(object sender, ValueChangedEventArgs e)
-        {
-
-        }
-
-        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
-        {
-
-        }
         private async void Delete_Tapped(object sender, System.EventArgs e)
         {
             var view = (Label)sender;

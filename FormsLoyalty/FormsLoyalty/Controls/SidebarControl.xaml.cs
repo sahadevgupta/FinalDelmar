@@ -40,7 +40,7 @@ namespace FormsLoyalty.Controls
         {
             var control = (SidebarControl)bindable;
             var categories = control.FindByName("categoriesContainer") as StackLayout;
-            foreach (StackLayout stackLayout in categories.Children)
+            foreach (View stackLayout in categories.Children)
             {
                 var label = stackLayout.FindByName<Label>("categoryTitle");
                 var grid = stackLayout.FindByName<Grid>("sectionIndicator");
@@ -94,26 +94,11 @@ namespace FormsLoyalty.Controls
            else
                 CategorySelected = Categories.FirstOrDefault(c => c.Description == label.Text);
 
-            if (CurrentCategoryChangedCommand != null)
-                if (CurrentCategoryChangedCommand.CanExecute(CategorySelected))
+            if (CurrentCategoryChangedCommand != null && CurrentCategoryChangedCommand.CanExecute(CategorySelected))
                     CurrentCategoryChangedCommand.Execute(CategorySelected);
         }
 
-        //protected override void OnSizeAllocated(double width, double height)
-        //{
-        //    base.OnSizeAllocated(width, height);
-        //    //Fix for Indicator
-        //    foreach (StackLayout stackLayout in categoriesContainer.Children)
-        //    {
-        //        var label = stackLayout.FindByName<Button>("categoryTitle");
-        //        if (CategorySelected.Description == label.Text)
-        //        {
-        //            MoveActiveIndicator(stackLayout);
-        //        }
-
-        //    }
-        //}
-
+        
         void MoveActiveIndicator(StackLayout target)
         {
             var parent = target.Parent as StackLayout;
@@ -124,26 +109,6 @@ namespace FormsLoyalty.Controls
             sectionIndicator.TranslateTo(0, target.Y + parent.Y, 300, Easing.SpringOut);
         }
 
-        //void Toggle_Menu(System.Object sender, System.EventArgs e)
-        //{
-        //    Animation animateSection;
-        //    if (IsMenuOpen)
-        //        animateSection = new Animation(d => menuContainer.WidthRequest = d, 300, 80);
-        //    else
-        //        animateSection = new Animation(d => menuContainer.WidthRequest = d, 80, 300);
-        //    animateSection.Commit(menuContainer, "MoreLikeSectionToggleAnimation", 16, 450, Easing.SpringIn);
-        //    IsMenuOpen = !IsMenuOpen;
-        //}
-
-        //void SwipeGestureRecognizer_Swiped(System.Object sender, Xamarin.Forms.SwipedEventArgs e)
-        //{
-        //    Animation animateSection;
-        //    if (IsMenuOpen)
-        //        animateSection = new Animation(d => menuContainer.WidthRequest = d, 300, 80);
-        //    else
-        //        animateSection = new Animation(d => menuContainer.WidthRequest = d, 80, 300);
-        //    animateSection.Commit(menuContainer, "MoreLikeSectionToggleAnimation", 16, 450, Easing.SpringIn);
-        //    IsMenuOpen = !IsMenuOpen;
-        //}
+       
     }
 }

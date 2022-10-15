@@ -31,7 +31,7 @@ namespace FormsLoyalty.Views
                 var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
                 if (status != PermissionStatus.Granted)
                 {
-                    status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+                    await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
                 }
                 CurrentLocation = await Geolocation.GetLastKnownLocationAsync();
                 if (CurrentLocation == null)

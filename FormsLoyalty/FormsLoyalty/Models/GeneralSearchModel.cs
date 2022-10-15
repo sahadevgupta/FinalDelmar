@@ -21,11 +21,6 @@ namespace FormsLoyalty.Models
         private SharedService sharedService;
         
 
-        
-        public void ResetSearch()
-        {
-           
-        }
 
         public async Task<SearchRs> Search(string searchKey, SearchType searchType)
         {

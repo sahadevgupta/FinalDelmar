@@ -162,7 +162,6 @@ namespace FormsLoyalty.Views
 
 
             var mainView = ((View)((View)sender).Parent.Parent);
-            //var SelectedView = (View)sender;
             var topMargin = index > 0 ? index * mainView.Height : mainView.Height;
 
             switch (SelelctedNotification.Status)
@@ -221,9 +220,5 @@ namespace FormsLoyalty.Views
             PopupNavigation.Instance.PushAsync(popup);
         }
 
-        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }

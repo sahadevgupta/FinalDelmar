@@ -89,7 +89,6 @@ namespace FormsLoyalty.Controls
             IsError = false;
            
 
-           // footerLabel.SetBinding(Label.TextProperty, new Binding(nameof(expiresBinding),BindingMode.TwoWay));
 
             if (OtpCount != 0)
             {
@@ -134,7 +133,7 @@ namespace FormsLoyalty.Controls
                 }
                 else
                 {
-                    OtpModelList.FirstOrDefault(x => string.IsNullOrEmpty(x.Value)).entry.Focus();
+                    OtpModelList.FirstOrDefault(x => string.IsNullOrEmpty(x.Value))?.entry.Focus();
                 }
             }
         }
@@ -174,7 +173,7 @@ namespace FormsLoyalty.Controls
             OtpModel lastelement = OtpModelList.Last();
             int previous = count.ID - 1;
             int next = count.ID + 1;
-            if (count.ID == firstelement.ID)
+            if (count.ID == firstelement?.ID)
             {
                 if (count.entry.Text.Length >= 1)
                 {
@@ -208,13 +207,12 @@ namespace FormsLoyalty.Controls
             OtpModel count = currentry.BindingContext as OtpModel;
             OtpModel firstelement = OtpModelList.FirstOrDefault();
 
-            if (count.ID != firstelement.ID)
+            if (count.ID != firstelement?.ID && string.IsNullOrEmpty(count.Value))
             {
-                if (string.IsNullOrEmpty(count.Value))
-                {
+                
                     int previous = count.ID - 1;
                     OtpModelList[previous].entry.Focus();
-                }
+                
             }
             GetEnteredOTP();
         }

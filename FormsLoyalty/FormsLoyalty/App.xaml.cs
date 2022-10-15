@@ -1,50 +1,44 @@
-using Prism;
-using Prism.Ioc;
-using FormsLoyalty.ViewModels;
-using FormsLoyalty.Views;
-using Xamarin.Essentials.Interfaces;
-using Xamarin.Essentials.Implementation;
-using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using LSRetail.Omni.Domain.Services.Loyalty.Items;
-using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.Setup;
-using System.Threading;
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Infrastructure.Data.SQLite.Devices;
-using LSRetail.Omni.Domain.Services.Loyalty.MemberContacts;
-using Infrastructure.Data.SQLite.MemberContacts;
-using LSRetail.Omni.Domain.Services.Loyalty.Devices;
-using LSRetail.Omni.Domain.Services.Base.Image;
-using Prism.Services;
-using System;
-using Xamarin.Essentials;
-using FormsLoyalty.Interfaces;
-using DependencyService = Xamarin.Forms.DependencyService;
-using FormsLoyalty.Utils;
-using LSRetail.Omni.Domain.DataModel.Loyalty.Setup.SpecialCase;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
-using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
-using LSRetail.Omni.Domain.Services.Loyalty.Transactions;
-using Infrastructure.Data.SQLite.Transactions;
-using LSRetail.Omni.Domain.Services.Loyalty.Notifications;
-using Infrastructure.Data.SQLite.Notifications;
-using Infrastructure.Data.SQLite.Addresses;
 using FormsLoyalty.Helpers;
-using Plugin.Settings;
-using FormsLoyalty.Services;
+using FormsLoyalty.Interfaces;
 using FormsLoyalty.Repos;
+using FormsLoyalty.Services;
+using FormsLoyalty.Utils;
+using FormsLoyalty.ViewModels;
+using FormsLoyalty.Views;
+using Infrastructure.Data.SQLite.Addresses;
+using Infrastructure.Data.SQLite.Devices;
+using Infrastructure.Data.SQLite.MemberContacts;
+using Infrastructure.Data.SQLite.Notifications;
+using Infrastructure.Data.SQLite.Transactions;
+using LSRetail.Omni.Domain.DataModel.Base.Retail;
+using LSRetail.Omni.Domain.DataModel.Loyalty.Setup.SpecialCase;
+using LSRetail.Omni.Domain.Services.Loyalty.Devices;
+using LSRetail.Omni.Domain.Services.Loyalty.Items;
+using LSRetail.Omni.Domain.Services.Loyalty.MemberContacts;
+using LSRetail.Omni.Domain.Services.Loyalty.Notifications;
+using LSRetail.Omni.Domain.Services.Loyalty.Transactions;
+using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.Setup;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
-using System.Collections.Generic;
 using Plugin.FirebasePushNotification;
-using static LSRetail.Omni.Infrastructure.Data.Omniservice.Utils.Utils;
-using FormsLoyalty.PopUpView;
-using FormsLoyalty.Models;
+using Prism;
+using Prism.Ioc;
 using Prism.Navigation;
-using LSRetail.Omni.Domain.DataModel.Base.Retail;
-using System.Net.Http;
+using Prism.Services;
+using Xamarin.Essentials.Implementation;
+using Xamarin.Essentials.Interfaces;
+using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
+using static LSRetail.Omni.Infrastructure.Data.Omniservice.Utils.Utils;
+using DependencyService = Xamarin.Forms.DependencyService;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 [assembly: ExportFont("fa-solid-900.ttf", Alias = "FontAwesome")]
@@ -68,7 +62,6 @@ namespace FormsLoyalty
             DbHelper.InitializeDatabase();
             var serverTasks = new List<Task>();
             
-            //serverTasks.Add(memberConatctTask);
             var offerTask = MemberConatcts.LoadOfferFromServer();
             serverTasks.Add(offerTask);
             var adsTask = MemberConatcts.LoadAdvertisementsFromServer();
@@ -88,7 +81,6 @@ namespace FormsLoyalty
 
         protected override void OnInitialized()
         {
-           // Xamarin.Forms.Device.SetFlags(new string[] { "CarouselView_Experimental", "RadioButton_Experimental", "IndicatorView_Experimental", "Expander_Experimental", "Shapes_Experimental", "SwipeView_Experimental","Brush_Experimental" });
             InitializeComponent();
             navigationService = NavigationService;
             
@@ -115,33 +107,19 @@ namespace FormsLoyalty
             CultureInfo language;
             if (Settings.RTL)
             {
-                language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("Arabic"));
+                language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).AsEnumerable().First(element => element.EnglishName.Contains("Arabic"));
             }
             else
-                language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).ToList().First(element => element.EnglishName.Contains("English"));
+                language = CultureInfo.GetCultures(CultureTypes.NeutralCultures).AsEnumerable().First(element => element.EnglishName.Contains("English"));
 
             Thread.CurrentThread.CurrentUICulture = language;
             AppResources.Culture = Thread.CurrentThread.CurrentUICulture;
 
-            #region Image API Call for SSL
-
-            var handler = new HttpClientHandler();
-            handler.ClientCertificateOptions = ClientCertificateOption.Manual;
-            handler.ServerCertificateCustomValidationCallback =
-                (httpRequestMessage, cert, cetChain, policyErrors) => true;
-
-            var client = new HttpClient(handler);
-            //FFImageLoading.ImageService.Instance.Initialize(new FFImageLoading.Config.Configuration
-            //{
-            //    HttpClient = client
-            //});
-
-            #endregion
+            
 
             var deviceId = DependencyService.Get<INotify>().getDeviceUuid();
 
              LSRetail.Omni.Infrastructure.Data.Omniservice.Utils.Utils.InitWebService( deviceId, AppType.Loyalty, DefaultUrlLoyalty, AppResources.Culture.TwoLetterISOLanguageName);
-            AppData.IsLoggedIn = Xamarin.Essentials.Preferences.Get("IsLoggedIn", default(bool));
             if (string.IsNullOrEmpty(AppData.Device.Id) && !(AppData.Device is UnknownDevice))
             {
                 var deviceRepo = PrismApplicationBase.Current.Container.Resolve<IDeviceLocalRepository>();
@@ -155,7 +133,6 @@ namespace FormsLoyalty
             }
 
            
-            // await NavigationService.NavigateAsync(nameof(WelcomePage));
             if (AppData.Device is UnknownDevice)
             {
                 NavigationService.NavigateAsync(nameof(WelcomePage));
@@ -167,15 +144,10 @@ namespace FormsLoyalty
                     
                     NavigationService.NavigateAsync("app:///NavigationPage/MainTabbedPage");
                });
-                //Current.MainPage = new CheckoutPage();
 
             }
         }
 
-        protected override void OnAppLinkRequestReceived(Uri uri)
-        {
-            base.OnAppLinkRequestReceived(uri);
-        }
         protected override void OnStart()
         {
             base.OnStart();

@@ -5,7 +5,7 @@ namespace FormsLoyalty.Repos
 {
     public interface IScanSendRepo
     {
-        object ScanSendCreate(ScanSend scansend);
+        object ScanSendCreate(ScanSend request);
         Task<string> GetTermsCondition();
     }
 }

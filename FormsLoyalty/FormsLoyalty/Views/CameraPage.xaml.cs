@@ -81,7 +81,7 @@ namespace FormsLoyalty.Views
             cameraView.Shutter();
         }
 
-        void CameraView_MediaCaptured(object sender, MediaCapturedEventArgs e)
+        async void CameraView_MediaCaptured(object sender, MediaCapturedEventArgs e)
         {
             switch (cameraView.CaptureMode)
             {
@@ -90,10 +90,7 @@ namespace FormsLoyalty.Views
 
                    var bytes =  DependencyService.Get<IMediaService>().CompressImage(e.ImageData);
 
-                    _viewModel.NavigateToScanSendPage(bytes);
-
-                   
-
+                    await _viewModel.NavigateToScanSendPage(bytes);
                     break;
             }
         }

@@ -15,11 +15,7 @@ namespace FormsLoyalty.Views
             base.OnAppearing();
             loginView.BindingContext = BindingContext;
         }
-        private void TapGestureRecognizer_Tapped(object sender, System.EventArgs e)
-        {
-
-        }
-
+       
         private void MaterialTextField_TextChanged(object sender, TextChangedEventArgs e)
         {
             var view = (MaterialTextField)sender;
@@ -29,12 +25,9 @@ namespace FormsLoyalty.Views
                     view.HasError = true;
                 
             }
-            if (!string.IsNullOrEmpty(view.Text))
+            if (!string.IsNullOrEmpty(view.Text) && view.HasError)
             {
-                if (view.HasError)
-                {
                     view.HasError = false;
-                }
             }
 
             if (view.Text.Length>11)

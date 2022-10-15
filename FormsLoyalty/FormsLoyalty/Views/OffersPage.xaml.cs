@@ -19,49 +19,13 @@ namespace FormsLoyalty.Views
         {
             base.OnAppearing();
            _viewModel.LoadOffers();
-           // ChangeToolbarIcon();
         }
 
-        private void ChangeToolbarIcon()
-        {
-            //try
-            //{
-            //    if (Settings.ShowCard)
-            //    {
-            //        viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-            //        _viewModel.count = 2;
-            //        offerlist.ItemTemplate = (DataTemplate)Resources["CardView"];
-            //    }
-            //    else
-            //    {
-            //        _viewModel.count = 1;
-            //        viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
-            //        offerlist.ItemTemplate = (DataTemplate)Resources["ListView"];
-            //    }
-            //}
-            //catch (System.Exception)
-            //{
-
-            //    if (Settings.ShowCard)
-            //    {
-            //        viewtoolbar.IconImageSource = "ic_view_list_white_24dp";
-            //        _viewModel.count = 2;
-            //        offerlist.ItemTemplate = (DataTemplate)Resources["CardView"];
-            //    }
-            //    else
-            //    {
-            //        _viewModel.count = 1;
-            //        viewtoolbar.IconImageSource = "ic_view_module_white_24dp";
-            //        offerlist.ItemTemplate = (DataTemplate)Resources["ListView"];
-            //    }
-            //}
-           
-        }
+        
 
         private void ToolbarItem_Clicked(object sender, System.EventArgs e)
         {
             Settings.ShowCard = !Settings.ShowCard;
-            //ChangeToolbarIcon();
         }
 
         private async void Offer_Tapped(object sender, System.EventArgs e)

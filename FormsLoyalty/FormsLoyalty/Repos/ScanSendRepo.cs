@@ -9,10 +9,10 @@ namespace FormsLoyalty.Repos
 {
     public class ScanSendRepo : BaseRepository, IScanSendRepo
     {
-        public object ScanSendCreate(ScanSend ScanSend)
+        public object ScanSendCreate(ScanSend request)
         {
             string methodName = "ScanSendCreate";
-            var jObject = new { ScanSend };
+            var jObject = new { request };
             return base.PostData<bool>(jObject, methodName);
         }
 

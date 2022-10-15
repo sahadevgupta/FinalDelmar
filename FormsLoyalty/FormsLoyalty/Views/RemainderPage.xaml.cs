@@ -38,7 +38,7 @@ namespace FormsLoyalty.Views
 
         private void OnDataSelection(ReminderDate reminderDate)
         {
-            var selectedAny = _viewModel.dates.Where(x => x.IsSelected).FirstOrDefault();
+            var selectedAny = _viewModel.dates.FirstOrDefault(x => x.IsSelected);
             if (selectedAny != null)
             {
                 selectedAny.IsSelected = false;
@@ -49,11 +49,7 @@ namespace FormsLoyalty.Views
             _viewModel.GetReminder();
         }
 
-        private void collectionView_Scrolled(object sender, ItemsViewScrolledEventArgs e)
-        {
-            
-        }
-
+       
         private async void leftarrow_Tapped(object sender, EventArgs e)
         {
             var view = (Image)sender;
@@ -100,7 +96,7 @@ namespace FormsLoyalty.Views
 
         private void Today_Clicked(object sender, EventArgs e)
         {
-            var today = collectionView.ItemsSource.Cast<ReminderDate>().Where( x => x.day == DateTime.UtcNow.Day).FirstOrDefault();
+            var today = collectionView.ItemsSource.Cast<ReminderDate>().FirstOrDefault( x => x.day == DateTime.UtcNow.Day);
             if (today !=null)
             {
                 collectionView.ScrollTo(today, position: ScrollToPosition.Center, animate: true);

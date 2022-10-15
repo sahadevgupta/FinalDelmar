@@ -86,10 +86,7 @@ namespace FormsLoyalty.Helpers
             return instance.Value.GetAwaiter();
         }
 
-        public void Start()
-        {
-            var unused = instance.Value;
-        }
+       
     }
 
 }

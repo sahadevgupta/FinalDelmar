@@ -54,7 +54,8 @@ namespace FormsLoyalty.Droid.Services
 
         public string GetOSVersion()
         {
-            return Android.OS.Build.VERSION.SdkInt.ToString();
+            string version = Android.OS.Build.VERSION.SdkInt.ToString();
+            return version;
         }
 
         public void SwitchToBackground()

@@ -119,10 +119,9 @@ namespace FormsLoyalty.Helpers
 
         public static async Task LoadBestSellerItems(int retryCounter = 3)
         {
-            if (AppData.BestSellers == null || AppData.BestSellers?.Count == 0)
+            if ((AppData.BestSellers == null || AppData.BestSellers?.Count == 0) && Connectivity.NetworkAccess == NetworkAccess.Internet)
             {
-                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
-                {
+               
                     await Task.Run(async () =>
                     {
                         try
@@ -147,7 +146,7 @@ namespace FormsLoyalty.Helpers
                             
                         }
                     }).ConfigureAwait(false);
-                }
+                
             }
             
 

@@ -59,7 +59,6 @@ namespace FormsLoyalty.Controls
         public LoginView()
         {
             InitializeComponent();
-            //numberText.SetBinding(MaterialTextField.TextProperty, new Binding(nameof(MobileNumber), BindingMode.TwoWay, source: this));
         }
 
         // Helper method for invoking commands safely
@@ -85,13 +84,12 @@ namespace FormsLoyalty.Controls
             else
             {
 
-                if (!string.IsNullOrEmpty(view.Text))
+                if (!string.IsNullOrEmpty(view.Text) && view.HasError)
                 {
-                    if (view.HasError)
-                    {
+                   
                         view.HasError = false;
                         view.ErrorText = string.Empty;
-                    }
+                    
                 }
 
                 if (view.Text.Length > 11)

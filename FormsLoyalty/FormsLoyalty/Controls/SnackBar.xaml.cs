@@ -68,7 +68,7 @@ namespace FormsLoyalty.Controls
             set { SetValue(IsOpenProperty, value); }
         }
 
-        private static void IsOpenChanged(BindableObject bindable, object oldValue, object newValue)
+        private static async void IsOpenChanged(BindableObject bindable, object oldValue, object newValue)
         {
             bool isOpen;
 
@@ -77,13 +77,13 @@ namespace FormsLoyalty.Controls
                 var control = (SnackBar)bindable;
                 isOpen = (bool)newValue;
 
-                if (control.IsOpen == false)
+                if (!control.IsOpen )
                 {
-                    control.Close();
+                   await control.Close();
                 }
                 else
                 {
-                    control.Open(control.Message);
+                   await control.Open(control.Message);
                 }
             }
         }
@@ -104,19 +104,19 @@ namespace FormsLoyalty.Controls
             InitializeComponent();
         }
 
-        private void CloseButton_Clicked(object sender, EventArgs e)
+        private async void CloseButton_Clicked(object sender, EventArgs e)
         {
-            Close();
+           await Close();
         }
 
-        public async void Close()
+        public async Task Close()
         {
             await this.TranslateTo(0, 50, AnimationDuration);
             Message = string.Empty;
             IsOpen = IsVisible = false;
         }
 
-        public async void Open(string message)
+        public async Task Open(string message)
         {
             IsVisible = true;
             Message = message;

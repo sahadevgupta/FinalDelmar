@@ -154,13 +154,13 @@ namespace FormsLoyalty.Utils
         public static bool IsDualScreen = false;
         public static string magazineURL = "https://magento.linkedgates.com/";
 
-        private static bool _isLoggedIn;
+
         public static bool IsLoggedIn
         {
-            get { return _isLoggedIn; }
-            set { _isLoggedIn = value; }
+            get => Preferences.Get(nameof(IsLoggedIn), false);
+            set => Preferences.Set(nameof(IsLoggedIn), value);
         }
-        public static bool IsInsideApp = false;
+
         public static bool IsViewStock = false;
         public static bool IsLanguageChanged = false;
         public static bool IsFirstTimeMemberRefresh = false;
@@ -174,5 +174,8 @@ namespace FormsLoyalty.Utils
 
         public static SocialMediaConnection SocialMediaConnection = SocialMediaConnection.None;
         public static List<ShippingMedhod> ShippingMethods = new List<ShippingMedhod>(){ShippingMedhod.ClickCollect, ShippingMedhod.HomeDelivery}; 
+
+
+
     }
 }

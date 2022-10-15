@@ -33,14 +33,14 @@ namespace FormsLoyalty.Views
         }
 
 
-        private void GetFileData(App arg1, List<Tuple<byte[], string>> arg2)
+        private async void GetFileData(App arg1, List<Tuple<byte[], string>> arg2)
         {
             if (_viewModel.CanNavigate)
                 return;
 
             _viewModel.CanNavigate = true;
 
-            _viewModel.NavigateToScanPage(arg2);
+            await _viewModel.NavigateToScanPage(arg2);
             _viewModel.IsUploadBtnClicked = false;
             _viewModel.CanNavigate = false;
         }
@@ -69,7 +69,7 @@ namespace FormsLoyalty.Views
             await view.FadeTo(1, 250);
 
           
-            _viewModel.ScanSend();
+           await _viewModel.ScanSend();
 
             view.Opacity = 1;
         }
@@ -87,7 +87,7 @@ namespace FormsLoyalty.Views
             stack.Opacity = 0;
             await stack.FadeTo(1, 250);
 
-            _viewModel.NavigateToItemCategory((e as TappedEventArgs).Parameter as ItemCategory);
+           await _viewModel.NavigateToItemCategory((e as TappedEventArgs).Parameter as ItemCategory);
             stack.Opacity = 1;
         }
 
@@ -136,30 +136,8 @@ namespace FormsLoyalty.Views
         private async void AddToCart_Clicked(object sender, EventArgs e)
         {
             var item = ((Button)sender).BindingContext as LoyItem;
-            bool IsSucess = await _viewModel.AddItemToBasket(item);
-            //if (IsSucess)
-            //{
-            //    text.Text = $"{item.Description} has been added to basket!!";
-            //    snackbar.IsVisible = true;
-
-
-
-            //    ((Button)sender).IsVisible = false;
-
-            //    //function to fire to kill the app or the game
-
-            //    System.Timers.Timer timer = new System.Timers.Timer(5000);
-            //    timer.AutoReset = false; // the key is here so it repeats
-            //    timer.Elapsed += (s,e1)=>
-            //    {
-            //        Device.BeginInvokeOnMainThread(() =>
-            //        {
-            //            snackbar.IsVisible = false;
-            //        });
-                    
-            //    };
-            //    timer.Start();
-            //}
+           await _viewModel.AddItemToBasket(item);
+            
         }
         private async void minus_Tapped(object sender, EventArgs e)
         {
@@ -206,11 +184,8 @@ namespace FormsLoyalty.Views
             var selectedItem = view.BindingContext as LoyItem;
             if (selectedItem != null)
             {
-               var IsWishlistAdded = await _viewModel.AddRemoveWishList(selectedItem);
-                if (IsWishlistAdded)
-                {
-                   // view.Source = "ic_favorite_24dp";
-                }
+               await _viewModel.AddRemoveWishList(selectedItem);
+                
                 
             }
             view.Opacity = 1;

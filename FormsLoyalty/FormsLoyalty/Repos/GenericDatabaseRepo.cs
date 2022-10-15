@@ -9,7 +9,7 @@ namespace FormsLoyalty.Repos
 {
     public class GenericDatabaseRepo<T> : IGenericDatabaseRepo<T> where T : new()
     {
-        SQLiteConnection _sQLite;
+        readonly SQLiteConnection _sQLite;
         public GenericDatabaseRepo()
         {
             _sQLite = new SQLiteConnection(DbHelper.DatabasePath, DbHelper.Flags);

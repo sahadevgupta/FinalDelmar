@@ -10,7 +10,7 @@ namespace FormsLoyalty.Repos
 {
     public class MagazineRepo : IMagazineRepo
     {
-        string MagazineConfigurationURL = $"{AppData.magazineURL}index.php/rest/V1/";
+        readonly string  MagazineConfigurationURL = $"{AppData.magazineURL}index.php/rest/V1/";
 
 
         public async Task<string> GetToken(object jObject, string methodname)
