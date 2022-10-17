@@ -37,6 +37,7 @@
     <AbsoluteLayout>
 
         <ScrollView AbsoluteLayout.LayoutBounds="0,0,1,1"
+                    x:Name="mainScroll"
                     AbsoluteLayout.LayoutFlags="All">
 
             <ScrollView.Triggers>
@@ -262,6 +263,7 @@
 
 
                     <CollectionView ItemsSource="{Binding RelatedItems}"
+                                    x:Name="relatedlist"
                                     IsVisible="{Binding RelatedItems.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"
                                 HorizontalScrollBarVisibility="Never"
                                 HeightRequest="250"
@@ -287,8 +289,8 @@
                                         
                                    
                                     </Frame>
-                                    <Label Text="{Binding Description}" LineBreakMode="WordWrap"
-                                           MaxLines="3"
+                                    <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                                           MaxLines="2"
                                    HorizontalTextAlignment="Center"/>
                                 </StackLayout>
                             </DataTemplate>

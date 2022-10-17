@@ -28,8 +28,10 @@ namespace FormsLoyalty.Views
             await view.FadeTo(1, 250);
 
            await _viewModel.ExecuteChangeSelectedItem((e as TappedEventArgs).Parameter as LoyItem);
-
+          await  mainScroll.ScrollToAsync(carousel, ScrollToPosition.Start, false);
             view.Opacity = 1;
+
+           
         }
 
 

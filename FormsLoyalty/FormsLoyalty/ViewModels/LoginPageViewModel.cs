@@ -74,8 +74,8 @@ namespace FormsLoyalty.ViewModels
             get {
                 if (Device.RuntimePlatform == Device.Android)
                 {
-                    var environment = DependencyService.Get <IAppSettings> ();
-                    if (environment.GetOSVersion() == "S" || environment.GetOSVersion() == "32") //32 is Android 12.1
+                    string version = DependencyService.Get <IAppSettings>().GetOSVersion();
+                    if (version == "S" || version == "32") //32 is Android 12.1
                         return false;
                 }
                 return true;
