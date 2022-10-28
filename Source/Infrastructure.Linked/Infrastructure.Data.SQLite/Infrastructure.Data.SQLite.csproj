@@ -95,71 +95,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\DBHelper.cs">
-      <Link>DB\DBHelper.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\DTO\CouponData.cs">
-      <Link>DB\DTO\CouponData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\DTO\DeviceData.cs">
-      <Link>DB\DTO\DeviceData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\DTO\MemberContactData.cs">
-      <Link>DB\DTO\MemberContactData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\DTO\NotificationData.cs">
-      <Link>DB\DTO\NotificationData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\DTO\OfferData.cs">
-      <Link>DB\DTO\OfferData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\DTO\TransactionData.cs">
-      <Link>DB\DTO\TransactionData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\DTO\WebserviceData.cs">
-      <Link>DB\DTO\WebserviceData.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\DB\SQLite.cs">
-      <Link>DB\SQLite.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Devices\DeviceFactory.cs">
-      <Link>Devices\DeviceFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Devices\DeviceRepository.cs">
-      <Link>Devices\DeviceRepository.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\MemberContacts\MemberContactFactory.cs">
-      <Link>MemberContacts\MemberContactFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\MemberContacts\MemberContactRepository.cs">
-      <Link>MemberContacts\MemberContactRepository.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Notifications\NotificationFactory.cs">
-      <Link>Notifications\NotificationFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Notifications\NotificationRepository.cs">
-      <Link>Notifications\NotificationRepository.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Offers\OfferFactory.cs">
-      <Link>Offers\OfferFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Offers\OfferRepository.cs">
-      <Link>Offers\OfferRepository.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Transactions\TransactionFactory.cs">
-      <Link>Transactions\TransactionFactory.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Transactions\TransactionRepository.cs">
-      <Link>Transactions\TransactionRepository.cs</Link>
-    </Compile>
-    <Compile Include="..\..\..\..\Core\Source\Infrastructure\Infrastructure.Data.SQLite\Webservice\WebserviceRepository.cs">
-      <Link>Webservice\WebserviceRepository.cs</Link>
-    </Compile>
     <Compile Include="Addresses\AddressFactory.cs" />
     <Compile Include="Addresses\AddressRepository.cs" />
     <Compile Include="Addresses\IAddressRepository.cs" />
+    <Compile Include="DB\DBHelper.cs" />
     <Compile Include="DB\DTO\AddressessData.cs" />
+    <Compile Include="DB\DTO\CouponData.cs" />
+    <Compile Include="DB\DTO\DeviceData.cs" />
+    <Compile Include="DB\DTO\MemberContactData.cs" />
+    <Compile Include="DB\DTO\NotificationData.cs" />
+    <Compile Include="DB\DTO\OfferData.cs" />
+    <Compile Include="DB\DTO\TransactionData.cs" />
+    <Compile Include="DB\DTO\WebserviceData.cs" />
+    <Compile Include="DB\SQLite.cs" />
+    <Compile Include="Devices\DeviceFactory.cs" />
+    <Compile Include="Devices\DeviceRepository.cs" />
+    <Compile Include="MemberContacts\MemberContactFactory.cs" />
+    <Compile Include="MemberContacts\MemberContactRepository.cs" />
+    <Compile Include="Notifications\NotificationFactory.cs" />
+    <Compile Include="Notifications\NotificationRepository.cs" />
+    <Compile Include="Offers\OfferFactory.cs" />
+    <Compile Include="Offers\OfferRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Transactions\TransactionFactory.cs" />
+    <Compile Include="Transactions\TransactionRepository.cs" />
+    <Compile Include="Webservice\WebserviceRepository.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\Common\Core\Base\Domain.DataModel.Base\Domain.DataModel.Base.csproj">
@@ -179,6 +139,7 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('..\..\..\packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
