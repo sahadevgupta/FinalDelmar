@@ -168,7 +168,7 @@ namespace FormsLoyalty.ViewModels
             App.dialogService = pageDialogService;
             itemModel = new ItemModel();
 
-            LoadPoints();
+            //LoadPoints();
 
             IsActiveChanged += HandleIsActiveTrue;
 
@@ -273,7 +273,7 @@ namespace FormsLoyalty.ViewModels
             if (IsActive)
             {
 
-                LoadPoints();
+                //LoadPoints();
 
                 if (!IsInitialized)
                 {
@@ -1112,11 +1112,6 @@ namespace FormsLoyalty.ViewModels
                     }
                     break;
             }
-        }
-        public override void Initialize(INavigationParameters parameters)
-        {
-            base.Initialize(parameters);
-            LoadPoints();
         }
     }
 }

@@ -1,21 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
+             xmlns:resources="clr-namespace:FormsLoyalty"
+             xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.CheckoutPage"
-             xmlns:resources="clr-namespace:FormsLoyalty"
-             xmlns:effects="clr-namespace:FormsLoyalty.Effects"
-             xmlns:controls="clr-namespace:ImageCircle.Forms.Plugin.Abstractions;assembly=ImageCircle.Forms.Plugin"
-             xmlns:converters="clr-namespace:FormsLoyalty.Converters" 
-             xmlns:controls1="clr-namespace:FormsLoyalty.Controls" 
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:customview="clr-namespace:FormsLoyalty.Views.CheckoutStepperView"
-             xmlns:vm="clr-namespace:FormsLoyalty.ViewModels"
-             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
-             xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              BackgroundColor="WhiteSmoke"
-             
              Title="{x:Static resources:AppResources.ActionbarCheckout}">
    
     
@@ -95,10 +91,6 @@
 
                     </yummy:PancakeView>
 
-                    <!--<Grid.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="StepTapped_Tapped"/>
-                </Grid.GestureRecognizers>-->
-
                 </Grid>
 
 
@@ -125,57 +117,31 @@
 
             <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
                 <Grid>
-                    <StackLayout x:Name="addressStackView">
+                    
+                    <!--#region Address View-->
 
-                        <StackLayout.Resources>
-                            <ResourceDictionary>
-                                <Style TargetType="material:MaterialTextField">
-                                    <Setter Property="TintColor" Value="Blue"/>
+                    <StackLayout x:Name="addressStackView" Padding="10,10,5,10">
 
-                                </Style>
-
-
-                            </ResourceDictionary>
-                        </StackLayout.Resources>
 
                         <controls1:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.CheckoutViewShippingAddress}"
-                                                        Margin="10,0"/>
+                                                        Margin="0,5,0,0"/>
 
                         
 
                         <controls1:ExtendedDropdown ItemSource="{Binding addresses}"
-                                           Margin="5,0,5,0"
+                                           
                                            DisplayMemberPath="Address1"
                                            SelectedItem="{Binding selectedAddress}"
                                            PlaceholderText="{x:Static resources:AppResources.txtSelectAddress}"
                                            Title="{x:Static resources:AppResources.txtSelectAddress}"/>
 
 
-
-                        <!--<Frame Padding="8" Margin="5,0,5,0" CornerRadius="5"  HasShadow="True" Visual="Material"
-                               BorderColor="#E1E1EA" >
-                            <StackLayout IsClippedToBounds="True" BackgroundColor="White">
-                                <Label Text="{x:Static resources:AppResources.txtSelectAddress}" FontSize="Body" Margin="5,0" FontAttributes="Bold"/>
-                                <Picker ItemsSource="{Binding addresses}" SelectedItem="{Binding selectedAddress}"
-                    TextColor="{StaticResource My_Header_Color}"
-                    ItemDisplayBinding="{Binding Address1}"
-                    TitleColor="Black"
-                    
-                    Title="{x:Static resources:AppResources.txtSelectAddress}"
-                    Visual="Default"/>
-                            </StackLayout>
-                        </Frame>-->
-
-
-
-
-
                         <controls1:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.txtAddressDetails}"
-                                       Margin="10,10,0,0"/>
+                                       Margin="0,10,0,0"/>
 
                         
 
-                        <Label Padding="10,0,10,0">
+                        <Label>
                             <Label.Triggers>
                                 <DataTrigger TargetType="Label" Binding="{Binding selectedAddress.LineNO}"
                              Value="0">
@@ -195,38 +161,36 @@
 
                         </Label>
 
-                        <StackLayout IsEnabled="False" x:Name="addressStack">
+                        <StackLayout IsEnabled="False" Opacity="0.5" x:Name="addressStack">
                             <StackLayout.Triggers>
                                 <DataTrigger TargetType="StackLayout" Binding="{Binding selectedAddress.LineNO}"
                              Value="0">
                                     <Setter Property="IsEnabled" Value="True"/>
+                                    <Setter Property="Opacity" Value="1"/>
                                 </DataTrigger>
                             </StackLayout.Triggers>
 
-
-                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.CheckoutViewName}" 
-                                        Margin="5,0,5,0"
-                                        x:Name="userName"
-                                       AlwaysShowUnderline="True"
-                                        BackgroundColor="White"
-                                        Text="{Binding shippingAddressName}"
-                                        HasError="{Binding IsNameErrorVisible}"
-                                        HelperTextColor="Red"
-                                        ErrorText="Error Text" 
-                                        InputType="Default" 
-                                    />
-
+                            <controls1:ExtendedEntry Title="{x:Static resources:AppResources.CheckoutViewName}" 
+                                                     PlaceholderText="{x:Static resources:AppResources.CheckoutViewName}"
+                                                     Text="{Binding shippingAddressName}"
+                                                     IsError="{Binding IsNameErrorVisible}"
+                                                     ErrorText="{x:Static resources:AppResources.ApplicationRequired}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     KeyboardType="Default"
+                                                     x:Name="userName"/>
 
                             <controls1:ExtendedDropdown ItemSource="{Binding Cities}"
-                                           Margin="5,0,5,0"
+                                           IsError="{Binding IsCityErrorVisible}"
+                                           ErrorText="{x:Static resources:AppResources.ApplicationRequired}"           
                                            DisplayMemberPath="City"
                                            SelectedItem="{Binding SelectedCity}"
                                            PlaceholderText="{x:Static resources:AppResources.AccountInformationViewCity}"
                                            Title="{x:Static resources:AppResources.AccountInformationViewCity}"/>
 
                             <controls1:ExtendedDropdown ItemSource="{Binding Areas}"
-                                           Margin="5,0,5,0"
                                            DisplayMemberPath="Area"
+                                           ErrorText="{x:Static resources:AppResources.ApplicationRequired}"   
+                                           IsError="{Binding IsAreaErrorVisible}"             
                                            Opacity="1"
                                            SelectedItem="{Binding SelectedArea}"
                                            PlaceholderText="{x:Static resources:AppResources.txtArea}"
@@ -240,84 +204,50 @@
                         </controls1:ExtendedDropdown.Triggers>
                     </controls1:ExtendedDropdown>
 
-                            <!--<Frame Padding="10,0,10,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="False"
-                                   BorderColor="#E1E1EA">
-                                <controls1:CustomPicker ItemsSource="{Binding Cities}" ItemDisplayBinding="{Binding City}"
-                                       SelectedItem="{Binding SelectedCity}" TextColor="Black"
-                                       Title="{x:Static resources:AppResources.AccountInformationViewCity}" 
-                                    TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
-                                   Visual="Default"   />
-                            </Frame>-->
+
+                            <controls1:ExtendedEntry Title="{x:Static resources:AppResources.txtNumber}" 
+                                                     PlaceholderText="{x:Static resources:AppResources.txtNumber}"
+                                                     Text="{Binding shippingAddress.Number}"
+                                                     IsError="{Binding IsNumberErrorVisible}"
+                                                     ErrorText="{x:Static resources:AppResources.ApplicationRequired}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     KeyboardType="Default"
+                                                     x:Name="AddressOne"/>
+
+                            <controls1:ExtendedEntry Title="{x:Static resources:AppResources.txtStreet}" 
+                                                     PlaceholderText="{x:Static resources:AppResources.txtStreet}"
+                                                     Text="{Binding shippingAddress.Street}"
+                                                     IsError="{Binding IsStreetErrorVisible}"
+                                                     ErrorText="{x:Static resources:AppResources.ApplicationRequired}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     KeyboardType="Default"/>
+
+                            <controls1:ExtendedEntry Title="{x:Static resources:AppResources.txtFloorNo}" 
+                                                     PlaceholderText="{x:Static resources:AppResources.txtFloorNo}"
+                                                     Text="{Binding shippingAddress.FloorNo}"
+                                                     IsError="{Binding IsFloorErrorVisible}"
+                                                     ErrorText="{x:Static resources:AppResources.ApplicationRequired}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     KeyboardType="Default"/>
 
 
-                            <!--<Frame Padding="10,0,10,0" HeightRequest="40"  Margin="5,10,5,0" HasShadow="false" BorderColor="#E1E1EA">
-                                <controls1:CustomPicker ItemsSource="{Binding Areas}" ItemDisplayBinding="{Binding Area}"
-                                       SelectedItem="{Binding SelectedArea}" TextColor="Black"
-                                       Title="{x:Static resources:AppResources.txtArea}" 
-                                    TitleColor="{AppThemeBinding Dark=LightGray,Light=LightGray}"
-                                   Visual="Default">
-                                    <controls1:CustomPicker.Triggers>
-                                        <DataTrigger TargetType="controls1:CustomPicker" Binding="{Binding SelectedCity,TargetNullValue=null}"
-                                     Value="null">
-                                            <Setter Property="IsEnabled" Value="False"/>
-
-                                        </DataTrigger>
-                                    </controls1:CustomPicker.Triggers>
-
-                                </controls1:CustomPicker>
-                            </Frame>-->
-
-
-                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtNumber}" 
-                                         AlwaysShowUnderline="True"
-                                         HasError="{Binding IsNumberErrorVisible}"
-                                        Text="{Binding shippingAddress.Number}"
-                                       BackgroundColor="White"
-                                        x:Name="AddressOne"
-                                        Margin="5,0,5,0"
-                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
-                                        InputType="Chat" />
-
-                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtStreet}" 
-                                        AlwaysShowUnderline="True"
-                                        BackgroundColor="White"
-                                       
-                                        HasError="{Binding IsStreetErrorVisible}"
-                                        Text="{Binding shippingAddress.Street}"
-                                        Margin="5,10,5,0"
-                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
-                                        InputType="Chat" />
-
-                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtFloorNo}" 
-                                        
-                                        HasError="{Binding IsFloorErrorVisible}"
-                                        AlwaysShowUnderline="True"
-                                       BackgroundColor="White"
-                                       Margin="5,10,5,0"
-                                        Text="{Binding shippingAddress.FloorNo}"
-                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
-                                        InputType="Chat" />
-
-
-                            <material:MaterialTextField Placeholder="{x:Static resources:AppResources.txtAprtNo}" 
-                                         HasError="{Binding IsApartmentErrorVisible}"
-                                        
-                                        AlwaysShowUnderline="True"
-                                       BackgroundColor="White"
-                                       Margin="5,10,5,0"
-                                        Text="{Binding shippingAddress.ApartmentNo}"
-                                        ErrorText="{x:Static resources:AppResources.ApplicationRequired}" 
-                                        InputType="Chat" />
+                            <controls1:ExtendedEntry Title="{x:Static resources:AppResources.txtAprtNo}" 
+                                                     PlaceholderText="{x:Static resources:AppResources.txtAprtNo}"
+                                                     Text="{Binding shippingAddress.ApartmentNo}"
+                                                     IsError="{Binding IsApartmentErrorVisible}"
+                                                     ErrorText="{x:Static resources:AppResources.ApplicationRequired}"
+                                                     HorizontalOptions="FillAndExpand"
+                                                     KeyboardType="Default"/>
 
                         </StackLayout>
 
                         <controls1:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.CheckoutViewPaymentOptions}"
-                                       Margin="10,10,0,0"/>
+                                       Margin="0,10,0,0"/>
 
 
 
                         <RadioButton TextColor="{StaticResource My_Button_Color}" FlowDirection="LeftToRight"
-                     FontSize="Body" Margin="10,0"
+                     FontSize="Body" 
                      x:Name="cod"
                      ControlTemplate="{StaticResource ThemeRadioTemplate}"
                      Content="{x:Static resources:AppResources.CheckoutViewPayOnDelivery}"
@@ -331,7 +261,6 @@
                       ControlTemplate="{StaticResource ThemeRadioTemplate}"
                       Content="{x:Static resources:AppResources.CheckoutViewPayCreditOnDelivery}"
                       x:Name="visadelivery"
-                      Margin="10,0"
                       GroupName="payment"/>
 
 
@@ -344,8 +273,10 @@
             />
 
                     </StackLayout>
+                    <!--#endregion-->
 
 
+                    <!--#region Order View-->
                     <StackLayout x:Name="reviewstackview" IsVisible="false" Visual="Material">
 
                         <StackLayout.Resources>
@@ -653,7 +584,7 @@
 
 
                     </StackLayout>
-
+                    <!--#endregion-->
 
                 </Grid>
                

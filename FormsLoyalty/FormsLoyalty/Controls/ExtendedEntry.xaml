@@ -1,0 +1,109 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit" 
+             xmlns:custom="clr-namespace:FormsLoyalty.Controls"
+             xmlns:resources="clr-namespace:FormsLoyalty.Resources"
+             x:Class="FormsLoyalty.Controls.ExtendedEntry"
+             x:Name="extendedEntry">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <xct:IsNotNullOrEmptyConverter x:Key="IsNotNullOrEmptyConverter"/>
+            <xct:InvertedBoolConverter x:Key="InvertedBoolConverter"/>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <StackLayout x:Name="parentView"
+                 HorizontalOptions="FillAndExpand"
+                 VerticalOptions="StartAndExpand">
+
+        <!--Title Label-->
+        <Label HorizontalOptions="FillAndExpand"
+               x:Name="titlelbl"
+               IsVisible="{Binding Title,Source={x:Reference extendedEntry},Converter={StaticResource IsNotNullOrEmptyConverter}}"
+               VerticalTextAlignment="Center"
+               Text="{Binding Title,Source={x:Reference extendedEntry}}"
+               Style="{Binding TitleStyle,Source={x:Reference extendedEntry}}"
+               />
+
+        <!--SubTitle Label-->
+        <Label HorizontalOptions="FillAndExpand"
+               x:Name="subtitlelbl"
+               IsVisible="{Binding SubTitle,Source={x:Reference extendedEntry},Converter={StaticResource IsNotNullOrEmptyConverter}}"
+               VerticalTextAlignment="Center"
+               Text="{Binding SubTitle,Source={x:Reference extendedEntry}}"
+               Style="{Binding SubTitleStyle,Source={x:Reference extendedEntry}}"/>
+
+        <!--Entry with Frame-->
+        <Frame HasShadow="False"
+               x:Name="entryParent"
+               Padding="5,0,5,0"
+               Style="{Binding FrameStyle,Source={x:Reference extendedEntry}}">
+
+            <Grid ColumnDefinitions="Auto,*">
+                <!--Custom Entry-->
+                <custom:CustomEntry Text="{Binding Text,Source={x:Reference extendedEntry}}"
+                                    Placeholder="{Binding PlaceholderText,Source={x:Reference extendedEntry}}"
+                                    IsPassword="{Binding IsPassword,Source={x:Reference extendedEntry}}"
+                                    Keyboard="{Binding KeyboardType,Source={x:Reference extendedEntry}}"
+                                    Style="{Binding EntryStyle,Source={x:Reference extendedEntry}}"
+                                    MaxLength="{Binding MaxLength,Source={x:Reference extendedEntry}}"
+                                    ReturnType="{Binding KeyboardReturnType,Source={x:Reference extendedEntry}}"
+                                    ReturnCommand="{Binding ReturnTypeCommand,Source={x:Reference extendedEntry}}"
+                                    ReturnCommandParameter="{Binding ReturnTypeCommandParameter,Source={x:Reference extendedEntry}}"
+                                    Grid.Column="1"
+                                    VerticalTextAlignment="Center"
+                                    x:Name="customentry"
+                                    TextChanged="customentry_TextChanged"/>
+
+               
+
+
+                <!--Image with FonImageSource-->
+                <Image Grid.Column="0" Margin="10,0,0,0"
+                       IsVisible="{Binding IsFontImage,Source={x:Reference extendedEntry}}">
+                    <Image.Source>
+                        <FontImageSource FontFamily="FontAwesome"
+                                         Size="Large"
+                                         Color="Black"
+                                         Glyph="{Binding Icon,Source={x:Reference extendedEntry}}"/>
+                    </Image.Source>
+                </Image>
+
+                <!--Image-->
+                <Image Grid.Column="0" Margin="10,0,0,0"
+                       IsVisible="{Binding IsFontImage,Source={x:Reference extendedEntry}}"
+                       Source="{Binding Icon,Source={x:Reference extendedEntry}}"/>
+
+            </Grid>
+
+            <Frame.Triggers>
+                <DataTrigger Binding="{Binding Source={x:Reference errorlbl},Path=IsVisible}"
+                             TargetType="Frame"
+                             Value="true">
+                    <Setter Property="BorderColor" Value="Red"/>
+                </DataTrigger>
+            </Frame.Triggers>
+
+        </Frame>
+
+        <StackLayout Orientation="Horizontal">
+            <!-- Error Label-->
+            <Label x:Name="errorlbl"
+               Text="{Binding ErrorText,Source={x:Reference extendedEntry}}"
+               IsVisible="{Binding IsError,Source={x:Reference extendedEntry}}"
+               TextColor="Red"
+               VerticalTextAlignment="Center"/>
+
+            <!-- Footer Label-->
+            <Label x:Name="footerlbl"
+               Text="{Binding FooterText,Source={x:Reference extendedEntry}}"
+               IsVisible="{Binding FooterText,Source={x:Reference extendedEntry},Converter={StaticResource IsNotNullOrEmptyConverter}}"
+               HorizontalOptions="EndAndExpand"
+               Style="{Binding FooterStyle,Source={x:Reference extendedEntry}}"/>
+        </StackLayout>
+        
+    </StackLayout>
+
+</ContentView>

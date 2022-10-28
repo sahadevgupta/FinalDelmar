@@ -290,6 +290,20 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _isNoErrorVisible, value); }
         }
 
+        private bool _isCityErrorVisible;
+        public bool IsCityErrorVisible
+        {
+            get { return _isCityErrorVisible; }
+            set { SetProperty(ref _isCityErrorVisible, value); }
+        }
+
+        private bool _isAreaErrorVisible;
+        public bool IsAreaErrorVisible
+        {
+            get { return _isAreaErrorVisible; }
+            set { SetProperty(ref _isAreaErrorVisible, value); }
+        }
+
         private bool _isNameErrorVisible;
         public bool IsNameErrorVisible
         {
@@ -607,10 +621,12 @@ namespace FormsLoyalty.ViewModels
 
             if (SelectedCity == null || string.IsNullOrEmpty(SelectedCity?.City))
             {
+                IsCityErrorVisible = true;
                 IsSucess = false;
             }
             if (SelectedArea == null || string.IsNullOrEmpty(SelectedArea?.Area))
             {
+                IsAreaErrorVisible = true;
                 IsSucess = false;
             }
             if (string.IsNullOrEmpty(shippingAddress.Number))

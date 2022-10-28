@@ -57,7 +57,7 @@
 
 
 
-        <Grid RowDefinitions="180,*"  x:Name="mainGrid" BackgroundColor="#F0F0F0"
+        <Grid RowDefinitions="Auto,*"  x:Name="mainGrid" BackgroundColor="#F0F0F0"
                AbsoluteLayout.LayoutBounds="0,0,1,1"
               AbsoluteLayout.LayoutFlags="All" >
 
@@ -73,7 +73,7 @@
 
 
 
-            <yummy:PancakeView CornerRadius="0,0,50,50" HeightRequest="180" BackgroundColor="{StaticResource My_Header_Color}">
+            <yummy:PancakeView CornerRadius="0,0,40,40"  Padding="0,0,0,30" BackgroundColor="{StaticResource My_Header_Color}">
 
                 <StackLayout Margin="0,10,0,0">
 
@@ -133,8 +133,9 @@
 
                     </Grid>
 
+                   <!--#region Hide points 27/10/22-->
 
-                    <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Margin="0,10,0,10">
+                    <StackLayout Orientation="Horizontal"  HorizontalOptions="CenterAndExpand" Margin="0,10,0,10" IsVisible="false">
                         <Label  TextColor="White" Text="{Binding Source={x:Static resources:AppResources.MyPoints}}"/>
 
                         <Frame BackgroundColor="#D03E3E" Padding="0" BorderColor="White" CornerRadius="5" HasShadow="False">
@@ -159,6 +160,8 @@
                         </Frame>
                     </StackLayout>
 
+                  <!--#endregion-->
+                    
                     <Grid  ColumnDefinitions="*,Auto" RowDefinitions="60" VerticalOptions="End" Margin="20,0,20,0"
                          HorizontalOptions="FillAndExpand"  >
 

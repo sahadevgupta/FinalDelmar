@@ -251,21 +251,21 @@ namespace FormsLoyalty.ViewModels
 
             #region Coupons Tab
 
-            if (EnabledItems.HasCoupons)
-            {
-                string couponCount = GetCouponsCount();
+            //if (EnabledItems.HasCoupons)
+            //{
+            //    string couponCount = GetCouponsCount();
 
-                drawerMenus.Add(new SecondaryTextDrawerMenuItem()
-                {
-                    ActivityType = AppConstValues.Coupons,
-                    IsVisible = true,
-                    Image = FontAwesomeIcons.Gift,
-                    IsFontImage = true,
-                    IsLoading = false,
-                    Title = AppResources.ResourceManager.GetString("ActionbarCoupons", AppResources.Culture),
-                    SubTitle = couponCount
-                });
-            }
+            //    drawerMenus.Add(new SecondaryTextDrawerMenuItem()
+            //    {
+            //        ActivityType = AppConstValues.Coupons,
+            //        IsVisible = true,
+            //        Image = FontAwesomeIcons.Gift,
+            //        IsFontImage = true,
+            //        IsLoading = false,
+            //        Title = AppResources.ResourceManager.GetString("ActionbarCoupons", AppResources.Culture),
+            //        SubTitle = couponCount
+            //    });
+            //}
             #endregion
 
             #region Magazine Tab

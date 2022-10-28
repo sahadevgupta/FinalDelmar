@@ -1,8 +1,5 @@
-﻿using FormsLoyalty.Interfaces;
+﻿using FormsLoyalty.Controls;
 using FormsLoyalty.ViewModels;
-using LSRetail.Omni.Domain.DataModel.Base.Retail;
-using LSRetail.Omni.Domain.DataModel.Loyalty.Members;
-using LSRetail.Omni.Domain.DataModel.Loyalty.Util;
 using System;
 using Xamarin.Forms;
 using XF.Material.Forms.UI;
@@ -27,7 +24,7 @@ namespace FormsLoyalty.Views
                 {
                     var _digit = mobile.Text.Substring(0, 3);
                     if (_digit.Equals("011") || _digit.Equals("012") || _digit.Equals("015") || _digit.Equals("010"))
-                        await _viewModel.AssignToMemberContact(userName.Text);
+                        await _viewModel.AssignToMemberContact(_viewModel.UserName);
                     else
                         await App.dialogService.DisplayAlertAsync("Error!!", "Mobile Number not in correct format.First 3 digit should be 010,011,015 or 012", AppResources.ResourceManager.GetString("ApplicationOk", AppResources.Culture));
 
@@ -46,38 +43,44 @@ namespace FormsLoyalty.Views
 
             if (string.IsNullOrEmpty(firstName.Text))
             {
-                firstName.HasError = true;
+                firstName.IsError = true;
             }
             if (string.IsNullOrEmpty(lastName.Text))
             {
-                lastName.HasError = true;
+                lastName.IsError = true;
             }
             if (string.IsNullOrEmpty(mobile.Text))
             {
-                mobile.HasError = true;
+                mobile.IsError = true;
             }
             if (string.IsNullOrEmpty(streetlbl.Text))
             {
-                streetlbl.HasError = true;
+                streetlbl.IsError = true;
             }
             if (string.IsNullOrEmpty(numberlbl.Text))
             {
-                numberlbl.HasError = true;
+                numberlbl.IsError = true;
             }
             if (string.IsNullOrEmpty(floorlbl.Text))
             {
-                floorlbl.HasError = true;
+                floorlbl.IsError = true;
             }
             if (string.IsNullOrEmpty(Apartmentlbl.Text))
             {
-                Apartmentlbl.HasError = true;
+                Apartmentlbl.IsError = true;
             }
 
 
-            if (string.IsNullOrEmpty(_viewModel.SelectedArea?.Area) || string.IsNullOrEmpty(_viewModel.SelectedCity?.City))
+            if (string.IsNullOrEmpty(_viewModel.SelectedCity?.City))
             {
-                DependencyService.Get<INotify>().ShowToast(AppResources.txtSelectCityArea);
-               
+                citypicker.IsError =  true;
+
+
+            }
+
+            if (string.IsNullOrEmpty(_viewModel.SelectedArea?.Area))
+            {
+                areapicker.IsError = true;
             }
 
             if (string.IsNullOrEmpty(firstName.Text)|| string.IsNullOrEmpty(lastName.Text) || string.IsNullOrEmpty(mobile.Text) ||
@@ -99,13 +102,18 @@ namespace FormsLoyalty.Views
             await _viewModel.GoBack();
         }
 
-        private void MaterialTextField_TextChanged(object sender, TextChangedEventArgs e)
+
+        private void ExtendedEntry_OnEntryTextChanged(object sender, TextChangedEventArgs e)
         {
-            var view = (MaterialTextField)sender;
-            if (!string.IsNullOrEmpty(view.Text) && view.HasError)
+            var view = (ExtendedEntry)sender;
+            if (!string.IsNullOrEmpty(view.Text))
             {
-               
-                    view.HasError = false;
+
+                view.IsError = false;
+            }
+            else
+            {
+                view.IsError = true;
             }
         }
     }

@@ -51,6 +51,9 @@
 		<intent>
 			<action android:name="android.media.action.IMAGE_CAPTURE" />
 		</intent>
+
+		<package android:name="com.facebook.katana" />
+
 	</queries>
 	<!--PROTECTION LEVEL NORMAL-->
 	<uses-permission android:name="android.permission.INTERNET" />

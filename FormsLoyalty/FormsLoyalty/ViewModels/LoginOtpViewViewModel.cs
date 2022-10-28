@@ -176,6 +176,7 @@ namespace FormsLoyalty.ViewModels
                                    await Task.Run(async() =>
                                     {
                                         IsPageEnabled = true;
+
                                         response.FacebookID = fbProfile.Id;
                                         response.UserName = MobileNumber;
                                         response.FirstName = string.IsNullOrEmpty(response.FirstName) ? fbProfile.FirstName : response.FirstName;
@@ -184,13 +185,19 @@ namespace FormsLoyalty.ViewModels
                                         try
                                         {
                                             await new MemberContactModel().UpdateMemberContact(response);
+
+                                            await GoToMainScreen();
                                         }
                                         catch (Exception)
                                         {
+                                            AppData.IsLoggedIn = false;
 
                                             IsPageEnabled = false;
+
+                                            DependencyService.Get<INotify>().ShowSnackBar("System encountered unexcepted error.\n Please try after some time");
+
                                         }
-                                        
+
                                     });
                                     
                                 }
@@ -208,16 +215,24 @@ namespace FormsLoyalty.ViewModels
                                         try
                                         {
                                             await new MemberContactModel().UpdateMemberContact(response);
+
+                                            await GoToMainScreen();
                                         }
                                         catch (Exception)
                                         {
-
+                                            AppData.IsLoggedIn = false;
                                             IsPageEnabled = false;
+
+                                            DependencyService.Get<INotify>().ShowSnackBar("System encountered unexcepted error.\n Please try after some time");
+
                                         }
                                     });
                                 }
-
-                               await GoToMainScreen();
+                                else
+                                {
+                                    await GoToMainScreen();
+                                }
+                              
                             }
                             else
                                 await NavigationService.NavigateAsync($"../{nameof(SignUpPage)}", new NavigationParameters { { "edit", true } });

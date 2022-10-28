@@ -97,7 +97,8 @@ namespace FormsLoyalty
             if (mergedDictionaries != null)
             {
                 mergedDictionaries.Add(new Styles.colors());
-                if(Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
+                mergedDictionaries.Add(new Styles.GeneralDevicesStyle());
+                if (Xamarin.Forms.Device.RuntimePlatform == Xamarin.Forms.Device.iOS)
                     mergedDictionaries.Add(new Styles.iosStyle());
             }
         }

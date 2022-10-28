@@ -5,12 +5,11 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.ContactUsPage"
              xmlns:resources="clr-namespace:FormsLoyalty"
-              xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
+             xmlns:ios="clr-namespace:Xamarin.Forms.PlatformConfiguration.iOSSpecific;assembly=Xamarin.Forms.Core"
              xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              ios:Page.UseSafeArea="True"
-             Title="Conatact Us"
              BackgroundColor="White"
-             
+             Title="{x:Static resources:AppResources.ActionbarContactUs}"
              x:Name="thisPage">
 
     <Grid RowDefinitions="Auto,*">
@@ -22,18 +21,14 @@
                Padding="10"
                TextColor="Black">
             <Label.GestureRecognizers>
-                <TapGestureRecognizer Command="{prism:GoBack}"/>
+                <TapGestureRecognizer Command="{prism:GoBack Animated=False}"/>
             </Label.GestureRecognizers>
         </Label>
 
        
 
         <ImageButton Source="iconClose" HorizontalOptions="StartAndExpand" VerticalOptions="Start" BackgroundColor="Transparent" 
-                     Command="{prism:GoBack}" xct:IconTintColorEffect.TintColor="Black"/>
-
-
-
-      
+                     Command="{prism:GoBack Animated=False}" xct:IconTintColorEffect.TintColor="Black"/>
 
 
             <StackLayout BindableLayout.ItemsSource="{Binding ContactMethods}" Grid.Row="1" Margin="20,150,20,20" >

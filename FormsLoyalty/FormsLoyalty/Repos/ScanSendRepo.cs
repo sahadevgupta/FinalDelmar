@@ -12,7 +12,7 @@ namespace FormsLoyalty.Repos
         public object ScanSendCreate(ScanSend request)
         {
             string methodName = "ScanSendCreate";
-            var jObject = new { request };
+            var jObject = new { ScanSend = request };
             return base.PostData<bool>(jObject, methodName);
         }
 

@@ -105,5 +105,46 @@ namespace FormsLoyalty.Controls
         {
             new Command(() => Execute(Command));
         }
+
+        private void ExtendedEntry_OnEntryTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var view = (ExtendedEntry)sender;
+            if (string.IsNullOrEmpty(view.Text))
+            {
+
+                view.IsError = true;
+                view.ErrorText = AppResources.txtMobileEmpty;
+            }
+            else
+            {
+
+                if (!string.IsNullOrEmpty(view.Text) && view.IsError)
+                {
+
+                    view.IsError = false;
+                    view.ErrorText = string.Empty;
+
+                }
+
+                if (view.Text.Length > 11)
+                {
+                    view.Text = e.OldTextValue;
+                }
+
+                if (view.Text.Length >= 3 && view.Text.Length <= 11)
+                {
+                    var _digit = view.Text.Substring(0, 3);
+                    if (!(_digit.Equals("011") || _digit.Equals("012") || _digit.Equals("015") || _digit.Equals("010")))
+                    {
+                        view.IsError = true;
+                        view.ErrorText = "Mobile Number not in correct format.First 3 digit should be 010,011,015 or 012";
+
+                    }
+                    else
+                        view.IsError = false;
+                }
+
+            }
+        }
     }
 }

@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              xmlns:material="clr-namespace:XF.Material.Forms.UI;assembly=XF.Material"
              xmlns:resources="clr-namespace:FormsLoyalty"
-             xmlns:prism="http://prismlibrary.com" 
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:fonticons="clr-namespace:FormsLoyalty.Resources"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit"
              x:Class="FormsLoyalty.Controls.LoginView">
 
 
@@ -43,10 +45,21 @@
             </Label>
 
 
+            <controls:ExtendedEntry Grid.Row="4" KeyboardType="Telephone"
+                                    Margin="0,10,0,0"
+                                    PlaceholderText="{x:Static resources:AppResources.AccountInformationViewMobile}"
+                                    Text="{Binding MobileNumber}"
+                                    ErrorText="{Binding ErrorText}" 
+                                    Icon="{x:Static fonticons:FontAwesomeIcons.MobileAlt}"
+                                    IsFontImage="True"
+                                    IsError="{Binding IsError}"
+                                    OnEntryTextChanged="ExtendedEntry_OnEntryTextChanged"/>
 
-            <Frame Margin="0,10,0,0" Padding="0" Visual="Material" Grid.Row="4" BorderColor="LightGray">
+
+            <Frame Margin="0,10,0,0" Padding="0" Visual="Material" Grid.Row="5" BorderColor="LightGray" IsVisible="false">
 
                 <material:MaterialTextField Placeholder="{x:Static resources:AppResources.AccountInformationViewMobile}" x:Name="numberText"
+                                            
                                                              LeadingIcon="mobile"
                                                             Padding="3,0,3,0"
                                                             BackgroundColor="White"
@@ -67,8 +80,8 @@
             </Frame>
 
             <Button Text="{x:Static resources:AppResources.txtGenerateOtp}" BackgroundColor="{StaticResource My_Button_Color}" Grid.Row="5"
-                       Command="{Binding OnOtpCommand}"
-                        Margin="0,50,0,0" HeightRequest="40"/>
+                    Command="{Binding OnOtpCommand}"
+                        Margin="0,30,0,0" HeightRequest="40"/>
         </Grid>
 
     </ContentView.Content>

@@ -70,13 +70,13 @@ namespace FormsLoyalty.Controls
         /// <summary>
         /// set sub-title for the control
         /// </summary>
-        public static readonly BindableProperty IsErrorPoperty =
+        public static readonly BindableProperty IsErrorProperty =
             BindableProperty.Create(nameof(IsError), typeof(bool), typeof(ExtendedDropdown), default(bool), BindingMode.TwoWay);
 
         /// <summary>
         /// set sub-title for the control
         /// </summary>
-        public static readonly BindableProperty IsFontImagePoperty =
+        public static readonly BindableProperty IsFontImageProperty =
             BindableProperty.Create(nameof(IsFontImage), typeof(bool), typeof(ExtendedDropdown), true, BindingMode.TwoWay);
 
 
@@ -112,18 +112,18 @@ namespace FormsLoyalty.Controls
         }
         public object SelectedItem
         {
-            get { return (object)GetValue(SelectedItemProperty); }
+            get { return GetValue(SelectedItemProperty); }
             set { SetValue(SelectedItemProperty, value); }
         }
         public bool IsError
         {
-            get { return (bool)GetValue(IsErrorPoperty); }
-            set { SetValue(IsErrorPoperty, value); }
+            get { return (bool)GetValue(IsErrorProperty); }
+            set { SetValue(IsErrorProperty, value); }
         }
         public bool IsFontImage
         {
-            get { return (bool)GetValue(IsFontImagePoperty); }
-            set { SetValue(IsFontImagePoperty, value); }
+            get { return (bool)GetValue(IsFontImageProperty); }
+            set { SetValue(IsFontImageProperty, value); }
         }
 
         public Style TitleStyle
