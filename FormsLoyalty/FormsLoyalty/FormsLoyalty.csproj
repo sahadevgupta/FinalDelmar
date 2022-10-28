@@ -67,12 +67,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Common\Core\Base\Domain.DataModel.Base\Domain.DataModel.Base.csproj" />
-    <ProjectReference Include="..\..\..\..\Common\Core\Base\Domain.Services.Base\Domain.Services.Base.csproj" />
-    <ProjectReference Include="..\..\..\..\Common\Core\Base\Infrastructure.Data.Omniservice\Infrastructure.Data.Omniservice.csproj" />
-    <ProjectReference Include="..\..\..\..\Common\Core\Loyalty\Domain.DataModel.Loyalty\Domain.DataModel.Loyalty.csproj" />
-    <ProjectReference Include="..\..\..\..\Common\Core\Loyalty\Domain.Services.Loyalty\Domain.Services.Loyalty.csproj" />
-    <ProjectReference Include="..\..\..\..\Common\Core\Loyalty\Infrastructure.Data.Omniservice.Loyalty\Infrastructure.Data.Omniservice.Loyalty.csproj" />
+    <ProjectReference Include="..\..\Common\Core\Base\Domain.DataModel.Base\Domain.DataModel.Base.csproj" />
+    <ProjectReference Include="..\..\Common\Core\Base\Domain.Services.Base\Domain.Services.Base.csproj" />
+    <ProjectReference Include="..\..\Common\Core\Base\Infrastructure.Data.Omniservice\Infrastructure.Data.Omniservice.csproj" />
+    <ProjectReference Include="..\..\Common\Core\Loyalty\Domain.DataModel.Loyalty\Domain.DataModel.Loyalty.csproj" />
+    <ProjectReference Include="..\..\Common\Core\Loyalty\Domain.Services.Loyalty\Domain.Services.Loyalty.csproj" />
+    <ProjectReference Include="..\..\Common\Core\Loyalty\Infrastructure.Data.Omniservice.Loyalty\Infrastructure.Data.Omniservice.Loyalty.csproj" />
     <ProjectReference Include="..\..\Source\Infrastructure.Linked\Infrastructure.Data.SQLite\Infrastructure.Data.SQLite.csproj" />
   </ItemGroup>
 

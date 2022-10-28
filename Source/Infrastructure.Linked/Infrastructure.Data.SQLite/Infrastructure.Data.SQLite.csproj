@@ -162,15 +162,15 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Common\Core\Base\Domain.DataModel.Base\Domain.DataModel.Base.csproj">
+    <ProjectReference Include="..\..\..\Common\Core\Base\Domain.DataModel.Base\Domain.DataModel.Base.csproj">
       <Project>{7bcac03e-3b65-4cf4-9ebb-4ef353276d1c}</Project>
       <Name>Domain.DataModel.Base</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\Common\Core\Loyalty\Domain.DataModel.Loyalty\Domain.DataModel.Loyalty.csproj">
+    <ProjectReference Include="..\..\..\Common\Core\Loyalty\Domain.DataModel.Loyalty\Domain.DataModel.Loyalty.csproj">
       <Project>{36a6fdfb-59d3-4618-92dd-0deb8b6ab501}</Project>
       <Name>Domain.DataModel.Loyalty</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\..\..\..\Common\Core\Loyalty\Domain.Services.Loyalty\Domain.Services.Loyalty.csproj">
+    <ProjectReference Include="..\..\..\Common\Core\Loyalty\Domain.Services.Loyalty\Domain.Services.Loyalty.csproj">
       <Project>{1be9dd18-afaf-4f25-a62d-e6bf109c180f}</Project>
       <Name>Domain.Services.Loyalty</Name>
     </ProjectReference>

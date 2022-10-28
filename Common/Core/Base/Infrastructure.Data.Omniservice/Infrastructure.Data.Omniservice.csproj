@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup Label="Globals">
+	  <SccProjectName></SccProjectName>
+	  <SccProvider></SccProvider>
+	  <SccAuxPath></SccAuxPath>
+	  <SccLocalPath></SccLocalPath>
+	</PropertyGroup>
+	<PropertyGroup>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+	</PropertyGroup>
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>LSRetail.Omni.Infrastructure.Data.Omniservice</RootNamespace>
+    <AssemblyName>LSRetail.Omni.Infrastructure.Data.Omniservice</AssemblyName>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\Domain.DataModel.Base\Properties\Version.cs" Link="Properties\Version.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="Xam.Plugins.Settings" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Domain.DataModel.Base\Domain.DataModel.Base.csproj" />
+    <ProjectReference Include="..\Domain.Services.Base\Domain.Services.Base.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="LSRetail.Omni.Licence">
+      <HintPath>..\..\..\..\LSRetail.Omni.Licence.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>
