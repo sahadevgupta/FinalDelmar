@@ -186,7 +186,7 @@ namespace FormsLoyalty.ViewModels
                                         {
                                             await new MemberContactModel().UpdateMemberContact(response);
 
-                                            await GoToMainScreen();
+                                             GoToMainScreen();
                                         }
                                         catch (Exception)
                                         {
@@ -216,7 +216,7 @@ namespace FormsLoyalty.ViewModels
                                         {
                                             await new MemberContactModel().UpdateMemberContact(response);
 
-                                            await GoToMainScreen();
+                                             GoToMainScreen();
                                         }
                                         catch (Exception)
                                         {
@@ -230,7 +230,7 @@ namespace FormsLoyalty.ViewModels
                                 }
                                 else
                                 {
-                                    await GoToMainScreen();
+                                     GoToMainScreen();
                                 }
                               
                             }
@@ -259,7 +259,7 @@ namespace FormsLoyalty.ViewModels
 
             IsPageEnabled = false;
         }
-        private async Task GoToMainScreen()
+        private void GoToMainScreen()
         {
             AppData.IsLoggedIn = true;
             IsPageEnabled = true;
@@ -267,20 +267,30 @@ namespace FormsLoyalty.ViewModels
             if (FromItemPage)
             {
                 MessagingCenter.Send((App)Xamarin.Forms.Application.Current, "LoggedIn");
-
-                await NavigationService.NavigateAsync("../../");
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await NavigationService.NavigateAsync("../../");
+                });
             }
             else if(fbProfile is object || googleProfile is object)
             {
                 MessagingCenter.Send(new BasketModel(), "CartUpdated");
-                await NavigationService.NavigateAsync("../../../");
+
+                Device.BeginInvokeOnMainThread(async() =>
+                {
+                    await NavigationService.NavigateAsync("../../../");
+                });
+
+                
             }
             else
             {
 
                 MessagingCenter.Send(new BasketModel(), "CartUpdated");
-                await NavigationService.NavigateAsync("../../");
-                
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await NavigationService.NavigateAsync("../../");
+                });
             }
 
             IsPageEnabled = false;
