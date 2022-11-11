@@ -273,14 +273,19 @@ namespace FormsLoyalty.ViewModels
             if (IsActive)
             {
 
-                //LoadPoints();
-
                 if (!IsInitialized)
                 {
                     IsInitialized = true;
                     LoadData();
                 }
-                
+                else
+                {
+                    Task.Run(async () =>
+                    {
+                        await LoadBestSellerItemsAsync();
+                    });
+
+                }
 
 
             }

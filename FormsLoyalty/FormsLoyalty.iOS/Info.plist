@@ -99,7 +99,7 @@
 			<string>fb</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>fb1009767512769310</string>
+				<string>fb3064425220442168</string>
 			</array>
 		</dict>
 		<dict>
@@ -122,9 +122,9 @@
 		</dict>
 	</array>
 	<key>FacebookAppID</key>
-	<string>1009767512769310</string>
+	<string>3064425220442168</string>
 	<key>FacebookDisplayName</key>
-	<string>FormsLoyalty</string>
+	<string>Delmar &amp; Attallah</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>

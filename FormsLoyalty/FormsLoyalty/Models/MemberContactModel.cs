@@ -143,10 +143,6 @@ namespace FormsLoyalty.Models
 
             BeginWsCall();
 
-
-            var loading = await MaterialDialog.Instance.LoadingDialogAsync(message: string.Format(AppResources.ResourceManager.GetString("MemberContactModelLoggingInUser", AppResources.Culture), FacebookEmail));
-
-
             try
             {
                 var contact = service.MemberContactLogonWithFacebook(repository, FacebookID, FacebookEmail, AppData.Device.Id);
@@ -178,11 +174,9 @@ namespace FormsLoyalty.Models
                 var errorMessage = await HandleUIExceptionAsync(ex, showToastOnNetworkError: false, displayAlert: false);
 
                 onError(errorMessage);
-                await loading.DismissAsync();
                 return success;
             }
 
-           await loading.DismissAsync();
 
             return success;
         }

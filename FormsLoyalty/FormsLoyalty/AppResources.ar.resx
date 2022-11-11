@@ -1715,5 +1715,7 @@
   <data name="ItemDescriptionAndActiveIngredient" xml:space="preserve">
     <value>"منتجات (بالاسم او بالمادة الفعالة)"</value>
   </data>
-
+  <data name="Account" xml:space="preserve">
+    <value>الحساب</value>
+  </data>
 </root>

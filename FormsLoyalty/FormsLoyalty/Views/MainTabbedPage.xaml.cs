@@ -29,7 +29,7 @@ namespace FormsLoyalty.Views
             hometab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome" , Glyph = FormsLoyalty.Resources.FontAwesomeIcons.Home,Size=24 };
             categorytab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.ThLarge, Size = 24 };
             carttabios.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.ShoppingCart, Size = 24 };
-
+            moretab.IconImageSource = new FontImageSource() { FontFamily = "FontAwesome", Glyph = FormsLoyalty.Resources.FontAwesomeIcons.UserCircle, Size = 24 };
 
         }
 

@@ -209,8 +209,6 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<ItemCategoriesPage, ItemCategoriesPageViewModel>();
             containerRegistry.RegisterForNavigation<WelcomePage, WelcomePageViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginPageViewModel>();
-            containerRegistry.RegisterForNavigation<ForgotPasswordPage, ForgotPasswordPageViewModel>();
-            containerRegistry.RegisterForNavigation<ResetPasswordPage, ResetPasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<AppSettingsPage, AppSettingsPageViewModel>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
             containerRegistry.RegisterForNavigation<OffersPage, OffersPageViewModel>();
@@ -232,7 +230,6 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<CheckoutPage, CheckoutPageViewModel>();
             containerRegistry.RegisterForNavigation<ItemSearchPage, ItemSearchPageViewModel>();
             containerRegistry.RegisterForNavigation<CouponsPage, CouponsPageViewModel>();
-            containerRegistry.RegisterForNavigation<ChangePasswordPage, ChangePasswordPageViewModel>();
             containerRegistry.RegisterForNavigation<MagazinePage, MagazinePageViewModel>();
             containerRegistry.RegisterForNavigation<RemainderPage, RemainderPageViewModel>();
             containerRegistry.RegisterForNavigation<AddReminderPage, AddReminderPageViewModel>();
@@ -241,7 +238,6 @@ namespace FormsLoyalty
             containerRegistry.RegisterForNavigation<MainTabbedPage, MainTabbedPageViewModel>();
             containerRegistry.RegisterForNavigation<CartPage, CartPageViewModel>();
             containerRegistry.RegisterForNavigation<MoreInfoPage, MoreInfoPageViewModel>();
-            containerRegistry.RegisterForNavigation<HelpPage, HelpPageViewModel>();
             containerRegistry.RegisterForNavigation<TermsConditionPage, TermsConditionPageViewModel>();
             containerRegistry.RegisterForNavigation<ImagePreviewPage, ImagePreviewPageViewModel>();
             containerRegistry.RegisterForNavigation<LoginOtpView, LoginOtpViewViewModel>();

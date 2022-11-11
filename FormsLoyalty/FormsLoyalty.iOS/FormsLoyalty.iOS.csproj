@@ -27,17 +27,6 @@
     <MtouchArch>i386, x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
-    <MtouchEnableSGenConc>true</MtouchEnableSGenConc>
-    <CodesignKey>iPhone Developer</CodesignKey>
-    <CodesignProvision>
-    </CodesignProvision>
-    <MtouchHttpClientHandler>NSUrlSessionHandler</MtouchHttpClientHandler>
-    <DeviceSpecificBuild>true</DeviceSpecificBuild>
-    <MtouchFastDev>true</MtouchFastDev>
-    <MtouchFloat32>false</MtouchFloat32>
-    <MtouchNoSymbolStrip>true</MtouchNoSymbolStrip>
-    <OptimizePNGs>true</OptimizePNGs>
-    <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>

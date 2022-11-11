@@ -102,7 +102,8 @@
                 Grid.Row="1"
                 IsGroupingEnabled="true"
                 VerticalScrollBarVisibility="Never"
-                IsVisible="{OnPlatform iOS=true,Default=false}">
+                IsVisible="{OnPlatform iOS=true,Default=false}"
+                SeparatorVisibility="None">
 
                 <ListView.GroupHeaderTemplate>
                           <DataTemplate>
@@ -182,7 +183,7 @@
 
                             <Label Text="{Binding Title}" Grid.Column="1"
                                        VerticalOptions="Center"
-                                       FontSize="{OnPlatform Android=16, Default=14}"
+                                       FontSize="Body"
                                        TextColor="Black"
                                          Grid.Row="0"/>
 

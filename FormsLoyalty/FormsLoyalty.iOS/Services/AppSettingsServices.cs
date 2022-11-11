@@ -19,6 +19,7 @@ namespace FormsLoyalty.iOS.Services
 
         public void ClearAllCookies()
         {
+
             //NSHttpCookieStorage CookieStorage = NSHttpCookieStorage.SharedStorage;
             //foreach (var cookie in CookieStorage.Cookies)
             //{

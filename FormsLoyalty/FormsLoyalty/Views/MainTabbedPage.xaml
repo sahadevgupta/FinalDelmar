@@ -121,7 +121,7 @@
 
 
         <!--More Page-->
-        <NavigationPage Title="{x:Static resources:AppResources.MoreTab}" x:Name="moretab" IconImageSource="{OnPlatform iOS=reveal-icon.png,Android=ic_menu_white_24dp.png}">
+        <NavigationPage Title="{x:Static resources:AppResources.Account}" x:Name="moretab">
             <x:Arguments>
                 <views:MoreInfoPage />
             </x:Arguments>

@@ -427,7 +427,7 @@
                         </StackLayout>
 
 
-                        <StackLayout>
+                        <StackLayout IsVisible="false">
 
                             <Label Text="{x:Static resources:AppResources.ActionbarCoupon}"
             TextColor="Black"
@@ -438,12 +438,12 @@
 
                             <StackLayout Orientation="Horizontal" Margin="10,0,10,0" IsVisible="false">
 
-                                <StackLayout.Triggers>
+                                <!--<StackLayout.Triggers>
                                     <DataTrigger    TargetType="StackLayout" Binding="{Binding SelectedCoupon,TargetNullValue=null}"
                                             Value="null">
                                         <Setter Property="IsVisible" Value="true"/>
                                     </DataTrigger>
-                                </StackLayout.Triggers>
+                                </StackLayout.Triggers>-->
 
                                 <Label Text="{x:Static resources:AppResources.txtSelectCode}" VerticalOptions="Center" HorizontalOptions="FillAndExpand"/>
 
@@ -454,13 +454,13 @@
                             </StackLayout>
 
 
-                            <StackLayout Orientation="Horizontal" Margin="10,0,10,0" IsVisible="true">
-                                <StackLayout.Triggers>
+                            <StackLayout Orientation="Horizontal" Margin="10,0,10,0" IsVisible="false">
+                                <!--<StackLayout.Triggers>
                                     <DataTrigger    TargetType="StackLayout" Binding="{Binding SelectedCoupon,TargetNullValue=null}"
                                             Value="null">
                                         <Setter Property="IsVisible" Value="false"/>
                                     </DataTrigger>
-                                </StackLayout.Triggers>
+                                </StackLayout.Triggers>-->
 
                                 <Label HorizontalOptions="FillAndExpand">
                                     <Label.FormattedText>

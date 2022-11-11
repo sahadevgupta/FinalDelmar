@@ -5,7 +5,6 @@ using FormsLoyalty.Models;
 using FormsLoyalty.PopUpView;
 using FormsLoyalty.Utils;
 using FormsLoyalty.Views;
-using FormsLoyalty.Views.CheckoutStepperView;
 using Infrastructure.Data.SQLite.Addresses;
 using LSRetail.Omni.Domain.DataModel.Base.Retail;
 using LSRetail.Omni.Domain.DataModel.Base.SalesEntries;
@@ -50,13 +49,7 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _mainGrid, value); }
         }
 
-        private ObservableCollection<StepBarModel> _steps;
-        public ObservableCollection<StepBarModel> Steps
-        {
-            get { return _steps; }
-            set { SetProperty(ref _steps, value); }
-        }
-       
+        
         public bool IsNotLastPage { get; set; }
 
         #endregion
@@ -446,39 +439,9 @@ namespace FormsLoyalty.ViewModels
         public CheckoutPageViewModel(INavigationService navigationService): base(navigationService)
         {
           
-            Steps = new ObservableCollection<StepBarModel>()
-            {
-                new StepBarModel()
-                { 
-                    StepName=AppResources.txtAddressDetails,
-                    Status=StepBarStatus.InProgress,
-                    IsNotLast=true,
-                    
-                    MainContent=new AddressDetailsView(this),IsCurrentContent=true,
-                    
-                },
-                new StepBarModel()
-                { 
-                    StepName=AppResources.ActionbarCheckout,
-                    Status=StepBarStatus.Pending,
-                    
-                    IsNotLast=false,MainContent=new ReviewSubmitView(this),
-                    IsCurrentContent=false
-                },
-            };
-            StepListCount = Steps.Count;
-            
             basketModel = new BasketModel();
             memberContactModel = new MemberContactModel();
-
-           
-
-
             LoadData();
-           
-
-            
-
         }
 
         
@@ -493,72 +456,6 @@ namespace FormsLoyalty.ViewModels
 
         #region Stepper Module
 
-        public void AddContentForSelectedStep()
-        {
-            if (Steps.FirstOrDefault(x => x.IsCurrentContent) != null)
-            {
-                ContentView content = Steps.FirstOrDefault(x => x.IsCurrentContent)?.MainContent;
-                bool isNotLast = Steps.FirstOrDefault(x => x.IsCurrentContent).IsNotLast;
-                if (content != null)
-                {
-                    if (SubGrid.Children.Count >= 1)
-                    {
-                        for (int i = 0; i < SubGrid.Children.Count; i++)
-                        {
-                            SubGrid.Children.RemoveAt(i);
-                        }
-                    }
-
-                    SubGrid.Children.Add(content, 0, 0);
-                }
-                IsNotLastPage = isNotLast;
-            }
-        }
-
-
-        public override void OnStepTapped(StepBarModel stepBarModel)
-        {
-            base.OnStepTapped(stepBarModel);
-            NavigateToBackStep();
-        }
-        public void NavigateToBackStep()
-        {
-            
-                int index = Steps.IndexOf(Steps.LastOrDefault(x => x.IsCurrentContent));
-                if (index > 0)
-                {
-                    StepBarModel step = Steps.ElementAt(index);
-                    step.Status = StepBarStatus.Pending;
-                    step.IsCurrentContent = false;
-                    Steps[index] = step;
-                    if ((index - 1) > 0)
-                    {
-                        StepBarModel stepnext = Steps.ElementAt(index - 1);
-                        if (stepnext.Status == StepBarStatus.Completed)
-                        {
-                            stepnext.Status = StepBarStatus.InProgress;
-                        }
-                        stepnext.IsCurrentContent = true;
-                        Steps[index - 1] = stepnext;
-                    }
-                    else
-                    {
-                        StepBarModel stepnext = Steps.ElementAt(0);
-
-                        stepnext.Status = StepBarStatus.InProgress;
-
-                        stepnext.IsCurrentContent = true;
-                        Steps[index - 1] = stepnext;
-                    }
-
-                    StepBarComponent stepbar = new StepBarComponent(this);
-                    int indexforstepper = MainGrid.Children.IndexOf(MainGrid.Children.LastOrDefault(x => x.GetType() == typeof(StepBarComponent)));
-                    MainGrid.Children.RemoveAt(indexforstepper);
-                    MainGrid.Children.Add(stepbar, 0, 0);
-                }
-                AddContentForSelectedStep();
-            
-        }
 
 
         public bool NavigateToNextStep()
