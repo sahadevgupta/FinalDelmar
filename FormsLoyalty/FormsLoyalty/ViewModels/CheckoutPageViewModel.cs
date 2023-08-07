@@ -487,7 +487,6 @@ namespace FormsLoyalty.ViewModels
         {
             LoadAddressView();
             LoadBasket();
-            CalculateBasket();
 
         }
 
@@ -566,6 +565,7 @@ namespace FormsLoyalty.ViewModels
             if (ValidateFields())
             {
 
+                CalculateBasket();
 
                 if (isCreditCard && string.IsNullOrEmpty(CardNumber))
                     CardDesc = $"{AppResources.ResourceManager.GetString("NotificationViewExpires", AppResources.Culture)} {CardExpirationDate}";

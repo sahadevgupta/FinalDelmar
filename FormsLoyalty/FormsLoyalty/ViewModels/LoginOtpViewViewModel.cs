@@ -313,6 +313,11 @@ namespace FormsLoyalty.ViewModels
             FromItemPage = parameters.GetValue<bool>("itemPage");
             MobileNumber = parameters.GetValue<string>("number");
             Otp = parameters.GetValue<string>("otp");
+
+#if Debug
+
+            DependencyService.Get<INotify>().ShowSnackBar(Otp);
+#endif
             Console.WriteLine("OTP :" + Otp);
             fbProfile = parameters.GetValue<FacebookProfile>("fb");
             googleProfile = parameters.GetValue<GoogleProfile>("google");

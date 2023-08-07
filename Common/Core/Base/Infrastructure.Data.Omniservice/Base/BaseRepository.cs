@@ -224,7 +224,7 @@ namespace LSRetail.Omni.Infrastructure.Data.Omniservice.Base
             }
             catch (LSOmniException lex)
             {
-                throw lex;
+                HandleException(lex.InnerException);
             }
             catch (Exception ex)
             {

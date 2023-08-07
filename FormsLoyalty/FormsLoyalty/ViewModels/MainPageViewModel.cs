@@ -42,6 +42,13 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _advertisements, value); }
         }
 
+        private ObservableCollection<DashboardGroup> _dashboardGroups = new ObservableCollection<DashboardGroup>();
+        public ObservableCollection<DashboardGroup> DashboardGroups
+        {
+            get { return _dashboardGroups; }
+            set { SetProperty(ref _dashboardGroups, value); }
+        }
+
         private ObservableCollection<ItemCategory> _itemCategories;
         public ObservableCollection<ItemCategory> itemCategories
         {
@@ -957,11 +964,20 @@ namespace FormsLoyalty.ViewModels
                     }
                
             }
-            else
+            var temp = new List<DashboardModel>();
+            foreach (var category in AppData.ItemCategories)
             {
-                itemCategories = new ObservableCollection<ItemCategory>(AppData.ItemCategories);
+                temp.Add(new DashboardModel
+                {
+                    Description = category.Description,
+                    ArabicDescription = category.ArabicDescription,
+                    ImageUrl = category.Images[0].Location,
+                    ItemType = Models.Enums.DashboardItemType.Categories
+                });
             }
-                
+            DashboardGroups.Add(new DashboardGroup(AppResources.txtCategory, temp));
+
+
         }
 
         internal async Task NavigateToItemCategory(ItemCategory itemCategory)

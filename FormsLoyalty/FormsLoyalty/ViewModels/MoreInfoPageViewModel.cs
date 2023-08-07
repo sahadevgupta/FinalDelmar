@@ -185,7 +185,18 @@ namespace FormsLoyalty.ViewModels
                 });
             }
 
+            #region Item Tab
 
+            drawerMenuItems.Add(new DrawerMenuItem()
+            {
+                ActivityType = AppConstValues.Items,
+                IsVisible = true,
+                Image = "items",
+                IsLoading = false,
+                Title = AppResources.ResourceManager.GetString("ActionbarItems", AppResources.Culture),
+            });
+
+            #endregion
 
             #region Search tab
             drawerMenus.Add(new DrawerMenuItem()
@@ -251,21 +262,17 @@ namespace FormsLoyalty.ViewModels
 
             #region Coupons Tab
 
-            //if (EnabledItems.HasCoupons)
-            //{
-            //    string couponCount = GetCouponsCount();
-
-            //    drawerMenus.Add(new SecondaryTextDrawerMenuItem()
-            //    {
-            //        ActivityType = AppConstValues.Coupons,
-            //        IsVisible = true,
-            //        Image = FontAwesomeIcons.Gift,
-            //        IsFontImage = true,
-            //        IsLoading = false,
-            //        Title = AppResources.ResourceManager.GetString("ActionbarCoupons", AppResources.Culture),
-            //        SubTitle = couponCount
-            //    });
-            //}
+                drawerMenus.Add(new SecondaryTextDrawerMenuItem()
+                {
+                    ActivityType = AppConstValues.Coupons,
+                    IsVisible = true,
+                    Image = FontAwesomeIcons.Gift,
+                    IsFontImage = true,
+                    IsLoading = false,
+                    Title = AppResources.ResourceManager.GetString("ActionbarCoupons", AppResources.Culture),
+                    SubTitle = GetCouponsCount()
+                });
+          
             #endregion
 
             #region Magazine Tab
@@ -280,7 +287,16 @@ namespace FormsLoyalty.ViewModels
             });
             #endregion
 
-           
+            #region Reminder Tab
+            drawerMenuItems.Add(new DrawerMenuItem()
+            {
+                ActivityType = AppConstValues.Reminder,
+                IsVisible = true,
+                Image = "reminder",
+                IsLoading = false,
+                Title = AppResources.ResourceManager.GetString("ActionbarReminders", AppResources.Culture),
+            });
+            #endregion
 
             #region Wishlist Tab
 

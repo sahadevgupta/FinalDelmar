@@ -15,7 +15,7 @@ using Android.Widget;
 using AndroidApp = Android.App.Application;
 namespace FormsLoyalty.Droid
 {
-    [BroadcastReceiver(Enabled = true,Name = "com.LinkedGates.LinkedCommerce.AlarmReceiver", Label = "Local Notifications Broadcast Receiver")]
+    [BroadcastReceiver(Enabled = true,Name = "com.LinkedGates.LinkedCommerce.AlarmReceiver", Label = "Local Notifications Broadcast Receiver", Exported =false)]
     [IntentFilter(new[] { Intent.ActionBootCompleted })]
     public class AlarmReceiver : BroadcastReceiver
     {

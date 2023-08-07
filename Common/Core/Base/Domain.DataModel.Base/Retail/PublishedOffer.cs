@@ -57,6 +57,10 @@ namespace LSRetail.Omni.Domain.DataModel.Base.Retail
         [DataMember]
         public string OfferId { get; set; }
         [DataMember]
+        public string ArabicDescription { get; set; }
+        [DataMember]
+        public string ArabicText { get; set; }
+        [DataMember]
         public string Description { get; set; }
         [DataMember]
         public string Details { get; set; }
