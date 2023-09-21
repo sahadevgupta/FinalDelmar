@@ -81,11 +81,12 @@ namespace FormsLoyalty
 
         protected override void OnInitialized()
         {
+            LoadStyles();
             InitializeComponent();
             navigationService = NavigationService;
             
             XF.Material.Forms.Material.Init(this);
-            LoadStyles();
+            
             Init();
 
             

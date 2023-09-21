@@ -74,6 +74,36 @@
         <Setter Property="TextColor"       Value = "White"    />
     </Style>
 
+    <!--#region [ Button Styles ] -->
+
+    <Style x:Key="ButtonBorderStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{DynamicResource Primary}" />
+        <Setter Property="BorderColor" Value="{DynamicResource Primary}" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="FontSize" Value="Body" />
+        <Setter Property="BorderWidth" Value="1" />
+    </Style>
+
+    <Style x:Key="BorderlessButtonStyle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{DynamicResource Primary}" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="FontSize" Value="Body" />
+    </Style>
+
+
+    <Style x:Key="ButtonFillStyle" TargetType="Button">
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="FontSize" Value="Body" />
+        <Setter Property="BackgroundColor" Value="{DynamicResource Primary}" />
+        <Setter Property="TextColor" Value="White" />
+        <Setter Property="BorderColor" Value="{DynamicResource Primary}" />
+        <Setter Property="BorderWidth" Value="1" />
+    </Style>
+
+    <!--#endregion-->
+    
     <ControlTemplate x:Key="ThemeRadioTemplate">
         <Frame
                     Padding="0"

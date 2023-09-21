@@ -111,13 +111,14 @@
                     </Label>
 
                     <Label Margin="10"
+                           IsVisible="true"
                    TextColor="Black"
                    FontSize="Body"
                    >
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="Expires: "/>
-                            <Span Text="{Binding selectedOffer.ExpirationDate,Mode=OneWay}"/>
+                            <Span Text="{Binding selectedOffer.ExpirationDate,StringFormat='{0:dd/MM/yyyy}',Mode=OneWay}"/>
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

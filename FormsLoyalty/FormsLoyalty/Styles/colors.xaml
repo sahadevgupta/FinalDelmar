@@ -7,7 +7,9 @@
              mc:Ignorable="d"
              x:Class="FormsLoyalty.Styles.colors">
 
-    <Color x:Key="PrimaryColor">#b72228</Color>
+    <Color x:Key="Primary">#b72228</Color>
+    <Color x:Key="My_Header_Color">#b72228</Color>
+    <Color x:Key="My_Button_Color">#b72228</Color>
     <Color x:Key="SecondaryColor">#a61f23</Color>
     <Color x:Key="CyanAccent">#2DBECD</Color>
     <Color x:Key="VibrantCyan050">#DDFCFF</Color>
@@ -25,9 +27,9 @@
     <Color x:Key="Neutal010">#F8F8FC</Color>
     <Color x:Key="RichGreen">#01884C</Color>
     <Color x:Key="RichBlack">#1B1B25</Color>
-  
 
-  
+
+
 
 
 </ResourceDictionary>

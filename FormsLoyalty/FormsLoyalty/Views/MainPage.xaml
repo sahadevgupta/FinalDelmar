@@ -834,11 +834,33 @@
                     <!--#region OFFER VIEW-->
                     <StackLayout Grid.Row="3" Padding="10">
 
-                        <Label TextColor="Black"
-                               Text="{x:Static resources:AppResources.ActionbarOffers}"
-                               FontSize="Subtitle"
-                               CharacterSpacing="2"
-                               FontAttributes="Bold" />
+                        <StackLayout.Triggers>
+                            <DataTrigger TargetType="StackLayout" Binding="{Binding offers.Count}"
+                                     Value="0">
+                                <Setter Property="IsVisible" Value="false"/>
+                            </DataTrigger>
+                        </StackLayout.Triggers>
+
+                        <Grid>
+                            <Label TextColor="Black"
+                                   Text="{x:Static resources:AppResources.ActionbarOffers}"
+                                   FontSize="Subtitle"
+                                   CharacterSpacing="2"
+                                   FontAttributes="Bold" />
+
+                            <Label Text="{x:Static resources:AppResources.View_All}"
+                                   TextDecorations="Underline"
+                                   HorizontalOptions="End"
+                                   Margin="10,0,10,0"
+                                   xct:TouchEffect.Command="{Binding ViewAllOfferCommand}"
+                                   Style="{StaticResource TitleStyle}"
+                                   TextColor="{StaticResource Primary}"
+                                   FontAttributes="Bold"
+                                   FontSize="Medium"/>
+
+                        </Grid>
+                        
+                        
 
                         <!--<Label.Triggers>
                                 <MultiTrigger TargetType="Label">

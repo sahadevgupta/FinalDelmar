@@ -38,7 +38,7 @@ namespace FormsLoyalty.ViewModels
         #region Command
         public DelegateCommand ShowPreviewCommand => new DelegateCommand(async () =>
         {
-            if (string.IsNullOrEmpty(selectedOffer.Images[0].Image) || selectedOffer.Images[0].Image.ToLower().Contains("noimage".ToLower()))
+            if (!selectedOffer.Images.Any() && (string.IsNullOrEmpty(selectedOffer.Images[0].Image) || selectedOffer.Images[0].Image.ToLower().Contains("noimage".ToLower())))
                 return;
 
             await NavigationService.NavigateAsync(nameof(ImagePreviewPage), new NavigationParameters { { "previewImage", selectedOffer.Images[0].Image }, { "images", selectedOffer.Images } });

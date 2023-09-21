@@ -164,6 +164,8 @@ namespace FormsLoyalty.ViewModels
         #region Commands
         public DelegateCommand<Advertisement> OnAdTappedCommand { get; set; }
         public DelegateCommand SearchCommand { get; set; }
+        public DelegateCommand ViewAllOfferCommand { get; set; }
+
         #endregion
 
         public MainPageViewModel(INavigationService navigationService, IPageDialogService pageDialogService) : base(navigationService)
@@ -179,13 +181,21 @@ namespace FormsLoyalty.ViewModels
 
             IsActiveChanged += HandleIsActiveTrue;
 
-            
-
+            ViewAllOfferCommand = new DelegateCommand(async () => await ExecuteViewAllOfferCommandAsync());
             OnAdTappedCommand = new DelegateCommand<Advertisement>(async(data) => await OnAdSelected(data));
             SearchCommand = new DelegateCommand(async() => await ExecuteSearchCommandAsync());
 
             MessagingCenter.Subscribe<LoyItem>(this, "WhistlistChange",UpdateWishlist);
 
+        }
+
+        private async Task ExecuteViewAllOfferCommandAsync()
+        {
+            IsPageEnabled = true;
+
+            await NavigationService.NavigateAsync(nameof(OffersPage));
+
+            IsPageEnabled = false;
         }
 
         private void UpdateWishlist(LoyItem obj)
