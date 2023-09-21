@@ -11,6 +11,7 @@
              xmlns:resources="clr-namespace:FormsLoyalty"
              xmlns:fontresources="clr-namespace:FormsLoyalty.Resources"
              xmlns:controls1="clr-namespace:FormsLoyalty.Controls"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              x:Name="offerPage"
              Padding="10"
              BackgroundColor="#f2f2ef"
@@ -54,14 +55,27 @@
                             <Label Text="{Binding Description}" FontSize="Body" TextColor="Black" 
                                Grid.Row="0"
                                Grid.Column="1"
-                               VerticalTextAlignment="Center"/>
+                               VerticalTextAlignment="Center">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" 
+                                                                                 Value="True">
+                                        <Setter Property="Text" Value="{Binding ArabicDescription}"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
 
                             <Label Grid.Row="1"  Text="{Binding Details}" 
                                Grid.Column="1"
                                LineBreakMode="TailTruncation"
                                        TextColor="Silver"
-                                       FontSize="Caption"
-                                       />
+                                       FontSize="Caption">
+                                <Label.Triggers>
+                                    <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" 
+                                                                                 Value="True">
+                                        <Setter Property="Text" Value="{Binding ArabicText}"/>
+                                    </DataTrigger>
+                                </Label.Triggers>
+                            </Label>
 
 
                             <Button    VerticalOptions="Start" Grid.Row="0"

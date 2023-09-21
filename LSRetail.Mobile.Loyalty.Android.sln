@@ -11,17 +11,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure.Data.SQLite", "Source\Infrastructure.Linked\Infrastructure.Data.SQLite\Infrastructure.Data.SQLite.csproj", "{748DD107-0F44-469F-8904-59E83A846E5A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.DataModel.Base", "..\..\Common\Core\Base\Domain.DataModel.Base\Domain.DataModel.Base.csproj", "{7BCAC03E-3B65-4CF4-9EBB-4EF353276D1C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.DataModel.Base", "Common\Core\Base\Domain.DataModel.Base\Domain.DataModel.Base.csproj", "{7BCAC03E-3B65-4CF4-9EBB-4EF353276D1C}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Services.Base", "..\..\Common\Core\Base\Domain.Services.Base\Domain.Services.Base.csproj", "{9C38D897-021B-4743-92E4-AE9C0252D17F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Services.Base", "Common\Core\Base\Domain.Services.Base\Domain.Services.Base.csproj", "{9C38D897-021B-4743-92E4-AE9C0252D17F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.DataModel.Loyalty", "..\..\Common\Core\Loyalty\Domain.DataModel.Loyalty\Domain.DataModel.Loyalty.csproj", "{36A6FDFB-59D3-4618-92DD-0DEB8B6AB501}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.DataModel.Loyalty", "Common\Core\Loyalty\Domain.DataModel.Loyalty\Domain.DataModel.Loyalty.csproj", "{36A6FDFB-59D3-4618-92DD-0DEB8B6AB501}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Services.Loyalty", "..\..\Common\Core\Loyalty\Domain.Services.Loyalty\Domain.Services.Loyalty.csproj", "{1BE9DD18-AFAF-4F25-A62D-E6BF109C180F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Services.Loyalty", "Common\Core\Loyalty\Domain.Services.Loyalty\Domain.Services.Loyalty.csproj", "{1BE9DD18-AFAF-4F25-A62D-E6BF109C180F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data.Omniservice.Loyalty", "..\..\Common\Core\Loyalty\Infrastructure.Data.Omniservice.Loyalty\Infrastructure.Data.Omniservice.Loyalty.csproj", "{D007C2F6-6B6B-40A7-AF96-1AE94BCC0598}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data.Omniservice.Loyalty", "Common\Core\Loyalty\Infrastructure.Data.Omniservice.Loyalty\Infrastructure.Data.Omniservice.Loyalty.csproj", "{D007C2F6-6B6B-40A7-AF96-1AE94BCC0598}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data.Omniservice", "..\..\Common\Core\Base\Infrastructure.Data.Omniservice\Infrastructure.Data.Omniservice.csproj", "{8DD497E3-7563-41C0-8543-0163F5702591}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure.Data.Omniservice", "Common\Core\Base\Infrastructure.Data.Omniservice\Infrastructure.Data.Omniservice.csproj", "{8DD497E3-7563-41C0-8543-0163F5702591}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FormsLoyalty", "FormsLoyalty\FormsLoyalty\FormsLoyalty.csproj", "{A1AD8F6A-45F0-428E-80FA-C0E39103E672}"
 EndProject

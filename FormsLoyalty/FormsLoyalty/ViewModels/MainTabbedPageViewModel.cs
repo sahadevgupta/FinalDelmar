@@ -79,11 +79,7 @@ namespace FormsLoyalty.ViewModels
             MessagingCenter.Subscribe<BasketModel>(this, "CartUpdated", CheckCartCount);
             MessagingCenter.Subscribe<App>((App)Xamarin.Forms.Application.Current, "LoggedIn", ReloadView);
 
-
-            
             DependencyService.Get<INotify>().ChangeTabBarFlowDirection(RTL);
-            
-
         }
 
         private void ReloadView(App obj)
@@ -141,7 +137,7 @@ namespace FormsLoyalty.ViewModels
                     Task.Run(async () =>
                     {
 
-                        if (AppData.IsLoggedIn)
+                        if (AppData.IsLoggedIn && !string.IsNullOrEmpty(AppData.Device.CardId))
                         {
                             var memberContactModel = new MemberContactModel();
                             await memberContactModel.UserGetByCardId(AppData.Device.CardId);

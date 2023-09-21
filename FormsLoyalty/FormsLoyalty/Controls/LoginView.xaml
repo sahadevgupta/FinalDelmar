@@ -25,7 +25,7 @@
     </ContentView.Resources>
 
     <ContentView.Content>
-        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" RowSpacing="10">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto">
             <Image Source="imgmPIN" Grid.Row="1"/>
 
 

@@ -42,6 +42,13 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _advertisements, value); }
         }
 
+        private ObservableCollection<DashboardGroup> _dashboardGroups = new ObservableCollection<DashboardGroup>();
+        public ObservableCollection<DashboardGroup> DashboardGroups
+        {
+            get { return _dashboardGroups; }
+            set { SetProperty(ref _dashboardGroups, value); }
+        }
+
         private ObservableCollection<ItemCategory> _itemCategories;
         public ObservableCollection<ItemCategory> itemCategories
         {
@@ -168,7 +175,7 @@ namespace FormsLoyalty.ViewModels
             App.dialogService = pageDialogService;
             itemModel = new ItemModel();
 
-            //LoadPoints();
+            LoadPoints();
 
             IsActiveChanged += HandleIsActiveTrue;
 
@@ -273,19 +280,12 @@ namespace FormsLoyalty.ViewModels
             if (IsActive)
             {
 
+                LoadPoints();
 
                 if (!IsInitialized)
                 {
                     IsInitialized = true;
                     LoadData();
-                }
-                else
-                {
-                    Task.Run(async() =>
-                    {
-                        await LoadBestSellerItemsAsync();
-                    });
-                   
                 }
                 
 
@@ -929,46 +929,40 @@ namespace FormsLoyalty.ViewModels
         /// </summary>
         private async Task LoadCategoriesAsync(int retryCounter = 3)
         {
-
             if (AppData.ItemCategories == null || AppData.ItemCategories?.Count == 0)
             {
-               
-                    if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+                {
+                    try
                     {
-                        try
+
+                        var cat = await itemModel.GetItemCategories();
+                        if (cat?.Count > 0)
                         {
-                            
-                            var cat = await itemModel.GetItemCategories();
-                            if (cat?.Count > 0)
-                            {
-                                itemCategories = new ObservableCollection<ItemCategory>(cat);
+                            itemCategories = new ObservableCollection<ItemCategory>(cat);
 
-                                retryCounter = 0;
-                            }
-                            else
-                                itemCategories = new ObservableCollection<ItemCategory>();
-
+                            retryCounter = 0;
                         }
-                        catch (Exception ex)
-                        {
-                            Crashes.TrackError(ex);
-                            if (retryCounter == 0)
-                            {
-                                DependencyService.Get<INotify>().ShowToast(ex.Message);
+                        else
+                            itemCategories = new ObservableCollection<ItemCategory>();
 
-                            }
-                            else
-                               await LoadCategoriesAsync(--retryCounter);
-
-                        }
                     }
-               
+                    catch (Exception ex)
+                    {
+                        Crashes.TrackError(ex);
+                        if (retryCounter == 0)
+                        {
+                            DependencyService.Get<INotify>().ShowToast(ex.Message);
+
+                        }
+                        else
+                            await LoadCategoriesAsync(--retryCounter);
+
+                    }
+                }
             }
             else
-            {
-                itemCategories = new ObservableCollection<ItemCategory>(AppData.ItemCategories);
-            }
-                
+              itemCategories = new ObservableCollection<ItemCategory>(AppData.ItemCategories);
         }
 
         internal async Task NavigateToItemCategory(ItemCategory itemCategory)

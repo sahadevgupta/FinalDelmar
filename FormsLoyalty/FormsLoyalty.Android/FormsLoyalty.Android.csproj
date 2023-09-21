@@ -12,7 +12,7 @@
     <RootNamespace>FormsLoyalty.Droid</RootNamespace>
     <AssemblyName>FormsLoyalty.Android</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v10.0</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v12.0</TargetFrameworkVersion>
     <AndroidApplication>True</AndroidApplication>
     <AndroidUseIntermediateDesignerFile>true</AndroidUseIntermediateDesignerFile>
     <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
@@ -79,9 +79,7 @@
     <AndroidExplicitCrunch>true</AndroidExplicitCrunch>
     <AndroidHttpClientHandlerType>Xamarin.Android.Net.AndroidClientHandler</AndroidHttpClientHandlerType>
     <AndroidTlsProvider>btls</AndroidTlsProvider>
-    <AndroidPackageFormat>aab</AndroidPackageFormat>
-    <AndroidSupportedAbis>
-    </AndroidSupportedAbis>
+    <AndroidPackageFormat>apk</AndroidPackageFormat>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <MandroidI18n />
     <AndroidKeyStore>true</AndroidKeyStore>

@@ -5,6 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="FormsLoyalty.Views.OfferDetailsPage"
              xmlns:converters="clr-namespace:FormsLoyalty.Converters"
+             xmlns:helpers="clr-namespace:FormsLoyalty.Helpers"
              xmlns:resources="clr-namespace:FormsLoyalty"
              x:Name="offerDetailsPage"
              BackgroundColor="WhiteSmoke"
@@ -94,17 +95,22 @@
 
 
 
-           
-            <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
 
+                <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
+                    
+                    <Label Margin="10"
+                           FontSize="Title"
+                           TextColor="{StaticResource My_Header_Color}"
+                           Text="{Binding selectedOffer.Description}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" 
+                                                                                 Value="True">
+                                <Setter Property="Text" Value="{Binding selectedOffer.ArabicDescription}"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
 
-
-                <Label Margin="10"
-                   FontSize="Title"
-                   TextColor="{StaticResource My_Header_Color}"
-                   Text="{Binding selectedOffer.Description}"/>
-
-                <Label Margin="10"
+                    <Label Margin="10"
                    TextColor="Black"
                    FontSize="Body"
                    >
@@ -116,10 +122,17 @@
                     </Label.FormattedText>
                 </Label>
 
-                <Label Margin="10"
+                    <Label Margin="10"
                    FontSize="Body"
                    TextColor="Black"
-                   Text="{Binding selectedOffer.Details}"/>
+                   Text="{Binding selectedOffer.Details}">
+                        <Label.Triggers>
+                            <DataTrigger TargetType="Label" Binding="{Binding Source={x:Static helpers:Settings.RTL}}" 
+                                                                                 Value="True">
+                                <Setter Property="Text" Value="{Binding selectedOffer.ArabicText}"/>
+                            </DataTrigger>
+                        </Label.Triggers>
+                    </Label>
 
                     <Label Margin="10,20,10,0"
                        TextColor="Black"

@@ -7,8 +7,7 @@
              mc:Ignorable="d"
              x:Class="FormsLoyalty.Styles.colors">
 
-    <Color x:Key="My_Header_Color">#b72228</Color>
-    <Color x:Key="My_Button_Color">#b72228</Color>
+    <Color x:Key="PrimaryColor">#b72228</Color>
     <Color x:Key="SecondaryColor">#a61f23</Color>
     <Color x:Key="CyanAccent">#2DBECD</Color>
     <Color x:Key="VibrantCyan050">#DDFCFF</Color>

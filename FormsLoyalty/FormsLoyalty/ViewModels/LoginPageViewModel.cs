@@ -189,10 +189,8 @@ namespace FormsLoyalty.ViewModels
             if (obj.Equals("Facebook"))
             {
                 isFbLogin = true;
-
-                //await FBLoginAsync();
-
-                await LoginFacebookAsync();
+                
+                await FBLoginAsync();
             }
             else
             {
@@ -201,7 +199,7 @@ namespace FormsLoyalty.ViewModels
             }
                
 
-            
+            IsPageEnabled = false;
         }
 
         private async Task LoginGoogleAsync()
@@ -252,53 +250,6 @@ namespace FormsLoyalty.ViewModels
             catch (Exception ex)
             {
                 Crashes.TrackError(ex);
-                Debug.WriteLine(ex.ToString());
-            }
-        }
-
-
-        private async Task LoginFacebookAsync()
-        {
-            try
-            {
-
-                if (_facebookService.IsLoggedIn)
-                {
-                    _facebookService.Logout();
-                }
-
-                EventHandler<FBEventArgs<string>> userDataDelegate = null;
-
-                userDataDelegate = async (object sender, FBEventArgs<string> e) =>
-                {
-                    switch (e.Status)
-                    {
-                        case FacebookActionStatus.Completed:
-                            fbProfile = await Task.Run(() => JsonConvert.DeserializeObject<FacebookProfile>(e.Data));
-                            await FacebookLogon();
-                            break;
-                        case FacebookActionStatus.Canceled:
-                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Canceled", "Ok");
-                            break;
-                        case FacebookActionStatus.Error:
-                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Error", "Ok");
-                            break;
-                        case FacebookActionStatus.Unauthorized:
-                            await App.Current.MainPage.DisplayAlert("Facebook Auth", "Unauthorized", "Ok");
-                            break;
-                    }
-
-                    _facebookService.OnUserData -= userDataDelegate;
-                };
-
-                _facebookService.OnUserData += userDataDelegate;
-
-                string[] fbRequestFields = { "email", "first_name", "picture", "gender", "last_name" };
-                string[] fbPermisions = { "email" };
-                await _facebookService.RequestUserDataAsync(fbRequestFields, fbPermisions);
-            }
-            catch (Exception ex)
-            {
                 Debug.WriteLine(ex.ToString());
             }
         }
@@ -389,9 +340,6 @@ namespace FormsLoyalty.ViewModels
         private async Task GoToMainScreen()
         {
             IsPageEnabled = true;
-
-            AppData.IsLoggedIn = true;
-
             SendFCMTokenToServer();
             if (FromItemPage)
             {
@@ -400,14 +348,7 @@ namespace FormsLoyalty.ViewModels
                await NavigationService.GoBackAsync();
             }
             else
-            {
-
-                MessagingCenter.Send(new BasketModel(), "CartUpdated");
-                Device.BeginInvokeOnMainThread(async () =>
-                {
-                    await NavigationService.NavigateAsync("../",animated:false);
-                });
-            }
+              await NavigationService.NavigateAsync("app:///MainTabbedPage?selectedTab=MainPage");
             IsPageEnabled = false;
         }
         /// <summary>

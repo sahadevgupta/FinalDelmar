@@ -68,8 +68,6 @@ namespace FormsLoyalty.ViewModels
             var publishedOffers = AppData.Device.UserLoggedOnToDevice.PublishedOffers.Where(x => x.Code == OfferDiscountType.Coupon);
             Coupons = new ObservableCollection<PublishedOffer>(publishedOffers);
 
-           
-
             var coupons = await new CommonModel().GetDelmarCouponAsync(AppData.Device.UserLoggedOnToDevice.Account.Id);
             DelmarCoupons = new ObservableCollection<DelmarCoupons>(coupons);
 

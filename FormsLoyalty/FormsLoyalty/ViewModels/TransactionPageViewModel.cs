@@ -65,9 +65,7 @@ namespace FormsLoyalty.ViewModels
 
                 order.OrderDate = order.DocumentRegTime.ToLocalTime();
                 transactions.Add(order);
-            }
-
-            
+            }  
         }
 
         private void LoadData()
