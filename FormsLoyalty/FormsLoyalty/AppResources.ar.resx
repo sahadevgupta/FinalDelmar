@@ -1717,4 +1717,13 @@
   <data name="View_All" xml:space="preserve">
     <value>عرض الكل</value>
   </data>
+  <data name="Order_Remark" xml:space="preserve">
+    <value>ملاحظات علي الطلب</value>
+  </data>
+  <data name="Order_Remark_Placeholder" xml:space="preserve">
+    <value>اكتب ملاحظاتك</value>
+  </data>
+  <data name="AccountTab" xml:space="preserve">
+    <value>حساب</value>
+  </data>
 </root>

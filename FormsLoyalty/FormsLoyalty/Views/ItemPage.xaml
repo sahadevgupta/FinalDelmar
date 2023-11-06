@@ -32,7 +32,7 @@
         <ToolbarItem IconImageSource="ic_action_stock" Order="Primary" Command="{Binding StockCommand}"/>
         <ToolbarItem IconImageSource="ic_action_navigation_more_vert" Order="Primary" Priority="1" Clicked="moreOption_Clicked"/>
     </ContentPage.ToolbarItems>-->
-    
+
 
     <AbsoluteLayout>
 
@@ -73,7 +73,7 @@
                                         <TapGestureRecognizer Command="{Binding BindingContext.ShowPreviewCommand,Source={x:Reference carousel}}"
                                                               CommandParameter="{Binding .}"/>
                                     </StackLayout.GestureRecognizers>
-                                    
+
                                     <Frame Visual="Material" Padding="1">
 
                                         <controls:CustomImageControl ImageHeight="300"  UriImageSource="{Binding Location}"/>
@@ -112,11 +112,11 @@
                     <Grid.GestureRecognizers>
                         <TapGestureRecognizer Tapped="wishlist_Tapped"/>
                     </Grid.GestureRecognizers>
-                    
+
                 </Grid>
 
 
-            
+
                 <Label Margin="20,20,20,0"
                    Grid.Row="1" Grid.ColumnSpan="2"
                    FontSize="Title"
@@ -134,9 +134,9 @@
                                 <Setter Property="IsVisible" Value="False"/>
                             </DataTrigger>
                         </StackLayout.Triggers>-->
-                      
 
-                    <StackLayout IsVisible="{OnPlatform iOS=true, Android=false}" VerticalOptions="Center" Grid.Row="2" 
+
+                        <StackLayout IsVisible="{OnPlatform iOS=true, Android=false}" VerticalOptions="Center" Grid.Row="2" 
                                                  Orientation="Horizontal"
                                                  Margin="10,0,10,0">
                             <Label Text="{Binding Item.NewPrice,StringFormat='EGP {0} '}" FontSize="16" FontAttributes="Bold" />
@@ -144,42 +144,42 @@
                             <Label Text="{Binding Item.Discount,StringFormat=' ({0:F2} % Off)',Mode=OneWay}" FontSize="16" TextDecorations="Strikethrough" />
                             <StackLayout.Triggers>
                                 <DataTrigger TargetType="StackLayout" Binding="{Binding Item.Discount}" Value="0">
-                                <Setter Property="IsVisible" Value="false"/>
-                            </DataTrigger>
-                        </StackLayout.Triggers>
+                                    <Setter Property="IsVisible" Value="false"/>
+                                </DataTrigger>
+                            </StackLayout.Triggers>
 
-                    </StackLayout>
+                        </StackLayout>
 
 
-                    <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0" IsVisible="{OnPlatform iOS=false, Android=true}">
+                        <Label VerticalOptions="Center" Grid.Row="2" Margin="10,0,10,0" IsVisible="{OnPlatform iOS=false, Android=true}">
 
-                        <Label.FormattedText>
-                            <FormattedString>
+                            <Label.FormattedText>
+                                <FormattedString>
                                     <Span Text="{Binding Item.NewPrice,StringFormat='EGP {0}'}" FontSize="16" FontAttributes="Bold" />
-                                <Span Text="  " FontSize="16" FontAttributes="Bold" />
+                                    <Span Text="  " FontSize="16" FontAttributes="Bold" />
                                     <Span Text="{Binding Item.ItemPrice,StringFormat='EGP {0}'}" FontSize="12" TextDecorations="Strikethrough" />
                                     <Span Text="{Binding Item.Discount,StringFormat=' ({0:F2} % Off)',Mode=OneWay}" TextColor="Red" />
                                 </FormattedString>
-                        </Label.FormattedText>
+                            </Label.FormattedText>
 
-                        <Label.Triggers>
+                            <Label.Triggers>
                                 <DataTrigger TargetType="Label" Binding="{Binding Item.Discount}" Value="0">
-                                <Setter Property="IsVisible" Value="false"/>
-                            </DataTrigger>
-                        </Label.Triggers>
+                                    <Setter Property="IsVisible" Value="false"/>
+                                </DataTrigger>
+                            </Label.Triggers>
 
-                    </Label>
+                        </Label>
 
 
                         <Label Text="{Binding itemPrice,StringFormat='EGP {0}'}" IsVisible="false" 
                                                    Margin="10,0,10,0" 
                                                    FontSize="16" FontAttributes="Bold">
-                        <Label.Triggers>
+                            <Label.Triggers>
                                 <DataTrigger TargetType="Label" Binding="{Binding Item.Discount}" Value="0">
-                                <Setter Property="IsVisible" Value="true"/>
-                            </DataTrigger>
-                        </Label.Triggers>
-                    </Label>
+                                    <Setter Property="IsVisible" Value="true"/>
+                                </DataTrigger>
+                            </Label.Triggers>
+                        </Label>
 
 
                     </StackLayout>
@@ -192,7 +192,7 @@
                            x:Name="variant"
                    TextColor="{StaticResource My_Header_Color}"
                    Text="{Binding selectVariant}">
-                        
+
                         <Label.Triggers>
                             <DataTrigger TargetType="Label"
                                      Binding="{Binding selectVariant,Converter={StaticResource StringToBoolConverter}}"
@@ -204,7 +204,7 @@
                         <Label.GestureRecognizers>
                             <TapGestureRecognizer Tapped="variant_Tapped"/>
                         </Label.GestureRecognizers>
-                        
+
                     </Label>
 
                     <StackLayout Orientation="Horizontal" Margin="10">
@@ -261,46 +261,81 @@
                            IsVisible="{Binding RelatedItems.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"/>
 
 
+                    <StackLayout xct:StateLayout.CurrentState="{Binding RelatedOfferCurrentState}">
+                        <xct:StateLayout.StateViews>
 
-                    <CollectionView ItemsSource="{Binding RelatedItems}"
-                                    x:Name="relatedlist"
-                                    IsVisible="{Binding RelatedItems.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"
-                                HorizontalScrollBarVisibility="Never"
-                                HeightRequest="250"
-                            Margin="10,0">
+                            <xct:StateView StateKey="Loading" Margin="5,10">
+                                <xct:StateView.Template>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="150,150,150" HeightRequest="100" ColumnSpacing="10">
 
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout Orientation="Horizontal" />
-                        </CollectionView.ItemsLayout>
-
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <StackLayout WidthRequest="150" Padding="5" >
-                                    <StackLayout.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnRelatedItemTapped" CommandParameter="{Binding .}"/>
-                                    </StackLayout.GestureRecognizers>
-
-                                    <Frame Padding="0" CornerRadius="5" BorderColor="LightGray" Visual="Material">
-                                        <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding Images[0].Location}"
-                                                                     Grid.Row="0"/>
-                                        
-                                   
-                                    </Frame>
-                                    <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
-                                           MaxLines="2"
-                                   HorizontalTextAlignment="Center"/>
-                                </StackLayout>
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                                            <Frame Padding="0" CornerRadius="5" HasShadow="True" 
+                                                   Visual="Material" 
+                                                   HeightRequest="130"
+                                                   WidthRequest="150" 
+                                                   IsClippedToBounds="True">
 
 
+                                                <controls:SkeletonView StartColor="#cccccc" EndColor="Gray"
+                                                       IsLoading="True"
+                                                       HeightRequest="80" Grid.Row="0"/>
 
 
+                                            </Frame>
+
+                                            <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="1">
+                                                <controls:SkeletonView StartColor="#cccccc" EndColor="Gray"
+                                                   IsLoading="True"
+                                                   HeightRequest="80" Grid.Row="0"/>
+                                            </Frame>
+
+                                            <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="2">
+                                                <controls:SkeletonView StartColor="#cccccc" EndColor="Gray"
+                                                   IsLoading="True"
+                                                   HeightRequest="80" Grid.Row="0"/>
+                                            </Frame>
+
+                                        </Grid>
+
+                                    </DataTemplate>
+                                </xct:StateView.Template>
+                            </xct:StateView>
+                            <xct:StateView StateKey="Success">
+                                <CollectionView ItemsSource="{Binding RelatedItems}"
+                 x:Name="relatedlist"
+                 IsVisible="{Binding RelatedItems.Count,Converter={StaticResource IntToBoolConverter},FallbackValue=false,TargetNullValue=false}"
+             HorizontalScrollBarVisibility="Never"
+             HeightRequest="250"
+         Margin="10,0">
+
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" />
+                                    </CollectionView.ItemsLayout>
+
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout WidthRequest="150" Padding="5" >
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="OnRelatedItemTapped" CommandParameter="{Binding .}"/>
+                                                </StackLayout.GestureRecognizers>
+
+                                                <Frame Padding="0" CornerRadius="5" BorderColor="LightGray" Visual="Material">
+                                                    <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding Images[0].Location}"
+                                                  Grid.Row="0"/>
+
+
+                                                </Frame>
+                                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+                        MaxLines="2"
+                HorizontalTextAlignment="Center"/>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </xct:StateView>
+                        </xct:StateLayout.StateViews>
+                    </StackLayout>
                 </StackLayout>
-
-
-
             </Grid>
         </ScrollView>
 

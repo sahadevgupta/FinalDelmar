@@ -18,8 +18,7 @@
             SelectedTabColor="{StaticResource My_Header_Color}"
             FlowDirection="LeftToRight"
             NavigationPage.HasNavigationBar="False"
-            BarBackgroundColor="White"
-            >
+            BarBackgroundColor="White">
 
     <TabbedPage.Triggers>
         <DataTrigger TargetType="TabbedPage" Binding="{Binding Source={x:Static helpers:Settings.RTL}}"
@@ -32,14 +31,8 @@
 
     <TabbedPage.Children>
 
-        
-       
-        
         <!--Home Page-->
         <NavigationPage Title="{x:Static resources:AppResources.ActionbarHome}" x:Name="hometab">
-            
-            
-            
             <x:Arguments>
                 <views:MainPage />
             </x:Arguments>
@@ -57,60 +50,12 @@
 
         <NavigationPage Title="{x:Static resources:AppResources.CartTab}" x:Name="carttabios">
             <x:Arguments>
-
-
                 <views:CartPage  
                                 plugin:TabBadge.BadgeText="{Binding BadgeCount}"
                                  plugin:TabBadge.BadgeColor="{StaticResource SecondaryColor}"
                                  plugin:TabBadge.BadgeTextColor="White"/>
-
-
-
-
-
             </x:Arguments>
         </NavigationPage>
-
-        <!--<OnPlatform x:TypeArguments="NavigationPage">
-            <OnPlatform.iOS>
-                <NavigationPage Title="{x:Static resources:AppResources.CartTab}" x:Name="carttabios">
-                    <x:Arguments>
-
-
-                        <views:CartPage  
-                                plugin:TabBadge.BadgeText="{Binding BadgeCount}"
-                                 plugin:TabBadge.BadgeColor="{StaticResource SecondaryColor}"
-                                 plugin:TabBadge.BadgeTextColor="White"/>
-
-
-
-
-
-                    </x:Arguments>
-                </NavigationPage>
-            </OnPlatform.iOS>
-
-            <OnPlatform.Android>
-                <NavigationPage Title="{x:Static resources:AppResources.CartTab}" x:Name="carttab">
-                    <x:Arguments>
-
-
-                        <views:CartPage  
-                                helpers:TabBadge.BadgeText="{Binding BadgeCount}"
-                                 helpers:TabBadge.BadgeColor="{StaticResource SecondaryColor}"
-                                 helpers:TabBadge.BadgeTextColor="White"/>
-
-
-
-
-
-                    </x:Arguments>
-                </NavigationPage>
-            </OnPlatform.Android>
-
-        </OnPlatform>-->
-        
-        
 
         <!--Order Page-->
         <NavigationPage Title="{x:Static resources:AppResources.OrdersTab}" x:Name="ordertab" IconImageSource="order.png">
@@ -121,19 +66,12 @@
 
 
         <!--More Page-->
-        <NavigationPage Title="Account" x:Name="moretab" >
+        <NavigationPage Title="{x:Static resources:AppResources.AccountTab}" x:Name="moretab" >
             <x:Arguments>
                 <views:MoreInfoPage />
             </x:Arguments>
         </NavigationPage>
 
-
-        <!--<views:MainPage Title="Home" IconImageSource="camera.png" />
-        <views:ItemCategoriesPage Title="Categories" IconImageSource="camera.png"/>
-        <views:CartPage Title="Cart" IconImageSource="camera.png"/>
-        <views:TransactionPage Title="Order" IconImageSource="camera.png"/>
-        <views:ItemCategoriesPage Title="More" IconImageSource="camera.png"/>-->
     </TabbedPage.Children>
-    
     
 </TabbedPage>

@@ -21,6 +21,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.CommunityToolkit.UI.Views;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using XF.Material.Forms.UI.Dialogs;
@@ -37,8 +38,6 @@ namespace FormsLoyalty.ViewModels
         }
 
         private string _wishlistIcon = "ic_favorite_outline_24dp";
-
-        
 
         public string WishListIcon
         {
@@ -80,6 +79,13 @@ namespace FormsLoyalty.ViewModels
         {
             get { return _selectVariant; }
             set { SetProperty(ref _selectVariant, value); }
+        }
+
+        private LayoutState _relatedOfferCurrentState;
+        public LayoutState RelatedOfferCurrentState
+        {
+            get { return _relatedOfferCurrentState; }
+            set { SetProperty(ref _relatedOfferCurrentState, value); }
         }
 
         readonly ShoppingListModel shoppingListModel;
@@ -373,6 +379,8 @@ namespace FormsLoyalty.ViewModels
         {
             try
             {
+                RelatedOfferCurrentState = LayoutState.Loading;
+
                 var relatedItem = await itemModel.ItemsGetByRelatedItemIdAsync(Item.Id, 10);
                 if (relatedItem.Any(x => x.Id == Item.Id))
                 {
@@ -380,6 +388,8 @@ namespace FormsLoyalty.ViewModels
                     relatedItem.RemoveAt(index);
                 }
                 RelatedItems = new ObservableCollection<LoyItem>(relatedItem);
+
+                RelatedOfferCurrentState = LayoutState.Success;
 
             }
             catch (Exception ex)

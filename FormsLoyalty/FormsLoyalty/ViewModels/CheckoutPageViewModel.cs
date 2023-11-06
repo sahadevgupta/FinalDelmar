@@ -352,6 +352,12 @@ namespace FormsLoyalty.ViewModels
             set { SetProperty(ref _email, value); }
         }
 
+        private string _orderRemark;
+        public string OrderRemark
+        {
+            get { return _orderRemark; }
+            set { SetProperty(ref _orderRemark, value); }
+        }
 
         private string _shippingAddressDesc;
         public string ShippingAddressDesc
@@ -368,10 +374,6 @@ namespace FormsLoyalty.ViewModels
         }
 
         private Order basketOrder;
-
-
-        
-        
 
         private DelmarCoupons _selectedCoupon;
         public DelmarCoupons SelectedCoupon
@@ -392,8 +394,6 @@ namespace FormsLoyalty.ViewModels
                 
             }
         }
-
-
 
         #region Amount
 
@@ -435,12 +435,8 @@ namespace FormsLoyalty.ViewModels
         #endregion
         #endregion
 
-
-
         readonly BasketModel basketModel;
         readonly MemberContactModel memberContactModel;
-
-       
         public bool IsNewAddresAdded { get; private set; }
 
         public CheckoutPageViewModel(INavigationService navigationService): base(navigationService)
@@ -914,6 +910,7 @@ namespace FormsLoyalty.ViewModels
             IsPageEnabled = true;
             try
             {
+                basketOrder.SpecialComment = OrderRemark;
                 var success = await basketModel.SendOrder(basketOrder);
 
                 if (success)

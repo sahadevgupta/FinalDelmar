@@ -10,7 +10,8 @@
              x:Name="offerDetailsPage"
              BackgroundColor="WhiteSmoke"
              xmlns:effects="clr-namespace:FormsLoyalty.Effects" 
-             xmlns:controls="clr-namespace:FormsLoyalty.Controls">
+             xmlns:controls="clr-namespace:FormsLoyalty.Controls"
+             xmlns:xct="http://xamarin.com/schemas/2020/toolkit">
 
    
     <ContentPage.Resources>
@@ -40,7 +41,7 @@
             </Grid.RowDefinitions>
 
 
-             <controls:CustomImageControl ImageHeight="250"
+                <controls:CustomImageControl ImageHeight="250"
                                           UriImageSource="{Binding selectedOffer.Images[0].Location}"
                                           Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0">
 
@@ -49,52 +50,33 @@
                                                               />
                     </controls:CustomImageControl.GestureRecognizers>
 
-                    </controls:CustomImageControl>
-
-
-                <!--<Image Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0"
-                   Aspect="AspectFill"
-                HeightRequest="250"
-                   HorizontalOptions="FillAndExpand"
-                   Source="{Binding selectedOffer.Images[0].Location}">
-                    <Image.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding BindingContext.ShowPreviewCommand,Source={x:Reference offerDetailsPage}}"
-                                                              />
-                    </Image.GestureRecognizers>
-                </Image>-->
-
-
-
-
+                </controls:CustomImageControl>
 
                 <Grid Margin="10,0,10,0" Grid.Row="0" Grid.Column="1" HorizontalOptions="EndAndExpand" VerticalOptions="EndAndExpand"
                   TranslationY="30" IsVisible="false" >
-                <BoxView HeightRequest="60" WidthRequest="60" CornerRadius="30"
+                    <BoxView HeightRequest="60" WidthRequest="60" CornerRadius="30"
                          BackgroundColor="#303F9F"/>
-                <Image  VerticalOptions="Center" HorizontalOptions="Center" Source="ic_action_new" effects:TintImageEffect.TintColor="White"
+                    <Image  VerticalOptions="Center" HorizontalOptions="Center" Source="ic_action_new" effects:TintImageEffect.TintColor="White"
                        HeightRequest="40">
-                    <Image.Triggers>
-                        <DataTrigger TargetType="Image" Binding="{Binding selectedOffer.Selected}" Value="true">
-                            <Setter Property="Source" Value="ic_action_remove"/>
+                        <Image.Triggers>
+                            <DataTrigger TargetType="Image" Binding="{Binding selectedOffer.Selected}" Value="true">
+                                <Setter Property="Source" Value="ic_action_remove"/>
+                            </DataTrigger>
+
+                        </Image.Triggers>
+                    </Image>
+
+                    <Grid.Triggers>
+                        <DataTrigger TargetType="Grid" Binding="{Binding selectedOffer.Type}" Value="PointOffer">
+                            <Setter Property="IsVisible" Value="True"/>
                         </DataTrigger>
-                        
-                    </Image.Triggers>
-                </Image>
+                    </Grid.Triggers>
 
-                <Grid.Triggers>
-                    <DataTrigger TargetType="Grid" Binding="{Binding selectedOffer.Type}" Value="PointOffer">
-                        <Setter Property="IsVisible" Value="True"/>
-                    </DataTrigger>
-                </Grid.Triggers>
+                    <Grid.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="Button_Clicked"/>
+                    </Grid.GestureRecognizers>
 
-                <Grid.GestureRecognizers>
-                    <TapGestureRecognizer Tapped="Button_Clicked"/>
-                </Grid.GestureRecognizers>
-
-            </Grid>
-
-
-
+                </Grid>
 
                 <StackLayout Grid.Row="1" Grid.ColumnSpan="2">
                     
@@ -148,45 +130,87 @@
                             </DataTrigger>
                         </Label.Triggers>
                     </Label>
-                    <CollectionView ItemsSource="{Binding relatedItems}"
+
+                    <StackLayout xct:StateLayout.CurrentState="{Binding RelatedOfferCurrentState}">
+                        <xct:StateLayout.StateViews>
+
+                            <xct:StateView StateKey="Loading" Margin="5,10">
+                                <xct:StateView.Template>
+                                    <DataTemplate>
+                                        <Grid ColumnDefinitions="150,150,150" HeightRequest="100" ColumnSpacing="10">
+
+                                            <Frame Padding="0" CornerRadius="5" HasShadow="True" 
+                                                   Visual="Material" 
+                                                   HeightRequest="130"
+                                                   WidthRequest="150" 
+                                                   IsClippedToBounds="True">
+
+
+                                                <controls:SkeletonView StartColor="#cccccc" EndColor="Gray"
+                                                                           IsLoading="True"
+                                                                           HeightRequest="80" Grid.Row="0"/>
+
+
+                                            </Frame>
+
+                                            <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="1">
+                                                <controls:SkeletonView StartColor="#cccccc" EndColor="Gray"
+                                                                       IsLoading="True"
+                                                                       HeightRequest="80" Grid.Row="0"/>
+                                            </Frame>
+
+                                            <Frame Padding="0" CornerRadius="5" HasShadow="True" Visual="Material" HeightRequest="130" WidthRequest="150" IsClippedToBounds="True" Grid.Column="2">
+                                                <controls:SkeletonView StartColor="#cccccc" EndColor="Gray"
+                                                                       IsLoading="True"
+                                                                       HeightRequest="80" Grid.Row="0"/>
+                                            </Frame>
+
+                                        </Grid>
+
+                                    </DataTemplate>
+                                </xct:StateView.Template>
+                            </xct:StateView>
+                            <xct:StateView StateKey="Success">
+                                <CollectionView ItemsSource="{Binding relatedItems}"
                                 SelectionMode="Single"
                                 HeightRequest="250"
                             Margin="10,0">
 
-                        <CollectionView.Triggers>
-                            <DataTrigger TargetType="CollectionView" Binding="{Binding relatedItems.Count}" Value="0">
-                                <Setter Property="IsVisible" Value="false"/>
-                            </DataTrigger>
-                        </CollectionView.Triggers>
+                                    <CollectionView.Triggers>
+                                        <DataTrigger TargetType="CollectionView" Binding="{Binding relatedItems.Count}" Value="0">
+                                            <Setter Property="IsVisible" Value="false"/>
+                                        </DataTrigger>
+                                    </CollectionView.Triggers>
 
-                        <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Horizontal" 
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Horizontal" 
                                            ItemSpacing="5"/>
-                    </CollectionView.ItemsLayout>
+                                    </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout WidthRequest="150" Padding="5" >
-
-                                
-
-                                <StackLayout.GestureRecognizers>
-                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
-                                </StackLayout.GestureRecognizers>
-
-                                    <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding Images[0].Location}"/>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackLayout WidthRequest="150" Padding="5" >
 
 
-                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
+
+                                                <StackLayout.GestureRecognizers>
+                                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" CommandParameter="{Binding .}"/>
+                                                </StackLayout.GestureRecognizers>
+
+                                                <controls:CustomImageControl ImageHeight="200"  UriImageSource="{Binding Images[0].Location}"/>
+
+
+                                                <Label Text="{Binding Description}" LineBreakMode="TailTruncation"
                                    VerticalTextAlignment="Center"/>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </xct:StateView>
+                        </xct:StateLayout.StateViews>
+                    </StackLayout>
 
-            </StackLayout>
-
-
+                </StackLayout>
 
         </Grid>
         </ScrollView>

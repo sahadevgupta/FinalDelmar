@@ -286,8 +286,6 @@
                         <controls1:ContentPageTitleView StepperContentPageTitle="{x:Static resources:AppResources.ActionbarItems}"
                                        Margin="10,0"/>
 
-                       
-
                         <StackLayout BindableLayout.ItemsSource="{Binding basketItems}">
                             <BindableLayout.ItemTemplate>
                                 <DataTemplate>
@@ -347,9 +345,6 @@
                             </BindableLayout.ItemTemplate>
                         </StackLayout>
 
-
-
-
                         <StackLayout x:Name="emailStack" IsVisible="False">
                             <StackLayout.Triggers>
                                 <DataTrigger TargetType="StackLayout"
@@ -370,9 +365,7 @@
 
                         </StackLayout>
 
-
                         <StackLayout Margin="0,10,0,0">
-
                             <StackLayout.Triggers>
                                 <DataTrigger TargetType="StackLayout" Binding="{Binding Source={x:Reference emailStack}, Path= IsVisible}"
                                      Value="true">
@@ -426,8 +419,27 @@
 
                         </StackLayout>
 
-
                         <StackLayout>
+
+                            <Label Text="{x:Static resources:AppResources.Order_Remark}"
+                                   TextColor="Black"
+                                   Padding="10,5,10,5"
+                                   BackgroundColor="#dedede"
+                                   FontSize="Body"/>
+
+                            <Frame Padding="10" Visual="Material"
+                                   CornerRadius="0"
+                                   BorderColor="#CACED1">
+                                <Editor Placeholder="{x:Static resources:AppResources.Order_Remark_Placeholder}"
+                                        Visual="Default"
+                                        Text="{Binding OrderRemark}"
+                                        BackgroundColor="Transparent"
+                                        HeightRequest="65"
+                                        PlaceholderColor="Gray"/>
+                            </Frame>
+                            
+                            
+
 
                             <Label Text="{x:Static resources:AppResources.ActionbarCoupon}"
             TextColor="Black"

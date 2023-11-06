@@ -295,6 +295,15 @@ namespace FormsLoyalty {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        public static string AccountTab {
+            get {
+                return ResourceManager.GetString("AccountTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Current level.
         /// </summary>
         public static string AccountTierViewCurrentLevel {
@@ -2911,6 +2920,24 @@ namespace FormsLoyalty {
         public static string OfferViewRemoveFromQRCode {
             get {
                 return ResourceManager.GetString("OfferViewRemoveFromQRCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remarks on order.
+        /// </summary>
+        public static string Order_Remark {
+            get {
+                return ResourceManager.GetString("Order_Remark", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to write your notes.
+        /// </summary>
+        public static string Order_Remark_Placeholder {
+            get {
+                return ResourceManager.GetString("Order_Remark_Placeholder", resourceCulture);
             }
         }
         

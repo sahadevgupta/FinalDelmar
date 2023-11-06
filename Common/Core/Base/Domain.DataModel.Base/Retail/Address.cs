@@ -177,7 +177,7 @@ namespace LSRetail.Omni.Domain.DataModel.Base.Retail
                 //    address += ", " + PostCode; 
                 
                 if (string.IsNullOrEmpty(Country) == false)
-                    address += Environment.NewLine + Country;
+                    address += ", " + Country;
 
                 return address;
             }

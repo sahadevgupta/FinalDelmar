@@ -17,6 +17,7 @@ using LSRetail.Omni.Infrastructure.Data.Omniservice.Loyalty.Setup;
 using FormsLoyalty.Views;
 using FormsLoyalty.Models;
 using FormsLoyalty.Repos;
+using Xamarin.CommunityToolkit.UI.Views;
 
 namespace FormsLoyalty.ViewModels
 {
@@ -35,6 +36,14 @@ namespace FormsLoyalty.ViewModels
             get { return _relatedItems; }
             set { SetProperty(ref _relatedItems, value); }
         }
+
+        private LayoutState _relatedOfferCurrentState;
+        public LayoutState RelatedOfferCurrentState
+        {
+            get { return _relatedOfferCurrentState; }
+            set { SetProperty(ref _relatedOfferCurrentState, value); }
+        }
+
         #region Command
         public DelegateCommand ShowPreviewCommand => new DelegateCommand(async () =>
         {
@@ -69,9 +78,12 @@ namespace FormsLoyalty.ViewModels
 
                 Task.Run(async () =>
                 {
+                    RelatedOfferCurrentState = LayoutState.Loading;
                     var loyItems = await service.GetItemsByPublishedOfferIdAsync(selectedOffer.Id, Int32.MaxValue);
 
                     relatedItems = new ObservableCollection<LoyItem>(loyItems);
+
+                    RelatedOfferCurrentState = LayoutState.Success;
                 });
             }
             catch (Exception)

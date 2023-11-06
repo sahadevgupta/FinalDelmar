@@ -141,6 +141,9 @@ namespace LSRetail.Omni.Domain.DataModel.Loyalty.Orders
         [DataMember]
         public string ShippingAgentServiceCode { get; set; }
 
+        [DataMember]
+        public string SpecialComment { get; set; }
+
         /// <summary>
         /// Current Member Contact Point balance 
         /// </summary>

@@ -1718,4 +1718,13 @@ Please continue to check.</value>
   <data name="View_All" xml:space="preserve">
     <value>View All</value>
   </data>
+  <data name="Order_Remark" xml:space="preserve">
+    <value>Remarks on order</value>
+  </data>
+  <data name="Order_Remark_Placeholder" xml:space="preserve">
+    <value>write your notes</value>
+  </data>
+  <data name="AccountTab" xml:space="preserve">
+    <value>Account</value>
+  </data>
 </root>
